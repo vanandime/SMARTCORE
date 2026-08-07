@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KeuanganKu - Smart Finance Tracker</title>
+  <title>WorkSpace & Finance Hub</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
@@ -13,131 +13,263 @@
     ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
   </style>
 </head>
-<body class="bg-slate-100 text-slate-800 min-h-screen pb-12">
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col md:flex-row">
 
-  <!-- Header / Navigation -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-2">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold text-lg">K</div>
+  <!-- Sidebar Navigasi Utama -->
+  <aside class="w-full md:w-64 bg-slate-900 text-slate-300 flex-shrink-0 border-r border-slate-800 flex flex-col justify-between">
+    <div>
+      <!-- Brand Logo -->
+      <div class="p-5 border-b border-slate-800 flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold text-lg shadow-md">W</div>
         <div>
-          <h1 class="font-bold text-base text-slate-900 leading-tight">KeuanganKu</h1>
-          <p class="text-[11px] text-slate-500 hidden sm:block">Pencatat Keuangan Personal</p>
+          <h1 class="font-bold text-base text-white leading-tight">WorkSpace Hub</h1>
+          <p class="text-[11px] text-slate-400">All-in-One Personal App</p>
         </div>
       </div>
 
-      <div class="flex items-center gap-2">
-        <button onclick="openAboutModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-3 py-2 rounded-lg transition flex items-center gap-1.5 border border-slate-200">
-          <span>👤</span> <span class="hidden sm:inline">Tentang Saya</span>
+      <!-- Navigasi Menu Utama -->
+      <nav class="p-3 space-y-1">
+        <button onclick="switchTab('finance')" id="nav-finance" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition bg-indigo-600 text-white shadow-sm">
+          <span class="text-base">💰</span> Manajemen Keuangan
         </button>
-        <input type="month" id="monthPicker" class="text-xs bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 font-medium text-slate-700 outline-none focus:border-indigo-500 min-w-[140px]">
-        <button onclick="openModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3 sm:px-4 py-2 rounded-lg shadow-sm transition flex items-center gap-1 shrink-0">
-          <span>+</span> Transaksi
+        <button onclick="switchTab('tasks')" id="nav-tasks" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:bg-slate-800 hover:text-slate-200">
+          <span class="text-base">📋</span> Manajemen Tugas
         </button>
-      </div>
-    </div>
-  </header>
-
-  <main class="max-w-6xl mx-auto px-4 mt-6 space-y-6">
-
-    <!-- Metrics Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
-        <div class="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Total Saldo Bersih</div>
-        <div id="metricNet" class="text-2xl font-extrabold text-slate-900">Rp 0</div>
-        <div class="text-[11px] text-slate-400 mt-2">Berdasarkan filter periode aktif</div>
-        <div class="absolute right-[-10px] bottom-[-10px] w-20 h-20 bg-indigo-50 rounded-full opacity-50 -z-0"></div>
-      </div>
-
-      <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
-        <div class="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Total Pemasukan</div>
-        <div id="metricIncome" class="text-2xl font-extrabold text-emerald-600">Rp 0</div>
-        <div class="text-[11px] text-emerald-600/70 mt-2">▲ Aliran kas masuk</div>
-        <div class="absolute right-[-10px] bottom-[-10px] w-20 h-20 bg-emerald-50 rounded-full opacity-50 -z-0"></div>
-      </div>
-
-      <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
-        <div class="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Total Pengeluaran</div>
-        <div id="metricExpense" class="text-2xl font-extrabold text-rose-600">Rp 0</div>
-        <div class="text-[11px] text-rose-600/70 mt-2">▼ Aliran kas keluar</div>
-        <div class="absolute right-[-10px] bottom-[-10px] w-20 h-20 bg-rose-50 rounded-full opacity-50 -z-0"></div>
-      </div>
+        <button onclick="switchTab('profile')" id="nav-profile" class="nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:bg-slate-800 hover:text-slate-200">
+          <span class="text-base">👤</span> Profil Saya
+        </button>
+      </nav>
     </div>
 
-    <!-- Main Grid: Table & Visual Chart -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-      <!-- Left Column: Filter & Table -->
-      <div class="lg:col-span-2 space-y-4">
-        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm space-y-3">
-          <!-- Filter & Search Bar -->
-          <div class="flex flex-wrap gap-2 items-center justify-between">
-            <input type="text" id="searchInput" placeholder="Cari deskripsi..." class="text-xs border border-slate-200 rounded-lg px-3 py-2 flex-1 min-w-[140px] outline-none focus:border-indigo-500">
-            
-            <select id="filterType" class="text-xs border border-slate-200 rounded-lg px-2.5 py-2 outline-none focus:border-indigo-500">
-              <option value="all">Semua Tipe</option>
-              <option value="income">Pemasukan (+)</option>
-              <option value="expense">Pengeluaran (-)</option>
-            </select>
-
-            <select id="filterCategory" class="text-xs border border-slate-200 rounded-lg px-2.5 py-2 outline-none focus:border-indigo-500">
-              <option value="all">Semua Kategori</option>
-            </select>
-          </div>
-
-          <!-- Transaction List Table -->
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs min-w-[500px]">
-              <thead class="bg-slate-50 text-slate-500 font-medium border-b border-slate-200">
-                <tr>
-                  <th class="p-3 w-24">Tanggal</th>
-                  <th class="p-3">Kategori</th>
-                  <th class="p-3">Keterangan</th>
-                  <th class="p-3 text-right">Nominal</th>
-                  <th class="p-3 text-center w-20">Aksi</th>
-                </tr>
-              </thead>
-              <tbody id="txTableBody" class="divide-y divide-slate-100 text-slate-700"></tbody>
-            </table>
-          </div>
-        </div>
+    <!-- Quick Profile Footer -->
+    <div class="p-4 border-t border-slate-800 flex items-center gap-3 bg-slate-950/40">
+      <div class="w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold text-xs shrink-0">
+        DM
       </div>
+      <div class="truncate">
+        <p class="text-xs font-semibold text-slate-200 truncate">Danis Muria[span_1](start_span)[span_1](end_span)</p>
+        <p class="text-[10px] text-slate-500 truncate">Civil Eng & AI NLP[span_2](start_span)[span_2](end_span)</p>
+      </div>
+    </div>
+  </aside>
 
-      <!-- Right Column: Visual Breakdown & Data Ops -->
-      <div class="space-y-4">
-        <!-- Donut Chart Card -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-3">
-          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500">Proporsi Pengeluaran</h2>
-          <div class="relative w-full h-52 flex items-center justify-center">
-            <canvas id="categoryChart"></canvas>
-          </div>
+  <!-- Content Area -->
+  <main class="flex-1 overflow-y-auto p-4 md:p-8">
+
+    <!-- ==================== TAB 1: MANAJEMEN KEUANGAN ==================== -->
+    <section id="tab-finance" class="tab-content space-y-6">
+      <header class="flex flex-wrap items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div>
+          <h2 class="text-lg font-bold text-slate-900">Manajemen Keuangan</h2>
+          <p class="text-xs text-slate-500">Pantau arus kas masuk, keluar, dan laporan periode[span_3](start_span)[span_3](end_span).</p>
         </div>
-
-        <!-- Data Management Box -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-3">
-          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500">Manajemen Data</h2>
-          <div class="grid grid-cols-2 gap-2">
-            <button onclick="exportJSON()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs py-2 px-3 rounded-lg font-medium transition text-center">
-              📥 Backup JSON
-            </button>
-            <label class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs py-2 px-3 rounded-lg font-medium transition text-center cursor-pointer">
-              📤 Restore JSON
-              <input type="file" id="importFile" accept=".json" onchange="importJSON(event)" class="hidden">
-            </label>
-            <button onclick="exportCSV()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs py-2 px-3 rounded-lg font-medium transition text-center col-span-2">
-              📊 Export Ke Excel (CSV)
-            </button>
-          </div>
-          <button onclick="clearAllData()" class="w-full text-rose-600 hover:bg-rose-50 text-xs py-1.5 rounded-lg transition font-medium text-center">
-            ⚠️ Hapus Semua Data
+        <div class="flex items-center gap-2">
+          <input type="month" id="monthPicker" class="text-xs bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 font-medium text-slate-700 outline-none focus:border-indigo-500 min-w-[140px]">
+          <button onclick="openModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3.5 py-2 rounded-lg shadow-sm transition flex items-center gap-1 shrink-0">
+            <span>+</span> Transaksi
           </button>
         </div>
+      </header>
+
+      <!-- Metrics Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
+          <div class="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Total Saldo Bersih</div>
+          <div id="metricNet" class="text-2xl font-extrabold text-slate-900">Rp 0</div>
+          <div class="text-[11px] text-slate-400 mt-2">Berdasarkan filter periode aktif</div>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
+          <div class="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Total Pemasukan</div>
+          <div id="metricIncome" class="text-2xl font-extrabold text-emerald-600">Rp 0</div>
+          <div class="text-[11px] text-emerald-600/70 mt-2">▲ Aliran kas masuk</div>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
+          <div class="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Total Pengeluaran</div>
+          <div id="metricExpense" class="text-2xl font-extrabold text-rose-600">Rp 0</div>
+          <div class="text-[11px] text-rose-600/70 mt-2">▼ Aliran kas keluar</div>
+        </div>
       </div>
 
-    </div>
+      <!-- Main Layout: Table & Chart -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 space-y-4">
+          <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm space-y-3">
+            <div class="flex flex-wrap gap-2 items-center justify-between">
+              <input type="text" id="searchInput" placeholder="Cari deskripsi..." class="text-xs border border-slate-200 rounded-lg px-3 py-2 flex-1 min-w-[140px] outline-none focus:border-indigo-500">
+              <select id="filterType" class="text-xs border border-slate-200 rounded-lg px-2.5 py-2 outline-none focus:border-indigo-500">
+                <option value="all">Semua Tipe</option>
+                <option value="income">Pemasukan (+)</option>
+                <option value="expense">Pengeluaran (-)</option>
+              </select>
+              <select id="filterCategory" class="text-xs border border-slate-200 rounded-lg px-2.5 py-2 outline-none focus:border-indigo-500">
+                <option value="all">Semua Kategori</option>
+              </select>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs min-w-[500px]">
+                <thead class="bg-slate-50 text-slate-500 font-medium border-b border-slate-200">
+                  <tr>
+                    <th class="p-3 w-24">Tanggal</th>
+                    <th class="p-3">Kategori</th>
+                    <th class="p-3">Keterangan</th>
+                    <th class="p-3 text-right">Nominal</th>
+                    <th class="p-3 text-center w-20">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="txTableBody" class="divide-y divide-slate-100 text-slate-700"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-3">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">Proporsi Pengeluaran</h3>
+            <div class="relative w-full h-52 flex items-center justify-center">
+              <canvas id="categoryChart"></canvas>
+            </div>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-3">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">Manajemen Data</h3>
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="exportJSON()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs py-2 px-3 rounded-lg font-medium transition text-center">📥 Backup</button>
+              <label class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs py-2 px-3 rounded-lg font-medium transition text-center cursor-pointer">
+                📤 Restore
+                <input type="file" id="importFile" accept=".json" onchange="importJSON(event)" class="hidden">
+              </label>
+              <button onclick="exportCSV()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs py-2 px-3 rounded-lg font-medium transition text-center col-span-2">📊 Export Excel (CSV)</button>
+            </div>
+            <button onclick="clearAllData()" class="w-full text-rose-600 hover:bg-rose-50 text-xs py-1.5 rounded-lg transition font-medium text-center">⚠️ Hapus Semua Data</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: MANAJEMEN TUGAS & PROYEK ==================== -->
+    <section id="tab-tasks" class="tab-content space-y-6 hidden">
+      <header class="flex flex-wrap items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div>
+          <h2 class="text-lg font-bold text-slate-900">Manajemen Tugas & Proyek</h2>
+          <p class="text-xs text-slate-500">Kelola prioritas, deadline, dan progress pekerjaan harian Anda.</p>
+        </div>
+        <button onclick="openTaskModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3.5 py-2 rounded-lg shadow-sm transition flex items-center gap-1">
+          <span>+</span> Tugas Baru
+        </button>
+      </header>
+
+      <!-- Task Metrics & Progress -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+          <span class="text-xs text-slate-500 font-medium">Total Tugas</span>
+          <div id="taskTotal" class="text-2xl font-bold text-slate-900 mt-1">0</div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+          <span class="text-xs text-slate-500 font-medium">Selesai</span>
+          <div id="taskCompleted" class="text-2xl font-bold text-emerald-600 mt-1">0</div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+          <span class="text-xs text-slate-500 font-medium">Progress Penyelesaian</span>
+          <div class="w-full bg-slate-100 rounded-full h-2.5 mt-3">
+            <div id="taskProgressBar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task List Container -->
+      <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm space-y-3">
+        <div class="flex items-center justify-between border-b pb-3">
+          <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Daftar Tugas</h3>
+          <select id="filterTaskStatus" onchange="renderTasks()" class="text-xs border border-slate-200 rounded-lg px-2.5 py-1.5 outline-none focus:border-indigo-500">
+            <option value="all">Semua Status</option>
+            <option value="pending">Belum Selesai</option>
+            <option value="completed">Selesai</option>
+          </select>
+        </div>
+        <div id="taskList" class="divide-y divide-slate-100"></div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: PROFIL PENGEMBANG ==================== -->
+    <section id="tab-profile" class="tab-content space-y-6 hidden">
+      <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200/80 shadow-sm max-w-4xl mx-auto space-y-6">
+        
+        <!-- Header Profile -->
+        <div class="flex flex-col sm:flex-row items-center gap-6 border-b pb-6">
+          <div class="w-24 h-24 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-3xl shadow-lg shrink-0">
+            DM
+          </div>
+          <div class="text-center sm:text-left space-y-1">
+            <h2 class="text-2xl font-extrabold text-slate-900">Mohammad Danis Muria Vanandi</h2>
+            <p class="text-sm font-semibold text-indigo-600">Civil Engineer & AI / NLP Researcher</p>
+            <p class="text-xs text-slate-500">Alumni Politeknik Negeri Malang (2021)</p>
+          </div>
+        </div>
+
+        <!-- Bio Summary -->
+        <div class="space-y-2">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Ringkasan Profil</h3>
+          <p class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100">
+            Professional berorientasi hasil dengan fondasi Teknik Sipil dan pengalaman 4+ tahun di bidang administrasi pertanahan, logistik keuangan, serta proyek desain bangunan[span_4](start_span)[span_4](end_span). Berdedikasi tinggi dalam transisi ke bidang Artificial Intelligence (AI) dan Natural Language Processing (NLP) melalui pemahaman praktis model bahasa besar, evaluasi konten, dan metodologi anotasi data[span_5](start_span)[span_5](end_span).
+          </p>
+        </div>
+
+        <!-- Experience & Education Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+          
+          <!-- Experience -->
+          <div class="space-y-3">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Pengalaman Kerja</h3>
+            <ul class="space-y-3 text-xs text-slate-700">
+              <li class="border-l-2 border-indigo-500 pl-3">
+                <span class="font-bold block text-slate-900">PTSL Juridical Aspect</span>
+                <span class="text-slate-500">National Land Agency (2021 - 2022)</span>
+              </li>
+              <li class="border-l-2 border-indigo-500 pl-3">
+                <span class="font-bold block text-slate-900">Finance and Logistics</span>
+                <span class="text-slate-500">District Office (2023 - 2024)</span>
+              </li>
+              <li class="border-l-2 border-indigo-500 pl-3">
+                <span class="font-bold block text-slate-900">Building Designer</span>
+                <span class="text-slate-500">Project FEB Contractor (2024 - 2025)</span>
+              </li>
+              <li class="border-l-2 border-indigo-500 pl-3">
+                <span class="font-bold block text-slate-900">Independent AI & NLP Researcher</span>
+                <span class="text-slate-500">Self-Directed Learning (2023 - Sekarang)</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Skills & Tools -->
+          <div class="space-y-3">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Keahlian & Aplikasi</h3>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-md text-xs font-semibold">AI & NLP Research</span>
+              <span class="px-2.5 py-1 bg-slate-100 text-slate-700 border border-slate-200 rounded-md text-xs">AutoCAD</span>
+              <span class="px-2.5 py-1 bg-slate-100 text-slate-700 border border-slate-200 rounded-md text-xs">SketchUp 3D</span>
+              <span class="px-2.5 py-1 bg-slate-100 text-slate-700 border border-slate-200 rounded-md text-xs">Project Manager</span>
+              <span class="px-2.5 py-1 bg-slate-100 text-slate-700 border border-slate-200 rounded-md text-xs">Ms. Excel & Office</span>
+              <span class="px-2.5 py-1 bg-slate-100 text-slate-700 border border-slate-200 rounded-md text-xs">Adobe Photoshop</span>
+              <span class="px-2.5 py-1 bg-slate-100 text-slate-700 border border-slate-200 rounded-md text-xs">Corel Draw</span>
+              <span class="px-2.5 py-1 bg-slate-100 text-slate-700 border border-slate-200 rounded-md text-xs">Unity</span>
+            </div>
+
+            <!-- Contacts -->
+            <div class="pt-4 border-t border-slate-100 space-y-1.5 text-xs text-slate-600">
+              <p><strong class="text-slate-800">Email:</strong> vanandi@proton.me / danisvanandi@gmail.com</p>
+              <p><strong class="text-slate-800">Telepon/WA:</strong> +62 898 5160 888</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
-  <!-- Modal Input/Edit Transaksi -->
+  <!-- Modal Input Transaksi Keuangan -->
   <div id="txModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-xl border border-slate-200 w-full max-w-md p-6 space-y-4 relative">
       <div class="flex justify-between items-center border-b pb-3">
@@ -147,7 +279,6 @@
 
       <form id="txForm" class="space-y-3">
         <input type="hidden" id="formId">
-
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Jenis Transaksi</label>
           <div class="grid grid-cols-2 gap-2">
@@ -186,64 +317,59 @@
     </div>
   </div>
 
-  <!-- Modal Tentang Saya -->
-  <div id="aboutModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl shadow-xl border border-slate-200 w-full max-w-lg p-6 space-y-4 relative max-h-[90vh] overflow-y-auto">
+  <!-- Modal Input Tugas Baru -->
+  <div id="taskModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl border border-slate-200 w-full max-w-md p-6 space-y-4 relative">
       <div class="flex justify-between items-center border-b pb-3">
-        <h3 class="font-bold text-slate-800 text-base">Profil Pengembang</h3>
-        <button onclick="closeAboutModal()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">&times;</button>
+        <h3 class="font-bold text-slate-800 text-base">Tambah Tugas Baru</h3>
+        <button onclick="closeTaskModal()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">&times;</button>
       </div>
 
-      <div class="space-y-4">
-        <div class="flex items-center gap-4">
-          <div class="w-16 h-16 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-2xl shrink-0 shadow-md">
-            DM
+      <form id="taskForm" class="space-y-3">
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1">Judul Tugas / Proyek</label>
+          <input type="text" id="taskTitle" required placeholder="Contoh: Review dokumen gambar teknik" class="w-full text-xs border border-slate-200 rounded-lg p-2.5 outline-none focus:border-indigo-500">
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs font-medium text-slate-600 mb-1">Prioritas</label>
+            <select id="taskPriority" class="w-full text-xs border border-slate-200 rounded-lg p-2.5 outline-none focus:border-indigo-500">
+              <option value="Rendah">Rendah</option>
+              <option value="Sedang" selected>Sedang</option>
+              <option value="Tinggi">Tinggi</option>
+            </select>
           </div>
           <div>
-            <h4 class="font-bold text-slate-900 text-base">Mohammad Danis Muria Vanandi</h4>
-            <p class="text-xs font-medium text-indigo-600">Civil Engineer & AI / NLP Researcher</p>
-            <p class="text-[11px] text-slate-500 mt-0.5">Politeknik Negeri Malang (2021)</p>
+            <label class="block text-xs font-medium text-slate-600 mb-1">Tenggat Waktu</label>
+            <input type="date" id="taskDueDate" required class="w-full text-xs border border-slate-200 rounded-lg p-2.5 outline-none focus:border-indigo-500">
           </div>
         </div>
 
-        <p class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">
-          Professional berorientasi hasil dengan latar belakang Teknik Sipil dan pengalaman 4+ tahun di bidang administrasi pertanahan, logistik keuangan, serta proyek desain bangunan. Saat ini mendalami riset mandiri di bidang AI dan Natural Language Processing (NLP).
-        </p>
-
-        <!-- Skill Badges -->
-        <div>
-          <h5 class="text-xs font-bold text-slate-700 mb-2">Keahlian & Program:</h5>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="px-2.5 py-1 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-md text-[11px] font-medium">AI & NLP Research</span>
-            <span class="px-2.5 py-1 bg-slate-100 text-slate-700 border border-slate-200 rounded-md text-[11px]">3D & 2D Designer</span>
-            <span class="px-2.5 py-1 bg-slate-100 text-slate-700 border border-slate-200 rounded-md text-[11px]">AutoCAD & SketchUp</span>
-            <span class="px-2.5 py-1 bg-slate-100 text-slate-700 border border-slate-200 rounded-md text-[11px]">Project Management</span>
-            <span class="px-2.5 py-1 bg-slate-100 text-slate-700 border border-slate-200 rounded-md text-[11px]">Ms. Office</span>
-          </div>
+        <div class="pt-2 flex justify-end gap-2">
+          <button type="button" onclick="closeTaskModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-lg">Batal</button>
+          <button type="submit" class="px-4 py-2 text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg shadow-sm">Simpan Tugas</button>
         </div>
-
-        <!-- Contact Links -->
-        <div class="border-t pt-3 space-y-1.5 text-xs text-slate-600">
-          <div class="flex items-center gap-2">
-            <span>✉️</span> <a href="mailto:danisvanandi@gmail.com" class="hover:underline text-indigo-600">danisvanandi@gmail.com</a>
-          </div>
-          <div class="flex items-center gap-2">
-            <span>✉️</span> <a href="mailto:vanandi@proton.me" class="hover:underline text-indigo-600">vanandi@proton.me</a>
-          </div>
-          <div class="flex items-center gap-2">
-            <span>📞</span> <span>+62 898 5160 888</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="pt-2 flex justify-end">
-        <button type="button" onclick="closeAboutModal()" class="px-4 py-2 text-xs font-semibold bg-slate-800 hover:bg-slate-900 text-white rounded-lg">Tutup</button>
-      </div>
+      </form>
     </div>
   </div>
 
   <script>
-    // System Master Data
+    // Tab Navigation Logic
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.nav-btn').forEach(el => {
+        el.className = 'nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:bg-slate-800 hover:text-slate-200';
+      });
+
+      document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+      const activeNav = document.getElementById(`nav-${tabName}`);
+      activeNav.className = 'nav-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition bg-indigo-600 text-white shadow-sm';
+    }
+
+    // ==========================================
+    // FINANCE LOGIC
+    // ==========================================
     const CATEGORIES = {
       expense: ['Makanan & Minuman', 'Transportasi', 'Belanja', 'Tagihan & Utang', 'Hiburan', 'Kesehatan', 'Pendidikan', 'Lainnya'],
       income: ['Gaji & Upah', 'Bonus & Komisi', 'Investasi', 'Penjualan', 'Hadiah', 'Lainnya']
@@ -252,34 +378,22 @@
     let transactions = JSON.parse(localStorage.getItem('keuanganku_db')) || [];
     let chartInstance = null;
 
-    // Elements
     const monthPicker = document.getElementById('monthPicker');
     const searchInput = document.getElementById('searchInput');
     const filterType = document.getElementById('filterType');
     const filterCategory = document.getElementById('filterCategory');
 
-    // Init App
     const now = new Date();
-    const currentYYYYMM = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
-    monthPicker.value = currentYYYYMM;
+    monthPicker.value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
     document.getElementById('formDate').value = now.toISOString().split('T')[0];
 
     initCategoryDropdowns();
     render();
 
-    // Event Listeners
     monthPicker.addEventListener('change', render);
     searchInput.addEventListener('input', render);
     filterType.addEventListener('change', render);
     filterCategory.addEventListener('change', render);
-
-    function openAboutModal() {
-      document.getElementById('aboutModal').classList.remove('hidden');
-    }
-
-    function closeAboutModal() {
-      document.getElementById('aboutModal').classList.add('hidden');
-    }
 
     function initCategoryDropdowns() {
       const allCats = [...new Set([...CATEGORIES.expense, ...CATEGORIES.income])];
@@ -434,10 +548,7 @@
       if (labels.length === 0) {
         chartInstance = new Chart(ctx, {
           type: 'doughnut',
-          data: {
-            labels: ['Tidak ada pengeluaran'],
-            datasets: [{ data: [1], backgroundColor: ['#f1f5f9'] }]
-          },
+          data: { labels: ['Tidak ada pengeluaran'], datasets: [{ data: [1], backgroundColor: ['#f1f5f9'] }] },
           options: { plugins: { legend: { display: false } }, responsive: true, maintainAspectRatio: false }
         });
         return;
@@ -447,23 +558,18 @@
         type: 'doughnut',
         data: {
           labels: labels,
-          datasets: [{
-            data: dataValues,
-            backgroundColor: ['#f43f5e', '#6366f1', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4', '#ec4899', '#64748b']
-          }]
+          datasets: [{ data: dataValues, backgroundColor: ['#f43f5e', '#6366f1', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4', '#ec4899', '#64748b'] }]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: {
-            legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
-          }
+          plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } }
         }
       });
     }
 
     function exportJSON() {
-      if (transactions.length === 0) return alert('Tidak ada data untuk diekspor!');
+      if (transactions.length === 0) return alert('Tidak ada data!');
       const blob = new Blob([JSON.stringify(transactions, null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
@@ -505,10 +611,104 @@
     }
 
     function clearAllData() {
-      if (confirm('Apakah Anda yakin ingin menghapus SELURUH data transaksi? Tindakan ini tidak dapat dibatalkan.')) {
+      if (confirm('Hapus SELURUH data transaksi?')) {
         transactions = [];
         saveAndRender();
       }
+    }
+
+    // ==========================================
+    // TASK MANAGEMENT LOGIC
+    // ==========================================
+    let tasks = JSON.parse(localStorage.getItem('workspace_tasks')) || [];
+    document.getElementById('taskDueDate').value = new Date().toISOString().split('T')[0];
+
+    renderTasks();
+
+    function openTaskModal() {
+      document.getElementById('taskModal').classList.remove('hidden');
+    }
+
+    function closeTaskModal() {
+      document.getElementById('taskModal').classList.add('hidden');
+    }
+
+    document.getElementById('taskForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const newTask = {
+        id: Date.now().toString(),
+        title: document.getElementById('taskTitle').value,
+        priority: document.getElementById('taskPriority').value,
+        dueDate: document.getElementById('taskDueDate').value,
+        completed: false
+      };
+
+      tasks.push(newTask);
+      saveAndRenderTasks();
+      closeTaskModal();
+      document.getElementById('taskForm').reset();
+    });
+
+    function toggleTask(id) {
+      tasks = tasks.map(t => t.id === id ? { ...t, completed: !t.completed } : t);
+      saveAndRenderTasks();
+    }
+
+    function deleteTask(id) {
+      tasks = tasks.filter(t => t.id !== id);
+      saveAndRenderTasks();
+    }
+
+    function saveAndRenderTasks() {
+      localStorage.setItem('workspace_tasks', JSON.stringify(tasks));
+      renderTasks();
+    }
+
+    function renderTasks() {
+      const filterStatus = document.getElementById('filterTaskStatus').value;
+      const filtered = tasks.filter(t => {
+        if (filterStatus === 'pending') return !t.completed;
+        if (filterStatus === 'completed') return t.completed;
+        return true;
+      });
+
+      const total = tasks.length;
+      const completedCount = tasks.filter(t => t.completed).length;
+      const progressPercent = total > 0 ? Math.round((completedCount / total) * 100) : 0;
+
+      document.getElementById('taskTotal').textContent = total;
+      document.getElementById('taskCompleted').textContent = completedCount;
+      document.getElementById('taskProgressBar').style.width = `${progressPercent}%`;
+
+      const listContainer = document.getElementById('taskList');
+      if (filtered.length === 0) {
+        listContainer.innerHTML = `<p class="p-6 text-center text-xs text-slate-400">Belum ada tugas tercatat.</p>`;
+        return;
+      }
+
+      listContainer.innerHTML = filtered.map(t => {
+        const priorityColors = {
+          'Tinggi': 'bg-rose-50 text-rose-600 border-rose-200',
+          'Sedang': 'bg-amber-50 text-amber-600 border-amber-200',
+          'Rendah': 'bg-slate-100 text-slate-600 border-slate-200'
+        };
+
+        return `
+          <div class="p-3 flex items-center justify-between gap-3 ${t.completed ? 'opacity-60 bg-slate-50' : ''}">
+            <div class="flex items-center gap-3">
+              <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTask('${t.id}')" class="w-4 h-4 rounded text-indigo-600 cursor-pointer">
+              <div>
+                <p class="text-xs font-semibold ${t.completed ? 'line-through text-slate-400' : 'text-slate-800'}">${t.title}</p>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="text-[10px] px-2 py-0.5 rounded border ${priorityColors[t.priority]}">${t.priority}</span>
+                  <span class="text-[10px] text-slate-400">Tenggat: ${t.dueDate}</span>
+                </div>
+              </div>
+            </div>
+            <button onclick="deleteTask('${t.id}')" class="text-rose-500 hover:text-rose-700 text-xs font-medium">Hapus</button>
+          </div>
+        `;
+      }).join('');
     }
   </script>
 </body>

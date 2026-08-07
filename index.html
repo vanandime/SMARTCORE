@@ -3,254 +3,451 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laporan Keuangan Harian</title>
+  <title>KeuanganKu - Smart Finance Tracker</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen p-4 sm:p-6">
-  <div class="max-w-3xl mx-auto">
-    <!-- Header & Filter -->
-    <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b pb-4 gap-4">
-      <div>
-        <h1 class="text-2xl font-bold">Laporan Keuangan</h1>
-        <p class="text-sm text-slate-500">Tersimpan di browser & terintegrasi real-time</p>
-      </div>
-      
-      <!-- Filter Tanggal Sinkron -->
-      <div class="flex items-center gap-2 bg-white p-1.5 border rounded-lg shadow-sm">
-        <select id="filterMode" class="text-sm border-none bg-transparent focus:ring-0 cursor-pointer font-medium text-slate-700">
-          <option value="date">Per Tanggal:</option>
-          <option value="all">Semua Tanggal</option>
-        </select>
-        <input type="date" id="filterDate" class="border p-1.5 rounded text-sm bg-slate-50">
-      </div>
-    </header>
+<body class="bg-slate-100 text-slate-800 min-h-screen pb-12">
 
-    <!-- Ringkasan -->
-    <div class="grid grid-cols-3 gap-3 mb-6">
-      <div class="bg-white p-3 rounded-lg border text-center shadow-sm">
-        <p class="text-xs text-slate-500">Pemasukan</p>
-        <p id="totalIncome" class="text-lg font-bold text-emerald-600">Rp 0</p>
+  <!-- Header / Navigation -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-3.5 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold text-lg">K</div>
+        <div>
+          <h1 class="font-bold text-base text-slate-900 leading-tight">KeuanganKu</h1>
+          <p class="text-xs text-slate-500">Pencatat Keuangan Personal</p>
+        </div>
       </div>
-      <div class="bg-white p-3 rounded-lg border text-center shadow-sm">
-        <p class="text-xs text-slate-500">Pengeluaran</p>
-        <p id="totalExpense" class="text-lg font-bold text-rose-600">Rp 0</p>
-      </div>
-      <div class="bg-white p-3 rounded-lg border text-center shadow-sm">
-        <p class="text-xs text-slate-500">Saldo Bersih</p>
-        <p id="netBalance" class="text-lg font-bold text-blue-600">Rp 0</p>
-      </div>
-    </div>
 
-    <!-- Form Input Transaksi -->
-    <form id="txForm" class="bg-white p-4 rounded-lg border mb-6 flex flex-wrap gap-2 shadow-sm">
-      <input type="date" id="txDate" required class="border p-2 rounded text-sm flex-1">
-      <select id="txType" class="border p-2 rounded text-sm">
-        <option value="income">Pemasukan (+)</option>
-        <option value="expense">Pengeluaran (-)</option>
-      </select>
-      <input type="number" id="txAmount" placeholder="Jumlah (Rp)" required class="border p-2 rounded text-sm flex-1">
-      <input type="text" id="txDesc" placeholder="Keterangan" required class="border p-2 rounded text-sm flex-1">
-      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-blue-700 transition">Tambah</button>
-    </form>
-
-    <!-- Panel Manajemen File -->
-    <div class="bg-white p-3 rounded-lg border mb-6 flex flex-wrap gap-2 items-center justify-between shadow-sm">
-      <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Manajemen File:</span>
-      <div class="flex flex-wrap gap-2">
-        <button onclick="exportJSON()" class="bg-slate-700 text-white text-xs px-3 py-1.5 rounded hover:bg-slate-800">
-          📥 Backup (JSON)
-        </button>
-        <label class="bg-slate-100 border text-slate-700 text-xs px-3 py-1.5 rounded cursor-pointer hover:bg-slate-200">
-          📤 Restore (JSON)
-          <input type="file" id="importFile" accept=".json" onchange="importJSON(event)" class="hidden">
-        </label>
-        <button onclick="exportCSV()" class="bg-emerald-600 text-white text-xs px-3 py-1.5 rounded hover:bg-emerald-700">
-          📊 Ekspor (Excel)
+      <div class="flex items-center gap-2">
+        <input type="month" id="monthPicker" class="text-xs bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 font-medium text-slate-700 outline-none focus:border-indigo-500">
+        <button onclick="openModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-sm transition flex items-center gap-1.5">
+          <span>+</span> Transaksi
         </button>
       </div>
     </div>
+  </header>
 
-    <!-- Tabel Transaksi -->
-    <div class="bg-white rounded-lg border overflow-hidden shadow-sm">
-      <table class="w-full text-left text-sm">
-        <thead class="bg-slate-100 text-slate-600">
-          <tr>
-            <th class="p-3">Tanggal</th>
-            <th class="p-3">Keterangan</th>
-            <th class="p-3">Tipe</th>
-            <th class="p-3 text-right">Nominal</th>
-            <th class="p-3 text-center">Aksi</th>
-          </tr>
-        </thead>
-        <tbody id="txList" class="divide-y"></tbody>
-      </table>
+  <main class="max-w-6xl mx-auto px-4 mt-6 space-y-6">
+
+    <!-- Metrics Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
+        <div class="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Total Saldo Bersih</div>
+        <div id="metricNet" class="text-2xl font-extrabold text-slate-900">Rp 0</div>
+        <div class="text-[11px] text-slate-400 mt-2">Berdasarkan filter periode aktif</div>
+        <div class="absolute right-[-10px] bottom-[-10px] w-20 h-20 bg-indigo-50 rounded-full opacity-50 -z-0"></div>
+      </div>
+
+      <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
+        <div class="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Total Pemasukan</div>
+        <div id="metricIncome" class="text-2xl font-extrabold text-emerald-600">Rp 0</div>
+        <div class="text-[11px] text-emerald-600/70 mt-2">▲ Aliran kas masuk</div>
+        <div class="absolute right-[-10px] bottom-[-10px] w-20 h-20 bg-emerald-50 rounded-full opacity-50 -z-0"></div>
+      </div>
+
+      <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
+        <div class="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1">Total Pengeluaran</div>
+        <div id="metricExpense" class="text-2xl font-extrabold text-rose-600">Rp 0</div>
+        <div class="text-[11px] text-rose-600/70 mt-2">▼ Aliran kas keluar</div>
+        <div class="absolute right-[-10px] bottom-[-10px] w-20 h-20 bg-rose-50 rounded-full opacity-50 -z-0"></div>
+      </div>
+    </div>
+
+    <!-- Main Grid: Table & Visual Chart -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Left Column: Filter & Table -->
+      <div class="lg:col-span-2 space-y-4">
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm space-y-3">
+          <!-- Filter & Search Bar -->
+          <div class="flex flex-wrap gap-2 items-center justify-between">
+            <input type="text" id="searchInput" placeholder="Cari deskripsi..." class="text-xs border border-slate-200 rounded-lg px-3 py-2 flex-1 min-w-[150px] outline-none focus:border-indigo-500">
+            
+            <select id="filterType" class="text-xs border border-slate-200 rounded-lg px-3 py-2 outline-none focus:border-indigo-500">
+              <option value="all">Semua Tipe</option>
+              <option value="income">Pemasukan (+)</option>
+              <option value="expense">Pengeluaran (-)</option>
+            </select>
+
+            <select id="filterCategory" class="text-xs border border-slate-200 rounded-lg px-3 py-2 outline-none focus:border-indigo-500">
+              <option value="all">Semua Kategori</option>
+            </select>
+          </div>
+
+          <!-- Transaction List Table -->
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-50 text-slate-500 font-medium border-b border-slate-200">
+                <tr>
+                  <th class="p-3">Tanggal</th>
+                  <th class="p-3">Kategori</th>
+                  <th class="p-3">Keterangan</th>
+                  <th class="p-3 text-right">Nominal</th>
+                  <th class="p-3 text-center">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="txTableBody" class="divide-y divide-slate-100 text-slate-700"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Visual Breakdown & Data Ops -->
+      <div class="space-y-4">
+        <!-- Donut Chart Card -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-3">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500">Proporsi Pengeluaran</h2>
+          <div class="relative w-full h-52 flex items-center justify-center">
+            <canvas id="categoryChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Data Management Box -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-3">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500">Manajemen Data</h2>
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="exportJSON()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs py-2 px-3 rounded-lg font-medium transition text-center">
+              📥 Backup JSON
+            </button>
+            <label class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs py-2 px-3 rounded-lg font-medium transition text-center cursor-pointer">
+              📤 Restore JSON
+              <input type="file" id="importFile" accept=".json" onchange="importJSON(event)" class="hidden">
+            </label>
+            <button onclick="exportCSV()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs py-2 px-3 rounded-lg font-medium transition text-center col-span-2">
+              📊 Export Ke Excel (CSV)
+            </button>
+          </div>
+          <button onclick="clearAllData()" class="w-full text-rose-600 hover:bg-rose-50 text-xs py-1.5 rounded-lg transition font-medium text-center">
+            ⚠️ Hapus Semua Data
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Modal Input/Edit Transaksi -->
+  <div id="txModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl border border-slate-200 w-full max-w-md p-6 space-y-4 relative">
+      <div class="flex justify-between items-center border-b pb-3">
+        <h3 id="modalTitle" class="font-bold text-slate-800 text-base">Tambah Transaksi</h3>
+        <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">&times;</button>
+      </div>
+
+      <form id="txForm" class="space-y-3">
+        <input type="hidden" id="formId">
+
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1">Jenis Transaksi</label>
+          <div class="grid grid-cols-2 gap-2">
+            <button type="button" id="btnTypeExpense" onclick="setType('expense')" class="py-2 text-xs font-semibold rounded-lg border border-slate-200 bg-rose-50 text-rose-600">Pengeluaran (-)</button>
+            <button type="button" id="btnTypeIncome" onclick="setType('income')" class="py-2 text-xs font-semibold rounded-lg border border-slate-200 text-slate-600">Pemasukan (+)</button>
+          </div>
+          <input type="hidden" id="formType" value="expense">
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs font-medium text-slate-600 mb-1">Tanggal</label>
+            <input type="date" id="formDate" required class="w-full text-xs border border-slate-200 rounded-lg p-2.5 outline-none focus:border-indigo-500">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-600 mb-1">Kategori</label>
+            <select id="formCategory" required class="w-full text-xs border border-slate-200 rounded-lg p-2.5 outline-none focus:border-indigo-500"></select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1">Nominal (Rp)</label>
+          <input type="number" id="formAmount" min="1" placeholder="Contoh: 50000" required class="w-full text-xs border border-slate-200 rounded-lg p-2.5 outline-none focus:border-indigo-500 font-semibold">
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1">Keterangan / Catatan</label>
+          <input type="text" id="formDesc" placeholder="Contoh: Makan Siang Nasi Padang" required class="w-full text-xs border border-slate-200 rounded-lg p-2.5 outline-none focus:border-indigo-500">
+        </div>
+
+        <div class="pt-2 flex justify-end gap-2">
+          <button type="button" onclick="closeModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-lg">Batal</button>
+          <button type="submit" class="px-4 py-2 text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg shadow-sm">Simpan</button>
+        </div>
+      </form>
     </div>
   </div>
 
   <script>
-    const today = new Date().toISOString().split('T')[0];
-    const filterDateInput = document.getElementById('filterDate');
-    const txDateInput = document.getElementById('txDate');
-    const filterModeSelect = document.getElementById('filterMode');
+    // System Master Data
+    const CATEGORIES = {
+      expense: ['Makanan & Minuman', 'Transportasi', 'Belanja', 'Tagihan & Utang', 'Hiburan', 'Kesehatan', 'Pendidikan', 'Lainnya'],
+      income: ['Gaji & Upah', 'Bonus & Komisi', 'Investasi', 'Penjualan', 'Hadiah', 'Lainnya']
+    };
 
-    filterDateInput.value = today;
-    txDateInput.value = today;
+    let transactions = JSON.parse(localStorage.getItem('keuanganku_db')) || [];
+    let chartInstance = null;
 
-    let data = JSON.parse(localStorage.getItem('my_finance_data')) || [];
+    // Elements
+    const monthPicker = document.getElementById('monthPicker');
+    const searchInput = document.getElementById('searchInput');
+    const filterType = document.getElementById('filterType');
+    const filterCategory = document.getElementById('filterCategory');
 
-    // Sinkronisasi input tanggal form dengan filter tanggal utama
-    filterDateInput.addEventListener('change', () => {
-      txDateInput.value = filterDateInput.value;
-      render();
-    });
+    // Init App
+    const now = new Date();
+    const currentYYYYMM = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+    monthPicker.value = currentYYYYMM;
+    document.getElementById('formDate').value = now.toISOString().split('T')[0];
 
-    filterModeSelect.addEventListener('change', () => {
-      filterDateInput.style.display = filterModeSelect.value === 'all' ? 'none' : 'inline-block';
-      render();
-    });
+    initCategoryDropdowns();
+    render();
 
-    function render() {
-      const mode = filterModeSelect.value;
-      const selectedDate = filterDateInput.value;
-      const list = document.getElementById('txList');
+    // Event Listeners
+    monthPicker.addEventListener('change', render);
+    searchInput.addEventListener('input', render);
+    filterType.addEventListener('change', render);
+    filterCategory.addEventListener('change', render);
 
-      // Filter data sesuai opsi
-      const filtered = data.filter(item => {
-        if (mode === 'all') return true;
-        return item.date === selectedDate;
-      });
-
-      let inc = 0, exp = 0;
-      let htmlRows = '';
-
-      filtered.forEach(item => {
-        const amt = Number(item.amount) || 0;
-        if (item.type === 'income') inc += amt;
-        else exp += amt;
-
-        htmlRows += `
-          <tr>
-            <td class="p-3 text-xs text-slate-500">${item.date}</td>
-            <td class="p-3 font-medium">${item.desc}</td>
-            <td class="p-3">
-              <span class="px-2 py-0.5 text-xs rounded font-medium ${item.type === 'income' ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}">
-                ${item.type === 'income' ? 'Masuk' : 'Keluar'}
-              </span>
-            </td>
-            <td class="p-3 text-right font-semibold ${item.type === 'income' ? 'text-emerald-600' : 'text-rose-600'}">
-              Rp ${amt.toLocaleString('id-ID')}
-            </td>
-            <td class="p-3 text-center">
-              <button onclick="del('${item.id}')" class="text-rose-600 text-xs hover:underline">Hapus</button>
-            </td>
-          </tr>`;
-      });
-
-      if (filtered.length === 0) {
-        htmlRows = `<tr><td colspan="5" class="p-4 text-center text-slate-400">Tidak ada transaksi pada periode ini.</td></tr>`;
-      }
-
-      list.innerHTML = htmlRows;
-
-      // Update Card Ringkasan
-      document.getElementById('totalIncome').textContent = 'Rp ' + inc.toLocaleString('id-ID');
-      document.getElementById('totalExpense').textContent = 'Rp ' + exp.toLocaleString('id-ID');
-      
-      const net = inc - exp;
-      const netEl = document.getElementById('netBalance');
-      netEl.textContent = 'Rp ' + net.toLocaleString('id-ID');
-      netEl.className = `text-lg font-bold ${net >= 0 ? 'text-blue-600' : 'text-rose-600'}`;
+    function initCategoryDropdowns() {
+      const allCats = [...new Set([...CATEGORIES.expense, ...CATEGORIES.income])];
+      filterCategory.innerHTML = '<option value="all">Semua Kategori</option>' + 
+        allCats.map(c => `<option value="${c}">${c}</option>`).join('');
+      updateFormCategoryOptions('expense');
     }
 
-    // Tambah Transaksi
+    function updateFormCategoryOptions(type) {
+      const select = document.getElementById('formCategory');
+      select.innerHTML = CATEGORIES[type].map(c => `<option value="${c}">${c}</option>`).join('');
+    }
+
+    function setType(type) {
+      document.getElementById('formType').value = type;
+      const btnExp = document.getElementById('btnTypeExpense');
+      const btnInc = document.getElementById('btnTypeIncome');
+
+      if (type === 'expense') {
+        btnExp.className = 'py-2 text-xs font-semibold rounded-lg border border-rose-300 bg-rose-50 text-rose-600';
+        btnInc.className = 'py-2 text-xs font-semibold rounded-lg border border-slate-200 text-slate-600';
+      } else {
+        btnInc.className = 'py-2 text-xs font-semibold rounded-lg border border-emerald-300 bg-emerald-50 text-emerald-600';
+        btnExp.className = 'py-2 text-xs font-semibold rounded-lg border border-slate-200 text-slate-600';
+      }
+      updateFormCategoryOptions(type);
+    }
+
+    function openModal(id = null) {
+      document.getElementById('txModal').classList.remove('hidden');
+      if (id) {
+        const item = transactions.find(t => t.id === id);
+        if (!item) return;
+        document.getElementById('modalTitle').textContent = 'Edit Transaksi';
+        document.getElementById('formId').value = item.id;
+        document.getElementById('formDate').value = item.date;
+        document.getElementById('formAmount').value = item.amount;
+        document.getElementById('formDesc').value = item.desc;
+        setType(item.type);
+        document.getElementById('formCategory').value = item.category;
+      } else {
+        document.getElementById('modalTitle').textContent = 'Tambah Transaksi Baru';
+        document.getElementById('formId').value = '';
+        document.getElementById('txForm').reset();
+        document.getElementById('formDate').value = new Date().toISOString().split('T')[0];
+        setType('expense');
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('txModal').classList.add('hidden');
+    }
+
     document.getElementById('txForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      const newTxDate = txDateInput.value;
-      
-      data.push({
-        id: Date.now().toString(),
-        date: newTxDate,
-        type: document.getElementById('txType').value,
-        amount: document.getElementById('txAmount').value,
-        desc: document.getElementById('txDesc').value
-      });
+      const id = document.getElementById('formId').value;
+      const newTx = {
+        id: id || Date.now().toString(),
+        date: document.getElementById('formDate').value,
+        type: document.getElementById('formType').value,
+        category: document.getElementById('formCategory').value,
+        amount: Number(document.getElementById('formAmount').value),
+        desc: document.getElementById('formDesc').value
+      };
 
-      localStorage.setItem('my_finance_data', JSON.stringify(data));
+      if (id) {
+        transactions = transactions.map(t => t.id === id ? newTx : t);
+      } else {
+        transactions.push(newTx);
+      }
 
-      // Otomatis arahkan filter ke tanggal transaksi baru agar langsung kelihatan real-time
-      filterModeSelect.value = 'date';
-      filterDateInput.style.display = 'inline-block';
-      filterDateInput.value = newTxDate;
-
-      document.getElementById('txAmount').value = '';
-      document.getElementById('txDesc').value = '';
-      render();
+      saveAndRender();
+      closeModal();
     });
 
-    // Hapus Transaksi
-    function del(id) {
-      data = data.filter(d => d.id !== id);
-      localStorage.setItem('my_finance_data', JSON.stringify(data));
+    function deleteTx(id) {
+      if (confirm('Hapus transaksi ini?')) {
+        transactions = transactions.filter(t => t.id !== id);
+        saveAndRender();
+      }
+    }
+
+    function saveAndRender() {
+      localStorage.setItem('keuanganku_db', JSON.stringify(transactions));
       render();
     }
 
-    // Backup & Export File
-    function exportJSON() {
-      if (data.length === 0) return alert('Belum ada data!');
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
-      const anchor = document.createElement('a');
-      anchor.setAttribute("href", dataStr);
-      anchor.setAttribute("download", `keuangan_backup_${today}.json`);
-      document.body.appendChild(anchor);
-      anchor.click();
-      anchor.remove();
+    function render() {
+      const selectedMonth = monthPicker.value; // YYYY-MM
+      const searchKey = searchInput.value.toLowerCase();
+      const typeVal = filterType.value;
+      const catVal = filterCategory.value;
+
+      // Filter Logic
+      const filtered = transactions.filter(t => {
+        const matchMonth = !selectedMonth || t.date.startsWith(selectedMonth);
+        const matchSearch = t.desc.toLowerCase().includes(searchKey);
+        const matchType = typeVal === 'all' || t.type === typeVal;
+        const matchCat = catVal === 'all' || t.category === catVal;
+        return matchMonth && matchSearch && matchType && matchCat;
+      });
+
+      // Calculate Metrics (filtered by period)
+      let inc = 0, exp = 0;
+      filtered.forEach(t => {
+        if (t.type === 'income') inc += t.amount;
+        else exp += t.amount;
+      });
+
+      document.getElementById('metricIncome').textContent = 'Rp ' + inc.toLocaleString('id-ID');
+      document.getElementById('metricExpense').textContent = 'Rp ' + exp.toLocaleString('id-ID');
+      document.getElementById('metricNet').textContent = 'Rp ' + (inc - exp).toLocaleString('id-ID');
+
+      // Table Render
+      const tbody = document.getElementById('txTableBody');
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-400">Belum ada transaksi pada periode/filter ini.</td></tr>`;
+      } else {
+        // Sort latest first
+        const sorted = [...filtered].sort((a,b) => new Date(b.date) - new Date(a.date));
+        tbody.innerHTML = sorted.map(t => `
+          <tr class="hover:bg-slate-50 transition">
+            <td class="p-3 text-slate-500 font-mono text-[11px]">${t.date}</td>
+            <td class="p-3">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${t.type === 'income' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-100 text-slate-600 border border-slate-200'}">
+                ${t.category}
+              </span>
+            </td>
+            <td class="p-3 font-medium text-slate-800">${t.desc}</td>
+            <td class="p-3 text-right font-semibold ${t.type === 'income' ? 'text-emerald-600' : 'text-rose-600'}">
+              ${t.type === 'income' ? '+' : '-'} Rp ${t.amount.toLocaleString('id-ID')}
+            </td>
+            <td class="p-3 text-center space-x-1">
+              <button onclick="openModal('${t.id}')" class="text-indigo-600 hover:text-indigo-800 font-medium text-[11px]">Edit</button>
+              <button onclick="deleteTx('${t.id}')" class="text-rose-600 hover:text-rose-800 font-medium text-[11px]">Hapus</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      updateChart(filtered.filter(t => t.type === 'expense'));
     }
 
-    function importJSON(event) {
-      const file = event.target.files[0];
-      if (!file) return;
+    function updateChart(expenseItems) {
+      const categoryTotals = {};
+      expenseItems.forEach(t => {
+        categoryTotals[t.category] = (categoryTotals[t.category] || 0) + t.amount;
+      });
 
+      const labels = Object.keys(categoryTotals);
+      const dataValues = Object.values(categoryTotals);
+
+      const ctx = document.getElementById('categoryChart').getContext('2d');
+      if (chartInstance) chartInstance.destroy();
+
+      if (labels.length === 0) {
+        chartInstance = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Tidak ada pengeluaran'],
+            datasets: [{ data: [1], backgroundColor: ['#f1f5f9'] }]
+          },
+          options: { plugins: { legend: { display: false } }, responsive: true, maintainAspectRatio: false }
+        });
+        return;
+      }
+
+      chartInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: dataValues,
+            backgroundColor: ['#f43f5e', '#6366f1', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4', '#ec4899', '#64748b']
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
+          }
+        }
+      });
+    }
+
+    // Backup & Restore
+    function exportJSON() {
+      if (transactions.length === 0) return alert('Tidak ada data untuk diekspor!');
+      const blob = new Blob([JSON.stringify(transactions, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `backup_keuangan_${monthPicker.value || 'all'}.json`;
+      a.click();
+    }
+
+    function importJSON(e) {
+      const file = e.target.files[0];
+      if (!file) return;
       const reader = new FileReader();
-      reader.onload = function(e) {
+      reader.onload = (evt) => {
         try {
-          const imported = JSON.parse(e.target.result);
+          const imported = JSON.parse(evt.target.result);
           if (Array.isArray(imported)) {
-            if (confirm('Import file ini akan menimpa data yang ada. Lanjutkan?')) {
-              data = imported;
-              localStorage.setItem('my_finance_data', JSON.stringify(data));
-              render();
+            if (confirm('Impor file ini akan menggantikan seluruh data saat ini. Lanjutkan?')) {
+              transactions = imported;
+              saveAndRender();
               alert('Data berhasil dipulihkan!');
             }
-          } else {
-            alert('Format file JSON tidak valid!');
           }
-        } catch (err) {
-          alert('Gagal membaca file JSON.');
-        }
+        } catch (err) { alert('Format file tidak valid!'); }
       };
       reader.readAsText(file);
-      event.target.value = '';
+      e.target.value = '';
     }
 
     function exportCSV() {
-      if (data.length === 0) return alert('Belum ada data!');
-      let csv = "\uFEFFTanggal,Tipe,Nominal,Keterangan\n";
-      data.forEach(item => {
-        const type = item.type === 'income' ? 'Pemasukan' : 'Pengeluaran';
-        const desc = `"${item.desc.replace(/"/g, '""')}"`;
-        csv += `${item.date},${type},${item.amount},${desc}\n`;
+      if (transactions.length === 0) return alert('Tidak ada data!');
+      let csv = "\uFEFFID,Tanggal,Tipe,Kategori,Keterangan,Nominal\n";
+      transactions.forEach(t => {
+        csv += `"${t.id}","${t.date}","${t.type}","${t.category}","${t.desc.replace(/"/g, '""')}",${t.amount}\n`;
       });
-
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.setAttribute("download", `laporan_keuangan_${today}.csv`);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `laporan_keuangan_${monthPicker.value || 'semua'}.csv`;
+      a.click();
     }
 
-    render();
+    function clearAllData() {
+      if (confirm('Apakah Anda yakin ingin menghapus SELURUH data transaksi? Tindakan ini tidak dapat dibatalkan.')) {
+        transactions = [];
+        saveAndRender();
+      }
+    }
   </script>
 </body>
 </html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laporan Keuangan Harian</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen p-4 sm:p-6">
+  <div class="max-w-3xl mx-auto">
+    <header class="flex justify-between items-center mb-6 border-b pb-4">
+      <div>
+        <h1 class="text-2xl font-bold">Laporan Keuangan Harian</h1>
+        <p class="text-sm text-slate-500">Tersimpan otomatis di browser Anda</p>
+      </div>
+      <input type="date" id="filterDate" class="border p-2 rounded-lg text-sm bg-white">
+    </header>
+
+    <!-- Ringkasan -->
+    <div class="grid grid-cols-3 gap-3 mb-6">
+      <div class="bg-white p-3 rounded-lg border text-center">
+        <p class="text-xs text-slate-500">Pemasukan</p>
+        <p id="totalIncome" class="text-lg font-bold text-emerald-600">Rp 0</p>
+      </div>
+      <div class="bg-white p-3 rounded-lg border text-center">
+        <p class="text-xs text-slate-500">Pengeluaran</p>
+        <p id="totalExpense" class="text-lg font-bold text-rose-600">Rp 0</p>
+      </div>
+      <div class="bg-white p-3 rounded-lg border text-center">
+        <p class="text-xs text-slate-500">Saldo Bersih</p>
+        <p id="netBalance" class="text-lg font-bold text-blue-600">Rp 0</p>
+      </div>
+    </div>
+
+    <!-- Input Transaksi -->
+    <form id="txForm" class="bg-white p-4 rounded-lg border mb-6 flex flex-wrap gap-2">
+      <input type="date" id="txDate" required class="border p-2 rounded text-sm flex-1">
+      <select id="txType" class="border p-2 rounded text-sm">
+        <option value="income">Pemasukan (+)</option>
+        <option value="expense">Pengeluaran (-)</option>
+      </select>
+      <input type="number" id="txAmount" placeholder="Jumlah (Rp)" required class="border p-2 rounded text-sm flex-1">
+      <input type="text" id="txDesc" placeholder="Keterangan" required class="border p-2 rounded text-sm flex-1">
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium">Tambah</button>
+    </form>
+
+    <!-- Tabel -->
+    <div class="bg-white rounded-lg border overflow-hidden">
+      <table class="w-full text-left text-sm">
+        <thead class="bg-slate-100 text-slate-600">
+          <tr>
+            <th class="p-3">Keterangan</th>
+            <th class="p-3">Tipe</th>
+            <th class="p-3 text-right">Nominal</th>
+            <th class="p-3 text-center">Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="txList" class="divide-y"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('filterDate').value = today;
+    document.getElementById('txDate').value = today;
+
+    let data = JSON.parse(localStorage.getItem('my_finance_data')) || [];
+
+    function render() {
+      const date = document.getElementById('filterDate').value;
+      const list = document.getElementById('txList');
+      list.innerHTML = '';
+
+      let inc = 0, exp = 0;
+      const filtered = data.filter(d => d.date === date);
+
+      filtered.forEach(item => {
+        if (item.type === 'income') inc += Number(item.amount);
+        else exp += Number(item.amount);
+
+        list.innerHTML += `
+          <tr>
+            <td class="p-3">${item.desc}</td>
+            <td class="p-3"><span class="px-2 py-0.5 text-xs rounded ${item.type === 'income' ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}">${item.type === 'income' ? 'Masuk' : 'Keluar'}</span></td>
+            <td class="p-3 text-right font-semibold">Rp ${Number(item.amount).toLocaleString('id-ID')}</td>
+            <td class="p-3 text-center"><button onclick="del('${item.id}')" class="text-rose-600 text-xs">Hapus</button></td>
+          </tr>`;
+      });
+
+      document.getElementById('totalIncome').textContent = 'Rp ' + inc.toLocaleString('id-ID');
+      document.getElementById('totalExpense').textContent = 'Rp ' + exp.toLocaleString('id-ID');
+      document.getElementById('netBalance').textContent = 'Rp ' + (inc - exp).toLocaleString('id-ID');
+    }
+
+    document.getElementById('txForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      data.push({
+        id: Date.now().toString(),
+        date: document.getElementById('txDate').value,
+        type: document.getElementById('txType').value,
+        amount: document.getElementById('txAmount').value,
+        desc: document.getElementById('txDesc').value
+      });
+      localStorage.setItem('my_finance_data', JSON.stringify(data));
+      document.getElementById('txAmount').value = '';
+      document.getElementById('txDesc').value = '';
+      render();
+    });
+
+    function del(id) {
+      data = data.filter(d => d.id !== id);
+      localStorage.setItem('my_finance_data', JSON.stringify(data));
+      render();
+    }
+
+    document.getElementById('filterDate').addEventListener('change', render);
+    render();
+  </script>
+</body>
+</html>

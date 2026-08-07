@@ -8,10 +8,11 @@
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen p-4 sm:p-6">
   <div class="max-w-3xl mx-auto">
-    <header class="flex justify-between items-center mb-6 border-b pb-4">
+    <!-- Header -->
+    <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b pb-4 gap-4">
       <div>
         <h1 class="text-2xl font-bold">Laporan Keuangan Harian</h1>
-        <p class="text-sm text-slate-500">Tersimpan otomatis di browser Anda</p>
+        <p class="text-sm text-slate-500">Tersimpan di browser & dapat diekspor ke file</p>
       </div>
       <input type="date" id="filterDate" class="border p-2 rounded-lg text-sm bg-white">
     </header>
@@ -41,10 +42,27 @@
       </select>
       <input type="number" id="txAmount" placeholder="Jumlah (Rp)" required class="border p-2 rounded text-sm flex-1">
       <input type="text" id="txDesc" placeholder="Keterangan" required class="border p-2 rounded text-sm flex-1">
-      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium">Tambah</button>
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-blue-700">Tambah</button>
     </form>
 
-    <!-- Tabel -->
+    <!-- Panel Manajemen File & Data -->
+    <div class="bg-white p-4 rounded-lg border mb-6 flex flex-wrap gap-3 items-center justify-between">
+      <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Manajemen File:</span>
+      <div class="flex flex-wrap gap-2">
+        <button onclick="exportJSON()" class="bg-slate-700 text-white text-xs px-3 py-2 rounded hover:bg-slate-800">
+          📥 Backup (JSON)
+        </button>
+        <label class="bg-slate-100 border text-slate-700 text-xs px-3 py-2 rounded cursor-pointer hover:bg-slate-200">
+          📤 Restore (JSON)
+          <input type="file" id="importFile" accept=".json" onchange="importJSON(event)" class="hidden">
+        </label>
+        <button onclick="exportCSV()" class="bg-emerald-600 text-white text-xs px-3 py-2 rounded hover:bg-emerald-700">
+          📊 Ekspor (Excel/CSV)
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabel Transaksi -->
     <div class="bg-white rounded-lg border overflow-hidden">
       <table class="w-full text-left text-sm">
         <thead class="bg-slate-100 text-slate-600">
@@ -84,7 +102,7 @@
             <td class="p-3">${item.desc}</td>
             <td class="p-3"><span class="px-2 py-0.5 text-xs rounded ${item.type === 'income' ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}">${item.type === 'income' ? 'Masuk' : 'Keluar'}</span></td>
             <td class="p-3 text-right font-semibold">Rp ${Number(item.amount).toLocaleString('id-ID')}</td>
-            <td class="p-3 text-center"><button onclick="del('${item.id}')" class="text-rose-600 text-xs">Hapus</button></td>
+            <td class="p-3 text-center"><button onclick="del('${item.id}')" class="text-rose-600 text-xs hover:underline">Hapus</button></td>
           </tr>`;
       });
 
@@ -112,6 +130,64 @@
       data = data.filter(d => d.id !== id);
       localStorage.setItem('my_finance_data', JSON.stringify(data));
       render();
+    }
+
+    // Fitur Simpan File: Backup JSON
+    function exportJSON() {
+      if (data.length === 0) return alert('Belum ada data untuk diekspor!');
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
+      const anchor = document.createElement('a');
+      anchor.setAttribute("href", dataStr);
+      anchor.setAttribute("download", `keuangan_backup_${today}.json`);
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+    }
+
+    // Fitur Baca File: Restore JSON
+    function importJSON(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (Array.isArray(imported)) {
+            if (confirm('Import file ini akan menimpa data yang ada sekarang. Lanjutkan?')) {
+              data = imported;
+              localStorage.setItem('my_finance_data', JSON.stringify(data));
+              render();
+              alert('Data berhasil dipulihkan!');
+            }
+          } else {
+            alert('Format file tidak sesuai!');
+          }
+        } catch (err) {
+          alert('Gagal membaca file JSON.');
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = ''; // Reset input file
+    }
+
+    // Fitur Ekspor File CSV untuk Excel
+    function exportCSV() {
+      if (data.length === 0) return alert('Belum ada data untuk diekspor!');
+      let csv = "\uFEFFTanggal,Tipe,Nominal,Keterangan\n";
+      data.forEach(item => {
+        const type = item.type === 'income' ? 'Pemasukan' : 'Pengeluaran';
+        const desc = `"${item.desc.replace(/"/g, '""')}"`;
+        csv += `${item.date},${type},${item.amount},${desc}\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.setAttribute("download", `laporan_keuangan_${today}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
     }
 
     document.getElementById('filterDate').addEventListener('change', render);

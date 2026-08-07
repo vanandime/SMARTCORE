@@ -17,18 +17,19 @@
 
   <!-- Header / Navigation -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 py-3.5 flex flex-wrap items-center justify-between gap-3">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-2">
       <div class="flex items-center gap-2">
         <div class="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold text-lg">K</div>
         <div>
           <h1 class="font-bold text-base text-slate-900 leading-tight">KeuanganKu</h1>
-          <p class="text-xs text-slate-500">Pencatat Keuangan Personal</p>
+          <p class="text-[11px] text-slate-500 hidden sm:block">Pencatat Keuangan Personal</p>
         </div>
       </div>
 
+      <!-- Filter Bulan Fix: Penambahan min-w-[140px] agar tahun 2026 tidak terpotong -->
       <div class="flex items-center gap-2">
-        <input type="month" id="monthPicker" class="text-xs bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 font-medium text-slate-700 outline-none focus:border-indigo-500">
-        <button onclick="openModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-sm transition flex items-center gap-1.5">
+        <input type="month" id="monthPicker" class="text-xs bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 font-medium text-slate-700 outline-none focus:border-indigo-500 min-w-[140px]">
+        <button onclick="openModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-3 sm:px-4 py-2 rounded-lg shadow-sm transition flex items-center gap-1 shrink-0">
           <span>+</span> Transaksi
         </button>
       </div>
@@ -69,29 +70,29 @@
         <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm space-y-3">
           <!-- Filter & Search Bar -->
           <div class="flex flex-wrap gap-2 items-center justify-between">
-            <input type="text" id="searchInput" placeholder="Cari deskripsi..." class="text-xs border border-slate-200 rounded-lg px-3 py-2 flex-1 min-w-[150px] outline-none focus:border-indigo-500">
+            <input type="text" id="searchInput" placeholder="Cari deskripsi..." class="text-xs border border-slate-200 rounded-lg px-3 py-2 flex-1 min-w-[140px] outline-none focus:border-indigo-500">
             
-            <select id="filterType" class="text-xs border border-slate-200 rounded-lg px-3 py-2 outline-none focus:border-indigo-500">
+            <select id="filterType" class="text-xs border border-slate-200 rounded-lg px-2.5 py-2 outline-none focus:border-indigo-500">
               <option value="all">Semua Tipe</option>
               <option value="income">Pemasukan (+)</option>
               <option value="expense">Pengeluaran (-)</option>
             </select>
 
-            <select id="filterCategory" class="text-xs border border-slate-200 rounded-lg px-3 py-2 outline-none focus:border-indigo-500">
+            <select id="filterCategory" class="text-xs border border-slate-200 rounded-lg px-2.5 py-2 outline-none focus:border-indigo-500">
               <option value="all">Semua Kategori</option>
             </select>
           </div>
 
-          <!-- Transaction List Table -->
+          <!-- Transaction List Table dengan Scroll Horizontal Mobile -->
           <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
+            <table class="w-full text-left text-xs min-w-[500px]">
               <thead class="bg-slate-50 text-slate-500 font-medium border-b border-slate-200">
                 <tr>
-                  <th class="p-3">Tanggal</th>
+                  <th class="p-3 w-24">Tanggal</th>
                   <th class="p-3">Kategori</th>
                   <th class="p-3">Keterangan</th>
                   <th class="p-3 text-right">Nominal</th>
-                  <th class="p-3 text-center">Aksi</th>
+                  <th class="p-3 text-center w-20">Aksi</th>
                 </tr>
               </thead>
               <tbody id="txTableBody" class="divide-y divide-slate-100 text-slate-700"></tbody>
@@ -301,12 +302,11 @@
     }
 
     function render() {
-      const selectedMonth = monthPicker.value; // YYYY-MM
+      const selectedMonth = monthPicker.value;
       const searchKey = searchInput.value.toLowerCase();
       const typeVal = filterType.value;
       const catVal = filterCategory.value;
 
-      // Filter Logic
       const filtered = transactions.filter(t => {
         const matchMonth = !selectedMonth || t.date.startsWith(selectedMonth);
         const matchSearch = t.desc.toLowerCase().includes(searchKey);
@@ -315,7 +315,6 @@
         return matchMonth && matchSearch && matchType && matchCat;
       });
 
-      // Calculate Metrics (filtered by period)
       let inc = 0, exp = 0;
       filtered.forEach(t => {
         if (t.type === 'income') inc += t.amount;
@@ -326,26 +325,24 @@
       document.getElementById('metricExpense').textContent = 'Rp ' + exp.toLocaleString('id-ID');
       document.getElementById('metricNet').textContent = 'Rp ' + (inc - exp).toLocaleString('id-ID');
 
-      // Table Render
       const tbody = document.getElementById('txTableBody');
       if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-400">Belum ada transaksi pada periode/filter ini.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-400">Belum ada transaksi pada periode ini.</td></tr>`;
       } else {
-        // Sort latest first
         const sorted = [...filtered].sort((a,b) => new Date(b.date) - new Date(a.date));
         tbody.innerHTML = sorted.map(t => `
           <tr class="hover:bg-slate-50 transition">
-            <td class="p-3 text-slate-500 font-mono text-[11px]">${t.date}</td>
-            <td class="p-3">
+            <td class="p-3 text-slate-500 font-mono text-[11px] whitespace-nowrap">${t.date}</td>
+            <td class="p-3 whitespace-nowrap">
               <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${t.type === 'income' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-100 text-slate-600 border border-slate-200'}">
                 ${t.category}
               </span>
             </td>
             <td class="p-3 font-medium text-slate-800">${t.desc}</td>
-            <td class="p-3 text-right font-semibold ${t.type === 'income' ? 'text-emerald-600' : 'text-rose-600'}">
+            <td class="p-3 text-right font-semibold whitespace-nowrap ${t.type === 'income' ? 'text-emerald-600' : 'text-rose-600'}">
               ${t.type === 'income' ? '+' : '-'} Rp ${t.amount.toLocaleString('id-ID')}
             </td>
-            <td class="p-3 text-center space-x-1">
+            <td class="p-3 text-center space-x-1 whitespace-nowrap">
               <button onclick="openModal('${t.id}')" class="text-indigo-600 hover:text-indigo-800 font-medium text-[11px]">Edit</button>
               <button onclick="deleteTx('${t.id}')" class="text-rose-600 hover:text-rose-800 font-medium text-[11px]">Hapus</button>
             </td>
@@ -399,7 +396,6 @@
       });
     }
 
-    // Backup & Restore
     function exportJSON() {
       if (transactions.length === 0) return alert('Tidak ada data untuk diekspor!');
       const blob = new Blob([JSON.stringify(transactions, null, 2)], { type: 'application/json' });

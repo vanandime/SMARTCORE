@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkSpace - v4.15 Pro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; will-change: background-color, color; }
+    
+    .theme-dark { --bg-main: #07090e; --bg-card: #111726; --border: #1e293b; --text-main: #f8fafc; --text-sub: #94a3b8; --input-bg: #0f172a; }
+    .theme-light { --bg-main: #f1f5f9; --bg-card: #ffffff; --border: #cbd5e1; --text-main: #0f172a; --text-sub: #475569; --input-bg: #f8fafc; }
+    .theme-emerald { --bg-main: #021c16; --bg-card: #063529; --border: #047857; --text-main: #ecfdf5; --text-sub: #a7f3d0; --input-bg: #022c22; }
+    .theme-ocean { --bg-main: #041d2c; --bg-card: #0a3147; --border: #0369a1; --text-main: #f0f9ff; --text-sub: #bae6fd; --input-bg: #072538; }
+    .theme-cyber { --bg-main: #1a0b2e; --bg-card: #281145; --border: #6b21a8; --text-main: #faf5ff; --text-sub: #e9d5ff; --input-bg: #200d38; }
+
+    body { background-color: var(--bg-main); color: var(--text-main); }
+    .card-modern { background-color: var(--bg-card); border-color: var(--border); border-width: 1px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .card-modern:hover { transform: translateY(-2px); }
+    .text-sub { color: var(--text-sub); }
+    .custom-input { background-color: var(--input-bg); color: var(--text-main); border-color: var(--border); }
+
+    .tab-content { animation: fadeIn 0.35s ease-in-out forwards; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .donut-chart {
+      width: 120px; height: 120px; border-radius: 50%;
+      background: conic-gradient(#10b981 0% 50%, #f43f5e 50% 100%);
+      display: flex; align-items: center; justify-content: center; position: relative; margin: auto;
+    }
+    .donut-hole {
+      width: 80px; height: 80px; border-radius: 50%; background: var(--bg-card);
+      display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 11px;
+    }
+
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.2); border-radius: 4px; }
+  </style>
+</head>
+<body id="appBody" class="theme-dark min-h-screen pb-24 md:pb-6 transition-colors duration-300">
+
+  <!-- MODAL MASUK / LOGIN -->
+  <div id="loginModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-sm w-full p-6 space-y-4 shadow-2xl text-center">
+      <div class="w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center mx-auto text-xl font-bold">🔐</div>
+      <h3 class="font-extrabold text-sm" data-i18n="loginTitle">Masuk ke WorkSpace</h3>
+      <p class="text-xs text-sub" data-i18n="loginSub">Masukkan nama Anda untuk memulai sesi.</p>
+      <form id="loginForm" class="space-y-3 pt-2">
+        <input type="text" id="loginUsername" placeholder="Nama Pengguna / Username" required class="w-full text-xs custom-input border rounded-xl p-3 font-semibold outline-none text-center">
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2.5 rounded-xl shadow transition" data-i18n="loginBtn">Masuk Sekarang</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- HEADER UTAMA -->
+  <header class="sticky top-2 z-40 max-w-[98%] md:max-w-7xl mx-auto px-2">
+    <div class="card-modern rounded-2xl shadow-2xl backdrop-blur-md bg-opacity-95 px-5 py-3 flex items-center justify-between border-white/15">
+      <div class="flex items-center gap-3">
+        <!-- LOGO TANPA BACKGROUND DENGAN UKURAN LEBIH BESAR -->
+        <div class="w-11 h-11 text-indigo-400 flex items-center justify-center drop-shadow-lg">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+        </div>
+        <span id="welcomeUserBadge" class="text-xs text-indigo-400 font-semibold pl-1"></span>
+      </div>
+      <div class="flex items-center gap-2 text-xs font-mono font-bold text-indigo-400">
+        <div class="flex items-center gap-2 bg-indigo-500/10 px-3.5 py-1.5 rounded-xl border border-indigo-500/30 whitespace-nowrap shadow-inner">
+          <span id="weatherWidget" class="text-xs">🌤️ --°C</span>
+          <span class="opacity-40">|</span>
+          <span id="headerClock">00:00:00</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PEMILIH BAHASA MENGAMBANG -->
+  <div class="fixed bottom-5 left-5 z-50">
+    <div class="card-modern rounded-full shadow-2xl p-2.5 flex items-center justify-center bg-slate-900/95 backdrop-blur-md border border-white/15 cursor-pointer group hover:scale-105 transition">
+      <span class="text-sm">🌐</span>
+      <select id="langSelector" onchange="changeLanguage(this.value)" class="text-xs custom-input border-0 bg-transparent rounded-lg px-1 outline-none font-semibold cursor-pointer absolute inset-0 opacity-0 w-full h-full">
+        <option value="id">🇮🇩 ID</option>
+        <option value="en">🇬🇧 EN</option>
+        <option value="zh">🇨🇳 ZH</option>
+        <option value="ar">🇸🇦 AR</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- KONTEN UTAMA APLIKASI -->
+  <main class="max-w-[98%] md:max-w-7xl mx-auto p-2 md:p-4 space-y-6">
+
+    <!-- TAB 1: KEUANGAN -->
+    <section id="tab-finance" class="tab-content space-y-5">
+      <div class="card-modern p-4 rounded-2xl flex flex-wrap items-center justify-between gap-3">
+        <div><h2 class="text-base font-extrabold" data-i18n="finTitle">Manajemen Keuangan</h2><p class="text-xs text-sub" data-i18n="finSub">Pantau arus kas, grafik lingkaran, dan perbandingan online vs offline.</p></div>
+        <div class="flex flex-wrap items-center gap-2">
+          <input type="month" id="monthPicker" class="text-xs custom-input border rounded-xl px-3 py-2 font-semibold outline-none min-w-[140px]">
+          <button onclick="openTxModal('offline')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-2 rounded-xl shadow transition" data-i18n="btnTx">+ Offline</button>
+          <button onclick="openTxModal('online')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-2 rounded-xl shadow transition" data-i18n="btnOnlineTx">🌐 Online</button>
+          <button onclick="exportFinance()" class="card-modern hover:bg-slate-800 text-xs font-bold px-3 py-2 rounded-xl transition" data-i18n="btnExportFin">Ekspor</button>
+          <button onclick="shareFinance()" class="card-modern hover:bg-slate-800 text-xs font-bold px-3 py-2 rounded-xl transition" data-i18n="btnShareFin">Bagikan</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="card-modern p-4 rounded-2xl"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblNet">Total Saldo</div><div id="metricNet" class="text-xl font-extrabold mt-1">Rp 0</div></div>
+        <div class="card-modern p-4 rounded-2xl"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblIncome">Pemasukan</div><div id="metricIncome" class="text-xl font-extrabold text-emerald-400 mt-1">Rp 0</div></div>
+        <div class="card-modern p-4 rounded-2xl"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblExpense">Pengeluaran</div><div id="metricExpense" class="text-xl font-extrabold text-rose-400 mt-1">Rp 0</div></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card-modern p-5 rounded-2xl space-y-3 text-center">
+          <h3 class="text-xs font-bold uppercase text-sub" data-i18n="chartIncExpTitle">📊 Rasio Pemasukan vs Pengeluaran</h3>
+          <div id="donutIncExp" class="donut-chart"><div id="donutIncExpHole" class="donut-hole">0%</div></div>
+          <div class="flex justify-center gap-4 text-xs font-bold pt-1"><span class="text-emerald-400">■ Pemasukan</span><span class="text-rose-400">■ Pengeluaran</span></div>
+        </div>
+        <div class="card-modern p-5 rounded-2xl space-y-3 text-center">
+          <h3 class="text-xs font-bold uppercase text-sub" data-i18n="chartOnlineOfflineTitle">🌐 Rasio Online vs Offline</h3>
+          <div id="donutOnlineOffline" class="donut-chart"><div id="donutOnlineOfflineHole" class="donut-hole">0%</div></div>
+          <div class="flex justify-center gap-4 text-xs font-bold pt-1"><span class="text-indigo-400">■ Online</span><span class="text-violet-400">■ Offline</span></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card-modern p-4 rounded-2xl space-y-2">
+          <div class="flex items-center justify-between border-b pb-2">
+            <span class="text-xs font-extrabold text-indigo-400 uppercase" data-i18n="lblSummaryOnline">🌐 Transaksi Online</span>
+            <span id="badgeOnlineCount" class="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-300">0 Data</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 pt-1 text-xs">
+            <div><div class="text-sub text-[10px]" data-i18n="lblOnlineIn">Masuk</div><div id="summaryOnlineInc" class="font-bold text-emerald-400 mt-0.5">Rp 0</div></div>
+            <div><div class="text-sub text-[10px]" data-i18n="lblOnlineOut">Keluar</div><div id="summaryOnlineExp" class="font-bold text-rose-400 mt-0.5">Rp 0</div></div>
+          </div>
+        </div>
+        <div class="card-modern p-4 rounded-2xl space-y-2">
+          <div class="flex items-center justify-between border-b pb-2">
+            <span class="text-xs font-extrabold text-violet-400 uppercase" data-i18n="lblSummaryOffline">💼 Transaksi Offline</span>
+            <span id="badgeOfflineCount" class="text-[10px] font-mono px-2 py-0.5 rounded bg-violet-500/10 text-violet-300">0 Data</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 pt-1 text-xs">
+            <div><div class="text-sub text-[10px]" data-i18n="lblOfflineIn">Masuk</div><div id="summaryOfflineInc" class="font-bold text-emerald-400 mt-0.5">Rp 0</div></div>
+            <div><div class="text-sub text-[10px]" data-i18n="lblOfflineOut">Keluar</div><div id="summaryOfflineExp" class="font-bold text-rose-400 mt-0.5">Rp 0</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-modern p-4 rounded-2xl space-y-3">
+        <div class="flex flex-wrap gap-2 items-center justify-between">
+          <input type="text" id="searchInput" placeholder="Cari..." class="text-xs custom-input border rounded-xl px-3 py-2 flex-1 outline-none">
+          <select id="filterType" class="text-xs custom-input border rounded-xl px-3 py-2 outline-none">
+            <option value="all" data-i18n="optAll">Semua</option>
+            <option value="income" data-i18n="optInc">Pemasukan</option>
+            <option value="expense" data-i18n="optExp">Pengeluaran</option>
+            <option value="online" data-i18n="optOnline">Online Saja</option>
+            <option value="offline" data-i18n="optOffline">Offline Saja</option>
+          </select>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs min-w-[500px]">
+            <thead class="border-b border-slate-700/60 text-sub font-semibold">
+              <tr>
+                <th class="p-2.5" data-i18n="thDate">Tanggal</th>
+                <th class="p-2.5" data-i18n="thCat">Kategori / Metode</th>
+                <th class="p-2.5" data-i18n="thDesc">Keterangan</th>
+                <th class="p-2.5 text-right" data-i18n="thNom">Nominal</th>
+                <th class="p-2.5 text-center" data-i18n="thAct">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="txTableBody" class="divide-y divide-slate-800/40"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: JAM & ALARM -->
+    <section id="tab-clock" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div>
+          <h2 class="text-base font-extrabold" data-i18n="clockHeading">Jam Dunia & Alarm Pintar</h2>
+          <p class="text-xs text-sub" data-i18n="clockSub">Atur alarm dan zona waktu real-time dengan izin perangkat.</p>
+        </div>
+        <button onclick="requestNotificationPermission()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow transition" data-i18n="btnNotifPerm">Izinkan Notifikasi Alarm</button>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card-modern p-5 rounded-2xl text-center space-y-3">
+          <div class="text-xs font-bold uppercase text-sub" data-i18n="lblCurrentLiveTime">Waktu Lokal Perangkat</div>
+          <div id="liveClockBig" class="text-5xl font-black font-mono text-indigo-400 py-4">00:00:00</div>
+          <div id="liveDateBig" class="text-xs font-semibold text-sub">1 Januari 2026</div>
+        </div>
+        <div class="card-modern p-5 rounded-2xl space-y-3">
+          <h3 class="text-xs font-bold uppercase text-sub border-b pb-2" data-i18n="lblSetAlarm">Atur Alarm Cepat</h3>
+          <div class="space-y-2 text-xs">
+            <div><label class="text-sub" data-i18n="lblAlarmTime">Waktu Alarm</label><input type="time" id="alarmTimeInput" class="w-full custom-input border rounded-xl p-2.5 mt-1 font-bold"></div>
+            <div><label class="text-sub" data-i18n="lblAlarmNote">Catatan Pengingat Alarm</label><input type="text" id="alarmNoteInput" placeholder="Contoh: Rapat Kerja" class="w-full custom-input border rounded-xl p-2.5 mt-1"></div>
+            <button onclick="saveAlarm()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl shadow transition" data-i18n="btnSaveAlarm">Pasang Alarm</button>
+          </div>
+          <div id="alarmList" class="space-y-1.5 max-h-32 overflow-y-auto pt-2"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: CUACA -->
+    <section id="tab-weather" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div>
+          <h2 class="text-base font-extrabold" data-i18n="weatherHeading">Pusat Cuaca Real-Time</h2>
+          <p class="text-xs text-sub" data-i18n="weatherSub">Informasi cuaca dan iklim terkini secara langsung.</p>
+        </div>
+        <button onclick="fetchLiveWeather()" class="bg-indigo-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow transition" data-i18n="btnRefreshWeather">Perbarui Cuaca</button>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="card-modern p-5 rounded-2xl space-y-2 text-center">
+          <div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblTemp">Suhu Saat Ini</div>
+          <div id="liveTemp" class="text-3xl font-black text-indigo-400">--°C</div>
+        </div>
+        <div class="card-modern p-5 rounded-2xl space-y-2 text-center">
+          <div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblCondition">Kondisi</div>
+          <div id="liveCondition" class="text-lg font-bold text-emerald-400">Memuat...</div>
+        </div>
+        <div class="card-modern p-5 rounded-2xl space-y-2 text-center">
+          <div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblWind">Kecepatan Angin</div>
+          <div id="liveWind" class="text-lg font-bold text-violet-400">-- km/h</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: BIO LINK GENERATOR -->
+    <section id="tab-biolink" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div>
+          <h2 class="text-base font-extrabold" data-i18n="bioHeading">Bio Link Generator</h2>
+          <p class="text-xs text-sub" data-i18n="bioSub">Buat halaman landing tautan profil gaya LinkTree.</p>
+        </div>
+        <button onclick="generateBioLinkPage()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow transition" data-i18n="bioGenBtn">Buat Bio Link</button>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card-modern p-5 rounded-2xl space-y-4">
+          <div>
+            <label class="text-xs font-bold text-sub" data-i18n="bioTitleLabel">Judul Profil / Nama Halaman</label>
+            <input type="text" id="bioProfileTitle" placeholder="Contoh: Nama Anda / Brand" class="w-full text-xs custom-input border rounded-xl p-2.5 mt-1 font-bold">
+          </div>
+          <div>
+            <label class="text-xs font-bold text-sub" data-i18n="bioSubtitleLabel">Bio Singkat / Deskripsi</label>
+            <input type="text" id="bioProfileSub" placeholder="Contoh: Kreator Konten & Developer" class="w-full text-xs custom-input border rounded-xl p-2.5 mt-1">
+          </div>
+          <div class="space-y-3 pt-2 border-t border-slate-800">
+            <label class="text-xs font-bold text-sub uppercase" data-i18n="bioAddBtnLabel">Tambah Tautan Tombol Baru</label>
+            <div class="space-y-2">
+              <input type="text" id="newBioBtnText" placeholder="Teks Tombol (Misal: Instagram Saya)" class="w-full text-xs custom-input border rounded-xl p-2.5">
+              <input type="url" id="newBioBtnUrl" placeholder="URL Tujuan (https://...)" class="w-full text-xs custom-input border rounded-xl p-2.5">
+              <button onclick="addCustomBioLink()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2 rounded-xl shadow transition" data-i18n="bioAddBtn">+ Tambah ke Daftar Tombol</button>
+            </div>
+          </div>
+          <div class="space-y-2 pt-2 border-t border-slate-800">
+            <label class="text-xs font-bold text-sub uppercase" data-i18n="bioLinksList">Daftar Tombol Tautan Aktif</label>
+            <div id="bioCustomLinkList" class="space-y-2 max-h-40 overflow-y-auto"></div>
+          </div>
+        </div>
+        <div class="card-modern p-5 rounded-2xl space-y-3 flex flex-col justify-between">
+          <div>
+            <h3 class="text-xs font-bold uppercase text-sub border-b pb-2" data-i18n="bioResLabel">Pratinjau Tampilan LinkTree</h3>
+            <div id="linkTreePreview" class="mt-4 p-6 rounded-2xl bg-slate-950/80 border border-slate-800 text-center space-y-4 shadow-inner min-h-[260px] flex flex-col items-center justify-center">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-indigo-500 to-pink-500 flex items-center justify-center text-white font-black text-xl shadow-lg">WS</div>
+              <div>
+                <h4 id="prevTitle" class="font-bold text-sm text-white">Nama Profil Anda</h4>
+                <p id="prevSub" class="text-[10px] text-sub mt-0.5">Bio singkat profil Anda di sini...</p>
+              </div>
+              <div id="prevLinksContainer" class="w-full space-y-2 pt-2">
+                <div class="p-2.5 rounded-xl bg-indigo-600/30 border border-indigo-500/30 text-indigo-200 text-xs font-bold">Contoh Tombol Tautan 1</div>
+              </div>
+            </div>
+          </div>
+          <button onclick="copyBioLink()" class="w-full bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold py-2.5 rounded-xl shadow transition" data-i18n="bioCopy">Salin Kode HTML Bio Link</button>
+          <textarea id="bioResultOutput" class="hidden"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: TUGAS & CATATAN -->
+    <section id="tab-tasks" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div><h2 class="text-base font-extrabold" data-i18n="taskHeading">Tugas & Catatan</h2><p class="text-xs text-sub" data-i18n="taskSub">Pusat pengorganisasian tugas dan memo.</p></div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="openTaskModal()" class="bg-indigo-600 text-white text-xs font-bold px-3 py-2 rounded-xl shadow transition" data-i18n="btnTask">+ Tugas</button>
+          <button onclick="openNoteModal()" class="bg-violet-600 text-white text-xs font-bold px-3 py-2 rounded-xl shadow transition" data-i18n="btnNote">+ Catatan</button>
+          <button onclick="exportTasksNotes()" class="card-modern text-xs font-bold px-3 py-2 rounded-xl transition" data-i18n="btnExportTask">Ekspor</button>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card-modern p-4 rounded-2xl space-y-3">
+          <h3 class="text-xs font-bold uppercase text-sub border-b pb-2" data-i18n="lblTaskList">Daftar Pekerjaan</h3>
+          <div id="taskList" class="divide-y divide-slate-800/40 space-y-2"></div>
+        </div>
+        <div class="card-modern p-4 rounded-2xl space-y-3">
+          <h3 class="text-xs font-bold uppercase text-sub border-b pb-2" data-i18n="lblNoteList">Catatan Saya</h3>
+          <div id="noteList" class="grid grid-cols-1 gap-2.5"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: KALENDER -->
+    <section id="tab-calendar" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div><h2 class="text-base font-extrabold" data-i18n="calHeading">Kalender Interaktif & Pengingat</h2><p class="text-xs text-sub" data-i18n="calSub">Klik tanggal untuk menambah agenda & pengingat.</p></div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <button onclick="changeCalMonth(-1)" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold transition">&larr;</button>
+          <span id="calMonthYearLabel" class="text-xs font-bold font-mono px-2">Bulan Tahun</span>
+          <button onclick="changeCalMonth(1)" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold transition">&rarr;</button>
+          <button onclick="exportCalendar()" class="card-modern text-xs font-bold px-3 py-2 rounded-xl transition" data-i18n="btnExportCal">Ekspor</button>
+        </div>
+      </div>
+      <div class="card-modern p-4 rounded-2xl space-y-3">
+        <div class="grid grid-cols-7 gap-1 text-center font-bold text-xs text-sub pb-2 border-b border-slate-800">
+          <span>Min</span><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span>
+        </div>
+        <div id="calendarGrid" class="grid grid-cols-7 gap-1.5"></div>
+      </div>
+    </section>
+
+    <!-- TAB 7: POMODORO -->
+    <section id="tab-pomodoro" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between"><h2 class="text-base font-extrabold" data-i18n="pomHeading">Pomodoro Focus Timer</h2></div>
+      <div class="card-modern p-6 rounded-2xl max-w-md mx-auto text-center space-y-6">
+        <div class="flex justify-center gap-2">
+          <button onclick="setPomodoroMode('work')" id="pomModeWork" class="px-4 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow">Fokus (25m)</button>
+          <button onclick="setPomodoroMode('shortBreak')" id="pomModeShort" class="px-4 py-1.5 rounded-xl text-xs font-bold card-modern text-sub">Istirahat (5m)</button>
+        </div>
+        <div class="text-6xl font-black font-mono tracking-wider text-indigo-400 py-6" id="pomTimerDisplay">25:00</div>
+        <div class="flex justify-center gap-3">
+          <button onclick="startPomodoro()" class="bg-indigo-600 text-white text-xs font-bold px-6 py-2.5 rounded-xl shadow transition" data-i18n="pomStart">Mulai</button>
+          <button onclick="pausePomodoro()" class="card-modern text-xs font-bold px-6 py-2.5 rounded-xl transition" data-i18n="pomPause">Jeda</button>
+          <button onclick="resetPomodoro()" class="card-modern text-xs font-bold px-6 py-2.5 rounded-xl text-rose-400 transition" data-i18n="pomReset">Reset</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 8: FONT GENERATOR -->
+    <section id="tab-font" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="fontHeading">Font Generator & Text Stylist</h2></div>
+      <div class="card-modern p-5 rounded-2xl space-y-4 max-w-2xl mx-auto">
+        <textarea id="fontInputText" rows="3" class="w-full text-xs custom-input border rounded-xl p-3 outline-none" oninput="generateFonts()">WorkSpace</textarea>
+        <div id="fontResultsList" class="space-y-2.5 max-h-[420px] overflow-y-auto pr-1"></div>
+      </div>
+    </section>
+
+    <!-- TAB 9: DOWNLOADER -->
+    <section id="tab-downloader" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="dlHeading">Media & Photo Downloader</h2></div>
+      <div class="card-modern p-5 rounded-2xl space-y-4 max-w-xl mx-auto">
+        
+        <!-- LINK / URL INPUT SECTION -->
+        <div class="space-y-3">
+          <div class="flex gap-2">
+            <input type="url" id="dlUrlInput" placeholder="Tempel tautan YouTube atau link gambar/foto di sini..." class="text-xs custom-input border rounded-xl px-3 py-2.5 flex-1 outline-none">
+            <button onclick="processDownload()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition" data-i18n="dlProc">Proses</button>
+          </div>
+          
+          <!-- TOMBOL PILIHAN FORMAT GABUNGAN (YOUTUBE & FOTO LINK) -->
+          <div id="dlResultArea" class="hidden p-4 card-modern rounded-xl space-y-3">
+            <div id="ytInfoBox" class="text-xs font-semibold text-sub text-center">Media siap diunduh! Pilih format:</div>
+            <div id="dlActionGrid" class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <a id="dlVideoBtn" href="#" target="_blank" class="block text-center bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2.5 rounded-xl shadow transition">Video (MP4)</a>
+              <a id="dlAudioBtn" href="#" target="_blank" class="block text-center bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold py-2.5 rounded-xl shadow transition">Audio (MP3)</a>
+              <a id="dlPhotoLinkBtn" href="#" target="_blank" download="downloaded-photo.jpg" class="block text-center bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2.5 rounded-xl shadow transition">Foto (JPG/PNG)</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 10: URL SHORTENER -->
+    <section id="tab-shortener" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="shortHeading">Pemendek Link (URL Shortener)</h2></div>
+      <div class="card-modern p-5 rounded-2xl space-y-3 max-w-xl mx-auto">
+        <div class="flex gap-2">
+          <input type="url" id="shortUrlInput" placeholder="https://..." class="text-xs custom-input border rounded-xl px-3 py-2.5 flex-1 outline-none">
+          <button onclick="generateShortUrl()" class="bg-indigo-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition" data-i18n="shortProc">Pendekkan</button>
+        </div>
+        <div id="shortResultArea" class="hidden p-3.5 card-modern rounded-xl space-y-2">
+          <div class="flex gap-2">
+            <input type="text" id="shortResultOutput" readonly class="text-xs custom-input border rounded-xl px-3 py-2 flex-1 font-mono text-indigo-400 font-bold">
+            <button onclick="copyShortUrl()" class="bg-violet-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow transition" data-i18n="shortCopy">Salin</button>
+          </div>
+        </div>
+        <div id="shortHistoryList" class="space-y-2 max-h-40 overflow-y-auto"></div>
+      </div>
+    </section>
+
+    <!-- TAB 11: TRANSLATOR -->
+    <section id="tab-translator" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="transHeading">Penerjemah Bahasa</h2></div>
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
+        <div class="card-modern p-4 rounded-2xl space-y-3 md:col-span-2">
+          <select id="transSourceLang" class="custom-input border rounded-lg px-2 py-1 outline-none text-xs font-bold w-full">
+            <option value="auto">Deteksi Otomatis (Auto Detect)</option>
+            <option value="id">Bahasa Indonesia</option>
+            <option value="en">English (Inggris)</option>
+            <option value="zh">中文 (Mandarin)</option>
+            <option value="ar">العربية (Arab)</option>
+            <option value="ja">日本語 (Jepang)</option>
+            <option value="ko">한국어 (Korea)</option>
+          </select>
+          <textarea id="transInputText" rows="4" placeholder="Ketik atau tempel teks di sini..." class="w-full text-xs custom-input border rounded-xl p-3 outline-none"></textarea>
+          <button onclick="translateText()" class="w-full bg-indigo-600 text-white text-xs font-bold py-2 rounded-xl shadow transition" data-i18n="transBtn">Terjemahkan</button>
+        </div>
+        <div class="flex justify-center md:col-span-1"><span class="text-indigo-400 font-bold text-lg animate-pulse">⇄</span></div>
+        <div class="card-modern p-4 rounded-2xl space-y-3 md:col-span-2">
+          <select id="transTargetLang" class="custom-input border rounded-lg px-2 py-1 outline-none text-xs font-bold w-full">
+            <option value="en">English (Inggris)</option>
+            <option value="id" selected>Bahasa Indonesia</option>
+            <option value="zh">中文 (Mandarin)</option>
+            <option value="ar">العربية (Arab)</option>
+            <option value="ja">日本語 (Jepang)</option>
+            <option value="ko">한국어 (Korea)</option>
+          </select>
+          <div id="transOutputResult" class="w-full h-[96px] text-xs custom-input border rounded-xl p-3 overflow-y-auto text-indigo-300 font-medium select-all" data-i18n="transRes">Hasil terjemahan...</div>
+          <button onclick="copyTranslation()" class="w-full card-modern text-xs font-bold py-2 rounded-xl transition" data-i18n="transCopy">Salin Hasil</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 12: CURRENCY -->
+    <section id="tab-currency" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="currHeading">Konversi Mata Uang</h2></div>
+      <div class="card-modern p-5 rounded-2xl space-y-4 max-w-xl mx-auto">
+        <input type="number" id="currAmount" value="1" class="w-full custom-input border rounded-xl p-2.5 text-xs font-bold" oninput="convertCurrency()">
+        <div class="grid grid-cols-2 gap-3">
+          <select id="currFrom" class="custom-input border rounded-xl p-2.5 text-xs font-bold" onchange="convertCurrency()"><option value="USD">USD</option><option value="IDR" selected>IDR</option></select>
+          <select id="currTo" class="custom-input border rounded-xl p-2.5 text-xs font-bold" onchange="convertCurrency()"><option value="USD" selected>USD</option><option value="IDR">IDR</option></select>
+        </div>
+        <div class="p-4 card-modern rounded-xl text-center"><div id="currResultValue" class="text-xl font-extrabold text-emerald-400">0.00</div></div>
+      </div>
+    </section>
+
+    <!-- TAB 13: NEWS -->
+    <section id="tab-news" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex justify-between items-center"><h2 class="text-base font-extrabold" data-i18n="newsHeading">Berita Real-Time</h2><button onclick="fetchNews()" class="bg-indigo-600 text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow transition" data-i18n="newsRefresh">Muat Ulang</button></div>
+      <div id="newsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-4"><div class="card-modern p-4 rounded-2xl text-xs text-sub col-span-3 text-center py-10" data-i18n="newsLoading">Memuat...</div></div>
+    </section>
+
+    <!-- TAB 14: PDF VIEWER -->
+    <section id="tab-pdf" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex justify-between items-center"><h2 class="text-base font-extrabold" data-i18n="pdfHeading">PDF Viewer</h2><label class="bg-indigo-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl cursor-pointer shadow transition"><span data-i18n="pdfChoose">Pilih File</span><input type="file" accept="application/pdf" class="hidden" onchange="loadPdf(event)"></label></div>
+      <div class="card-modern p-4 rounded-2xl flex flex-col items-center justify-center min-h-[400px]">
+        <div id="pdfPlaceholder" class="text-xs text-sub py-10" data-i18n="pdfPlaceholder">Belum ada PDF.</div>
+        <div id="pdfViewerContainer" class="hidden w-full space-y-3 flex flex-col items-center">
+          <div class="flex gap-2"><button onclick="prevPdfPage()" class="px-3 py-1 bg-indigo-600 text-white rounded text-xs font-bold">&larr;</button><span class="font-mono text-xs" id="pdfPageInfo">0/0</span><button onclick="nextPdfPage()" class="px-3 py-1 bg-indigo-600 text-white rounded text-xs font-bold">&rarr;</button></div>
+          <canvas id="pdfCanvas" class="max-w-full h-auto rounded shadow bg-white"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 15: CALCULATOR -->
+    <section id="tab-calc" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="calcHeading">Kalkulator</h2></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card-modern p-4 rounded-2xl space-y-3">
+          <input type="text" id="calcScreen" readonly class="w-full text-right text-lg font-mono custom-input border rounded-xl p-2.5 text-emerald-400 font-bold" value="0">
+          <div class="grid grid-cols-4 gap-1.5">
+            <button onclick="calcClear()" class="bg-rose-600/20 text-rose-300 p-2.5 rounded-lg font-bold text-xs">C</button>
+            <button onclick="calcAppend('/')" class="bg-indigo-600/30 text-indigo-300 p-2.5 rounded-lg font-bold text-xs">÷</button>
+            <button onclick="calcAppend('*')" class="bg-indigo-600/30 text-indigo-300 p-2.5 rounded-lg font-bold text-xs">×</button>
+            <button onclick="calcAppend('-')" class="bg-indigo-600/30 text-indigo-300 p-2.5 rounded-lg font-bold text-xs">-</button>
+            <button onclick="calcAppend('7')" class="card-modern p-2.5 rounded-lg font-bold text-xs">7</button><button onclick="calcAppend('8')" class="card-modern p-2.5 rounded-lg font-bold text-xs">8</button><button onclick="calcAppend('9')" class="card-modern p-2.5 rounded-lg font-bold text-xs">9</button>
+            <button onclick="calcAppend('+')" class="bg-indigo-600/30 text-indigo-300 p-2.5 rounded-lg font-bold text-xs">+</button>
+            <button onclick="calcAppend('4')" class="card-modern p-2.5 rounded-lg font-bold text-xs">4</button><button onclick="calcAppend('5')" class="card-modern p-2.5 rounded-lg font-bold text-xs">5</button><button onclick="calcAppend('6')" class="card-modern p-2.5 rounded-lg font-bold text-xs">6</button>
+            <button onclick="calcCompute()" class="bg-emerald-600 text-white p-2.5 rounded-lg font-bold text-xs row-span-2">=</button>
+            <button onclick="calcAppend('1')" class="card-modern p-2.5 rounded-lg font-bold text-xs">1</button><button onclick="calcAppend('2')" class="card-modern p-2.5 rounded-lg font-bold text-xs">2</button><button onclick="calcAppend('3')" class="card-modern p-2.5 rounded-lg font-bold text-xs">3</button>
+            <button onclick="calcAppend('0')" class="col-span-2 card-modern p-2.5 rounded-lg font-bold text-xs">0</button><button onclick="calcAppend('.')" class="card-modern p-2.5 rounded-lg font-bold text-xs">.</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 16: PHOTO EDITOR -->
+    <section id="tab-photo" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex justify-between items-center"><h2 class="text-base font-extrabold" data-i18n="photoHeading">Photo Editor</h2><label class="bg-indigo-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl cursor-pointer shadow transition"><span data-i18n="photoChoose">Pilih Foto</span><input type="file" accept="image/*" class="hidden" onchange="loadPhoto(event)"></label></div>
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-center min-h-[300px]">
+        <div id="photoPlaceholder" class="text-xs text-sub" data-i18n="photoPlaceholder">Belum ada foto.</div>
+        <canvas id="photoCanvas" class="max-w-full max-h-[380px] object-contain hidden rounded-xl shadow"></canvas>
+      </div>
+    </section>
+
+    <!-- TAB 17: SETTINGS -->
+    <section id="tab-settings" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="setHeading">Pengaturan & Informasi</h2></div>
+      
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between">
+        <div>
+          <h3 class="text-xs font-bold uppercase text-sub" data-i18n="musicSettingTitle">Musik Latar Belakang (Ambient Lo-Fi)</h3>
+          <p class="text-[10px] text-sub" data-i18n="musicSettingDesc">Nyalakan atau matikan musik latar otomatis.</p>
+        </div>
+        <button onclick="toggleBackgroundMusic()" id="musicToggleBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2 rounded-xl shadow transition">🎵 <span id="musicStatus">Nyala</span></button>
+      </div>
+
+      <div class="card-modern p-4 rounded-2xl space-y-3">
+        <h3 class="text-xs font-bold uppercase text-sub" data-i18n="lblTheme">Tema Tampilan</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+          <button onclick="setAppTheme('dark')" class="p-2.5 rounded-xl border bg-slate-950 text-white text-xs font-bold transition">Dark</button>
+          <button onclick="setAppTheme('light')" class="p-2.5 rounded-xl border bg-slate-100 text-slate-900 text-xs font-bold transition">Light</button>
+          <button onclick="setAppTheme('emerald')" class="p-2.5 rounded-xl border bg-emerald-950 text-emerald-200 text-xs font-bold transition">Emerald</button>
+          <button onclick="setAppTheme('ocean')" class="p-2.5 rounded-xl border bg-sky-950 text-sky-200 text-xs font-bold transition">Ocean</button>
+          <button onclick="setAppTheme('cyber')" class="p-2.5 rounded-xl border bg-purple-950 text-purple-200 text-xs font-bold transition">Cyber</button>
+        </div>
+      </div>
+      <div class="card-modern p-4 rounded-2xl space-y-3">
+        <h3 class="text-xs font-bold uppercase text-sub" data-i18n="lblBackup">Backup / Restore Data</h3>
+        <div class="flex gap-2">
+          <button onclick="autoBackupJSON()" class="bg-indigo-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow transition" data-i18n="btnDownloadJson">Download JSON</button>
+          <label class="card-modern text-xs font-bold px-3.5 py-2 rounded-xl cursor-pointer shadow transition"><span data-i18n="lblRestoreJson">Restore JSON</span><input type="file" accept=".json" onchange="importJSON(event)" class="hidden"></label>
+        </div>
+      </div>
+      <div class="card-modern p-5 rounded-2xl space-y-3">
+        <h3 class="text-xs font-bold uppercase text-sub border-b pb-2" data-i18n="lblAboutTitle">Tentang Aplikasi & Pengembang</h3>
+        <div class="space-y-1 text-xs">
+          <p class="font-bold text-indigo-400">WorkSpace v4.15 Pro (Production)</p>
+          <p class="text-sub"><span data-i18n="lblDev">Dikembangkan oleh:</span> <strong>Mohammad Danis Muria Vanandi</strong></p>
+          <p class="text-sub"><span data-i18n="lblField">Bidang:</span> Civil Engineer & AI / NLP Researcher</p>
+          <p class="text-[10px] text-sub pt-1">Politeknik Negeri Malang (2021)</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- LAUNCHER MENGAMBANG -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <button onclick="toggleFloatingMenu()" class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-pink-600 flex items-center justify-center text-white shadow-2xl hover:scale-110 transition active:scale-95">
+      <svg class="w-6 h-6 animate-pulse" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+    </button>
+  </div>
+
+  <!-- MODAL MENU LAUNCHER -->
+  <div id="floatingMenuModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b pb-2.5">
+        <h3 class="font-extrabold text-xs tracking-wide" data-i18n="launcherTitle">Pusat Menu Launcher</h3>
+        <div class="flex items-center gap-2">
+          <button onclick="switchTabAndClose('settings')" class="w-8 h-8 rounded-xl bg-indigo-600/20 text-indigo-400 hover:bg-indigo-600 hover:text-white flex items-center justify-center text-sm font-bold transition shadow" title="Pengaturan & Info">⚙️</button>
+          <button onclick="toggleFloatingMenu()" class="w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 hover:bg-rose-500 hover:text-white flex items-center justify-center text-base font-bold transition shadow" title="Tutup">&times;</button>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-2 max-h-[55vh] overflow-y-auto p-0.5 text-xs">
+        <button onclick="switchTabAndClose('finance')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">💰</span><span data-i18n="menuFinance">Keuangan</span></button>
+        <button onclick="switchTabAndClose('clock')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">⏰</span><span data-i18n="menuClock">Jam & Alarm</span></button>
+        <button onclick="switchTabAndClose('weather')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🌤️</span><span data-i18n="menuWeather">Cuaca</span></button>
+        <button onclick="switchTabAndClose('biolink')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🔗</span><span data-i18n="menuBioLink">Bio Link</span></button>
+        <button onclick="switchTabAndClose('tasks')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📋</span><span data-i18n="menuTasks">Tugas & Memo</span></button>
+        <button onclick="switchTabAndClose('calendar')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📅</span><span data-i18n="menuCalendar">Kalender</span></button>
+        <button onclick="switchTabAndClose('pomodoro')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">⏱️</span><span data-i18n="menuPomodoro">Pomodoro</span></button>
+        <button onclick="switchTabAndClose('font')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🔤</span><span data-i18n="menuFont">Font Generator</span></button>
+        <button onclick="switchTabAndClose('downloader')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📥</span><span data-i18n="menuDownloader">Downloader</span></button>
+        <button onclick="switchTabAndClose('shortener')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🔗</span><span data-i18n="menuShortener">Pemendek Link</span></button>
+        <button onclick="switchTabAndClose('translator')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🌐</span><span data-i18n="menuTranslator">Translator</span></button>
+        <button onclick="switchTabAndClose('currency')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">💱</span><span data-i18n="menuCurrency">Konversi Kurs</span></button>
+        <button onclick="switchTabAndClose('news')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📰</span><span data-i18n="menuNews">Berita</span></button>
+        <button onclick="switchTabAndClose('pdf')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📄</span><span data-i18n="menuPdf">PDF Viewer</span></button>
+        <button onclick="switchTabAndClose('calc')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🧮</span><span data-i18n="menuCalc">Kalkulator</span></button>
+        <button onclick="switchTabAndClose('photo')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📸</span><span data-i18n="menuPhoto">Photo Editor</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL TRANSAKSI -->
+  <div id="txModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b pb-2"><h3 class="font-bold text-xs" id="modalTxTitle">Form Transaksi</h3><button onclick="closeTxModal()" class="text-sub font-bold">&times;</button></div>
+      <form id="txForm" class="space-y-2.5">
+        <input type="hidden" id="editTxId">
+        <input type="hidden" id="formIsOnline" value="false">
+        <div class="grid grid-cols-2 gap-2">
+          <input type="date" id="formDate" required class="text-xs custom-input border rounded-xl p-2">
+          <select id="formType" class="text-xs custom-input border rounded-xl p-2">
+            <option value="expense">Pengeluaran (-)</option>
+            <option value="income">Pemasukan (+)</option>
+          </select>
+        </div>
+        <input type="text" id="formCategory" placeholder="Kategori / Metode" required class="w-full text-xs custom-input border rounded-xl p-2">
+        <input type="number" id="formAmount" placeholder="Nominal (Rp)" required class="w-full text-xs custom-input border rounded-xl p-2 font-bold">
+        <input type="text" id="formDesc" placeholder="Keterangan" required class="w-full text-xs custom-input border rounded-xl p-2">
+        <div class="flex justify-end gap-2 pt-1">
+          <button type="button" onclick="closeTxModal()" class="px-3 py-1.5 text-xs text-sub" data-i18n="btnCancel">Batal</button>
+          <button type="submit" class="px-3.5 py-1.5 text-xs bg-indigo-600 text-white rounded-xl font-bold shadow" data-i18n="btnSave">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL CATATAN -->
+  <div id="noteModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b pb-2"><h3 class="font-bold text-xs">Catatan</h3><button onclick="closeNoteModal()" class="text-sub font-bold">&times;</button></div>
+      <form id="noteForm" class="space-y-2.5">
+        <input type="hidden" id="editNoteId">
+        <input type="text" id="noteTitle" placeholder="Judul" required class="w-full text-xs custom-input border rounded-xl p-2 font-bold">
+        <textarea id="noteContent" rows="3" placeholder="Isi..." required class="w-full text-xs custom-input border rounded-xl p-2"></textarea>
+        <div class="flex justify-end gap-2"><button type="button" onclick="closeNoteModal()" class="px-3 py-1.5 text-xs text-sub" data-i18n="btnCancel">Batal</button><button type="submit" class="px-3.5 py-1.5 text-xs bg-violet-600 text-white rounded-xl font-bold" data-i18n="btnSave">Simpan</button></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL TUGAS -->
+  <div id="taskModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b pb-2"><h3 class="font-bold text-xs">Tugas</h3><button onclick="closeTaskModal()" class="text-sub font-bold">&times;</button></div>
+      <form id="taskForm" class="space-y-2.5">
+        <input type="hidden" id="editTaskId">
+        <input type="text" id="taskTitle" placeholder="Judul Tugas" required class="w-full text-xs custom-input border rounded-xl p-2">
+        <input type="date" id="taskDueDate" required class="w-full text-xs custom-input border rounded-xl p-2">
+        <div class="flex justify-end gap-2"><button type="button" onclick="closeTaskModal()" class="px-3 py-1.5 text-xs text-sub" data-i18n="btnCancel">Batal</button><button type="submit" class="px-3.5 py-1.5 text-xs bg-indigo-600 text-white rounded-xl font-bold" data-i18n="btnSave">Simpan</button></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCRIPT APLIKASI -->
+  <script>
+    const langData = {
+      id: {
+        loginTitle: "Masuk ke WorkSpace", loginSub: "Masukkan nama Anda untuk memulai sesi.", loginBtn: "Masuk Sekarang",
+        welTitle: "Selamat Datang di WorkSpace", welDesc: "Suite produktivitas modern yang cepat dan elegan.", welBtn: "Mulai Eksplorasi",
+        menuFinance: "Keuangan", menuClock: "Jam & Alarm", menuWeather: "Cuaca", menuBioLink: "Bio Link", menuTasks: "Tugas & Memo", menuCalendar: "Kalender", menuPomodoro: "Pomodoro", menuFont: "Font Generator", menuDownloader: "Downloader", menuShortener: "Pemendek Link", menuTranslator: "Translator", menuCurrency: "Konversi Kurs", menuNews: "Berita", menuPdf: "PDF Viewer", menuCalc: "Kalkulator", menuPhoto: "Photo Editor", menuSettings: "Pengaturan & Info",
+        launcherTitle: "Pusat Menu Launcher",
+        finTitle: "Manajemen Keuangan", finSub: "Pantau arus kas, grafik lingkaran, dan perbandingan online vs offline.",
+        lblNet: "Total Saldo", lblIncome: "Pemasukan", lblExpense: "Pengeluaran",
+        chartIncExpTitle: "📊 Rasio Pemasukan vs Pengeluaran", chartOnlineOfflineTitle: "🌐 Rasio Online vs Offline",
+        optAll: "Semua", optInc: "Pemasukan", optExp: "Pengeluaran", optOnline: "Online Saja", optOffline: "Offline Saja",
+        thDate: "Tanggal", thCat: "Kategori / Metode", thDesc: "Keterangan", thNom: "Nominal", thAct: "Aksi",
+        btnExportFin: "Ekspor", btnShareFin: "Bagikan", btnOnlineTx: "🌐 Online", btnTx: "+ Offline",
+        lblSummaryOnline: "🌐 Transaksi Online", lblSummaryOffline: "💼 Transaksi Offline",
+        lblOnlineIn: "Masuk", lblOnlineOut: "Keluar", lblOfflineIn: "Masuk", lblOfflineOut: "Keluar",
+        clockHeading: "Jam Dunia & Alarm Pintar", clockSub: "Atur alarm dan zona waktu real-time dengan izin perangkat.", btnNotifPerm: "Izinkan Notifikasi Alarm",
+        lblCurrentLiveTime: "Waktu Lokal Perangkat", lblSetAlarm: "Atur Alarm Cepat", lblAlarmTime: "Waktu Alarm", lblAlarmNote: "Catatan Pengingat Alarm", btnSaveAlarm: "Pasang Alarm",
+        weatherHeading: "Pusat Cuaca Real-Time", weatherSub: "Informasi cuaca dan iklim terkini secara langsung.", btnRefreshWeather: "Perbarui Cuaca",
+        lblTemp: "Suhu Saat Ini", lblCondition: "Kondisi", lblWind: "Kecepatan Angin",
+        bioHeading: "Bio Link Generator", bioSub: "Buat halaman landing tautan profil gaya LinkTree.", bioGenBtn: "Buat Bio Link", bioTitleLabel: "Judul Profil / Nama Halaman", bioSubtitleLabel: "Bio Singkat / Deskripsi", bioAddBtnLabel: "Tambah Tautan Tombol Baru", bioAddBtn: "+ Tambah ke Daftar Tombol", bioLinksList: "Daftar Tombol Tautan Aktif", bioResLabel: "Pratinjau Tampilan LinkTree", bioCopy: "Salin Kode HTML Bio Link",
+        taskHeading: "Tugas & Catatan", taskSub: "Pusat pengorganisasian tugas dan memo.", btnTask: "+ Tugas", btnNote: "+ Catatan", btnExportTask: "Ekspor",
+        lblTaskList: "Daftar Pekerjaan", lblNoteList: "Catatan Saya",
+        calHeading: "Kalender Interaktif & Pengingat", calSub: "Klik tanggal untuk menambah agenda & pengingat.", btnExportCal: "Ekspor",
+        pomHeading: "Pomodoro Focus Timer", pomStart: "Mulai", pomPause: "Jeda", pomReset: "Reset",
+        fontHeading: "Font Generator & Text Stylist",
+        dlHeading: "Media & Photo Downloader", dlProc: "Proses",
+        shortHeading: "Pemendek Link (URL Shortener)", shortProc: "Pendekkan", shortCopy: "Salin",
+        transHeading: "Penerjemah Bahasa", transBtn: "Terjemahkan", transRes: "Hasil terjemahan...", transCopy: "Salin Hasil",
+        currHeading: "Konversi Mata Uang",
+        newsHeading: "Berita Real-Time", newsRefresh: "Muat Ulang", newsLoading: "Memuat...",
+        pdfHeading: "PDF Viewer", pdfChoose: "Pilih File", pdfPlaceholder: "Belum ada PDF.",
+        calcHeading: "Kalkulator", photoHeading: "Photo Editor", photoChoose: "Pilih Foto", photoPlaceholder: "Belum ada foto.",
+        setHeading: "Pengaturan & Informasi", musicSettingTitle: "Musik Latar Belakang (Ambient Lo-Fi)", musicSettingDesc: "Nyalakan atau matikan musik latar otomatis.", lblTheme: "Tema Tampilan", lblBackup: "Backup / Restore Data", btnDownloadJson: "Download JSON", lblRestoreJson: "Restore JSON",
+        lblAboutTitle: "Tentang Aplikasi & Pengembang", lblDev: "Dikembangkan oleh:", lblField: "Bidang:", btnCancel: "Batal", btnSave: "Simpan"
+      },
+      en: {
+        loginTitle: "Sign in to WorkSpace", loginSub: "Enter your name to start session.", loginBtn: "Sign In",
+        welTitle: "Welcome to WorkSpace", welDesc: "A modern, fast, and elegant productivity suite.", welBtn: "Start Exploring",
+        menuFinance: "Finance", menuClock: "Clock & Alarm", menuWeather: "Weather", menuBioLink: "Bio Link", menuTasks: "Tasks & Memos", menuCalendar: "Calendar", menuPomodoro: "Pomodoro", menuFont: "Font Generator", menuDownloader: "Downloader", menuShortener: "URL Shortener", menuTranslator: "Translator", menuCurrency: "Currency", menuNews: "News", menuPdf: "PDF Viewer", menuCalc: "Calculator", menuPhoto: "Photo Editor", menuSettings: "Settings & Info",
+        launcherTitle: "Launcher Menu Center",
+        finTitle: "Financial Management", finSub: "Monitor cash flow, donut charts, and online vs offline comparisons.",
+        lblNet: "Total Balance", lblIncome: "Income", lblExpense: "Expense",
+        chartIncExpTitle: "📊 Income vs Expense Ratio", chartOnlineOfflineTitle: "🌐 Online vs Offline Ratio",
+        optAll: "All", optInc: "Income", optExp: "Expense", optOnline: "Online Only", optOffline: "Offline Only",
+        thDate: "Date", thCat: "Category / Method", thDesc: "Description", thNom: "Amount", thAct: "Action",
+        btnExportFin: "Export", btnShareFin: "Share", btnOnlineTx: "🌐 Online", btnTx: "+ Offline",
+        lblSummaryOnline: "🌐 Online Transactions", lblSummaryOffline: "💼 Offline Transactions",
+        lblOnlineIn: "In", lblOnlineOut: "Out", lblOfflineIn: "In", lblOfflineOut: "Out",
+        clockHeading: "World Clock & Smart Alarm", clockSub: "Set alarms and real-time timezones with device permission.", btnNotifPerm: "Allow Alarm Notifications",
+        lblCurrentLiveTime: "Device Local Time", lblSetAlarm: "Set Quick Alarm", lblAlarmTime: "Alarm Time", lblAlarmNote: "Alarm Reminder Note", btnSaveAlarm: "Set Alarm",
+        weatherHeading: "Real-Time Weather Center", weatherSub: "Live weather and climate information.", btnRefreshWeather: "Refresh Weather",
+        lblTemp: "Current Temp", lblCondition: "Condition", lblWind: "Wind Speed",
+        bioHeading: "Bio Link Generator", bioSub: "Create a LinkTree-style profile landing page.", bioGenBtn: "Generate Bio", bioTitleLabel: "Profile Title", bioSubtitleLabel: "Short Bio / Description", bioAddBtnLabel: "Add New Button Link", bioAddBtn: "+ Add to Button List", bioLinksList: "Active Button Links", bioResLabel: "LinkTree Style Preview", bioCopy: "Copy Bio HTML Code",
+        taskHeading: "Tasks & Notes", taskSub: "Organization hub for tasks and memos.", btnTask: "+ Task", btnNote: "+ Note", btnExportTask: "Export",
+        lblTaskList: "Task List", lblNoteList: "My Notes",
+        calHeading: "Interactive Calendar & Reminders", calSub: "Click a date to add agenda & reminders.", btnExportCal: "Export",
+        pomHeading: "Pomodoro Focus Timer", pomStart: "Start", pomPause: "Pause", pomReset: "Reset",
+        fontHeading: "Font Generator & Text Stylist",
+        dlHeading: "Media & Photo Downloader", dlProc: "Process",
+        shortHeading: "URL Shortener", shortProc: "Shorten", shortCopy: "Copy",
+        transHeading: "Language Translator", transBtn: "Translate", transRes: "Translation result...", transCopy: "Copy Result",
+        currHeading: "Currency Converter",
+        newsHeading: "Real-Time News", newsRefresh: "Refresh", newsLoading: "Loading...",
+        pdfHeading: "PDF Viewer", pdfChoose: "Choose File", pdfPlaceholder: "No PDF loaded.",
+        calcHeading: "Calculator", photoHeading: "Photo Editor", photoChoose: "Choose Photo", photoPlaceholder: "No photo uploaded.",
+        setHeading: "Settings & Info", musicSettingTitle: "Background Music (Ambient Lo-Fi)", musicSettingDesc: "Toggle automatic ambient music.", lblTheme: "Theme Options", lblBackup: "Backup / Restore Data", btnDownloadJson: "Download JSON", lblRestoreJson: "Restore JSON",
+        lblAboutTitle: "About App & Developer", lblDev: "Developed by:", lblField: "Field:", btnCancel: "Cancel", btnSave: "Save"
+      },
+      zh: {
+        loginTitle: "登录 WorkSpace", loginSub: "输入您的名字开始会话。", loginBtn: "立即登录",
+        welTitle: "欢迎来到 WorkSpace", welDesc: "现代化、快速且优雅的生产力套件。", welBtn: "开始探索",
+        menuFinance: "财务", menuClock: "时钟与闹钟", menuWeather: "天气", menuBioLink: "个人主页链接", menuTasks: "任务与备忘", menuCalendar: "日历", menuPomodoro: "番茄钟", menuFont: "字体生成器", menuDownloader: "下载器", menuShortener: "短网址", menuTranslator: "翻译器", menuCurrency: "货币换算", menuNews: "新闻", menuPdf: "PDF 查看", menuCalc: "计算器", menuPhoto: "照片编辑", menuSettings: "设置与信息",
+        launcherTitle: "启动器菜单中心",
+        finTitle: "财务管理", finSub: "实时监控现金流、圆环图表及线上线下交易对比。",
+        lblNet: "总余额", lblIncome: "收入", lblExpense: "支出",
+        chartIncExpTitle: "📊 收入与支出比例", chartOnlineOfflineTitle: "🌐 线上与线下比例",
+        optAll: "全部", optInc: "收入", optExp: "支出", optOnline: "仅线上", optOffline: "仅线下",
+        thDate: "日期", thCat: "类别 / 方式", thDesc: "描述", thNom: "金额", thAct: "操作",
+        btnExportFin: "导出", btnShareFin: "分享", btnOnlineTx: "🌐 线上", btnTx: "+ 线下",
+        lblSummaryOnline: "🌐 线上交易", lblSummaryOffline: "💼 线下交易",
+        lblOnlineIn: "收入", lblOnlineOut: "支出", lblOfflineIn: "收入", lblOfflineOut: "支出",
+        clockHeading: "世界时钟与智能闹钟", clockSub: "设置闹钟和实时时区。", btnNotifPerm: "允许闹钟通知",
+        lblCurrentLiveTime: "设备本地时间", lblSetAlarm: "设置快速闹钟", lblAlarmTime: "闹钟时间", lblAlarmNote: "闹钟提醒备注", btnSaveAlarm: "设定闹钟",
+        weatherHeading: "实时天气中心", weatherSub: "实时天气与气候信息。", btnRefreshWeather: "刷新天气",
+        lblTemp: "当前温度", lblCondition: "天气状况", lblWind: "风速",
+        bioHeading: "个人主页链接生成器", bioSub: "创建 LinkTree 风格的个人资料落地页。", bioGenBtn: "生成主页", bioTitleLabel: "个人资料标题", bioSubtitleLabel: "简短个人简介", bioAddBtnLabel: "添加新按钮链接", bioAddBtn: "+ 添加到按钮列表", bioLinksList: "活动按钮列表", bioResLabel: "LinkTree 风格预览", bioCopy: "复制主页 HTML 代码",
+        taskHeading: "任务与笔记", taskSub: "任务和备忘录组织中心。", btnTask: "+ 任务", btnNote: "+ 笔记", btnExportTask: "导出",
+        lblTaskList: "任务列表", lblNoteList: "我的笔记",
+        calHeading: "互动日历与提醒", calSub: "点击日期以添加日程与提醒。", btnExportCal: "导出",
+        pomHeading: "番茄钟专注计时器", pomStart: "开始", pomPause: "暂停", pomReset: "重置",
+        fontHeading: "字体生成器与样式化",
+        dlHeading: "媒体下载器", dlProc: "处理",
+        shortHeading: "网址缩短器", shortProc: "缩短", shortCopy: "复制",
+        transHeading: "语言翻译器", transBtn: "翻译", transRes: "翻译结果...", transCopy: "复制结果",
+        currHeading: "货币换算",
+        newsHeading: "实时新闻", newsRefresh: "刷新", newsLoading: "加载中...",
+        pdfHeading: "PDF 查看器", pdfChoose: "选择文件", pdfPlaceholder: "未加载 PDF。",
+        calcHeading: "计算器", photoHeading: "照片编辑", photoChoose: "选择照片", photoPlaceholder: "未上传照片。",
+        setHeading: "设置与信息", musicSettingTitle: "背景音乐 (Ambient Lo-Fi)", musicSettingDesc: "开关自动环境音乐。", lblTheme: "主题选项", lblBackup: "备份 / 恢复数据", btnDownloadJson: "下载 JSON", lblRestoreJson: "恢复 JSON",
+        lblAboutTitle: "关于应用与开发者", lblDev: "开发者:", lblField: "领域:", btnCancel: "取消", btnSave: "保存"
+      },
+      ar: {
+        loginTitle: "تسجيل الدخول إلى WorkSpace", loginSub: "أدخل اسمك لبدء الجلسة.", loginBtn: "تسجيل الدخول",
+        welTitle: "أهلاً بك في WorkSpace", welDesc: "مجموعة إنتاجية حديثة وسريعة وأنيقة.", welBtn: "ابدأ الاستكشاف",
+        menuFinance: "المالية", menuClock: "الساعة والمنبه", menuWeather: "الطقس", menuBioLink: "رابط البايو", menuTasks: "المهام", menuCalendar: "التقويم", menuPomodoro: "بومودورو", menuFont: "الخطوط", menuDownloader: "التحميل", menuShortener: "اختصار الروابط", menuTranslator: "المترجم", menuCurrency: "العملات", menuNews: "الأخبار", menuPdf: "عرض PDF", menuCalc: "الحاسبة", menuPhoto: "محرر الصور", menuSettings: "الإعدادات",
+        launcherTitle: "مركز القائمة",
+        finTitle: "إدارة المالية", finSub: "مراقبة التدفقات النقدية والرسوم البيانية الدائرية والمقارنة.",
+        lblNet: "إجمالي الرصيد", lblIncome: "الدخل", lblExpense: "المصروفات",
+        chartIncExpTitle: "📊 نسبة الدخل مقابل المصروفات", chartOnlineOfflineTitle: "🌐 نسبة عبر الإنترنت مقابل اليدوي",
+        optAll: "الكل", optInc: "دخل", optExp: "مصروف", optOnline: "عبر الإنترنت فقط", optOffline: "غير متصل فقط",
+        thDate: "التاريخ", thCat: "الفئة", thDesc: "الوصف", thNom: "المبلغ", thAct: "الإجراء",
+        btnExportFin: "تصدير", btnShareFin: "مشاركة", btnOnlineTx: "🌐 عبر الإنترنت", btnTx: "+ يدوي",
+        lblSummaryOnline: "🌐 المعاملات عبر الإنترنت", lblSummaryOffline: "💼 المعاملات اليدوية",
+        lblOnlineIn: "دخل", lblOnlineOut: "صرف", lblOfflineIn: "دخل", lblOfflineOut: "صرف",
+        clockHeading: "الساعة العالمية والمنبه الذكي", clockSub: "اضبط المنبهات والأوقات الحية.", btnNotifPerm: "السماح بإشعارات المنبه",
+        lblCurrentLiveTime: "الوقت المحلي للجهاز", lblSetAlarm: "ضبط منبه سريع", lblAlarmTime: "وقت المنبه", lblAlarmNote: "ملاحظة التذكير للمنبه", btnSaveAlarm: "ضبط المنبه",
+        weatherHeading: "مركز الطقس الفوري", weatherSub: "معلومات الطقس والمناخ الحية.", btnRefreshWeather: "تحديث الطقس",
+        lblTemp: "درجة الحرارة", lblCondition: "الحالة", lblWind: "سرعة الرياح",
+        bioHeading: "منشئ روابط البايو", bioSub: "أنشئ صفحة روابط احترافية بأسلوب LinkTree.", bioGenBtn: "إنشاء البايو", bioTitleLabel: "عنوان الملف الشخصي", bioSubtitleLabel: "نبذة تعريفية قصيرة", bioAddBtnLabel: "إضافة زر رابط جديد", bioAddBtn: "+ إضافة إلى القائمة", bioLinksList: "روابط الأزرار النشطة", bioResLabel: "معاينة بأسلوب LinkTree", bioCopy: "نسخ كود HTML للبايو",
+        taskHeading: "المهام والملاحظات", taskSub: "مركز تنظيم المهام والمذكرات.", btnTask: "+ مهمة", btnNote: "+ ملاحظة", btnExportTask: "تصدير",
+        lblTaskList: "قائمة المهام", lblNoteList: "ملاحظاتي",
+        calHeading: "التقويم التفاعلي والتذكيرات", calSub: "انقر فوق التاريخ لإضافة جدول وتذكيرات.", btnExportCal: "تصدير",
+        pomHeading: "مؤقت التركيز بومودورو", pomStart: "ابدأ", pomPause: "إيقاف", pomReset: "إعادة ضبط",
+        fontHeading: "منشئ الخطوط",
+        dlHeading: "محمل الوسائط", dlProc: "معالجة",
+        shortHeading: "اختصار الروابط", shortProc: "اختصار", shortCopy: "نسخ",
+        transHeading: "مترجم اللغات", transBtn: "ترجم", transRes: "نتيجة الترجمة...", transCopy: "نسخ النتيجة",
+        currHeading: "محول العملات",
+        newsHeading: "الأخبار الفورية", newsRefresh: "تحديث", newsLoading: "جاري التحميل...",
+        pdfHeading: "عارض PDF", pdfChoose: "اختر ملف", pdfPlaceholder: "لا يوجد ملف PDF.",
+        calcHeading: "الحاسبة", photoHeading: "محرر الصور", photoChoose: "اختر صورة", photoPlaceholder: "لا توجد صورة.",
+        setHeading: "الإعدادات والمعلومات", musicSettingTitle: "موسيقى الخلفية (Ambient Lo-Fi)", musicSettingDesc: "تشغيل أو إيقاف موسيقى الخلفية التلقائية.", lblTheme: "خيارات السمة", lblBackup: "النسخ الاحتياطي", btnDownloadJson: "تحميل JSON", lblRestoreJson: "Restore JSON",
+        lblAboutTitle: "عن التطبيق والمطور", lblDev: "طوير بواسطة:", lblField: "المجال:", btnCancel: "إلغاء", btnSave: "Simpan"
+      }
+    };
+
+    function changeLanguage(lang) {
+      localStorage.setItem('workspace_lang', lang);
+      const dict = langData[lang] || langData.id;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+      renderBioLinkSelector();
+    }
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      const activeEl = document.getElementById(`tab-${tabName}`);
+      if (activeEl) activeEl.classList.remove('hidden');
+      localStorage.setItem('workspace_active_tab', tabName);
+      window.scrollTo(0, 0);
+      if(tabName === 'currency') convertCurrency();
+      if(tabName === 'news') fetchNews();
+      if(tabName === 'calendar') renderCalendar();
+      if(tabName === 'font') generateFonts();
+      if(tabName === 'weather') fetchLiveWeather();
+      if(tabName === 'biolink') renderBioLinkSelector();
+    }
+
+    function toggleFloatingMenu() { document.getElementById('floatingMenuModal').classList.toggle('hidden'); }
+    function switchTabAndClose(tabName) { switchTab(tabName); toggleFloatingMenu(); }
+    
+    function setAppTheme(theme) {
+      document.getElementById('appBody').className = `min-h-screen pb-24 md:pb-6 transition-colors duration-300 theme-${theme}`;
+      localStorage.setItem('workspace_theme_lite', theme);
+    }
+    setAppTheme(localStorage.getItem('workspace_theme_lite') || 'dark');
+
+    // PENGELOLA JAM & ALARM
+    let alarms = JSON.parse(localStorage.getItem('workspace_alarms')) || [];
+
+    setInterval(() => {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('id-ID');
+      const dateStr = now.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      
+      const clockEl = document.getElementById('headerClock');
+      if (clockEl) clockEl.textContent = timeStr;
+      
+      const bigClock = document.getElementById('liveClockBig');
+      if (bigClock) bigClock.textContent = timeStr;
+      
+      const bigDate = document.getElementById('liveDateBig');
+      if (bigDate) bigDate.textContent = dateStr;
+
+      const currentHm = now.toTimeString().slice(0, 5);
+      alarms.forEach((al) => {
+        if (al.time === currentHm && !al.triggered) {
+          al.triggered = true;
+          if (Notification.permission === "granted") {
+            new Notification("⏰ Pengingat Alarm WorkSpace", { body: al.note || "Waktu telah tiba!" });
+          } else {
+            alert(`⏰ ALARM: ${al.note || "Waktu telah tiba!"} (${al.time})`);
+          }
+        }
+      });
+    }, 1000);
+
+    function requestNotificationPermission() {
+      if ("Notification" in window) {
+        Notification.requestPermission().then(permission => {
+          if (permission === "granted") alert("Izin notifikasi alarm diizinkan!");
+          else alert("Izin notifikasi ditolak.");
+        });
+      }
+    }
+
+    function saveAlarm() {
+      const time = document.getElementById('alarmTimeInput').value;
+      const note = document.getElementById('alarmNoteInput').value;
+      if (!time) { alert("Pilih waktu alarm!"); return; }
+      alarms.push({ id: Date.now(), time, note, triggered: false });
+      localStorage.setItem('workspace_alarms', JSON.stringify(alarms));
+      document.getElementById('alarmTimeInput').value = '';
+      document.getElementById('alarmNoteInput').value = '';
+      renderAlarms();
+      alert("Alarm berhasil dipasang!");
+    }
+
+    function deleteAlarm(id) {
+      alarms = alarms.filter(a => a.id !== id);
+      localStorage.setItem('workspace_alarms', JSON.stringify(alarms));
+      renderAlarms();
+    }
+
+    function renderAlarms() {
+      const container = document.getElementById('alarmList');
+      if (!container) return;
+      if (alarms.length === 0) {
+        container.innerHTML = `<div class="text-[11px] text-sub">Belum ada alarm aktif.</div>`;
+        return;
+      }
+      container.innerHTML = alarms.map(a => `
+        <div class="card-modern p-2 rounded-xl flex items-center justify-between text-xs">
+          <div><strong class="text-indigo-400 font-mono">${a.time}</strong> - <span>${a.note || 'Pengingat'}</span></div>
+          <button onclick="deleteAlarm(${a.id})" class="text-rose-400 font-bold">Hapus</button>
+        </div>
+      `).join('');
+    }
+
+    // MUSIK LATAR BELAKANG AMBIENT LO-FI
+    let audioCtx = null;
+    let isMusicPlaying = false;
+    let musicInterval = null;
+
+    function startBackgroundMusic() {
+      if (isMusicPlaying) return;
+      try {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        isMusicPlaying = true;
+        const btnStatus = document.getElementById('musicStatus');
+        if (btnStatus) btnStatus.textContent = "Nyala";
+        playAmbientLoop();
+      } catch(e) {
+        console.log("Audio diblokir otomatis oleh browser.");
+      }
+    }
+
+    function toggleBackgroundMusic() {
+      const btnStatus = document.getElementById('musicStatus');
+      if (!isMusicPlaying) {
+        startBackgroundMusic();
+      } else {
+        if (musicInterval) clearInterval(musicInterval);
+        if (audioCtx) audioCtx.close();
+        isMusicPlaying = false;
+        if (btnStatus) btnStatus.textContent = "Mati";
+      }
+    }
+
+    function playAmbientLoop() {
+      const notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25];
+      musicInterval = setInterval(() => {
+        if (!isMusicPlaying || !audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const note = notes[Math.floor(Math.random() * notes.length)];
+        
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(note, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 3.0);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 3.0);
+      }, 2500);
+    }
+
+    // OTENTIKASI PENGGUNA
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('loginUsername').value.trim();
+      if (!username) return;
+      localStorage.setItem('workspace_user', username);
+      document.getElementById('welcomeUserBadge').textContent = `Hi, ${username}`;
+      document.getElementById('loginModal').classList.add('hidden');
+      startBackgroundMusic();
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedUser = localStorage.getItem('workspace_user');
+      if (savedUser) {
+        document.getElementById('welcomeUserBadge').textContent = `Hi, ${savedUser}`;
+        document.getElementById('loginModal').classList.add('hidden');
+        startBackgroundMusic();
+      } else {
+        document.getElementById('loginModal').classList.remove('hidden');
+      }
+      renderShortHistory();
+      generateFonts();
+      fetchLiveWeather();
+      renderAlarms();
+    });
+
+    // MANAJEMEN DATA & PENYIMPANAN LOKAL
+    let transactions = JSON.parse(localStorage.getItem('hub_finance')) || [];
+    let customBioLinks = JSON.parse(localStorage.getItem('hub_custom_biolinks')) || [];
+    let tasks = JSON.parse(localStorage.getItem('hub_tasks')) || [];
+    let notes = JSON.parse(localStorage.getItem('hub_notes')) || [];
+    let shortLinks = JSON.parse(localStorage.getItem('hub_shortlinks')) || {};
+    let calendarEvents = JSON.parse(localStorage.getItem('hub_calevents')) || {};
+
+    const monthPicker = document.getElementById('monthPicker');
+    const nowMonth = new Date();
+    monthPicker.value = `${nowMonth.getFullYear()}-${String(nowMonth.getMonth() + 1).padStart(2, '0')}`;
+    monthPicker.addEventListener('change', renderFinance);
+    document.getElementById('searchInput').addEventListener('input', renderFinance);
+    document.getElementById('filterType').addEventListener('change', renderFinance);
+
+    function renderFinance() {
+      const selectedMonth = monthPicker.value;
+      const searchKey = document.getElementById('searchInput').value.toLowerCase();
+      const typeVal = document.getElementById('filterType').value;
+
+      const filtered = transactions.filter(t => {
+        const matchMonth = !selectedMonth || (t.date && t.date.startsWith(selectedMonth));
+        const matchSearch = t.desc && t.desc.toLowerCase().includes(searchKey);
+        let matchType = true;
+        if (typeVal === 'income') matchType = t.type === 'income';
+        else if (typeVal === 'expense') matchType = t.type === 'expense';
+        else if (typeVal === 'online') matchType = t.isOnline === true;
+        else if (typeVal === 'offline') matchType = !t.isOnline;
+        return matchMonth && matchSearch && matchType;
+      });
+
+      let inc = 0, exp = 0;
+      let onlineInc = 0, onlineExp = 0, onlineCount = 0;
+      let offlineInc = 0, offlineExp = 0, offlineCount = 0;
+
+      transactions.forEach(t => {
+        const matchMonth = !selectedMonth || (t.date && t.date.startsWith(selectedMonth));
+        if (!matchMonth) return;
+        const amt = Number(t.amount);
+        if (t.type === 'income') inc += amt; else exp += amt;
+        if (t.isOnline) {
+          onlineCount++;
+          if (t.type === 'income') onlineInc += amt; else onlineExp += amt;
+        } else {
+          offlineCount++;
+          if (t.type === 'income') offlineInc += amt; else offlineExp += amt;
+        }
+      });
+
+      document.getElementById('metricIncome').textContent = 'Rp ' + inc.toLocaleString('id-ID');
+      document.getElementById('metricExpense').textContent = 'Rp ' + exp.toLocaleString('id-ID');
+      document.getElementById('metricNet').textContent = 'Rp ' + (inc - exp).toLocaleString('id-ID');
+
+      document.getElementById('badgeOnlineCount').textContent = `${onlineCount} Data`;
+      document.getElementById('summaryOnlineInc').textContent = 'Rp ' + onlineInc.toLocaleString('id-ID');
+      document.getElementById('summaryOnlineExp').textContent = 'Rp ' + onlineExp.toLocaleString('id-ID');
+
+      document.getElementById('badgeOfflineCount').textContent = `${offlineCount} Data`;
+      document.getElementById('summaryOfflineInc').textContent = 'Rp ' + offlineInc.toLocaleString('id-ID');
+      document.getElementById('summaryOfflineExp').textContent = 'Rp ' + offlineExp.toLocaleString('id-ID');
+
+      const totalInOut = inc + exp;
+      const pctInc = totalInOut > 0 ? Math.round((inc / totalInOut) * 100) : 50;
+      const donutIncExp = document.getElementById('donutIncExp');
+      donutIncExp.style.background = `conic-gradient(#10b981 0% ${pctInc}%, #f43f5e ${pctInc}% 100%)`;
+      document.getElementById('donutIncExpHole').textContent = `${pctInc}% Masuk`;
+
+      const totalOnlineOffline = onlineCount + offlineCount;
+      const pctOnline = totalOnlineOffline > 0 ? Math.round((onlineCount / totalOnlineOffline) * 100) : 50;
+      const donutOnlineOffline = document.getElementById('donutOnlineOffline');
+      donutOnlineOffline.style.background = `conic-gradient(#6366f1 0% ${pctOnline}%, #8b5cf6 ${pctOnline}% 100%)`;
+      document.getElementById('donutOnlineOfflineHole').textContent = `${pctOnline}% Online`;
+
+      document.getElementById('txTableBody').innerHTML = filtered.map(t => `
+        <tr class="hover:bg-indigo-500/5 transition">
+          <td class="p-2.5 font-mono text-sub">${t.date}</td>
+          <td class="p-2.5"><span class="px-2 py-0.5 rounded card-modern text-[10px] font-bold ${t.isOnline ? 'text-indigo-400' : 'text-violet-400'}">${t.category}</span></td>
+          <td class="p-2.5 font-semibold">${t.desc} ${t.isOnline ? '<span class="ml-1 text-[9px] bg-indigo-500/20 text-indigo-300 px-1.5 py-0.5 rounded font-mono">ONLINE</span>' : '<span class="ml-1 text-[9px] bg-slate-500/20 text-sub px-1.5 py-0.5 rounded font-mono">OFFLINE</span>'}</td>
+          <td class="p-2.5 text-right font-bold ${t.type === 'income' ? 'text-emerald-400' : 'text-rose-400'}">Rp ${Number(t.amount).toLocaleString('id-ID')}</td>
+          <td class="p-2.5 text-center space-x-2">
+            <button onclick="editTx('${t.id}')" class="text-indigo-400 text-xs font-bold hover:underline">Edit</button>
+            <button onclick="deleteTx('${t.id}')" class="text-rose-400 text-xs font-bold hover:underline">Hapus</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openTxModal(mode) {
+      document.getElementById('editTxId').value = '';
+      document.getElementById('txForm').reset();
+      document.getElementById('formDate').value = new Date().toISOString().slice(0,10);
+      document.getElementById('formIsOnline').value = (mode === 'online') ? 'true' : 'false';
+      document.getElementById('modalTxTitle').textContent = (mode === 'online') ? '🌐 Transaksi Online' : '💼 Transaksi Offline';
+      document.getElementById('txModal').classList.remove('hidden');
+    }
+    function closeTxModal() { document.getElementById('txModal').classList.add('hidden'); }
+
+    document.getElementById('txForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = document.getElementById('editTxId').value;
+      const isOnline = document.getElementById('formIsOnline').value === 'true';
+      const data = {
+        id: id || Date.now().toString(),
+        date: document.getElementById('formDate').value,
+        type: document.getElementById('formType').value,
+        category: document.getElementById('formCategory').value,
+        amount: Number(document.getElementById('formAmount').value),
+        desc: document.getElementById('formDesc').value,
+        isOnline: isOnline
+      };
+      if (id) { transactions = transactions.map(t => t.id === id ? data : t); } else { transactions.push(data); }
+      localStorage.setItem('hub_finance', JSON.stringify(transactions));
+      renderFinance(); closeTxModal();
+    });
+
+    function editTx(id) {
+      const t = transactions.find(x => x.id === id);
+      if (!t) return;
+      document.getElementById('editTxId').value = t.id;
+      document.getElementById('formDate').value = t.date;
+      document.getElementById('formType').value = t.type;
+      document.getElementById('formCategory').value = t.category;
+      document.getElementById('formAmount').value = t.amount;
+      document.getElementById('formDesc').value = t.desc;
+      document.getElementById('formIsOnline').value = t.isOnline ? 'true' : 'false';
+      document.getElementById('modalTxTitle').textContent = t.isOnline ? '🌐 Edit Transaksi Online' : '💼 Edit Transaksi Offline';
+      document.getElementById('txModal').classList.remove('hidden');
+    }
+
+    function deleteTx(id) { transactions = transactions.filter(t => t.id !== id); localStorage.setItem('hub_finance', JSON.stringify(transactions)); renderFinance(); }
+    
+    function exportFinance() {
+      let csv = "Tanggal,Tipe,Kategori,Nominal,Keterangan,Online\n";
+      transactions.forEach(t => { csv += `${t.date},${t.type},${t.category},${t.amount},"${t.desc}",${t.isOnline ? 'Ya' : 'Tidak'}\n`; });
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'keuangan.csv'; a.click();
+    }
+
+    function shareFinance() {
+      const text = `Total Transaksi Keuangan: ${transactions.length} item.`;
+      if (navigator.share) navigator.share({ title: 'Keuangan', text });
+      else { navigator.clipboard.writeText(text); alert("Disalin!"); }
+    }
+
+    // BIO LINK GENERATOR
+    document.getElementById('bioProfileTitle').addEventListener('input', updateLinkTreePreview);
+    document.getElementById('bioProfileSub').addEventListener('input', updateLinkTreePreview);
+
+    function updateLinkTreePreview() {
+      const name = document.getElementById('bioProfileTitle').value || "Nama Profil Anda";
+      const sub = document.getElementById('bioProfileSub').value || "Bio singkat profil Anda di sini...";
+      document.getElementById('prevTitle').textContent = name;
+      document.getElementById('prevSub').textContent = sub;
+    }
+
+    function addCustomBioLink() {
+      const text = document.getElementById('newBioBtnText').value.trim();
+      const url = document.getElementById('newBioBtnUrl').value.trim();
+      if (!text || !url) { alert("Isi teks dan URL tombol dengan benar!"); return; }
+      customBioLinks.push({ id: Date.now().toString(), text, url });
+      localStorage.setItem('hub_custom_biolinks', JSON.stringify(customBioLinks));
+      document.getElementById('newBioBtnText').value = '';
+      document.getElementById('newBioBtnUrl').value = '';
+      renderBioLinkSelector();
+    }
+
+    function deleteCustomBioLink(id) {
+      customBioLinks = customBioLinks.filter(b => b.id !== id);
+      localStorage.setItem('hub_custom_biolinks', JSON.stringify(customBioLinks));
+      renderBioLinkSelector();
+    }
+
+    function renderBioLinkSelector() {
+      const container = document.getElementById('bioCustomLinkList');
+      if (!container) return;
+      if (customBioLinks.length === 0) {
+        container.innerHTML = `<div class="text-xs text-sub">Belum ada tombol ditambahkan.</div>`;
+        updateLinkTreeButtons([]);
+        return;
+      }
+      container.innerHTML = customBioLinks.map(b => `
+        <div class="card-modern p-2 rounded-xl flex items-center justify-between text-xs">
+          <div class="truncate max-w-[180px]"><strong class="text-indigo-300">${b.text}</strong><br><span class="text-[10px] text-sub">${b.url}</span></div>
+          <button onclick="deleteCustomBioLink('${b.id}')" class="text-rose-400 font-bold hover:underline">Hapus</button>
+        </div>
+      `).join('');
+      updateLinkTreeButtons(customBioLinks);
+    }
+
+    function updateLinkTreeButtons(links) {
+      const container = document.getElementById('prevLinksContainer');
+      if (!container) return;
+      if (!links || links.length === 0) {
+        container.innerHTML = `<div class="p-2.5 rounded-xl bg-indigo-600/30 border border-indigo-500/30 text-indigo-200 text-xs font-bold">Contoh Tombol Tautan</div>`;
+        return;
+      }
+      container.innerHTML = links.map(b => `<div class="p-2.5 rounded-xl bg-indigo-600 text-white text-xs font-bold shadow">${b.text}</div>`).join('');
+    }
+
+    function generateBioLinkPage() {
+      const title = document.getElementById('bioProfileTitle').value || "Tautan Profil Saya";
+      const sub = document.getElementById('bioProfileSub').value || "";
+      if (customBioLinks.length === 0) { alert("Tambahkan minimal satu tombol tautan!"); return; }
+
+      let linksHtml = '';
+      customBioLinks.forEach(b => {
+        linksHtml += `  <a href="${b.url}" target="_blank" style="display:block; padding:14px; margin:10px 0; background:#4f46e5; color:#fff; text-align:center; border-radius:14px; text-decoration:none; font-family:sans-serif; font-weight:bold; box-shadow:0 4px 12px rgba(79,70,229,0.3);">${b.text}</a>\n`;
+      });
+
+      const fullHtml = `<!DOCTYPE html>\n<html lang="id">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <title>${title}</title>\n</head>\n<body style="background:#0f172a; color:#f8fafc; padding:40px 20px; max-width:480px; margin:auto; text-align:center; font-family:sans-serif;">\n  <div style="width:80px; height:80px; border-radius:50%; background:linear-gradient(135deg, #4f46e5, #db2777); margin:auto; display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:bold; color:#fff; box-shadow:0 8px 20px rgba(0,0,0,0.3);">WS</div>\n  <h1 style="margin-top:16px; font-size:22px;">${title}</h1>\n  <p style="color:#94a3b8; font-size:14px; margin-bottom:24px;">${sub}</p>\n${linksHtml}</body>\n</html>`;
+
+      document.getElementById('bioResultOutput').value = fullHtml;
+      copyBioLink();
+    }
+
+    function copyBioLink() {
+      const val = document.getElementById('bioResultOutput').value;
+      if (!val) { generateBioLinkPage(); return; }
+      navigator.clipboard.writeText(val);
+      alert("Kode HTML Bio Link bergaya LinkTree berhasil disalin!");
+    }
+
+    // TUGAS & CATATAN
+    function openNoteModal() { document.getElementById('editNoteId').value = ''; document.getElementById('noteForm').reset(); document.getElementById('noteModal').classList.remove('hidden'); }
+    function closeNoteModal() { document.getElementById('noteModal').classList.add('hidden'); }
+    
+    document.getElementById('noteForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = document.getElementById('editNoteId').value;
+      const data = { id: id || Date.now().toString(), title: document.getElementById('noteTitle').value, content: document.getElementById('noteContent').value };
+      if (id) { notes = notes.map(n => n.id === id ? data : n); } else { notes.push(data); }
+      localStorage.setItem('hub_notes', JSON.stringify(notes)); renderNotes(); closeNoteModal();
+    });
+
+    function renderNotes() {
+      document.getElementById('noteList').innerHTML = notes.map(n => `
+        <div class="p-3 card-modern rounded-xl space-y-1 text-xs">
+          <div class="flex justify-between items-center"><h4 class="font-bold text-violet-300">${n.title}</h4><button onclick="deleteNote('${n.id}')" class="text-rose-400 text-[10px]">Hapus</button></div>
+          <p class="text-sub">${n.content}</p>
+        </div>
+      `).join('');
+    }
+    function deleteNote(id) { notes = notes.filter(n => n.id !== id); localStorage.setItem('hub_notes', JSON.stringify(notes)); renderNotes(); }
+
+    function openTaskModal() { document.getElementById('editTaskId').value = ''; document.getElementById('taskForm').reset(); document.getElementById('taskModal').classList.remove('hidden'); }
+    function closeTaskModal() { document.getElementById('taskModal').classList.add('hidden'); }
+    
+    document.getElementById('taskForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = document.getElementById('editTaskId').value;
+      const title = document.getElementById('taskTitle').value;
+      const dueDate = document.getElementById('taskDueDate').value;
+      const data = { id: id || Date.now().toString(), title, dueDate };
+      if (id) { tasks = tasks.map(t => t.id === id ? data : t); } else { tasks.push(data); }
+      localStorage.setItem('hub_tasks', JSON.stringify(tasks));
+      
+      if (dueDate) {
+        alarms.push({ id: Date.now(), time: "08:00", note: `Tugas: ${title}`, triggered: false });
+        localStorage.setItem('workspace_alarms', JSON.stringify(alarms));
+        renderAlarms();
+      }
+
+      renderTasks(); closeTaskModal();
+    });
+
+    function renderTasks() {
+      document.getElementById('taskList').innerHTML = tasks.map(t => `
+        <div class="p-2 flex justify-between items-center text-xs"><span>${t.title} <span class="text-[10px] text-indigo-400 font-mono">(${t.dueDate})</span></span><button onclick="deleteTask('${t.id}')" class="text-rose-400 font-bold">Hapus</button></div>
+      `).join('');
+    }
+    function deleteTask(id) { tasks = tasks.filter(t => t.id !== id); localStorage.setItem('hub_tasks', JSON.stringify(tasks)); renderTasks(); }
+    
+    function exportTasksNotes() {
+      const blob = new Blob([JSON.stringify({tasks, notes}, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'tugas_catatan.json'; a.click();
+    }
+
+    // KALENDER INTERAKTIF
+    let calCurrentDate = new Date();
+    function changeCalMonth(dir) { calCurrentDate.setMonth(calCurrentDate.getMonth() + dir); renderCalendar(); }
+    
+    function renderCalendar() {
+      const year = calCurrentDate.getFullYear();
+      const month = calCurrentDate.getMonth();
+      const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+      document.getElementById('calMonthYearLabel').textContent = `${monthNames[month]} ${year}`;
+      const firstDay = new Date(year, month, 1).getDay();
+      const totalDays = new Date(year, month + 1, 0).getDate();
+      const grid = document.getElementById('calendarGrid'); grid.innerHTML = '';
+      for (let i = 0; i < firstDay; i++) grid.innerHTML += `<div class="p-2 card-modern rounded-xl opacity-25"></div>`;
+      for (let day = 1; day <= totalDays; day++) {
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const ev = calendarEvents[dateStr] || '';
+        grid.innerHTML += `
+          <div onclick="handleCalClick('${dateStr}')" class="p-2 card-modern rounded-xl flex flex-col justify-between h-16 text-xs cursor-pointer hover:border-indigo-500 transition">
+            <span class="font-bold">${day}</span>
+            <span class="text-[9px] text-indigo-300 truncate">${ev}</span>
+          </div>
+        `;
+      }
+    }
+
+    function handleCalClick(dateStr) {
+      const val = prompt(`Agenda & Pengingat untuk ${dateStr}:`, calendarEvents[dateStr] || '');
+      if (val !== null) {
+        if (val.trim() === '') {
+          delete calendarEvents[dateStr];
+        } else {
+          calendarEvents[dateStr] = val;
+          alarms.push({ id: Date.now(), time: "07:00", note: `Agenda: ${val} (${dateStr})`, triggered: false });
+          localStorage.setItem('workspace_alarms', JSON.stringify(alarms));
+          renderAlarms();
+        }
+        localStorage.setItem('hub_calevents', JSON.stringify(calendarEvents));
+        renderCalendar();
+      }
+    }
+
+    function exportCalendar() {
+      const blob = new Blob([JSON.stringify(calendarEvents, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'kalender.json'; a.click();
+    }
+
+    // POMODORO TIMER
+    let pomInt = null, pomLeft = 1500, pomRun = false, pomM = 'work';
+    function setPomodoroMode(m) {
+      pomM = m; clearInterval(pomInt); pomRun = false;
+      pomLeft = m === 'work' ? 1500 : 300;
+      document.getElementById('pomModeWork').className = m === 'work' ? "px-4 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow" : "px-4 py-1.5 rounded-xl text-xs font-bold card-modern text-sub";
+      document.getElementById('pomModeShort').className = m === 'shortBreak' ? "px-4 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow" : "px-4 py-1.5 rounded-xl text-xs font-bold card-modern text-sub";
+      updPom();
+    }
+    function updPom() {
+      document.getElementById('pomTimerDisplay').textContent = `${String(Math.floor(pomLeft/60)).padStart(2,'0')}:${String(pomLeft%60).padStart(2,'0')}`;
+    }
+    function startPomodoro() {
+      if (pomRun) return; pomRun = true;
+      pomInt = setInterval(() => {
+        if (pomLeft > 0) { pomLeft--; updPom(); } else { clearInterval(pomInt); pomRun = false; alert("Selesai!"); }
+      }, 1000);
+    }
+    function pausePomodoro() { clearInterval(pomInt); pomRun = false; }
+    function resetPomodoro() { clearInterval(pomInt); pomRun = false; setPomodoroMode(pomM); }
+
+    // FONT GENERATOR
+    function generateFonts() {
+      const txt = document.getElementById('fontInputText').value || "WorkSpace";
+      const maps = [
+        {name: "Bold Sans", map: {a:'𝗮',b:'𝗯',c:'𝗰',d:'𝗱',e:'𝗲',f:'𝗳',g:'𝗴',h:'𝗵',i:'𝗶',j:'𝗷',k:'𝗸',l:'𝗹',m:'𝗺',n:'𝗻',o:'𝗼',p:'𝗽',q:'𝗾',r:'𝗿',s:'𝘀',t:'𝘁',u:'𝘂',v:'𝘃',w:'𝘄',x:'𝘅',y:'𝘆',z:'𝘇'}},
+        {name: "Italic Serif", map: {a:'𝑎',b:'𝑏',c:'𝑐',d:'𝑑',e:'𝑒',f:'𝑓',g:'𝑔',h:'ℎ',i:'𝑖',j:'𝑗',k:'𝑘',l:'𝑙',m:'𝑚',n:'𝑛',o:'𝑜',p:'𝑝',q:'𝑞',r:'𝑟',s:'𝑠',t:'𝑡',u:'𝑢',v:'𝑣',w:'𝑤',x:'𝑥',y:'𝑦',z:'𝑧'}},
+        {name: "Bubble Circled", map: {a:'ⓐ',b:'ⓑ',c:'ⓒ',d:'ⓓ',e:'ⓔ',f:'ⓕ',g:'ⓖ',h:'ⓗ',i:'ⓘ',j:'ⓙ',k:'ⓚ',l:'ⓛ',m:'ⓜ',n:'ⓝ',o:'ⓞ',p:'ⓟ',q:'ⓠ',r:'ⓡ',s:'ⓢ',t:'ⓣ',u:'ⓤ',v:'ⓥ',w:'ⓦ',x:'ⓧ',y:'ⓨ',z:'ⓩ'}},
+        {name: "Monospace", map: {a:'𝚊',b:'𝚋',c:'𝚌',d:'𝚍',e:'𝚎',f:'𝚏',g:'𝚐',h:'𝚑',i:'𝚒',j:'𝚓',k:'𝚔',l:'𝚕',m:'𝚖',n:'𝚗',o:'𝚘',p:'𝚙',q:'𝚚',r:'𝚛',s:'𝚜',t:'𝚝',u:'𝚞',v:'𝚟',w:'𝚠',x:'𝚡',y:'𝚢',z:'𝚣'}},
+        {name: "Gothic Fraktur", map: {a:'𝔞',b:'𝔟',c:'𝔠',d:'𝔡',e:'𝔢',f:'𝔣',g:'𝔤',h:'𝔥',i:'𝔦',j:'𝔧',k:'𝔨',l:'𝔩',m:'𝔪',n:'𝔫',o:'𝔬',p:'𝔭',q:'𝔮',r:'𝔯',s:'𝔰',t:'𝔱',u:'𝔲',v:'𝔳',w:'𝔴',x:'𝔵',y:'𝔶',z:'𝔷'}}
+      ];
+      document.getElementById('fontResultsList').innerHTML = maps.map(item => {
+        const res = txt.split('').map(c => item.map[c] || c).join('');
+        return `<div class="card-modern p-2.5 rounded-xl flex justify-between items-center text-xs"><div class="space-y-0.5"><span class="text-[9px] font-bold text-sub block uppercase">${item.name}</span><span class="text-indigo-300 font-bold select-all">${res}</span></div><button onclick="navigator.clipboard.writeText('${res}');alert('Disalin!')" class="bg-indigo-600 hover:bg-indigo-700 text-white px-2.5 py-1 rounded-lg font-bold shadow transition">Salin</button></div>`;
+      }).join('');
+    }
+
+    // DOWNLOADER (YOUTUBE & PHOTO LINK VIA PROSES)
+    function processDownload() {
+      const url = document.getElementById('dlUrlInput').value.trim();
+      if (!url) { alert("Masukkan URL tautan terlebih dahulu!"); return; }
+      
+      document.getElementById('dlResultArea').classList.remove('hidden');
+      const videoBtn = document.getElementById('dlVideoBtn');
+      const audioBtn = document.getElementById('dlAudioBtn');
+      const photoBtn = document.getElementById('dlPhotoLinkBtn');
+
+      const ytMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+      const isImage = /\.(jpeg|jpg|png|webp|gif|svg)($|\?)/i.test(url) || url.includes('image') || url.includes('imgur') || url.includes('ibb.co');
+
+      if (ytMatch && ytMatch[1]) {
+        videoBtn.style.display = 'block';
+        audioBtn.style.display = 'block';
+        photoBtn.style.display = 'none';
+        videoBtn.href = `https://www.y2mate.com/youtube/${ytMatch[1]}`;
+        audioBtn.href = `https://www.y2mate.com/youtube/${ytMatch[1]}`;
+        document.getElementById('ytInfoBox').textContent = "Video YouTube siap diunduh! Pilih format:";
+      } else if (isImage || url.startsWith('http')) {
+        videoBtn.style.display = 'none';
+        audioBtn.style.display = 'none';
+        photoBtn.style.display = 'block';
+        photoBtn.href = url;
+        document.getElementById('ytInfoBox').textContent = "Tautan foto terdeteksi! Klik tombol di bawah untuk mengunduh:";
+      } else {
+        videoBtn.style.display = 'block';
+        audioBtn.style.display = 'block';
+        photoBtn.style.display = 'block';
+        videoBtn.href = url;
+        audioBtn.href = url;
+        photoBtn.href = url;
+        document.getElementById('ytInfoBox').textContent = "Tautan diproses! Pilih format tujuan:";
+      }
+    }
+
+    // URL SHORTENER
+    function generateShortUrl() {
+      const u = document.getElementById('shortUrlInput').value;
+      if (!u) return;
+      const code = Math.random().toString(36).substring(2, 7);
+      shortLinks[code] = u; localStorage.setItem('hub_shortlinks', JSON.stringify(shortLinks));
+      document.getElementById('shortResultOutput').value = `${window.location.origin}?s=${code}`;
+      document.getElementById('shortResultArea').classList.remove('hidden');
+      renderShortHistory();
+    }
+    function renderShortHistory() {
+      const el = document.getElementById('shortHistoryList');
+      if (!el) return;
+      el.innerHTML = Object.keys(shortLinks).map(c => `<div class="card-modern p-2 rounded text-xs flex justify-between items-center"><span class="font-mono text-indigo-400">?s=${c}</span><button onclick="deleteShortLink('${c}')" class="text-rose-400 font-bold hover:underline">Hapus</button></div>`).join('');
+    }
+    function deleteShortLink(c) { delete shortLinks[c]; localStorage.setItem('hub_shortlinks', JSON.stringify(shortLinks)); renderShortHistory(); }
+    function copyShortUrl() { navigator.clipboard.writeText(document.getElementById('shortResultOutput').value); alert("Disalin!"); }
+
+    // TRANSLATOR
+    async function translateText() {
+      const t = document.getElementById('transInputText').value;
+      const s = document.getElementById('transSourceLang').value;
+      const tg = document.getElementById('transTargetLang').value;
+      if (!t) return;
+      document.getElementById('transOutputResult').textContent = "Menerjemahkan...";
+      try {
+        const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(t)}&langpair=${s}|${tg}`);
+        const data = await res.json();
+        document.getElementById('transOutputResult').textContent = data?.responseData?.translatedText || "Gagal menerjemahkan.";
+      } catch (e) {
+        document.getElementById('transOutputResult').textContent = "Kesalahan koneksi.";
+      }
+    }
+    function copyTranslation() { navigator.clipboard.writeText(document.getElementById('transOutputResult').textContent); alert("Disalin!"); }
+
+    // CURRENCY
+    async function convertCurrency() {
+      const amt = Number(document.getElementById('currAmount').value) || 1;
+      const f = document.getElementById('currFrom').value;
+      const to = document.getElementById('currTo').value;
+      try {
+        const res = await fetch(`https://open.er-api.com/v6/latest/${f}`);
+        const d = await res.json();
+        document.getElementById('currResultValue').textContent = `${(amt * (d?.rates?.[to] || 1)).toFixed(2)} ${to}`;
+      } catch(e) {
+        document.getElementById('currResultValue').textContent = "Gagal memuat kurs";
+      }
+    }
+
+    // NEWS
+    async function fetchNews() {
+      const c = document.getElementById('newsContainer');
+      try {
+        const res = await fetch('https://api.spaceflightnewsapi.net/v4/articles/?limit=3');
+        const d = await res.json();
+        c.innerHTML = (d?.results || []).map(i => `<div class="card-modern rounded-xl overflow-hidden flex flex-col justify-between"><img src="${i.image_url}" class="w-full h-32 object-cover"><div class="p-3 space-y-1"><h4 class="font-bold text-xs">${i.title}</h4><a href="${i.url}" target="_blank" class="text-indigo-400 font-bold text-[10px] hover:underline">Baca &rarr;</a></div></div>`).join('');
+      } catch(e) {
+        c.innerHTML = `<div class="text-xs text-sub col-span-3 text-center py-10">Gagal memuat berita.</div>`;
+      }
+    }
+
+    // WEATHER
+    async function fetchLiveWeather() {
+      try {
+        const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-7.98&longitude=112.63&current_weather=true');
+        const d = await res.json();
+        if(d && d.current_weather) {
+          document.getElementById('liveTemp').textContent = `${d.current_weather.temperature}°C`;
+          document.getElementById('liveWind').textContent = `${d.current_weather.windspeed} km/h`;
+          document.getElementById('liveCondition').textContent = "Cerah / Normal";
+          document.getElementById('weatherWidget').textContent = `🌤️ ${d.current_weather.temperature}°C`;
+        }
+      } catch(e) {
+        document.getElementById('liveCondition').textContent = "Offline";
+      }
+    }
+
+    // PDF VIEWER
+    let pdfDoc = null, pNum = 1;
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    function loadPdf(e) {
+      const f = e.target.files[0]; if (!f) return;
+      const fr = new FileReader();
+      fr.onload = function() {
+        pdfjsLib.getDocument(new Uint8Array(this.result)).promise.then(pdf => {
+          pdfDoc = pdf; pNum = 1; document.getElementById('pdfPlaceholder').classList.add('hidden');
+          document.getElementById('pdfViewerContainer').classList.remove('hidden'); renderPdf(pNum);
+        });
+      };
+      fr.readAsArrayBuffer(f);
+    }
+    function renderPdf(num) {
+      pdfDoc.getPage(num).then(page => {
+        const vp = page.getViewport({scale: 1.0});
+        const cv = document.getElementById('pdfCanvas'); const ctx = cv.getContext('2d');
+        cv.height = vp.height; cv.width = vp.width; page.render({canvasContext: ctx, viewport: vp});
+        document.getElementById('pdfPageInfo').textContent = `${num}/${pdfDoc.numPages}`;
+      });
+    }
+    function prevPdfPage() { if (pNum > 1) renderPdf(--pNum); }
+    function nextPdfPage() { if (pdfDoc && pNum < pdfDoc.numPages) renderPdf(++pNum); }
+
+    // CALCULATOR
+    function calcClear() { document.getElementById('calcScreen').value = '0'; }
+    function calcAppend(v) {
+      const s = document.getElementById('calcScreen');
+      if (s.value === '0' || s.value === 'Error') s.value = '';
+      s.value += v;
+    }
+    function calcCompute() {
+      const s = document.getElementById('calcScreen');
+      try { s.value = eval(s.value); } catch(e) { s.value = 'Error'; }
+    }
+
+    // PHOTO EDITOR
+    let pImg = null, pCv = document.getElementById('photoCanvas'), pCtx = pCv.getContext('2d');
+    function loadPhoto(e) {
+      const f = e.target.files[0]; if (!f) return;
+      const fr = new FileReader();
+      fr.onload = function(ev) {
+        pImg = new Image();
+        pImg.onload = function() {
+          pCv.classList.remove('hidden'); document.getElementById('photoPlaceholder').classList.add('hidden');
+          pCv.width = pImg.width; pCv.height = pImg.height; pCtx.drawImage(pImg, 0, 0);
+        };
+        pImg.src = ev.target.result;
+      };
+      fr.readAsDataURL(f);
+    }
+
+    // BACKUP & RESTORE DATA JSON
+    function autoBackupJSON() {
+      const allData = { transactions, customBioLinks, tasks, notes, shortLinks, calendarEvents, alarms };
+      const blob = new Blob([JSON.stringify(allData, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'workspace_backup.json'; a.click();
+    }
+
+    function importJSON(e) {
+      const f = e.target.files[0]; if(!f) return;
+      const fr = new FileReader();
+      fr.onload = function(ev) {
+        try {
+          const d = JSON.parse(ev.target.result);
+          if (d.transactions) localStorage.setItem('hub_finance', JSON.stringify(d.transactions));
+          if (d.tasks) localStorage.setItem('hub_tasks', JSON.stringify(d.tasks));
+          if (d.notes) localStorage.setItem('hub_notes', JSON.stringify(d.notes));
+          if (d.alarms) localStorage.setItem('workspace_alarms', JSON.stringify(d.alarms));
+          alert("Data berhasil dipulihkan! Muat ulang halaman.");
+          location.reload();
+        } catch(err) {
+          alert("Format file cadangan tidak valid.");
+        }
+      };
+      fr.readAsText(f);
+    }
+
+    // INISIALISASI UTAMA
+    switchTab(localStorage.getItem('workspace_active_tab') || 'finance');
+    renderFinance(); renderTasks(); renderNotes(); renderBioLinkSelector();
+    const sLang = localStorage.getItem('workspace_lang') || 'id';
+    document.getElementById('langSelector').value = sLang; changeLanguage(sLang);
+  </script>
+</body>
+</html>
+

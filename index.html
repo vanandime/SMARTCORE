@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkSpace Hub - Lite Suite v4.8</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; will-change: background-color, color; }
+    
+    .theme-dark { --bg-main: #07090e; --bg-card: #111726; --border: #1e293b; --text-main: #f8fafc; --text-sub: #94a3b8; --input-bg: #0f172a; }
+    .theme-light { --bg-main: #f1f5f9; --bg-card: #ffffff; --border: #cbd5e1; --text-main: #0f172a; --text-sub: #475569; --input-bg: #f8fafc; }
+    .theme-emerald { --bg-main: #021c16; --bg-card: #063529; --border: #047857; --text-main: #ecfdf5; --text-sub: #a7f3d0; --input-bg: #022c22; }
+    .theme-ocean { --bg-main: #041d2c; --bg-card: #0a3147; --border: #0369a1; --text-main: #f0f9ff; --text-sub: #bae6fd; --input-bg: #072538; }
+    .theme-cyber { --bg-main: #1a0b2e; --bg-card: #281145; --border: #6b21a8; --text-main: #faf5ff; --text-sub: #e9d5ff; --input-bg: #200d38; }
+
+    body { background-color: var(--bg-main); color: var(--text-main); }
+    .card-modern { background-color: var(--bg-card); border-color: var(--border); border-width: 1px; }
+    .text-sub { color: var(--text-sub); }
+    .custom-input { background-color: var(--input-bg); color: var(--text-main); border-color: var(--border); }
+
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.2); border-radius: 4px; }
+  </style>
+</head>
+<body id="appBody" class="theme-dark min-h-screen pb-24 md:pb-6 transition-colors duration-200">
+
+  <!-- POPUP WELCOME -->
+  <div id="welcomeModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl text-center">
+      <div class="w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center mx-auto text-xl font-bold">🤖</div>
+      <h3 class="font-extrabold text-sm" id="welTitle">Selamat Datang di WorkSpace Hub</h3>
+      <p class="text-xs text-sub leading-relaxed" id="welDesc">Website ini dikembangkan oleh Mohammad Danis Muria Vanandi dengan bantuan AI.</p>
+      <button onclick="closeWelcomeModal()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2.5 rounded-xl shadow" id="welBtn">Mengerti & Lanjutkan</button>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 card-modern border-b backdrop-blur-md bg-opacity-90 px-4 py-2.5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-600 flex items-center justify-center text-white shadow-md">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+        </div>
+        <div>
+          <h1 class="font-bold text-xs tracking-tight">WorkSpace Hub</h1>
+          <p class="text-[10px] text-sub" id="lblSubtitle">Lite Suite v4.8</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <select id="langSelector" onchange="changeLanguage(this.value)" class="text-xs custom-input border rounded-lg px-2 py-1 outline-none font-semibold">
+          <option value="id">🇮🇩 ID</option>
+          <option value="en">🇬🇧 EN</option>
+          <option value="zh">🇨🇳 ZH</option>
+          <option value="ar">🇸🇦 AR</option>
+        </select>
+        <div class="text-xs font-mono font-bold text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-lg border border-indigo-500/25 whitespace-nowrap" id="headerClock">00:00:00</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
+
+    <!-- 1. KEUANGAN -->
+    <section id="tab-finance" class="tab-content space-y-5">
+      <div class="card-modern p-4 rounded-2xl flex flex-wrap items-center justify-between gap-3">
+        <div><h2 class="text-base font-extrabold" id="finTitle">Manajemen Keuangan</h2><p class="text-xs text-sub" id="finSub">Pantau arus kas dan perbandingan online vs offline.</p></div>
+        <div class="flex flex-wrap items-center gap-2">
+          <input type="month" id="monthPicker" class="text-xs custom-input border rounded-xl px-3 py-2 font-semibold outline-none min-w-[140px]">
+          <button onclick="openTxModal('offline')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-2 rounded-xl shadow" id="btnTx">+ Offline</button>
+          <button onclick="openTxModal('online')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-2 rounded-xl shadow" id="btnOnlineTx">🌐 Online</button>
+          <button onclick="exportFinance()" class="card-modern hover:bg-slate-800 text-xs font-bold px-3 py-2 rounded-xl" id="btnExportFin">Ekspor</button>
+          <button onclick="shareFinance()" class="card-modern hover:bg-slate-800 text-xs font-bold px-3 py-2 rounded-xl" id="btnShareFin">Bagikan</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="card-modern p-4 rounded-2xl"><div class="text-[11px] font-bold text-sub uppercase" id="lblNet">Total Saldo</div><div id="metricNet" class="text-xl font-extrabold mt-1">Rp 0</div></div>
+        <div class="card-modern p-4 rounded-2xl"><div class="text-[11px] font-bold text-sub uppercase" id="lblIncome">Pemasukan</div><div id="metricIncome" class="text-xl font-extrabold text-emerald-400 mt-1">Rp 0</div></div>
+        <div class="card-modern p-4 rounded-2xl"><div class="text-[11px] font-bold text-sub uppercase" id="lblExpense">Pengeluaran</div><div id="metricExpense" class="text-xl font-extrabold text-rose-400 mt-1">Rp 0</div></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card-modern p-4 rounded-2xl space-y-2">
+          <div class="flex items-center justify-between border-b pb-2">
+            <span class="text-xs font-extrabold text-indigo-400 uppercase" id="lblSummaryOnline">🌐 Transaksi Online</span>
+            <span id="badgeOnlineCount" class="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-300">0 Data</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 pt-1 text-xs">
+            <div><div class="text-sub text-[10px]" id="lblOnlineIn">Masuk</div><div id="summaryOnlineInc" class="font-bold text-emerald-400 mt-0.5">Rp 0</div></div>
+            <div><div class="text-sub text-[10px]" id="lblOnlineOut">Keluar</div><div id="summaryOnlineExp" class="font-bold text-rose-400 mt-0.5">Rp 0</div></div>
+          </div>
+        </div>
+        <div class="card-modern p-4 rounded-2xl space-y-2">
+          <div class="flex items-center justify-between border-b pb-2">
+            <span class="text-xs font-extrabold text-violet-400 uppercase" id="lblSummaryOffline">💼 Transaksi Offline</span>
+            <span id="badgeOfflineCount" class="text-[10px] font-mono px-2 py-0.5 rounded bg-violet-500/10 text-violet-300">0 Data</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 pt-1 text-xs">
+            <div><div class="text-sub text-[10px]" id="lblOfflineIn">Masuk</div><div id="summaryOfflineInc" class="font-bold text-emerald-400 mt-0.5">Rp 0</div></div>
+            <div><div class="text-sub text-[10px]" id="lblOfflineOut">Keluar</div><div id="summaryOfflineExp" class="font-bold text-rose-400 mt-0.5">Rp 0</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-modern p-4 rounded-2xl space-y-3">
+        <div class="flex flex-wrap gap-2 items-center justify-between">
+          <input type="text" id="searchInput" placeholder="Cari..." class="text-xs custom-input border rounded-xl px-3 py-2 flex-1 outline-none">
+          <select id="filterType" class="text-xs custom-input border rounded-xl px-3 py-2 outline-none">
+            <option value="all" id="optAll">Semua</option>
+            <option value="income" id="optInc">Pemasukan</option>
+            <option value="expense" id="optExp">Pengeluaran</option>
+            <option value="online" id="optOnline">Online Saja</option>
+            <option value="offline" id="optOffline">Offline Saja</option>
+          </select>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs min-w-[500px]">
+            <thead class="border-b border-slate-700/60 text-sub font-semibold">
+              <tr>
+                <th class="p-2.5" id="thDate">Tanggal</th>
+                <th class="p-2.5" id="thCat">Kategori / Metode</th>
+                <th class="p-2.5" id="thDesc">Keterangan</th>
+                <th class="p-2.5 text-right" id="thNom">Nominal</th>
+                <th class="p-2.5 text-center" id="thAct">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="txTableBody" class="divide-y divide-slate-800/40"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. CATATAN KEUANGAN & MEMO CEPAT (NEW MENU) -->
+    <section id="tab-quicknotes" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div><h2 class="text-base font-extrabold" id="qnHeading">Catatan Keuangan & Memo Cepat</h2><p class="text-xs text-sub" id="qnSub">Simpan coretan ide, catatan belanja, atau perhitungan kilat.</p></div>
+        <button onclick="openQnModal()" class="bg-indigo-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl" id="btnAddQn">+ Catatan Baru</button>
+      </div>
+      <div id="qnListContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3"></div>
+    </section>
+
+    <!-- 3. TUGAS & CATATAN -->
+    <section id="tab-tasks" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div><h2 class="text-base font-extrabold" id="taskHeading">Tugas & Catatan</h2><p class="text-xs text-sub" id="taskSub">Pusat pengorganisasian tugas dan memo.</p></div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="openTaskModal()" class="bg-indigo-600 text-white text-xs font-bold px-3 py-2 rounded-xl" id="btnTask">+ Tugas</button>
+          <button onclick="openNoteModal()" class="bg-violet-600 text-white text-xs font-bold px-3 py-2 rounded-xl" id="btnNote">+ Catatan</button>
+          <button onclick="exportTasksNotes()" class="card-modern text-xs font-bold px-3 py-2 rounded-xl" id="btnExportTask">Ekspor</button>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card-modern p-4 rounded-2xl space-y-3"><h3 class="text-xs font-bold uppercase text-sub border-b pb-2" id="lblTaskList">Daftar Pekerjaan</h3><div id="taskList" class="divide-y divide-slate-800/40 space-y-2"></div></div>
+        <div class="card-modern p-4 rounded-2xl space-y-3"><h3 class="text-xs font-bold uppercase text-sub border-b pb-2" id="lblNoteList">Catatan Saya</h3><div id="noteList" class="grid grid-cols-1 gap-2.5"></div></div>
+      </div>
+    </section>
+
+    <!-- 4. KALENDER -->
+    <section id="tab-calendar" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div><h2 class="text-base font-extrabold" id="calHeading">Kalender Interaktif</h2><p class="text-xs text-sub" id="calSub">Klik tanggal untuk menambah agenda.</p></div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <button onclick="changeCalMonth(-1)" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold">&larr;</button>
+          <span id="calMonthYearLabel" class="text-xs font-bold font-mono px-2">Bulan Tahun</span>
+          <button onclick="changeCalMonth(1)" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold">&rarr;</button>
+          <button onclick="exportCalendar()" class="card-modern text-xs font-bold px-3 py-2 rounded-xl" id="btnExportCal">Ekspor</button>
+        </div>
+      </div>
+      <div class="card-modern p-4 rounded-2xl space-y-3">
+        <div class="grid grid-cols-7 gap-1 text-center font-bold text-xs text-sub pb-2 border-b border-slate-800">
+          <span>Min</span><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span>
+        </div>
+        <div id="calendarGrid" class="grid grid-cols-7 gap-1.5"></div>
+      </div>
+    </section>
+
+    <!-- 5. POMODORO -->
+    <section id="tab-pomodoro" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between"><h2 class="text-base font-extrabold" id="pomHeading">Pomodoro Focus Timer</h2></div>
+      <div class="card-modern p-6 rounded-2xl max-w-md mx-auto text-center space-y-6">
+        <div class="flex justify-center gap-2">
+          <button onclick="setPomodoroMode('work')" id="pomModeWork" class="px-4 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white">Fokus (25m)</button>
+          <button onclick="setPomodoroMode('shortBreak')" id="pomModeShort" class="px-4 py-1.5 rounded-xl text-xs font-bold card-modern text-sub">Istirahat (5m)</button>
+        </div>
+        <div class="text-6xl font-black font-mono tracking-wider text-indigo-400 py-6" id="pomTimerDisplay">25:00</div>
+        <div class="flex justify-center gap-3">
+          <button onclick="startPomodoro()" class="bg-indigo-600 text-white text-xs font-bold px-6 py-2.5 rounded-xl shadow">Mulai</button>
+          <button onclick="pausePomodoro()" class="card-modern text-xs font-bold px-6 py-2.5 rounded-xl">Jeda</button>
+          <button onclick="resetPomodoro()" class="card-modern text-xs font-bold px-6 py-2.5 rounded-xl text-rose-400">Reset</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. FONT GENERATOR -->
+    <section id="tab-font" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" id="fontHeading">Font Generator & Text Stylist</h2></div>
+      <div class="card-modern p-5 rounded-2xl space-y-4 max-w-2xl mx-auto">
+        <textarea id="fontInputText" rows="3" class="w-full text-xs custom-input border rounded-xl p-3 outline-none" oninput="generateFonts()">WorkSpace Hub</textarea>
+        <div id="fontResultsList" class="space-y-2.5 max-h-[400px] overflow-y-auto pr-1"></div>
+      </div>
+    </section>
+
+    <!-- 7. DOWNLOADER -->
+    <section id="tab-downloader" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" id="dlHeading">Media & YouTube Downloader</h2></div>
+      <div class="card-modern p-5 rounded-2xl space-y-3 max-w-xl mx-auto">
+        <div class="flex gap-2">
+          <input type="url" id="dlUrlInput" placeholder="https://www.youtube.com/watch?v=..." class="text-xs custom-input border rounded-xl px-3 py-2.5 flex-1 outline-none">
+          <button onclick="processDownload()" class="bg-indigo-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl">Proses</button>
+        </div>
+        <div id="dlResultArea" class="hidden p-4 card-modern rounded-xl space-y-3">
+          <div id="ytEmbedContainer" class="w-full aspect-video bg-black rounded-xl overflow-hidden hidden"></div>
+          <div class="grid grid-cols-2 gap-2">
+            <a id="dlVideoBtn" href="#" target="_blank" class="block text-center bg-indigo-600 text-white text-xs font-bold py-2 rounded-xl">Video (MP4)</a>
+            <a id="dlAudioBtn" href="#" target="_blank" class="block text-center bg-violet-600 text-white text-xs font-bold py-2 rounded-xl">Audio (MP3)</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. URL SHORTENER -->
+    <section id="tab-shortener" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" id="shortHeading">Pemendek Link (URL Shortener)</h2></div>
+      <div class="card-modern p-5 rounded-2xl space-y-3 max-w-xl mx-auto">
+        <div class="flex gap-2">
+          <input type="url" id="shortUrlInput" placeholder="https://..." class="text-xs custom-input border rounded-xl px-3 py-2.5 flex-1 outline-none">
+          <button onclick="generateShortUrl()" class="bg-indigo-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl">Pendekkan</button>
+        </div>
+        <div id="shortResultArea" class="hidden p-3.5 card-modern rounded-xl space-y-2">
+          <div class="flex gap-2">
+            <input type="text" id="shortResultOutput" readonly class="text-xs custom-input border rounded-xl px-3 py-2 flex-1 font-mono text-indigo-400 font-bold">
+            <button onclick="copyShortUrl()" class="bg-violet-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl">Salin</button>
+          </div>
+        </div>
+        <div id="shortHistoryList" class="space-y-2 max-h-40 overflow-y-auto"></div>
+      </div>
+    </section>
+
+    <!-- 9. TRANSLATOR -->
+    <section id="tab-translator" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" id="transHeading">Penerjemah Bahasa</h2></div>
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
+        <div class="card-modern p-4 rounded-2xl space-y-3 md:col-span-2">
+          <select id="transSourceLang" class="custom-input border rounded-lg px-2 py-1 outline-none text-xs font-bold w-full"><option value="auto">Auto</option><option value="id">ID</option><option value="en">EN</option></select>
+          <textarea id="transInputText" rows="4" placeholder="Ketik teks..." class="w-full text-xs custom-input border rounded-xl p-3 outline-none"></textarea>
+          <button onclick="translateText()" class="w-full bg-indigo-600 text-white text-xs font-bold py-2 rounded-xl">Terjemahkan</button>
+        </div>
+        <div class="flex justify-center md:col-span-1"><span class="text-indigo-400 font-bold text-lg">⇄</span></div>
+        <div class="card-modern p-4 rounded-2xl space-y-3 md:col-span-2">
+          <select id="transTargetLang" class="custom-input border rounded-lg px-2 py-1 outline-none text-xs font-bold w-full"><option value="en">EN</option><option value="id">ID</option></select>
+          <div id="transOutputResult" class="w-full h-[96px] text-xs custom-input border rounded-xl p-3 overflow-y-auto text-indigo-300 font-medium select-all">Hasil...</div>
+          <button onclick="copyTranslation()" class="w-full card-modern text-xs font-bold py-2 rounded-xl">Salin</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. CURRENCY -->
+    <section id="tab-currency" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" id="currHeading">Konversi Mata Uang</h2></div>
+      <div class="card-modern p-5 rounded-2xl space-y-4 max-w-xl mx-auto">
+        <input type="number" id="currAmount" value="1" class="w-full custom-input border rounded-xl p-2.5 text-xs font-bold" oninput="convertCurrency()">
+        <div class="grid grid-cols-2 gap-3">
+          <select id="currFrom" class="custom-input border rounded-xl p-2.5 text-xs font-bold" onchange="convertCurrency()"><option value="USD">USD</option><option value="IDR" selected>IDR</option></select>
+          <select id="currTo" class="custom-input border rounded-xl p-2.5 text-xs font-bold" onchange="convertCurrency()"><option value="USD" selected>USD</option><option value="IDR">IDR</option></select>
+        </div>
+        <div class="p-4 card-modern rounded-xl text-center"><div id="currResultValue" class="text-xl font-extrabold text-emerald-400">0.00</div></div>
+      </div>
+    </section>
+
+    <!-- 11. NEWS -->
+    <section id="tab-news" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex justify-between items-center"><h2 class="text-base font-extrabold" id="newsHeading">Berita Real-Time</h2><button onclick="fetchNews()" class="bg-indigo-600 text-white text-xs font-bold px-3 py-1.5 rounded-xl">Muat Ulang</button></div>
+      <div id="newsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-4"><div class="card-modern p-4 rounded-2xl text-xs text-sub col-span-3 text-center py-10">Memuat...</div></div>
+    </section>
+
+    <!-- 12. PDF VIEWER -->
+    <section id="tab-pdf" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex justify-between items-center"><h2 class="text-base font-extrabold" id="pdfHeading">PDF Viewer</h2><label class="bg-indigo-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl cursor-pointer">Pilih File<input type="file" accept="application/pdf" class="hidden" onchange="loadPdf(event)"></label></div>
+      <div class="card-modern p-4 rounded-2xl flex flex-col items-center justify-center min-h-[400px]">
+        <div id="pdfPlaceholder" class="text-xs text-sub py-10">Belum ada PDF.</div>
+        <div id="pdfViewerContainer" class="hidden w-full space-y-3 flex flex-col items-center">
+          <div class="flex gap-2"><button onclick="prevPdfPage()" class="px-3 py-1 bg-indigo-600 text-white rounded text-xs font-bold">&larr;</button><span class="font-mono text-xs" id="pdfPageInfo">0/0</span><button onclick="nextPdfPage()" class="px-3 py-1 bg-indigo-600 text-white rounded text-xs font-bold">&rarr;</button></div>
+          <canvas id="pdfCanvas" class="max-w-full h-auto rounded shadow bg-white"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. CALCULATOR -->
+    <section id="tab-calc" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" id="calcHeading">Kalkulator</h2></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card-modern p-4 rounded-2xl space-y-3">
+          <input type="text" id="calcScreen" readonly class="w-full text-right text-lg font-mono custom-input border rounded-xl p-2.5 text-emerald-400 font-bold" value="0">
+          <div class="grid grid-cols-4 gap-1.5">
+            <button onclick="calcClear()" class="bg-rose-600/20 text-rose-300 p-2.5 rounded-lg font-bold text-xs">C</button>
+            <button onclick="calcAppend('/')" class="bg-indigo-600/30 text-indigo-300 p-2.5 rounded-lg font-bold text-xs">÷</button>
+            <button onclick="calcAppend('*')" class="bg-indigo-600/30 text-indigo-300 p-2.5 rounded-lg font-bold text-xs">×</button>
+            <button onclick="calcAppend('-')" class="bg-indigo-600/30 text-indigo-300 p-2.5 rounded-lg font-bold text-xs">-</button>
+            <button onclick="calcAppend('7')" class="card-modern p-2.5 rounded-lg font-bold text-xs">7</button><button onclick="calcAppend('8')" class="card-modern p-2.5 rounded-lg font-bold text-xs">8</button><button onclick="calcAppend('9')" class="card-modern p-2.5 rounded-lg font-bold text-xs">9</button>
+            <button onclick="calcAppend('+')" class="bg-indigo-600/30 text-indigo-300 p-2.5 rounded-lg font-bold text-xs">+</button>
+            <button onclick="calcAppend('4')" class="card-modern p-2.5 rounded-lg font-bold text-xs">4</button><button onclick="calcAppend('5')" class="card-modern p-2.5 rounded-lg font-bold text-xs">5</button><button onclick="calcAppend('6')" class="card-modern p-2.5 rounded-lg font-bold text-xs">6</button>
+            <button onclick="calcCompute()" class="bg-emerald-600 text-white p-2.5 rounded-lg font-bold text-xs row-span-2">=</button>
+            <button onclick="calcAppend('1')" class="card-modern p-2.5 rounded-lg font-bold text-xs">1</button><button onclick="calcAppend('2')" class="card-modern p-2.5 rounded-lg font-bold text-xs">2</button><button onclick="calcAppend('3')" class="card-modern p-2.5 rounded-lg font-bold text-xs">3</button>
+            <button onclick="calcAppend('0')" class="col-span-2 card-modern p-2.5 rounded-lg font-bold text-xs">0</button><button onclick="calcAppend('.')" class="card-modern p-2.5 rounded-lg font-bold text-xs">.</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14. PHOTO EDITOR -->
+    <section id="tab-photo" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex justify-between items-center"><h2 class="text-base font-extrabold" id="photoHeading">Photo Editor</h2><label class="bg-indigo-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl cursor-pointer">Pilih Foto<input type="file" accept="image/*" class="hidden" onchange="loadPhoto(event)"></label></div>
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-center min-h-[300px]">
+        <div id="photoPlaceholder" class="text-xs text-sub">Belum ada foto.</div>
+        <canvas id="photoCanvas" class="max-w-full max-h-[380px] object-contain hidden rounded-xl shadow"></canvas>
+      </div>
+    </section>
+
+    <!-- 15. SETTINGS -->
+    <section id="tab-settings" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" id="setHeading">Pengaturan & Data</h2></div>
+      <div class="card-modern p-4 rounded-2xl space-y-3">
+        <h3 class="text-xs font-bold uppercase text-sub" id="lblTheme">Tema</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+          <button onclick="setAppTheme('dark')" class="p-2.5 rounded-xl border bg-slate-950 text-white text-xs font-bold">Dark</button>
+          <button onclick="setAppTheme('light')" class="p-2.5 rounded-xl border bg-slate-100 text-slate-900 text-xs font-bold">Light</button>
+          <button onclick="setAppTheme('emerald')" class="p-2.5 rounded-xl border bg-emerald-950 text-emerald-200 text-xs font-bold">Emerald</button>
+          <button onclick="setAppTheme('ocean')" class="p-2.5 rounded-xl border bg-sky-950 text-sky-200 text-xs font-bold">Ocean</button>
+          <button onclick="setAppTheme('cyber')" class="p-2.5 rounded-xl border bg-purple-950 text-purple-200 text-xs font-bold">Cyber</button>
+        </div>
+      </div>
+      <div class="card-modern p-4 rounded-2xl space-y-3">
+        <h3 class="text-xs font-bold uppercase text-sub">Backup / Restore</h3>
+        <div class="flex gap-2">
+          <button onclick="autoBackupJSON()" class="bg-indigo-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl">Download JSON</button>
+          <label class="card-modern text-xs font-bold px-3.5 py-2 rounded-xl cursor-pointer">Restore JSON<input type="file" accept=".json" onchange="importJSON(event)" class="hidden"></label>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FLOATING LAUNCHER -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <button onclick="toggleFloatingMenu()" class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-pink-600 flex items-center justify-center text-white shadow-2xl hover:scale-110 transition">
+      <svg class="w-6 h-6 animate-pulse" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+    </button>
+  </div>
+
+  <!-- FLOATING MENU MODAL -->
+  <div id="floatingMenuModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b pb-2"><h3 class="font-extrabold text-xs">Pusat Menu Launcher</h3><button onclick="toggleFloatingMenu()" class="text-sub font-bold">&times;</button></div>
+      <div class="grid grid-cols-2 gap-2 max-h-[55vh] overflow-y-auto p-0.5 text-xs">
+        <button onclick="switchTabAndClose('finance')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">💰</span><span>Keuangan</span></button>
+        <button onclick="switchTabAndClose('quicknotes')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📝</span><span>Catatan Cepat</span></button>
+        <button onclick="switchTabAndClose('tasks')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📋</span><span>Tugas & Memo</span></button>
+        <button onclick="switchTabAndClose('calendar')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📅</span><span>Kalender</span></button>
+        <button onclick="switchTabAndClose('pomodoro')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">⏱️</span><span>Pomodoro</span></button>
+        <button onclick="switchTabAndClose('font')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🔤</span><span>Font Generator</span></button>
+        <button onclick="switchTabAndClose('downloader')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📥</span><span>Downloader</span></button>
+        <button onclick="switchTabAndClose('shortener')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🔗</span><span>Pemendek Link</span></button>
+        <button onclick="switchTabAndClose('translator')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🌐</span><span>Translator</span></button>
+        <button onclick="switchTabAndClose('currency')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">💱</span><span>Konversi Kurs</span></button>
+        <button onclick="switchTabAndClose('news')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📰</span><span>Berita</span></button>
+        <button onclick="switchTabAndClose('pdf')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📄</span><span>PDF Viewer</span></button>
+        <button onclick="switchTabAndClose('calc')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🧮</span><span>Kalkulator</span></button>
+        <button onclick="switchTabAndClose('photo')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📸</span><span>Photo Editor</span></button>
+        <button onclick="switchTabAndClose('settings')" class="col-span-2 p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">⚙️</span><span>Pengaturan</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL TRANSAKSI (OFFLINE / ONLINE) -->
+  <div id="txModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b pb-2"><h3 class="font-bold text-xs" id="modalTxTitle">Form Transaksi</h3><button onclick="closeTxModal()" class="text-sub font-bold">&times;</button></div>
+      <form id="txForm" class="space-y-2.5">
+        <input type="hidden" id="editTxId">
+        <input type="hidden" id="formIsOnline" value="false">
+        <div class="grid grid-cols-2 gap-2">
+          <input type="date" id="formDate" required class="text-xs custom-input border rounded-xl p-2">
+          <select id="formType" class="text-xs custom-input border rounded-xl p-2">
+            <option value="expense">Pengeluaran (-)</option>
+            <option value="income">Pemasukan (+)</option>
+          </select>
+        </div>
+        <input type="text" id="formCategory" placeholder="Kategori / Metode Pembayaran" required class="w-full text-xs custom-input border rounded-xl p-2">
+        <input type="number" id="formAmount" placeholder="Nominal (Rp)" required class="w-full text-xs custom-input border rounded-xl p-2 font-bold">
+        <input type="text" id="formDesc" placeholder="Keterangan / Tujuan" required class="w-full text-xs custom-input border rounded-xl p-2">
+        <div class="flex justify-end gap-2 pt-1">
+          <button type="button" onclick="closeTxModal()" class="px-3 py-1.5 text-xs text-sub">Batal</button>
+          <button type="submit" class="px-3.5 py-1.5 text-xs bg-indigo-600 text-white rounded-xl font-bold shadow">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL CATATAN CEPAT -->
+  <div id="qnModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b pb-2"><h3 class="font-bold text-xs">Catatan Cepat Baru</h3><button onclick="closeQnModal()" class="text-sub font-bold">&times;</button></div>
+      <form id="qnForm" class="space-y-2.5">
+        <input type="text" id="qnTitle" placeholder="Judul Catatan" required class="w-full text-xs custom-input border rounded-xl p-2 font-bold">
+        <textarea id="qnText" rows="4" placeholder="Tulis catatan di sini..." required class="w-full text-xs custom-input border rounded-xl p-2"></textarea>
+        <div class="flex justify-end gap-2 pt-1">
+          <button type="button" onclick="closeQnModal()" class="px-3 py-1.5 text-xs text-sub">Batal</button>
+          <button type="submit" class="px-3.5 py-1.5 text-xs bg-indigo-600 text-white rounded-xl font-bold shadow">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL CATATAN BIASA -->
+  <div id="noteModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b pb-2"><h3 class="font-bold text-xs">Catatan</h3><button onclick="closeNoteModal()" class="text-sub font-bold">&times;</button></div>
+      <form id="noteForm" class="space-y-2.5">
+        <input type="hidden" id="editNoteId">
+        <input type="text" id="noteTitle" placeholder="Judul" required class="w-full text-xs custom-input border rounded-xl p-2 font-bold">
+        <textarea id="noteContent" rows="3" placeholder="Isi..." required class="w-full text-xs custom-input border rounded-xl p-2"></textarea>
+        <div class="flex justify-end gap-2"><button type="button" onclick="closeNoteModal()" class="px-3 py-1.5 text-xs text-sub">Batal</button><button type="submit" class="px-3.5 py-1.5 text-xs bg-violet-600 text-white rounded-xl font-bold">Simpan</button></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL TUGAS -->
+  <div id="taskModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b pb-2"><h3 class="font-bold text-xs">Tugas</h3><button onclick="closeTaskModal()" class="text-sub font-bold">&times;</button></div>
+      <form id="taskForm" class="space-y-2.5">
+        <input type="hidden" id="editTaskId">
+        <input type="text" id="taskTitle" placeholder="Judul Tugas" required class="w-full text-xs custom-input border rounded-xl p-2">
+        <input type="date" id="taskDueDate" required class="w-full text-xs custom-input border rounded-xl p-2">
+        <div class="flex justify-end gap-2"><button type="button" onclick="closeTaskModal()" class="px-3 py-1.5 text-xs text-sub">Batal</button><button type="submit" class="px-3.5 py-1.5 text-xs bg-indigo-600 text-white rounded-xl font-bold">Simpan</button></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    const langData = {
+      id: {
+        subtitle: "Lite Suite v4.8", 
+        menuFinance: "Keuangan", subFinance: "Arus Kas",
+        menuTasks: "Tugas & Catatan", subTasks: "Agenda & Memo",
+        menuCalendar: "Kalender", subCalendar: "Jadwal Bulanan",
+        menuPomodoro: "Pomodoro", subPomodoro: "Fokus Kerja",
+        menuFont: "Font Generator", subFont: "Teks Unik & Gaya",
+        menuDownloader: "Downloader", subDownloader: "YouTube / Media",
+        menuShortener: "Pemendek Link", subShortener: "Short URL",
+        menuTranslator: "Translator", subTranslator: "Penerjemah",
+        menuCurrency: "Konversi Kurs", subCurrency: "Mata Uang",
+        menuNews: "Berita", subNews: "Real-Time",
+        menuPdf: "PDF Viewer", subPdf: "Lihat Berkas",
+        menuCalc: "Kalkulator", subCalc: "Matematika",
+        menuPhoto: "Photo Editor", subPhoto: "Sunting Filter",
+        menuSettings: "Pengaturan", subSettings: "Tema & Backup",
+        finTitle: "Manajemen Keuangan", finSub: "Pantau arus kas dan perbandingan online vs offline.", 
+        lblNet: "Total Saldo", lblIncome: "Pemasukan", lblExpense: "Pengeluaran", 
+        optAll: "Semua", optInc: "Pemasukan", optExp: "Pengeluaran", optOnline: "Online Saja", optOffline: "Offline Saja",
+        thDate: "Tanggal", thCat: "Kategori / Metode", thDesc: "Keterangan", thNom: "Nominal", thAct: "Aksi",
+        btnExportFin: "Ekspor", btnShareFin: "Bagikan", btnOnlineTx: "🌐 Online", btnTx: "+ Offline",
+        lblSummaryOnline: "🌐 Transaksi Online", lblSummaryOffline: "💼 Transaksi Offline",
+        lblOnlineIn: "Masuk", lblOnlineOut: "Keluar", lblOfflineIn: "Masuk", lblOfflineOut: "Keluar",
+        qnHeading: "Catatan Keuangan & Memo Cepat", qnSub: "Simpan coretan ide, catatan belanja, atau perhitungan kilat.", btnAddQn: "+ Catatan Baru",
+        welTitle: "Selamat Datang di WorkSpace Hub",
+        welDesc: "Website ini dikembangkan oleh Mohammad Danis Muria Vanandi dengan bantuan AI.",
+        welBtn: "Mengerti & Lanjutkan"
+      },
+      en: {
+        subtitle: "Lite Suite v4.8", 
+        menuFinance: "Finance", subFinance: "Cash Flow",
+        menuTasks: "Tasks & Notes", subTasks: "Agendas & Memos",
+        menuCalendar: "Calendar", subCalendar: "Monthly Schedule",
+        menuPomodoro: "Pomodoro", subPomodoro: "Focus Timer",
+        menuFont: "Font Generator", subFont: "Fancy Text Styles",
+        menuDownloader: "Downloader", subDownloader: "YouTube / Media",
+        menuShortener: "URL Shortener", subShortener: "Short URL",
+        menuTranslator: "Translator", subTranslator: "Translator",
+        menuCurrency: "Currency Converter", subCurrency: "Exchange Rates",
+        menuNews: "News", subNews: "Real-Time",
+        menuPdf: "PDF Viewer", subPdf: "View Files",
+        menuCalc: "Calculator", subCalc: "Mathematics",
+        menuPhoto: "Photo Editor", subPhoto: "Filters & Text",
+        menuSettings: "Settings", subSettings: "Theme & Backup",
+        finTitle: "Financial Management", finSub: "Monitor cash flow and online vs offline comparisons.", 
+        lblNet: "Total Balance", lblIncome: "Income", lblExpense: "Expense", 
+        optAll: "All", optInc: "Income", optExp: "Expense", optOnline: "Online Only", optOffline: "Offline Only",
+        thDate: "Date", thCat: "Category / Method", thDesc: "Description", thNom: "Amount", thAct: "Action",
+        btnExportFin: "Export", btnShareFin: "Share", btnOnlineTx: "🌐 Online", btnTx: "+ Offline",
+        lblSummaryOnline: "🌐 Online Transactions", lblSummaryOffline: "💼 Offline Transactions",
+        lblOnlineIn: "In", lblOnlineOut: "Out", lblOfflineIn: "In", lblOfflineOut: "Out",
+        qnHeading: "Quick Financial Notes & Memos", qnSub: "Save ideas, shopping lists, or rapid calculations.", btnAddQn: "+ New Note",
+        welTitle: "Welcome to WorkSpace Hub",
+        welDesc: "This website was developed by Mohammad Danis Muria Vanandi with AI assistance.",
+        welBtn: "Understand & Continue"
+      },
+      zh: {
+        subtitle: "轻量套件 v4.8", 
+        menuFinance: "财务管理", subFinance: "现金流",
+        menuTasks: "任务与笔记", subTasks: "日程与备忘",
+        menuCalendar: "日历", subCalendar: "每月日程",
+        menuPomodoro: "番茄钟", subPomodoro: "专注计时器",
+        menuFont: "字体生成器", subFont: "个性花体文本",
+        menuDownloader: "媒体下载", subDownloader: "YouTube/媒体",
+        menuShortener: "短网址", subShortener: "短链接",
+        menuTranslator: "翻译器", subTranslator: "多语种翻译",
+        menuCurrency: "货币换算", subCurrency: "实时汇率",
+        menuNews: "新闻", subNews: "实时资讯",
+        menuPdf: "PDF 查看", subPdf: "查看文档",
+        menuCalc: "计算器", subCalc: "数学计算",
+        menuPhoto: "照片编辑", subPhoto: "滤镜与文字",
+        menuSettings: "设置", subSettings: "主题与备份",
+        finTitle: "财务管理", finSub: "实时监控现金流及线上线下交易对比。", 
+        lblNet: "总余额", lblIncome: "收入", lblExpense: "支出", 
+        optAll: "全部", optInc: "收入", optExp: "支出", optOnline: "仅线上", optOffline: "仅线下",
+        thDate: "日期", thCat: "类别 / 方式", thDesc: "描述", thNom: "金额", thAct: "操作",
+        btnExportFin: "导出", btnShareFin: "分享", btnOnlineTx: "🌐 线上", btnTx: "+ 线下",
+        lblSummaryOnline: "🌐 线上交易", lblSummaryOffline: "💼 线下交易",
+        lblOnlineIn: "收入", lblOnlineOut: "支出", lblOfflineIn: "收入", lblOfflineOut: "支出",
+        qnHeading: "快速财务笔记与备忘", qnSub: "保存创意灵感、购物清单或快速计算。", btnAddQn: "+ 新建笔记",
+        welTitle: "欢迎来到 WorkSpace Hub",
+        welDesc: "本网站由 Mohammad Danis Muria Vanandi 在 AI 协助下开发。",
+        welBtn: "了解并继续"
+      },
+      ar: {
+        subtitle: "الإصدار الخفيف v4.8", 
+        menuFinance: "المالية", subFinance: "تدفق النقد",
+        menuTasks: "المهام والملاحظات", subTasks: "الأجندة والمذكرات",
+        menuCalendar: "التقويم", subCalendar: "الجدول الشهري",
+        menuPomodoro: "بومودورو", subPomodoro: "مؤقت التركيز",
+        menuFont: "منشئ الخطوط", subFont: "أنماط النصوص",
+        menuDownloader: "محمل الوسائط", subDownloader: "يوتيوب",
+        menuShortener: "اختصار الروابط", subShortener: "رابط قصير",
+        menuTranslator: "المترجم", subTranslator: "مترجم الفوري",
+        menuCurrency: "محول العملات", subCurrency: "أسعار الصرف",
+        menuNews: "الأخبار", subNews: "الأخبار الفورية",
+        menuPdf: "عرض PDF", subPdf: "عرض الملفات",
+        menuCalc: "الحاسبة", subCalc: "الرياضيات",
+        menuPhoto: "محرر الصور", subPhoto: "المرشحات",
+        menuSettings: "الإعدادات", subSettings: "السمات والنسخ",
+        finTitle: "إدارة المالية", finSub: "مراقبة التدفقات النقدية والمقارنة.", 
+        lblNet: "إجمالي الرصيد", lblIncome: "الدخل", lblExpense: "المصروفات", 
+        optAll: "الكل", optInc: "دخل", optExp: "مصروف", optOnline: "عبر الإنترنت فقط", optOffline: "غير متصل فقط",
+        thDate: "التاريخ", thCat: "الفئة", thDesc: "الوصف", thNom: "المبلغ", thAct: "الإجراء",
+        btnExportFin: "تصدير", btnShareFin: "مشاركة", btnOnlineTx: "🌐 عبر الإنترنت", btnTx: "+ يدوي",
+        lblSummaryOnline: "🌐 المعاملات عبر الإنترنت", lblSummaryOffline: "💼 المعاملات اليدوية",
+        lblOnlineIn: "دخل", lblOnlineOut: "صرف", lblOfflineIn: "دخل", lblOfflineOut: "صرف",
+        qnHeading: "ملاحظات مالية سريعة ومذكرات", qnSub: "احفظ الأفكار أو قوائم التسوق.", btnAddQn: "+ ملاحظة جديدة",
+        welTitle: "أهلاً بك في WorkSpace Hub",
+        welDesc: "تم تطوير هذا الموقع بواسطة Mohammad Danis Muria Vanandi بمساعدة الذكاء الاصطناعي.",
+        welBtn: "فهمت والمتابعة"
+      }
+    };
+
+    function changeLanguage(lang) {
+      localStorage.setItem('workspace_lang', lang);
+      const d = langData[lang] || langData.id;
+      for (const key in d) {
+        const el = document.getElementById(key);
+        if (el) el.textContent = d[key];
+      }
+    }
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      const activeEl = document.getElementById(`tab-${tabName}`);
+      if (activeEl) activeEl.classList.remove('hidden');
+      localStorage.setItem('workspace_active_tab', tabName);
+      window.scrollTo(0, 0);
+      if(tabName === 'currency') convertCurrency();
+      if(tabName === 'news') fetchNews();
+      if(tabName === 'calendar') renderCalendar();
+      if(tabName === 'font') generateFonts();
+      if(tabName === 'quicknotes') renderQuickNotes();
+    }
+
+    function toggleFloatingMenu() { document.getElementById('floatingMenuModal').classList.toggle('hidden'); }
+    function switchTabAndClose(tabName) { switchTab(tabName); toggleFloatingMenu(); }
+    function setAppTheme(theme) {
+      document.getElementById('appBody').className = `min-h-screen pb-24 md:pb-6 transition-colors duration-200 theme-${theme}`;
+      localStorage.setItem('workspace_theme_lite', theme);
+    }
+    setAppTheme(localStorage.getItem('workspace_theme_lite') || 'dark');
+
+    setInterval(() => {
+      document.getElementById('headerClock').textContent = new Date().toLocaleTimeString('id-ID');
+    }, 1000);
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (!localStorage.getItem('workspace_welcomed')) {
+        document.getElementById('welcomeModal').classList.remove('hidden');
+      }
+      renderShortHistory();
+      generateFonts();
+    });
+
+    function closeWelcomeModal() {
+      localStorage.setItem('workspace_welcomed', 'true');
+      document.getElementById('welcomeModal').classList.add('hidden');
+    }
+
+    let transactions = JSON.parse(localStorage.getItem('hub_finance')) || [];
+    let quickNotes = JSON.parse(localStorage.getItem('hub_quicknotes')) || [];
+    let tasks = JSON.parse(localStorage.getItem('hub_tasks')) || [];
+    let notes = JSON.parse(localStorage.getItem('hub_notes')) || [];
+    let shortLinks = JSON.parse(localStorage.getItem('hub_shortlinks')) || {};
+    let calendarEvents = JSON.parse(localStorage.getItem('hub_calevents')) || {};
+
+    const monthPicker = document.getElementById('monthPicker');
+    const now = new Date();
+    monthPicker.value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+    monthPicker.addEventListener('change', renderFinance);
+    document.getElementById('searchInput').addEventListener('input', renderFinance);
+    document.getElementById('filterType').addEventListener('change', renderFinance);
+
+    function renderFinance() {
+      const selectedMonth = monthPicker.value;
+      const searchKey = document.getElementById('searchInput').value.toLowerCase();
+      const typeVal = document.getElementById('filterType').value;
+
+      const filtered = transactions.filter(t => {
+        const matchMonth = !selectedMonth || (t.date && t.date.startsWith(selectedMonth));
+        const matchSearch = t.desc && t.desc.toLowerCase().includes(searchKey);
+        let matchType = true;
+        if (typeVal === 'income') matchType = t.type === 'income';
+        else if (typeVal === 'expense') matchType = t.type === 'expense';
+        else if (typeVal === 'online') matchType = t.isOnline === true;
+        else if (typeVal === 'offline') matchType = !t.isOnline;
+        return matchMonth && matchSearch && matchType;
+      });
+
+      let inc = 0, exp = 0;
+      let onlineInc = 0, onlineExp = 0, onlineCount = 0;
+      let offlineInc = 0, offlineExp = 0, offlineCount = 0;
+
+      transactions.forEach(t => {
+        const matchMonth = !selectedMonth || (t.date && t.date.startsWith(selectedMonth));
+        if (!matchMonth) return;
+        const amt = Number(t.amount);
+        if (t.type === 'income') inc += amt; else exp += amt;
+        if (t.isOnline) {
+          onlineCount++;
+          if (t.type === 'income') onlineInc += amt; else onlineExp += amt;
+        } else {
+          offlineCount++;
+          if (t.type === 'income') offlineInc += amt; else offlineExp += amt;
+        }
+      });
+
+      document.getElementById('metricIncome').textContent = 'Rp ' + inc.toLocaleString('id-ID');
+      document.getElementById('metricExpense').textContent = 'Rp ' + exp.toLocaleString('id-ID');
+      document.getElementById('metricNet').textContent = 'Rp ' + (inc - exp).toLocaleString('id-ID');
+
+      document.getElementById('badgeOnlineCount').textContent = `${onlineCount} Data`;
+      document.getElementById('summaryOnlineInc').textContent = 'Rp ' + onlineInc.toLocaleString('id-ID');
+      document.getElementById('summaryOnlineExp').textContent = 'Rp ' + onlineExp.toLocaleString('id-ID');
+
+      document.getElementById('badgeOfflineCount').textContent = `${offlineCount} Data`;
+      document.getElementById('summaryOfflineInc').textContent = 'Rp ' + offlineInc.toLocaleString('id-ID');
+      document.getElementById('summaryOfflineExp').textContent = 'Rp ' + offlineExp.toLocaleString('id-ID');
+
+      document.getElementById('txTableBody').innerHTML = filtered.map(t => `
+        <tr class="hover:bg-indigo-500/5">
+          <td class="p-2.5 font-mono text-sub">${t.date}</td>
+          <td class="p-2.5"><span class="px-2 py-0.5 rounded card-modern text-[10px] font-bold ${t.isOnline ? 'text-indigo-400' : 'text-violet-400'}">${t.category}</span></td>
+          <td class="p-2.5 font-semibold">${t.desc} ${t.isOnline ? '<span class="ml-1 text-[9px] bg-indigo-500/20 text-indigo-300 px-1.5 py-0.5 rounded font-mono">ONLINE</span>' : '<span class="ml-1 text-[9px] bg-slate-500/20 text-sub px-1.5 py-0.5 rounded font-mono">OFFLINE</span>'}</td>
+          <td class="p-2.5 text-right font-bold ${t.type === 'income' ? 'text-emerald-400' : 'text-rose-400'}">Rp ${Number(t.amount).toLocaleString('id-ID')}</td>
+          <td class="p-2.5 text-center space-x-2">
+            <button onclick="editTx('${t.id}')" class="text-indigo-400 text-xs font-bold">Edit</button>
+            <button onclick="deleteTx('${t.id}')" class="text-rose-400 text-xs font-bold">Hapus</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openTxModal(mode) {
+      document.getElementById('editTxId').value = '';
+      document.getElementById('txForm').reset();
+      document.getElementById('formDate').value = new Date().toISOString().slice(0,10);
+      document.getElementById('formIsOnline').value = (mode === 'online') ? 'true' : 'false';
+      document.getElementById('modalTxTitle').textContent = (mode === 'online') ? '🌐 Transaksi Online' : '💼 Transaksi Offline';
+      document.getElementById('txModal').classList.remove('hidden');
+    }
+    function closeTxModal() { document.getElementById('txModal').classList.add('hidden'); }
+
+    document.getElementById('txForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = document.getElementById('editTxId').value;
+      const isOnline = document.getElementById('formIsOnline').value === 'true';
+      const data = {
+        id: id || Date.now().toString(),
+        date: document.getElementById('formDate').value,
+        type: document.getElementById('formType').value,
+        category: document.getElementById('formCategory').value,
+        amount: Number(document.getElementById('formAmount').value),
+        desc: document.getElementById('formDesc').value,
+        isOnline: isOnline
+      };
+      if (id) { transactions = transactions.map(t => t.id === id ? data : t); } else { transactions.push(data); }
+      localStorage.setItem('hub_finance', JSON.stringify(transactions));
+      renderFinance(); closeTxModal();
+    });
+
+    function editTx(id) {
+      const t = transactions.find(x => x.id === id);
+      if (!t) return;
+      document.getElementById('editTxId').value = t.id;
+      document.getElementById('formDate').value = t.date;
+      document.getElementById('formType').value = t.type;
+      document.getElementById('formCategory').value = t.category;
+      document.getElementById('formAmount').value = t.amount;
+      document.getElementById('formDesc').value = t.desc;
+      document.getElementById('formIsOnline').value = t.isOnline ? 'true' : 'false';
+      document.getElementById('modalTxTitle').textContent = t.isOnline ? '🌐 Edit Transaksi Online' : '💼 Edit Transaksi Offline';
+      document.getElementById('txModal').classList.remove('hidden');
+    }
+
+    function deleteTx(id) { transactions = transactions.filter(t => t.id !== id); localStorage.setItem('hub_finance', JSON.stringify(transactions)); renderFinance(); }
+    function exportFinance() {
+      let csv = "Tanggal,Tipe,Kategori,Nominal,Keterangan,Online\n";
+      transactions.forEach(t => { csv += `${t.date},${t.type},${t.category},${t.amount},"${t.desc}",${t.isOnline ? 'Ya' : 'Tidak'}\n`; });
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'keuangan.csv'; a.click();
+    }
+    function shareFinance() {
+      const text = `Total Transaksi Keuangan: ${transactions.length} item.`;
+      if (navigator.share) navigator.share({ title: 'Keuangan', text });
+      else { navigator.clipboard.writeText(text); alert("Disalin!"); }
+    }
+
+    // NEW MENU: QUICK NOTES
+    function openQnModal() { document.getElementById('qnForm').reset(); document.getElementById('qnModal').classList.remove('hidden'); }
+    function closeQnModal() { document.getElementById('qnModal').classList.add('hidden'); }
+    document.getElementById('qnForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = { id: Date.now().toString(), title: document.getElementById('qnTitle').value, text: document.getElementById('qnText').value };
+      quickNotes.push(data);
+      localStorage.setItem('hub_quicknotes', JSON.stringify(quickNotes));
+      renderQuickNotes(); closeQnModal();
+    });
+    function renderQuickNotes() {
+      const container = document.getElementById('qnListContainer');
+      if (quickNotes.length === 0) {
+        container.innerHTML = `<div class="card-modern p-4 rounded-xl text-xs text-sub col-span-3 text-center">Belum ada catatan cepat.</div>`;
+        return;
+      }
+      container.innerHTML = quickNotes.map(q => `
+        <div class="card-modern p-3 rounded-xl space-y-1.5 flex flex-col justify-between text-xs">
+          <div><h4 class="font-bold text-indigo-300">${q.title}</h4><p class="text-sub mt-1 whitespace-pre-wrap">${q.text}</p></div>
+          <div class="pt-2 border-t border-slate-800 text-right"><button onclick="deleteQn('${q.id}')" class="text-rose-400 font-bold text-[10px]">Hapus</button></div>
+        </div>
+      `).join('');
+    }
+    function deleteQn(id) { quickNotes = quickNotes.filter(q => q.id !== id); localStorage.setItem('hub_quicknotes', JSON.stringify(quickNotes)); renderQuickNotes(); }
+
+    // TASKS & NOTES
+    function openNoteModal() { document.getElementById('editNoteId').value = ''; document.getElementById('noteForm').reset(); document.getElementById('noteModal').classList.remove('hidden'); }
+    function closeNoteModal() { document.getElementById('noteModal').classList.add('hidden'); }
+    document.getElementById('noteForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = document.getElementById('editNoteId').value;
+      const data = { id: id || Date.now().toString(), title: document.getElementById('noteTitle').value, content: document.getElementById('noteContent').value };
+      if (id) { notes = notes.map(n => n.id === id ? data : n); } else { notes.push(data); }
+      localStorage.setItem('hub_notes', JSON.stringify(notes)); renderNotes(); closeNoteModal();
+    });
+    function renderNotes() {
+      document.getElementById('noteList').innerHTML = notes.map(n => `
+        <div class="p-3 card-modern rounded-xl space-y-1 text-xs">
+          <div class="flex justify-between items-center"><h4 class="font-bold text-violet-300">${n.title}</h4><button onclick="deleteNote('${n.id}')" class="text-rose-400 text-[10px]">Hapus</button></div>
+          <p class="text-sub">${n.content}</p>
+        </div>
+      `).join('');
+    }
+    function deleteNote(id) { notes = notes.filter(n => n.id !== id); localStorage.setItem('hub_notes', JSON.stringify(notes)); renderNotes(); }
+
+    function openTaskModal() { document.getElementById('editTaskId').value = ''; document.getElementById('taskForm').reset(); document.getElementById('taskModal').classList.remove('hidden'); }
+    function closeTaskModal() { document.getElementById('taskModal').classList.add('hidden'); }
+    document.getElementById('taskForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = document.getElementById('editTaskId').value;
+      const data = { id: id || Date.now().toString(), title: document.getElementById('taskTitle').value, dueDate: document.getElementById('taskDueDate').value };
+      if (id) { tasks = tasks.map(t => t.id === id ? data : t); } else { tasks.push(data); }
+      localStorage.setItem('hub_tasks', JSON.stringify(tasks)); renderTasks(); closeTaskModal();
+    });
+    function renderTasks() {
+      document.getElementById('taskList').innerHTML = tasks.map(t => `
+        <div class="p-2 flex justify-between items-center text-xs"><span>${t.title} <span class="text-[10px] text-sub">(${t.dueDate})</span></span><button onclick="deleteTask('${t.id}')" class="text-rose-400 font-bold">Hapus</button></div>
+      `).join('');
+    }
+    function deleteTask(id) { tasks = tasks.filter(t => t.id !== id); localStorage.setItem('hub_tasks', JSON.stringify(tasks)); renderTasks(); }
+    function exportTasksNotes() {
+      const blob = new Blob([JSON.stringify({tasks, notes}, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'tugas_catatan.json'; a.click();
+    }
+
+    // CALENDAR
+    let calCurrentDate = new Date();
+    function changeCalMonth(dir) { calCurrentDate.setMonth(calCurrentDate.getMonth() + dir); renderCalendar(); }
+    function renderCalendar() {
+      const year = calCurrentDate.getFullYear();
+      const month = calCurrentDate.getMonth();
+      const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+      document.getElementById('calMonthYearLabel').textContent = `${monthNames[month]} ${year}`;
+      const firstDay = new Date(year, month, 1).getDay();
+      const totalDays = new Date(year, month + 1, 0).getDate();
+      const grid = document.getElementById('calendarGrid'); grid.innerHTML = '';
+      for (let i = 0; i < firstDay; i++) grid.innerHTML += `<div class="p-2 card-modern rounded-xl opacity-25"></div>`;
+      for (let day = 1; day <= totalDays; day++) {
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const ev = calendarEvents[dateStr] || '';
+        grid.innerHTML += `
+          <div onclick="handleCalClick('${dateStr}')" class="p-2 card-modern rounded-xl flex flex-col justify-between h-16 text-xs cursor-pointer hover:border-indigo-500">
+            <span class="font-bold">${day}</span>
+            <span class="text-[9px] text-sub truncate">${ev}</span>
+          </div>
+        `;
+      }
+    }
+    function handleCalClick(dateStr) {
+      const val = prompt(`Agenda untuk ${dateStr}:`, calendarEvents[dateStr] || '');
+      if (val !== null) {
+        if (val.trim() === '') delete calendarEvents[dateStr]; else calendarEvents[dateStr] = val;
+        localStorage.setItem('hub_calevents', JSON.stringify(calendarEvents)); renderCalendar();
+      }
+    }
+    function exportCalendar() {
+      const blob = new Blob([JSON.stringify(calendarEvents, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'kalender.json'; a.click();
+    }
+
+    // POMODORO
+    let pomInt = null, pomLeft = 1500, pomRun = false, pomM = 'work';
+    function setPomodoroMode(m) {
+      pomM = m; clearInterval(pomInt); pomRun = false;
+      pomLeft = m === 'work' ? 1500 : 300;
+      document.getElementById('pomModeWork').className = m === 'work' ? "px-4 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white" : "px-4 py-1.5 rounded-xl text-xs font-bold card-modern text-sub";
+      document.getElementById('pomModeShort').className = m === 'shortBreak' ? "px-4 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white" : "px-4 py-1.5 rounded-xl text-xs font-bold card-modern text-sub";
+      updPom();
+    }
+    function updPom() {
+      document.getElementById('pomTimerDisplay').textContent = `${String(Math.floor(pomLeft/60)).padStart(2,'0')}:${String(pomLeft%60).padStart(2,'0')}`;
+    }
+    function startPomodoro() {
+      if (pomRun) return; pomRun = true;
+      pomInt = setInterval(() => {
+        if (pomLeft > 0) { pomLeft--; updPom(); } else { clearInterval(pomInt); pomRun = false; alert("Selesai!"); }
+      }, 1000);
+    }
+    function pausePomodoro() { clearInterval(pomInt); pomRun = false; }
+    function resetPomodoro() { clearInterval(pomInt); pomRun = false; setPomodoroMode(pomM); }
+
+    // FONT GENERATOR
+    function generateFonts() {
+      const txt = document.getElementById('fontInputText').value || "WorkSpace Hub";
+      const maps = [
+        {name: "Bold", map: {a:'𝗮',b:'𝗯',c:'𝗰',d:'𝗱',e:'𝗲',f:'𝗳',g:'𝗴',h:'𝗵',i:'𝗶',j:'𝗷',k:'𝗸',l:'𝗹',m:'𝗺',n:'𝗻',o:'𝗼',p:'𝗽',q:'𝗾',r:'𝗿',s:'𝘀',t:'𝘁',u:'𝘂',v:'𝘃',w:'𝘄',x:'𝘅',y:'𝘆',z:'𝘇'}},
+        {name: "Italic", map: {a:'𝑎',b:'𝑏',c:'𝑐',d:'𝑑',e:'𝑒',f:'𝑓',g:'𝑔',h:'ℎ',i:'𝑖',j:'𝑗',k:'𝑘',l:'𝑙',m:'𝑚',n:'𝑛',o:'𝑜',p:'𝑝',q:'𝑞',r:'𝑟',s:'𝑠',t:'𝑡',u:'𝑢',v:'𝑣',w:'𝑤',x:'𝑥',y:'𝑦',z:'𝑧'}},
+        {name: "Bubble", map: {a:'ⓐ',b:'ⓑ',c:'ⓒ',d:'ⓓ',e:'ⓔ',f:'ⓕ',g:'ⓖ',h:'ⓗ',i:'ⓘ',j:'ⓙ',k:'ⓚ',l:'ⓛ',m:'ⓜ',n:'ⓝ',o:'ⓞ',p:'ⓟ',q:'ⓠ',r:'ⓡ',s:'ⓢ',t:'ⓣ',u:'ⓤ',v:'ⓥ',w:'ⓦ',x:'ⓧ',y:'ⓨ',z:'ⓩ'}}
+      ];
+      document.getElementById('fontResultsList').innerHTML = maps.map(item => {
+        const res = txt.split('').map(c => item.map[c] || c).join('');
+        return `<div class="card-modern p-2.5 rounded-xl flex justify-between items-center text-xs"><span class="text-indigo-300 font-bold select-all">${res}</span><button onclick="navigator.clipboard.writeText('${res}');alert('Disalin!')" class="bg-indigo-600 text-white px-2 py-1 rounded font-bold">Salin</button></div>`;
+      }).join('');
+    }
+
+    // DOWNLOADER
+    function processDownload() {
+      const url = document.getElementById('dlUrlInput').value;
+      if (!url) return;
+      document.getElementById('dlResultArea').classList.remove('hidden');
+      const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+      if (m && m[1]) {
+        document.getElementById('ytEmbedContainer').classList.remove('hidden');
+        document.getElementById('ytEmbedContainer').innerHTML = `<iframe class="w-full h-full" src="https://www.youtube.com/embed/${m[1]}" frameborder="0" allowfullscreen></iframe>`;
+        document.getElementById('dlVideoBtn').href = `https://www.y2mate.com/youtube/${m[1]}`;
+        document.getElementById('dlAudioBtn').href = `https://www.y2mate.com/youtube/${m[1]}`;
+      }
+    }
+
+    // SHORTENER
+    function generateShortUrl() {
+      const u = document.getElementById('shortUrlInput').value;
+      if (!u) return;
+      const code = Math.random().toString(36).substring(2, 7);
+      shortLinks[code] = u; localStorage.setItem('hub_shortlinks', JSON.stringify(shortLinks));
+      document.getElementById('shortResultOutput').value = `${window.location.origin}?s=${code}`;
+      document.getElementById('shortResultArea').classList.remove('hidden');
+      renderShortHistory();
+    }
+    function renderShortHistory() {
+      document.getElementById('shortHistoryList').innerHTML = Object.keys(shortLinks).map(c => `<div class="card-modern p-2 rounded text-xs flex justify-between"><span class="font-mono text-indigo-400">?s=${c}</span><button onclick="deleteShortLink('${c}')" class="text-rose-400 font-bold">Hapus</button></div>`).join('');
+    }
+    function deleteShortLink(c) { delete shortLinks[c]; localStorage.setItem('hub_shortlinks', JSON.stringify(shortLinks)); renderShortHistory(); }
+    function copyShortUrl() { navigator.clipboard.writeText(document.getElementById('shortResultOutput').value); alert("Disalin!"); }
+
+    // TRANSLATOR
+    async function translateText() {
+      const t = document.getElementById('transInputText').value;
+      const s = document.getElementById('transSourceLang').value;
+      const tg = document.getElementById('transTargetLang').value;
+      if (!t) return;
+      const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(t)}&langpair=${s}|${tg}`);
+      const data = await res.json();
+      document.getElementById('transOutputResult').textContent = data?.responseData?.translatedText || "Gagal";
+    }
+    function copyTranslation() { navigator.clipboard.writeText(document.getElementById('transOutputResult').textContent); alert("Disalin!"); }
+
+    // CURRENCY
+    async function convertCurrency() {
+      const amt = Number(document.getElementById('currAmount').value) || 1;
+      const f = document.getElementById('currFrom').value;
+      const to = document.getElementById('currTo').value;
+      const res = await fetch(`https://open.er-api.com/v6/latest/${f}`);
+      const d = await res.json();
+      document.getElementById('currResultValue').textContent = `${(amt * (d?.rates?.[to] || 1)).toFixed(2)} ${to}`;
+    }
+
+    // NEWS
+    async function fetchNews() {
+      const c = document.getElementById('newsContainer');
+      const res = await fetch('https://api.spaceflightnewsapi.net/v4/articles/?limit=3');
+      const d = await res.json();
+      c.innerHTML = (d?.results || []).map(i => `<div class="card-modern rounded-xl overflow-hidden flex flex-col justify-between"><img src="${i.image_url}" class="w-full h-32 object-cover"><div class="p-3 space-y-1"><h4 class="font-bold text-xs">${i.title}</h4><a href="${i.url}" target="_blank" class="text-indigo-400 font-bold text-[10px]">Baca &rarr;</a></div></div>`).join('');
+    }
+
+    // PDF VIEWER
+    let pdfDoc = null, pNum = 1;
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    function loadPdf(e) {
+      const f = e.target.files[0]; if (!f) return;
+      const fr = new FileReader();
+      fr.onload = function() {
+        pdfjsLib.getDocument(new Uint8Array(this.result)).promise.then(pdf => {
+          pdfDoc = pdf; pNum = 1; document.getElementById('pdfPlaceholder').classList.add('hidden');
+          document.getElementById('pdfViewerContainer').classList.remove('hidden'); renderPdf(pNum);
+        });
+      };
+      fr.readAsArrayBuffer(f);
+    }
+    function renderPdf(num) {
+      pdfDoc.getPage(num).then(page => {
+        const vp = page.getViewport({scale: 1.0});
+        const cv = document.getElementById('pdfCanvas'); const ctx = cv.getContext('2d');
+        cv.height = vp.height; cv.width = vp.width; page.render({canvasContext: ctx, viewport: vp});
+        document.getElementById('pdfPageInfo').textContent = `${num}/${pdfDoc.numPages}`;
+      });
+    }
+    function prevPdfPage() { if (pNum > 1) renderPdf(--pNum); }
+    function nextPdfPage() { if (pdfDoc && pNum < pdfDoc.numPages) renderPdf(++pNum); }
+
+    // CALCULATOR
+    function calcClear() { document.getElementById('calcScreen').value = '0'; }
+    function calcAppend(v) {
+      const s = document.getElementById('calcScreen');
+      if (s.value === '0' || s.value === 'Error') s.value = '';
+      s.value += v;
+    }
+    function calcCompute() {
+      const s = document.getElementById('calcScreen');
+      try { s.value = eval(s.value); } catch(e) { s.value = 'Error'; }
+    }
+
+    // PHOTO EDITOR
+    let pImg = null, pCv = document.getElementById('photoCanvas'), pCtx = pCv.getContext('2d');
+    function loadPhoto(e) {
+      const f = e.target.files[0]; if (!f) return;
+      const fr = new FileReader();
+      fr.onload = function(ev) {
+        pImg = new Image();
+        pImg.onload = function() {
+          pCv.classList.remove('hidden'); document.getElementById('photoPlaceholder').classList.add('hidden');
+          pCv.width = pImg.width; pCv.height = pImg.height; pCtx.drawImage(pImg, 0, 0);
+        };
+        pImg.src = ev.target.result;
+      };
+      fr.readAsDataURL(f);
+    }
+
+    // INIT
+    switchTab(localStorage.getItem('workspace_active_tab') || 'finance');
+    renderFinance(); renderTasks(); renderNotes(); renderQuickNotes();
+    const sLang = localStorage.getItem('workspace_lang') || 'id';
+    document.getElementById('langSelector').value = sLang; changeLanguage(sLang);
+  </script>
+</body>
+</html>
+

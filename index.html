@@ -3,32 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WorkSpace Hub - Ultimate Launcher Suite</title>
+  <title>WorkSpace Hub - Ultimate Suite v3.5</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     
-    .theme-dark { --bg-main: #07090e; --bg-card: #111726; --border: #1e293b; --text-main: #f8fafc; --text-sub: #94a3b8; }
-    .theme-light { --bg-main: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; --text-main: #0f172a; --text-sub: #64748b; }
-    .theme-emerald { --bg-main: #021c16; --bg-card: #063529; --border: #047857; --text-main: #ecfdf5; --text-sub: #a7f3d0; }
-    .theme-ocean { --bg-main: #041d2c; --bg-card: #0a3147; --border: #0369a1; --text-main: #f0f9ff; --text-sub: #bae6fd; }
-    .theme-cyber { --bg-main: #1a0b2e; --bg-card: #281145; --border: #6b21a8; --text-main: #faf5ff; --text-sub: #e9d5ff; }
+    .theme-dark { --bg-main: #07090e; --bg-card: #111726; --border: #1e293b; --text-main: #f8fafc; --text-sub: #94a3b8; --input-bg: #0f172a; }
+    .theme-light { --bg-main: #f1f5f9; --bg-card: #ffffff; --border: #cbd5e1; --text-main: #0f172a; --text-sub: #475569; --input-bg: #f8fafc; }
+    .theme-emerald { --bg-main: #021c16; --bg-card: #063529; --border: #047857; --text-main: #ecfdf5; --text-sub: #a7f3d0; --input-bg: #022c22; }
+    .theme-ocean { --bg-main: #041d2c; --bg-card: #0a3147; --border: #0369a1; --text-main: #f0f9ff; --text-sub: #bae6fd; --input-bg: #072538; }
+    .theme-cyber { --bg-main: #1a0b2e; --bg-card: #281145; --border: #6b21a8; --text-main: #faf5ff; --text-sub: #e9d5ff; --input-bg: #200d38; }
 
     body { background-color: var(--bg-main); color: var(--text-main); }
-    .card-modern { background-color: var(--bg-card); border-color: var(--border); }
+    .card-modern { background-color: var(--bg-card); border-color: var(--border); border-width: 1px; }
     .text-sub { color: var(--text-sub); }
+    .custom-input { background-color: var(--input-bg); color: var(--text-main); border-color: var(--border); }
 
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.2); border-radius: 4px; }
   </style>
 </head>
-<body id="appBody" class="theme-dark min-h-screen pb-20 md:pb-6 transition-colors duration-300">
+<body id="appBody" class="theme-dark min-h-screen pb-24 md:pb-6 transition-colors duration-300">
 
-  <!-- TOP APP BAR / LAUNCHER HEADER -->
-  <header class="sticky top-0 z-50 card-modern border-b backdrop-blur-md bg-opacity-90 px-4 py-3">
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 card-modern border-b backdrop-blur-md bg-opacity-90 px-4 py-3">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-3">
         <button onclick="switchTab('launcher')" class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20 hover:scale-105 transition">
@@ -36,380 +37,286 @@
         </button>
         <div>
           <h1 class="font-extrabold text-sm tracking-tight cursor-pointer" onclick="switchTab('launcher')">WorkSpace Hub</h1>
-          <p class="text-[10px] text-sub" id="lblSubtitle">Ultimate Launcher Suite</p>
+          <p class="text-[10px] text-sub" id="lblSubtitle">Ultimate Suite v3.5</p>
         </div>
       </div>
-
-      <!-- Quick Actions & Language Switcher -->
       <div class="flex items-center gap-2.5">
-        <select id="langSelector" onchange="changeLanguage(this.value)" class="text-xs bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-1.5 text-white outline-none font-semibold">
+        <select id="langSelector" onchange="changeLanguage(this.value)" class="text-xs custom-input border rounded-xl px-2.5 py-1.5 outline-none font-semibold">
           <option value="id">🇮🇩 ID</option>
           <option value="en">🇬🇧 EN</option>
         </select>
-        <div class="hidden sm:block text-xs font-mono font-bold text-indigo-400 bg-slate-900/60 px-3 py-1.5 rounded-xl border border-slate-800" id="headerClock">00:00:00</div>
+        <div class="hidden sm:block text-xs font-mono font-bold text-indigo-400 bg-indigo-500/10 px-3 py-1.5 rounded-xl border border-indigo-500/20" id="headerClock">00:00:00</div>
       </div>
     </div>
   </header>
 
-  <!-- MAIN CONTAINER -->
+  <!-- CONTAINER -->
   <main class="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
 
-    <!-- ==================== LAUNCHER HOME (DASHBOARD) ==================== -->
+    <!-- LAUNCHER HOME -->
     <section id="tab-launcher" class="tab-content space-y-6">
-      <div class="card-modern border p-6 rounded-3xl bg-gradient-to-r from-indigo-900/20 via-purple-900/10 to-transparent flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="card-modern p-6 rounded-3xl bg-gradient-to-r from-indigo-600/10 via-purple-600/5 to-transparent flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
         <div class="space-y-2 text-center md:text-left">
-          <span class="text-xs font-bold px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30" id="badgeWelcome">Selamat Datang Kembali</span>
-          <h2 class="text-2xl font-black tracking-tight" id="welcomeTitle">Pilih Modul Produktivitas Anda</h2>
-          <p class="text-xs text-sub max-w-xl" id="welcomeDesc">Semua alat esensial untuk manajemen keuangan, tugas, kalkulator, catatan, dan pengembangan kode dalam satu kendali.</p>
+          <span class="text-xs font-bold px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30" id="badgeWelcome">Selamat Datang</span>
+          <h2 class="text-2xl font-black tracking-tight" id="welcomeTitle">Pusat Kendali Produktivitas</h2>
+          <p class="text-xs text-sub max-w-xl" id="welcomeDesc">Pilih modul di bawah untuk mulai mengelola keuangan, tugas, kalkulator, kalender, editor kode, penyunting foto, dan pengaturan.</p>
         </div>
-        <button onclick="autoBackupJSON()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-5 py-3 rounded-2xl shadow-lg shadow-indigo-600/30 transition flex items-center gap-2 shrink-0">
+        <button onclick="autoBackupJSON()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-5 py-3 rounded-2xl shadow-lg transition flex items-center gap-2 shrink-0">
           <span>💾</span> <span id="btnAutoBackup">Backup Data Otomatis</span>
         </button>
       </div>
 
-      <!-- Grid Menu Launcher -->
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-        <div onclick="switchTab('finance')" class="card-modern border p-5 rounded-2xl cursor-pointer hover:border-indigo-500 transition group space-y-3">
+        <div onclick="switchTab('finance')" class="card-modern p-5 rounded-2xl cursor-pointer hover:border-indigo-500 transition group space-y-3">
           <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl group-hover:scale-110 transition">💰</div>
-          <div>
-            <h3 class="font-extrabold text-sm" id="menuFinance">Keuangan</h3>
-            <p class="text-[11px] text-sub" id="subFinance">Arus kas & laporan bulanan</p>
-          </div>
+          <div><h3 class="font-extrabold text-sm" id="menuFinance">Keuangan</h3><p class="text-[11px] text-sub" id="subFinance">Arus kas & laporan</p></div>
         </div>
-
-        <div onclick="switchTab('tasks')" class="card-modern border p-5 rounded-2xl cursor-pointer hover:border-indigo-500 transition group space-y-3">
+        <div onclick="switchTab('tasks')" class="card-modern p-5 rounded-2xl cursor-pointer hover:border-indigo-500 transition group space-y-3">
           <div class="w-12 h-12 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl group-hover:scale-110 transition">📋</div>
-          <div>
-            <h3 class="font-extrabold text-sm" id="menuTasks">Tugas & Catatan</h3>
-            <p class="text-[11px] text-sub" id="subTasks">Agenda & memo harian</p>
-          </div>
+          <div><h3 class="font-extrabold text-sm" id="menuTasks">Tugas & Catatan</h3><p class="text-[11px] text-sub" id="subTasks">Agenda & memo</p></div>
         </div>
-
-        <div onclick="switchTab('calc')" class="card-modern border p-5 rounded-2xl cursor-pointer hover:border-indigo-500 transition group space-y-3">
+        <div onclick="switchTab('calc')" class="card-modern p-5 rounded-2xl cursor-pointer hover:border-indigo-500 transition group space-y-3">
           <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl group-hover:scale-110 transition">🧮</div>
-          <div>
-            <h3 class="font-extrabold text-sm" id="menuCalc">Kalkulator & Finansial</h3>
-            <p class="text-[11px] text-sub" id="subCalc">Hitung cepat & bunga pinjaman</p>
-          </div>
+          <div><h3 class="font-extrabold text-sm" id="menuCalc">Kalkulator</h3><p class="text-[11px] text-sub" id="subCalc">Matematika & cicilan</p></div>
         </div>
-
-        <div onclick="switchTab('calendar')" class="card-modern border p-5 rounded-2xl cursor-pointer hover:border-indigo-500 transition group space-y-3">
+        <div onclick="switchTab('calendar')" class="card-modern p-5 rounded-2xl cursor-pointer hover:border-indigo-500 transition group space-y-3">
           <div class="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-xl group-hover:scale-110 transition">📅</div>
-          <div>
-            <h3 class="font-extrabold text-sm" id="menuCalendar">Kalender & Agenda</h3>
-            <p class="text-[11px] text-sub" id="subCalendar">Jadwal kegiatan bulanan</p>
-          </div>
+          <div><h3 class="font-extrabold text-sm" id="menuCalendar">Kalender</h3><p class="text-[11px] text-sub" id="subCalendar">Jadwal kegiatan</p></div>
         </div>
-
-        <div onclick="switchTab('tools')" class="card-modern border p-5 rounded-2xl cursor-pointer hover:border-indigo-500 transition group space-y-3">
+        <div onclick="switchTab('tools')" class="card-modern p-5 rounded-2xl cursor-pointer hover:border-indigo-500 transition group space-y-3">
           <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl group-hover:scale-110 transition">💻</div>
-          <div>
-            <h3 class="font-extrabold text-sm" id="menuTools">Code Playground</h3>
-            <p class="text-[11px] text-sub" id="subTools">Editor HTML/CSS interaktif</p>
-          </div>
+          <div><h3 class="font-extrabold text-sm" id="menuTools">Code Playground</h3><p class="text-[11px] text-sub" id="subTools">Editor HTML/CSS</p></div>
         </div>
-
-        <div onclick="switchTab('settings')" class="card-modern border p-5 rounded-2xl cursor-pointer hover:border-indigo-500 transition group space-y-3">
-          <div class="w-12 h-12 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-xl group-hover:scale-110 transition">⚙️</div>
-          <div>
-            <h3 class="font-extrabold text-sm" id="menuSettings">Pengaturan & Profil</h3>
-            <p class="text-[11px] text-sub" id="subSettings">Tema, backup & pengembang</p>
-          </div>
+        <div onclick="switchTab('photo')" class="card-modern p-5 rounded-2xl cursor-pointer hover:border-indigo-500 transition group space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-xl group-hover:scale-110 transition">📸</div>
+          <div><h3 class="font-extrabold text-sm" id="menuPhoto">Photo Editor</h3><p class="text-[11px] text-sub" id="subPhoto">Sunting & filter foto</p></div>
+        </div>
+        <div onclick="switchTab('settings')" class="card-modern p-5 rounded-2xl cursor-pointer hover:border-indigo-500 transition group space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-slate-500/20 text-slate-300 flex items-center justify-center text-xl group-hover:scale-110 transition">⚙️</div>
+          <div><h3 class="font-extrabold text-sm" id="menuSettings">Pengaturan</h3><p class="text-[11px] text-sub" id="subSettings">Tema & profil</p></div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== TAB 1: KEUANGAN ==================== -->
+    <!-- KEUANGAN -->
     <section id="tab-finance" class="tab-content space-y-6 hidden">
-      <div class="card-modern border p-5 rounded-2xl flex flex-wrap items-center justify-between gap-4">
+      <div class="card-modern p-5 rounded-2xl flex flex-wrap items-center justify-between gap-4">
         <div class="flex items-center gap-3">
-          <button onclick="switchTab('launcher')" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-xl font-bold">← Menu</button>
-          <div>
-            <h2 class="text-lg font-extrabold">Manajemen Keuangan</h2>
-            <p class="text-xs text-sub">Pantau arus kas masuk, keluar, dan laporan periode.</p>
-          </div>
+          <button onclick="switchTab('launcher')" class="text-xs card-modern px-3 py-2 rounded-xl font-bold hover:bg-indigo-500/10">← Menu</button>
+          <div><h2 class="text-lg font-extrabold" id="finTitle">Manajemen Keuangan</h2><p class="text-xs text-sub" id="finSub">Pantau arus kas masuk dan keluar.</p></div>
         </div>
         <div class="flex items-center gap-2.5">
-          <input type="month" id="monthPicker" class="text-xs bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white font-semibold outline-none focus:border-indigo-500">
+          <input type="month" id="monthPicker" class="text-xs custom-input border rounded-xl px-3 py-2 font-semibold outline-none">
           <button onclick="openTxModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-lg">+ Transaksi</button>
         </div>
       </div>
-
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="card-modern border p-5 rounded-2xl">
-          <div class="text-xs font-bold text-sub uppercase">Total Saldo Bersih</div>
-          <div id="metricNet" class="text-2xl font-extrabold mt-1">Rp 0</div>
-        </div>
-        <div class="card-modern border p-5 rounded-2xl">
-          <div class="text-xs font-bold text-sub uppercase">Total Pemasukan</div>
-          <div id="metricIncome" class="text-2xl font-extrabold text-emerald-400 mt-1">Rp 0</div>
-        </div>
-        <div class="card-modern border p-5 rounded-2xl">
-          <div class="text-xs font-bold text-sub uppercase">Total Pengeluaran</div>
-          <div id="metricExpense" class="text-2xl font-extrabold text-rose-400 mt-1">Rp 0</div>
-        </div>
+        <div class="card-modern p-5 rounded-2xl"><div class="text-xs font-bold text-sub uppercase" id="lblNet">Total Saldo Bersih</div><div id="metricNet" class="text-2xl font-extrabold mt-1">Rp 0</div></div>
+        <div class="card-modern p-5 rounded-2xl"><div class="text-xs font-bold text-sub uppercase" id="lblIncome">Total Pemasukan</div><div id="metricIncome" class="text-2xl font-extrabold text-emerald-400 mt-1">Rp 0</div></div>
+        <div class="card-modern p-5 rounded-2xl"><div class="text-xs font-bold text-sub uppercase" id="lblExpense">Total Pengeluaran</div><div id="metricExpense" class="text-2xl font-extrabold text-rose-400 mt-1">Rp 0</div></div>
       </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 card-modern border p-5 rounded-2xl space-y-4">
-          <div class="flex flex-wrap gap-2 items-center justify-between">
-            <input type="text" id="searchInput" placeholder="Cari keterangan..." class="text-xs bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 flex-1 outline-none text-white">
-            <select id="filterType" class="text-xs bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white">
-              <option value="all">Semua Tipe</option>
-              <option value="income">Pemasukan (+)</option>
-              <option value="expense">Pengeluaran (-)</option>
-            </select>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs min-w-[500px]">
-              <thead class="border-b border-slate-700 text-sub font-semibold">
-                <tr>
-                  <th class="p-3">Tanggal</th>
-                  <th class="p-3">Kategori</th>
-                  <th class="p-3">Keterangan</th>
-                  <th class="p-3 text-right">Nominal</th>
-                  <th class="p-3 text-center">Aksi</th>
-                </tr>
-              </thead>
-              <tbody id="txTableBody" class="divide-y divide-slate-800/60"></tbody>
-            </table>
-          </div>
+      <div class="card-modern p-5 rounded-2xl space-y-4">
+        <div class="flex flex-wrap gap-2 items-center justify-between">
+          <input type="text" id="searchInput" placeholder="Cari keterangan..." class="text-xs custom-input border rounded-xl px-3.5 py-2 flex-1 outline-none">
+          <select id="filterType" class="text-xs custom-input border rounded-xl px-3 py-2 outline-none">
+            <option value="all" id="optAll">Semua Tipe</option>
+            <option value="income" id="optInc">Pemasukan (+)</option>
+            <option value="expense" id="optExp">Pengeluaran (-)</option>
+          </select>
         </div>
-
-        <div class="card-modern border p-5 rounded-2xl space-y-3">
-          <h3 class="text-xs font-bold uppercase text-sub">Proporsi Pengeluaran</h3>
-          <div class="relative w-full h-60 flex items-center justify-center">
-            <canvas id="categoryChart"></canvas>
-          </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs min-w-[500px]">
+            <thead class="border-b border-slate-700 text-sub font-semibold">
+              <tr>
+                <th class="p-3" id="thDate">Tanggal</th>
+                <th class="p-3" id="thCat">Kategori</th>
+                <th class="p-3" id="thDesc">Keterangan</th>
+                <th class="p-3 text-right" id="thNom">Nominal</th>
+                <th class="p-3 text-center" id="thAct">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="txTableBody" class="divide-y divide-slate-800/60"></tbody>
+          </table>
         </div>
       </div>
     </section>
 
-    <!-- ==================== TAB 2: TUGAS & CATATAN ==================== -->
+    <!-- TUGAS & CATATAN -->
     <section id="tab-tasks" class="tab-content space-y-6 hidden">
-      <div class="card-modern border p-5 rounded-2xl flex items-center justify-between">
+      <div class="card-modern p-5 rounded-2xl flex items-center justify-between flex-wrap gap-3">
         <div class="flex items-center gap-3">
-          <button onclick="switchTab('launcher')" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-xl font-bold">← Menu</button>
-          <div>
-            <h2 class="text-lg font-extrabold">Tugas & Catatan</h2>
-            <p class="text-xs text-sub">Pusat pengorganisasian tugas harian dan memo penting.</p>
-          </div>
+          <button onclick="switchTab('launcher')" class="text-xs card-modern px-3 py-2 rounded-xl font-bold">← Menu</button>
+          <div><h2 class="text-lg font-extrabold" id="taskHeading">Tugas & Catatan</h2><p class="text-xs text-sub" id="taskSub">Pusat pengorganisasian tugas dan memo.</p></div>
         </div>
         <div class="flex gap-2">
           <button onclick="openTaskModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl">+ Tugas</button>
           <button onclick="openNoteModal()" class="bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl">+ Catatan</button>
         </div>
       </div>
-
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="card-modern border p-5 rounded-2xl space-y-4">
-          <h3 class="text-xs font-bold uppercase text-sub border-b border-slate-700 pb-2">Daftar Pekerjaan</h3>
+        <div class="card-modern p-5 rounded-2xl space-y-4">
+          <h3 class="text-xs font-bold uppercase text-sub border-b pb-2" id="lblTaskList">Daftar Pekerjaan</h3>
           <div id="taskList" class="divide-y divide-slate-800/60 space-y-2"></div>
         </div>
-        <div class="card-modern border p-5 rounded-2xl space-y-4">
-          <h3 class="text-xs font-bold uppercase text-sub border-b border-slate-700 pb-2">Catatan Saya</h3>
+        <div class="card-modern p-5 rounded-2xl space-y-4">
+          <h3 class="text-xs font-bold uppercase text-sub border-b pb-2" id="lblNoteList">Catatan Saya</h3>
           <div id="noteList" class="grid grid-cols-1 gap-3"></div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== TAB 3: KALKULATOR & FINANSIAL ==================== -->
+    <!-- KALKULATOR -->
     <section id="tab-calc" class="tab-content space-y-6 hidden">
-      <div class="card-modern border p-5 rounded-2xl flex items-center justify-between">
+      <div class="card-modern p-5 rounded-2xl flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <button onclick="switchTab('launcher')" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-xl font-bold">← Menu</button>
-          <div>
-            <h2 class="text-lg font-extrabold">Kalkulator & Alat Finansial</h2>
-            <p class="text-xs text-sub">Kalkulator saintifik lengkap dan simulasi cicilan pinjaman.</p>
-          </div>
+          <button onclick="switchTab('launcher')" class="text-xs card-modern px-3 py-2 rounded-xl font-bold">← Menu</button>
+          <div><h2 class="text-lg font-extrabold" id="calcHeading">Kalkulator & Finansial</h2><p class="text-xs text-sub" id="calcSub">Kalkulator interaktif dan simulasi cicilan.</p></div>
         </div>
       </div>
-
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Kalkulator Saintifik / Standar -->
-        <div class="card-modern border p-5 rounded-2xl space-y-4">
-          <h3 class="text-xs font-bold uppercase text-sub border-b border-slate-700 pb-2">Kalkulator Interaktif</h3>
-          <input type="text" id="calcScreen" readonly class="w-full text-right text-xl font-mono bg-slate-950 border border-slate-800 rounded-xl p-3 text-emerald-400 font-bold" value="0">
+        <div class="card-modern p-5 rounded-2xl space-y-4">
+          <h3 class="text-xs font-bold uppercase text-sub border-b pb-2">Kalkulator</h3>
+          <input type="text" id="calcScreen" readonly class="w-full text-right text-xl font-mono custom-input border rounded-xl p-3 text-emerald-400 font-bold" value="0">
           <div class="grid grid-cols-4 gap-2">
             <button onclick="calcClear()" class="bg-rose-600/20 text-rose-300 p-3 rounded-xl font-bold text-xs">C</button>
-            <button onclick="calcAppend('(')" class="bg-slate-800 p-3 rounded-xl font-bold text-xs">(</button>
-            <button onclick="calcAppend(')')" class="bg-slate-800 p-3 rounded-xl font-bold text-xs">)</button>
+            <button onclick="calcAppend('(')" class="card-modern p-3 rounded-xl font-bold text-xs">(</button>
+            <button onclick="calcAppend(')')" class="card-modern p-3 rounded-xl font-bold text-xs">)</button>
             <button onclick="calcAppend('/')" class="bg-indigo-600/30 text-indigo-300 p-3 rounded-xl font-bold text-xs">÷</button>
-            <button onclick="calcAppend('7')" class="bg-slate-900 p-3 rounded-xl font-bold text-xs">7</button>
-            <button onclick="calcAppend('8')" class="bg-slate-900 p-3 rounded-xl font-bold text-xs">8</button>
-            <button onclick="calcAppend('9')" class="bg-slate-900 p-3 rounded-xl font-bold text-xs">9</button>
+            <button onclick="calcAppend('7')" class="card-modern p-3 rounded-xl font-bold text-xs">7</button>
+            <button onclick="calcAppend('8')" class="card-modern p-3 rounded-xl font-bold text-xs">8</button>
+            <button onclick="calcAppend('9')" class="card-modern p-3 rounded-xl font-bold text-xs">9</button>
             <button onclick="calcAppend('*')" class="bg-indigo-600/30 text-indigo-300 p-3 rounded-xl font-bold text-xs">×</button>
-            <button onclick="calcAppend('4')" class="bg-slate-900 p-3 rounded-xl font-bold text-xs">4</button>
-            <button onclick="calcAppend('5')" class="bg-slate-900 p-3 rounded-xl font-bold text-xs">5</button>
-            <button onclick="calcAppend('6')" class="bg-slate-900 p-3 rounded-xl font-bold text-xs">6</button>
+            <button onclick="calcAppend('4')" class="card-modern p-3 rounded-xl font-bold text-xs">4</button>
+            <button onclick="calcAppend('5')" class="card-modern p-3 rounded-xl font-bold text-xs">5</button>
+            <button onclick="calcAppend('6')" class="card-modern p-3 rounded-xl font-bold text-xs">6</button>
             <button onclick="calcAppend('-')" class="bg-indigo-600/30 text-indigo-300 p-3 rounded-xl font-bold text-xs">-</button>
-            <button onclick="calcAppend('1')" class="bg-slate-900 p-3 rounded-xl font-bold text-xs">1</button>
-            <button onclick="calcAppend('2')" class="bg-slate-900 p-3 rounded-xl font-bold text-xs">2</button>
-            <button onclick="calcAppend('3')" class="bg-slate-900 p-3 rounded-xl font-bold text-xs">3</button>
+            <button onclick="calcAppend('1')" class="card-modern p-3 rounded-xl font-bold text-xs">1</button>
+            <button onclick="calcAppend('2')" class="card-modern p-3 rounded-xl font-bold text-xs">2</button>
+            <button onclick="calcAppend('3')" class="card-modern p-3 rounded-xl font-bold text-xs">3</button>
             <button onclick="calcAppend('+')" class="bg-indigo-600/30 text-indigo-300 p-3 rounded-xl font-bold text-xs">+</button>
-            <button onclick="calcAppend('0')" class="col-span-2 bg-slate-900 p-3 rounded-xl font-bold text-xs">0</button>
-            <button onclick="calcAppend('.')" class="bg-slate-900 p-3 rounded-xl font-bold text-xs">.</button>
+            <button onclick="calcAppend('0')" class="col-span-2 card-modern p-3 rounded-xl font-bold text-xs">0</button>
+            <button onclick="calcAppend('.')" class="card-modern p-3 rounded-xl font-bold text-xs">.</button>
             <button onclick="calcCompute()" class="bg-emerald-600 text-white p-3 rounded-xl font-bold text-xs">=</button>
           </div>
         </div>
-
-        <!-- Simulasi Cicilan / Pinjaman -->
-        <div class="card-modern border p-5 rounded-2xl space-y-4">
-          <h3 class="text-xs font-bold uppercase text-sub border-b border-slate-700 pb-2">Simulasi Cicilan Kredit</h3>
+        <div class="card-modern p-5 rounded-2xl space-y-4">
+          <h3 class="text-xs font-bold uppercase text-sub border-b pb-2">Simulasi Kredit</h3>
           <div class="space-y-3 text-xs">
-            <div>
-              <label class="text-sub">Plafon Pinjaman (Rp)</label>
-              <input type="number" id="loanAmount" value="10000000" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 mt-1 text-white font-bold">
-            </div>
-            <div>
-              <label class="text-sub">Bunga per Tahun (%)</label>
-              <input type="number" id="loanInterest" value="12" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 mt-1 text-white font-bold">
-            </div>
-            <div>
-              <label class="text-sub">Tenor (Bulan)</label>
-              <input type="number" id="loanTenor" value="12" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 mt-1 text-white font-bold">
-            </div>
+            <div><label class="text-sub">Plafon Pinjaman (Rp)</label><input type="number" id="loanAmount" value="10000000" class="w-full custom-input border rounded-xl p-2.5 mt-1 font-bold"></div>
+            <div><label class="text-sub">Bunga per Tahun (%)</label><input type="number" id="loanInterest" value="12" class="w-full custom-input border rounded-xl p-2.5 mt-1 font-bold"></div>
+            <div><label class="text-sub">Tenor (Bulan)</label><input type="number" id="loanTenor" value="12" class="w-full custom-input border rounded-xl p-2.5 mt-1 font-bold"></div>
             <button onclick="calculateLoan()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl">Hitung Angsuran</button>
-            <div id="loanResult" class="p-3 bg-slate-950 rounded-xl border border-slate-800 text-indigo-300 font-bold text-center">
-              Cicilan per Bulan: Rp 0
-            </div>
+            <div id="loanResult" class="p-3 card-modern rounded-xl text-indigo-400 font-bold text-center">Cicilan per Bulan: Rp 0</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== TAB 4: KALENDER & AGENDA ==================== -->
+    <!-- KALENDER -->
     <section id="tab-calendar" class="tab-content space-y-6 hidden">
-      <div class="card-modern border p-5 rounded-2xl flex items-center justify-between">
+      <div class="card-modern p-5 rounded-2xl flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <button onclick="switchTab('launcher')" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-xl font-bold">← Menu</button>
-          <div>
-            <h2 class="text-lg font-extrabold">Kalender & Agenda</h2>
-            <p class="text-xs text-sub">Jadwal kegiatan harian dan pengingat bulanan.</p>
-          </div>
+          <button onclick="switchTab('launcher')" class="text-xs card-modern px-3 py-2 rounded-xl font-bold">← Menu</button>
+          <div><h2 class="text-lg font-extrabold" id="calHeading">Kalender & Agenda</h2><p class="text-xs text-sub" id="calSub">Jadwal kegiatan harian.</p></div>
         </div>
-        <button onclick="openCalendarModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl">+ Agenda</button>
       </div>
-
-      <div class="card-modern border p-5 rounded-2xl space-y-4">
+      <div class="card-modern p-5 rounded-2xl space-y-4">
         <div class="flex justify-between items-center">
           <h3 id="calMonthYear" class="font-bold text-sm text-indigo-400">Bulan Tahun</h3>
           <div class="flex gap-2">
-            <button onclick="changeMonth(-1)" class="bg-slate-800 px-3 py-1.5 rounded-xl text-xs font-bold">&larr;</button>
-            <button onclick="changeMonth(1)" class="bg-slate-800 px-3 py-1.5 rounded-xl text-xs font-bold">&rarr;</button>
+            <button onclick="changeMonth(-1)" class="card-modern px-3 py-1.5 rounded-xl text-xs font-bold">&larr;</button>
+            <button onclick="changeMonth(1)" class="card-modern px-3 py-1.5 rounded-xl text-xs font-bold">&rarr;</button>
           </div>
         </div>
-        <div class="grid grid-cols-7 gap-2 text-center text-xs font-bold text-sub">
-          <div>Min</div><div>Sen</div><div>Sel</div><div>Rab</div><div>Kam</div><div>Jum</div><div>Sab</div>
-        </div>
+        <div class="grid grid-cols-7 gap-2 text-center text-xs font-bold text-sub"><div>Min</div><div>Sen</div><div>Sel</div><div>Rab</div><div>Kam</div><div>Jum</div><div>Sab</div></div>
         <div id="calendarGrid" class="grid grid-cols-7 gap-2 text-center text-xs"></div>
       </div>
     </section>
 
-    <!-- ==================== TAB 5: CODE PLAYGROUND ==================== -->
+    <!-- CODE PLAYGROUND -->
     <section id="tab-tools" class="tab-content space-y-6 hidden">
-      <div class="card-modern border p-5 rounded-2xl flex flex-wrap justify-between items-center gap-3">
+      <div class="card-modern p-5 rounded-2xl flex flex-wrap justify-between items-center gap-3">
         <div class="flex items-center gap-3">
-          <button onclick="switchTab('launcher')" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-xl font-bold">← Menu</button>
-          <div>
-            <h2 class="text-lg font-extrabold">Code Playground (HTML/CSS/JS)</h2>
-            <p class="text-xs text-sub">Editor kode interaktif dengan preview real-time.</p>
-          </div>
+          <button onclick="switchTab('launcher')" class="text-xs card-modern px-3 py-2 rounded-xl font-bold">← Menu</button>
+          <div><h2 class="text-lg font-extrabold">Code Playground</h2><p class="text-xs text-sub">Editor HTML/CSS/JS interaktif.</p></div>
         </div>
         <button onclick="runCode()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl shadow-lg">Jalankan Kode</button>
       </div>
-
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="card-modern border p-4 rounded-2xl space-y-3">
-          <div class="flex justify-between items-center text-xs font-bold text-sub">
-            <span>EDITOR KODE</span>
-            <span>HTML / CSS</span>
-          </div>
-          <textarea id="codeSource" rows="16" class="w-full text-xs font-mono bg-slate-950 border border-slate-800 rounded-xl p-4 text-emerald-400 outline-none leading-relaxed"><!DOCTYPE html>
+        <div class="card-modern p-4 rounded-2xl space-y-3">
+          <div class="flex justify-between items-center text-xs font-bold text-sub"><span>EDITOR KODE</span><span>HTML / CSS</span></div>
+          <textarea id="codeSource" rows="16" class="w-full text-xs font-mono custom-input border rounded-xl p-4 text-emerald-400 outline-none leading-relaxed"><!DOCTYPE html>
 <html>
-<head>
-  <style>
-    body { font-family: sans-serif; background: #0f172a; color: #fff; padding: 20px; text-align: center; }
-    .card { background: #1e293b; padding: 20px; border-radius: 12px; }
-    h2 { color: #818cf8; }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <h2>WorkSpace Hub</h2>
-    <p>Live Preview Berjalan Sempurna!</p>
-  </div>
-</body>
+<head><style>body{font-family:sans-serif;background:#0f172a;color:#fff;padding:20px;text-align:center;}.card{background:#1e293b;padding:20px;border-radius:12px;}h2{color:#818cf8;}</style></head>
+<body><div class="card"><h2>WorkSpace Hub</h2><p>Live Preview Berjalan Sempurna!</p></div></body>
 </html></textarea>
         </div>
-
-        <div class="card-modern border p-4 rounded-2xl space-y-3 flex flex-col">
-          <div class="flex justify-between items-center text-xs font-bold text-sub">
-            <span>LIVE PREVIEW</span>
-            <span class="text-emerald-400 font-mono">Active</span>
-          </div>
-          <div class="flex-1 border border-slate-700 rounded-xl bg-white min-h-[350px] overflow-hidden">
-            <iframe id="codePreview" class="w-full h-full border-0"></iframe>
-          </div>
+        <div class="card-modern p-4 rounded-2xl space-y-3 flex flex-col">
+          <div class="flex justify-between items-center text-xs font-bold text-sub"><span>LIVE PREVIEW</span><span class="text-emerald-400 font-mono">Active</span></div>
+          <div class="flex-1 border rounded-xl bg-white min-h-[350px] overflow-hidden"><iframe id="codePreview" class="w-full h-full border-0"></iframe></div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== TAB 6: PENGATURAN & PROFIL ==================== -->
+    <!-- PHOTO EDITOR -->
+    <section id="tab-photo" class="tab-content space-y-6 hidden">
+      <div class="card-modern p-5 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div class="flex items-center gap-3">
+          <button onclick="switchTab('launcher')" class="text-xs card-modern px-3 py-2 rounded-xl font-bold">← Menu</button>
+          <div><h2 class="text-lg font-extrabold">Photo Editor</h2><p class="text-xs text-sub">Unggah foto dan lakukan penyuntingan instan.</p></div>
+        </div>
+        <label class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl cursor-pointer">
+          Pilih Foto <input type="file" id="uploadPhoto" accept="image/*" class="hidden" onchange="loadPhoto(event)">
+        </label>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="card-modern p-5 rounded-2xl space-y-4">
+          <h3 class="text-xs font-bold uppercase text-sub border-b pb-2">Kontrol Filter</h3>
+          <div class="space-y-3 text-xs">
+            <div><label class="text-sub">Kecerahan (Brightness)</label><input type="range" id="rangeBright" min="0" max="200" value="100" class="w-full mt-1" oninput="applyFilters()"></div>
+            <div><label class="text-sub">Kontras (Contrast)</label><input type="range" id="rangeContrast" min="0" max="200" value="100" class="w-full mt-1" oninput="applyFilters()"></div>
+            <div class="flex gap-2 pt-2">
+              <button onclick="setFilter('grayscale(100%)')" class="flex-1 card-modern p-2 rounded-xl font-bold text-xs">Grayscale</button>
+              <button onclick="setFilter('invert(100%)')" class="flex-1 card-modern p-2 rounded-xl font-bold text-xs">Invert</button>
+            </div>
+            <button onclick="resetPhoto()" class="w-full card-modern p-2 rounded-xl font-bold text-rose-400">Reset Filter</button>
+            <a id="downloadPhotoBtn" class="block text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl cursor-pointer" download="edited-photo.png" onclick="downloadPhoto()">Unduh Foto</a>
+          </div>
+        </div>
+        <div class="lg:col-span-2 card-modern p-5 rounded-2xl flex items-center justify-center min-h-[350px]">
+          <div id="photoPlaceholder" class="text-xs text-sub">Belum ada foto yang diunggah.</div>
+          <canvas id="photoCanvas" class="max-w-full max-h-[450px] object-contain hidden rounded-xl shadow-md"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- PENGATURAN -->
     <section id="tab-settings" class="tab-content space-y-6 hidden">
-      <div class="card-modern border p-5 rounded-2xl flex items-center gap-3">
-        <button onclick="switchTab('launcher')" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-xl font-bold">← Menu</button>
-        <div>
-          <h2 class="text-lg font-extrabold">Pengaturan & Data</h2>
-          <p class="text-xs text-sub">Kustomisasi tema, manajemen data, dan informasi pengembang.</p>
-        </div>
+      <div class="card-modern p-5 rounded-2xl flex items-center gap-3">
+        <button onclick="switchTab('launcher')" class="text-xs card-modern px-3 py-2 rounded-xl font-bold">← Menu</button>
+        <div><h2 class="text-lg font-extrabold" id="setHeading">Pengaturan & Data</h2><p class="text-xs text-sub" id="setSub">Kustomisasi tema dan manajemen data.</p></div>
       </div>
-
-      <!-- Pilihan Tema -->
-      <div class="card-modern border p-5 rounded-2xl space-y-4">
-        <h3 class="text-xs font-bold uppercase text-sub">Pilihan Tema Tampilan</h3>
+      <div class="card-modern p-5 rounded-2xl space-y-4">
+        <h3 class="text-xs font-bold uppercase text-sub" id="lblTheme">Pilihan Tema Tampilan</h3>
         <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
-          <button onclick="setAppTheme('dark')" class="p-3 rounded-xl border border-slate-700 bg-slate-950 text-white flex flex-col items-center gap-2">
-            <span class="w-5 h-5 rounded-full bg-slate-900 border border-slate-700"></span>
-            <span class="text-xs font-bold">Dark Obsidian</span>
-          </button>
-          <button onclick="setAppTheme('light')" class="p-3 rounded-xl border border-slate-300 bg-slate-100 text-slate-900 flex flex-col items-center gap-2">
-            <span class="w-5 h-5 rounded-full bg-white border border-slate-300"></span>
-            <span class="text-xs font-bold">Clean Light</span>
-          </button>
-          <button onclick="setAppTheme('emerald')" class="p-3 rounded-xl border border-emerald-700 bg-emerald-950 text-emerald-200 flex flex-col items-center gap-2">
-            <span class="w-5 h-5 rounded-full bg-emerald-800"></span>
-            <span class="text-xs font-bold">Emerald Forest</span>
-          </button>
-          <button onclick="setAppTheme('ocean')" class="p-3 rounded-xl border border-sky-700 bg-sky-950 text-sky-200 flex flex-col items-center gap-2">
-            <span class="w-5 h-5 rounded-full bg-sky-800"></span>
-            <span class="text-xs font-bold">Ocean Blue</span>
-          </button>
-          <button onclick="setAppTheme('cyber')" class="p-3 rounded-xl border border-purple-700 bg-purple-950 text-purple-200 flex flex-col items-center gap-2">
-            <span class="w-5 h-5 rounded-full bg-purple-800"></span>
-            <span class="text-xs font-bold">Cyber Purple</span>
-          </button>
+          <button onclick="setAppTheme('dark')" class="p-3 rounded-xl border bg-slate-950 text-white flex flex-col items-center gap-2"><span class="w-5 h-5 rounded-full bg-slate-900 border"></span><span class="text-xs font-bold">Dark Obsidian</span></button>
+          <button onclick="setAppTheme('light')" class="p-3 rounded-xl border bg-slate-100 text-slate-900 flex flex-col items-center gap-2"><span class="w-5 h-5 rounded-full bg-white border"></span><span class="text-xs font-bold">Clean Light</span></button>
+          <button onclick="setAppTheme('emerald')" class="p-3 rounded-xl border bg-emerald-950 text-emerald-200 flex flex-col items-center gap-2"><span class="w-5 h-5 rounded-full bg-emerald-800"></span><span class="text-xs font-bold">Emerald</span></button>
+          <button onclick="setAppTheme('ocean')" class="p-3 rounded-xl border bg-sky-950 text-sky-200 flex flex-col items-center gap-2"><span class="w-5 h-5 rounded-full bg-sky-800"></span><span class="text-xs font-bold">Ocean Blue</span></button>
+          <button onclick="setAppTheme('cyber')" class="p-3 rounded-xl border bg-purple-950 text-purple-200 flex flex-col items-center gap-2"><span class="w-5 h-5 rounded-full bg-purple-800"></span><span class="text-xs font-bold">Cyber Purple</span></button>
         </div>
       </div>
-
-      <!-- Backup & Restore Data -->
-      <div class="card-modern border p-5 rounded-2xl space-y-4">
-        <h3 class="text-xs font-bold uppercase text-sub">Manajemen Data & Backup Otomatis</h3>
+      <div class="card-modern p-5 rounded-2xl space-y-4">
+        <h3 class="text-xs font-bold uppercase text-sub">Backup & Restore JSON</h3>
         <div class="flex flex-wrap gap-3">
           <button onclick="autoBackupJSON()" class="bg-indigo-600 text-xs px-4 py-2.5 rounded-xl font-bold text-white">Download Backup JSON</button>
-          <label class="bg-slate-800 text-xs px-4 py-2.5 rounded-xl border border-slate-700 text-slate-300 font-bold cursor-pointer">
-            Restore JSON <input type="file" accept=".json" onchange="importJSON(event)" class="hidden">
-          </label>
+          <label class="card-modern text-xs px-4 py-2.5 rounded-xl font-bold cursor-pointer">Restore JSON <input type="file" accept=".json" onchange="importJSON(event)" class="hidden"></label>
         </div>
       </div>
-
-      <!-- Tentang Pengembang -->
-      <div class="card-modern border p-6 rounded-2xl space-y-5">
-        <h3 class="text-xs font-bold uppercase text-sub border-b border-slate-700 pb-2">Tentang Pengembang</h3>
+      <div class="card-modern p-6 rounded-2xl space-y-5">
+        <h3 class="text-xs font-bold uppercase text-sub border-b pb-2">Tentang Pengembang</h3>
         <div class="flex flex-col sm:flex-row items-center gap-4">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-600 text-white flex items-center justify-center font-black text-xl shadow-lg shrink-0">
-            DM
-          </div>
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-600 text-white flex items-center justify-center font-black text-xl shadow-lg shrink-0">DM</div>
           <div class="text-center sm:text-left space-y-1">
             <h4 class="font-extrabold text-sm">Mohammad Danis Muria Vanandi</h4>
             <p class="text-xs font-semibold text-indigo-400">Civil Engineer & AI / NLP Researcher</p>
@@ -421,24 +328,37 @@
 
   </main>
 
-  <!-- MODAL TRANSAKSI -->
+  <!-- FLOATING BOTTOM DOCK / NAVIGASI MENGAMBANG KHUSUS MOBILE -->
+  <div class="md:hidden fixed bottom-3 inset-x-3 z-50 flex justify-center">
+    <nav class="card-modern p-2 rounded-2xl shadow-2xl flex items-center justify-around w-full max-w-md backdrop-blur-md">
+      <button onclick="switchTab('launcher')" class="flex flex-col items-center gap-0.5 p-2 rounded-xl text-[10px] font-bold text-sub hover:text-indigo-400"><span>🏠</span><span>Home</span></button>
+      <button onclick="switchTab('finance')" class="flex flex-col items-center gap-0.5 p-2 rounded-xl text-[10px] font-bold text-sub hover:text-indigo-400"><span>💰</span><span>Finance</span></button>
+      <button onclick="switchTab('tasks')" class="flex flex-col items-center gap-0.5 p-2 rounded-xl text-[10px] font-bold text-sub hover:text-indigo-400"><span>📋</span><span>Tasks</span></button>
+      <button onclick="switchTab('calc')" class="flex flex-col items-center gap-0.5 p-2 rounded-xl text-[10px] font-bold text-sub hover:text-indigo-400"><span>🧮</span><span>Calc</span></button>
+      <button onclick="switchTab('photo')" class="flex flex-col items-center gap-0.5 p-2 rounded-xl text-[10px] font-bold text-sub hover:text-indigo-400"><span>📸</span><span>Photo</span></button>
+      <button onclick="switchTab('settings')" class="flex flex-col items-center gap-0.5 p-2 rounded-xl text-[10px] font-bold text-sub hover:text-indigo-400"><span>⚙️</span><span>Set</span></button>
+    </nav>
+  </div>
+
+  <!-- MODAL TRANSAKSI (DENGAN DUKUNGAN EDIT) -->
   <div id="txModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="card-modern border rounded-2xl max-w-md w-full p-5 space-y-4 shadow-2xl">
-      <div class="flex justify-between items-center border-b border-slate-700 pb-2">
-        <h3 class="font-bold text-sm">Tambah Transaksi</h3>
+    <div class="card-modern rounded-2xl max-w-md w-full p-5 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center border-b pb-2">
+        <h3 class="font-bold text-sm" id="txModalTitle">Tambah Transaksi</h3>
         <button onclick="closeTxModal()" class="text-sub font-bold">&times;</button>
       </div>
       <form id="txForm" class="space-y-3">
+        <input type="hidden" id="editTxId">
         <div class="grid grid-cols-2 gap-2">
-          <input type="date" id="formDate" required class="text-xs bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white">
-          <select id="formType" class="text-xs bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white">
-            <option value="expense">Pengeluaran (-)</option>
-            <option value="income">Pemasukan (+)</option>
+          <input type="date" id="formDate" required class="text-xs custom-input border rounded-xl p-2.5">
+          <select id="formType" class="text-xs custom-input border rounded-xl p-2.5">
+            <option value="expense" id="optFormExp">Pengeluaran (-)</option>
+            <option value="income" id="optFormInc">Pemasukan (+)</option>
           </select>
         </div>
-        <input type="text" id="formCategory" placeholder="Kategori (misal: Makanan, Gaji)" required class="w-full text-xs bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white">
-        <input type="number" id="formAmount" placeholder="Nominal (Rp)" required class="w-full text-xs bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white font-bold">
-        <input type="text" id="formDesc" placeholder="Keterangan" required class="w-full text-xs bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white">
+        <input type="text" id="formCategory" placeholder="Kategori (misal: Makanan)" required class="w-full text-xs custom-input border rounded-xl p-2.5">
+        <input type="number" id="formAmount" placeholder="Nominal (Rp)" required class="w-full text-xs custom-input border rounded-xl p-2.5 font-bold">
+        <input type="text" id="formDesc" placeholder="Keterangan" required class="w-full text-xs custom-input border rounded-xl p-2.5">
         <div class="flex justify-end gap-2 pt-2">
           <button type="button" onclick="closeTxModal()" class="px-4 py-2 text-xs text-sub">Batal</button>
           <button type="submit" class="px-4 py-2 text-xs bg-indigo-600 text-white rounded-xl font-bold">Simpan</button>
@@ -449,119 +369,78 @@
 
   <!-- MODAL CATATAN -->
   <div id="noteModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="card-modern border rounded-2xl max-w-md w-full p-5 space-y-4 shadow-2xl">
-      <div class="flex justify-between items-center border-b border-slate-700 pb-2">
-        <h3 class="font-bold text-sm">Tambah Catatan Baru</h3>
-        <button onclick="closeNoteModal()" class="text-sub font-bold">&times;</button>
-      </div>
+    <div class="card-modern rounded-2xl max-w-md w-full p-5 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center border-b pb-2"><h3 class="font-bold text-sm">Catatan</h3><button onclick="closeNoteModal()" class="text-sub font-bold">&times;</button></div>
       <form id="noteForm" class="space-y-3">
-        <input type="text" id="noteTitle" placeholder="Judul Catatan" required class="w-full text-xs bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white font-bold">
-        <textarea id="noteContent" rows="4" placeholder="Isi catatan..." required class="w-full text-xs bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white"></textarea>
-        <div class="flex justify-end gap-2 pt-2">
-          <button type="button" onclick="closeNoteModal()" class="px-4 py-2 text-xs text-sub">Batal</button>
-          <button type="submit" class="px-4 py-2 text-xs bg-violet-600 text-white rounded-xl font-bold">Simpan</button>
-        </div>
+        <input type="hidden" id="editNoteId">
+        <input type="text" id="noteTitle" placeholder="Judul Catatan" required class="w-full text-xs custom-input border rounded-xl p-2.5 font-bold">
+        <textarea id="noteContent" rows="4" placeholder="Isi catatan..." required class="w-full text-xs custom-input border rounded-xl p-2.5"></textarea>
+        <div class="flex justify-end gap-2 pt-2"><button type="button" onclick="closeNoteModal()" class="px-4 py-2 text-xs text-sub">Batal</button><button type="submit" class="px-4 py-2 text-xs bg-violet-600 text-white rounded-xl font-bold">Simpan</button></div>
       </form>
     </div>
   </div>
 
   <!-- MODAL TUGAS -->
   <div id="taskModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="card-modern border rounded-2xl max-w-md w-full p-5 space-y-4 shadow-2xl">
-      <div class="flex justify-between items-center border-b border-slate-700 pb-2">
-        <h3 class="font-bold text-sm">Tambah Tugas Baru</h3>
-        <button onclick="closeTaskModal()" class="text-sub font-bold">&times;</button>
-      </div>
+    <div class="card-modern rounded-2xl max-w-md w-full p-5 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center border-b pb-2"><h3 class="font-bold text-sm">Tugas</h3><button onclick="closeTaskModal()" class="text-sub font-bold">&times;</button></div>
       <form id="taskForm" class="space-y-3">
-        <input type="text" id="taskTitle" placeholder="Judul Tugas" required class="w-full text-xs bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white">
-        <input type="date" id="taskDueDate" required class="w-full text-xs bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-white">
-        <div class="flex justify-end gap-2 pt-2">
-          <button type="button" onclick="closeTaskModal()" class="px-4 py-2 text-xs text-sub">Batal</button>
-          <button type="submit" class="px-4 py-2 text-xs bg-indigo-600 text-white rounded-xl font-bold">Simpan</button>
-        </div>
+        <input type="hidden" id="editTaskId">
+        <input type="text" id="taskTitle" placeholder="Judul Tugas" required class="w-full text-xs custom-input border rounded-xl p-2.5">
+        <input type="date" id="taskDueDate" required class="w-full text-xs custom-input border rounded-xl p-2.5">
+        <div class="flex justify-end gap-2 pt-2"><button type="button" onclick="closeTaskModal()" class="px-4 py-2 text-xs text-sub">Batal</button><button type="submit" class="px-4 py-2 text-xs bg-indigo-600 text-white rounded-xl font-bold">Simpan</button></div>
       </form>
     </div>
   </div>
 
-  <!-- SCRIPT LOGIC -->
+  <!-- SCRIPT -->
   <script>
-    // Multi-Language Dictionary
     const langData = {
       id: {
-        subtitle: "Ultimate Launcher Suite",
-        badgeWelcome: "Selamat Datang Kembali",
-        welcomeTitle: "Pilih Modul Produktivitas Anda",
-        welcomeDesc: "Semua alat esensial untuk manajemen keuangan, tugas, kalkulator, catatan, dan pengembangan kode dalam satu kendali.",
-        btnAutoBackup: "Backup Data Otomatis",
-        menuFinance: "Keuangan", subFinance: "Arus kas & laporan bulanan",
-        menuTasks: "Tugas & Catatan", subTasks: "Agenda & memo harian",
-        menuCalc: "Kalkulator & Finansial", subCalc: "Hitung cepat & bunga pinjaman",
-        menuCalendar: "Kalender & Agenda", subCalendar: "Jadwal kegiatan bulanan",
-        menuTools: "Code Playground", subTools: "Editor HTML/CSS interaktif",
-        menuSettings: "Pengaturan & Profil", subSettings: "Tema, backup & pengembang"
+        subtitle: "Ultimate Suite v3.5", badgeWelcome: "Selamat Datang", welcomeTitle: "Pusat Kendali Produktivitas", welcomeDesc: "Pilih modul di bawah untuk mulai mengelola keuangan, tugas, kalkulator, kalender, editor kode, penyunting foto, dan pengaturan.", btnAutoBackup: "Backup Data Otomatis",
+        menuFinance: "Keuangan", subFinance: "Arus kas & laporan", menuTasks: "Tugas & Catatan", subTasks: "Agenda & memo", menuCalc: "Kalkulator", subCalc: "Matematika & cicilan", menuCalendar: "Kalender", subCalendar: "Jadwal kegiatan", menuTools: "Code Playground", subTools: "Editor HTML/CSS", menuPhoto: "Photo Editor", subPhoto: "Sunting & filter foto", menuSettings: "Pengaturan", subSettings: "Tema & profil",
+        finTitle: "Manajemen Keuangan", finSub: "Pantau arus kas masuk dan keluar.", lblNet: "Total Saldo Bersih", lblIncome: "Total Pemasukan", lblExpense: "Total Pengeluaran", optAll: "Semua Tipe", optInc: "Pemasukan (+)", optExp: "Pengeluaran (-)", thDate: "Tanggal", thCat: "Kategori", thDesc: "Keterangan", thNom: "Nominal", thAct: "Aksi",
+        taskHeading: "Tugas & Catatan", taskSub: "Pusat pengorganisasian tugas dan memo.", lblTaskList: "Daftar Pekerjaan", lblNoteList: "Catatan Saya",
+        calcHeading: "Kalkulator & Finansial", calcSub: "Kalkulator interaktif dan simulasi cicilan.", calHeading: "Kalender & Agenda", calSub: "Jadwal kegiatan harian.", setHeading: "Pengaturan & Data", setSub: "Kustomisasi tema dan manajemen data.", lblTheme: "Pilihan Tema Tampilan"
       },
       en: {
-        subtitle: "Ultimate Launcher Suite",
-        badgeWelcome: "Welcome Back",
-        welcomeTitle: "Select Your Productivity Module",
-        welcomeDesc: "All essential tools for finance, tasks, calculator, notes, and code development under one roof.",
-        btnAutoBackup: "Auto Backup Data",
-        menuFinance: "Finance", subFinance: "Cash flow & monthly reports",
-        menuTasks: "Tasks & Notes", subTasks: "Daily agendas & memos",
-        menuCalc: "Calculator & Finance", subCalc: "Quick math & loan interest",
-        menuCalendar: "Calendar & Agenda", subCalendar: "Monthly schedule",
-        menuTools: "Code Playground", subTools: "Interactive HTML/CSS editor",
-        menuSettings: "Settings & Profile", subSettings: "Theme, backup & developer"
+        subtitle: "Ultimate Suite v3.5", badgeWelcome: "Welcome Back", welcomeTitle: "Productivity Control Center", welcomeDesc: "Choose a module below to manage finances, tasks, calculator, calendar, code editor, photo editor, and settings.", btnAutoBackup: "Auto Backup Data",
+        menuFinance: "Finance", subFinance: "Cash flow & reports", menuTasks: "Tasks & Notes", subTasks: "Agendas & memos", menuCalc: "Calculator", subCalc: "Math & loans", menuCalendar: "Calendar", subCalendar: "Schedules", menuTools: "Code Playground", subTools: "HTML/CSS Editor", menuPhoto: "Photo Editor", subPhoto: "Edit & filters", menuSettings: "Settings", subSettings: "Theme & profile",
+        finTitle: "Financial Management", finSub: "Monitor cash inflows and outflows.", lblNet: "Total Net Balance", lblIncome: "Total Income", lblExpense: "Total Expense", optAll: "All Types", optInc: "Income (+)", optExp: "Expense (-)", thDate: "Date", thCat: "Category", thDesc: "Description", thNom: "Amount", thAct: "Action",
+        taskHeading: "Tasks & Notes", taskSub: "Organization hub for tasks and memos.", lblTaskList: "Task List", lblNoteList: "My Notes",
+        calcHeading: "Calculator & Finance", calcSub: "Interactive calculator and loan simulation.", calHeading: "Calendar & Agenda", calSub: "Daily schedules.", setHeading: "Settings & Data", setSub: "Theme customization and data management.", lblTheme: "Theme Options"
       }
     };
 
     function changeLanguage(lang) {
       localStorage.setItem('workspace_lang', lang);
       const d = langData[lang] || langData.id;
-      document.getElementById('lblSubtitle').textContent = d.subtitle;
-      document.getElementById('badgeWelcome').textContent = d.badgeWelcome;
-      document.getElementById('welcomeTitle').textContent = d.welcomeTitle;
-      document.getElementById('welcomeDesc').textContent = d.welcomeDesc;
-      document.getElementById('btnAutoBackup').textContent = d.btnAutoBackup;
-      document.getElementById('menuFinance').textContent = d.menuFinance;
-      document.getElementById('subFinance').textContent = d.subFinance;
-      document.getElementById('menuTasks').textContent = d.menuTasks;
-      document.getElementById('subTasks').textContent = d.subTasks;
-      document.getElementById('menuCalc').textContent = d.menuCalc;
-      document.getElementById('subCalc').textContent = d.subCalc;
-      document.getElementById('menuCalendar').textContent = d.menuCalendar;
-      document.getElementById('subCalendar').textContent = d.subCalendar;
-      document.getElementById('menuTools').textContent = d.menuTools;
-      document.getElementById('subTools').textContent = d.subTools;
-      document.getElementById('menuSettings').textContent = d.menuSettings;
-      document.getElementById('subSettings').textContent = d.subSettings;
+      for (const key in d) {
+        const el = document.getElementById(key);
+        if (el) el.textContent = d[key];
+      }
     }
 
-    // Tab Switcher
     function switchTab(tabName) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       document.getElementById(`tab-${tabName}`).classList.remove('hidden');
       window.scrollTo(0, 0);
     }
 
-    // Theme Engine
     function setAppTheme(theme) {
-      document.getElementById('appBody').className = `min-h-screen pb-20 md:pb-6 transition-colors duration-300 theme-${theme}`;
+      document.getElementById('appBody').className = `min-h-screen pb-24 md:pb-6 transition-colors duration-300 theme-${theme}`;
       localStorage.setItem('workspace_theme_ultimate', theme);
     }
     setAppTheme(localStorage.getItem('workspace_theme_ultimate') || 'dark');
 
-    // Clock
     setInterval(() => {
       document.getElementById('headerClock').textContent = new Date().toLocaleTimeString('id-ID');
     }, 1000);
 
-    // Data Storage robust handling
     let transactions = JSON.parse(localStorage.getItem('hub_finance')) || [];
     let tasks = JSON.parse(localStorage.getItem('hub_tasks')) || [];
     let notes = JSON.parse(localStorage.getItem('hub_notes')) || [];
 
-    // Finance Renderer
     const monthPicker = document.getElementById('monthPicker');
     const now = new Date();
     monthPicker.value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
@@ -589,80 +468,112 @@
       document.getElementById('metricNet').textContent = 'Rp ' + (inc - exp).toLocaleString('id-ID');
 
       document.getElementById('txTableBody').innerHTML = filtered.map(t => `
-        <tr class="hover:bg-slate-800/40">
+        <tr class="hover:bg-indigo-500/5">
           <td class="p-3 font-mono text-sub">${t.date}</td>
-          <td class="p-3"><span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-bold">${t.category}</span></td>
-          <td class="p-3 font-semibold text-slate-200">${t.desc}</td>
+          <td class="p-3"><span class="px-2 py-0.5 rounded card-modern text-[10px] font-bold">${t.category}</span></td>
+          <td class="p-3 font-semibold">${t.desc}</td>
           <td class="p-3 text-right font-bold ${t.type === 'income' ? 'text-emerald-400' : 'text-rose-400'}">Rp ${t.amount.toLocaleString('id-ID')}</td>
-          <td class="p-3 text-center"><button onclick="deleteTx('${t.id}')" class="text-rose-400 text-xs font-bold">Hapus</button></td>
+          <td class="p-3 text-center space-x-2">
+            <button onclick="editTx('${t.id}')" class="text-indigo-400 text-xs font-bold">Edit</button>
+            <button onclick="deleteTx('${t.id}')" class="text-rose-400 text-xs font-bold">Hapus</button>
+          </td>
         </tr>
       `).join('');
     }
 
-    function openTxModal() { document.getElementById('txModal').classList.remove('hidden'); }
+    function openTxModal() { document.getElementById('editTxId').value = ''; document.getElementById('txForm').reset(); document.getElementById('formDate').value = new Date().toISOString().slice(0,10); document.getElementById('txModal').classList.remove('hidden'); }
     function closeTxModal() { document.getElementById('txModal').classList.add('hidden'); }
     document.getElementById('txForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      transactions.push({
-        id: Date.now().toString(),
+      const id = document.getElementById('editTxId').value;
+      const data = {
+        id: id || Date.now().toString(),
         date: document.getElementById('formDate').value,
         type: document.getElementById('formType').value,
         category: document.getElementById('formCategory').value,
         amount: Number(document.getElementById('formAmount').value),
         desc: document.getElementById('formDesc').value
-      });
+      };
+      if (id) {
+        transactions = transactions.map(t => t.id === id ? data : t);
+      } else {
+        transactions.push(data);
+      }
       localStorage.setItem('hub_finance', JSON.stringify(transactions));
       renderFinance(); closeTxModal();
     });
+    function editTx(id) {
+      const t = transactions.find(x => x.id === id);
+      if (!t) return;
+      document.getElementById('editTxId').value = t.id;
+      document.getElementById('formDate').value = t.date;
+      document.getElementById('formType').value = t.type;
+      document.getElementById('formCategory').value = t.category;
+      document.getElementById('formAmount').value = t.amount;
+      document.getElementById('formDesc').value = t.desc;
+      document.getElementById('txModal').classList.remove('hidden');
+    }
     function deleteTx(id) { transactions = transactions.filter(t => t.id !== id); localStorage.setItem('hub_finance', JSON.stringify(transactions)); renderFinance(); }
 
-    // Notes & Tasks
-    function openNoteModal() { document.getElementById('noteModal').classList.remove('hidden'); }
+    // Notes & Tasks with Edit
+    function openNoteModal() { document.getElementById('editNoteId').value = ''; document.getElementById('noteForm').reset(); document.getElementById('noteModal').classList.remove('hidden'); }
     function closeNoteModal() { document.getElementById('noteModal').classList.add('hidden'); }
     document.getElementById('noteForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      notes.push({ id: Date.now().toString(), title: document.getElementById('noteTitle').value, content: document.getElementById('noteContent').value });
+      const id = document.getElementById('editNoteId').value;
+      const data = { id: id || Date.now().toString(), title: document.getElementById('noteTitle').value, content: document.getElementById('noteContent').value };
+      if (id) { notes = notes.map(n => n.id === id ? data : n); } else { notes.push(data); }
       localStorage.setItem('hub_notes', JSON.stringify(notes));
       renderNotes(); closeNoteModal();
     });
     function renderNotes() {
       document.getElementById('noteList').innerHTML = notes.map(n => `
-        <div class="p-3.5 bg-slate-900/60 border border-slate-800 rounded-xl space-y-1">
-          <div class="flex justify-between items-center"><h4 class="font-bold text-xs text-violet-300">${n.title}</h4><button onclick="deleteNote('${n.id}')" class="text-rose-400 text-[10px]">Hapus</button></div>
-          <p class="text-xs text-slate-300">${n.content}</p>
+        <div class="p-3.5 card-modern rounded-xl space-y-1">
+          <div class="flex justify-between items-center"><h4 class="font-bold text-xs text-violet-300">${n.title}</h4><div class="space-x-2"><button onclick="editNote('${n.id}')" class="text-indigo-400 text-[10px]">Edit</button><button onclick="deleteNote('${n.id}')" class="text-rose-400 text-[10px]">Hapus</button></div></div>
+          <p class="text-xs text-sub">${n.content}</p>
         </div>
       `).join('');
     }
+    function editNote(id) {
+      const n = notes.find(x => x.id === id);
+      if(!n) return;
+      document.getElementById('editNoteId').value = n.id;
+      document.getElementById('noteTitle').value = n.title;
+      document.getElementById('noteContent').value = n.content;
+      document.getElementById('noteModal').classList.remove('hidden');
+    }
     function deleteNote(id) { notes = notes.filter(n => n.id !== id); localStorage.setItem('hub_notes', JSON.stringify(notes)); renderNotes(); }
 
-    function openTaskModal() { document.getElementById('taskModal').classList.remove('hidden'); }
+    function openTaskModal() { document.getElementById('editTaskId').value = ''; document.getElementById('taskForm').reset(); document.getElementById('taskModal').classList.remove('hidden'); }
     function closeTaskModal() { document.getElementById('taskModal').classList.add('hidden'); }
     document.getElementById('taskForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      tasks.push({ id: Date.now().toString(), title: document.getElementById('taskTitle').value, dueDate: document.getElementById('taskDueDate').value });
+      const id = document.getElementById('editTaskId').value;
+      const data = { id: id || Date.now().toString(), title: document.getElementById('taskTitle').value, dueDate: document.getElementById('taskDueDate').value };
+      if (id) { tasks = tasks.map(t => t.id === id ? data : t); } else { tasks.push(data); }
       localStorage.setItem('hub_tasks', JSON.stringify(tasks));
       renderTasks(); closeTaskModal();
     });
     function renderTasks() {
       document.getElementById('taskList').innerHTML = tasks.map(t => `
-        <div class="p-2 flex justify-between items-center text-xs"><span class="font-semibold">${t.title} <span class="text-[10px] text-sub">(${t.dueDate})</span></span><button onclick="deleteTask('${t.id}')" class="text-rose-400 font-bold">Hapus</button></div>
+        <div class="p-2 flex justify-between items-center text-xs"><span class="font-semibold">${t.title} <span class="text-[10px] text-sub">(${t.dueDate})</span></span><div class="space-x-2"><button onclick="editTask('${t.id}')" class="text-indigo-400 font-bold">Edit</button><button onclick="deleteTask('${t.id}')" class="text-rose-400 font-bold">Hapus</button></div></div>
       `).join('');
+    }
+    function editTask(id) {
+      const t = tasks.find(x => x.id === id);
+      if(!t) return;
+      document.getElementById('editTaskId').value = t.id;
+      document.getElementById('taskTitle').value = t.title;
+      document.getElementById('taskDueDate').value = t.dueDate;
+      document.getElementById('taskModal').classList.remove('hidden');
     }
     function deleteTask(id) { tasks = tasks.filter(t => t.id !== id); localStorage.setItem('hub_tasks', JSON.stringify(tasks)); renderTasks(); }
 
-    // Calculator Logic
+    // Calc
     let calcValue = "";
     function calcAppend(val) { calcValue += val; document.getElementById('calcScreen').value = calcValue || "0"; }
     function calcClear() { calcValue = ""; document.getElementById('calcScreen').value = "0"; }
-    function calcCompute() {
-      try {
-        calcValue = eval(calcValue).toString();
-        document.getElementById('calcScreen').value = calcValue;
-      } catch {
-        document.getElementById('calcScreen').value = "Error";
-        calcValue = "";
-      }
-    }
+    function calcCompute() { try { calcValue = eval(calcValue).toString(); document.getElementById('calcScreen').value = calcValue; } catch { document.getElementById('calcScreen').value = "Error"; calcValue = ""; } }
     function calculateLoan() {
       const p = Number(document.getElementById('loanAmount').value);
       const r = Number(document.getElementById('loanInterest').value) / 100 / 12;
@@ -671,9 +582,8 @@
       document.getElementById('loanResult').textContent = `Cicilan per Bulan: Rp ${Math.round(res || 0).toLocaleString('id-ID')}`;
     }
 
-    // Calendar Simple Generator
-    let calYear = now.getFullYear();
-    let calMonth = now.getMonth();
+    // Calendar
+    let calYear = now.getFullYear(), calMonth = now.getMonth();
     function renderCalendar() {
       const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
       document.getElementById('calMonthYear').textContent = `${months[calMonth]} ${calYear}`;
@@ -681,16 +591,11 @@
       const totalDays = new Date(calYear, calMonth + 1, 0).getDate();
       let html = "";
       for (let i = 0; i < firstDay; i++) html += `<div></div>`;
-      for (let d = 1; d <= totalDays; d++) {
-        html += `<div class="p-2 bg-slate-900/60 rounded-xl border border-slate-800 font-bold">${d}</div>`;
-      }
+      for (let d = 1; d <= totalDays; d++) { html += `<div class="p-2 card-modern rounded-xl font-bold">${d}</div>`; }
       document.getElementById('calendarGrid').innerHTML = html;
     }
     function changeMonth(dir) {
-      calMonth += dir;
-      if (calMonth > 11) { calMonth = 0; calYear++; }
-      if (calMonth < 0) { calMonth = 11; calYear--; }
-      renderCalendar();
+      calMonth += dir; if (calMonth > 11) { calMonth = 0; calYear++; } if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar();
     }
 
     // Code Playground
@@ -700,7 +605,50 @@
       iframe.open(); iframe.write(code); iframe.close();
     }
 
-    // Auto Backup & Restore
+    // Photo Editor Logic
+    let imageObj = new Image();
+    let currentFilter = '';
+    function loadPhoto(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        imageObj.onload = function() {
+          const canvas = document.getElementById('photoCanvas');
+          canvas.classList.remove('hidden');
+          document.getElementById('photoPlaceholder').classList.add('hidden');
+          const ctx = canvas.getContext('2d');
+          canvas.width = imageObj.width;
+          canvas.height = imageObj.height;
+          ctx.drawImage(imageObj, 0, 0);
+        };
+        imageObj.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+    function applyFilters() {
+      const canvas = document.getElementById('photoCanvas');
+      const ctx = canvas.getContext('2d');
+      const bright = document.getElementById('rangeBright').value;
+      const contrast = document.getElementById('rangeContrast').value;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.filter = `${currentFilter} brightness(${bright}%) contrast(${contrast}%)`;
+      ctx.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
+    }
+    function setFilter(filter) { currentFilter = filter; applyFilters(); }
+    function resetPhoto() {
+      document.getElementById('rangeBright').value = 100;
+      document.getElementById('rangeContrast').value = 100;
+      currentFilter = '';
+      applyFilters();
+    }
+    function downloadPhoto() {
+      const canvas = document.getElementById('photoCanvas');
+      const btn = document.getElementById('downloadPhotoBtn');
+      btn.href = canvas.toDataURL('image/png');
+    }
+
+    // Backup & Restore
     function autoBackupJSON() {
       const data = { transactions, tasks, notes };
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -716,16 +664,13 @@
           if (parsed.transactions) { transactions = parsed.transactions; localStorage.setItem('hub_finance', JSON.stringify(transactions)); }
           if (parsed.tasks) { tasks = parsed.tasks; localStorage.setItem('hub_tasks', JSON.stringify(tasks)); }
           if (parsed.notes) { notes = parsed.notes; localStorage.setItem('hub_notes', JSON.stringify(notes)); }
-          renderFinance(); renderNotes(); renderTasks();
-          alert("Data berhasil dipulihkan!");
-        } catch {
-          alert("Format file JSON tidak valid.");
-        }
+          renderFinance(); renderNotes(); renderTasks(); alert("Data berhasil dipulihkan!");
+        } catch { alert("Format file JSON tidak valid."); }
       };
       reader.readAsText(file);
     }
 
-    // Init All Renderers
+    // Init
     renderFinance(); renderNotes(); renderTasks(); renderCalendar(); runCode();
     const savedLang = localStorage.getItem('workspace_lang') || 'id';
     document.getElementById('langSelector').value = savedLang;

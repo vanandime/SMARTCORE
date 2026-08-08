@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WorkSpace Hub - Lite Suite v4.1</title>
+  <title>WorkSpace Hub - Lite Suite v4.2</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- PDF.js untuk Viewer/Editor PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
     body { font-family: 'Plus Jakarta Sans', sans-serif; will-change: background-color, color; }
@@ -36,13 +38,15 @@
         </div>
         <div>
           <h1 class="font-bold text-xs tracking-tight">WorkSpace Hub</h1>
-          <p class="text-[10px] text-sub" id="lblSubtitle">Lite Suite v4.1</p>
+          <p class="text-[10px] text-sub" id="lblSubtitle">Lite Suite v4.2</p>
         </div>
       </div>
       <div class="flex items-center gap-2">
         <select id="langSelector" onchange="changeLanguage(this.value)" class="text-xs custom-input border rounded-lg px-2 py-1 outline-none font-semibold">
           <option value="id">🇮🇩 ID</option>
           <option value="en">🇬🇧 EN</option>
+          <option value="zh">🇨🇳 ZH</option>
+          <option value="ar">🇸🇦 AR</option>
         </select>
         <div class="text-xs font-mono font-bold text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-lg border border-indigo-500/20 whitespace-nowrap" id="headerClock">00:00:00</div>
       </div>
@@ -58,7 +62,7 @@
         <div><h2 class="text-base font-extrabold" id="finTitle">Manajemen Keuangan</h2><p class="text-xs text-sub" id="finSub">Pantau arus kas masuk dan keluar secara real-time.</p></div>
         <div class="flex items-center gap-2">
           <input type="month" id="monthPicker" class="text-xs custom-input border rounded-xl px-2.5 py-2 font-semibold outline-none">
-          <button onclick="openTxModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow">+ Transaksi</button>
+          <button onclick="openTxModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow" id="btnTx">+ Transaksi</button>
         </div>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -97,8 +101,8 @@
       <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
         <div><h2 class="text-base font-extrabold" id="taskHeading">Tugas & Catatan</h2><p class="text-xs text-sub" id="taskSub">Pusat pengorganisasian tugas dan memo.</p></div>
         <div class="flex gap-2">
-          <button onclick="openTaskModal()" class="bg-indigo-600 text-white text-xs font-bold px-3 py-2 rounded-xl">+ Tugas</button>
-          <button onclick="openNoteModal()" class="bg-violet-600 text-white text-xs font-bold px-3 py-2 rounded-xl">+ Catatan</button>
+          <button onclick="openTaskModal()" class="bg-indigo-600 text-white text-xs font-bold px-3 py-2 rounded-xl" id="btnTask">+ Tugas</button>
+          <button onclick="openNoteModal()" class="bg-violet-600 text-white text-xs font-bold px-3 py-2 rounded-xl" id="btnNote">+ Catatan</button>
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -116,23 +120,23 @@
     <!-- MEDIA DOWNLOADER -->
     <section id="tab-downloader" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl">
-        <h2 class="text-base font-extrabold">Media Downloader</h2>
-        <p class="text-xs text-sub">Masukkan tautan video atau media untuk memproses unduhan.</p>
+        <h2 class="text-base font-extrabold" id="dlHeading">Media Downloader</h2>
+        <p class="text-xs text-sub" id="dlSub">Masukkan tautan video atau media untuk memproses unduhan.</p>
       </div>
       <div class="card-modern p-5 rounded-2xl space-y-3 max-w-xl mx-auto">
         <div>
-          <label class="text-xs font-bold text-sub">URL Video / Media</label>
+          <label class="text-xs font-bold text-sub" id="lblDlUrl">URL Video / Media</label>
           <div class="flex gap-2 mt-1">
             <input type="url" id="dlUrlInput" placeholder="https://example.com/video..." class="text-xs custom-input border rounded-xl px-3 py-2.5 flex-1 outline-none">
-            <button onclick="processDownload()" class="bg-indigo-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl">Proses</button>
+            <button onclick="processDownload()" class="bg-indigo-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl" id="btnDlProc">Proses</button>
           </div>
         </div>
         <div id="dlResultArea" class="hidden p-3.5 card-modern rounded-xl space-y-2">
           <div class="flex items-center gap-2.5">
             <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">✓</div>
-            <div><h4 class="font-bold text-xs">Media Ditemukan</h4><p class="text-[10px] text-sub">Siap diunduh dalam resolusi terbaik.</p></div>
+            <div><h4 class="font-bold text-xs" id="lblDlFound">Media Ditemukan</h4><p class="text-[10px] text-sub" id="lblDlReady">Siap diunduh dalam resolusi terbaik.</p></div>
           </div>
-          <a id="dlActionBtn" href="#" target="_blank" class="block text-center bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 rounded-xl">Unduh Berkas Sekarang</a>
+          <a id="dlActionBtn" href="#" target="_blank" class="block text-center bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 rounded-xl" id="lblDlAction">Unduh Berkas Sekarang</a>
         </div>
       </div>
     </section>
@@ -140,23 +144,74 @@
     <!-- PEMENDEK LINK (URL SHORTENER) -->
     <section id="tab-shortener" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl">
-        <h2 class="text-base font-extrabold">Pemendek Link (URL Shortener)</h2>
-        <p class="text-xs text-sub">Buat tautan pendek yang rapi dan mudah dibagikan.</p>
+        <h2 class="text-base font-extrabold" id="shortHeading">Pemendek Link (URL Shortener)</h2>
+        <p class="text-xs text-sub" id="shortSub">Buat tautan pendek yang rapi dan mudah dibagikan sesuai domain saat ini.</p>
       </div>
       <div class="card-modern p-5 rounded-2xl space-y-3 max-w-xl mx-auto">
         <div>
-          <label class="text-xs font-bold text-sub">Tautan Panjang</label>
+          <label class="text-xs font-bold text-sub" id="lblLongUrl">Tautan Panjang</label>
           <div class="flex gap-2 mt-1">
             <input type="url" id="shortUrlInput" placeholder="https://situspanjang.com/halaman/artikel..." class="text-xs custom-input border rounded-xl px-3 py-2.5 flex-1 outline-none">
-            <button onclick="generateShortUrl()" class="bg-indigo-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl">Pendekkan</button>
+            <button onclick="generateShortUrl()" class="bg-indigo-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl" id="btnShortProc">Pendekkan</button>
           </div>
         </div>
         <div id="shortResultArea" class="hidden p-3.5 card-modern rounded-xl space-y-2">
-          <label class="text-xs font-bold text-sub">Hasil Link Pendek</label>
+          <label class="text-xs font-bold text-sub" id="lblShortRes">Hasil Link Pendek</label>
           <div class="flex gap-2">
             <input type="text" id="shortResultOutput" readonly class="text-xs custom-input border rounded-xl px-3 py-2 flex-1 font-mono text-indigo-400 font-bold">
-            <button onclick="copyShortUrl()" class="bg-violet-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl">Salin</button>
+            <button onclick="copyShortUrl()" class="bg-violet-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl" id="btnCopyShort">Salin</button>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRANSLATOR -->
+    <section id="tab-translator" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl">
+        <h2 class="text-base font-extrabold" id="transHeading">Penerjemah Bahasa (Translator)</h2>
+        <p class="text-xs text-sub" id="transSub">Terjemahkan teks antar bahasa dengan cepat.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card-modern p-4 rounded-2xl space-y-3">
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-bold text-sub" id="lblSourceText">Teks Asli</span>
+            <select id="transTargetLang" class="custom-input border rounded-lg px-2 py-1 outline-none text-xs font-bold">
+              <option value="en">English (EN)</option>
+              <option value="id">Indonesia (ID)</option>
+              <option value="zh">中文 (ZH)</option>
+              <option value="ar">العربية (AR)</option>
+              <option value="ja">日本語 (JA)</option>
+              <option value="es">Español (ES)</option>
+            </select>
+          </div>
+          <textarea id="transInputText" rows="5" placeholder="Ketik teks yang ingin diterjemahkan..." class="w-full text-xs custom-input border rounded-xl p-3 outline-none"></textarea>
+          <button onclick="translateText()" class="w-full bg-indigo-600 text-white text-xs font-bold py-2.5 rounded-xl" id="btnTranslate">Terjemahkan Sekarang</button>
+        </div>
+        <div class="card-modern p-4 rounded-2xl space-y-3">
+          <span class="font-bold text-sub text-xs" id="lblResultText">Hasil Terjemahan</span>
+          <div id="transOutputResult" class="w-full h-[142px] text-xs custom-input border rounded-xl p-3 overflow-y-auto text-indigo-300 font-medium select-all">Hasil terjemahan akan muncul di sini...</div>
+          <button onclick="copyTranslation()" class="w-full card-modern text-xs font-bold py-2.5 rounded-xl" id="btnCopyTrans">Salin Hasil</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PDF EDITOR & VIEWER -->
+    <section id="tab-pdf" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div><h2 class="text-base font-extrabold" id="pdfHeading">PDF Editor & Viewer</h2><p class="text-xs text-sub" id="pdfSub">Buka dan tinjau dokumen PDF langsung di browser.</p></div>
+        <label class="bg-indigo-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl cursor-pointer">
+          <span id="lblUploadPdf">Pilih File PDF</span> <input type="file" id="uploadPdfFile" accept="application/pdf" class="hidden" onchange="loadPdf(event)">
+        </label>
+      </div>
+      <div class="card-modern p-4 rounded-2xl flex flex-col items-center justify-center min-h-[400px] space-y-4">
+        <div id="pdfPlaceholder" class="text-xs text-sub text-center py-10">Belum ada file PDF yang dimuat. Silakan unggah file PDF Anda.</div>
+        <div id="pdfViewerContainer" class="hidden w-full space-y-3 flex flex-col items-center">
+          <div class="flex items-center gap-3 bg-slate-900/50 p-2 rounded-xl border border-slate-800 text-xs">
+            <button onclick="prevPdfPage()" class="px-3 py-1 bg-indigo-600 text-white rounded-lg font-bold" id="btnPdfPrev">Sebelumnya</button>
+            <span class="font-mono" id="pdfPageInfo">Halaman: 0 / 0</span>
+            <button onclick="nextPdfPage()" class="px-3 py-1 bg-indigo-600 text-white rounded-lg font-bold" id="btnPdfNext">Selanjutnya</button>
+          </div>
+          <canvas id="pdfCanvas" class="max-w-full shadow-lg rounded-xl border border-slate-700 bg-white"></canvas>
         </div>
       </div>
     </section>
@@ -164,12 +219,12 @@
     <!-- KALKULATOR -->
     <section id="tab-calc" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl">
-        <h2 class="text-base font-extrabold">Kalkulator & Finansial</h2>
-        <p class="text-xs text-sub">Kalkulator interaktif dan simulasi cicilan.</p>
+        <h2 class="text-base font-extrabold" id="calcHeading">Kalkulator & Finansial</h2>
+        <p class="text-xs text-sub" id="calcSub">Kalkulator interaktif dan simulasi cicilan.</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="card-modern p-4 rounded-2xl space-y-3">
-          <h3 class="text-xs font-bold uppercase text-sub border-b pb-2">Kalkulator</h3>
+          <h3 class="text-xs font-bold uppercase text-sub border-b pb-2" id="lblCalcTitle">Kalkulator</h3>
           <input type="text" id="calcScreen" readonly class="w-full text-right text-lg font-mono custom-input border rounded-xl p-2.5 text-emerald-400 font-bold" value="0">
           <div class="grid grid-cols-4 gap-1.5">
             <button onclick="calcClear()" class="bg-rose-600/20 text-rose-300 p-2.5 rounded-lg font-bold text-xs">C</button>
@@ -194,12 +249,12 @@
           </div>
         </div>
         <div class="card-modern p-4 rounded-2xl space-y-3">
-          <h3 class="text-xs font-bold uppercase text-sub border-b pb-2">Simulasi Kredit</h3>
+          <h3 class="text-xs font-bold uppercase text-sub border-b pb-2" id="lblLoanTitle">Simulasi Kredit</h3>
           <div class="space-y-2.5 text-xs">
-            <div><label class="text-sub">Plafon Pinjaman (Rp)</label><input type="number" id="loanAmount" value="10000000" class="w-full custom-input border rounded-xl p-2 mt-1 font-bold"></div>
-            <div><label class="text-sub">Bunga per Tahun (%)</label><input type="number" id="loanInterest" value="12" class="w-full custom-input border rounded-xl p-2 mt-1 font-bold"></div>
-            <div><label class="text-sub">Tenor (Bulan)</label><input type="number" id="loanTenor" value="12" class="w-full custom-input border rounded-xl p-2 mt-1 font-bold"></div>
-            <button onclick="calculateLoan()" class="w-full bg-indigo-600 text-white font-bold py-2 rounded-xl">Hitung Angsuran</button>
+            <div><label class="text-sub" id="lblLoanAmount">Plafon Pinjaman (Rp)</label><input type="number" id="loanAmount" value="10000000" class="w-full custom-input border rounded-xl p-2 mt-1 font-bold"></div>
+            <div><label class="text-sub" id="lblLoanInterest">Bunga per Tahun (%)</label><input type="number" id="loanInterest" value="12" class="w-full custom-input border rounded-xl p-2 mt-1 font-bold"></div>
+            <div><label class="text-sub" id="lblLoanTenor">Tenor (Bulan)</label><input type="number" id="loanTenor" value="12" class="w-full custom-input border rounded-xl p-2 mt-1 font-bold"></div>
+            <button onclick="calculateLoan()" class="w-full bg-indigo-600 text-white font-bold py-2 rounded-xl" id="btnLoanCalc">Hitung Angsuran</button>
             <div id="loanResult" class="p-2.5 card-modern rounded-xl text-indigo-400 font-bold text-center">Cicilan per Bulan: Rp 0</div>
           </div>
         </div>
@@ -209,23 +264,23 @@
     <!-- PHOTO EDITOR -->
     <section id="tab-photo" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
-        <div><h2 class="text-base font-extrabold">Photo Editor</h2><p class="text-xs text-sub">Unggah foto dan lakukan penyuntingan instan.</p></div>
+        <div><h2 class="text-base font-extrabold" id="photoHeading">Photo Editor</h2><p class="text-xs text-sub" id="photoSub">Unggah foto dan lakukan penyuntingan instan.</p></div>
         <label class="bg-indigo-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl cursor-pointer">
-          Pilih Foto <input type="file" id="uploadPhoto" accept="image/*" class="hidden" onchange="loadPhoto(event)">
+          <span id="lblChoosePhoto">Pilih Foto</span> <input type="file" id="uploadPhoto" accept="image/*" class="hidden" onchange="loadPhoto(event)">
         </label>
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div class="card-modern p-4 rounded-2xl space-y-3">
-          <h3 class="text-xs font-bold uppercase text-sub border-b pb-2">Kontrol Filter</h3>
+          <h3 class="text-xs font-bold uppercase text-sub border-b pb-2" id="lblFilterCtrl">Kontrol Filter</h3>
           <div class="space-y-2.5 text-xs">
-            <div><label class="text-sub">Kecerahan</label><input type="range" id="rangeBright" min="0" max="200" value="100" class="w-full mt-1" oninput="applyFilters()"></div>
-            <div><label class="text-sub">Kontras</label><input type="range" id="rangeContrast" min="0" max="200" value="100" class="w-full mt-1" oninput="applyFilters()"></div>
+            <div><label class="text-sub" id="lblBright">Kecerahan</label><input type="range" id="rangeBright" min="0" max="200" value="100" class="w-full mt-1" oninput="applyFilters()"></div>
+            <div><label class="text-sub" id="lblContrast">Kontras</label><input type="range" id="rangeContrast" min="0" max="200" value="100" class="w-full mt-1" oninput="applyFilters()"></div>
             <div class="flex gap-2 pt-1">
               <button onclick="setFilter('grayscale(100%)')" class="flex-1 card-modern p-2 rounded-xl font-bold text-xs">Grayscale</button>
               <button onclick="setFilter('invert(100%)')" class="flex-1 card-modern p-2 rounded-xl font-bold text-xs">Invert</button>
             </div>
-            <button onclick="resetPhoto()" class="w-full card-modern p-2 rounded-xl font-bold text-rose-400">Reset</button>
-            <a id="downloadPhotoBtn" class="block text-center bg-emerald-600 text-white font-bold py-2 rounded-xl cursor-pointer" download="edited-photo.png" onclick="downloadPhoto()">Unduh Foto</a>
+            <button onclick="resetPhoto()" class="w-full card-modern p-2 rounded-xl font-bold text-rose-400" id="btnPhotoReset">Reset</button>
+            <a id="downloadPhotoBtn" class="block text-center bg-emerald-600 text-white font-bold py-2 rounded-xl cursor-pointer" download="edited-photo.png" onclick="downloadPhoto()" id="lblDownloadPhoto">Unduh Foto</a>
           </div>
         </div>
         <div class="lg:col-span-2 card-modern p-4 rounded-2xl flex items-center justify-center min-h-[300px]">
@@ -251,14 +306,14 @@
         </div>
       </div>
       <div class="card-modern p-4 rounded-2xl space-y-3">
-        <h3 class="text-xs font-bold uppercase text-sub">Backup & Restore JSON</h3>
+        <h3 class="text-xs font-bold uppercase text-sub" id="lblBackup">Backup & Restore JSON</h3>
         <div class="flex flex-wrap gap-2.5">
-          <button onclick="autoBackupJSON()" class="bg-indigo-600 text-xs px-3.5 py-2 rounded-xl font-bold text-white">Download Backup JSON</button>
-          <label class="card-modern text-xs px-3.5 py-2 rounded-xl font-bold cursor-pointer">Restore JSON <input type="file" accept=".json" onchange="importJSON(event)" class="hidden"></label>
+          <button onclick="autoBackupJSON()" class="bg-indigo-600 text-xs px-3.5 py-2 rounded-xl font-bold text-white" id="btnDownloadJson">Download Backup JSON</button>
+          <label class="card-modern text-xs px-3.5 py-2 rounded-xl font-bold cursor-pointer" id="lblRestoreJson">Restore JSON <input type="file" accept=".json" onchange="importJSON(event)" class="hidden"></label>
         </div>
       </div>
       <div class="card-modern p-5 rounded-2xl space-y-4">
-        <h3 class="text-xs font-bold uppercase text-sub border-b pb-2">Tentang Pengembang</h3>
+        <h3 class="text-xs font-bold uppercase text-sub border-b pb-2" id="lblDevAbout">Tentang Pengembang</h3>
         <div class="flex flex-col sm:flex-row items-center gap-3">
           <div class="w-14 h-14 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-600 text-white flex items-center justify-center font-black text-lg shadow shrink-0">DM</div>
           <div class="text-center sm:text-left space-y-0.5">
@@ -283,17 +338,19 @@
   <div id="floatingMenuModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-4">
     <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
       <div class="flex justify-between items-center border-b pb-2">
-        <div><h3 class="font-extrabold text-xs">Pusat Menu Launcher</h3><p class="text-[10px] text-sub">Pilih modul navigasi</p></div>
+        <div><h3 class="font-extrabold text-xs" id="lblLauncherTitle">Pusat Menu Launcher</h3><p class="text-[10px] text-sub" id="lblLauncherSub">Pilih modul navigasi</p></div>
         <button onclick="toggleFloatingMenu()" class="text-sub font-bold text-base">&times;</button>
       </div>
       <div class="grid grid-cols-2 gap-2 max-h-[55vh] overflow-y-auto p-0.5">
         <button onclick="switchTabAndClose('finance')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">💰</span><div><div class="font-bold text-xs" id="menuFinance">Keuangan</div><div class="text-[9px] text-sub">Arus Kas</div></div></button>
         <button onclick="switchTabAndClose('tasks')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">📋</span><div><div class="font-bold text-xs" id="menuTasks">Tugas & Catatan</div><div class="text-[9px] text-sub">Agenda & Memo</div></div></button>
-        <button onclick="switchTabAndClose('downloader')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">📥</span><div><div class="font-bold text-xs">Downloader</div><div class="text-[9px] text-sub">Unduh Video</div></div></button>
-        <button onclick="switchTabAndClose('shortener')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">🔗</span><div><div class="font-bold text-xs">Pemendek Link</div><div class="text-[9px] text-sub">Short URL</div></div></button>
-        <button onclick="switchTabAndClose('calc')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">🧮</span><div><div class="font-bold text-xs">Kalkulator</div><div class="text-[9px] text-sub">Matematika</div></div></button>
-        <button onclick="switchTabAndClose('photo')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">📸</span><div><div class="font-bold text-xs">Photo Editor</div><div class="text-[9px] text-sub">Sunting Filter</div></div></button>
-        <button onclick="switchTabAndClose('settings')" class="col-span-2 p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">⚙️</span><div><div class="font-bold text-xs">Pengaturan</div><div class="text-[9px] text-sub">Tema & Data Backup</div></div></button>
+        <button onclick="switchTabAndClose('downloader')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">📥</span><div><div class="font-bold text-xs" id="menuDownloader">Downloader</div><div class="text-[9px] text-sub">Unduh Video</div></div></button>
+        <button onclick="switchTabAndClose('shortener')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">🔗</span><div><div class="font-bold text-xs" id="menuShortener">Pemendek Link</div><div class="text-[9px] text-sub">Short URL</div></div></button>
+        <button onclick="switchTabAndClose('translator')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">🌐</span><div><div class="font-bold text-xs" id="menuTranslator">Translator</div><div class="text-[9px] text-sub">Penerjemah</div></div></button>
+        <button onclick="switchTabAndClose('pdf')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">📄</span><div><div class="font-bold text-xs" id="menuPdf">PDF Editor</div><div class="text-[9px] text-sub">Lihat & Berkas</div></div></button>
+        <button onclick="switchTabAndClose('calc')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">🧮</span><div><div class="font-bold text-xs" id="menuCalc">Kalkulator</div><div class="text-[9px] text-sub">Matematika</div></div></button>
+        <button onclick="switchTabAndClose('photo')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">📸</span><div><div class="font-bold text-xs" id="menuPhoto">Photo Editor</div><div class="text-[9px] text-sub">Sunting Filter</div></div></button>
+        <button onclick="switchTabAndClose('settings')" class="col-span-2 p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">⚙️</span><div><div class="font-bold text-xs" id="menuSettings">Pengaturan</div><div class="text-[9px] text-sub">Tema & Data Backup</div></div></button>
       </div>
     </div>
   </div>
@@ -301,20 +358,20 @@
   <!-- MODAL TRANSAKSI -->
   <div id="txModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
-      <div class="flex justify-between items-center border-b pb-2"><h3 class="font-bold text-xs">Transaksi</h3><button onclick="closeTxModal()" class="text-sub font-bold">&times;</button></div>
+      <div class="flex justify-between items-center border-b pb-2"><h3 class="font-bold text-xs" id="modalTxTitle">Transaksi</h3><button onclick="closeTxModal()" class="text-sub font-bold">&times;</button></div>
       <form id="txForm" class="space-y-2.5">
         <input type="hidden" id="editTxId">
         <div class="grid grid-cols-2 gap-2">
           <input type="date" id="formDate" required class="text-xs custom-input border rounded-xl p-2">
           <select id="formType" class="text-xs custom-input border rounded-xl p-2">
-            <option value="expense">Pengeluaran (-)</option>
-            <option value="income">Pemasukan (+)</option>
+            <option value="expense" id="optFormExp">Pengeluaran (-)</option>
+            <option value="income" id="optFormInc">Pemasukan (+)</option>
           </select>
         </div>
         <input type="text" id="formCategory" placeholder="Kategori" required class="w-full text-xs custom-input border rounded-xl p-2">
         <input type="number" id="formAmount" placeholder="Nominal (Rp)" required class="w-full text-xs custom-input border rounded-xl p-2 font-bold">
         <input type="text" id="formDesc" placeholder="Keterangan" required class="w-full text-xs custom-input border rounded-xl p-2">
-        <div class="flex justify-end gap-2 pt-1"><button type="button" onclick="closeTxModal()" class="px-3 py-1.5 text-xs text-sub">Batal</button><button type="submit" class="px-3 py-1.5 text-xs bg-indigo-600 text-white rounded-xl font-bold">Simpan</button></div>
+        <div class="flex justify-end gap-2 pt-1"><button type="button" onclick="closeTxModal()" class="px-3 py-1.5 text-xs text-sub" id="btnCancelTx">Batal</button><button type="submit" class="px-3 py-1.5 text-xs bg-indigo-600 text-white rounded-xl font-bold" id="btnSaveTx">Simpan</button></div>
       </form>
     </div>
   </div>
@@ -322,12 +379,12 @@
   <!-- MODAL CATATAN -->
   <div id="noteModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
-      <div class="flex justify-between items-center border-b pb-2"><h3 class="font-bold text-xs">Catatan</h3><button onclick="closeNoteModal()" class="text-sub font-bold">&times;</button></div>
+      <div class="flex justify-between items-center border-b pb-2"><h3 class="font-bold text-xs" id="modalNoteTitle">Catatan</h3><button onclick="closeNoteModal()" class="text-sub font-bold">&times;</button></div>
       <form id="noteForm" class="space-y-2.5">
         <input type="hidden" id="editNoteId">
         <input type="text" id="noteTitle" placeholder="Judul" required class="w-full text-xs custom-input border rounded-xl p-2 font-bold">
         <textarea id="noteContent" rows="3" placeholder="Isi catatan..." required class="w-full text-xs custom-input border rounded-xl p-2"></textarea>
-        <div class="flex justify-end gap-2 pt-1"><button type="button" onclick="closeNoteModal()" class="px-3 py-1.5 text-xs text-sub">Batal</button><button type="submit" class="px-3 py-1.5 text-xs bg-violet-600 text-white rounded-xl font-bold">Simpan</button></div>
+        <div class="flex justify-end gap-2 pt-1"><button type="button" onclick="closeNoteModal()" class="px-3 py-1.5 text-xs text-sub" id="btnCancelNote">Batal</button><button type="submit" class="px-3 py-1.5 text-xs bg-violet-600 text-white rounded-xl font-bold" id="btnSaveNote">Simpan</button></div>
       </form>
     </div>
   </div>
@@ -335,12 +392,12 @@
   <!-- MODAL TUGAS -->
   <div id="taskModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
-      <div class="flex justify-between items-center border-b pb-2"><h3 class="font-bold text-xs">Tugas</h3><button onclick="closeTaskModal()" class="text-sub font-bold">&times;</button></div>
+      <div class="flex justify-between items-center border-b pb-2"><h3 class="font-bold text-xs" id="modalTaskTitle">Tugas</h3><button onclick="closeTaskModal()" class="text-sub font-bold">&times;</button></div>
       <form id="taskForm" class="space-y-2.5">
         <input type="hidden" id="editTaskId">
         <input type="text" id="taskTitle" placeholder="Judul Tugas" required class="w-full text-xs custom-input border rounded-xl p-2">
         <input type="date" id="taskDueDate" required class="w-full text-xs custom-input border rounded-xl p-2">
-        <div class="flex justify-end gap-2 pt-1"><button type="button" onclick="closeTaskModal()" class="px-3 py-1.5 text-xs text-sub">Batal</button><button type="submit" class="px-3 py-1.5 text-xs bg-indigo-600 text-white rounded-xl font-bold">Simpan</button></div>
+        <div class="flex justify-end gap-2 pt-1"><button type="button" onclick="closeTaskModal()" class="px-3 py-1.5 text-xs text-sub" id="btnCancelTask">Batal</button><button type="submit" class="px-3 py-1.5 text-xs bg-indigo-600 text-white rounded-xl font-bold" id="btnSaveTask">Simpan</button></div>
       </form>
     </div>
   </div>
@@ -349,24 +406,60 @@
   <script>
     const langData = {
       id: {
-        subtitle: "Lite Suite v4.1", menuFinance: "Keuangan", menuTasks: "Tugas & Catatan", 
+        subtitle: "Lite Suite v4.2", menuFinance: "Keuangan", menuTasks: "Tugas & Catatan", menuDownloader: "Downloader", menuShortener: "Pemendek Link", menuTranslator: "Translator", menuPdf: "PDF Editor", menuCalc: "Kalkulator", menuPhoto: "Photo Editor", menuSettings: "Pengaturan",
         finTitle: "Manajemen Keuangan", finSub: "Pantau arus kas masuk dan keluar secara real-time.", 
         lblNet: "Total Saldo Bersih", lblIncome: "Total Pemasukan", lblExpense: "Total Pengeluaran", 
         optAll: "Semua Tipe", optInc: "Pemasukan (+)", optExp: "Pengeluaran (-)", 
         thDate: "Tanggal", thCat: "Kategori", thDesc: "Keterangan", thNom: "Nominal", thAct: "Aksi",
         taskHeading: "Tugas & Catatan", taskSub: "Pusat pengorganisasian tugas dan memo.", 
         lblTaskList: "Daftar Pekerjaan", lblNoteList: "Catatan Saya",
-        setHeading: "Pengaturan & Data", setSub: "Kustomisasi tema dan manajemen data.", lblTheme: "Pilihan Tema Tampilan"
+        setHeading: "Pengaturan & Data", setSub: "Kustomisasi tema dan manajemen data.", lblTheme: "Pilihan Tema Tampilan",
+        transHeading: "Penerjemah Bahasa", transSub: "Terjemahkan teks antar bahasa dengan cepat.", lblSourceText: "Teks Asli", lblResultText: "Hasil Terjemahan", btnTranslate: "Terjemahkan Sekarang", btnCopyTrans: "Salin Hasil",
+        pdfHeading: "PDF Editor & Viewer", pdfSub: "Buka dan tinjau dokumen PDF langsung di browser.", lblUploadPdf: "Pilih File PDF", btnPdfPrev: "Sebelumnya", btnPdfNext: "Selanjutnya",
+        shortHeading: "Pemendek Link (URL Shortener)", shortSub: "Buat tautan pendek sesuai domain saat ini.", lblLongUrl: "Tautan Panjang", btnShortProc: "Pendekkan", lblShortRes: "Hasil Link Pendek", btnCopyShort: "Salin",
+        dlHeading: "Media Downloader", dlSub: "Masukkan tautan video atau media untuk memproses unduhan.", lblDlUrl: "URL Video / Media", btnDlProc: "Proses", lblDlFound: "Media Ditemukan", lblDlReady: "Siap diunduh dalam resolusi terbaik."
       },
       en: {
-        subtitle: "Lite Suite v4.1", menuFinance: "Finance", menuTasks: "Tasks & Notes", 
+        subtitle: "Lite Suite v4.2", menuFinance: "Finance", menuTasks: "Tasks & Notes", menuDownloader: "Downloader", menuShortener: "URL Shortener", menuTranslator: "Translator", menuPdf: "PDF Editor", menuCalc: "Calculator", menuPhoto: "Photo Editor", menuSettings: "Settings",
         finTitle: "Financial Management", finSub: "Monitor cash inflows and outflows in real-time.", 
         lblNet: "Total Net Balance", lblIncome: "Total Income", lblExpense: "Total Expense", 
         optAll: "All Types", optInc: "Income (+)", optExp: "Expense (-)", 
         thDate: "Date", thCat: "Category", thDesc: "Description", thNom: "Amount", thAct: "Action",
         taskHeading: "Tasks & Notes", taskSub: "Organization hub for tasks and memos.", 
         lblTaskList: "Task List", lblNoteList: "My Notes",
-        setHeading: "Settings & Data", setSub: "Theme customization and data management.", lblTheme: "Theme Options"
+        setHeading: "Settings & Data", setSub: "Theme customization and data management.", lblTheme: "Theme Options",
+        transHeading: "Language Translator", transSub: "Translate text across languages quickly.", lblSourceText: "Source Text", lblResultText: "Translation Result", btnTranslate: "Translate Now", btnCopyTrans: "Copy Result",
+        pdfHeading: "PDF Editor & Viewer", pdfSub: "Open and view PDF documents directly in your browser.", lblUploadPdf: "Choose PDF File", btnPdfPrev: "Previous", btnPdfNext: "Next",
+        shortHeading: "URL Shortener", shortSub: "Create clean short links based on the current domain.", lblLongUrl: "Long URL", btnShortProc: "Shorten", lblShortRes: "Short Link Result", btnCopyShort: "Copy",
+        dlHeading: "Media Downloader", dlSub: "Enter a video or media link to process download.", lblDlUrl: "Video / Media URL", btnDlProc: "Process", lblDlFound: "Media Found", lblDlReady: "Ready to download in best resolution."
+      },
+      zh: {
+        subtitle: "轻量套件 v4.2", menuFinance: "财务管理", menuTasks: "任务与笔记", menuDownloader: "媒体下载", menuShortener: "短网址", menuTranslator: "翻译器", menuPdf: "PDF 编辑器", menuCalc: "计算器", menuPhoto: "照片编辑", menuSettings: "设置",
+        finTitle: "财务管理", finSub: "实时监控现金流进出。", 
+        lblNet: "净资产总额", lblIncome: "总收入", lblExpense: "总支出", 
+        optAll: "所有类型", optInc: "收入 (+)", optExp: "支出 (-)", 
+        thDate: "日期", thCat: "类别", thDesc: "描述", thNom: "金额", thAct: "操作",
+        taskHeading: "任务与笔记", taskSub: "任务和备忘录组织中心。", 
+        lblTaskList: "任务列表", lblNoteList: "我的笔记",
+        setHeading: "设置与数据", setSub: "主题定制与数据管理。", lblTheme: "显示主题选项",
+        transHeading: "语言翻译器", transSub: "快速跨语言翻译文本。", lblSourceText: "源文本", lblResultText: "翻译结果", btnTranslate: "立即翻译", btnCopyTrans: "复制结果",
+        pdfHeading: "PDF 编辑与查看", pdfSub: "直接在浏览器中打开和查看 PDF 文档。", lblUploadPdf: "选择 PDF 文件", btnPdfPrev: "上一页", btnPdfNext: "下一页",
+        shortHeading: "网址缩短器", shortSub: "基于当前域生成整洁的短链接。", lblLongUrl: "长网址", btnShortProc: "缩短", lblShortRes: "短链接结果", btnCopyShort: "复制",
+        dlHeading: "媒体下载器", dlSub: "输入视频或媒体链接以处理下载。", lblDlUrl: "视频/媒体网址", btnDlProc: "处理", lblDlFound: "找到媒体", lblDlReady: "准备以最佳分辨率下载。"
+      },
+      ar: {
+        subtitle: "الإصدار الخفيف v4.2", menuFinance: "المالية", menuTasks: "المهام والملاحظات", menuDownloader: "محمل الوسائط", menuShortener: "اختصار الروابط", menuTranslator: "المترجم", menuPdf: "محرر PDF", menuCalc: "الحاسبة", menuPhoto: "محرر الصور", menuSettings: "الإعدادات",
+        finTitle: "إدارة المالية", finSub: "مراقبة التدفقات النقدية الواردة والصادرة في الوقت الفعلي.", 
+        lblNet: "إجمالي الرصيد الصافي", lblIncome: "إجمالي الدخل", lblExpense: "إجمالي المصروفات", 
+        optAll: "جميع الأنواع", optInc: "دخل (+)", optExp: "مصروف (-)", 
+        thDate: "التاريخ", thCat: "الفئة", thDesc: "الوصف", thNom: "المبلغ", thAct: "الإجراء",
+        taskHeading: "المهام والملاحظات", taskSub: "مركز تنظيم المهام والمذكرات.", 
+        lblTaskList: "قائمة المهام", lblNoteList: "ملاحظاتي",
+        setHeading: "الإعدادات والبيانات", setSub: "تخصيص المظهر وإدارة البيانات.", lblTheme: "خيارات السمة",
+        transHeading: "مترجم اللغات", transSub: "ترجمة النصوص عبر اللغات بسرعة.", lblSourceText: "النص الأصلي", lblResultText: "نتيجة الترجمة", btnTranslate: "ترجم الآن", btnCopyTrans: "نسخ النتيجة",
+        pdfHeading: "عارض ومحرر PDF", pdfSub: "فتح وعرض مستندات PDF مباشرة في المتصفح.", lblUploadPdf: "اختر ملف PDF", btnPdfPrev: "السابق", btnPdfNext: "التالي",
+        shortHeading: "اختصار الروابط", shortSub: "إنشاء روابط قصيرة مرتبطة بالنطاق الحالي.", lblLongUrl: "الرابط الطويل", btnShortProc: "اختصار", lblShortRes: "نتيجة الرابط القصير", btnCopyShort: "نسخ",
+        dlHeading: "محمل الوسائط", dlSub: "أدخل رابط الفيديو أو الوسائط لمعالجة التحميل.", lblDlUrl: "رابط الوسائط", btnDlProc: "معالجة", lblDlFound: "تم العثور على الوسائط", lblDlReady: "جاهز للتحميل بأفضل دقة."
       }
     };
 
@@ -379,9 +472,12 @@
       }
     }
 
+    // STATE TAB & REFRESH STABILITY
     function switchTab(tabName) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-      document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+      const activeEl = document.getElementById(`tab-${tabName}`);
+      if (activeEl) activeEl.classList.remove('hidden');
+      localStorage.setItem('workspace_active_tab', tabName);
       window.scrollTo(0, 0);
     }
 
@@ -540,12 +636,13 @@
       document.getElementById('dlActionBtn').href = url;
     }
 
-    // URL Shortener
+    // URL Shortener (Sesuai Domain Aktif)
     function generateShortUrl() {
       const longUrl = document.getElementById('shortUrlInput').value;
       if(!longUrl) { alert("Masukkan URL terlebih dahulu!"); return; }
       const randomCode = Math.random().toString(36).substring(2, 8);
-      document.getElementById('shortResultOutput').value = `https://workspace.hub/${randomCode}`;
+      const currentDomain = window.location.origin + window.location.pathname;
+      document.getElementById('shortResultOutput').value = `${currentDomain}?s=${randomCode}`;
       document.getElementById('shortResultArea').classList.remove('hidden');
     }
     function copyShortUrl() {
@@ -553,6 +650,89 @@
       copyText.select();
       navigator.clipboard.writeText(copyText.value);
       alert("Link pendek berhasil disalin!");
+    }
+
+    // TRANSLATOR (Fitur Translator)
+    async function translateText() {
+      const text = document.getElementById('transInputText').value;
+      const target = document.getElementById('transTargetLang').value;
+      if(!text.trim()) { alert("Masukkan teks yang ingin diterjemahkan!"); return; }
+      document.getElementById('transOutputResult').textContent = "Menerjemahkan...";
+      try {
+        const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=auto|${target}`);
+        const data = await res.json();
+        if(data && data.responseData) {
+          document.getElementById('transOutputResult').textContent = data.responseData.translatedText;
+        } else {
+          document.getElementById('transOutputResult').textContent = "Gagal menerjemahkan.";
+        }
+      } catch (err) {
+        document.getElementById('transOutputResult').textContent = "Terjadi kesalahan jaringan.";
+      }
+    }
+    function copyTranslation() {
+      const out = document.getElementById('transOutputResult').textContent;
+      navigator.clipboard.writeText(out);
+      alert("Hasil terjemahan disalin!");
+    }
+
+    // PDF EDITOR & VIEWER (PDF.js)
+    let pdfDoc = null, pageNum = 1, pageRendering = false, pageNumPending = null, scale = 1.2;
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    function loadPdf(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const fileReader = new FileReader();
+      fileReader.onload = function() {
+        const typedarray = new Uint8Array(this.result);
+        pdfjsLib.getDocument(typedarray).promise.then(function(pdfDoc_) {
+          pdfDoc = pdfDoc_;
+          document.getElementById('pdfPageInfo').textContent = `Halaman: ${pageNum} / ${pdfDoc.numPages}`;
+          document.getElementById('pdfPlaceholder').classList.add('hidden');
+          document.getElementById('pdfViewerContainer').classList.remove('hidden');
+          renderPdfPage(pageNum);
+        });
+      };
+      fileReader.readAsArrayBuffer(file);
+    }
+
+    function renderPdfPage(num) {
+      pageRendering = true;
+      pdfDoc.getPage(num).then(function(page) {
+        const canvas = document.getElementById('pdfCanvas');
+        const ctx = canvas.getContext('2d');
+        const viewport = page.getViewport({ scale: scale });
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        const renderContext = { canvasContext: ctx, viewport: viewport };
+        const renderTask = page.render(renderContext);
+        renderTask.promise.then(function() {
+          pageRendering = false;
+          if (pageNumPending !== null) {
+            renderPdfPage(pageNumPending);
+            pageNumPending = null;
+          }
+        });
+      });
+      document.getElementById('pdfPageInfo').textContent = `Halaman: ${num} / ${pdfDoc.numPages}`;
+    }
+
+    function queueRenderPdfPage(num) {
+      if (pageRendering) { pageNumPending = num; } else { renderPdfPage(num); }
+    }
+
+    function prevPdfPage() {
+      if (pageNum <= 1) return;
+      pageNum--;
+      queueRenderPdfPage(pageNum);
+    }
+
+    function nextPdfPage() {
+      if (!pdfDoc || pageNum >= pdfDoc.numPages) return;
+      pageNum++;
+      queueRenderPdfPage(pageNum);
     }
 
     // Calc
@@ -632,11 +812,14 @@
       reader.readAsText(file);
     }
 
-    // Init
+    // Init & State Persistence (Restore last active tab on refresh)
     renderFinance(); renderNotes(); renderTasks();
     const savedLang = localStorage.getItem('workspace_lang') || 'id';
     document.getElementById('langSelector').value = savedLang;
     changeLanguage(savedLang);
+
+    const lastTab = localStorage.getItem('workspace_active_tab') || 'finance';
+    switchTab(lastTab);
   </script>
 </body>
 </html>

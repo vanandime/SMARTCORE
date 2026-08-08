@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WorkSpace Hub - Lite Suite v4.2</title>
+  <title>WorkSpace Hub - Lite Suite v4.3</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- PDF.js untuk Viewer/Editor PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
@@ -38,7 +37,7 @@
         </div>
         <div>
           <h1 class="font-bold text-xs tracking-tight">WorkSpace Hub</h1>
-          <p class="text-[10px] text-sub" id="lblSubtitle">Lite Suite v4.2</p>
+          <p class="text-[10px] text-sub" id="lblSubtitle">Lite Suite v4.3</p>
         </div>
       </div>
       <div class="flex items-center gap-2">
@@ -56,7 +55,7 @@
   <!-- CONTAINER UTAMA -->
   <main class="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
 
-    <!-- KEUANGAN (DEFAULT MENU UTAMA) -->
+    <!-- KEUANGAN -->
     <section id="tab-finance" class="tab-content space-y-5">
       <div class="card-modern p-4 rounded-2xl flex flex-wrap items-center justify-between gap-3">
         <div><h2 class="text-base font-extrabold" id="finTitle">Manajemen Keuangan</h2><p class="text-xs text-sub" id="finSub">Pantau arus kas masuk dan keluar secara real-time.</p></div>
@@ -117,35 +116,57 @@
       </div>
     </section>
 
-    <!-- MEDIA DOWNLOADER -->
+    <!-- KALENDER -->
+    <section id="tab-calendar" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div><h2 class="text-base font-extrabold" id="calHeading">Kalender Interaktif</h2><p class="text-xs text-sub" id="calSub">Kelola jadwal bulanan dan penanggalan Anda.</p></div>
+        <div class="flex items-center gap-2">
+          <button onclick="changeCalMonth(-1)" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold">&larr;</button>
+          <span id="calMonthYearLabel" class="text-xs font-bold font-mono px-2">Bulan Tahun</span>
+          <button onclick="changeCalMonth(1)" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold">&rarr;</button>
+        </div>
+      </div>
+      <div class="card-modern p-4 rounded-2xl space-y-3">
+        <div class="grid grid-cols-7 gap-1 text-center font-bold text-xs text-sub pb-2 border-b border-slate-800">
+          <span id="calSun">Min</span><span id="calMon">Sen</span><span id="calTue">Sel</span><span id="calWed">Rab</span><span id="calThu">Kam</span><span id="calFri">Jum</span><span id="calSat">Sab</span>
+        </div>
+        <div id="calendarGrid" class="grid grid-cols-7 gap-1.5"></div>
+      </div>
+    </section>
+
+    <!-- MEDIA DOWNLOADER (YOUTUBE & MEDIA) -->
     <section id="tab-downloader" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl">
-        <h2 class="text-base font-extrabold" id="dlHeading">Media Downloader</h2>
-        <p class="text-xs text-sub" id="dlSub">Masukkan tautan video atau media untuk memproses unduhan.</p>
+        <h2 class="text-base font-extrabold" id="dlHeading">Media & YouTube Downloader</h2>
+        <p class="text-xs text-sub" id="dlSub">Masukkan tautan YouTube atau media untuk memproses unduhan.</p>
       </div>
       <div class="card-modern p-5 rounded-2xl space-y-3 max-w-xl mx-auto">
         <div>
-          <label class="text-xs font-bold text-sub" id="lblDlUrl">URL Video / Media</label>
+          <label class="text-xs font-bold text-sub" id="lblDlUrl">URL YouTube / Media</label>
           <div class="flex gap-2 mt-1">
-            <input type="url" id="dlUrlInput" placeholder="https://example.com/video..." class="text-xs custom-input border rounded-xl px-3 py-2.5 flex-1 outline-none">
+            <input type="url" id="dlUrlInput" placeholder="https://www.youtube.com/watch?v=..." class="text-xs custom-input border rounded-xl px-3 py-2.5 flex-1 outline-none">
             <button onclick="processDownload()" class="bg-indigo-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl" id="btnDlProc">Proses</button>
           </div>
         </div>
-        <div id="dlResultArea" class="hidden p-3.5 card-modern rounded-xl space-y-2">
+        <div id="dlResultArea" class="hidden p-4 card-modern rounded-xl space-y-3">
           <div class="flex items-center gap-2.5">
             <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">✓</div>
-            <div><h4 class="font-bold text-xs" id="lblDlFound">Media Ditemukan</h4><p class="text-[10px] text-sub" id="lblDlReady">Siap diunduh dalam resolusi terbaik.</p></div>
+            <div><h4 class="font-bold text-xs" id="lblDlFound">Media Ditemukan</h4><p class="text-[10px] text-sub" id="lblDlReady">Pilih format unduhan di bawah.</p></div>
           </div>
-          <a id="dlActionBtn" href="#" target="_blank" class="block text-center bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 rounded-xl" id="lblDlAction">Unduh Berkas Sekarang</a>
+          <div id="ytEmbedContainer" class="w-full aspect-video bg-black rounded-xl overflow-hidden hidden"></div>
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <a id="dlVideoBtn" href="#" target="_blank" class="block text-center bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2 rounded-xl" id="lblYtVid">Unduh Video (MP4)</a>
+            <a id="dlAudioBtn" href="#" target="_blank" class="block text-center bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold py-2 rounded-xl" id="lblYtAud">Unduh Audio (MP3)</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- PEMENDEK LINK (URL SHORTENER) -->
+    <!-- PEMENDEK LINK (URL SHORTENER - BERFUNGSI) -->
     <section id="tab-shortener" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl">
         <h2 class="text-base font-extrabold" id="shortHeading">Pemendek Link (URL Shortener)</h2>
-        <p class="text-xs text-sub" id="shortSub">Buat tautan pendek yang rapi dan mudah dibagikan sesuai domain saat ini.</p>
+        <p class="text-xs text-sub" id="shortSub">Buat tautan pendek aktif yang otomatis mengarahkan ke link asli.</p>
       </div>
       <div class="card-modern p-5 rounded-2xl space-y-3 max-w-xl mx-auto">
         <div>
@@ -162,36 +183,107 @@
             <button onclick="copyShortUrl()" class="bg-violet-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl" id="btnCopyShort">Salin</button>
           </div>
         </div>
+        <div class="space-y-2 pt-2 border-t border-slate-800">
+          <h3 class="text-xs font-bold text-sub uppercase" id="lblShortHistory">Riwayat Link Pendek Aktif</h3>
+          <div id="shortHistoryList" class="space-y-2 max-h-40 overflow-y-auto"></div>
+        </div>
       </div>
     </section>
 
-    <!-- TRANSLATOR -->
+    <!-- TRANSLATOR (DUA ARAH / BIDIRECTIONAL) -->
     <section id="tab-translator" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl">
         <h2 class="text-base font-extrabold" id="transHeading">Penerjemah Bahasa (Translator)</h2>
-        <p class="text-xs text-sub" id="transSub">Terjemahkan teks antar bahasa dengan cepat.</p>
+        <p class="text-xs text-sub" id="transSub">Terjemahkan teks antar bahasa secara instan dan dua arah.</p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="card-modern p-4 rounded-2xl space-y-3">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
+        <div class="card-modern p-4 rounded-2xl space-y-3 md:col-span-2">
           <div class="flex justify-between items-center text-xs">
-            <span class="font-bold text-sub" id="lblSourceText">Teks Asli</span>
+            <span class="font-bold text-sub" id="lblSourceText">Bahasa Asal</span>
+            <select id="transSourceLang" class="custom-input border rounded-lg px-2 py-1 outline-none text-xs font-bold">
+              <option value="auto">Auto Detect</option>
+              <option value="id">Indonesia (ID)</option>
+              <option value="en">English (EN)</option>
+              <option value="zh">中文 (ZH)</option>
+              <option value="ar">العربية (AR)</option>
+              <option value="ja">日本語 (JA)</option>
+            </select>
+          </div>
+          <textarea id="transInputText" rows="5" placeholder="Ketik teks di sini..." class="w-full text-xs custom-input border rounded-xl p-3 outline-none"></textarea>
+          <button onclick="translateText()" class="w-full bg-indigo-600 text-white text-xs font-bold py-2.5 rounded-xl" id="btnTranslate">Terjemahkan Sekarang</button>
+        </div>
+        <div class="flex justify-center md:col-span-1">
+          <button onclick="swapLanguages()" class="w-10 h-10 rounded-full card-modern flex items-center justify-center text-indigo-400 font-bold hover:scale-110 transition shadow" title="Tukar Bahasa">⇄</button>
+        </div>
+        <div class="card-modern p-4 rounded-2xl space-y-3 md:col-span-2">
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-bold text-sub" id="lblResultText">Bahasa Tujuan</span>
             <select id="transTargetLang" class="custom-input border rounded-lg px-2 py-1 outline-none text-xs font-bold">
               <option value="en">English (EN)</option>
               <option value="id">Indonesia (ID)</option>
               <option value="zh">中文 (ZH)</option>
               <option value="ar">العربية (AR)</option>
               <option value="ja">日本語 (JA)</option>
-              <option value="es">Español (ES)</option>
             </select>
           </div>
-          <textarea id="transInputText" rows="5" placeholder="Ketik teks yang ingin diterjemahkan..." class="w-full text-xs custom-input border rounded-xl p-3 outline-none"></textarea>
-          <button onclick="translateText()" class="w-full bg-indigo-600 text-white text-xs font-bold py-2.5 rounded-xl" id="btnTranslate">Terjemahkan Sekarang</button>
-        </div>
-        <div class="card-modern p-4 rounded-2xl space-y-3">
-          <span class="font-bold text-sub text-xs" id="lblResultText">Hasil Terjemahan</span>
-          <div id="transOutputResult" class="w-full h-[142px] text-xs custom-input border rounded-xl p-3 overflow-y-auto text-indigo-300 font-medium select-all">Hasil terjemahan akan muncul di sini...</div>
+          <div id="transOutputResult" class="w-full h-[112px] text-xs custom-input border rounded-xl p-3 overflow-y-auto text-indigo-300 font-medium select-all">Hasil terjemahan...</div>
           <button onclick="copyTranslation()" class="w-full card-modern text-xs font-bold py-2.5 rounded-xl" id="btnCopyTrans">Salin Hasil</button>
         </div>
+      </div>
+    </section>
+
+    <!-- KONVERSI MATA UANG REAL TIME -->
+    <section id="tab-currency" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl">
+        <h2 class="text-base font-extrabold" id="currHeading">Konversi Mata Uang Real-Time</h2>
+        <p class="text-xs text-sub" id="currSub">Kurs mata uang dunia langsung berdasarkan data global terkini.</p>
+      </div>
+      <div class="card-modern p-5 rounded-2xl space-y-4 max-w-xl mx-auto">
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-sub" id="lblCurrAmount">Jumlah</label>
+          <input type="number" id="currAmount" value="1" class="w-full custom-input border rounded-xl p-2.5 text-xs font-bold" oninput="convertCurrency()">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="space-y-1">
+            <label class="text-xs font-bold text-sub" id="lblCurrFrom">Dari</label>
+            <select id="currFrom" class="w-full custom-input border rounded-xl p-2.5 text-xs font-bold" onchange="convertCurrency()">
+              <option value="USD">USD - US Dollar</option>
+              <option value="IDR" selected>IDR - Rupiah</option>
+              <option value="EUR">EUR - Euro</option>
+              <option value="GBP">GBP - British Pound</option>
+              <option value="JPY">JPY - Japanese Yen</option>
+              <option value="CNY">CNY - Chinese Yuan</option>
+              <option value="SAR">SAR - Saudi Riyal</option>
+            </select>
+          </div>
+          <div class="space-y-1">
+            <label class="text-xs font-bold text-sub" id="lblCurrTo">Ke</label>
+            <select id="currTo" class="w-full custom-input border rounded-xl p-2.5 text-xs font-bold" onchange="convertCurrency()">
+              <option value="USD" selected>USD - US Dollar</option>
+              <option value="IDR">IDR - Rupiah</option>
+              <option value="EUR">EUR - Euro</option>
+              <option value="GBP">GBP - British Pound</option>
+              <option value="JPY">JPY - Japanese Yen</option>
+              <option value="CNY">CNY - Chinese Yuan</option>
+              <option value="SAR">SAR - Saudi Riyal</option>
+            </select>
+          </div>
+        </div>
+        <div class="p-4 card-modern rounded-xl text-center space-y-1">
+          <div class="text-xs text-sub" id="lblCurrResultTitle">Hasil Konversi</div>
+          <div id="currResultValue" class="text-xl font-extrabold text-emerald-400">0.00</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BERITA REAL TIME -->
+    <section id="tab-news" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div><h2 class="text-base font-extrabold" id="newsHeading">Berita Real-Time</h2><p class="text-xs text-sub" id="newsSub">Informasi dan wawasan global terbaru.</p></div>
+        <button onclick="fetchNews()" class="bg-indigo-600 text-white text-xs font-bold px-3 py-2 rounded-xl" id="btnRefreshNews">Muat Ulang Berita</button>
+      </div>
+      <div id="newsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="card-modern p-4 rounded-2xl text-xs text-sub col-span-3 text-center py-10" id="newsLoading">Memuat berita terbaru...</div>
       </div>
     </section>
 
@@ -327,7 +419,7 @@
 
   </main>
 
-  <!-- FLOATING LAUNCHER BUTTON (DI KANAN BAWAH) -->
+  <!-- FLOATING LAUNCHER BUTTON -->
   <div class="fixed bottom-5 right-5 z-50">
     <button onclick="toggleFloatingMenu()" class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white shadow-xl hover:scale-105 transition active:scale-95">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
@@ -344,9 +436,12 @@
       <div class="grid grid-cols-2 gap-2 max-h-[55vh] overflow-y-auto p-0.5">
         <button onclick="switchTabAndClose('finance')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">💰</span><div><div class="font-bold text-xs" id="menuFinance">Keuangan</div><div class="text-[9px] text-sub">Arus Kas</div></div></button>
         <button onclick="switchTabAndClose('tasks')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">📋</span><div><div class="font-bold text-xs" id="menuTasks">Tugas & Catatan</div><div class="text-[9px] text-sub">Agenda & Memo</div></div></button>
-        <button onclick="switchTabAndClose('downloader')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">📥</span><div><div class="font-bold text-xs" id="menuDownloader">Downloader</div><div class="text-[9px] text-sub">Unduh Video</div></div></button>
+        <button onclick="switchTabAndClose('calendar')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">📅</span><div><div class="font-bold text-xs" id="menuCalendar">Kalender</div><div class="text-[9px] text-sub">Jadwal Bulanan</div></div></button>
+        <button onclick="switchTabAndClose('downloader')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">📥</span><div><div class="font-bold text-xs" id="menuDownloader">Downloader</div><div class="text-[9px] text-sub">YouTube / Media</div></div></button>
         <button onclick="switchTabAndClose('shortener')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">🔗</span><div><div class="font-bold text-xs" id="menuShortener">Pemendek Link</div><div class="text-[9px] text-sub">Short URL</div></div></button>
         <button onclick="switchTabAndClose('translator')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">🌐</span><div><div class="font-bold text-xs" id="menuTranslator">Translator</div><div class="text-[9px] text-sub">Penerjemah</div></div></button>
+        <button onclick="switchTabAndClose('currency')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">💱</span><div><div class="font-bold text-xs" id="menuCurrency">Konversi Kurs</div><div class="text-[9px] text-sub">Mata Uang</div></div></button>
+        <button onclick="switchTabAndClose('news')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">📰</span><div><div class="font-bold text-xs" id="menuNews">Berita</div><div class="text-[9px] text-sub">Real-Time</div></div></button>
         <button onclick="switchTabAndClose('pdf')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">📄</span><div><div class="font-bold text-xs" id="menuPdf">PDF Editor</div><div class="text-[9px] text-sub">Lihat & Berkas</div></div></button>
         <button onclick="switchTabAndClose('calc')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">🧮</span><div><div class="font-bold text-xs" id="menuCalc">Kalkulator</div><div class="text-[9px] text-sub">Matematika</div></div></button>
         <button onclick="switchTabAndClose('photo')" class="p-2.5 card-modern rounded-xl flex items-center gap-2.5 hover:border-indigo-500 transition text-left"><span class="text-lg">📸</span><div><div class="font-bold text-xs" id="menuPhoto">Photo Editor</div><div class="text-[9px] text-sub">Sunting Filter</div></div></button>
@@ -406,60 +501,76 @@
   <script>
     const langData = {
       id: {
-        subtitle: "Lite Suite v4.2", menuFinance: "Keuangan", menuTasks: "Tugas & Catatan", menuDownloader: "Downloader", menuShortener: "Pemendek Link", menuTranslator: "Translator", menuPdf: "PDF Editor", menuCalc: "Kalkulator", menuPhoto: "Photo Editor", menuSettings: "Pengaturan",
+        subtitle: "Lite Suite v4.3", menuFinance: "Keuangan", menuTasks: "Tugas & Catatan", menuCalendar: "Kalender", menuDownloader: "Downloader", menuShortener: "Pemendek Link", menuTranslator: "Translator", menuCurrency: "Konversi Kurs", menuNews: "Berita", menuPdf: "PDF Editor", menuCalc: "Kalkulator", menuPhoto: "Photo Editor", menuSettings: "Pengaturan",
         finTitle: "Manajemen Keuangan", finSub: "Pantau arus kas masuk dan keluar secara real-time.", 
         lblNet: "Total Saldo Bersih", lblIncome: "Total Pemasukan", lblExpense: "Total Pengeluaran", 
         optAll: "Semua Tipe", optInc: "Pemasukan (+)", optExp: "Pengeluaran (-)", 
         thDate: "Tanggal", thCat: "Kategori", thDesc: "Keterangan", thNom: "Nominal", thAct: "Aksi",
         taskHeading: "Tugas & Catatan", taskSub: "Pusat pengorganisasian tugas dan memo.", 
         lblTaskList: "Daftar Pekerjaan", lblNoteList: "Catatan Saya",
+        calHeading: "Kalender Interaktif", calSub: "Kelola jadwal bulanan dan penanggalan Anda.",
+        calSun: "Min", calMon: "Sen", calTue: "Sel", calWed: "Rab", calThu: "Kam", calFri: "Jum", calSat: "Sab",
+        dlHeading: "Media & YouTube Downloader", dlSub: "Masukkan tautan YouTube atau media untuk memproses unduhan.", lblDlUrl: "URL YouTube / Media", btnDlProc: "Proses", lblDlFound: "Media Ditemukan", lblDlReady: "Pilih format unduhan di bawah.", lblYtVid: "Unduh Video (MP4)", lblYtAud: "Unduh Audio (MP3)",
+        shortHeading: "Pemendek Link (URL Shortener)", shortSub: "Buat tautan pendek aktif yang otomatis mengarahkan ke link asli.", lblLongUrl: "Tautan Panjang", btnShortProc: "Pendekkan", lblShortRes: "Hasil Link Pendek", btnCopyShort: "Salin", lblShortHistory: "Riwayat Link Pendek Aktif",
+        transHeading: "Penerjemah Bahasa", transSub: "Terjemahkan teks antar bahasa secara instan dan dua arah.", lblSourceText: "Bahasa Asal", lblResultText: "Bahasa Tujuan", btnTranslate: "Terjemahkan Sekarang", btnCopyTrans: "Salin Hasil",
+        currHeading: "Konversi Mata Uang Real-Time", currSub: "Kurs mata uang dunia langsung berdasarkan data global terkini.", lblCurrAmount: "Jumlah", lblCurrFrom: "Dari", lblCurrTo: "Ke", lblCurrResultTitle: "Hasil Konversi",
+        newsHeading: "Berita Real-Time", newsSub: "Informasi dan wawasan global terbaru.", btnRefreshNews: "Muat Ulang Berita",
         setHeading: "Pengaturan & Data", setSub: "Kustomisasi tema dan manajemen data.", lblTheme: "Pilihan Tema Tampilan",
-        transHeading: "Penerjemah Bahasa", transSub: "Terjemahkan teks antar bahasa dengan cepat.", lblSourceText: "Teks Asli", lblResultText: "Hasil Terjemahan", btnTranslate: "Terjemahkan Sekarang", btnCopyTrans: "Salin Hasil",
-        pdfHeading: "PDF Editor & Viewer", pdfSub: "Buka dan tinjau dokumen PDF langsung di browser.", lblUploadPdf: "Pilih File PDF", btnPdfPrev: "Sebelumnya", btnPdfNext: "Selanjutnya",
-        shortHeading: "Pemendek Link (URL Shortener)", shortSub: "Buat tautan pendek sesuai domain saat ini.", lblLongUrl: "Tautan Panjang", btnShortProc: "Pendekkan", lblShortRes: "Hasil Link Pendek", btnCopyShort: "Salin",
-        dlHeading: "Media Downloader", dlSub: "Masukkan tautan video atau media untuk memproses unduhan.", lblDlUrl: "URL Video / Media", btnDlProc: "Proses", lblDlFound: "Media Ditemukan", lblDlReady: "Siap diunduh dalam resolusi terbaik."
+        pdfHeading: "PDF Editor & Viewer", pdfSub: "Buka dan tinjau dokumen PDF langsung di browser.", lblUploadPdf: "Pilih File PDF", btnPdfPrev: "Sebelumnya", btnPdfNext: "Selanjutnya"
       },
       en: {
-        subtitle: "Lite Suite v4.2", menuFinance: "Finance", menuTasks: "Tasks & Notes", menuDownloader: "Downloader", menuShortener: "URL Shortener", menuTranslator: "Translator", menuPdf: "PDF Editor", menuCalc: "Calculator", menuPhoto: "Photo Editor", menuSettings: "Settings",
+        subtitle: "Lite Suite v4.3", menuFinance: "Finance", menuTasks: "Tasks & Notes", menuCalendar: "Calendar", menuDownloader: "Downloader", menuShortener: "URL Shortener", menuTranslator: "Translator", menuCurrency: "Currency Converter", menuNews: "News", menuPdf: "PDF Editor", menuCalc: "Calculator", menuPhoto: "Photo Editor", menuSettings: "Settings",
         finTitle: "Financial Management", finSub: "Monitor cash inflows and outflows in real-time.", 
         lblNet: "Total Net Balance", lblIncome: "Total Income", lblExpense: "Total Expense", 
         optAll: "All Types", optInc: "Income (+)", optExp: "Expense (-)", 
         thDate: "Date", thCat: "Category", thDesc: "Description", thNom: "Amount", thAct: "Action",
         taskHeading: "Tasks & Notes", taskSub: "Organization hub for tasks and memos.", 
         lblTaskList: "Task List", lblNoteList: "My Notes",
+        calHeading: "Interactive Calendar", calSub: "Manage your monthly schedule and calendar.",
+        calSun: "Sun", calMon: "Mon", calTue: "Tue", calWed: "Wed", calThu: "Thu", calFri: "Fri", calSat: "Sat",
+        dlHeading: "Media & YouTube Downloader", dlSub: "Enter YouTube or media link to process download.", lblDlUrl: "YouTube / Media URL", btnDlProc: "Process", lblDlFound: "Media Found", lblDlReady: "Select download format below.", lblYtVid: "Download Video (MP4)", lblYtAud: "Download Audio (MP3)",
+        shortHeading: "URL Shortener", shortSub: "Create active short links that automatically redirect to the original URL.", lblLongUrl: "Long URL", btnShortProc: "Shorten", lblShortRes: "Short Link Result", btnCopyShort: "Copy", lblShortHistory: "Active Short Link History",
+        transHeading: "Language Translator", transSub: "Translate text across languages instantly and bidirectionally.", lblSourceText: "Source Language", lblResultText: "Target Language", btnTranslate: "Translate Now", btnCopyTrans: "Copy Result",
+        currHeading: "Real-Time Currency Converter", currSub: "Live global currency exchange rates.", lblCurrAmount: "Amount", lblCurrFrom: "From", lblCurrTo: "To", lblCurrResultTitle: "Conversion Result",
+        newsHeading: "Real-Time News", newsSub: "Latest global information and insights.", btnRefreshNews: "Refresh News",
         setHeading: "Settings & Data", setSub: "Theme customization and data management.", lblTheme: "Theme Options",
-        transHeading: "Language Translator", transSub: "Translate text across languages quickly.", lblSourceText: "Source Text", lblResultText: "Translation Result", btnTranslate: "Translate Now", btnCopyTrans: "Copy Result",
-        pdfHeading: "PDF Editor & Viewer", pdfSub: "Open and view PDF documents directly in your browser.", lblUploadPdf: "Choose PDF File", btnPdfPrev: "Previous", btnPdfNext: "Next",
-        shortHeading: "URL Shortener", shortSub: "Create clean short links based on the current domain.", lblLongUrl: "Long URL", btnShortProc: "Shorten", lblShortRes: "Short Link Result", btnCopyShort: "Copy",
-        dlHeading: "Media Downloader", dlSub: "Enter a video or media link to process download.", lblDlUrl: "Video / Media URL", btnDlProc: "Process", lblDlFound: "Media Found", lblDlReady: "Ready to download in best resolution."
+        pdfHeading: "PDF Editor & Viewer", pdfSub: "Open and view PDF documents directly in your browser.", lblUploadPdf: "Choose PDF File", btnPdfPrev: "Previous", btnPdfNext: "Next"
       },
       zh: {
-        subtitle: "轻量套件 v4.2", menuFinance: "财务管理", menuTasks: "任务与笔记", menuDownloader: "媒体下载", menuShortener: "短网址", menuTranslator: "翻译器", menuPdf: "PDF 编辑器", menuCalc: "计算器", menuPhoto: "照片编辑", menuSettings: "设置",
+        subtitle: "轻量套件 v4.3", menuFinance: "财务管理", menuTasks: "任务与笔记", menuCalendar: "日历", menuDownloader: "媒体下载", menuShortener: "短网址", menuTranslator: "翻译器", menuCurrency: "货币换算", menuNews: "新闻", menuPdf: "PDF 编辑器", menuCalc: "计算器", menuPhoto: "照片编辑", menuSettings: "设置",
         finTitle: "财务管理", finSub: "实时监控现金流进出。", 
         lblNet: "净资产总额", lblIncome: "总收入", lblExpense: "总支出", 
         optAll: "所有类型", optInc: "收入 (+)", optExp: "支出 (-)", 
         thDate: "日期", thCat: "类别", thDesc: "描述", thNom: "金额", thAct: "操作",
         taskHeading: "任务与笔记", taskSub: "任务和备忘录组织中心。", 
         lblTaskList: "任务列表", lblNoteList: "我的笔记",
+        calHeading: "互动日历", calSub: "管理您的每月日程安排。",
+        calSun: "日", calMon: "一", calTue: "二", calWed: "三", calThu: "四", calFri: "五", calSat: "六",
+        dlHeading: "媒体与 YouTube 下载", dlSub: "输入 YouTube 或媒体链接以处理下载。", lblDlUrl: "YouTube/媒体网址", btnDlProc: "处理", lblDlFound: "找到媒体", lblDlReady: "在下方选择下载格式。", lblYtVid: "下载视频 (MP4)", lblYtAud: "下载音频 (MP3)",
+        shortHeading: "网址缩短器", shortSub: "创建可自动重定向到原始链接的有效短链接。", lblLongUrl: "长网址", btnShortProc: "缩短", lblShortRes: "短链接结果", btnCopyShort: "复制", lblShortHistory: "活跃短链接历史",
+        transHeading: "语言翻译器", transSub: "即时且双向跨语言翻译文本。", lblSourceText: "源语言", lblResultText: "目标语言", btnTranslate: "立即翻译", btnCopyTrans: "复制结果",
+        currHeading: "实时货币换算", currSub: "基于最新全球数据的实时汇率。", lblCurrAmount: "金额", lblCurrFrom: "从", lblCurrTo: "到", lblCurrResultTitle: "换算结果",
+        newsHeading: "实时新闻", newsSub: "最新全球资讯与洞察。", btnRefreshNews: "刷新新闻",
         setHeading: "设置与数据", setSub: "主题定制与数据管理。", lblTheme: "显示主题选项",
-        transHeading: "语言翻译器", transSub: "快速跨语言翻译文本。", lblSourceText: "源文本", lblResultText: "翻译结果", btnTranslate: "立即翻译", btnCopyTrans: "复制结果",
-        pdfHeading: "PDF 编辑与查看", pdfSub: "直接在浏览器中打开和查看 PDF 文档。", lblUploadPdf: "选择 PDF 文件", btnPdfPrev: "上一页", btnPdfNext: "下一页",
-        shortHeading: "网址缩短器", shortSub: "基于当前域生成整洁的短链接。", lblLongUrl: "长网址", btnShortProc: "缩短", lblShortRes: "短链接结果", btnCopyShort: "复制",
-        dlHeading: "媒体下载器", dlSub: "输入视频或媒体链接以处理下载。", lblDlUrl: "视频/媒体网址", btnDlProc: "处理", lblDlFound: "找到媒体", lblDlReady: "准备以最佳分辨率下载。"
+        pdfHeading: "PDF 编辑与查看", pdfSub: "直接在浏览器中打开和查看 PDF 文档。", lblUploadPdf: "选择 PDF 文件", btnPdfPrev: "上一页", btnPdfNext: "下一页"
       },
       ar: {
-        subtitle: "الإصدار الخفيف v4.2", menuFinance: "المالية", menuTasks: "المهام والملاحظات", menuDownloader: "محمل الوسائط", menuShortener: "اختصار الروابط", menuTranslator: "المترجم", menuPdf: "محرر PDF", menuCalc: "الحاسبة", menuPhoto: "محرر الصور", menuSettings: "الإعدادات",
+        subtitle: "الإصدار الخفيف v4.3", menuFinance: "المالية", menuTasks: "المهام والملاحظات", menuCalendar: "التقويم", menuDownloader: "محمل الوسائط", menuShortener: "اختصار الروابط", menuTranslator: "المترجم", menuCurrency: "محول العملات", menuNews: "الأخبار", menuPdf: "محرر PDF", menuCalc: "الحاسبة", menuPhoto: "محرر الصور", menuSettings: "الإعدادات",
         finTitle: "إدارة المالية", finSub: "مراقبة التدفقات النقدية الواردة والصادرة في الوقت الفعلي.", 
         lblNet: "إجمالي الرصيد الصافي", lblIncome: "إجمالي الدخل", lblExpense: "إجمالي المصروفات", 
         optAll: "جميع الأنواع", optInc: "دخل (+)", optExp: "مصروف (-)", 
         thDate: "التاريخ", thCat: "الفئة", thDesc: "الوصف", thNom: "المبلغ", thAct: "الإجراء",
         taskHeading: "المهام والملاحظات", taskSub: "مركز تنظيم المهام والمذكرات.", 
         lblTaskList: "قائمة المهام", lblNoteList: "ملاحظاتي",
+        calHeading: "التقويم التفاعلي", calSub: "إدارة جدولك الشهري والتقويم.",
+        calSun: "أحد", calMon: "إثنين", calTue: "ثلاثاء", calWed: "أربعاء", calThu: "خميس", calFri: "جمعة", calSat: "سبت",
+        dlHeading: "محمل الوسائط و YouTube", dlSub: "أدخل رابط يوتيوب أو الوسائط لمعالجة التحميل.", lblDlUrl: "رابط يوتيوب / الوسائط", btnDlProc: "معالجة", lblDlFound: "تم العثور على الوسائط", lblDlReady: "اختر صيغة التحميل أدناه.", lblYtVid: "تحميل فيديو (MP4)", lblYtAud: "تحميل صوت (MP3)",
+        shortHeading: "اختصار الروابط", shortSub: "إنشاء روابط قصيرة نشطة توجّه تلقائياً للرابط الأصلي.", lblLongUrl: "الرابط الطويل", btnShortProc: "اختصار", lblShortRes: "نتيجة الرابط القصير", btnCopyShort: "نسخ", lblShortHistory: "سجل الروابط النشطة",
+        transHeading: "مترجم اللغات", transSub: "ترجمة النصوص بين اللغات فورياً وباتجاهين.", lblSourceText: "لغة المصدر", lblResultText: "اللغة المستهدفة", btnTranslate: "ترجم الآن", btnCopyTrans: "نسخ النتيجة",
+        currHeading: "محول العملات الفوري", currSub: "أسعار صرف العملات العالمية المباشرة.", lblCurrAmount: "المبلغ", lblCurrFrom: "من", lblCurrTo: "إلى", lblCurrResultTitle: "نتيجة التحويل",
+        newsHeading: "الأخبار الفورية", newsSub: "أحدث المعلومات والرؤى العالمية.", btnRefreshNews: "تحديث الأخبار",
         setHeading: "الإعدادات والبيانات", setSub: "تخصيص المظهر وإدارة البيانات.", lblTheme: "خيارات السمة",
-        transHeading: "مترجم اللغات", transSub: "ترجمة النصوص عبر اللغات بسرعة.", lblSourceText: "النص الأصلي", lblResultText: "نتيجة الترجمة", btnTranslate: "ترجم الآن", btnCopyTrans: "نسخ النتيجة",
-        pdfHeading: "عارض ومحرر PDF", pdfSub: "فتح وعرض مستندات PDF مباشرة في المتصفح.", lblUploadPdf: "اختر ملف PDF", btnPdfPrev: "السابق", btnPdfNext: "التالي",
-        shortHeading: "اختصار الروابط", shortSub: "إنشاء روابط قصيرة مرتبطة بالنطاق الحالي.", lblLongUrl: "الرابط الطويل", btnShortProc: "اختصار", lblShortRes: "نتيجة الرابط القصير", btnCopyShort: "نسخ",
-        dlHeading: "محمل الوسائط", dlSub: "أدخل رابط الفيديو أو الوسائط لمعالجة التحميل.", lblDlUrl: "رابط الوسائط", btnDlProc: "معالجة", lblDlFound: "تم العثور على الوسائط", lblDlReady: "جاهز للتحميل بأفضل دقة."
+        pdfHeading: "عارض ومحرر PDF", pdfSub: "فتح وعرض مستندات PDF مباشرة في المتصفح.", lblUploadPdf: "اختر ملف PDF", btnPdfPrev: "السابق", btnPdfNext: "التالي"
       }
     };
 
@@ -472,13 +583,15 @@
       }
     }
 
-    // STATE TAB & REFRESH STABILITY
     function switchTab(tabName) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       const activeEl = document.getElementById(`tab-${tabName}`);
       if (activeEl) activeEl.classList.remove('hidden');
       localStorage.setItem('workspace_active_tab', tabName);
       window.scrollTo(0, 0);
+      if(tabName === 'currency') convertCurrency();
+      if(tabName === 'news') fetchNews();
+      if(tabName === 'calendar') renderCalendar();
     }
 
     function toggleFloatingMenu() {
@@ -503,6 +616,18 @@
     let transactions = JSON.parse(localStorage.getItem('hub_finance')) || [];
     let tasks = JSON.parse(localStorage.getItem('hub_tasks')) || [];
     let notes = JSON.parse(localStorage.getItem('hub_notes')) || [];
+    let shortLinks = JSON.parse(localStorage.getItem('hub_shortlinks')) || {};
+
+    // URL Shortener Redirect Check on Startup
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const shortCode = urlParams.get('s');
+      if (shortCode && shortLinks[shortCode]) {
+        window.location.replace(shortLinks[shortCode]);
+        return;
+      }
+      renderShortHistory();
+    });
 
     const monthPicker = document.getElementById('monthPicker');
     const now = new Date();
@@ -628,23 +753,102 @@
     }
     function deleteTask(id) { tasks = tasks.filter(t => t.id !== id); localStorage.setItem('hub_tasks', JSON.stringify(tasks)); renderTasks(); }
 
-    // Media Downloader
+    // CALENDAR FEATURE
+    let calCurrentDate = new Date();
+    function changeCalMonth(dir) {
+      calCurrentDate.setMonth(calCurrentDate.getMonth() + dir);
+      renderCalendar();
+    }
+    function renderCalendar() {
+      const year = calCurrentDate.getFullYear();
+      const month = calCurrentDate.getMonth();
+      const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+      document.getElementById('calMonthYearLabel').textContent = `${monthNames[month]} ${year}`;
+
+      const firstDayIndex = new Date(year, month, 1).getDay();
+      const totalDays = new Date(year, month + 1, 0).getDate();
+      const grid = document.getElementById('calendarGrid');
+      grid.innerHTML = '';
+
+      for (let i = 0; i < firstDayIndex; i++) {
+        grid.innerHTML += `<div class="p-2 card-modern rounded-xl opacity-20"></div>`;
+      }
+
+      const todayStr = new Date().toISOString().slice(0, 10);
+      for (let day = 1; day <= totalDays; day++) {
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const isToday = dateStr === todayStr;
+        const hasTask = tasks.some(t => t.dueDate === dateStr);
+
+        grid.innerHTML += `
+          <div class="p-2 card-modern rounded-xl flex flex-col justify-between h-16 text-xs ${isToday ? 'border-indigo-500 font-bold text-indigo-400' : ''}">
+            <span>${day}</span>
+            ${hasTask ? '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 self-center"></span>' : ''}
+          </div>
+        `;
+      }
+    }
+
+    // YOUTUBE & MEDIA DOWNLOADER
     function processDownload() {
       const url = document.getElementById('dlUrlInput').value;
       if(!url) { alert("Masukkan URL terlebih dahulu!"); return; }
       document.getElementById('dlResultArea').classList.remove('hidden');
-      document.getElementById('dlActionBtn').href = url;
+      
+      const ytMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+      const embedContainer = document.getElementById('ytEmbedContainer');
+      if (ytMatch && ytMatch[1]) {
+        const vidId = ytMatch[1];
+        embedContainer.classList.remove('hidden');
+        embedContainer.innerHTML = `<iframe class="w-full h-full" src="https://www.youtube.com/embed/${vidId}" frameborder="0" allowfullscreen></iframe>`;
+        document.getElementById('dlVideoBtn').href = `https://www.y2mate.com/youtube/${vidId}`;
+        document.getElementById('dlAudioBtn').href = `https://www.y2mate.com/youtube/${vidId}`;
+      } else {
+        embedContainer.classList.add('hidden');
+        document.getElementById('dlVideoBtn').href = url;
+        document.getElementById('dlAudioBtn').href = url;
+      }
     }
 
-    // URL Shortener (Sesuai Domain Aktif)
+    // URL SHORTENER (BERFUNGSI PENUH DENGAN REDIRECT & RIWAYAT)
     function generateShortUrl() {
       const longUrl = document.getElementById('shortUrlInput').value;
       if(!longUrl) { alert("Masukkan URL terlebih dahulu!"); return; }
       const randomCode = Math.random().toString(36).substring(2, 8);
+      shortLinks[randomCode] = longUrl;
+      localStorage.setItem('hub_shortlinks', JSON.stringify(shortLinks));
+
       const currentDomain = window.location.origin + window.location.pathname;
-      document.getElementById('shortResultOutput').value = `${currentDomain}?s=${randomCode}`;
+      const shortUrl = `${currentDomain}?s=${randomCode}`;
+      document.getElementById('shortResultOutput').value = shortUrl;
       document.getElementById('shortResultArea').classList.remove('hidden');
+      renderShortHistory();
     }
+
+    function renderShortHistory() {
+      const list = document.getElementById('shortHistoryList');
+      const currentDomain = window.location.origin + window.location.pathname;
+      const keys = Object.keys(shortLinks);
+      if(keys.length === 0) {
+        list.innerHTML = `<div class="text-sub text-[11px]">Belum ada riwayat link pendek.</div>`;
+        return;
+      }
+      list.innerHTML = keys.map(code => `
+        <div class="card-modern p-2.5 rounded-xl flex items-center justify-between text-xs gap-2">
+          <div class="truncate font-mono text-indigo-400">
+            <a href="${currentDomain}?s=${code}" target="_blank" class="hover:underline">${currentDomain}?s=${code}</a>
+          </div>
+          <button onclick="deleteShortLink('${code}')" class="text-rose-400 font-bold shrink-0">Hapus</button>
+        </div>
+      `).join('');
+    }
+
+    function deleteShortLink(code) {
+      delete shortLinks[code];
+      localStorage.setItem('hub_shortlinks', JSON.stringify(shortLinks));
+      renderShortHistory();
+    }
+
     function copyShortUrl() {
       const copyText = document.getElementById('shortResultOutput');
       copyText.select();
@@ -652,14 +856,16 @@
       alert("Link pendek berhasil disalin!");
     }
 
-    // TRANSLATOR (Fitur Translator)
+    // TRANSLATOR (DUA ARAH / BIDIRECTIONAL YANG BERFUNGSI)
     async function translateText() {
       const text = document.getElementById('transInputText').value;
+      const source = document.getElementById('transSourceLang').value;
       const target = document.getElementById('transTargetLang').value;
       if(!text.trim()) { alert("Masukkan teks yang ingin diterjemahkan!"); return; }
       document.getElementById('transOutputResult').textContent = "Menerjemahkan...";
       try {
-        const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=auto|${target}`);
+        const langpair = source === 'auto' ? `auto|${target}` : `${source}|${target}`;
+        const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${langpair}`);
         const data = await res.json();
         if(data && data.responseData) {
           document.getElementById('transOutputResult').textContent = data.responseData.translatedText;
@@ -670,13 +876,82 @@
         document.getElementById('transOutputResult').textContent = "Terjadi kesalahan jaringan.";
       }
     }
+
+    function swapLanguages() {
+      const sourceSelect = document.getElementById('transSourceLang');
+      const targetSelect = document.getElementById('transTargetLang');
+      const inputText = document.getElementById('transInputText');
+      const outputDiv = document.getElementById('transOutputResult');
+
+      if (sourceSelect.value === 'auto') {
+        alert("Pilih bahasa asal spesifik sebelum menukar.");
+        return;
+      }
+
+      const tempLang = sourceSelect.value;
+      sourceSelect.value = targetSelect.value;
+      targetSelect.value = tempLang;
+
+      const tempText = inputText.value;
+      inputText.value = outputDiv.textContent !== "Hasil terjemahan..." ? outputDiv.textContent : "";
+      outputDiv.textContent = tempText;
+    }
+
     function copyTranslation() {
       const out = document.getElementById('transOutputResult').textContent;
       navigator.clipboard.writeText(out);
       alert("Hasil terjemahan disalin!");
     }
 
-    // PDF EDITOR & VIEWER (PDF.js)
+    // REAL-TIME CURRENCY CONVERTER
+    async function convertCurrency() {
+      const amount = Number(document.getElementById('currAmount').value) || 0;
+      const from = document.getElementById('currFrom').value;
+      const to = document.getElementById('currTo').value;
+      try {
+        const res = await fetch(`https://open.er-api.com/v6/latest/${from}`);
+        const data = await res.json();
+        if(data && data.rates && data.rates[to]) {
+          const rate = data.rates[to];
+          const result = amount * rate;
+          document.getElementById('currResultValue').textContent = `${result.toLocaleString('id-ID', {maximumFractionDigits: 4})} ${to}`;
+        } else {
+          document.getElementById('currResultValue').textContent = "Gagal mengambil kurs.";
+        }
+      } catch (err) {
+        document.getElementById('currResultValue').textContent = "Kesalahan koneksi kurs.";
+      }
+    }
+
+    // REAL-TIME NEWS
+    async function fetchNews() {
+      const container = document.getElementById('newsContainer');
+      container.innerHTML = `<div class="card-modern p-4 rounded-2xl text-xs text-sub col-span-3 text-center py-10">Memuat berita terbaru...</div>`;
+      try {
+        const res = await fetch('https://api.spaceflightnewsapi.net/v4/articles/?limit=6');
+        const data = await res.json();
+        if(data && data.results) {
+          container.innerHTML = data.results.map(item => `
+            <div class="card-modern rounded-2xl overflow-hidden flex flex-col justify-between">
+              <img src="${item.image_url}" alt="News" class="w-full h-36 object-cover">
+              <div class="p-4 space-y-2 flex-1 flex flex-col justify-between">
+                <div>
+                  <h4 class="font-bold text-xs line-clamp-2">${item.title}</h4>
+                  <p class="text-[10px] text-sub mt-1 line-clamp-3">${item.summary}</p>
+                </div>
+                <a href="${item.url}" target="_blank" class="block text-center bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold py-1.5 rounded-xl mt-2">Baca Selengkapnya</a>
+              </div>
+            </div>
+          `).join('');
+        } else {
+          container.innerHTML = `<div class="card-modern p-4 rounded-2xl text-xs text-sub col-span-3 text-center py-10">Gagal memuat berita.</div>`;
+        }
+      } catch (err) {
+        container.innerHTML = `<div class="card-modern p-4 rounded-2xl text-xs text-sub col-span-3 text-center py-10">Terjadi kesalahan jaringan berita.</div>`;
+      }
+    }
+
+    // PDF EDITOR & VIEWER
     let pdfDoc = null, pageNum = 1, pageRendering = false, pageNumPending = null, scale = 1.2;
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
@@ -792,7 +1067,7 @@
 
     // Backup & Restore
     function autoBackupJSON() {
-      const data = { transactions, tasks, notes };
+      const data = { transactions, tasks, notes, shortLinks };
       const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
       const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `workspace_backup_${new Date().toISOString().slice(0,10)}.json`; a.click();
     }
@@ -806,13 +1081,14 @@
           if (parsed.transactions) { transactions = parsed.transactions; localStorage.setItem('hub_finance', JSON.stringify(transactions)); }
           if (parsed.tasks) { tasks = parsed.tasks; localStorage.setItem('hub_tasks', JSON.stringify(tasks)); }
           if (parsed.notes) { notes = parsed.notes; localStorage.setItem('hub_notes', JSON.stringify(notes)); }
-          renderFinance(); renderNotes(); renderTasks(); alert("Data berhasil dipulihkan!");
+          if (parsed.shortLinks) { shortLinks = parsed.shortLinks; localStorage.setItem('hub_shortlinks', JSON.stringify(shortLinks)); }
+          renderFinance(); renderNotes(); renderTasks(); renderShortHistory(); alert("Data berhasil dipulihkan!");
         } catch { alert("Format file JSON tidak valid."); }
       };
       reader.readAsText(file);
     }
 
-    // Init & State Persistence (Restore last active tab on refresh)
+    // Init & State Persistence
     renderFinance(); renderNotes(); renderTasks();
     const savedLang = localStorage.getItem('workspace_lang') || 'id';
     document.getElementById('langSelector').value = savedLang;

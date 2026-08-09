@@ -1,0 +1,2300 @@
+<!DOCTYPE html>
+<html lang="id" class="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkSpace Pro</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='11' width='18' height='10' rx='2'/><circle cx='12' cy='5' r='2'/><path d='M12 7v4'/><line x1='8' y1='15' x2='8' y2='15.01'/><line x1='16' y1='15' x2='16' y2='15.01'/></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+    
+    * { transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; user-select: none; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    .theme-dark { --bg-main: #07090e; --bg-card: #111726; --border: #1e293b; --text-main: #f8fafc; --text-sub: #94a3b8; --input-bg: #0f172a; }
+    .theme-light { --bg-main: #f1f5f9; --bg-card: #ffffff; --border: #cbd5e1; --text-main: #0f172a; --text-sub: #475569; --input-bg: #f8fafc; }
+    .theme-emerald { --bg-main: #021c16; --bg-card: #063529; --border: #047857; --text-main: #ecfdf5; --text-sub: #a7f3d0; --input-bg: #022c22; }
+    .theme-ocean { --bg-main: #041d2c; --bg-card: #0a3147; --border: #0369a1; --text-main: #f0f9ff; --text-sub: #bae6fd; --input-bg: #072538; }
+    .theme-cyber { --bg-main: #1a0b2e; --bg-card: #281145; --border: #6b21a8; --text-main: #faf5ff; --text-sub: #e9d5ff; --input-bg: #200d38; }
+    .theme-ios { --bg-main: #090d16; --bg-card: rgba(255, 255, 255, 0.07); --border: rgba(255, 255, 255, 0.15); --text-main: #ffffff; --text-sub: #94a3b8; --input-bg: rgba(0, 0, 0, 0.4); }
+    
+    .theme-ios .card-modern { backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.4); }
+
+    body { background-color: var(--bg-main); color: var(--text-main); }
+    .card-modern { background-color: var(--bg-card); border-color: var(--border); border-width: 1px; }
+    .card-modern:hover { border-color: rgba(99, 102, 241, 0.5); }
+    .text-sub { color: var(--text-sub); }
+    .custom-input { background-color: var(--input-bg); color: var(--text-main); border-color: var(--border); }
+
+    .tab-content { animation: fadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .typing-dot { animation: typing 1.4s infinite ease-in-out both; }
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    input[type="month"], input[type="date"], input[type="time"] { color-scheme: dark; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.25); border-radius: 4px; }
+  </style>
+</head>
+<body id="appBody" class="theme-ios min-h-screen pb-28 transition-colors duration-300">
+
+  <!-- HEADER APLIKASI -->
+  <header class="sticky top-2 z-40 max-w-7xl mx-auto px-3">
+    <div class="bg-slate-900/80 backdrop-blur-md border border-indigo-500/30 rounded-2xl px-4 py-2 flex items-center justify-between shadow-2xl">
+      <div class="flex items-center gap-2.5 cursor-pointer" onclick="switchTab('chatbot')">
+        <!-- ROBOT MINIMALIS ICON -->
+        <div class="w-8 h-8 rounded-xl bg-indigo-600/30 border border-indigo-500/40 flex items-center justify-center text-indigo-400 p-1">
+          <svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="10" rx="2"/>
+            <circle cx="12" cy="5" r="2"/>
+            <path d="M12 7v4"/>
+            <line x1="8" y1="15" x2="8" y2="15.01"/>
+            <line x1="16" y1="15" x2="16" y2="15.01"/>
+          </svg>
+        </div>
+        <span id="welcomeUserBadge" class="text-xs text-indigo-300 font-extrabold tracking-wide">Hi, Danis Vanandi</span>
+      </div>
+      
+      <div class="flex items-center gap-3 text-xs font-mono font-bold text-indigo-300">
+        <!-- KONTROL MUSIK HEADER -->
+        <button id="btnHeaderMusic" onclick="toggleBackgroundMusic()" class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-indigo-500/30 bg-indigo-500/10 hover:bg-indigo-600/20 text-[11px] font-sans transition">
+          <span id="musicStatusIcon">🎵</span> <span id="musicStatusText">Lo-Fi OFF</span>
+        </button>
+        <span class="opacity-30">|</span>
+        <span id="weatherWidget" class="text-xs font-semibold cursor-pointer" onclick="switchTab('weather')">🌤️ --°C</span>
+        <span class="opacity-30">|</span>
+        <span id="headerClock" class="bg-indigo-500/10 px-2.5 py-1 rounded-lg border border-indigo-500/20">00:00:00</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- KONTEN UTAMA APLIKASI -->
+  <main class="max-w-7xl mx-auto px-3 md:px-5 pt-3">
+
+    <!-- 1. TAB ASISTEN AI (ROBOT CHATBOT) -->
+    <section id="tab-chatbot" class="tab-content flex flex-col h-[calc(100vh-110px)] relative">
+      <div class="card-modern p-3 rounded-2xl flex items-center justify-between flex-wrap gap-2 shrink-0 mb-2">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/></svg>
+          </div>
+          <div>
+            <h2 class="text-xs font-extrabold" data-i18n="chatHeading">Asisten AI Serbaguna</h2>
+            <p class="text-[10px] text-sub" data-i18n="chatSub">Asisten pintar WorkSpace untuk pertanyaan, analisis, & produktivitas.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <input type="password" id="customApiKeyInput" placeholder="API Key (Opsional)" data-i18n-ph="phApiKey" class="text-xs custom-input border rounded-xl px-3 py-1 font-mono outline-none w-36 sm:w-44" onchange="saveCustomApiKey(this.value)">
+          <button onclick="clearChatHistory()" class="px-2.5 py-1.5 rounded-xl border border-rose-500/30 bg-rose-500/10 hover:bg-rose-600 text-rose-300 hover:text-white transition text-xs font-bold flex items-center gap-1 shadow" data-i18n="btnClearChat">
+            <span>🗑️</span> <span data-i18n="btnClearChatText">Bersihkan</span>
+          </button>
+          <button onclick="exportChatHistory()" class="px-2.5 py-1.5 rounded-xl card-modern hover:border-indigo-500 text-indigo-300 transition text-xs font-bold" data-i18n="btnExportChat">
+            📥 <span data-i18n="btnExportChatText">Ekspor</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 text-xs shrink-0">
+        <span class="text-sub font-bold text-[10px] uppercase whitespace-nowrap" data-i18n="lblQuickPrompt">PROMPT CEPAT:</span>
+        <button onclick="sendQuickPrompt('Ringkas teks berikut dengan jelas dan padat: ')" class="px-2.5 py-1 rounded-xl card-modern hover:border-indigo-500 text-indigo-300 text-[11px] font-semibold whitespace-nowrap">📝 Ringkas Teks</button>
+        <button onclick="sendQuickPrompt('Buatkan kode program JavaScript untuk fungsi berikut: ')" class="px-2.5 py-1 rounded-xl card-modern hover:border-indigo-500 text-emerald-300 text-[11px] font-semibold whitespace-nowrap">💻 Buat Kode</button>
+        <button onclick="sendQuickPrompt('Perbaiki ejaan & tata bahasa dari kalimat berikut: ')" class="px-2.5 py-1 rounded-xl card-modern hover:border-indigo-500 text-violet-300 text-[11px] font-semibold whitespace-nowrap">✨ Cek Gramatika</button>
+        <button onclick="sendQuickPrompt('Berikan 5 ide kreatif untuk: ')" class="px-2.5 py-1 rounded-xl card-modern hover:border-indigo-500 text-amber-300 text-[11px] font-semibold whitespace-nowrap">💡 Brainstorming Ide</button>
+      </div>
+
+      <div class="card-modern p-4 rounded-2xl flex-1 overflow-hidden relative flex flex-col mb-2 shadow-xl">
+        <div id="chatMessagesArea" class="flex-1 overflow-y-auto space-y-3 pr-2 pb-20">
+          <div class="flex items-start gap-2.5">
+            <div class="w-7 h-7 rounded-xl bg-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0 p-1">
+              <svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/></svg>
+            </div>
+            <div class="card-modern p-3 rounded-2xl text-xs max-w-[85%] leading-relaxed" data-i18n="chatWelcomeMsg">Halo! Saya asisten AI Robot WorkSpace Pro. Ada yang bisa saya bantu hari ini? Tanyakan apa saja!</div>
+          </div>
+        </div>
+
+        <div class="absolute bottom-3 left-3 right-3 z-30">
+          <div class="bg-slate-900/95 backdrop-blur-xl border border-indigo-500/40 rounded-2xl p-2 shadow-2xl flex items-center gap-2">
+            <input type="text" id="chatInputText" placeholder="Ketik pertanyaan atau perintah..." data-i18n-ph="phChatInput" class="flex-1 text-xs bg-transparent text-main px-3 py-2 outline-none" onkeydown="if(event.key==='Enter') sendChatMessage()">
+            <button onclick="sendChatMessage()" class="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white text-xs font-extrabold px-5 py-2.5 rounded-xl shadow-lg hover:scale-105 active:scale-95 transition flex items-center gap-1.5 shrink-0" data-i18n="btnSendChat">
+              🚀 <span data-i18n="lblSend">Kirim</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. TAB KANBAN & MATRIKS PRIORITAS -->
+    <section id="tab-kanban" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div>
+          <h2 class="text-base font-extrabold" data-i18n="kanbanHeading">Manajemen Proyek & Prioritas Matriks</h2>
+          <p class="text-xs text-sub" data-i18n="kanbanSub">Kelola alur kerja visual Kanban dan klasifikasi prioritas keputusan.</p>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <div class="bg-slate-900/80 p-1 rounded-xl border border-slate-800 flex gap-1">
+            <button onclick="setTaskViewMode('kanban')" id="btnViewKanban" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-indigo-600 text-white shadow">📌 Papan Kanban</button>
+            <button onclick="setTaskViewMode('matrix')" id="btnViewMatrix" class="px-3 py-1.5 text-xs font-bold rounded-lg card-modern text-sub hover:text-white">🎯 Matriks Prioritas</button>
+          </div>
+          <button id="btnAddNewTaskCard" onclick="openKanbanModal('todo')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow transition" data-i18n="btnNewKanbanCard">+ Tambah Kartu Baru</button>
+        </div>
+      </div>
+
+      <!-- TAMPILAN 1: PAPAN KANBAN -->
+      <div id="viewKanbanArea" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="card-modern p-4 rounded-2xl space-y-3">
+          <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+            <h3 class="text-xs font-extrabold text-amber-400 uppercase" data-i18n="colToDo">📋 Belum Dikerjakan (To Do)</h3>
+            <button onclick="openKanbanModal('todo')" class="text-xs text-indigo-300 font-bold hover:underline">+</button>
+          </div>
+          <div id="kanbanColToDo" class="space-y-2 min-h-[220px]"></div>
+        </div>
+
+        <div class="card-modern p-4 rounded-2xl space-y-3">
+          <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+            <h3 class="text-xs font-extrabold text-indigo-400 uppercase" data-i18n="colInProgress">⚡ Sedang Dikerjakan (In Progress)</h3>
+            <button onclick="openKanbanModal('in_progress')" class="text-xs text-indigo-300 font-bold hover:underline">+</button>
+          </div>
+          <div id="kanbanColInProgress" class="space-y-2 min-h-[220px]"></div>
+        </div>
+
+        <div class="card-modern p-4 rounded-2xl space-y-3">
+          <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+            <h3 class="text-xs font-extrabold text-emerald-400 uppercase" data-i18n="colDone">✅ Selesai (Done)</h3>
+            <button onclick="openKanbanModal('done')" class="text-xs text-indigo-300 font-bold hover:underline">+</button>
+          </div>
+          <div id="kanbanColDone" class="space-y-2 min-h-[220px]"></div>
+        </div>
+      </div>
+
+      <!-- TAMPILAN 2: MATRIKS PRIORITAS -->
+      <div id="viewMatrixArea" class="grid grid-cols-1 md:grid-cols-2 gap-4 hidden">
+        <div class="card-modern p-4 rounded-2xl border-rose-500/40 space-y-2">
+          <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+            <h3 class="text-xs font-extrabold text-rose-400 uppercase">🔥 1. Penting & Mendesak (Do First)</h3>
+            <button onclick="openEisenhowerModal('Q1')" class="text-xs text-rose-300 font-bold hover:underline">+</button>
+          </div>
+          <div id="eisenListQ1" class="space-y-2 min-h-[140px]"></div>
+        </div>
+
+        <div class="card-modern p-4 rounded-2xl border-indigo-500/40 space-y-2">
+          <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+            <h3 class="text-xs font-extrabold text-indigo-400 uppercase">📅 2. Penting & Tidak Mendesak (Schedule)</h3>
+            <button onclick="openEisenhowerModal('Q2')" class="text-xs text-indigo-300 font-bold hover:underline">+</button>
+          </div>
+          <div id="eisenListQ2" class="space-y-2 min-h-[140px]"></div>
+        </div>
+
+        <div class="card-modern p-4 rounded-2xl border-amber-500/40 space-y-2">
+          <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+            <h3 class="text-xs font-extrabold text-amber-400 uppercase">👥 3. Tidak Penting & Mendesak (Delegate)</h3>
+            <button onclick="openEisenhowerModal('Q3')" class="text-xs text-amber-300 font-bold hover:underline">+</button>
+          </div>
+          <div id="eisenListQ3" class="space-y-2 min-h-[140px]"></div>
+        </div>
+
+        <div class="card-modern p-4 rounded-2xl border-slate-700/60 space-y-2">
+          <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+            <h3 class="text-xs font-extrabold text-sub uppercase">🗑️ 4. Tidak Penting & Tidak Mendesak (Eliminate)</h3>
+            <button onclick="openEisenhowerModal('Q4')" class="text-xs text-sub font-bold hover:underline">+</button>
+          </div>
+          <div id="eisenListQ4" class="space-y-2 min-h-[140px]"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TAB TUGAS & CATATAN -->
+    <section id="tab-tasks" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div>
+          <h2 class="text-base font-extrabold" data-i18n="taskHeading">Tugas & Catatan</h2>
+          <p class="text-xs text-sub" data-i18n="taskSub">Pusat pengorganisasian tugas berprioritas dan memo.</p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="openTaskModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-2 rounded-xl shadow transition" data-i18n="btnTask">+ Tugas</button>
+          <button onclick="openNoteModal()" class="bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold px-3 py-2 rounded-xl shadow transition" data-i18n="btnNote">+ Catatan</button>
+          <button onclick="exportTasksNotes()" class="card-modern text-xs font-bold px-3 py-2 rounded-xl transition" data-i18n="btnExportTask">Ekspor</button>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card-modern p-4 rounded-2xl space-y-3">
+          <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+            <h3 class="text-xs font-bold uppercase text-sub" data-i18n="lblTaskList">Daftar Pekerjaan</h3>
+            <span id="taskProgressBadge" class="text-[10px] font-mono font-bold text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20">0% Selesai</span>
+          </div>
+          <div id="taskList" class="divide-y divide-slate-800/60 space-y-2"></div>
+        </div>
+        <div class="card-modern p-4 rounded-2xl space-y-3">
+          <h3 class="text-xs font-bold uppercase text-sub border-b border-slate-800 pb-2" data-i18n="lblNoteList">Catatan Saya</h3>
+          <div id="noteList" class="grid grid-cols-1 gap-2.5"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. TAB MIND MAP -->
+    <section id="tab-mindmap" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div>
+          <h2 class="text-base font-extrabold" data-i18n="mindmapHeading">Papan Ide & Mind Map Canvas</h2>
+          <p class="text-xs text-sub" data-i18n="mindmapSub">Visualisasikan ide, geser simpul (drag & drop), dan ekspor sketsa Anda.</p>
+        </div>
+        <div class="flex gap-2 flex-wrap">
+          <button onclick="addMindNode()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-2 rounded-xl shadow transition"><span>＋ Simpul Node</span></button>
+          <button onclick="editSelectedMindNode()" class="bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold px-3 py-2 rounded-xl shadow transition"><span>✏️ Edit Node</span></button>
+          <button onclick="deleteSelectedMindNode()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold px-3 py-2 rounded-xl shadow transition"><span>🗑️ Hapus Node</span></button>
+          <button onclick="exportMindCanvas()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-2 rounded-xl shadow transition"><span>📷 Ekspor Gambar</span></button>
+          <button onclick="clearMindCanvas()" class="card-modern hover:border-rose-500 text-xs text-rose-400 font-bold px-3 py-2 rounded-xl transition">Bersihkan</button>
+        </div>
+      </div>
+
+      <div class="card-modern p-4 rounded-2xl space-y-3">
+        <div id="mindCanvasContainer" class="relative w-full h-[480px] bg-slate-950/90 rounded-xl border border-slate-800 overflow-hidden flex items-center justify-center shadow-inner touch-none cursor-grab active:cursor-grabbing">
+          <canvas id="mindCanvas" class="absolute inset-0 w-full h-full block"></canvas>
+        </div>
+        <div class="text-[11px] text-sub flex justify-between items-center px-1">
+          <span>💡 <strong>Tips:</strong> Klik & geser (drag) simpul untuk mengatur posisi. Double-click simpul untuk edit cepat.</span>
+          <span id="mindNodeCount" class="font-mono font-bold text-indigo-400">Total Node: 0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. TAB KALENDER & EVENT LIST -->
+    <section id="tab-calendar" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div><h2 class="text-base font-extrabold" data-i18n="calHeading">Kalender Interaktif & Pengingat Agenda</h2><p class="text-xs text-sub" data-i18n="calSub">Klik tanggal untuk menambah agenda & pengingat.</p></div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <button onclick="jumpToTodayCalendar()" class="px-3 py-1.5 bg-indigo-600 text-white rounded-xl text-xs font-bold shadow" data-i18n="btnToday">Hari Ini</button>
+          <button onclick="changeCalMonth(-1)" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold transition">&larr;</button>
+          <span id="calMonthYearLabel" class="text-xs font-bold font-mono px-2">Bulan Tahun</span>
+          <button onclick="changeCalMonth(1)" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold transition">&rarr;</button>
+        </div>
+      </div>
+      <div class="card-modern p-4 rounded-2xl space-y-3">
+        <div class="grid grid-cols-7 gap-1 text-center font-bold text-xs pb-2 border-b border-slate-800">
+          <span class="text-rose-400" data-i18n="daySun">Min</span><span class="text-sub" data-i18n="dayMon">Sen</span><span class="text-sub" data-i18n="dayTue">Sel</span><span class="text-sub" data-i18n="dayWed">Rab</span><span class="text-sub" data-i18n="dayThu">Kam</span><span class="text-emerald-400" data-i18n="dayFri">Jum</span><span class="text-sub" data-i18n="daySat">Sab</span>
+        </div>
+        <div id="calendarGrid" class="grid grid-cols-7 gap-1.5"></div>
+      </div>
+      <!-- FITUR BARU: DAFTAR EVENT AGENDA KALENDER -->
+      <div class="card-modern p-4 rounded-2xl space-y-2">
+        <h3 class="text-xs font-bold uppercase text-indigo-300">📌 Daftar Agenda Mendatang</h3>
+        <div id="calendarEventsList" class="space-y-1.5 max-h-48 overflow-y-auto"></div>
+      </div>
+    </section>
+
+    <!-- 6. TAB JAM, ALARM, STOPWATCH & POMODORO -->
+    <section id="tab-clock" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div>
+          <h2 class="text-base font-extrabold" data-i18n="clockHeading">Jam Dunia, Alarm, Stopwatch, Timer & Pomodoro</h2>
+          <p class="text-xs text-sub" data-i18n="clockSub">Pusat manajemen waktu terlengkap dalam satu tempat.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="notifStatusBadge" class="text-xs px-3 py-1 rounded-xl bg-indigo-500/20 text-indigo-300 font-bold border border-indigo-500/30" data-i18n="lblNotifActive">🔔 Checking Permission...</span>
+          <button onclick="requestNotifPermission()" class="text-xs px-3 py-1 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold transition">Minta Izin</button>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card-modern p-5 rounded-2xl text-center space-y-3 flex flex-col justify-center">
+          <div class="text-xs font-bold uppercase text-sub" data-i18n="lblCurrentLiveTime">Waktu Lokal Perangkat</div>
+          <div id="liveClockBig" class="text-5xl font-black font-mono text-indigo-400 py-3">00:00:00</div>
+          <div id="liveDateBig" class="text-xs font-semibold text-sub">1 Januari 2026</div>
+        </div>
+
+        <div class="card-modern p-5 rounded-2xl space-y-3">
+          <h3 class="text-xs font-bold uppercase text-sub border-b border-slate-800 pb-2" data-i18n="lblSetAlarm">Atur Alarm Cepat</h3>
+          <div class="space-y-2 text-xs">
+            <div><label class="text-sub" data-i18n="lblAlarmTime">Waktu Alarm</label><input type="time" id="alarmTimeInput" class="w-full custom-input border rounded-xl p-2.5 mt-1 font-bold font-mono"></div>
+            <div><label class="text-sub" data-i18n="lblAlarmNote">Catatan Pengingat Alarm</label><input type="text" id="alarmNoteInput" placeholder="Contoh: Rapat Kerja" data-i18n-ph="phAlarmNote" class="w-full custom-input border rounded-xl p-2.5 mt-1"></div>
+            <button onclick="saveAlarm()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl shadow transition" data-i18n="btnSaveAlarm">Pasang Alarm</button>
+          </div>
+          <div id="alarmList" class="space-y-1.5 max-h-36 overflow-y-auto pt-2"></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card-modern p-5 rounded-2xl space-y-3 text-center">
+          <h3 class="text-xs font-bold uppercase text-sub border-b border-slate-800 pb-2">⏱️ Stopwatch</h3>
+          <div id="stopwatchDisplay" class="text-4xl font-black font-mono text-emerald-400 py-2">00:00:00</div>
+          <div class="flex justify-center gap-2">
+            <button onclick="startStopwatch()" class="bg-indigo-600 text-white text-xs font-bold px-4 py-2 rounded-xl shadow" data-i18n="btnStart">Mulai</button>
+            <button onclick="pauseStopwatch()" class="card-modern text-xs font-bold px-4 py-2 rounded-xl" data-i18n="btnPause">Jeda</button>
+            <button onclick="resetStopwatch()" class="card-modern text-xs font-bold px-4 py-2 rounded-xl text-rose-400" data-i18n="btnReset">Reset</button>
+          </div>
+        </div>
+
+        <div class="card-modern p-5 rounded-2xl space-y-3 text-center">
+          <h3 class="text-xs font-bold uppercase text-sub border-b border-slate-800 pb-2">⏳ Hitung Mundur (Timer)</h3>
+          <div id="timerDisplay" class="text-4xl font-black font-mono text-violet-400 py-1">00:00</div>
+          <div class="flex justify-center gap-2 items-center">
+            <input type="number" id="timerInputMin" placeholder="Menit" data-i18n-ph="phMin" min="1" max="180" class="w-20 text-xs custom-input border rounded-xl p-2 font-mono text-center">
+            <button onclick="startTimer()" class="bg-indigo-600 text-white text-xs font-bold px-4 py-2 rounded-xl shadow" data-i18n="btnStart">Mulai</button>
+            <button onclick="resetTimer()" class="card-modern text-xs font-bold px-4 py-2 rounded-xl text-rose-400" data-i18n="btnReset">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-modern p-6 rounded-2xl text-center space-y-5">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3 flex-wrap gap-2">
+          <h3 class="text-xs font-bold uppercase text-sub">🍅 Pomodoro Focus Timer</h3>
+          <span id="pomSessionCount" class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-xl border border-emerald-500/20">Sesi Selesai: 0</span>
+        </div>
+        <div class="flex justify-center gap-2 flex-wrap">
+          <button onclick="setPomodoroMode('work')" id="pomModeWork" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow">Fokus (25m)</button>
+          <button onclick="setPomodoroMode('shortBreak')" id="pomModeShort" class="px-3.5 py-1.5 rounded-xl text-xs font-bold card-modern text-sub">Istirahat (5m)</button>
+          <button onclick="setPomodoroMode('longBreak')" id="pomModeLong" class="px-3.5 py-1.5 rounded-xl text-xs font-bold card-modern text-sub">Istirahat Panjang (15m)</button>
+        </div>
+        <div class="text-6xl font-black font-mono tracking-wider text-indigo-400 py-4" id="pomTimerDisplay">25:00</div>
+        <div class="flex justify-center gap-3">
+          <button onclick="startPomodoro()" class="bg-indigo-600 text-white text-xs font-bold px-6 py-2.5 rounded-xl shadow transition" data-i18n="btnStart">Mulai</button>
+          <button onclick="pausePomodoro()" class="card-modern text-xs font-bold px-6 py-2.5 rounded-xl transition" data-i18n="btnPause">Jeda</button>
+          <button onclick="resetPomodoro()" class="card-modern text-xs font-bold px-6 py-2.5 rounded-xl text-rose-400 transition" data-i18n="btnReset">Reset</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. TAB KEUANGAN -->
+    <section id="tab-finance" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-5 rounded-2xl space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-base font-extrabold" data-i18n="finTitle">Manajemen Keuangan</h2>
+            <p class="text-xs text-sub" data-i18n="finSub">Pantau arus kas, grafik rasio, dan batas pengeluaran bulanan.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <select id="financeCurrency" onchange="renderFinance()" class="text-xs custom-input border rounded-xl px-3 py-2 font-bold outline-none cursor-pointer">
+              <option value="Rp">IDR (Rp)</option>
+              <option value="$">USD ($)</option>
+              <option value="€">EUR (€)</option>
+              <option value="£">GBP (£)</option>
+              <option value="¥">JPY (¥)</option>
+              <option value="SGD">SGD ($)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="p-3 card-modern rounded-xl space-y-2">
+          <div class="flex justify-between items-center text-xs">
+            <span class="font-bold text-sub" data-i18n="lblBudgetGoal">Target Batas Pengeluaran Bulanan:</span>
+            <input type="number" id="budgetLimitInput" value="5000000" onchange="renderFinance()" class="text-xs custom-input border rounded-lg px-2 py-1 w-32 font-mono font-bold text-right">
+          </div>
+          <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+            <div id="budgetProgressBar" class="bg-indigo-500 h-full transition-all duration-300" style="width: 0%"></div>
+          </div>
+          <div id="budgetProgressText" class="text-[10px] text-right font-mono text-sub">0% Terpakai</div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-800/80">
+          <button onclick="openTxModal('income')" class="flex-1 sm:flex-none px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow text-xs font-bold transition flex items-center justify-center gap-1.5"><span>＋</span> <span data-i18n="optInc">Pemasukan</span></button>
+          <button onclick="openTxModal('expense')" class="flex-1 sm:flex-none px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl shadow text-xs font-bold transition flex items-center justify-center gap-1.5"><span>－</span> <span data-i18n="optExp">Pengeluaran</span></button>
+          <button onclick="exportFinanceCSV()" class="card-modern hover:bg-slate-800 text-xs font-bold px-3.5 py-2 rounded-xl transition" data-i18n="btnExportFin">Ekspor CSV</button>
+          <button onclick="window.print()" class="card-modern hover:bg-slate-800 text-xs font-bold px-3.5 py-2 rounded-xl transition" data-i18n="btnPrint">🖨️ Cetak / PDF</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="card-modern p-4 rounded-2xl"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblNet">Total Saldo</div><div id="metricNet" class="text-xl font-extrabold mt-1 font-mono">Rp 0</div></div>
+        <div class="card-modern p-4 rounded-2xl"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblIncome">Pemasukan</div><div id="metricIncome" class="text-xl font-extrabold text-emerald-400 mt-1 font-mono">Rp 0</div></div>
+        <div class="card-modern p-4 rounded-2xl"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblExpense">Pengeluaran</div><div id="metricExpense" class="text-xl font-extrabold text-rose-400 mt-1 font-mono">Rp 0</div></div>
+      </div>
+
+      <div class="card-modern p-4 rounded-2xl space-y-3">
+        <div class="flex flex-wrap gap-2 items-center justify-between">
+          <input type="text" id="searchInput" placeholder="Cari transaksi..." data-i18n-ph="phSearchTx" oninput="renderFinance()" class="text-xs custom-input border rounded-xl px-3 py-2 flex-1 outline-none min-w-[180px]">
+          <select id="filterType" onchange="renderFinance()" class="text-xs custom-input border rounded-xl px-3 py-2 outline-none">
+            <option value="all" data-i18n="optAll">Semua</option>
+            <option value="income" data-i18n="optInc">Pemasukan</option>
+            <option value="expense" data-i18n="optExp">Pengeluaran</option>
+          </select>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs min-w-[550px]">
+            <thead class="border-b border-slate-800 text-sub font-semibold">
+              <tr>
+                <th class="p-2.5 min-w-[110px]" data-i18n="thDate">Tanggal</th>
+                <th class="p-2.5 min-w-[120px]" data-i18n="thCat">Kategori</th>
+                <th class="p-2.5" data-i18n="thDesc">Keterangan</th>
+                <th class="p-2.5 text-right min-w-[110px]" data-i18n="thNom">Nominal</th>
+                <th class="p-2.5 text-center min-w-[90px]" data-i18n="thAct">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="txTableBody" class="divide-y divide-slate-800/60"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. TAB KALKULATOR, KREDIT, BMI & BMR -->
+    <section id="tab-calc" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="calcHeading">Kalkulator Pintar, Kredit, BMI & BMR</h2></div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="card-modern p-4 rounded-2xl space-y-3">
+          <h3 class="text-xs font-bold uppercase text-slate-200 border-b border-slate-800 pb-2">Kalkulator Standar</h3>
+          <input type="text" id="calcScreen" readonly class="w-full text-right text-xl font-mono custom-input border rounded-xl p-3 text-emerald-400 font-black shadow-inner" value="0">
+          <div class="grid grid-cols-4 gap-1.5">
+            <button onclick="calcClear()" class="bg-rose-600/30 text-rose-300 p-2.5 rounded-lg font-bold text-xs">C</button>
+            <button onclick="calcAppend('/')" class="bg-indigo-600/30 text-indigo-300 p-2.5 rounded-lg font-bold text-xs">÷</button>
+            <button onclick="calcAppend('*')" class="bg-indigo-600/30 text-indigo-300 p-2.5 rounded-lg font-bold text-xs">×</button>
+            <button onclick="calcAppend('-')" class="bg-indigo-600/30 text-indigo-300 p-2.5 rounded-lg font-bold text-xs">-</button>
+            <button onclick="calcAppend('7')" class="card-modern p-2.5 rounded-lg font-bold text-xs">7</button><button onclick="calcAppend('8')" class="card-modern p-2.5 rounded-lg font-bold text-xs">8</button><button onclick="calcAppend('9')" class="card-modern p-2.5 rounded-lg font-bold text-xs">9</button>
+            <button onclick="calcAppend('+')" class="bg-indigo-600/30 text-indigo-300 p-2.5 rounded-lg font-bold text-xs">+</button>
+            <button onclick="calcAppend('4')" class="card-modern p-2.5 rounded-lg font-bold text-xs">4</button><button onclick="calcAppend('5')" class="card-modern p-2.5 rounded-lg font-bold text-xs">5</button><button onclick="calcAppend('6')" class="card-modern p-2.5 rounded-lg font-bold text-xs">6</button>
+            <button onclick="calcCompute()" class="bg-emerald-600 text-white p-2.5 rounded-lg font-bold text-xs row-span-2">=</button>
+            <button onclick="calcAppend('1')" class="card-modern p-2.5 rounded-lg font-bold text-xs">1</button><button onclick="calcAppend('2')" class="card-modern p-2.5 rounded-lg font-bold text-xs">2</button><button onclick="calcAppend('3')" class="card-modern p-2.5 rounded-lg font-bold text-xs">3</button>
+            <button onclick="calcAppend('0')" class="col-span-2 card-modern p-2.5 rounded-lg font-bold text-xs">0</button><button onclick="calcAppend('.')" class="card-modern p-2.5 rounded-lg font-bold text-xs">.</button>
+          </div>
+        </div>
+
+        <div class="card-modern p-4 rounded-2xl space-y-3">
+          <h3 class="text-xs font-bold uppercase text-slate-200 border-b border-slate-800 pb-2">Simulasi Kredit</h3>
+          <div class="space-y-2 text-xs">
+            <div><label class="text-sub">Plafon Pinjaman</label><input type="number" id="loanAmount" value="100000000" class="w-full custom-input border rounded-xl p-2 mt-1 font-mono"></div>
+            <div><label class="text-sub">Bunga per Tahun (%)</label><input type="number" id="loanInterest" value="12" step="0.1" class="w-full custom-input border rounded-xl p-2 mt-1 font-mono"></div>
+            <div><label class="text-sub">Tenor (Bulan)</label><input type="number" id="loanTenor" value="12" class="w-full custom-input border rounded-xl p-2 mt-1 font-mono"></div>
+            <button onclick="calcLoan()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl shadow transition">Hitung Angsuran</button>
+            <div id="loanResult" class="p-3 card-modern rounded-xl font-bold text-emerald-400 text-center font-mono">Cicilan: 0 /bln</div>
+          </div>
+        </div>
+
+        <div class="card-modern p-4 rounded-2xl space-y-3">
+          <h3 class="text-xs font-bold uppercase text-slate-200 border-b border-slate-800 pb-2">Kalkulator BMI & Kalori (BMR)</h3>
+          <div class="space-y-2 text-xs">
+            <div class="grid grid-cols-2 gap-2">
+              <div><label class="text-sub">Berat (kg)</label><input type="number" id="bmiWeight" value="65" class="w-full custom-input border rounded-xl p-2 mt-1 font-mono"></div>
+              <div><label class="text-sub">Tinggi (cm)</label><input type="number" id="bmiHeight" value="170" class="w-full custom-input border rounded-xl p-2 mt-1 font-mono"></div>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div><label class="text-sub">Usia (Thn)</label><input type="number" id="bmrAge" value="25" class="w-full custom-input border rounded-xl p-2 mt-1 font-mono"></div>
+              <div><label class="text-sub">Gender</label><select id="bmrGender" class="w-full custom-input border rounded-xl p-2 mt-1 font-bold"><option value="m">Pria</option><option value="f">Wanita</option></select></div>
+            </div>
+            <button onclick="calcBMI()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl shadow transition">Hitung BMI & BMR</button>
+            <div id="bmiResult" class="p-3 card-modern rounded-xl font-bold text-sky-400 text-center font-mono text-xs">BMI: Normal | BMR: 1600 kcal</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. TAB KONVERSI TERPADU -->
+    <section id="tab-conversion" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl border-b border-slate-800"><h2 class="text-base font-extrabold" data-i18n="convHeading">Pusat Konversi Lengkap</h2></div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card-modern p-5 rounded-2xl space-y-4">
+          <h3 class="text-xs font-bold uppercase text-emerald-400 border-b border-slate-800 pb-2" data-i18n="currHeading">Konversi Mata Uang</h3>
+          <input type="number" id="currAmount" value="1" class="w-full custom-input border rounded-xl p-2.5 text-xs font-bold font-mono" oninput="convertCurrency()">
+          <div class="grid grid-cols-5 gap-2 items-center">
+            <select id="currFrom" class="col-span-2 custom-input border rounded-xl p-2.5 text-xs font-bold" onchange="convertCurrency()"><option value="USD">USD ($)</option><option value="IDR" selected>IDR (Rp)</option><option value="EUR">EUR (€)</option><option value="SGD">SGD ($)</option><option value="GBP">GBP (£)</option><option value="JPY">JPY (¥)</option></select>
+            <button onclick="swapCurrency()" class="col-span-1 card-modern p-2 rounded-xl font-bold text-center text-xs">⇄</button>
+            <select id="currTo" class="col-span-2 custom-input border rounded-xl p-2.5 text-xs font-bold" onchange="convertCurrency()"><option value="USD" selected>USD ($)</option><option value="IDR">IDR (Rp)</option><option value="EUR">EUR (€)</option><option value="SGD">SGD ($)</option><option value="GBP">GBP (£)</option><option value="JPY">JPY (¥)</option></select>
+          </div>
+          <div class="p-3 card-modern rounded-xl text-center"><div id="currResultValue" class="text-lg font-extrabold text-emerald-400 font-mono">0.00</div></div>
+        </div>
+
+        <div class="card-modern p-5 rounded-2xl space-y-4">
+          <h3 class="text-xs font-bold uppercase text-sky-400 border-b border-slate-800 pb-2">📐 Konverter Satuan Pengukuran</h3>
+          <input type="number" id="unitInputVal" value="1" oninput="convertUnits()" class="w-full custom-input border rounded-xl p-2.5 text-xs font-mono">
+          <div class="grid grid-cols-2 gap-2">
+            <select id="unitTypeSelect" onchange="convertUnits()" class="custom-input border rounded-xl p-2.5 text-xs font-bold">
+              <option value="km-mile">Kilometer ke Mil</option>
+              <option value="kg-lbs">Kilogram ke Pon (lbs)</option>
+              <option value="c-f">Celsius ke Fahrenheit</option>
+              <option value="m2-sqft">Meter Persegi ke Sq Ft</option>
+              <option value="gb-mb">Gigabyte ke Megabyte</option>
+              <option value="kmh-mph">Kecepatan: km/h ke mph</option>
+            </select>
+            <div id="unitResultVal" class="p-2 card-modern rounded-xl font-bold font-mono text-sky-300 flex items-center justify-center text-xs">0.62 Mile</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-modern p-5 rounded-2xl space-y-3">
+        <h3 class="text-xs font-bold uppercase text-indigo-400 border-b border-slate-800 pb-2">🏷️ Kalkulator Diskon, Pajak & Tip</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+          <div><label class="text-sub">Harga Awal</label><input type="number" id="discPrice" value="100000" oninput="calcDiscount()" class="w-full custom-input border rounded-xl p-2 mt-1 font-mono font-bold"></div>
+          <div><label class="text-sub">Diskon (%)</label><input type="number" id="discPct" value="10" oninput="calcDiscount()" class="w-full custom-input border rounded-xl p-2 mt-1 font-mono"></div>
+          <div><label class="text-sub">Pajak / PPN (%)</label><input type="number" id="taxPct" value="11" oninput="calcDiscount()" class="w-full custom-input border rounded-xl p-2 mt-1 font-mono"></div>
+          <div class="p-3 card-modern rounded-xl text-center flex flex-col justify-center"><span class="text-[10px] text-sub">Harga Akhir:</span><strong id="discFinalRes" class="text-indigo-300 font-mono text-sm">Rp 99.900</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. TAB TOOLS BERGUNA & TEXT COUNTER -->
+    <section id="tab-tools" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl">
+        <h2 class="text-base font-extrabold" data-i18n="toolsHeading">Kumpulan Utilitas & Tools Berguna</h2>
+        <p class="text-xs text-sub" data-i18n="toolsSub">Fitur pembantu cepat untuk tugas teknis harian Anda.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- FITUR BARU: TEXT COUNTER -->
+        <div class="card-modern p-5 rounded-2xl space-y-3">
+          <h3 class="text-xs font-bold uppercase text-sky-400 border-b border-slate-800 pb-2">📝 Text, Word & Character Counter</h3>
+          <textarea id="wordCountInput" rows="3" oninput="analyzeTextStats()" placeholder="Ketik atau tempel teks di sini..." class="w-full text-xs custom-input border rounded-xl p-2.5 outline-none"></textarea>
+          <div class="grid grid-cols-3 gap-2 text-center text-xs font-mono">
+            <div class="p-2 card-modern rounded-xl"><span class="block text-[10px] text-sub">Kata</span><strong id="statWords" class="text-indigo-300">0</strong></div>
+            <div class="p-2 card-modern rounded-xl"><span class="block text-[10px] text-sub">Karakter</span><strong id="statChars" class="text-emerald-300">0</strong></div>
+            <div class="p-2 card-modern rounded-xl"><span class="block text-[10px] text-sub">Est. Waktu Baca</span><strong id="statReading" class="text-amber-300">0m</strong></div>
+          </div>
+        </div>
+
+        <div class="card-modern p-5 rounded-2xl space-y-3">
+          <h3 class="text-xs font-bold uppercase text-indigo-400 border-b border-slate-800 pb-2">🔑 Pembuat Kata Sandi (Password Generator)</h3>
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between items-center"><label class="text-sub">Panjang Karakter:</label><span id="pwdLenLabel" class="font-mono font-bold">16</span></div>
+            <input type="range" id="pwdLength" min="8" max="32" value="16" class="w-full accent-indigo-500" oninput="document.getElementById('pwdLenLabel').textContent=this.value">
+            <div class="flex gap-3 text-[11px]">
+              <label class="flex items-center gap-1 cursor-pointer"><input type="checkbox" id="pwdSym" checked> Simbol (@#$)</label>
+              <label class="flex items-center gap-1 cursor-pointer"><input type="checkbox" id="pwdNum" checked> Angka (0-9)</label>
+            </div>
+            <button onclick="generatePassword()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-xl shadow transition">Buat Kata Sandi</button>
+            <input type="text" id="pwdResult" readonly class="w-full text-center font-mono font-bold text-emerald-400 custom-input border rounded-xl p-2">
+          </div>
+        </div>
+
+        <div class="card-modern p-5 rounded-2xl space-y-3">
+          <h3 class="text-xs font-bold uppercase text-violet-400 border-b border-slate-800 pb-2">🎲 Generator UUID v4 & Clean URL Slug</h3>
+          <div class="space-y-2 text-xs">
+            <input type="text" id="slugInputText" placeholder="Ketik kalimat untuk URL slug..." oninput="generateSlugText()" class="w-full custom-input border rounded-xl p-2 outline-none">
+            <input type="text" id="slugOutputResult" readonly placeholder="hasil-url-slug-anda" class="w-full font-mono text-indigo-300 custom-input border rounded-xl p-2">
+            <div class="flex gap-2">
+              <button onclick="generateUUIDv4()" class="flex-1 bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 rounded-xl shadow transition">Buat UUID v4</button>
+              <button onclick="navigator.clipboard.writeText(document.getElementById('slugOutputResult').value); alert('Disalin!')" class="flex-1 card-modern hover:bg-slate-800 font-bold py-2 rounded-xl transition">Salin Hasil</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-modern p-5 rounded-2xl space-y-3">
+          <h3 class="text-xs font-bold uppercase text-emerald-400 border-b border-slate-800 pb-2">⚡ Base64 Encoder & Decoder</h3>
+          <div class="space-y-2 text-xs">
+            <textarea id="base64Input" rows="2" placeholder="Masukkan teks biasa atau kode Base64..." class="w-full custom-input border rounded-xl p-2 outline-none"></textarea>
+            <div class="flex gap-2">
+              <button onclick="processBase64('encode')" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-xl shadow transition">Encode Base64</button>
+              <button onclick="processBase64('decode')" class="flex-1 bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 rounded-xl shadow transition">Decode Base64</button>
+            </div>
+            <textarea id="base64Result" rows="2" readonly placeholder="Hasil proses Base64..." class="w-full font-mono text-indigo-300 custom-input border rounded-xl p-2"></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. TAB FONT GENERATOR & TEXT STYLIST -->
+    <section id="tab-font" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="fontHeading">Font Generator & Text Stylist</h2></div>
+      <div class="card-modern p-5 rounded-2xl space-y-4 max-w-2xl mx-auto">
+        <textarea id="fontInputText" rows="3" class="w-full text-xs custom-input border rounded-xl p-3 outline-none font-bold" oninput="generateFonts()">WorkSpace Pro</textarea>
+        <div class="flex gap-2 flex-wrap text-xs">
+          <button onclick="transformCase('upper')" class="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold shadow">KAPITAL</button>
+          <button onclick="transformCase('lower')" class="px-3.5 py-1.5 card-modern hover:border-indigo-500 rounded-xl font-bold">kecil</button>
+          <button onclick="transformCase('title')" class="px-3.5 py-1.5 card-modern hover:border-indigo-500 rounded-xl font-bold">Judul Kata</button>
+          <button onclick="transformCase('inverse')" class="px-3.5 py-1.5 card-modern hover:border-indigo-500 rounded-xl font-bold">iNvErS</button>
+        </div>
+        <div id="fontResultsList" class="space-y-2.5 max-h-[420px] overflow-y-auto pr-1"></div>
+      </div>
+    </section>
+
+    <!-- 12. TAB SHORTENER & QR CODE -->
+    <section id="tab-shortener" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="shortHeading">Pemendek Link (URL Shortener) & QR Generator</h2></div>
+      <div class="card-modern p-5 rounded-2xl space-y-3 max-w-xl mx-auto">
+        <div class="flex gap-2">
+          <input type="url" id="shortUrlInput" placeholder="https://..." class="text-xs custom-input border rounded-xl px-3 py-2.5 flex-1 outline-none">
+          <button onclick="generateShortUrl()" class="bg-indigo-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition" data-i18n="shortProc">Pendekkan</button>
+        </div>
+        <div id="shortResultArea" class="hidden p-3.5 card-modern rounded-xl space-y-3">
+          <div class="flex gap-2">
+            <input type="text" id="shortResultOutput" readonly class="text-xs custom-input border rounded-xl px-3 py-2 flex-1 font-mono text-indigo-400 font-bold">
+            <button onclick="copyShortUrl()" class="bg-violet-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow transition" data-i18n="shortCopy">Salin</button>
+          </div>
+          <div class="text-center pt-2">
+            <img id="shortQrImg" class="w-28 h-28 mx-auto rounded-lg border border-slate-700 shadow" src="" alt="Kode QR">
+            <span class="text-[10px] text-sub mt-1 block">Kode QR Tautan</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. TAB TRANSLATOR -->
+    <section id="tab-translator" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="transHeading">Penerjemah Bahasa Multi-Bahasa</h2></div>
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
+        <div class="card-modern p-4 rounded-2xl space-y-3 md:col-span-2">
+          <select id="transSourceLang" class="custom-input border rounded-lg px-2.5 py-1.5 outline-none text-xs font-bold w-full">
+            <option value="auto">Deteksi Otomatis (Auto Detect)</option><option value="id">Bahasa Indonesia</option><option value="en">English (Inggris)</option><option value="zh-CN">中文 (Mandarin)</option><option value="ar">العربية (Arab)</option>
+          </select>
+          <textarea id="transInputText" rows="4" placeholder="Ketik atau tempel teks di sini..." data-i18n-ph="phTransInput" class="w-full text-xs custom-input border rounded-xl p-3 outline-none"></textarea>
+          <button onclick="translateText()" class="w-full bg-indigo-600 text-white text-xs font-bold py-2.5 rounded-xl shadow transition" data-i18n="transBtn">Terjemahkan</button>
+        </div>
+        <div class="flex justify-center md:col-span-1">
+          <button onclick="swapLanguages()" class="w-10 h-10 rounded-full bg-indigo-600/20 text-indigo-300 font-bold flex items-center justify-center transition shadow border border-indigo-500/30 text-lg">⇄</button>
+        </div>
+        <div class="card-modern p-4 rounded-2xl space-y-3 md:col-span-2">
+          <select id="transTargetLang" class="custom-input border rounded-lg px-2.5 py-1.5 outline-none text-xs font-bold w-full">
+            <option value="en">English (Inggris)</option><option value="id" selected>Bahasa Indonesia</option><option value="zh-CN">中文 (Mandarin)</option><option value="ar">العربية (Arab)</option>
+          </select>
+          <div id="transOutputResult" class="w-full h-[96px] text-xs custom-input border rounded-xl p-3 overflow-y-auto text-indigo-300 font-medium select-all" data-i18n="transRes">Hasil terjemahan...</div>
+          <div class="flex gap-2">
+            <button onclick="copyTranslation()" class="flex-1 card-modern hover:bg-slate-800 text-xs font-bold py-2 rounded-xl transition" data-i18n="transCopy">Salin Hasil</button>
+            <button onclick="speakTranslation()" class="px-3 card-modern hover:bg-slate-800 text-xs font-bold py-2 rounded-xl transition">🔊</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14. TAB BIO LINK GENERATOR -->
+    <section id="tab-biolink" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div><h2 class="text-base font-extrabold" data-i18n="bioHeading">Bio Link Generator</h2><p class="text-xs text-sub" data-i18n="bioSub">Buat halaman landing tautan profil gaya LinkTree dengan Kode QR.</p></div>
+        <button onclick="generateBioLinkPage()" class="bg-emerald-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow transition" data-i18n="bioGenBtn">Buat Bio Link</button>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card-modern p-5 rounded-2xl space-y-4">
+          <div><label class="text-xs font-bold text-sub" data-i18n="bioTitleLabel">Judul Profil / Nama Halaman</label><input type="text" id="bioProfileTitle" placeholder="Contoh: Nama Anda / Brand" data-i18n-ph="phBioTitle" class="w-full text-xs custom-input border rounded-xl p-2.5 mt-1 font-bold"></div>
+          <div><label class="text-xs font-bold text-sub" data-i18n="bioSubtitleLabel">Bio Singkat / Deskripsi</label><input type="text" id="bioProfileSub" placeholder="Contoh: Kreator Konten & Developer" data-i18n-ph="phBioSub" class="w-full text-xs custom-input border rounded-xl p-2.5 mt-1"></div>
+          <div class="space-y-3 pt-2 border-t border-slate-800">
+            <label class="text-xs font-bold text-sub uppercase" data-i18n="bioAddBtnLabel">Tambah Tautan Tombol Baru</label>
+            <div class="space-y-2">
+              <input type="text" id="newBioBtnText" placeholder="Teks Tombol (Misal: Instagram Saya)" data-i18n-ph="phBtnText" class="w-full text-xs custom-input border rounded-xl p-2.5">
+              <input type="url" id="newBioBtnUrl" placeholder="URL Tujuan (https://...)" class="w-full text-xs custom-input border rounded-xl p-2.5">
+              <button onclick="addCustomBioLink()" class="w-full bg-indigo-600 text-white text-xs font-bold py-2 rounded-xl shadow transition" data-i18n="bioAddBtn">+ Tambah ke Daftar Tombol</button>
+            </div>
+          </div>
+          <div class="space-y-2 pt-2 border-t border-slate-800"><label class="text-xs font-bold text-sub uppercase" data-i18n="bioLinksList">Daftar Tombol Tautan Aktif</label><div id="bioCustomLinkList" class="space-y-2 max-h-40 overflow-y-auto"></div></div>
+        </div>
+        <div class="card-modern p-5 rounded-2xl space-y-3 flex flex-col justify-between">
+          <div>
+            <h3 class="text-xs font-bold uppercase text-sub border-b border-slate-800 pb-2" data-i18n="bioResLabel">Pratinjau Tampilan LinkTree</h3>
+            <div id="linkTreePreview" class="mt-4 p-6 rounded-2xl bg-slate-950/80 border border-slate-800 text-center space-y-4 shadow-inner min-h-[260px] flex flex-col items-center justify-center">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-indigo-500 to-pink-500 flex items-center justify-center text-white font-black text-xl shadow-lg">WS</div>
+              <div><h4 id="prevTitle" class="font-bold text-sm text-white">Nama Profil Anda</h4><p id="prevSub" class="text-[10px] text-sub mt-0.5">Bio singkat profil Anda di sini...</p></div>
+              <div id="prevLinksContainer" class="w-full space-y-2 pt-2"><div class="p-2.5 rounded-xl bg-indigo-600/30 border border-indigo-500/30 text-indigo-200 text-xs font-bold">Contoh Tombol Tautan 1</div></div>
+            </div>
+          </div>
+          <button onclick="copyBioLink()" class="w-full bg-violet-600 text-white text-xs font-bold py-2.5 rounded-xl shadow transition" data-i18n="bioCopy">Salin Kode HTML Bio Link</button>
+          <textarea id="bioResultOutput" class="hidden"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15. TAB MEDIA DOWNLOADER -->
+    <section id="tab-downloader" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="dlHeading">Media & Photo Downloader</h2></div>
+      <div class="card-modern p-5 rounded-2xl space-y-4 max-w-xl mx-auto">
+        <div class="flex gap-2">
+          <input type="url" id="dlUrlInput" placeholder="Tempel tautan YouTube atau link gambar/foto di sini..." data-i18n-ph="phMediaUrl" class="text-xs custom-input border rounded-xl px-3 py-2.5 flex-1 outline-none">
+          <button onclick="processDownload()" class="bg-indigo-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition" data-i18n="dlProc">Proses</button>
+        </div>
+        <div id="dlResultArea" class="hidden p-4 card-modern rounded-xl space-y-3">
+          <div id="ytInfoBox" class="text-xs font-semibold text-sub text-center">Media siap diunduh! Pilih format:</div>
+          <div id="dlActionGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <a id="dlVideoBtn" href="#" target="_blank" class="block text-center bg-indigo-600 text-white text-xs font-bold py-2.5 rounded-xl shadow transition">Video (MP4)</a>
+            <a id="dlAudioBtn" href="#" target="_blank" class="block text-center bg-violet-600 text-white text-xs font-bold py-2.5 rounded-xl shadow transition">Audio (MP3)</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16. TAB PDF VIEWER & EXTRACTOR -->
+    <section id="tab-pdf" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl flex justify-between items-center flex-wrap gap-2">
+        <h2 class="text-base font-extrabold" data-i18n="pdfHeading">PDF Viewer Interaktif & Ekstraktor Teks</h2>
+        <label class="bg-indigo-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl cursor-pointer shadow transition"><span data-i18n="pdfChoose">Pilih File PDF</span><input type="file" accept="application/pdf" class="hidden" onchange="loadPdf(event)"></label>
+      </div>
+      <div class="card-modern p-4 rounded-2xl flex flex-col items-center justify-center min-h-[400px]">
+        <div id="pdfPlaceholder" class="text-xs text-sub py-10" data-i18n="pdfPlaceholder">Belum ada PDF dimuat.</div>
+        <div id="pdfViewerContainer" class="hidden w-full space-y-3 flex flex-col items-center">
+          <div class="flex gap-2 items-center flex-wrap justify-center">
+            <button onclick="zoomPdf(-0.2)" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold">- Zoom</button>
+            <button onclick="prevPdfPage()" class="px-3 py-1 bg-indigo-600 text-white rounded-xl text-xs font-bold">&larr;</button>
+            <span class="font-mono text-xs" id="pdfPageInfo">0/0</span>
+            <button onclick="nextPdfPage()" class="px-3 py-1 bg-indigo-600 text-white rounded-xl text-xs font-bold">&rarr;</button>
+            <button onclick="zoomPdf(0.2)" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold">+ Zoom</button>
+            <button onclick="extractPdfText()" class="px-3 py-1 bg-emerald-600 text-white rounded-xl text-xs font-bold shadow">📝 Ekstrak Teks</button>
+          </div>
+          <canvas id="pdfCanvas" class="max-w-full h-auto rounded-xl shadow bg-white"></canvas>
+          <textarea id="pdfExtractedText" rows="4" readonly class="w-full text-xs custom-input border rounded-xl p-3 outline-none hidden font-mono"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17. TAB PHOTO EDITOR STUDIO FITUR BARU -->
+    <section id="tab-photo" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl flex justify-between items-center"><h2 class="text-base font-extrabold" data-i18n="photoHeading">Photo Editor Studio</h2><label class="bg-indigo-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl cursor-pointer shadow transition"><span data-i18n="photoChoose">Pilih Foto</span><input type="file" accept="image/*" class="hidden" onchange="loadPhoto(event)"></label></div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="card-modern p-4 rounded-2xl flex items-center justify-center min-h-[300px] md:col-span-2">
+          <div id="photoPlaceholder" class="text-xs text-sub" data-i18n="photoPlaceholder">Belum ada foto diunggah.</div>
+          <canvas id="photoCanvas" class="max-w-full max-h-[380px] object-contain hidden rounded-xl shadow"></canvas>
+        </div>
+        <div class="card-modern p-4 rounded-2xl space-y-3">
+          <h3 class="text-xs font-bold uppercase text-sub border-b border-slate-800 pb-2">Filter & Transformasi</h3>
+          <div class="space-y-2 text-xs">
+            <div><label class="text-sub">Kecerahan (Brightness)</label><input type="range" id="photoBrightness" min="0" max="200" value="100" class="w-full accent-indigo-500" oninput="applyPhotoFilters()"></div>
+            <div><label class="text-sub">Kontras (Contrast)</label><input type="range" id="photoContrast" min="0" max="200" value="100" class="w-full accent-indigo-500" oninput="applyPhotoFilters()"></div>
+            <div><label class="text-sub">Grayscale (Hitam Putih)</label><input type="range" id="photoGrayscale" min="0" max="100" value="0" class="w-full accent-indigo-500" oninput="applyPhotoFilters()"></div>
+            <div><label class="text-sub">Sepia</label><input type="range" id="photoSepia" min="0" max="100" value="0" class="w-full accent-indigo-500" oninput="applyPhotoFilters()"></div>
+            <div><label class="text-sub">Invert (Negatif)</label><input type="range" id="photoInvert" min="0" max="100" value="0" class="w-full accent-indigo-500" oninput="applyPhotoFilters()"></div>
+            <div class="flex gap-2 pt-2">
+              <button onclick="rotatePhoto(90)" class="flex-1 card-modern hover:bg-slate-800 font-bold py-1.5 rounded-xl text-xs">🔄 Putar 90°</button>
+              <button onclick="resetPhotoFilters()" class="flex-1 bg-rose-600/20 text-rose-300 border border-rose-500/30 font-bold py-1.5 rounded-xl text-xs">Reset</button>
+            </div>
+            <button onclick="downloadEditedPhoto()" class="w-full mt-3 bg-emerald-600 text-white font-bold py-2.5 rounded-xl shadow transition">Unduh Hasil Foto</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18. TAB MEDIA FINDER (GIF & SIMBOL) -->
+    <section id="tab-mediafinder" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl space-y-3">
+        <h2 class="text-base font-extrabold" data-i18n="mediaFinderHeading">Pencari GIF, Stiker & Simbol Unik</h2>
+        <p class="text-xs text-sub" data-i18n="mediaFinderSub">Cari media ekspresif dan salin simbol khusus dengan sekali klik.</p>
+        <div class="flex gap-2 flex-wrap text-xs pt-1 border-t border-slate-800">
+          <button onclick="setMediaFinderSubTab('symbol')" id="btnSubSymbol" class="px-3.5 py-1.5 bg-indigo-600 text-white rounded-xl font-bold shadow">🔣 Simbol & Karakter</button>
+          <button onclick="setMediaFinderSubTab('gif')" id="btnSubGif" class="px-3.5 py-1.5 card-modern text-sub rounded-xl font-bold">🖼️ Cari GIF / Stiker</button>
+        </div>
+      </div>
+
+      <div id="subtab-symbol" class="card-modern p-5 rounded-2xl space-y-3"><div id="symbolGrid" class="grid grid-cols-6 sm:grid-cols-10 md:grid-cols-12 gap-2 text-lg text-center max-h-80 overflow-y-auto p-1 font-bold"></div></div>
+      
+      <div id="subtab-gif" class="card-modern p-5 rounded-2xl space-y-3 hidden">
+        <div class="flex gap-2">
+          <input type="text" id="gifQueryInput" placeholder="Cari GIF (misal: cat, excited)..." class="text-xs custom-input border rounded-xl px-3 py-2.5 flex-1 outline-none" onkeydown="if(event.key==='Enter') searchGifs()">
+          <button onclick="searchGifs()" class="bg-indigo-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition">Cari GIF</button>
+        </div>
+        <div id="gifResultGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-h-96 overflow-y-auto pt-2"></div>
+      </div>
+    </section>
+
+    <!-- 19. TAB CUACA REAL-TIME -->
+    <section id="tab-weather" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div><h2 class="text-base font-extrabold" data-i18n="weatherHeading">Pusat Cuaca Real-Time</h2><p class="text-xs text-sub" data-i18n="weatherSub">Informasi cuaca dan iklim terkini secara langsung.</p></div>
+        <div class="flex gap-2 items-center">
+          <input type="text" id="weatherCitySearch" placeholder="Cari Kota (misal: Jakarta)" data-i18n-ph="phCity" class="text-xs custom-input border rounded-xl px-3 py-2 outline-none">
+          <button onclick="fetchLiveWeather()" class="bg-indigo-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow transition" data-i18n="btnRefreshWeather">Cari & Perbarui</button>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+        <div class="card-modern p-5 rounded-2xl space-y-2 text-center"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblTemp">Suhu Saat Ini</div><div id="liveTemp" class="text-3xl font-black font-mono text-indigo-400">--°C</div></div>
+        <div class="card-modern p-5 rounded-2xl space-y-2 text-center"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblCondition">Kondisi</div><div id="liveCondition" class="text-lg font-bold text-emerald-400">Memuat...</div></div>
+        <div class="card-modern p-5 rounded-2xl space-y-2 text-center"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblWind">Kecepatan Angin</div><div id="liveWind" class="text-lg font-bold font-mono text-violet-400">-- km/h</div></div>
+        <div class="card-modern p-5 rounded-2xl space-y-2 text-center"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblHumidity">Kelembapan Udara</div><div id="liveHumidity" class="text-lg font-bold font-mono text-sky-400">-- %</div></div>
+      </div>
+    </section>
+
+    <!-- 20. TAB BERITA -->
+    <section id="tab-news" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl flex flex-wrap justify-between items-center gap-3">
+        <h2 class="text-base font-extrabold" data-i18n="newsHeading">Berita Real-Time</h2>
+        <div class="flex items-center gap-2 flex-wrap">
+          <input type="text" id="newsSearchQuery" placeholder="Cari topik berita..." data-i18n-ph="phNewsSearch" class="text-xs custom-input border rounded-xl px-3 py-2 outline-none" onkeydown="if(event.key==='Enter') fetchNews()">
+          <button onclick="fetchNews()" class="bg-indigo-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow transition" data-i18n="newsRefresh">Cari</button>
+        </div>
+      </div>
+      <div id="newsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-4"><div class="card-modern p-4 rounded-2xl text-xs text-sub col-span-3 text-center py-10" data-i18n="newsLoading">Memuat...</div></div>
+    </section>
+
+    <!-- 21. TAB PENGATURAN & MUSIK AMBIENT -->
+    <section id="tab-settings" class="tab-content space-y-4 hidden">
+      <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="setHeading">Pengaturan & Informasi</h2></div>
+      
+      <!-- FITUR MUSIK LATAR BELAKANG DIPERBAIKI -->
+      <div class="card-modern p-4 rounded-2xl space-y-3">
+        <div>
+          <h3 class="text-xs font-bold uppercase text-sub">🎵 Musik Latar Belakang (Lo-Fi Ambience Synth)</h3>
+          <p class="text-[10px] text-sub">Synthesizer audio bawaan untuk fokus & rileks tanpa tergantung file eksternal.</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center pt-1">
+          <button onclick="toggleBackgroundMusic()" id="btnSettingMusicToggle" class="bg-indigo-600 text-white font-bold text-xs py-2 px-4 rounded-xl shadow">Putar / Jeda Lo-Fi</button>
+          <select id="musicPresetSelect" onchange="changeMusicPreset(this.value)" class="custom-input border rounded-xl p-2 text-xs font-bold">
+            <option value="chill">1. Deep Focus Chill</option>
+            <option value="cosmic">2. Cosmic Starlight Wave</option>
+            <option value="zen">3. Zen Meditation Chords</option>
+          </select>
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] text-sub">Vol:</span>
+            <input type="range" id="musicVolumeSlider" min="0" max="1" step="0.05" value="0.3" oninput="changeMusicVolume(this.value)" class="w-full accent-indigo-500 cursor-pointer">
+          </div>
+        </div>
+      </div>
+
+      <div class="card-modern p-4 rounded-2xl space-y-3">
+        <h3 class="text-xs font-bold uppercase text-sub" data-i18n="lblTheme">Tema Tampilan</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-6 gap-2.5">
+          <button onclick="setAppTheme('dark')" class="p-2.5 rounded-xl border bg-slate-950 text-white text-xs font-bold">Dark</button>
+          <button onclick="setAppTheme('light')" class="p-2.5 rounded-xl border bg-slate-100 text-slate-900 text-xs font-bold">Light</button>
+          <button onclick="setAppTheme('emerald')" class="p-2.5 rounded-xl border bg-emerald-950 text-emerald-200 text-xs font-bold">Emerald</button>
+          <button onclick="setAppTheme('ocean')" class="p-2.5 rounded-xl border bg-sky-950 text-sky-200 text-xs font-bold">Ocean</button>
+          <button onclick="setAppTheme('cyber')" class="p-2.5 rounded-xl border bg-purple-950 text-purple-200 text-xs font-bold">Cyber</button>
+          <button onclick="setAppTheme('ios')" class="p-2.5 rounded-xl border bg-slate-800/60 text-indigo-300 border-indigo-400/40 text-xs font-bold">iOS Glass ✨</button>
+        </div>
+      </div>
+      <div class="card-modern p-5 rounded-2xl space-y-3">
+        <h3 class="text-xs font-bold uppercase text-sub border-b border-slate-800 pb-2" data-i18n="lblAboutTitle">Tentang Aplikasi & Pengembang</h3>
+        <div class="space-y-1.5 text-xs">
+          <p class="font-black text-indigo-400 text-sm">WorkSpace Pro</p>
+          <p class="text-sub"><span data-i18n="lblDev">Pengembang:</span> <strong>Danis Vanandi</strong></p>
+          <p class="text-sub"><span data-i18n="lblField">Bidang:</span> Civil Engineer & AI / NLP Researcher</p>
+          <p class="text-sub"><span>Email:</span> <a href="mailto:vanandi@proton.me" class="text-indigo-400 font-mono font-bold hover:underline">vanandi@proton.me</a></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- DOCK BAR AKSI MELAYANG BAWAH (DENGAN INDIKATOR AKTIF YANG SUDAH DIPERBAIKI) -->
+  <div class="fixed bottom-4 right-4 z-50">
+    <div class="bg-slate-900/90 backdrop-blur-md border border-slate-700/80 p-1.5 rounded-2xl shadow-2xl flex items-center gap-2">
+      <!-- AI CHATBOT ROBOT BUTTON -->
+      <button id="dockBtnChatbot" onclick="switchTab('chatbot')" class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow transition hover:scale-105 active:scale-95" title="Asisten AI Robot">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="15" x2="8" y2="15.01"/><line x1="16" y1="15" x2="16" y2="15.01"/>
+        </svg>
+      </button>
+      <button id="dockBtnAccount" onclick="openLoginModal()" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-indigo-300 shadow transition hover:scale-105 active:scale-95" title="Akun & Keamanan Data">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+      </button>
+      <button onclick="toggleFloatingMenu()" class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-pink-600 flex items-center justify-center text-white shadow hover:scale-105 transition active:scale-95" title="Pusat Menu">
+        <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- PEMILIH BAHASA FLOATING -->
+  <div class="fixed bottom-4 left-4 z-50">
+    <div class="rounded-2xl shadow-2xl px-3 py-2 flex items-center justify-center bg-slate-900/90 backdrop-blur-md border border-slate-700/80 cursor-pointer hover:scale-105 transition">
+      <span class="text-xs mr-1">🌐</span>
+      <select id="langSelector" onchange="changeLanguage(this.value)" class="text-xs bg-transparent text-indigo-300 font-bold border-0 outline-none cursor-pointer">
+        <option value="id" class="bg-slate-900">ID</option>
+        <option value="en" class="bg-slate-900">EN</option>
+        <option value="zh" class="bg-slate-900">ZH</option>
+        <option value="ar" class="bg-slate-900">AR</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- MODAL PUSAT MENU LAUNCHER -->
+  <div id="floatingMenuModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-4">
+    <div class="bg-slate-900/95 border border-indigo-500/30 rounded-2xl max-w-md w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2.5">
+        <h3 class="font-extrabold text-xs tracking-wide text-indigo-300" data-i18n="launcherTitle">Pusat Menu Launcher</h3>
+        <div class="flex items-center gap-2">
+          <button onclick="switchTabAndClose('settings')" class="w-8 h-8 rounded-xl bg-indigo-600/30 text-indigo-300 hover:bg-indigo-600 hover:text-white flex items-center justify-center text-sm font-bold transition shadow" title="Pengaturan & Info">⚙️</button>
+          <button onclick="toggleFloatingMenu()" class="w-8 h-8 rounded-xl bg-rose-500/30 text-rose-300 hover:bg-rose-500 hover:text-white flex items-center justify-center text-base font-bold transition shadow" title="Tutup">&times;</button>
+        </div>
+      </div>
+
+      <div class="max-h-[60vh] overflow-y-auto space-y-3 pr-1 text-xs">
+        <div class="space-y-1.5">
+          <span class="text-[10px] font-bold text-sub uppercase tracking-wider block">PRODUKTIVITAS & PROYEK</span>
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="switchTabAndClose('kanban')" class="p-2.5 card-modern rounded-xl flex items-center gap-2 border-indigo-500/30"><span class="text-base">📌</span><span data-i18n="menuKanban">Kanban & Matriks</span></button>
+            <button onclick="switchTabAndClose('tasks')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📋</span><span data-i18n="menuTasks">Tugas & Memo</span></button>
+            <button onclick="switchTabAndClose('mindmap')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🧠</span><span data-i18n="menuMindMap">Mind Map</span></button>
+            <button onclick="switchTabAndClose('calendar')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📅</span><span data-i18n="menuCalendar">Kalender</span></button>
+            <button onclick="switchTabAndClose('clock')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">⏰</span><span data-i18n="menuClock">Jam & Alarm</span></button>
+          </div>
+        </div>
+
+        <div class="space-y-1.5 pt-2 border-t border-slate-800/80">
+          <span class="text-[10px] font-bold text-sub uppercase tracking-wider block">KEUANGAN & KALKULATOR</span>
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="switchTabAndClose('finance')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">💰</span><span data-i18n="menuFinance">Keuangan</span></button>
+            <button onclick="switchTabAndClose('calc')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🧮</span><span data-i18n="menuCalc">Kalkulator & BMI</span></button>
+            <button onclick="switchTabAndClose('conversion')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🔄</span><span data-i18n="menuConversion">Konversi</span></button>
+          </div>
+        </div>
+
+        <div class="space-y-1.5 pt-2 border-t border-slate-800/80">
+          <span class="text-[10px] font-bold text-sub uppercase tracking-wider block">UTILITAS & TEKNIS</span>
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="switchTabAndClose('tools')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🧰</span><span data-i18n="menuTools">Tools Berguna</span></button>
+            <button onclick="switchTabAndClose('font')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">𔓷</span><span data-i18n="menuFont">Font Generator</span></button>
+            <button onclick="switchTabAndClose('shortener')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🔗</span><span data-i18n="menuShortener">Pemendek Link</span></button>
+            <button onclick="switchTabAndClose('translator')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🌐</span><span data-i18n="menuTranslator">Translator</span></button>
+          </div>
+        </div>
+
+        <div class="space-y-1.5 pt-2 border-t border-slate-800/80">
+          <span class="text-[10px] font-bold text-sub uppercase tracking-wider block">MEDIA & DOKUMEN STUDIO</span>
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="switchTabAndClose('biolink')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🔗</span><span data-i18n="menuBioLink">Bio Link</span></button>
+            <button onclick="switchTabAndClose('downloader')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📥</span><span data-i18n="menuDownloader">Downloader</span></button>
+            <button onclick="switchTabAndClose('pdf')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📄</span><span data-i18n="menuPdf">PDF Viewer</span></button>
+            <button onclick="switchTabAndClose('photo')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📸</span><span data-i18n="menuPhoto">Photo Editor</span></button>
+            <button onclick="switchTabAndClose('mediafinder')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🖼️</span><span data-i18n="menuMediaFinder">GIF & Simbol</span></button>
+          </div>
+        </div>
+
+        <div class="space-y-1.5 pt-2 border-t border-slate-800/80">
+          <span class="text-[10px] font-bold text-sub uppercase tracking-wider block">INFORMASI & LAINNYA</span>
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="switchTabAndClose('weather')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">🌤️</span><span data-i18n="menuWeather">Cuaca</span></button>
+            <button onclick="switchTabAndClose('news')" class="p-2.5 card-modern rounded-xl flex items-center gap-2"><span class="text-base">📰</span><span data-i18n="menuNews">Berita</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL LOGIN / AKUN & BACKUP -->
+  <div id="loginModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-md w-full p-5 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+        <h3 class="font-extrabold text-xs tracking-wide" data-i18n="loginTitle">🔐 Akun & Pemulihan Data Total</h3>
+        <button onclick="closeLoginModal()" class="text-sub font-bold text-base">&times;</button>
+      </div>
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="text-sub" data-i18n="lblUsername">Nama Pengguna (Username)</label>
+          <input type="text" id="authUsername" class="w-full custom-input border rounded-xl p-2.5 mt-1 font-bold" placeholder="Nama Anda" data-i18n-ph="phUsername">
+        </div>
+        <div class="flex gap-2">
+          <button onclick="saveAuthCredentials()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl shadow transition" data-i18n="btnSaveAccount">Simpan Akun</button>
+          <button onclick="resetAppCache()" class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-2.5 px-3 rounded-xl shadow transition" data-i18n="btnResetData">Reset Data</button>
+        </div>
+        <div class="pt-3 border-t border-slate-800 space-y-2">
+          <label class="text-sub font-bold uppercase text-[10px] tracking-wide" data-i18n="lblFullBackup">Backup & Restore Penuh</label>
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="autoBackupJSON()" class="bg-violet-600 hover:bg-violet-700 text-white font-bold py-2.5 rounded-xl shadow transition" data-i18n="btnDownloadJSON">Download JSON</button>
+            <label class="block text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-2 rounded-xl cursor-pointer shadow transition truncate">
+              <span data-i18n="btnRestoreJSON">📁 Restore File</span>
+              <input type="file" accept=".json" onchange="importJSON(event)" class="hidden">
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL KANBAN -->
+  <div id="kanbanModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+        <h3 class="font-bold text-xs" data-i18n="kanbanFormTitle">Tambah / Edit Kartu Kanban</h3>
+        <button onclick="closeKanbanModal()" class="text-sub font-bold">&times;</button>
+      </div>
+      <form id="kanbanForm" class="space-y-2.5">
+        <input type="hidden" id="editKanbanId">
+        <input type="text" id="kanbanCardTitle" placeholder="Judul Proyek / Tugas..." required class="w-full text-xs custom-input border rounded-xl p-2 font-bold">
+        <select id="kanbanCardStatus" class="w-full text-xs custom-input border rounded-xl p-2 font-semibold">
+          <option value="todo">📋 To Do (Belum Dikerjakan)</option>
+          <option value="in_progress">⚡ In Progress (Sedang Dikerjakan)</option>
+          <option value="done">✅ Done (Selesai)</option>
+        </select>
+        <textarea id="kanbanCardDesc" rows="3" placeholder="Deskripsi singkat..." class="w-full text-xs custom-input border rounded-xl p-2 outline-none"></textarea>
+        <div class="flex justify-end gap-2 pt-1">
+          <button type="button" onclick="closeKanbanModal()" class="px-3 py-1.5 text-xs text-sub" data-i18n="btnCancel">Batal</button>
+          <button type="submit" class="px-3.5 py-1.5 text-xs bg-indigo-600 text-white rounded-xl font-bold shadow" data-i18n="btnSave">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL MATRIKS -->
+  <div id="eisenModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+        <h3 class="font-bold text-xs" data-i18n="eisenFormTitle">Tambah Tugas Prioritas Matriks</h3>
+        <button onclick="closeEisenhowerModal()" class="text-sub font-bold">&times;</button>
+      </div>
+      <form id="eisenForm" class="space-y-2.5">
+        <input type="text" id="eisenTitle" placeholder="Judul Tugas Prioritas..." required class="w-full text-xs custom-input border rounded-xl p-2 font-bold">
+        <select id="eisenQuadrant" class="w-full text-xs custom-input border rounded-xl p-2 font-semibold">
+          <option value="Q1">🔥 1. Penting & Mendesak (Do First)</option>
+          <option value="Q2">📅 2. Penting & Tidak Mendesak (Schedule)</option>
+          <option value="Q3">👥 3. Tidak Penting & Mendesak (Delegate)</option>
+          <option value="Q4">🗑️ 4. Tidak Penting & Tidak Mendesak (Eliminate)</option>
+        </select>
+        <div class="flex justify-end gap-2 pt-1">
+          <button type="button" onclick="closeEisenhowerModal()" class="px-3 py-1.5 text-xs text-sub" data-i18n="btnCancel">Batal</button>
+          <button type="submit" class="px-3.5 py-1.5 text-xs bg-indigo-600 text-white rounded-xl font-bold shadow" data-i18n="btnSave">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL TRANSAKSI KEUANGAN -->
+  <div id="txModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2"><h3 class="font-bold text-xs" id="modalTxTitle">Form Transaksi</h3><button onclick="closeTxModal()" class="text-sub font-bold">&times;</button></div>
+      <form id="txForm" class="space-y-2.5">
+        <input type="hidden" id="editTxId">
+        <input type="date" id="formDate" required class="w-full text-xs custom-input border rounded-xl p-2 font-mono">
+        <input type="hidden" id="formType" value="expense">
+        <input type="text" id="formCategory" placeholder="Kategori / Metode" required class="w-full text-xs custom-input border rounded-xl p-2">
+        <input type="number" id="formAmount" placeholder="Nominal" required class="w-full text-xs custom-input border rounded-xl p-2 font-bold font-mono">
+        <input type="text" id="formDesc" placeholder="Keterangan" required class="w-full text-xs custom-input border rounded-xl p-2">
+        <div class="flex justify-end gap-2 pt-1"><button type="button" onclick="closeTxModal()" class="px-3 py-1.5 text-xs text-sub" data-i18n="btnCancel">Batal</button><button type="submit" class="px-3.5 py-1.5 text-xs bg-indigo-600 text-white rounded-xl font-bold shadow" data-i18n="btnSave">Simpan</button></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL AGENDA KALENDER -->
+  <div id="calModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2"><h3 class="font-bold text-xs">Tambah Agenda Kalender</h3><button onclick="closeCalModal()" class="text-sub font-bold">&times;</button></div>
+      <form id="calForm" class="space-y-2.5">
+        <input type="date" id="calEventDate" required class="w-full text-xs custom-input border rounded-xl p-2 font-mono">
+        <input type="text" id="calEventTitle" placeholder="Judul Agenda / Pengingat" required class="w-full text-xs custom-input border rounded-xl p-2 font-bold">
+        <div class="flex justify-end gap-2"><button type="button" onclick="closeCalModal()" class="px-3 py-1.5 text-xs text-sub" data-i18n="btnCancel">Batal</button><button type="submit" class="px-3.5 py-1.5 text-xs bg-indigo-600 text-white rounded-xl font-bold" data-i18n="btnSave">Simpan</button></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL CATATAN & TUGAS -->
+  <div id="noteModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2"><h3 class="font-bold text-xs">Catatan Baru</h3><button onclick="closeNoteModal()" class="text-sub font-bold">&times;</button></div>
+      <form id="noteForm" class="space-y-2.5">
+        <input type="hidden" id="editNoteId">
+        <input type="text" id="noteTitle" placeholder="Judul Catatan" required class="w-full text-xs custom-input border rounded-xl p-2 font-bold">
+        <textarea id="noteContent" rows="3" placeholder="Isi Catatan..." required class="w-full text-xs custom-input border rounded-xl p-2"></textarea>
+        <div class="flex justify-end gap-2"><button type="button" onclick="closeNoteModal()" class="px-3 py-1.5 text-xs text-sub" data-i18n="btnCancel">Batal</button><button type="submit" class="px-3.5 py-1.5 text-xs bg-violet-600 text-white rounded-xl font-bold" data-i18n="btnSave">Simpan</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div id="taskModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2"><h3 class="font-bold text-xs">Tugas Baru</h3><button onclick="closeTaskModal()" class="text-sub font-bold">&times;</button></div>
+      <form id="taskForm" class="space-y-2.5">
+        <input type="hidden" id="editTaskId">
+        <input type="text" id="taskTitle" placeholder="Judul Tugas" required class="w-full text-xs custom-input border rounded-xl p-2">
+        <select id="taskPriority" class="w-full text-xs custom-input border rounded-xl p-2 font-bold">
+          <option value="Tinggi">🔴 Prioritas Tinggi</option><option value="Sedang" selected>🟡 Prioritas Sedang</option><option value="Rendah">🟢 Prioritas Rendah</option>
+        </select>
+        <input type="date" id="taskDueDate" required class="w-full text-xs custom-input border rounded-xl p-2 font-mono">
+        <div class="flex justify-end gap-2"><button type="button" onclick="closeTaskModal()" class="px-3 py-1.5 text-xs text-sub" data-i18n="btnCancel">Batal</button><button type="submit" class="px-3.5 py-1.5 text-xs bg-indigo-600 text-white rounded-xl font-bold" data-i18n="btnSave">Simpan</button></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCRIPT APLIKASI UTAMA (OPTIMIZED) -->
+  <script>
+    // DICTIONARY LENGKAP UNTUK 4 BAHASA
+    const langData = {
+      id: {
+        defaultUser: "Pengguna",
+        menuFinance: "Keuangan", menuKanban: "Kanban & Matriks", menuTasks: "Tugas & Memo", menuClock: "Jam & Alarm", menuConversion: "Konversi", menuMindMap: "Mind Map", menuCalendar: "Kalender", menuTools: "Tools Berguna", menuMediaFinder: "GIF & Simbol", menuWeather: "Cuaca", menuBioLink: "Bio Link", menuFont: "Font Generator", menuDownloader: "Downloader", menuShortener: "Pemendek Link", menuTranslator: "Translator", menuNews: "Berita", menuPdf: "PDF Viewer", menuCalc: "Kalkulator & BMI", menuPhoto: "Photo Editor", menuSettings: "Pengaturan & Info",
+        launcherTitle: "Pusat Menu Launcher",
+        finTitle: "Manajemen Keuangan", finSub: "Pantau arus kas, grafik rasio, dan batas pengeluaran bulanan.",
+        lblNet: "Total Saldo", lblIncome: "Pemasukan", lblExpense: "Pengeluaran", lblBudgetGoal: "Target Batas Pengeluaran Bulanan:", lblUsed: "Terpakai",
+        optAll: "Semua", optInc: "Pemasukan", optExp: "Pengeluaran",
+        thDate: "Tanggal", thCat: "Kategori", thDesc: "Keterangan", thNom: "Nominal", thAct: "Aksi",
+        btnExportFin: "Ekspor CSV", btnPrint: "🖨️ Cetak / PDF", phSearchTx: "Cari transaksi...",
+        clockHeading: "Jam Dunia, Alarm, Stopwatch, Timer & Pomodoro", clockSub: "Pusat manajemen waktu terlengkap dalam satu tempat.",
+        lblNotifActive: "🔔 Notifikasi Aktif", lblCurrentLiveTime: "Waktu Lokal Perangkat", lblSetAlarm: "Atur Alarm Cepat", lblAlarmTime: "Waktu Alarm", lblAlarmNote: "Catatan Pengingat Alarm", btnSaveAlarm: "Pasang Alarm", phAlarmNote: "Contoh: Rapat Kerja",
+        btnStart: "Mulai", btnPause: "Jeda", btnReset: "Reset", phMin: "Menit",
+        weatherHeading: "Pusat Cuaca Real-Time", weatherSub: "Informasi cuaca dan iklim terkini secara langsung.", btnRefreshWeather: "Cari & Perbarui", phCity: "Cari Kota (misal: Jakarta)",
+        lblTemp: "Suhu Saat Ini", lblCondition: "Kondisi", lblWind: "Kecepatan Angin", lblHumidity: "Kelembapan Udara",
+        taskHeading: "Tugas & Catatan", taskSub: "Pusat pengorganisasian tugas berprioritas dan memo.", btnTask: "+ Tugas", btnNote: "+ Catatan", btnExportTask: "Ekspor",
+        lblTaskList: "Daftar Pekerjaan", lblNoteList: "Catatan Saya",
+        calHeading: "Kalender Interaktif & Pengingat Agenda", calSub: "Klik tanggal untuk menambah agenda & pengingat.", btnToday: "Hari Ini",
+        daySun: "Min", dayMon: "Sen", dayTue: "Sel", dayWed: "Rab", dayThu: "Kam", dayFri: "Jum", daySat: "Sab",
+        chatHeading: "Asisten AI Serbaguna", chatSub: "Asisten pintar WorkSpace untuk membantu pertanyaan, analisis, & produktivitas.", phChatInput: "Ketik pertanyaan atau perintah...",
+        setHeading: "Pengaturan & Informasi", lblTheme: "Tema Tampilan",
+        lblAboutTitle: "Tentang Aplikasi & Pengembang", lblDev: "Pengembang:", lblField: "Bidang:", btnCancel: "Batal", btnSave: "Simpan",
+        btnClearChatText: "Bersihkan", phApiKey: "API Key (Opsional)", btnExportChat: "📥 Ekspor", btnExportChatText: "Ekspor", lblQuickPrompt: "PROMPT CEPAT:",
+        chatWelcomeMsg: "Halo! Saya asisten AI Robot WorkSpace Pro. Ada yang bisa saya bantu hari ini? Tanyakan apa saja!", btnSendChat: "Kirim", lblSend: "Kirim",
+        kanbanHeading: "Papan Proyek & Matriks", kanbanSub: "Kelola alur kerja dan status tugas proyek secara visual.", btnNewKanbanCard: "+ Kartu Baru", colToDo: "📋 Belum Dikerjakan (To Do)", colInProgress: "⚡ Sedang Dikerjakan (In Progress)", colDone: "✅ Selesai (Done)", kanbanFormTitle: "Tambah / Edit Kartu Kanban",
+        loginTitle: "🔐 Akun & Pemulihan Data Total", lblUsername: "Nama Pengguna (Username)", phUsername: "Nama Anda", btnSaveAccount: "Simpan Akun", btnResetData: "Reset Data", lblFullBackup: "Backup & Restore Penuh", btnDownloadJSON: "Download JSON", btnRestoreJSON: "📁 Restore File"
+      },
+      en: {
+        defaultUser: "User",
+        menuFinance: "Finance", menuKanban: "Kanban & Matrix", menuTasks: "Tasks & Memos", menuClock: "Clock & Alarm", menuConversion: "Conversion", menuMindMap: "Mind Map", menuCalendar: "Calendar", menuTools: "Useful Tools", menuMediaFinder: "GIF & Symbol", menuWeather: "Weather", menuBioLink: "Bio Link", menuFont: "Font Generator", menuDownloader: "Downloader", menuShortener: "Shortener", menuTranslator: "Translator", menuNews: "News", menuPdf: "PDF Viewer", menuCalc: "Calculator & BMI", menuPhoto: "Photo Editor", menuSettings: "Settings & Info",
+        launcherTitle: "Launcher Menu Center",
+        finTitle: "Financial Management", finSub: "Track cash flows, ratio charts, and monthly budget limits.",
+        lblNet: "Total Balance", lblIncome: "Income", lblExpense: "Expenses", lblBudgetGoal: "Monthly Spending Limit Goal:", lblUsed: "Used",
+        optAll: "All", optInc: "Income", optExp: "Expenses",
+        thDate: "Date", thCat: "Category", thDesc: "Description", thNom: "Amount", thAct: "Action",
+        btnExportFin: "Export CSV", btnPrint: "🖨️ Print / PDF", phSearchTx: "Search transactions...",
+        clockHeading: "World Clock, Alarm, Stopwatch, Timer & Pomodoro", clockSub: "Complete time management hub in one place.",
+        lblNotifActive: "🔔 Notifications Active", lblCurrentLiveTime: "Device Local Time", lblSetAlarm: "Quick Alarm Setup", lblAlarmTime: "Alarm Time", lblAlarmNote: "Alarm Reminder Note", btnSaveAlarm: "Set Alarm", phAlarmNote: "e.g. Work Meeting",
+        btnStart: "Start", btnPause: "Pause", btnReset: "Reset", phMin: "Minutes",
+        weatherHeading: "Real-Time Weather Center", weatherSub: "Current live weather and climate insights.", btnRefreshWeather: "Search & Refresh", phCity: "Search City (e.g., London)",
+        lblTemp: "Current Temp", lblCondition: "Condition", lblWind: "Wind Speed", lblHumidity: "Air Humidity",
+        taskHeading: "Tasks & Notes", taskSub: "Organize prioritized tasks and memos effortlessly.", btnTask: "+ Task", btnNote: "+ Note", btnExportTask: "Export",
+        lblTaskList: "Task Checklist", lblNoteList: "My Notes",
+        calHeading: "Interactive Calendar & Agenda", calSub: "Click any date to add events & reminders.", btnToday: "Today",
+        daySun: "Sun", dayMon: "Mon", dayTue: "Tue", dayWed: "Wed", dayThu: "Thu", dayFri: "Fri", daySat: "Sat",
+        chatHeading: "Versatile AI Assistant", chatSub: "WorkSpace smart assistant for Q&A, analysis, & productivity.", phChatInput: "Type a prompt or question...",
+        setHeading: "Settings & Information", lblTheme: "Display Theme",
+        lblAboutTitle: "About App & Developer", lblDev: "Developer:", lblField: "Field:", btnCancel: "Cancel", btnSave: "Save",
+        btnClearChatText: "Clear", phApiKey: "API Key (Optional)", btnExportChat: "📥 Export", btnExportChatText: "Export", lblQuickPrompt: "QUICK PROMPTS:",
+        chatWelcomeMsg: "Hello! I am WorkSpace Pro Robot AI assistant. How can I help you today? Ask me anything!", btnSendChat: "Send", lblSend: "Send",
+        kanbanHeading: "Project Board & Matrix", kanbanSub: "Visually manage workflows and project task statuses.", btnNewKanbanCard: "+ New Card", colToDo: "📋 To Do", colInProgress: "⚡ In Progress", colDone: "✅ Done", kanbanFormTitle: "Add / Edit Kanban Card",
+        loginTitle: "🔐 Account & Data Backup", lblUsername: "Username", phUsername: "Your Name", btnSaveAccount: "Save Account", btnResetData: "Reset Data", lblFullBackup: "Full Backup & Restore", btnDownloadJSON: "Download JSON", btnRestoreJSON: "📁 Restore File"
+      },
+      zh: {
+        defaultUser: "用户",
+        menuFinance: "财务管理", menuKanban: "看板与矩阵", menuTasks: "任务与笔记", menuClock: "时钟与闹钟", menuConversion: "转换", menuMindMap: "思维导图", menuCalendar: "日历", menuTools: "实用工具", menuMediaFinder: "GIF与符号", menuWeather: "天气", menuBioLink: "个人链接", menuFont: "字体生成", menuDownloader: "下载", menuShortener: "短链接", menuTranslator: "翻译", menuNews: "新闻", menuPdf: "PDF查看", menuCalc: "计算器与BMI", menuPhoto: "照片编辑", menuSettings: "设置与信息",
+        launcherTitle: "菜单中心",
+        finTitle: "财务管理", finSub: "监控现金流、比例图和每月支出预算。",
+        lblNet: "总余额", lblIncome: "收入", lblExpense: "支出", lblBudgetGoal: "每月支出预算目标：", lblUsed: "已使用",
+        optAll: "全部", optInc: "收入", optExp: "支出",
+        thDate: "日期", thCat: "类别", thDesc: "说明", thNom: "金额", thAct: "操作",
+        btnExportFin: "导出 CSV", btnPrint: "🖨️ 打印 / PDF", phSearchTx: "搜索交易...",
+        clockHeading: "世界时钟、闹钟、秒表、定时器与番茄钟", clockSub: "一站式完整时间管理中心。",
+        lblNotifActive: "🔔 通知已激活", lblCurrentLiveTime: "设备本地时间", lblSetAlarm: "快速设置闹钟", lblAlarmTime: "闹钟时间", lblAlarmNote: "闹钟提醒说明", btnSaveAlarm: "设置闹钟", phAlarmNote: "例：工作会议",
+        btnStart: "开始", btnPause: "暂停", btnReset: "重置", phMin: "分钟",
+        weatherHeading: "实时天气中心", weatherSub: "获取最新天气与气候数据。", btnRefreshWeather: "搜索并更新", phCity: "搜索城市（如：北京）",
+        lblTemp: "当前温度", lblCondition: "天气状况", lblWind: "风速", lblHumidity: "空气湿度",
+        taskHeading: "任务与笔记", taskSub: "轻松管理优先任务和备忘录。", btnTask: "+ 任务", btnNote: "+ 笔记", btnExportTask: "导出",
+        lblTaskList: "任务清单", lblNoteList: "我的笔记",
+        calHeading: "互动日历与提醒", calSub: "点击任何日期添加日程与提醒。", btnToday: "今天",
+        daySun: "日", dayMon: "一", dayTue: "二", dayWed: "三", dayThu: "四", dayFri: "五", daySat: "六",
+        chatHeading: "全能 AI 助手", chatSub: "WorkSpace 智能助手，解答疑问、分析与提升效率。", phChatInput: "输入问题或指令...",
+        setHeading: "设置与信息", lblTheme: "显示主题",
+        lblAboutTitle: "关于应用与开发者", lblDev: "开发者：", lblField: "领域：", btnCancel: "取消", btnSave: "保存",
+        btnClearChatText: "清除", phApiKey: "API 密钥 (可选)", btnExportChat: "📥 导出", btnExportChatText: "导出", lblQuickPrompt: "快速提示：",
+        chatWelcomeMsg: "您好！我是 WorkSpace Pro AI 机器人助手。今天有什么可以帮您？随心提问！", btnSendChat: "发送", lblSend: "发送",
+        kanbanHeading: "项目看板与矩阵", kanbanSub: "可视化管理工作流与项目任务状态。", btnNewKanbanCard: "+ 新卡片", colToDo: "📋 未完成", colInProgress: "⚡ 进行中", colDone: "✅ 已完成", kanbanFormTitle: "添加/编辑看板卡片",
+        loginTitle: "🔐 账户与数据备份", lblUsername: "用户名", phUsername: "您的名字", btnSaveAccount: "保存账户", btnResetData: "重置数据", lblFullBackup: "完整备份与恢复", btnDownloadJSON: "下载 JSON", btnRestoreJSON: "📁 恢复文件"
+      },
+      ar: {
+        defaultUser: "المستخدم",
+        menuFinance: "المالية", menuKanban: "كانبان والمصفوفة", menuTasks: "المهام", menuClock: "الساعة", menuConversion: "التحويل", menuMindMap: "الخريطة الذهنية", menuCalendar: "التقويم", menuTools: "أدوات", menuMediaFinder: "الرموز و GIF", menuWeather: "الطقس", menuBioLink: "رابط البيو", menuFont: "الخطوط", menuDownloader: "المُحمل", menuShortener: "المختصر", menuTranslator: "المترجم", menuNews: "الأخبار", menuPdf: "قارئ PDF", menuCalc: "الحاسبة و BMI", menuPhoto: "محرر الصور", menuSettings: "الإعدادات",
+        launcherTitle: "مركز القائمة",
+        finTitle: "الإدارة المالية", finSub: "تتبع التدفقات النقدية والمخططات وحدود الإنفاق الشهري.",
+        lblNet: "إجمالي الرصيد", lblIncome: "الدخل", lblExpense: "المصروفات", lblBudgetGoal: "حد الإنفاق الشهري المستهدف:", lblUsed: "مستعمل",
+        optAll: "الكل", optInc: "الدخل", optExp: "المصروفات",
+        thDate: "التاريخ", thCat: "الفئة", thDesc: "الوصف", thNom: "المبلغ", thAct: "الإجراء",
+        btnExportFin: "تصدير CSV", btnPrint: "🖨️ طباعة / PDF", phSearchTx: "البحث في المعاملات...",
+        clockHeading: "الساعة العالمية، المنبه، المؤقت، وبومودورو", clockSub: "مركز إدارة الوقت الشامل في مكان واحد.",
+        lblNotifActive: "🔔 الإشعارات مفعلة", lblCurrentLiveTime: "التوقيت المحلي للجهاز", lblSetAlarm: "إعداد منبه سريع", lblAlarmTime: "وقت المنبه", lblAlarmNote: "ملاحظة التذكير", btnSaveAlarm: "ضبط المنبه", phAlarmNote: "مثال: اجتماع العمل",
+        btnStart: "بدء", btnPause: "إوقف مؤقت", btnReset: "إعادة ضبط", phMin: "دقائق",
+        weatherHeading: "مركز الطقس المباشر", weatherSub: "معلومات الطقس والمناخ المباشرة.", btnRefreshWeather: "بحث وتحديث", phCity: "ابحث عن مدينة (مثل: القاهرة)",
+        lblTemp: "الحرارة الحالية", lblCondition: "الحالة", lblWind: "سرعة الرياح", lblHumidity: "رطوبة الهواء",
+        taskHeading: "المهام والملاحظات", taskSub: "تنظيم المهام والملاحظات ذات الأولوية بسهولة.", btnTask: "+ مهمة", btnNote: "+ ملاحظة", btnExportTask: "تصدير",
+        lblTaskList: "قائمة المهام", lblNoteList: "ملاحظاتي",
+        calHeading: "التقويم التفاعلي والأجندة", calSub: "انقر على أي تاريخ لإضافة مواعيد وتذكيرات.", btnToday: "اليوم",
+        daySun: "الأحد", dayMon: "الإثنين", dayTue: "الثلاثاء", dayWed: "الأربعاء", dayThu: "الخميس", dayFri: "الجمعة", daySat: "السبت",
+        chatHeading: "مساعد الذكاء الاصطناعي الشامل", chatSub: "مساعد WorkSpace الذكي للأسئلة والتحليل والإنتاجية.", phChatInput: "اكتب سؤالاً أو أمراً...",
+        setHeading: "الإعدادات والمعلومات", lblTheme: "مظهر العرض",
+        lblAboutTitle: "عن التطبيق والمطور", lblDev: "تطوير:", lblField: "المجال:", btnCancel: "إلغاء", btnSave: "حفظ",
+        btnClearChatText: "مسح", phApiKey: "مفتاح API (اختياري)", btnExportChat: "📥 تصدير", btnExportChatText: "تصدير", lblQuickPrompt: "أوامر سريعة:",
+        chatWelcomeMsg: "مرحباً! أنا مساعد الذكاء الاصطناعي WorkSpace Pro. كيف يمكنني مساعدتك اليوم؟ اسألني أي شيء!", btnSendChat: "إرسال", lblSend: "إرسال",
+        kanbanHeading: "لوحة مشاريع كانبان والمصفوفة", kanbanSub: "إدارة مسار العمل وحالات المهام بأسلوب بصرى.", btnNewKanbanCard: "+ بطاقة جديدة", colToDo: "📋 قيد الانتظار", colInProgress: "⚡ جاري العمل", colDone: "✅ مكتمل", kanbanFormTitle: "إضافة / تعديل بطاقة كانبان",
+        loginTitle: "🔐 الحساب والنسخ الاحتياطي", lblUsername: "اسم المستخدم", phUsername: "اسمك", btnSaveAccount: "حفظ الحساب", btnResetData: "إعادة ضبط", lblFullBackup: "النسخ الاحتياطي والاستعادة الكاملة", btnDownloadJSON: "تحميل JSON", btnRestoreJSON: "📁 استعادة ملف"
+      }
+    };
+
+    // FITUR BARU MUSIK LATAR BELAKANG LO-FI (WEB AUDIO SYNTHESIZER)
+    let audioCtx = null, isMusicPlaying = false, musicGainNode = null, musicLoopTimer = null;
+    function initAudioContext() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    
+    function playLoFiChord() {
+      if (!isMusicPlaying || !audioCtx) return;
+      const now = audioCtx.currentTime;
+      const chords = [
+        [261.63, 329.63, 392.00, 493.88], // Cmaj7
+        [220.00, 261.63, 329.63, 392.00], // Am7
+        [174.61, 220.00, 261.63, 329.63], // Fmaj7
+        [196.00, 246.94, 293.66, 349.23]  // G7
+      ];
+      const chord = chords[Math.floor(Math.random() * chords.length)];
+      
+      chord.forEach(freq => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now);
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.linearRampToValueAtTime(0.04, now + 0.8);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 3.8);
+        osc.connect(gain);
+        gain.connect(musicGainNode);
+        osc.start(now);
+        osc.stop(now + 4);
+      });
+    }
+
+    function toggleBackgroundMusic() {
+      initAudioContext();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      
+      isMusicPlaying = !isMusicPlaying;
+      const btnHeader = document.getElementById('musicStatusText');
+      const btnIcon = document.getElementById('musicStatusIcon');
+      
+      if (isMusicPlaying) {
+        musicGainNode = audioCtx.createGain();
+        musicGainNode.gain.value = parseFloat(document.getElementById('musicVolumeSlider').value) || 0.3;
+        musicGainNode.connect(audioCtx.destination);
+        playLoFiChord();
+        musicLoopTimer = setInterval(playLoFiChord, 3500);
+        btnHeader.textContent = "Lo-Fi ON";
+        btnIcon.textContent = "🔊";
+      } else {
+        clearInterval(musicLoopTimer);
+        btnHeader.textContent = "Lo-Fi OFF";
+        btnIcon.textContent = "🎵";
+      }
+    }
+
+    function changeMusicVolume(vol) {
+      if (musicGainNode) musicGainNode.gain.value = parseFloat(vol);
+    }
+
+    function changeMusicPreset(val) {
+      if (isMusicPlaying) playLoFiChord();
+    }
+
+    // GENERATOR SUARA BEEP BUATAN SINTETIS (WEB AUDIO API)
+    function playBeepSound(freq = 520, duration = 0.3) {
+      try {
+        initAudioContext();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine'; osc.frequency.value = freq;
+        osc.connect(gain); gain.connect(audioCtx.destination);
+        osc.start(); gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+        setTimeout(() => { osc.stop(); }, duration * 1000);
+      } catch(e) {}
+    }
+
+    // FORMATTER ANGKA MULTI-BAHASA
+    function formatNumber(num, currency = '') {
+      const currentLang = localStorage.getItem('workspace_lang') || 'id';
+      const localeMap = { id: 'id-ID', en: 'en-US', zh: 'zh-CN', ar: 'ar-SA' };
+      const locale = localeMap[currentLang] || 'id-ID';
+      const formatted = new Intl.NumberFormat(locale).format(num);
+      return currency ? `${currency} ${formatted}` : formatted;
+    }
+
+    // PENGUBAH BAHASA UTAMA
+    function changeLanguage(lang) {
+      localStorage.setItem('workspace_lang', lang);
+      const dict = langData[lang] || langData.id;
+      
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+
+      document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const key = el.getAttribute('data-i18n-ph');
+        if (dict[key]) el.placeholder = dict[key];
+      });
+
+      const userBadge = document.getElementById('welcomeUserBadge');
+      if(userBadge) {
+        const currentU = localStorage.getItem('workspace_user');
+        userBadge.textContent = currentU ? `Hi, ${currentU}` : dict.defaultUser;
+      }
+
+      renderFinance(); renderTasks(); renderNotes(); renderBioLinkSelector(); renderKanban(); renderEisenhower();
+    }
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      const activeEl = document.getElementById(`tab-${tabName}`);
+      if (activeEl) activeEl.classList.remove('hidden');
+      localStorage.setItem('workspace_active_tab', tabName);
+      window.scrollTo(0, 0);
+
+      // PERBAIKAN WARNA TOMBOL DOCK AKAS
+      const dockChat = document.getElementById('dockBtnChatbot');
+      if (dockChat) {
+        if (tabName === 'chatbot') {
+          dockChat.className = "w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 transition hover:scale-105 active:scale-95";
+        } else {
+          dockChat.className = "w-10 h-10 rounded-xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-indigo-300 shadow transition hover:scale-105 active:scale-95";
+        }
+      }
+
+      if(tabName === 'conversion') { convertCurrency(); convertUnits(); calcDiscount(); }
+      if(tabName === 'news') fetchNews();
+      if(tabName === 'calendar') renderCalendar();
+      if(tabName === 'font') generateFonts();
+      if(tabName === 'weather') fetchLiveWeather();
+      if(tabName === 'biolink') renderBioLinkSelector();
+      if(tabName === 'mediafinder') renderSymbolGrid();
+      if(tabName === 'kanban') { renderKanban(); renderEisenhower(); }
+      if(tabName === 'clock') { requestNotifPermission(); }
+      if(tabName === 'mindmap') setTimeout(initAndDrawMindCanvas, 60);
+    }
+
+    function toggleFloatingMenu() { document.getElementById('floatingMenuModal').classList.toggle('hidden'); }
+    function switchTabAndClose(tabName) { switchTab(tabName); toggleFloatingMenu(); }
+    
+    function setAppTheme(theme) {
+      document.getElementById('appBody').className = `min-h-screen pb-28 transition-colors duration-300 theme-${theme}`;
+      localStorage.setItem('workspace_theme_lite', theme);
+    }
+    setAppTheme(localStorage.getItem('workspace_theme_lite') || 'ios');
+
+    // TAMPILAN PAPAN KANBAN & MATRIKS
+    function setTaskViewMode(mode) {
+      const vk = document.getElementById('viewKanbanArea'), vm = document.getElementById('viewMatrixArea');
+      const bk = document.getElementById('btnViewKanban'), bm = document.getElementById('btnViewMatrix');
+      const btnAdd = document.getElementById('btnAddNewTaskCard');
+
+      if (mode === 'kanban') {
+        vk.classList.remove('hidden'); vm.classList.add('hidden');
+        bk.className = "px-3 py-1.5 text-xs font-bold rounded-lg bg-indigo-600 text-white shadow";
+        bm.className = "px-3 py-1.5 text-xs font-bold rounded-lg card-modern text-sub hover:text-white";
+        btnAdd.setAttribute('onclick', "openKanbanModal('todo')");
+      } else {
+        vk.classList.add('hidden'); vm.classList.remove('hidden');
+        bm.className = "px-3 py-1.5 text-xs font-bold rounded-lg bg-indigo-600 text-white shadow";
+        bk.className = "px-3 py-1.5 text-xs font-bold rounded-lg card-modern text-sub hover:text-white";
+        btnAdd.setAttribute('onclick', "openEisenhowerModal('Q1')");
+      }
+    }
+
+    // MIND MAP CANVAS INTERAKTIF
+    let mindNodes = JSON.parse(localStorage.getItem('hub_mindnodes')) || [
+      { id: 'root', text: 'Topik Utama', x: 280, y: 220, isRoot: true, parentId: null, color: '#6366f1' },
+      { id: '1', text: 'Sub Topik 1', x: 140, y: 120, isRoot: false, parentId: 'root', color: '#10b981' },
+      { id: '2', text: 'Sub Topik 2', x: 420, y: 120, isRoot: false, parentId: 'root', color: '#3b82f6' }
+    ];
+    let selectedNodeId = 'root', isDraggingNode = false, draggedNodeIdx = -1, dragOffsetX = 0, dragOffsetY = 0;
+
+    function initAndDrawMindCanvas() {
+      const container = document.getElementById('mindCanvasContainer');
+      const canvas = document.getElementById('mindCanvas');
+      if (!container || !canvas) return;
+      canvas.width = container.clientWidth || 600;
+      canvas.height = container.clientHeight || 480;
+      drawMindMap();
+    }
+
+    function drawMindMap() {
+      const canvas = document.getElementById('mindCanvas'); if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#020617'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const countEl = document.getElementById('mindNodeCount');
+      if (countEl) countEl.textContent = `Total Node: ${formatNumber(mindNodes.length)}`;
+
+      mindNodes.forEach(node => {
+        if (node.parentId) {
+          const parent = mindNodes.find(n => n.id === node.parentId);
+          if (parent) {
+            ctx.beginPath(); ctx.moveTo(parent.x, parent.y); ctx.lineTo(node.x, node.y);
+            ctx.strokeStyle = node.id === selectedNodeId ? '#818cf8' : 'rgba(148, 163, 184, 0.4)';
+            ctx.lineWidth = 2; ctx.stroke();
+          }
+        }
+      });
+
+      mindNodes.forEach(node => {
+        ctx.font = '600 12px "Plus Jakarta Sans"';
+        const metrics = ctx.measureText(node.text);
+        const boxW = metrics.width + 28, boxH = 32;
+        const boxX = node.x - boxW / 2, boxY = node.y - boxH / 2;
+        node.box = { x: boxX, y: boxY, w: boxW, h: boxH };
+
+        ctx.fillStyle = node.isRoot ? '#312e81' : (node.color || '#064e3b');
+        ctx.beginPath();
+        if(ctx.roundRect) ctx.roundRect(boxX, boxY, boxW, boxH, 8); else ctx.rect(boxX, boxY, boxW, boxH);
+        ctx.fill();
+        ctx.strokeStyle = node.id === selectedNodeId ? '#f43f5e' : '#34d399';
+        ctx.lineWidth = 1.5; ctx.stroke();
+
+        ctx.fillStyle = '#ffffff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(node.text, node.x, node.y);
+      });
+    }
+
+    const mindCanvasEl = document.getElementById('mindCanvas');
+    if (mindCanvasEl) {
+      mindCanvasEl.addEventListener('pointerdown', (e) => {
+        const rect = mindCanvasEl.getBoundingClientRect();
+        const coords = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+        draggedNodeIdx = -1;
+        for (let i = mindNodes.length - 1; i >= 0; i--) {
+          const n = mindNodes[i];
+          if (n.box && coords.x >= n.box.x && coords.x <= n.box.x + n.box.w && coords.y >= n.box.y && coords.y <= n.box.y + n.box.h) {
+            draggedNodeIdx = i; selectedNodeId = n.id;
+            dragOffsetX = coords.x - n.x; dragOffsetY = coords.y - n.y;
+            isDraggingNode = true; mindCanvasEl.setPointerCapture(e.pointerId);
+            drawMindMap(); return;
+          }
+        }
+        selectedNodeId = null; drawMindMap();
+      });
+
+      mindCanvasEl.addEventListener('pointermove', (e) => {
+        if (!isDraggingNode || draggedNodeIdx === -1) return;
+        const rect = mindCanvasEl.getBoundingClientRect();
+        mindNodes[draggedNodeIdx].x = (e.clientX - rect.left) - dragOffsetX;
+        mindNodes[draggedNodeIdx].y = (e.clientY - rect.top) - dragOffsetY;
+        drawMindMap();
+      });
+
+      const stopDrag = () => {
+        if (isDraggingNode) { isDraggingNode = false; draggedNodeIdx = -1; localStorage.setItem('hub_mindnodes', JSON.stringify(mindNodes)); }
+      };
+      mindCanvasEl.addEventListener('pointerup', stopDrag);
+      mindCanvasEl.addEventListener('dblclick', () => { if (selectedNodeId) editSelectedMindNode(); });
+    }
+
+    function addMindNode() {
+      const text = prompt("Masukkan nama simpul node baru:"); if (!text || !text.trim()) return;
+      const parentNode = mindNodes.find(n => n.id === selectedNodeId) || mindNodes[0];
+      const newNode = { id: Date.now().toString(), text: text.trim(), x: (parentNode ? parentNode.x + 100 : 200), y: (parentNode ? parentNode.y + 40 : 200), isRoot: false, parentId: parentNode ? parentNode.id : null, color: '#0284c7' };
+      mindNodes.push(newNode); selectedNodeId = newNode.id;
+      localStorage.setItem('hub_mindnodes', JSON.stringify(mindNodes)); drawMindMap();
+    }
+
+    function editSelectedMindNode() {
+      if (!selectedNodeId) return;
+      const node = mindNodes.find(n => n.id === selectedNodeId); if (!node) return;
+      const newText = prompt("Edit teks simpul:", node.text);
+      if (newText && newText.trim()) { node.text = newText.trim(); localStorage.setItem('hub_mindnodes', JSON.stringify(mindNodes)); drawMindMap(); }
+    }
+
+    function deleteSelectedMindNode() {
+      if (!selectedNodeId) return;
+      if (confirm("Hapus simpul terpilih?")) {
+        mindNodes = mindNodes.filter(n => n.id !== selectedNodeId && n.parentId !== selectedNodeId);
+        selectedNodeId = mindNodes.length > 0 ? mindNodes[0].id : null;
+        localStorage.setItem('hub_mindnodes', JSON.stringify(mindNodes)); drawMindMap();
+      }
+    }
+
+    function exportMindCanvas() {
+      drawMindMap(); const a = document.createElement('a'); a.download = `mindmap_${Date.now()}.png`;
+      a.href = mindCanvasEl.toDataURL('image/png'); a.click();
+    }
+
+    function clearMindCanvas() {
+      if (confirm("Bersihkan seluruh Mind Map?")) { mindNodes = []; localStorage.removeItem('hub_mindnodes'); drawMindMap(); }
+    }
+
+    // FONT GENERATOR
+    function generateFonts() {
+      const txt = document.getElementById('fontInputText').value || "WorkSpace Pro";
+      const fontMaps = [
+        { name: "Bold Sans", map: {a:'𝗮',b:'𝗯',c:'𝗰',d:'𝗱',e:'𝗲',f:'𝗳',g:'𝗴',h:'𝗵',i:'𝗶',j:'𝗷',k:'𝗸',l:'𝗹',m:'𝗺',n:'𝗻',o:'𝗼',p:'𝗽',q:'𝗾',r:'𝗿',s:'𝘀',t:'𝘁',u:'𝘂',v:'𝘃',w:'𝘄',x:'𝘅',y:'𝘆',z:'𝘇',A:'𝗔',B:'𝗕',C:'𝗖',D:'𝗗',E:'𝗘',F:'𝗙',G:'𝗚',H:'𝗛',I:'𝗜',J:'𝗝',K:'𝗞',L:'𝗟',M:'𝗠',N:'𝗡',O:'𝗢',P:'𝗣',Q:'𝗤',R:'𝗥',S:'𝗦',T:'𝗧',U:'𝗨',V:'𝗩',W:'𝗪',X:'𝘅',Y:'𝗬',Z:'𝗭'}},
+        { name: "Italic Serif", map: {a:'𝑎',b:'𝑏',c:'𝑐',d:'𝑑',e:'𝑒',f:'𝑓',g:'𝑔',h:'ℎ',i:'𝑖',j:'𝑗',k:'𝑘',l:'𝑙',m:'𝑚',n:'𝑛',o:'𝑜',p:'𝑝',q:'𝑞',r:'𝑟',s:'𝑠',t:'𝑡',u:'𝑢',v:'𝑣',w:'𝑤',x:'𝑥',y:'𝑦',z:'𝑧'}},
+        { name: "Monospace", map: {a:'𝚊',b:'𝚋',c:'𝚌',d:'𝚍',e:'𝚎',f:'𝚏',g:'𝚐',h:'𝚑',i:'𝚒',j:'𝚓',k:'𝚔',l:'𝚕',m:'𝚖',n:'𝚗',o:'𝚘',p:'𝚙',q:'𝚚',r:'𝚛',s:'𝚜',t:'𝚝',u:'𝚞',v:'𝚟',w:'𝚠',x:'𝚡',y:'𝚢',z:'𝚣'}}
+      ];
+
+      document.getElementById('fontResultsList').innerHTML = fontMaps.map(item => {
+        const converted = txt.split('').map(char => item.map[char] || char).join('');
+        return `
+          <div class="card-modern p-2.5 rounded-xl flex justify-between items-center text-xs">
+            <div><span class="text-[9px] font-bold text-sub block uppercase">${item.name}</span><span class="text-indigo-300 font-bold select-all">${converted}</span></div>
+            <button onclick="navigator.clipboard.writeText('${converted}'); alert('Disalin!')" class="bg-indigo-600 text-white px-2.5 py-1 rounded-lg font-bold shadow transition">Salin</button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function transformCase(mode) {
+      const el = document.getElementById('fontInputText');
+      if (mode === 'upper') el.value = el.value.toUpperCase();
+      else if (mode === 'lower') el.value = el.value.toLowerCase();
+      else if (mode === 'title') el.value = el.value.toLowerCase().replace(/(?:^|\s)\w/g, c => c.toUpperCase());
+      else if (mode === 'inverse') el.value = el.value.split('').map(c => c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()).join('');
+      generateFonts();
+    }
+
+    // IZIN NOTIFIKASI & ALARM
+    async function requestNotifPermission() {
+      const badge = document.getElementById('notifStatusBadge');
+      if (!('Notification' in window)) { if (badge) badge.textContent = "🔔 Notifikasi Tidak Didukung"; return; }
+      if (Notification.permission === 'granted') { if (badge) badge.textContent = "🔔 Notifikasi Aktif"; }
+      else {
+        const perm = await Notification.requestPermission();
+        if (badge) badge.textContent = perm === 'granted' ? "🔔 Notifikasi Aktif" : "⚠️ Notifikasi Ditolak";
+      }
+    }
+
+    let alarmsList = JSON.parse(localStorage.getItem('hub_alarms')) || [];
+    async function saveAlarm() {
+      await requestNotifPermission();
+      const timeVal = document.getElementById('alarmTimeInput').value;
+      const noteVal = document.getElementById('alarmNoteInput').value || "Pengingat Alarm WorkSpace";
+      if (!timeVal) { alert("Pilih waktu alarm!"); return; }
+      alarmsList.push({ id: Date.now().toString(), time: timeVal, note: noteVal, triggered: false });
+      localStorage.setItem('hub_alarms', JSON.stringify(alarmsList));
+      renderAlarms(); alert(`Alarm dipasang untuk jam ${timeVal}`);
+    }
+
+    function renderAlarms() {
+      const listEl = document.getElementById('alarmList'); if (!listEl) return;
+      if (alarmsList.length === 0) { listEl.innerHTML = `<div class="text-[10px] text-sub">Belum ada alarm terpasang.</div>`; return; }
+      listEl.innerHTML = alarmsList.map(a => `
+        <div class="card-modern p-2 rounded-xl flex justify-between items-center text-xs">
+          <div><strong class="font-mono text-indigo-300">${a.time}</strong> - <span class="text-sub">${a.note}</span></div>
+          <button onclick="deleteAlarm('${a.id}')" class="text-rose-400 font-bold hover:underline text-[10px]">Hapus</button>
+        </div>
+      `).join('');
+    }
+
+    function deleteAlarm(id) { alarmsList = alarmsList.filter(a => a.id !== id); localStorage.setItem('hub_alarms', JSON.stringify(alarmsList)); renderAlarms(); }
+
+    function checkActiveAlarmsLoop() {
+      const currentFormatted = new Date().toTimeString().slice(0, 5);
+      alarmsList.forEach(a => {
+        if (a.time === currentFormatted && !a.triggered) {
+          a.triggered = true; localStorage.setItem('hub_alarms', JSON.stringify(alarmsList));
+          playBeepSound(880, 1.5);
+          if ('Notification' in window && Notification.permission === 'granted') { new Notification("⏰ ALARM WORKSPACE PRO!", { body: a.note }); }
+          else { alert(`⏰ ALARM BERBUNYI: ${a.note}`); }
+        }
+      });
+    }
+
+    // STOPWATCH & TIMER
+    let swInterval, swTime = 0;
+    function startStopwatch() { clearInterval(swInterval); swInterval = setInterval(() => { swTime++; const m = String(Math.floor(swTime/600)).padStart(2,'0'), s = String(Math.floor((swTime%600)/10)).padStart(2,'0'), ms = String(swTime%10); document.getElementById('stopwatchDisplay').textContent = `${m}:${s}:${ms}`; }, 100); }
+    function pauseStopwatch() { clearInterval(swInterval); }
+    function resetStopwatch() { clearInterval(swInterval); swTime = 0; document.getElementById('stopwatchDisplay').textContent = "00:00:0"; }
+
+    let tmInterval, tmTime = 0;
+    function startTimer() {
+      const min = parseInt(document.getElementById('timerInputMin').value) || 0;
+      if (tmTime === 0) tmTime = min * 60;
+      clearInterval(tmInterval);
+      tmInterval = setInterval(() => {
+        if (tmTime <= 0) { clearInterval(tmInterval); playBeepSound(600, 1); alert("⏳ Timer Selesai!"); return; }
+        tmTime--;
+        const m = String(Math.floor(tmTime/60)).padStart(2,'0'), s = String(tmTime%60).padStart(2,'0');
+        document.getElementById('timerDisplay').textContent = `${m}:${s}`;
+      }, 1000);
+    }
+    function resetTimer() { clearInterval(tmInterval); tmTime = 0; document.getElementById('timerDisplay').textContent = "00:00"; }
+
+    // POMODORO DENGAN SWITCHING WARNA TOMBOL AKTIF
+    let pomInterval, pomTime = 1500, pomMode = 'work', pomCount = 0;
+    function setPomodoroMode(mode) {
+      pomMode = mode; clearInterval(pomInterval);
+      
+      const bWork = document.getElementById('pomModeWork');
+      const bShort = document.getElementById('pomModeShort');
+      const bLong = document.getElementById('pomModeLong');
+      
+      bWork.className = mode==='work' ? "px-3.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow" : "px-3.5 py-1.5 rounded-xl text-xs font-bold card-modern text-sub hover:text-white";
+      bShort.className = mode==='shortBreak' ? "px-3.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow" : "px-3.5 py-1.5 rounded-xl text-xs font-bold card-modern text-sub hover:text-white";
+      bLong.className = mode==='longBreak' ? "px-3.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow" : "px-3.5 py-1.5 rounded-xl text-xs font-bold card-modern text-sub hover:text-white";
+
+      if(mode==='work') pomTime = 1500; else if(mode==='shortBreak') pomTime = 300; else pomTime = 900;
+      const m = String(Math.floor(pomTime/60)).padStart(2,'0'), s = String(pomTime%60).padStart(2,'0');
+      document.getElementById('pomTimerDisplay').textContent = `${m}:${s}`;
+    }
+    function startPomodoro() {
+      clearInterval(pomInterval);
+      pomInterval = setInterval(() => {
+        if (pomTime <= 0) {
+          clearInterval(pomInterval); playBeepSound(750, 1.2);
+          if (pomMode==='work') { pomCount++; document.getElementById('pomSessionCount').textContent = `Sesi Selesai: ${pomCount}`; }
+          alert("🍅 Sesi Pomodoro Selesai!"); return;
+        }
+        pomTime--;
+        const m = String(Math.floor(pomTime/60)).padStart(2,'0'), s = String(pomTime%60).padStart(2,'0');
+        document.getElementById('pomTimerDisplay').textContent = `${m}:${s}`;
+      }, 1000);
+    }
+    function pausePomodoro() { clearInterval(pomInterval); }
+    function resetPomodoro() { setPomodoroMode(pomMode); }
+
+    // TOOLS UTILITAS & TEXT COUNTER ANALYSIS
+    function analyzeTextStats() {
+      const txt = document.getElementById('wordCountInput').value;
+      const words = txt.trim() ? txt.trim().split(/\s+/).length : 0;
+      const chars = txt.length;
+      const readMin = Math.ceil(words / 200);
+      document.getElementById('statWords').textContent = formatNumber(words);
+      document.getElementById('statChars').textContent = formatNumber(chars);
+      document.getElementById('statReading').textContent = `${readMin}m`;
+    }
+
+    function generateUUIDv4() {
+      document.getElementById('slugOutputResult').value = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+        const r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8); return v.toString(16);
+      });
+    }
+
+    function generateSlugText() {
+      const txt = document.getElementById('slugInputText').value;
+      document.getElementById('slugOutputResult').value = txt.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
+    }
+
+    function generatePassword() {
+      const len = parseInt(document.getElementById('pwdLength').value) || 16;
+      let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      if(document.getElementById('pwdNum').checked) chars += "0123456789";
+      if(document.getElementById('pwdSym').checked) chars += "!@#$%^&*()_+-=";
+      let res = ""; for(let i=0; i<len; i++) res += chars.charAt(Math.floor(Math.random() * chars.length));
+      document.getElementById('pwdResult').value = res;
+    }
+
+    function processBase64(mode) {
+      const input = document.getElementById('base64Input').value, out = document.getElementById('base64Result');
+      try { out.value = mode === 'encode' ? btoa(input) : atob(input); } catch(e) { out.value = "Format tidak valid."; }
+    }
+
+    // KALKULATOR & BMI / BMR
+    function calcClear() { document.getElementById('calcScreen').value = '0'; }
+    function calcAppend(v) {
+      const s = document.getElementById('calcScreen');
+      if (s.value === '0' || s.value === 'Error') s.value = '';
+      s.value += v;
+    }
+    function calcCompute() {
+      const s = document.getElementById('calcScreen');
+      try { s.value = new Function(`'use strict'; return (${s.value.replace(/[^0-9+\-*/.]/g, '')})`)(); } catch(e) { s.value = 'Error'; }
+    }
+
+    function calcBMI() {
+      const w = parseFloat(document.getElementById('bmiWeight').value) || 0;
+      const h = (parseFloat(document.getElementById('bmiHeight').value) || 0) / 100;
+      const age = parseInt(document.getElementById('bmrAge').value) || 25;
+      const gender = document.getElementById('bmrGender').value;
+      if (w <= 0 || h <= 0) return;
+      const bmi = (w / (h * h)).toFixed(1);
+      let bmr = (10 * w) + (6.25 * (h * 100)) - (5 * age) + (gender === 'm' ? 5 : -161);
+      document.getElementById('bmiResult').textContent = `BMI: ${bmi} | BMR: ${Math.round(bmr)} kcal/hari`;
+    }
+
+    function calcLoan() {
+      const p = parseFloat(document.getElementById('loanAmount').value) || 0;
+      const r = (parseFloat(document.getElementById('loanInterest').value) || 0) / 100 / 12;
+      const n = parseInt(document.getElementById('loanTenor').value) || 1;
+      let monthly = r === 0 ? p / n : (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      document.getElementById('loanResult').textContent = `Cicilan: ${formatNumber(Math.round(monthly))} /bln`;
+    }
+
+    // KONVERSI
+    const currRates = { IDR: 1, USD: 0.000063, EUR: 0.000058, SGD: 0.000084, GBP: 0.000049, JPY: 0.0095 };
+    function convertCurrency() {
+      const amount = parseFloat(document.getElementById('currAmount').value) || 0;
+      const from = document.getElementById('currFrom').value, to = document.getElementById('currTo').value;
+      const baseInIDR = amount / currRates[from];
+      const result = baseInIDR * currRates[to];
+      document.getElementById('currResultValue').textContent = formatNumber(result.toFixed(2), to);
+    }
+    function swapCurrency() {
+      const f = document.getElementById('currFrom'), t = document.getElementById('currTo'), temp = f.value;
+      f.value = t.value; t.value = temp; convertCurrency();
+    }
+
+    function convertUnits() {
+      const val = parseFloat(document.getElementById('unitInputVal').value) || 0;
+      const type = document.getElementById('unitTypeSelect').value;
+      let res = 0, unit = '';
+      if(type === 'km-mile') { res = val * 0.621371; unit = 'Mil'; }
+      else if(type === 'kg-lbs') { res = val * 2.20462; unit = 'Lbs'; }
+      else if(type === 'c-f') { res = (val * 9/5) + 32; unit = '°F'; }
+      else if(type === 'gb-mb') { res = val * 1024; unit = 'MB'; }
+      document.getElementById('unitResultVal').textContent = `${res.toFixed(2)} ${unit}`;
+    }
+
+    function calcDiscount() {
+      const price = parseFloat(document.getElementById('discPrice').value) || 0;
+      const disc = parseFloat(document.getElementById('discPct').value) || 0;
+      const tax = parseFloat(document.getElementById('taxPct').value) || 0;
+      const afterDisc = price - (price * (disc / 100));
+      const finalPrice = afterDisc + (afterDisc * (tax / 100));
+      document.getElementById('discFinalRes').textContent = formatNumber(Math.round(finalPrice), 'Rp');
+    }
+
+    // CUACA, BERITA, TRANSLATOR, BIO LINK, DOWNLOADER & SHORTENER
+    async function fetchLiveWeather() {
+      const cityQuery = document.getElementById('weatherCitySearch')?.value?.trim();
+      let lat = -7.98, lon = 112.63;
+      if (cityQuery) {
+        try {
+          const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityQuery)}&count=1`);
+          const geoData = await geoRes.json();
+          if (geoData?.results?.[0]) { lat = geoData.results[0].latitude; lon = geoData.results[0].longitude; }
+        } catch(e) {}
+      }
+      try {
+        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=relativehumidity_2m`);
+        const d = await res.json();
+        if(d?.current_weather) {
+          const tempVal = formatNumber(d.current_weather.temperature);
+          document.getElementById('liveTemp').textContent = `${tempVal}°C`;
+          document.getElementById('liveWind').textContent = `${formatNumber(d.current_weather.windspeed)} km/h`;
+          document.getElementById('liveHumidity').textContent = `${formatNumber(d?.hourly?.relativehumidity_2m?.[0] || 75)}%`;
+          document.getElementById('liveCondition').textContent = "Cerah / Normal";
+          document.getElementById('weatherWidget').textContent = `🌤️ ${tempVal}°C`;
+        }
+      } catch(e) { document.getElementById('liveCondition').textContent = "Offline"; }
+    }
+
+    async function fetchNews() {
+      const c = document.getElementById('newsContainer');
+      const q = document.getElementById('newsSearchQuery').value.trim();
+      c.innerHTML = `<div class="text-xs text-sub col-span-3 text-center py-10" data-i18n="newsLoading">Memuat...</div>`;
+      try {
+        let endpoint = `https://api.spaceflightnewsapi.net/v4/articles/?limit=6`;
+        if (q) endpoint += `&search=${encodeURIComponent(q)}`;
+        const res = await fetch(endpoint); const d = await res.json();
+        c.innerHTML = (d?.results || []).map(i => `<div class="card-modern rounded-xl overflow-hidden flex flex-col justify-between"><img src="${i.image_url}" class="w-full h-32 object-cover"><div class="p-3 space-y-1"><h4 class="font-bold text-xs">${i.title}</h4><a href="${i.url}" target="_blank" class="text-indigo-400 font-bold text-[10px] hover:underline">Baca &rarr;</a></div></div>`).join('');
+      } catch(e) { c.innerHTML = `<div class="text-xs text-sub col-span-3 text-center py-10">Gagal memuat berita.</div>`; }
+    }
+
+    // PDF VIEWER
+    let pdfDoc = null, pNum = 1, pdfScale = 1.0;
+    if(window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    function loadPdf(e) {
+      const f = e.target.files[0]; if (!f) return;
+      const fr = new FileReader();
+      fr.onload = function() {
+        pdfjsLib.getDocument(new Uint8Array(this.result)).promise.then(pdf => {
+          pdfDoc = pdf; pNum = 1; pdfScale = 1.0;
+          document.getElementById('pdfPlaceholder').classList.add('hidden');
+          document.getElementById('pdfViewerContainer').classList.remove('hidden'); renderPdf(pNum);
+        });
+      };
+      fr.readAsArrayBuffer(f);
+    }
+    function renderPdf(num) {
+      pdfDoc.getPage(num).then(page => {
+        const vp = page.getViewport({scale: pdfScale});
+        const cv = document.getElementById('pdfCanvas'), ctx = cv.getContext('2d');
+        cv.height = vp.height; cv.width = vp.width; page.render({canvasContext: ctx, viewport: vp});
+        document.getElementById('pdfPageInfo').textContent = `${formatNumber(num)}/${formatNumber(pdfDoc.numPages)}`;
+      });
+    }
+    function prevPdfPage() { if (pNum > 1) renderPdf(--pNum); }
+    function nextPdfPage() { if (pdfDoc && pNum < pdfDoc.numPages) renderPdf(++pNum); }
+    function zoomPdf(delta) { pdfScale = Math.max(0.5, pdfScale + delta); renderPdf(pNum); }
+    function extractPdfText() {
+      if(!pdfDoc) return;
+      pdfDoc.getPage(pNum).then(page => {
+        page.getTextContent().then(textContent => {
+          const el = document.getElementById('pdfExtractedText');
+          el.value = textContent.items.map(s => s.str).join(' ') || "Tidak ada teks terdeteksi.";
+          el.classList.remove('hidden');
+        });
+      });
+    }
+
+    // PHOTO STUDIO DENGAN FITUR BARU SEPIA, INVERT & RESET
+    let pImg = null, pCv = document.getElementById('photoCanvas'), photoRotation = 0;
+    function loadPhoto(e) {
+      const f = e.target.files[0]; if (!f) return;
+      const fr = new FileReader();
+      fr.onload = function(ev) {
+        pImg = new Image();
+        pImg.onload = function() {
+          pCv.classList.remove('hidden'); document.getElementById('photoPlaceholder').classList.add('hidden');
+          pCv.width = pImg.width; pCv.height = pImg.height; applyPhotoFilters();
+        };
+        pImg.src = ev.target.result;
+      };
+      fr.readAsDataURL(f);
+    }
+    function applyPhotoFilters() {
+      if(!pImg) return;
+      const pCtx = pCv.getContext('2d');
+      const b = document.getElementById('photoBrightness').value;
+      const c = document.getElementById('photoContrast').value;
+      const g = document.getElementById('photoGrayscale').value;
+      const sepia = document.getElementById('photoSepia')?.value || 0;
+      const invert = document.getElementById('photoInvert')?.value || 0;
+
+      pCtx.filter = `brightness(${b}%) contrast(${c}%) grayscale(${g}%) sepia(${sepia}%) invert(${invert}%)`;
+      pCtx.clearRect(0, 0, pCv.width, pCv.height);
+      pCtx.drawImage(pImg, 0, 0);
+    }
+    function resetPhotoFilters() {
+      document.getElementById('photoBrightness').value = 100;
+      document.getElementById('photoContrast').value = 100;
+      document.getElementById('photoGrayscale').value = 0;
+      if(document.getElementById('photoSepia')) document.getElementById('photoSepia').value = 0;
+      if(document.getElementById('photoInvert')) document.getElementById('photoInvert').value = 0;
+      applyPhotoFilters();
+    }
+    function rotatePhoto(deg) {
+      if(!pImg) return;
+      photoRotation = (photoRotation + deg) % 360;
+      applyPhotoFilters();
+    }
+    function downloadEditedPhoto() {
+      if(!pImg) return;
+      const a = document.createElement('a'); a.download = 'edited-photo.png'; a.href = pCv.toDataURL(); a.click();
+    }
+
+    // TRANSLATOR
+    async function translateText() {
+      const text = document.getElementById('transInputText').value.trim();
+      let sl = document.getElementById('transSourceLang').value, tl = document.getElementById('transTargetLang').value;
+      if (!text) return;
+      const resOut = document.getElementById('transOutputResult'); resOut.textContent = "Menerjemahkan...";
+      try {
+        const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q=${encodeURIComponent(text)}`);
+        const data = await res.json();
+        if (data?.[0]) {
+          let translated = ""; data[0].forEach(item => { if (item[0]) translated += item[0]; });
+          if (translated) { resOut.textContent = translated; return; }
+        }
+      } catch (err) {}
+      resOut.textContent = "Gagal menerjemahkan.";
+    }
+    function swapLanguages() {
+      const src = document.getElementById('transSourceLang'), tgt = document.getElementById('transTargetLang');
+      const temp = src.value; src.value = tgt.value; tgt.value = temp;
+    }
+    function copyTranslation() { navigator.clipboard.writeText(document.getElementById('transOutputResult').textContent); alert("Disalin!"); }
+    function speakTranslation() {
+      const text = document.getElementById('transOutputResult').textContent, lang = document.getElementById('transTargetLang').value;
+      if ('speechSynthesis' in window) {
+        const u = new SpeechSynthesisUtterance(text); u.lang = lang; window.speechSynthesis.speak(u);
+      }
+    }
+
+    // BIO LINK
+    let customBioLinks = JSON.parse(localStorage.getItem('hub_custom_biolinks')) || [];
+    function addCustomBioLink() {
+      const text = document.getElementById('newBioBtnText').value.trim(), url = document.getElementById('newBioBtnUrl').value.trim();
+      if (!text || !url) return;
+      customBioLinks.push({ id: Date.now().toString(), text, url });
+      localStorage.setItem('hub_custom_biolinks', JSON.stringify(customBioLinks));
+      document.getElementById('newBioBtnText').value = ''; document.getElementById('newBioBtnUrl').value = '';
+      renderBioLinkSelector();
+    }
+    function deleteCustomBioLink(id) {
+      customBioLinks = customBioLinks.filter(b => b.id !== id);
+      localStorage.setItem('hub_custom_biolinks', JSON.stringify(customBioLinks)); renderBioLinkSelector();
+    }
+    function renderBioLinkSelector() {
+      const container = document.getElementById('bioCustomLinkList'); if (!container) return;
+      container.innerHTML = customBioLinks.map(b => `
+        <div class="card-modern p-2 rounded-xl flex items-center justify-between text-xs">
+          <div class="truncate max-w-[180px]"><strong class="text-indigo-300">${b.text}</strong></div>
+          <button onclick="deleteCustomBioLink('${b.id}')" class="text-rose-400 font-bold hover:underline">Hapus</button>
+        </div>
+      `).join('');
+    }
+    function generateBioLinkPage() {
+      const title = document.getElementById('bioProfileTitle').value || "Tautan Profil Saya";
+      const sub = document.getElementById('bioProfileSub').value || "";
+      let linksHtml = customBioLinks.map(b => `  <a href="${b.url}" target="_blank" style="display:block; padding:14px; margin:10px 0; background:#4f46e5; color:#fff; text-align:center; border-radius:14px; text-decoration:none; font-weight:bold;">${b.text}</a>`).join('\n');
+      const fullHtml = `<!DOCTYPE html>\n<html><head><title>${title}</title></head><body style="background:#0f172a; color:#fff; padding:40px 20px; max-width:480px; margin:auto; text-align:center; font-family:sans-serif;"><h1>${title}</h1><p>${sub}</p>${linksHtml}</body></html>`;
+      document.getElementById('bioResultOutput').value = fullHtml; copyBioLink();
+    }
+    function copyBioLink() {
+      const val = document.getElementById('bioResultOutput').value;
+      if (!val) { generateBioLinkPage(); return; }
+      navigator.clipboard.writeText(val); alert("Kode HTML Bio Link berhasil disalin!");
+    }
+
+    // DOWNLOADER
+    function processDownload() {
+      const url = document.getElementById('dlUrlInput').value.trim(); if (!url) return;
+      document.getElementById('dlResultArea').classList.remove('hidden');
+      const ytMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+      if (ytMatch?.[1]) {
+        document.getElementById('dlVideoBtn').href = `https://www.y2mate.com/youtube/${ytMatch[1]}`;
+        document.getElementById('dlAudioBtn').href = `https://www.y2mate.com/youtube/${ytMatch[1]}`;
+      }
+    }
+
+    // SHORTENER
+    function generateShortUrl() {
+      const u = document.getElementById('shortUrlInput').value; if (!u) return;
+      const code = Math.random().toString(36).substring(2, 7);
+      const shortFullUrl = `${window.location.origin}?s=${code}`;
+      document.getElementById('shortResultOutput').value = shortFullUrl;
+      document.getElementById('shortQrImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(u)}`;
+      document.getElementById('shortResultArea').classList.remove('hidden');
+    }
+    function copyShortUrl() { navigator.clipboard.writeText(document.getElementById('shortResultOutput').value); alert("Tautan disalin!"); }
+
+    // DATA STATE & LOCAL STORAGE
+    let transactions = JSON.parse(localStorage.getItem('hub_finance')) || [];
+    let tasks = JSON.parse(localStorage.getItem('hub_tasks')) || [];
+    let notes = JSON.parse(localStorage.getItem('hub_notes')) || [];
+    let kanbanCards = JSON.parse(localStorage.getItem('hub_kanban')) || [];
+    let eisenTasks = JSON.parse(localStorage.getItem('hub_eisen')) || [];
+    let calEvents = JSON.parse(localStorage.getItem('hub_events')) || [];
+
+    function renderFinance() {
+      let inc = 0, exp = 0;
+      const currSymbol = document.getElementById('financeCurrency').value;
+      const searchVal = document.getElementById('searchInput')?.value?.toLowerCase() || '';
+      const filterType = document.getElementById('filterType')?.value || 'all';
+
+      let filtered = transactions.filter(t => {
+        const matchSearch = t.desc.toLowerCase().includes(searchVal) || t.category.toLowerCase().includes(searchVal);
+        const matchType = filterType === 'all' || t.type === filterType;
+        return matchSearch && matchType;
+      });
+
+      transactions.forEach(t => { if (t.type === 'income') inc += Number(t.amount); else exp += Number(t.amount); });
+      document.getElementById('metricIncome').textContent = formatNumber(inc, currSymbol);
+      document.getElementById('metricExpense').textContent = formatNumber(exp, currSymbol);
+      document.getElementById('metricNet').textContent = formatNumber(inc - exp, currSymbol);
+
+      const limit = Number(document.getElementById('budgetLimitInput').value) || 5000000;
+      const pct = limit > 0 ? Math.min(100, Math.round((exp / limit) * 100)) : 0;
+      document.getElementById('budgetProgressBar').style.width = `${pct}%`;
+      document.getElementById('budgetProgressText').textContent = `${formatNumber(pct)}% Terpakai`;
+
+      const tbody = document.getElementById('txTableBody');
+      if (tbody) {
+        tbody.innerHTML = filtered.map(t => `
+          <tr class="hover:bg-indigo-500/5 transition">
+            <td class="p-2.5 font-mono text-sub">${t.date}</td>
+            <td class="p-2.5"><span class="px-2 py-0.5 rounded card-modern text-[10px] font-bold">${t.category}</span></td>
+            <td class="p-2.5 font-semibold">${t.desc}</td>
+            <td class="p-2.5 text-right font-bold font-mono ${t.type === 'income' ? 'text-emerald-400' : 'text-rose-400'}">${formatNumber(Number(t.amount), currSymbol)}</td>
+            <td class="p-2.5 text-center"><button onclick="deleteTx('${t.id}')" class="text-rose-400 text-xs font-bold hover:underline">Hapus</button></td>
+          </tr>
+        `).join('');
+      }
+    }
+    function deleteTx(id) { transactions = transactions.filter(t => t.id !== id); localStorage.setItem('hub_finance', JSON.stringify(transactions)); renderFinance(); }
+    function openTxModal(type) { document.getElementById('txForm').reset(); document.getElementById('formDate').value = new Date().toISOString().slice(0,10); document.getElementById('formType').value = type; document.getElementById('txModal').classList.remove('hidden'); }
+    function closeTxModal() { document.getElementById('txModal').classList.add('hidden'); }
+    document.getElementById('txForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      transactions.push({ id: Date.now().toString(), date: document.getElementById('formDate').value, type: document.getElementById('formType').value, category: document.getElementById('formCategory').value, amount: Number(document.getElementById('formAmount').value), desc: document.getElementById('formDesc').value });
+      localStorage.setItem('hub_finance', JSON.stringify(transactions)); renderFinance(); closeTxModal();
+    });
+
+    function exportFinanceCSV() {
+      let csv = "Tanggal,Tipe,Kategori,Nominal,Keterangan\n";
+      transactions.forEach(t => { csv += `"${t.date}","${t.type}","${t.category}",${t.amount},"${t.desc}"\n`; });
+      const blob = new Blob([csv], { type: 'text/csv' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'keuangan.csv'; a.click();
+    }
+
+    function renderTasks() {
+      const container = document.getElementById('taskList'); if (!container) return;
+      const doneCount = tasks.filter(t => t.completed).length;
+      document.getElementById('taskProgressBadge').textContent = `${formatNumber(tasks.length ? Math.round((doneCount / tasks.length) * 100) : 0)}% Selesai`;
+      container.innerHTML = tasks.map(t => `
+        <div class="p-2 flex justify-between items-center text-xs">
+          <div class="flex items-center gap-2"><input type="checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTaskDone('${t.id}')" class="accent-indigo-500 cursor-pointer"><span class="${t.completed ? 'line-through text-sub' : 'font-bold'}">${t.title}</span></div>
+          <button onclick="deleteTask('${t.id}')" class="text-rose-400 font-bold">Hapus</button>
+        </div>
+      `).join('');
+    }
+    function toggleTaskDone(id) { tasks = tasks.map(t => t.id === id ? { ...t, completed: !t.completed } : t); localStorage.setItem('hub_tasks', JSON.stringify(tasks)); renderTasks(); }
+    function deleteTask(id) { tasks = tasks.filter(t => t.id !== id); localStorage.setItem('hub_tasks', JSON.stringify(tasks)); renderTasks(); }
+    function openTaskModal() { document.getElementById('taskModal').classList.remove('hidden'); }
+    function closeTaskModal() { document.getElementById('taskModal').classList.add('hidden'); }
+    document.getElementById('taskForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      tasks.push({ id: Date.now().toString(), title: document.getElementById('taskTitle').value, priority: document.getElementById('taskPriority').value, dueDate: document.getElementById('taskDueDate').value, completed: false });
+      localStorage.setItem('hub_tasks', JSON.stringify(tasks)); renderTasks(); closeTaskModal();
+    });
+
+    function exportTasksNotes() {
+      const data = { tasks, notes };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'tugas_catatan.json'; a.click();
+    }
+
+    function renderNotes() {
+      const container = document.getElementById('noteList'); if (!container) return;
+      container.innerHTML = notes.map(n => `
+        <div class="p-3 card-modern rounded-xl space-y-1 text-xs">
+          <div class="flex justify-between items-center"><h4 class="font-bold text-violet-300">${n.title}</h4><button onclick="deleteNote('${n.id}')" class="text-rose-400 text-[10px]">Hapus</button></div>
+          <p class="text-sub">${n.content}</p>
+        </div>
+      `).join('');
+    }
+    function deleteNote(id) { notes = notes.filter(n => n.id !== id); localStorage.setItem('hub_notes', JSON.stringify(notes)); renderNotes(); }
+    function openNoteModal() { document.getElementById('noteModal').classList.remove('hidden'); }
+    function closeNoteModal() { document.getElementById('noteModal').classList.add('hidden'); }
+    document.getElementById('noteForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      notes.push({ id: Date.now().toString(), title: document.getElementById('noteTitle').value, content: document.getElementById('noteContent').value });
+      localStorage.setItem('hub_notes', JSON.stringify(notes)); renderNotes(); closeNoteModal();
+    });
+
+    function renderKanban() {
+      const colTodo = document.getElementById('kanbanColToDo'); if(!colTodo) return;
+      document.getElementById('kanbanColToDo').innerHTML = kanbanCards.filter(c => c.status === 'todo').map(c => `<div class="card-modern p-3 rounded-xl text-xs space-y-1"><div class="flex justify-between items-center"><strong class="text-amber-300">${c.title}</strong><button onclick="deleteKanbanCard('${c.id}')" class="text-rose-400 text-[10px]">✕</button></div><p class="text-[10px] text-sub">${c.desc || ''}</p></div>`).join('');
+      document.getElementById('kanbanColInProgress').innerHTML = kanbanCards.filter(c => c.status === 'in_progress').map(c => `<div class="card-modern p-3 rounded-xl text-xs space-y-1"><div class="flex justify-between items-center"><strong class="text-indigo-300">${c.title}</strong><button onclick="deleteKanbanCard('${c.id}')" class="text-rose-400 text-[10px]">✕</button></div><p class="text-[10px] text-sub">${c.desc || ''}</p></div>`).join('');
+      document.getElementById('kanbanColDone').innerHTML = kanbanCards.filter(c => c.status === 'done').map(c => `<div class="card-modern p-3 rounded-xl text-xs space-y-1"><div class="flex justify-between items-center"><strong class="text-emerald-300 line-through">${c.title}</strong><button onclick="deleteKanbanCard('${c.id}')" class="text-rose-400 text-[10px]">✕</button></div><p class="text-[10px] text-sub">${c.desc || ''}</p></div>`).join('');
+    }
+    function deleteKanbanCard(id) { kanbanCards = kanbanCards.filter(c => c.id !== id); localStorage.setItem('hub_kanban', JSON.stringify(kanbanCards)); renderKanban(); }
+    function openKanbanModal(status = 'todo') { document.getElementById('kanbanCardStatus').value = status; document.getElementById('kanbanModal').classList.remove('hidden'); }
+    function closeKanbanModal() { document.getElementById('kanbanModal').classList.add('hidden'); }
+    document.getElementById('kanbanForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      kanbanCards.push({ id: Date.now().toString(), title: document.getElementById('kanbanCardTitle').value, status: document.getElementById('kanbanCardStatus').value, desc: document.getElementById('kanbanCardDesc').value });
+      localStorage.setItem('hub_kanban', JSON.stringify(kanbanCards)); renderKanban(); closeKanbanModal();
+    });
+
+    function renderEisenhower() {
+      const q1 = document.getElementById('eisenListQ1'); if (!q1) return;
+      document.getElementById('eisenListQ1').innerHTML = eisenTasks.filter(t => t.quadrant === 'Q1').map(t => `<div class="card-modern p-2.5 rounded-xl text-xs flex justify-between items-center"><span>${t.title}</span><button onclick="deleteEisenTask('${t.id}')" class="text-rose-400 text-[10px]">✕</button></div>`).join('');
+      document.getElementById('eisenListQ2').innerHTML = eisenTasks.filter(t => t.quadrant === 'Q2').map(t => `<div class="card-modern p-2.5 rounded-xl text-xs flex justify-between items-center"><span>${t.title}</span><button onclick="deleteEisenTask('${t.id}')" class="text-rose-400 text-[10px]">✕</button></div>`).join('');
+      document.getElementById('eisenListQ3').innerHTML = eisenTasks.filter(t => t.quadrant === 'Q3').map(t => `<div class="card-modern p-2.5 rounded-xl text-xs flex justify-between items-center"><span>${t.title}</span><button onclick="deleteEisenTask('${t.id}')" class="text-rose-400 text-[10px]">✕</button></div>`).join('');
+      document.getElementById('eisenListQ4').innerHTML = eisenTasks.filter(t => t.quadrant === 'Q4').map(t => `<div class="card-modern p-2.5 rounded-xl text-xs flex justify-between items-center"><span>${t.title}</span><button onclick="deleteEisenTask('${t.id}')" class="text-rose-400 text-[10px]">✕</button></div>`).join('');
+    }
+    function deleteEisenTask(id) { eisenTasks = eisenTasks.filter(t => t.id !== id); localStorage.setItem('hub_eisen', JSON.stringify(eisenTasks)); renderEisenhower(); }
+    function openEisenhowerModal(quadrant = 'Q1') { document.getElementById('eisenQuadrant').value = quadrant; document.getElementById('eisenModal').classList.remove('hidden'); }
+    function closeEisenhowerModal() { document.getElementById('eisenModal').classList.add('hidden'); }
+    document.getElementById('eisenForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      eisenTasks.push({ id: Date.now().toString(), title: document.getElementById('eisenTitle').value, quadrant: document.getElementById('eisenQuadrant').value });
+      localStorage.setItem('hub_eisen', JSON.stringify(eisenTasks)); renderEisenhower(); closeEisenhowerModal();
+    });
+
+    // PERBAIKAN CHATBOT AI CERDAS (SOLVED ERROR CHAT MACET DENGAN TYPING INDICATOR & OFFLINE ENGINE)
+    let chatHistory = JSON.parse(localStorage.getItem('workspace_chat_history')) || [];
+    function saveCustomApiKey(key) { localStorage.setItem('workspace_api_key', key); alert("API Key Disimpan!"); }
+    function sendQuickPrompt(p) { const input = document.getElementById('chatInputText'); input.value = p; input.focus(); }
+    function clearChatHistory() { chatHistory = []; localStorage.removeItem('workspace_chat_history'); location.reload(); }
+    function exportChatHistory() {
+      const blob = new Blob([JSON.stringify(chatHistory, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'chat_history.json'; a.click();
+    }
+
+    // RESPON OFFLINE DUMMY CERDAS JIKA TIDAK ADA API KEY
+    function getSmartLocalResponse(prompt) {
+      const p = prompt.toLowerCase();
+      if (p.includes("sapa") || p.includes("halo") || p.includes("hi") || p.includes("p") || p.includes("bang")) {
+        return "Halo! Ada yang bisa saya bantu untuk produktivitas Anda di WorkSpace Pro hari ini?";
+      } else if (p.includes("ringkas")) {
+        return "Tentu! Silakan tempel teks yang ingin diringkas, saya akan mengekstrak poin-poin terpentingnya.";
+      } else if (p.includes("kode") || p.includes("javascript") || p.includes("html")) {
+        return "Berikut contoh kode singkat:\n```javascript\n// Fungsi salam otomatis\nfunction greet(name) {\n  return `Halo ${name}, selamat bekerja!`;\n}\n```";
+      } else if (p.includes("ide") || p.includes("brainstorm")) {
+        return "1. Buat jadwal prioritas harian.\n2. Gunakan teknik Pomodoro (25m fokus, 5m rehat).\n3. Catat ide langsung di Mind Map.\n4. Kelola anggaran keuangan di Tab Finance.\n5. Tinjau proyek dengan Papan Kanban.";
+      } else {
+        return `Saya menerima pesan Anda: "${prompt}". Pasang Gemini API Key di kolom atas jika Anda ingin menggunakan model AI online secara penuh!`;
+      }
+    }
+
+    async function sendChatMessage() {
+      const input = document.getElementById('chatInputText'), text = input.value.trim(); if(!text) return;
+      const area = document.getElementById('chatMessagesArea');
+      
+      // Tambah Pesan User
+      area.innerHTML += `
+        <div class="flex items-start gap-2.5 justify-end">
+          <div class="bg-indigo-600 text-white p-3 rounded-2xl text-xs max-w-[85%] leading-relaxed shadow-md">${text}</div>
+        </div>
+      `;
+      input.value = ''; area.scrollTop = area.scrollHeight;
+
+      // Tambah Typing Indicator
+      const typingId = 'typing-' + Date.now();
+      area.innerHTML += `
+        <div id="${typingId}" class="flex items-start gap-2.5">
+          <div class="w-7 h-7 rounded-xl bg-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0 p-1">
+            <svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/></svg>
+          </div>
+          <div class="card-modern p-3 rounded-2xl text-xs flex items-center gap-1.5">
+            <span class="typing-dot w-1.5 h-1.5 bg-indigo-400 rounded-full"></span>
+            <span class="typing-dot w-1.5 h-1.5 bg-indigo-400 rounded-full"></span>
+            <span class="typing-dot w-1.5 h-1.5 bg-indigo-400 rounded-full"></span>
+          </div>
+        </div>
+      `;
+      area.scrollTop = area.scrollHeight;
+
+      const userKey = localStorage.getItem('workspace_api_key');
+      let aiReply = "";
+
+      if (userKey) {
+        try {
+          const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${userKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: [{ parts: [{ text }] }] })
+          });
+          const d = await res.json();
+          aiReply = d?.candidates?.[0]?.content?.parts?.[0]?.text || "Maaf, terjadi kesalahan dari server AI.";
+        } catch(e) {
+          aiReply = "Gagal terhubung ke API Gemini. Memakai balasan offline:\n" + getSmartLocalResponse(text);
+        }
+      } else {
+        // Delay sintetis 600ms agar terasa alami
+        await new Promise(r => setTimeout(r, 600));
+        aiReply = getSmartLocalResponse(text);
+      }
+
+      // Hapus Typing Indicator & Tampilkan Balasan AI
+      document.getElementById(typingId)?.remove();
+      const replyMsgId = 'msg-' + Date.now();
+      area.innerHTML += `
+        <div class="flex items-start gap-2.5">
+          <div class="w-7 h-7 rounded-xl bg-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0 p-1">
+            <svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/></svg>
+          </div>
+          <div class="card-modern p-3 rounded-2xl text-xs max-w-[85%] leading-relaxed space-y-2">
+            <div>${aiReply.replace(/\n/g, '<br>')}</div>
+            <button onclick="navigator.clipboard.writeText(\`${aiReply.replace(/`/g, '\\`')}\`); alert('Pesan AI Disalin!')" class="text-[10px] text-indigo-400 font-bold hover:underline flex items-center gap-1">📋 Salin Balasan</button>
+          </div>
+        </div>
+      `;
+      area.scrollTop = area.scrollHeight;
+
+      chatHistory.push({ role: 'user', text }, { role: 'ai', text: aiReply });
+      localStorage.setItem('workspace_chat_history', JSON.stringify(chatHistory));
+    }
+
+    // KALENDER INTERAKTIF & AGENDA
+    let calCurrentDate = new Date();
+    function changeCalMonth(dir) { calCurrentDate.setMonth(calCurrentDate.getMonth() + dir); renderCalendar(); }
+    function jumpToTodayCalendar() { calCurrentDate = new Date(); renderCalendar(); }
+    function renderCalendar() {
+      const year = calCurrentDate.getFullYear(), month = calCurrentDate.getMonth();
+      document.getElementById('calMonthYearLabel').textContent = calCurrentDate.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
+      const firstDay = new Date(year, month, 1).getDay();
+      const totalDays = new Date(year, month + 1, 0).getDate();
+      const grid = document.getElementById('calendarGrid'); grid.innerHTML = '';
+      
+      for (let i = 0; i < firstDay; i++) grid.innerHTML += `<div class="p-2 card-modern rounded-xl opacity-25"></div>`;
+      for (let day = 1; day <= totalDays; day++) {
+        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+        const dayEvents = calEvents.filter(e => e.date === dateStr);
+        let dots = dayEvents.map(e => `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>`).join('');
+        grid.innerHTML += `
+          <div onclick="openCalModal('${dateStr}')" class="p-2 card-modern rounded-xl h-16 text-xs flex flex-col justify-between cursor-pointer hover:border-indigo-500 transition">
+            <span class="font-bold">${formatNumber(day)}</span>
+            <div class="flex gap-0.5 flex-wrap">${dots}</div>
+          </div>
+        `;
+      }
+      renderCalendarEventsList();
+    }
+
+    function renderCalendarEventsList() {
+      const el = document.getElementById('calendarEventsList'); if(!el) return;
+      if(calEvents.length === 0) { el.innerHTML = `<div class="text-[11px] text-sub">Belum ada agenda terdaftar.</div>`; return; }
+      el.innerHTML = calEvents.map(ev => `
+        <div class="card-modern p-2 rounded-xl flex justify-between items-center text-xs">
+          <div><strong class="text-indigo-300 font-mono">${ev.date}</strong> - ${ev.title}</div>
+          <button onclick="deleteCalEvent('${ev.id}')" class="text-rose-400 font-bold hover:underline text-[10px]">Hapus</button>
+        </div>
+      `).join('');
+    }
+
+    function deleteCalEvent(id) {
+      calEvents = calEvents.filter(e => e.id !== id);
+      localStorage.setItem('hub_events', JSON.stringify(calEvents));
+      renderCalendar();
+    }
+
+    function openCalModal(dateStr) { document.getElementById('calEventDate').value = dateStr; document.getElementById('calModal').classList.remove('hidden'); }
+    function closeCalModal() { document.getElementById('calModal').classList.add('hidden'); }
+    document.getElementById('calForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      calEvents.push({ id: Date.now().toString(), date: document.getElementById('calEventDate').value, title: document.getElementById('calEventTitle').value });
+      localStorage.setItem('hub_events', JSON.stringify(calEvents)); renderCalendar(); closeCalModal();
+    });
+
+    // SIMBOL & GIF (SUB TAB MEDIA FINDER DENGAN INDIKATOR SUBTAB WARNA)
+    const symbolList = ["★","☆","✦","✧","✨","✪","💥","⚡","🔥","❄","☀️","🌙","☁️","🎯","🚀","💎","👑","🏆","🥇","🎉","🔔","📢","💬","🔍","💡","🔑","🔒","📌","📍","➡️","⬅️","⬆️","⬇️","🔄","➕","➖","✖️","♾️","💲","💶","💷","💴","©️","®️","™️","🎵","🎶","💻","📱","⚙️","🛡️"];
+    function setMediaFinderSubTab(t) {
+      const bSym = document.getElementById('btnSubSymbol');
+      const bGif = document.getElementById('btnSubGif');
+
+      document.getElementById('subtab-symbol').classList.add('hidden');
+      document.getElementById('subtab-gif').classList.add('hidden');
+
+      if(t === 'symbol') {
+        document.getElementById('subtab-symbol').classList.remove('hidden');
+        bSym.className = "px-3.5 py-1.5 bg-indigo-600 text-white rounded-xl font-bold shadow";
+        bGif.className = "px-3.5 py-1.5 card-modern text-sub hover:text-white rounded-xl font-bold";
+        renderSymbolGrid();
+      } else if(t === 'gif') {
+        document.getElementById('subtab-gif').classList.remove('hidden');
+        bGif.className = "px-3.5 py-1.5 bg-indigo-600 text-white rounded-xl font-bold shadow";
+        bSym.className = "px-3.5 py-1.5 card-modern text-sub hover:text-white rounded-xl font-bold";
+        searchGifs();
+      }
+    }
+    function renderSymbolGrid() { document.getElementById('symbolGrid').innerHTML = symbolList.map(s => `<div onclick="navigator.clipboard.writeText('${s}'); alert('Disalin!')" class="p-2 card-modern rounded-xl cursor-pointer hover:scale-125 transition text-center text-indigo-300">${s}</div>`).join(''); }
+    async function searchGifs() {
+      const q = document.getElementById('gifQueryInput').value.trim() || 'trending';
+      const grid = document.getElementById('gifResultGrid');
+      grid.innerHTML = `<div class="col-span-4 text-center py-8 text-xs text-sub">Memuat GIF...</div>`;
+      try {
+        const res = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=${encodeURIComponent(q)}&limit=12`);
+        const data = await res.json();
+        if(data?.data?.length) {
+          grid.innerHTML = data.data.map(g => `<div onclick="navigator.clipboard.writeText('${g.images.fixed_height.url}'); alert('URL GIF Disalin!')" class="card-modern rounded-xl overflow-hidden cursor-pointer"><img src="${g.images.fixed_height.url}" class="w-full h-28 object-cover"></div>`).join('');
+        } else grid.innerHTML = `<div class="col-span-4 text-center py-8 text-xs text-sub">Tidak ada GIF ditemukan.</div>`;
+      } catch(e) { grid.innerHTML = `<div class="col-span-4 text-center py-8 text-xs text-sub">Gagal memuat GIF.</div>`; }
+    }
+
+    // AKUN & BACKUP
+    let currentUsername = localStorage.getItem('workspace_user') || "";
+    function openLoginModal() { document.getElementById('authUsername').value = currentUsername; document.getElementById('loginModal').classList.remove('hidden'); }
+    function closeLoginModal() { document.getElementById('loginModal').classList.add('hidden'); }
+    function saveAuthCredentials() {
+      const uname = document.getElementById('authUsername').value.trim(); if(!uname) return;
+      currentUsername = uname; localStorage.setItem('workspace_user', uname);
+      document.getElementById('welcomeUserBadge').textContent = `Hi, ${uname}`;
+      alert("Kredensial disimpan!"); closeLoginModal();
+    }
+    function resetAppCache() { if (confirm("Hapus SEMUA data lokal?")) { localStorage.clear(); location.reload(); } }
+    function autoBackupJSON() {
+      const fullBackup = { 
+        workspace_user: localStorage.getItem('workspace_user') || '',
+        workspace_theme_lite: localStorage.getItem('workspace_theme_lite') || 'ios',
+        workspace_lang: localStorage.getItem('workspace_lang') || 'id',
+        hub_finance: JSON.parse(localStorage.getItem('hub_finance')) || [],
+        hub_tasks: JSON.parse(localStorage.getItem('hub_tasks')) || [],
+        hub_notes: JSON.parse(localStorage.getItem('hub_notes')) || [],
+        hub_kanban: JSON.parse(localStorage.getItem('hub_kanban')) || [],
+        hub_eisen: JSON.parse(localStorage.getItem('hub_eisen')) || [],
+        hub_mindnodes: JSON.parse(localStorage.getItem('hub_mindnodes')) || [],
+        hub_events: JSON.parse(localStorage.getItem('hub_events')) || []
+      };
+      const blob = new Blob([JSON.stringify(fullBackup, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+      a.download = `workspace_backup_${new Date().toISOString().slice(0,10)}.json`; a.click();
+    }
+    function importJSON(e) {
+      const f = e.target.files[0]; if(!f) return;
+      const fr = new FileReader();
+      fr.onload = function(ev) {
+        try {
+          const d = JSON.parse(ev.target.result);
+          if(d.workspace_user) localStorage.setItem('workspace_user', d.workspace_user);
+          if(d.hub_finance) localStorage.setItem('hub_finance', JSON.stringify(d.hub_finance));
+          if(d.hub_tasks) localStorage.setItem('hub_tasks', JSON.stringify(d.hub_tasks));
+          if(d.hub_notes) localStorage.setItem('hub_notes', JSON.stringify(d.hub_notes));
+          if(d.hub_events) localStorage.setItem('hub_events', JSON.stringify(d.hub_events));
+          if(d.hub_mindnodes) localStorage.setItem('hub_mindnodes', JSON.stringify(d.hub_mindnodes));
+          alert("Restorasi data berhasil!"); location.reload();
+        } catch(err) { alert("Format file JSON rusak."); }
+      };
+      fr.readAsText(f);
+    }
+
+    // INISIALISASI
+    window.addEventListener('DOMContentLoaded', () => {
+      const sLang = localStorage.getItem('workspace_lang') || 'id';
+      document.getElementById('langSelector').value = sLang;
+      changeLanguage(sLang);
+      renderAlarms();
+      switchTab(localStorage.getItem('workspace_active_tab') || 'chatbot');
+      
+      setInterval(() => {
+        const now = new Date();
+        const clockEl = document.getElementById('headerClock'); if (clockEl) clockEl.textContent = now.toLocaleTimeString();
+        const liveBig = document.getElementById('liveClockBig'); if (liveBig) liveBig.textContent = now.toLocaleTimeString();
+        checkActiveAlarmsLoop();
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

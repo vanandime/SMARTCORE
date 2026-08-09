@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WorkSpace Pro — i18n Preview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,'Plus Jakarta Sans',sans-serif;background:#07090e;color:#f8fafc}
+    .card{background:#111726;border:1px solid #1e293b;padding:12px;border-radius:12px}
+    .btn{padding:8px 12px;border-radius:10px}
+  </style>
+</head>
+<body>
+  <main class="max-w-4xl mx-auto p-6">
+    <header class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-indigo-600 flex items-center justify-center font-bold">WS</div>
+        <div>
+          <div id="welcomeUserBadge" class="text-sm font-extrabold">Hi, Danis Vanandi</div>
+          <div id="headerSubtitle" class="text-xs text-slate-400">WorkSpace Pro</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <select id="langSelectorHeader" class="custom-input text-sm bg-transparent text-indigo-300 font-bold">
+          <option value="id">ID</option>
+          <option value="en">EN</option>
+          <option value="zh">ZH</option>
+          <option value="ar">AR</option>
+        </select>
+        <button id="openLoginBtn" class="btn bg-indigo-600 text-white">Login</button>
+      </div>
+    </header>
+
+    <section class="card mb-4">
+      <h2 data-i18n="chatHeading">Asisten AI Serbaguna</h2>
+      <p class="text-xs text-slate-400" data-i18n="chatSub">Asisten pintar WorkSpace untuk membantu pertanyaan.</p>
+      <div class="mt-3">
+        <input id="chatInput" placeholder="Ketik pertanyaan atau perintah..." data-i18n-ph="phChatInput" class="w-full p-2 rounded-lg bg-slate-900" />
+        <div class="mt-2 flex gap-2 justify-end">
+          <button id="sendChatBtn" class="btn bg-gradient-to-r from-indigo-600 to-violet-600 text-white">🚀 <span data-i18n="btnSend">Kirim</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card mb-4" id="financeSection">
+      <div class="flex justify-between items-center">
+        <div>
+          <h3 data-i18n="finTitle">Manajemen Keuangan</h3>
+          <p class="text-xs text-slate-400" data-i18n="finSub">Pantau arus kas, format mata uang sesuai locale.</p>
+        </div>
+        <div class="flex gap-2 items-center">
+          <select id="financeCurrency" class="p-2 rounded-lg">
+            <option value="IDR">IDR (Rp)</option>
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+          </select>
+          <input id="budgetLimitInput" type="number" value="5000000" class="p-2 rounded-lg w-36 text-right" />
+        </div>
+      </div>
+      <div class="mt-3 text-sm">
+        <div class="flex justify-between"><span data-i18n="lblBudgetGoal">Target Batas Pengeluaran Bulanan:</span><span id="budgetProgressText">0% Terpakai</span></div>
+        <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden mt-2"><div id="budgetProgressBar" style="width:0%" class="bg-indigo-500 h-full"></div></div>
+      </div>
+    </section>
+
+    <section class="card mb-4" id="focusSection">
+      <h3 data-i18n="focusHeading">Focus Mode</h3>
+      <p class="text-xs text-slate-400" data-i18n="focusSub">Mode fokus ringan — fullscreen & quick Pomodoro.</p>
+      <div class="mt-3 flex gap-2 items-center">
+        <button id="toggleFullscreen" class="btn bg-indigo-600 text-white" data-i18n="btnToggleFull">Toggle Fullscreen</button>
+        <button class="btn bg-emerald-600 text-white" onclick="setPomodoroPreset(25)">25m</button>
+        <button class="btn bg-slate-700 text-white" onclick="setPomodoroPreset(5)">5m</button>
+        <div class="ml-auto">Timer: <span id="focusTimer">25:00</span></div>
+      </div>
+    </section>
+
+    <section class="card mb-4" id="toolsSection">
+      <h3 data-i18n="toolsHeading">Tools Berguna</h3>
+      <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="p-3 bg-slate-900 rounded-lg">
+          <label class="text-xs text-slate-400">Password Generator</label>
+          <div class="mt-2 flex gap-2">
+            <input id="pwdResult" readonly class="w-full p-2 rounded" />
+            <button id="genPwd" class="btn bg-indigo-600 text-white">Buat</button>
+            <button data-copy-target="#pwdResult" class="btn bg-violet-600 text-white">Salin</button>
+          </div>
+        </div>
+        <div class="p-3 bg-slate-900 rounded-lg">
+          <label class="text-xs text-slate-400">Base64</label>
+          <textarea id="base64Input" rows="2" class="w-full p-2 rounded mt-2"></textarea>
+          <div class="mt-2 flex gap-2"><button onclick="processBase64('encode')" class="btn bg-indigo-600 text-white">Encode</button><button onclick="processBase64('decode')" class="btn bg-violet-600 text-white">Decode</button></div>
+          <textarea id="base64Result" readonly class="w-full p-2 rounded mt-2"></textarea>
+          <div class="mt-2"><button data-copy-target="#base64Result" class="btn bg-emerald-600 text-white">Salin Hasil</button></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-xs text-slate-400 mt-6">WorkSpace Pro • Danis Vanandi</footer>
+  </main>
+
+  <!-- LOGIN MODAL -->
+  <div id="loginModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center p-4">
+    <div class="w-full max-w-md bg-slate-900 p-4 rounded-lg card">
+      <div class="flex justify-between items-center mb-2">
+        <h4 class="font-bold" data-i18n="loginTitle">Masuk</h4>
+        <button id="closeLogin" class="text-slate-400">&times;</button>
+      </div>
+      <div class="space-y-2">
+        <input id="loginEmail" placeholder="Email" data-i18n-ph="phLoginEmail" class="w-full p-2 rounded" />
+        <input id="loginPassword" type="password" placeholder="Password" data-i18n-ph="phLoginPass" class="w-full p-2 rounded" />
+        <div class="flex justify-end gap-2">
+          <button id="loginCancel" class="btn">Batal</button>
+          <button id="loginSubmit" class="btn bg-indigo-600 text-white">Masuk</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/assets/i18n.js"></script>
+  <script>
+    // Initialize app behaviors
+    document.addEventListener('DOMContentLoaded',()=>{
+      initI18n();
+
+      // login modal
+      document.getElementById('openLoginBtn').addEventListener('click',()=>document.getElementById('loginModal').classList.remove('hidden'));
+      document.getElementById('closeLogin').addEventListener('click',()=>document.getElementById('loginModal').classList.add('hidden'));
+      document.getElementById('loginCancel').addEventListener('click',()=>document.getElementById('loginModal').classList.add('hidden'));
+
+      // language selector
+      document.getElementById('langSelectorHeader').value = getCurrentLang();
+      document.getElementById('langSelectorHeader').addEventListener('change',(e)=>changeLanguage(e.target.value));
+      document.getElementById('langSelectorHeader').addEventListener('change',(e)=>{document.getElementById('langSelector').value=e.target.value});
+
+      // copy delegation
+      document.body.addEventListener('click',e=>{
+        const t = e.target.closest('[data-copy-target]');
+        if(t){
+          const sel = document.querySelector(t.dataset.copyTarget);
+          if(sel){navigator.clipboard.writeText(sel.value||sel.textContent).then(()=>alert(getTranslation('copied')||'Copied'))}
+        }
+      });
+
+      // password generator
+      document.getElementById('genPwd').addEventListener('click',()=>{
+        const len=16; const chars='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-='; let out=''; for(let i=0;i<len;i++)out+=chars[Math.floor(Math.random()*chars.length)]; document.getElementById('pwdResult').value=out;
+      });
+
+      // base64
+      window.processBase64=(mode)=>{
+        const input=document.getElementById('base64Input').value||''; try{ if(mode==='encode') document.getElementById('base64Result').value=btoa(unescape(encodeURIComponent(input))); else document.getElementById('base64Result').value=decodeURIComponent(escape(atob(input))); }catch(err){alert(getTranslation('errBase64')||'Invalid input')}
+      }
+
+      // Focus Mode fullscreen
+      document.getElementById('toggleFullscreen').addEventListener('click',()=>{
+        if(!document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{});
+        else document.exitFullscreen().catch(()=>{});
+      });
+
+      // simple pomodoro
+      window.setPomodoroPreset=(m)=>{window._pomMinutes=m; document.getElementById('focusTimer').textContent=(m<10?('0'+m):m)+':00'};
+      setPomodoroPreset(25);
+
+      // finance formatting on input
+      const budget = document.getElementById('budgetLimitInput'); budget.addEventListener('input',()=>renderFinance()); renderFinance();
+    });
+
+    // small render finance
+    function renderFinance(){
+      const currency=document.getElementById('financeCurrency').value||'IDR';
+      const budget=parseFloat(document.getElementById('budgetLimitInput').value||0);
+      const used= Math.min(budget, Math.floor(Math.random()*budget)); // demo data
+      const pct = budget? Math.round((used/budget)*100):0;
+      document.getElementById('budgetProgressBar').style.width=pct+'%';
+      const locale = getCurrentLang();
+      document.getElementById('budgetProgressText').textContent = new Intl.NumberFormat(locale,{style:'currency',currency:currency}).format(used) + ' • ' + pct + '% ' + (getTranslation('used')||'Terpakai');
+    }
+  </script>
+</body>
+</html>

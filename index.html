@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DV Hub</title>
+  <title>DV Hub - Mohammad Danis Muria Vanandi</title>
   
   <!-- MINIMALIST TRANSPARENT VECTOR SVG FAVICON -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23007aff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
@@ -49,48 +49,48 @@
       color: #00ff66;
     }
     
-    /* CARD STYLING & ULTRA MODERN FROSTED SHADOWS */
+    /* CARD STYLING & ULTRA MODERN FROSTED SHADOWS WITH SMOOTH TRANSITIONS */
     .card-modern {
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.06);
       box-shadow: 0 10px 35px rgba(0, 0, 0, 0.06);
       border-radius: 24px;
-      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
     .theme-cyberpunk-neon .card-modern {
-      background: rgba(12, 17, 29, 0.85);
+      background: rgba(12, 17, 29, 0.88);
       border: 1px solid rgba(0, 240, 255, 0.2);
       box-shadow: 0 10px 35px rgba(0, 240, 255, 0.12);
       color: #e0fbfc;
     }
     .theme-aurora-glass .card-modern {
-      background: rgba(6, 40, 35, 0.65);
+      background: rgba(6, 40, 35, 0.7);
       border: 1px solid rgba(52, 211, 153, 0.25);
       box-shadow: 0 12px 40px rgba(2, 20, 16, 0.5);
       color: #ecfdf5;
     }
     .theme-nordic-frost .card-modern {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       border: 1px solid rgba(16, 42, 67, 0.08);
       box-shadow: 0 10px 30px rgba(16, 42, 67, 0.06);
       color: #102a43;
     }
     .theme-obsidian-gold .card-modern {
-      background: rgba(22, 22, 22, 0.88);
+      background: rgba(22, 22, 22, 0.9);
       border: 1px solid rgba(243, 229, 171, 0.2);
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
       color: #f3e5ab;
     }
     .theme-sunset-blush .card-modern {
-      background: rgba(45, 30, 50, 0.85);
+      background: rgba(45, 30, 50, 0.88);
       border: 1px solid rgba(255, 180, 200, 0.2);
       box-shadow: 0 12px 40px rgba(10, 5, 12, 0.6);
       color: #fff1f2;
     }
     .theme-matrix-terminal .card-modern {
-      background: rgba(3, 20, 8, 0.9);
+      background: rgba(3, 20, 8, 0.92);
       border: 1px solid rgba(0, 255, 102, 0.25);
       box-shadow: 0 10px 35px rgba(0, 255, 102, 0.15);
       color: #00ff66;
@@ -138,11 +138,86 @@
       border-radius: 16px;
       transition: all 0.2s ease;
     }
+
+    /* PRETTIER CLOSE BUTTON */
+    .close-btn-refined {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+      cursor: pointer;
+    }
+    .close-btn-refined:hover {
+      background: rgba(239, 68, 68, 0.2);
+      transform: scale(1.05);
+    }
+
+    /* SMOOTH TAB & FEATURE ANIMATIONS */
+    .tab-content {
+      animation: tabFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes tabFadeIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* SPLASH BLUR ILLUSION LOADING SCREEN */
+    #splashScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    #splashScreen.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
   </style>
 </head>
 <body id="appBody" class="theme-nordic-frost min-h-screen pb-32">
 
-  <!-- TOP HEADER NAVBAR (TRANSPARENT VECTOR LOGO, REAL-TIME CLOCK, WEATHER, SIMPLIFIED USERNAME BADGE WITHOUT ICON) -->
+  <!-- SPLASH BLUR ILLUSION LOADING SCREEN -->
+  <div id="splashScreen">
+    <div class="card-modern p-8 rounded-3xl flex flex-col items-center space-y-4 shadow-2xl animate-pulse">
+      <div class="w-16 h-16 rounded-2xl bg-blue-600/20 text-blue-500 flex items-center justify-center">
+        <svg class="w-10 h-10 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <h2 class="text-xl font-extrabold tracking-tight">DV Hub v1.20</h2>
+      <p class="text-xs opacity-70">Menyiapkan ruang kerja cerdas...</p>
+    </div>
+  </div>
+
+  <!-- iOS NOTIFICATION BAR (TOP BAR ABOVE HEADER WITH CLOCK & LIVE WEATHER) -->
+  <div class="w-full bg-slate-950/10 dark:bg-white/5 backdrop-blur-md px-4 py-1.5 text-[11px] font-mono flex items-center justify-between border-b border-slate-200/20 dark:border-slate-800/20">
+    <div class="flex items-center gap-2 max-w-7xl mx-auto w-full justify-between">
+      <div class="flex items-center gap-1.5 font-bold">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span id="iosBarClock">00:00:00</span>
+        <span class="opacity-40">|</span>
+        <span>DV Hub Secure Link</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span id="iosBarWeather">🌤️ Denpasar, 31°C</span>
+        <span class="opacity-40">|</span>
+        <span class="text-blue-500 font-bold">5G / WiFi</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP HEADER NAVBAR (TRANSPARENT VECTOR LOGO, SIMPLIFIED USERNAME BADGE) -->
   <header class="sticky top-0 z-40 card-modern border-b px-4 py-3 flex items-center justify-between harmonized-bar my-3 shadow-xl backdrop-blur-2xl">
     <div class="flex items-center gap-2 md:gap-3">
       <!-- TRANSPARENT VECTOR SVG LOGO (NO BACKGROUND, CLICK TO DOWNLOAD APP) -->
@@ -151,17 +226,13 @@
           <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
         </svg>
       </button>
-      
-      <!-- REAL-TIME CLOCK & LIVE WEATHER INTEGRATED IN HEADER -->
-      <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-2xl card-modern text-[11px] font-mono">
-        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-        <span id="headerClock">00:00:00</span>
-        <span class="opacity-40">|</span>
-        <span id="headerWeatherInline" class="flex items-center gap-1 font-sans">🌤️ <span id="headerWeatherCity">Denpasar</span> <strong id="headerWeatherTemp">31°C</strong></span>
+      <div>
+        <h1 class="font-extrabold text-sm tracking-tight">DV Hub</h1>
+        <p class="text-[10px] opacity-70">Mohammad Danis Muria Vanandi</p>
       </div>
     </div>
 
-    <!-- HEADER USER BADGE (SIMPLIFIED: ICON REMOVED AS REQUESTED) -->
+    <!-- HEADER USER BADGE -->
     <div class="flex items-center gap-2">
       <button onclick="openLoginModal()" id="welcomeUserBadge" class="px-3.5 py-2 card-modern hover:border-blue-500 text-xs font-bold rounded-2xl transition ios-btn flex items-center gap-1">
         <span id="headerUsernameText">Hi, Pengguna</span>
@@ -172,17 +243,37 @@
   <!-- MAIN CONTAINER WORKSPACE -->
   <main class="max-w-7xl mx-auto px-4 py-6">
 
-    <!-- TAB 1: BERANDA (DEFAULT TAB WITH ULTIMATE REAL-TIME INTEGRATION & LIVE WIDGETS) -->
+    <!-- TAB 1: BERANDA (DEFAULT TAB WITH REAL-TIME NEWS TICKER & LIVE WIDGETS) -->
     <section id="tab-dashboard" class="tab-content space-y-6">
       
       <!-- HERO BANNER WITH REAL-TIME STATUS & QUICK LAUNCH -->
       <div class="card-modern p-6 md:p-8 rounded-3xl relative overflow-hidden bg-gradient-to-r from-blue-600/10 via-indigo-600/5 to-emerald-600/10 border border-blue-500/20 shadow-2xl">
         <div class="relative z-10 space-y-4">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/15 text-blue-500 text-xs font-bold uppercase tracking-wider">
-            <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span> Pusat Komando Real-Time v1.18
+            <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span> Pusat Komando Real-Time v1.20
           </div>
           <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight" data-i18n="dashHeroTitle">Produktivitas Tanpa Batas & Integrasi Langsung</h2>
-          <p class="text-xs md:text-sm opacity-80 max-w-2xl leading-relaxed" data-i18n="dashHeroDesc">Kelola seluruh modul cerdas, pantau pasar keuangan global secara real-time, dan catat ide kilat dalam satu ekosistem elegan.</p>
+          <p class="text-xs md:text-sm opacity-80 max-w-2xl leading-relaxed" data-i18n="dashHeroDesc">Kelola seluruh modul cerdas, pantau berita dunia & pasar keuangan global secara real-time dalam satu ekosistem elegan.</p>
+        </div>
+      </div>
+
+      <!-- REAL-TIME 6-ROW NEWS TICKER WIDGET -->
+      <div class="card-modern p-5 rounded-3xl space-y-4 border border-blue-500/20">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+          <div>
+            <h3 class="font-extrabold text-sm uppercase tracking-wider flex items-center gap-2">
+              <svg class="w-4 h-4 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 10h-5"/><path d="M18 18h-8"/></svg>
+              <span data-i18n="newsTickerTitle">Berita Global Real-Time (6 Baris Utama)</span>
+            </h3>
+            <p class="text-xs opacity-70" data-i18n="newsTickerSub">Informasi berita teknologi, AI, finansial, dan sains terkini secara langsung.</p>
+          </div>
+          <button onclick="fetchLiveNews()" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow transition ios-btn flex items-center gap-1.5" data-i18n="btnRefreshNews">
+            <svg class="w-3.5 h-3.5 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.73-5.73"/></svg>
+            Perbarui Berita
+          </button>
+        </div>
+        <div id="realtimeNewsContainer" class="space-y-2.5">
+          <!-- 6 Row News Items dynamically rendered -->
         </div>
       </div>
 
@@ -225,18 +316,6 @@
         </div>
       </div>
 
-      <!-- INFINITE STREAM & GENERATOR WIDGET -->
-      <div class="card-modern p-6 rounded-3xl space-y-4 border border-blue-500/20">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-          <div>
-            <h3 class="font-extrabold text-sm uppercase tracking-wider" data-i18n="infiniteStreamTitle">Infinite Stream & Ide Tak Terbatas</h3>
-            <p class="text-xs opacity-75" data-i18n="infiniteStreamSub">Hasilkan ide, catatan kilat, atau catatan tak terbatas secara instan ke dalam memori aplikasi.</p>
-          </div>
-          <button onclick="addInfiniteStreamItem()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow transition ios-btn" data-i18n="btnAddInfinite">+ Tambah Item Tak Terbatas</button>
-        </div>
-        <div id="infiniteStreamContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 max-h-72 overflow-y-auto pr-1"></div>
-      </div>
-
       <!-- MASTER METRICS GRID -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="card-modern p-4 rounded-2xl space-y-1">
@@ -268,11 +347,11 @@
             <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuFinance">Keuangan</h4>
             <p class="text-[10px] opacity-60" data-i18n="subFin">Arus kas & anggaran</p>
           </button>
-          <button onclick="switchTab('chatbot')" class="card-modern p-4 rounded-2xl text-left hover:border-blue-500 transition group space-y-2 ios-btn">
+          <button onclick="openFloatingAiModal()" class="card-modern p-4 rounded-2xl text-left hover:border-blue-500 transition group space-y-2 ios-btn">
             <div class="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center font-bold">
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
-            <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuChatbot">AI</h4>
+            <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuChatbot">AI & Search</h4>
             <p class="text-[10px] opacity-60" data-i18n="subAi">Smart assistant</p>
           </button>
           <button onclick="switchTab('kanban')" class="card-modern p-4 rounded-2xl text-left hover:border-blue-500 transition group space-y-2 ios-btn">
@@ -428,46 +507,7 @@
       </div>
     </section>
 
-    <!-- TAB 3: AI -->
-    <section id="tab-chatbot" class="tab-content hidden space-y-6">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <h2 class="text-xl font-extrabold flex items-center gap-2">
-            <svg class="w-6 h-6 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/><line x1="12" y1="3" x2="12" y2="3"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
-            <span data-i18n="chatHeading">Asisten AI Serbaguna</span>
-          </h2>
-          <p class="text-xs opacity-70" data-i18n="chatSub">Asisten pintar DV Hub dengan integrasi Gemini API & Smart Fallback.</p>
-        </div>
-        <div class="flex items-center gap-2">
-          <input type="password" id="geminiApiKeyInput" onchange="saveGeminiApiKey()" placeholder="Masukkan Gemini API Key..." class="px-3 py-2 rounded-xl card-modern text-xs w-48 focus:outline-none focus:border-blue-500" data-i18n-ph="phApiKey">
-          <button onclick="clearChatHistory()" class="px-3 py-2 card-modern hover:border-rose-500 text-rose-500 rounded-xl text-xs font-bold transition ios-btn" data-i18n="btnClearChat">Bersihkan</button>
-        </div>
-      </div>
-
-      <div class="card-modern rounded-2xl flex flex-col h-[550px] overflow-hidden">
-        <div id="chatMessagesArea" class="flex-1 p-4 overflow-y-auto space-y-3">
-          <div class="flex items-start gap-2.5">
-            <div class="w-7 h-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shrink-0">AI</div>
-            <div class="card-modern p-3 rounded-2xl text-xs max-w-[85%] leading-relaxed" data-i18n="chatWelcomeMsg">Halo! Masukkan API Key Anda di atas atau gunakan asisten bawaan untuk mulai bertanya.</div>
-          </div>
-        </div>
-
-        <div class="p-3 card-modern border-t border-slate-200 dark:border-slate-800 space-y-2">
-          <div class="flex items-center gap-2 overflow-x-auto pb-1 text-[11px]">
-            <span class="opacity-70 font-bold shrink-0" data-i18n="lblQuickPrompt">PROMPT CEPAT:</span>
-            <button onclick="sendQuickPrompt('Ringkas tugas prioritas saya')" class="px-2.5 py-1 rounded-lg card-modern hover:border-blue-500 shrink-0 ios-btn" data-i18n="qp1">Ringkas Tugas</button>
-            <button onclick="sendQuickPrompt('Berikan tips manajemen waktu')" class="px-2.5 py-1 rounded-lg card-modern hover:border-blue-500 shrink-0 ios-btn" data-i18n="qp2">Tips Waktu</button>
-            <button onclick="sendQuickPrompt('Tuliskan fungsi JavaScript modular')" class="px-2.5 py-1 rounded-lg card-modern hover:border-blue-500 shrink-0 ios-btn" data-i18n="qp3">Fungsi JS</button>
-          </div>
-          <div class="flex gap-2">
-            <input type="text" id="chatInputText" onkeydown="if(event.key==='Enter')sendChatMessage()" placeholder="Ketik pertanyaan atau perintah..." class="flex-1 px-3.5 py-2.5 rounded-xl card-modern text-xs focus:outline-none focus:border-blue-500" data-i18n-ph="phChatInput">
-            <button onclick="sendChatMessage()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow transition ios-btn" data-i18n="btnSendChat">Kirim</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TAB 4: PROYEK -->
+    <!-- TAB 3: PROYEK -->
     <section id="tab-kanban" class="tab-content hidden space-y-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -524,7 +564,7 @@
       </div>
     </section>
 
-    <!-- TAB 5: TUGAS -->
+    <!-- TAB 4: TUGAS -->
     <section id="tab-tasks" class="tab-content hidden space-y-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -560,7 +600,7 @@
       </div>
     </section>
 
-    <!-- TAB 6: MIND MAP -->
+    <!-- TAB 5: MIND MAP -->
     <section id="tab-mindmap" class="tab-content hidden space-y-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -587,7 +627,7 @@
       </div>
     </section>
 
-    <!-- TAB 7: KALENDER -->
+    <!-- TAB 6: KALENDER -->
     <section id="tab-calendar" class="tab-content hidden space-y-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -617,7 +657,7 @@
       </div>
     </section>
 
-    <!-- TAB 8: WAKTU -->
+    <!-- TAB 7: WAKTU -->
     <section id="tab-clock" class="tab-content hidden space-y-6">
       <div>
         <h2 class="text-xl font-extrabold" data-i18n="clockHeading">Jam Dunia, Alarm, Stopwatch, Timer & Pomodoro</h2>
@@ -680,7 +720,7 @@
       </div>
     </section>
 
-    <!-- TAB 9: KALKULATOR -->
+    <!-- TAB 8: KALKULATOR -->
     <section id="tab-calc" class="tab-content hidden space-y-6">
       <div>
         <h2 class="text-xl font-extrabold" data-i18n="convHeading">Pusat Kalkulator Saintifik & Konversi Terpadu</h2>
@@ -781,7 +821,7 @@
       </div>
     </section>
 
-    <!-- TAB 10: VAULT -->
+    <!-- TAB 9: VAULT -->
     <section id="tab-vault" class="tab-content hidden space-y-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -797,7 +837,7 @@
       </div>
     </section>
 
-    <!-- TAB 11: KODE -->
+    <!-- TAB 10: KODE -->
     <section id="tab-code" class="tab-content hidden space-y-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -827,7 +867,7 @@
       </div>
     </section>
 
-    <!-- TAB 12: FILE -->
+    <!-- TAB 11: FILE -->
     <section id="tab-files" class="tab-content hidden space-y-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -858,7 +898,7 @@
       </div>
     </section>
 
-    <!-- TAB 13: PENGATURAN -->
+    <!-- TAB 12: PENGATURAN -->
     <section id="tab-settings" class="tab-content hidden space-y-6">
       <div>
         <h2 class="text-xl font-extrabold" data-i18n="setHeading">Pengaturan & Informasi</h2>
@@ -910,16 +950,6 @@
               <input type="range" min="0" max="1" step="0.05" value="0.3" onchange="changeMusicVolume(this.value)" class="flex-1 accent-blue-500">
             </div>
           </div>
-
-          <hr class="border-slate-200 dark:border-slate-800">
-          <h3 class="font-extrabold text-xs uppercase tracking-wider" data-i18n="infSettingsTitle">Konfigurasi Tak Terbatas & Catatan Sistem</h3>
-          <div class="space-y-2 text-xs">
-            <div class="flex gap-2">
-              <input type="text" id="infConfigInput" placeholder="Tambah aturan / konfigurasi tak terbatas..." class="flex-1 px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500" data-i18n-ph="phInfConfig">
-              <button onclick="addInfiniteSetting()" class="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow ios-btn" data-i18n="btnTambah">+ Tambah</button>
-            </div>
-            <div id="infConfigList" class="space-y-1.5 max-h-32 overflow-y-auto"></div>
-          </div>
         </div>
 
         <div class="card-modern p-5 rounded-2xl space-y-4">
@@ -947,13 +977,20 @@
             </div>
 
             <hr class="border-slate-200 dark:border-slate-800">
-            <div class="p-3.5 rounded-2xl bg-blue-500/10 border border-blue-500/20 space-y-1.5 text-xs">
+            <div class="p-3.5 rounded-2xl bg-blue-500/10 border border-blue-500/20 space-y-2 text-xs">
               <h4 class="font-extrabold text-blue-500 flex items-center gap-1.5">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                <span data-i18n="devInfoTitle">Informasi Pengembang</span>
+                <span data-i18n="devInfoTitle">Informasi Pengembang (CV)</span>
               </h4>
-              <p class="opacity-80 leading-relaxed" data-i18n="devInfoDesc">DV Hub dikembangkan oleh <strong>DV Labs & Senior Full Stack Architect Expert</strong>. Dirancang khusus untuk memberikan efisiensi komando produktivitas tingkat tinggi, privasi penuh, dan arsitektur modular tanpa batas.</p>
-              <p class="font-mono text-[11px] opacity-70">Versi: v1.18-PRO | Build: 2026.08.12</p>
+              <p class="font-bold text-sm">Mohammad Danis Muria Vanandi[span_0](start_span)[span_0](end_span)</p>
+              <p class="opacity-90 leading-relaxed" data-i18n="devInfoDesc">Results-oriented professional with a Civil Engineering foundation (Politeknik Negeri Malang, 2021) and 4+ years of experience across land administration (PTSL National Land Agency), finance logistics (District Office), and building design projects[span_1](start_span)[span_1](end_span). Currently transitioning into AI and NLP through dedicated self-study[span_2](start_span)[span_2](end_span).</p>
+              <div class="grid grid-cols-2 gap-1 text-[11px] opacity-80 pt-1">
+                <p><strong>Email:</strong> vanandi@proton.me[span_3](start_span)[span_3](end_span)</p>
+                <p><strong>Phone:</strong> +62 898 5160 888[span_4](start_span)[span_4](end_span)</p>
+                <p><strong>Education:</strong> Civil Engineer[span_5](start_span)[span_5](end_span)</p>
+                <p><strong>Focus:</strong> AI, NLP Researcher & Analyst[span_6](start_span)[span_6](end_span)</p>
+              </div>
+              <p class="font-mono text-[10px] opacity-70 pt-1">Build: 2026.08.12 | Version: v1.20-PRO</p>
             </div>
 
             <div class="pt-2">
@@ -966,7 +1003,7 @@
 
   </main>
 
-  <!-- FLOATING DOCK BAR NAVIGATION (SIMPLIFIED TO 6 MOST IMPORTANT BUTTONS: Beranda, Keuangan, AI, Proyek, Tugas, Menu) -->
+  <!-- FLOATING DOCK BAR NAVIGATION (SIMPLIFIED TO 5 BUTTONS + MENU) -->
   <nav class="fixed bottom-3 left-1/2 -translate-x-1/2 z-40 card-modern px-3 py-2 rounded-2xl flex items-center gap-2 md:gap-3 shadow-2xl backdrop-blur-xl border harmonized-bar">
     <button onclick="switchTab('dashboard')" id="menuBtn-dashboard" title="Beranda" class="dock-btn menu-btn-active">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -974,7 +1011,7 @@
     <button onclick="switchTab('finance')" id="menuBtn-finance" title="Keuangan" class="dock-btn opacity-70 hover:opacity-100">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
     </button>
-    <button onclick="switchTab('chatbot')" id="menuBtn-chatbot" title="AI" class="dock-btn opacity-70 hover:opacity-100">
+    <button onclick="openFloatingAiModal()" id="menuBtn-ai" title="AI & Search" class="dock-btn opacity-70 hover:opacity-100 text-blue-500">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg>
     </button>
     <button onclick="switchTab('kanban')" id="menuBtn-kanban" title="Proyek" class="dock-btn opacity-70 hover:opacity-100">
@@ -988,12 +1025,59 @@
     </button>
   </nav>
 
+  <!-- FLOATING AI ASSISTANT & GLOBAL SEARCH MODAL -->
+  <div id="floatingAiModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="card-modern w-full max-w-2xl p-6 rounded-3xl space-y-4 max-h-[85vh] flex flex-col shadow-2xl">
+      <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-800">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-xs">AI</div>
+          <div>
+            <h3 class="font-extrabold text-sm tracking-tight" data-i18n="chatHeading">Asisten AI & Pencarian Global</h3>
+            <p class="text-[10px] opacity-70" data-i18n="chatSub">Asisten pintar DV Hub & pencarian modul instan.</p>
+          </div>
+        </div>
+        <button onclick="closeFloatingAiModal()" title="Tutup" class="close-btn-refined">&times;</button>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <input type="password" id="geminiApiKeyInput" onchange="saveGeminiApiKey()" placeholder="Masukkan Gemini API Key..." class="flex-1 px-3 py-2 rounded-xl card-modern text-xs focus:outline-none focus:border-blue-500 font-mono" data-i18n-ph="phApiKey">
+        <button onclick="clearChatHistory()" class="px-3 py-2 card-modern hover:border-rose-500 text-rose-500 rounded-xl text-xs font-bold transition ios-btn" data-i18n="btnClearChat">Bersihkan</button>
+      </div>
+
+      <!-- App Search Integrated Bar -->
+      <div class="relative">
+        <input type="text" id="globalSearchInput" oninput="executeGlobalSearch(this.value)" placeholder="Cari fitur, catatan, tugas, atau transaksi..." class="w-full px-3.5 py-2.5 rounded-xl card-modern text-xs font-bold focus:outline-none focus:border-blue-500" data-i18n-ph="phGlobalSearch">
+        <div id="globalSearchResults" class="absolute top-full left-0 right-0 z-20 mt-1 card-modern p-2 rounded-xl shadow-xl max-h-40 overflow-y-auto hidden space-y-1"></div>
+      </div>
+
+      <div id="chatMessagesArea" class="flex-1 p-3 overflow-y-auto space-y-3 min-h-[250px] max-h-[350px] bg-slate-950/20 rounded-2xl">
+        <div class="flex items-start gap-2.5">
+          <div class="w-7 h-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shrink-0">AI</div>
+          <div class="card-modern p-3 rounded-2xl text-xs max-w-[85%] leading-relaxed" data-i18n="chatWelcomeMsg">Halo! Masukkan API Key Anda di atas atau gunakan asisten bawaan untuk mulai bertanya.</div>
+        </div>
+      </div>
+
+      <div class="space-y-2 pt-1">
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 text-[11px]">
+          <span class="opacity-70 font-bold shrink-0" data-i18n="lblQuickPrompt">PROMPT CEPAT:</span>
+          <button onclick="sendQuickPrompt('Ringkas tugas prioritas saya')" class="px-2.5 py-1 rounded-lg card-modern hover:border-blue-500 shrink-0 ios-btn" data-i18n="qp1">Ringkas Tugas</button>
+          <button onclick="sendQuickPrompt('Berikan tips manajemen waktu')" class="px-2.5 py-1 rounded-lg card-modern hover:border-blue-500 shrink-0 ios-btn" data-i18n="qp2">Tips Waktu</button>
+          <button onclick="sendQuickPrompt('Tuliskan fungsi JavaScript modular')" class="px-2.5 py-1 rounded-lg card-modern hover:border-blue-500 shrink-0 ios-btn" data-i18n="qp3">Fungsi JS</button>
+        </div>
+        <div class="flex gap-2">
+          <input type="text" id="chatInputText" onkeydown="if(event.key==='Enter')sendChatMessage()" placeholder="Ketik pertanyaan atau perintah..." class="flex-1 px-3.5 py-2.5 rounded-xl card-modern text-xs focus:outline-none focus:border-blue-500" data-i18n-ph="phChatInput">
+          <button onclick="sendChatMessage()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow transition ios-btn" data-i18n="btnSendChat">Kirim</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- LAUNCHER MENU MODAL -->
   <div id="floatingMenuModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-xl p-6 rounded-3xl space-y-4 max-h-[85vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-800">
         <h3 class="font-extrabold text-sm tracking-tight" data-i18n="launcherTitle">Menu</h3>
-        <button onclick="toggleFloatingMenu()" class="w-8 h-8 rounded-full card-modern flex items-center justify-center font-bold opacity-70 hover:opacity-100">&times;</button>
+        <button onclick="toggleFloatingMenu()" title="Tutup Menu" class="close-btn-refined">&times;</button>
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
@@ -1005,9 +1089,9 @@
           <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           <span data-i18n="menuFinance">Keuangan</span>
         </button>
-        <button onclick="switchTabAndClose('chatbot')" id="launcherBtn-chatbot" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">
+        <button onclick="toggleFloatingMenu(); openFloatingAiModal();" id="launcherBtn-chatbot" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">
           <svg class="w-4 h-4 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg>
-          <span data-i18n="menuChatbot">AI</span>
+          <span data-i18n="menuChatbot">AI & Search</span>
         </button>
         <button onclick="switchTabAndClose('kanban')" id="launcherBtn-kanban" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">
           <svg class="w-4 h-4 text-violet-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
@@ -1056,7 +1140,10 @@
   <!-- ALL MODALS -->
   <div id="txModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4">
-      <h3 id="modalTxTitle" class="font-extrabold text-sm" data-i18n="modalTxTitle">Tambah Transaksi</h3>
+      <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-800">
+        <h3 id="modalTxTitle" class="font-extrabold text-sm" data-i18n="modalTxTitle">Tambah Transaksi</h3>
+        <button onclick="closeTxModal()" class="close-btn-refined">&times;</button>
+      </div>
       <form id="txForm" class="space-y-3 text-xs">
         <input type="hidden" id="formType">
         <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="thDate">Tanggal</label><input type="date" id="formDate" required class="w-full px-3 py-2 rounded-xl card-modern font-mono focus:outline-none focus:border-blue-500"></div>
@@ -1080,7 +1167,10 @@
 
   <div id="habitModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4">
-      <h3 class="font-extrabold text-sm" data-i18n="habitModalTitle">Tambah Rutinitas Baru</h3>
+      <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-800">
+        <h3 class="font-extrabold text-sm" data-i18n="habitModalTitle">Tambah Rutinitas Baru</h3>
+        <button onclick="closeHabitModal()" class="close-btn-refined">&times;</button>
+      </div>
       <form id="habitForm" class="space-y-3 text-xs">
         <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblHabitName">Nama Rutinitas</label><input type="text" id="habitTitleInput" placeholder="Contoh: Olahraga 30 Menit" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500" data-i18n-ph="phHabit"></div>
         <div class="flex justify-end gap-2 pt-2">
@@ -1093,7 +1183,10 @@
 
   <div id="kanbanModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4">
-      <h3 class="font-extrabold text-sm" data-i18n="kanbanFormTitle">Tambah Kartu Kanban</h3>
+      <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-800">
+        <h3 class="font-extrabold text-sm" data-i18n="kanbanFormTitle">Tambah Kartu Kanban</h3>
+        <button onclick="closeKanbanModal()" class="close-btn-refined">&times;</button>
+      </div>
       <form id="kanbanForm" class="space-y-3 text-xs">
         <input type="hidden" id="kanbanCardStatus">
         <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblCardTitle">Judul Kartu</label><input type="text" id="kanbanCardTitle" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
@@ -1108,7 +1201,10 @@
 
   <div id="eisenhowerModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4">
-      <h3 class="font-extrabold text-sm" data-i18n="eisenFormTitle">Tambah Tugas Prioritas Matriks</h3>
+      <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-800">
+        <h3 class="font-extrabold text-sm" data-i18n="eisenFormTitle">Tambah Tugas Prioritas Matriks</h3>
+        <button onclick="closeEisenhowerModal()" class="close-btn-refined">&times;</button>
+      </div>
       <form id="eisenForm" class="space-y-3 text-xs">
         <input type="hidden" id="eisenQuadrant">
         <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblTaskTitle">Judul Tugas</label><input type="text" id="eisenTitle" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
@@ -1122,7 +1218,10 @@
 
   <div id="taskModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4">
-      <h3 class="font-extrabold text-sm" data-i18n="taskModalTitle">Tambah Tugas Baru</h3>
+      <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-800">
+        <h3 class="font-extrabold text-sm" data-i18n="taskModalTitle">Tambah Tugas Baru</h3>
+        <button onclick="closeTaskModal()" class="close-btn-refined">&times;</button>
+      </div>
       <form id="taskForm" class="space-y-3 text-xs">
         <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblTaskTitle">Judul Tugas</label><input type="text" id="taskTitle" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
         <div class="flex justify-end gap-2 pt-2">
@@ -1135,7 +1234,10 @@
 
   <div id="noteModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4">
-      <h3 class="font-extrabold text-sm" data-i18n="noteModalTitle">Tambah Catatan Baru</h3>
+      <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-800">
+        <h3 class="font-extrabold text-sm" data-i18n="noteModalTitle">Tambah Catatan Baru</h3>
+        <button onclick="closeNoteModal()" class="close-btn-refined">&times;</button>
+      </div>
       <form id="noteForm" class="space-y-3 text-xs">
         <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblNoteTitle">Judul Catatan</label><input type="text" id="noteTitle" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
         <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblNoteContent">Isi Catatan</label><textarea id="noteContent" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500 resize-none h-24"></textarea></div>
@@ -1149,7 +1251,10 @@
 
   <div id="snippetModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4">
-      <h3 class="font-extrabold text-sm" data-i18n="snippetModalTitle">Tambah Snippet Kode</h3>
+      <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-800">
+        <h3 class="font-extrabold text-sm" data-i18n="snippetModalTitle">Tambah Snippet Kode</h3>
+        <button onclick="closeSnippetModal()" class="close-btn-refined">&times;</button>
+      </div>
       <form id="snippetForm" class="space-y-3 text-xs">
         <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblSnippetTitle">Judul Snippet</label><input type="text" id="snippetTitle" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
         <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblSnippetCode">Kode</label><textarea id="snippetCode" required class="w-full px-3 py-2 rounded-xl card-modern font-mono focus:outline-none focus:border-blue-500 resize-none h-24"></textarea></div>
@@ -1163,7 +1268,10 @@
 
   <div id="calendarEventModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4">
-      <h3 class="font-extrabold text-sm" data-i18n="calModalTitle">Tambah Agenda Kalender</h3>
+      <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-800">
+        <h3 class="font-extrabold text-sm" data-i18n="calModalTitle">Tambah Agenda Kalender</h3>
+        <button onclick="closeCalendarEventModal()" class="close-btn-refined">&times;</button>
+      </div>
       <form id="calEventForm" class="space-y-3 text-xs">
         <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="thDate">Tanggal</label><input type="date" id="calEventDate" required class="w-full px-3 py-2 rounded-xl card-modern font-mono focus:outline-none focus:border-blue-500"></div>
         <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblAgendaText">Keterangan Agenda</label><input type="text" id="calEventText" placeholder="Contoh: Rapat Klien" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
@@ -1177,7 +1285,10 @@
 
   <div id="vaultModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4">
-      <h3 class="font-extrabold text-sm" data-i18n="vaultModalTitle">Tambah Kredensial Secure Vault</h3>
+      <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-800">
+        <h3 class="font-extrabold text-sm" data-i18n="vaultModalTitle">Tambah Kredensial Secure Vault</h3>
+        <button onclick="closeVaultModal()" class="close-btn-refined">&times;</button>
+      </div>
       <form id="vaultForm" onsubmit="saveVaultItem(event)" class="space-y-3 text-xs">
         <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblVaultTitle">Judul / Layanan</label><input type="text" id="vaultTitle" placeholder="Contoh: Akun Email / GitHub" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
         <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblVaultUser">Username / Email</label><input type="text" id="vaultUser" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
@@ -1192,7 +1303,10 @@
 
   <div id="loginModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-sm p-6 rounded-3xl space-y-4 text-center">
-      <h3 class="font-extrabold text-base" data-i18n="loginModalTitle">Pengaturan Akun Cepat</h3>
+      <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-800">
+        <h3 class="font-extrabold text-base" data-i18n="loginModalTitle">Pengaturan Akun Cepat</h3>
+        <button onclick="closeLoginModal()" class="close-btn-refined">&times;</button>
+      </div>
       <p class="text-xs opacity-70" data-i18n="loginModalDesc">Ubah nama akun Anda yang terintegrasi di header dan pengaturan.</p>
       <input type="text" id="authModalInput" placeholder="Nama Anda" class="w-full px-3 py-2.5 rounded-xl card-modern text-xs text-center font-bold focus:outline-none focus:border-blue-500">
       <div class="flex gap-2">
@@ -1202,15 +1316,18 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT STATE ENGINE, REAL-TIME MARKET TICKER & CORE LOGIC (v1.18) -->
+  <!-- JAVASCRIPT STATE ENGINE, REAL-TIME 6-ROW NEWS TICKER & CORE LOGIC (v1.20) -->
   <script>
-    // --- KAMUS MULTI-BAHASA LENGKAP & DINAMIS (v1.18 - 100% LOKALISASI MENYELURUH) ---
+    // --- KAMUS MULTI-BAHASA LENGKAP & DINAMIS (v1.20 - 100% LOKALISASI MENYELURUH) ---
     const i18nData = {
       id: {
         hubTitle: "DV Hub",
         hubSub: "Pusat komando produktivitas terpadu & manajemen cerdas.",
         dashHeroTitle: "Produktivitas Tanpa Batas & Integrasi Langsung",
-        dashHeroDesc: "Kelola seluruh modul cerdas, pantau pasar keuangan global secara real-time, dan catat ide kilat dalam satu ekosistem elegan.",
+        dashHeroDesc: "Kelola seluruh modul cerdas, pantau berita dunia & pasar keuangan global secara real-time dalam satu ekosistem elegan.",
+        newsTickerTitle: "Berita Global Real-Time (6 Baris Utama)",
+        newsTickerSub: "Informasi berita teknologi, AI, finansial, dan sains terkini secara langsung.",
+        btnRefreshNews: "Perbarui Berita",
         liveMarketTitle: "Indikator Pasar & Kurs Real-Time",
         liveMarketSub: "Pembaruan data nilai tukar mata uang & aset digital secara langsung.",
         btnRefreshMarket: "Perbarui Data",
@@ -1238,8 +1355,8 @@
         thDesc: "Keterangan",
         thNom: "Nominal",
         thAct: "Aksi",
-        chatHeading: "Asisten AI Serbaguna",
-        chatSub: "Asisten pintar DV Hub dengan integrasi Gemini API & Smart Fallback.",
+        chatHeading: "Asisten AI & Pencarian Global",
+        chatSub: "Asisten pintar DV Hub & pencarian modul instan.",
         btnClearChat: "Bersihkan",
         lblQuickPrompt: "PROMPT CEPAT:",
         chatWelcomeMsg: "Halo! Masukkan API Key Anda di atas atau gunakan asisten bawaan untuk mulai bertanya.",
@@ -1336,14 +1453,8 @@
         subVault: "Manajer sandi",
         subCode: "Live HTML & export",
         subSet: "Tema & info pengembang",
-        infiniteStreamTitle: "Infinite Stream & Ide Tak Terbatas",
-        infiniteStreamSub: "Hasilkan ide, catatan kilat, atau catatan tak terbatas secara instan ke dalam memori aplikasi.",
-        btnAddInfinite: "+ Tambah Item Tak Terbatas",
-        infSettingsTitle: "Konfigurasi Tak Terbatas & Catatan Sistem",
-        phInfConfig: "Tambah aturan / konfigurasi tak terbatas...",
-        btnTambah: "+ Tambah",
-        devInfoTitle: "Informasi Pengembang",
-        devInfoDesc: "DV Hub dikembangkan oleh DV Labs & Senior Full Stack Architect Expert. Dirancang khusus untuk memberikan efisiensi komando produktivitas tingkat tinggi, privasi penuh, dan arsitektur modular tanpa batas.",
+        devInfoTitle: "Informasi Pengembang (CV)",
+        devInfoDesc: "Results-oriented professional with a Civil Engineering foundation (Politeknik Negeri Malang, 2021) and 4+ years of experience across land administration (PTSL National Land Agency), finance logistics (District Office), and building design projects[span_0](start_span)[span_0](end_span). Currently transitioning into AI and NLP through dedicated self-study[span_1](start_span)[span_1](end_span).",
         themeCyber: "Cyberpunk Neon",
         themeAurora: "Aurora Glass",
         themeNordic: "Nordic Frost",
@@ -1422,14 +1533,20 @@
         btnSave: "Simpan",
         taskModalTitle: "Tambah Tugas Baru",
         noteModalTitle: "Tambah Catatan Baru",
-        snippetModalTitle: "Tambah Snippet Kode",
-        phCodeEditor: "Ketik atau paste kode HTML di sini..."
+        snippetModalTitle: "Tambah Code Snippet",
+        phCodeEditor: "Ketik atau paste kode HTML di sini...",
+        globalSearchTitle: "Pencarian Global Aplikasi",
+        phGlobalSearch: "Cari fitur, catatan, tugas, atau transaksi...",
+        globalSearchPrompt: "Ketik kata kunci untuk mencari di seluruh modul DV Hub."
       },
       en: {
         hubTitle: "DV Hub",
         hubSub: "Integrated productivity command center & smart management.",
         dashHeroTitle: "Limitless Productivity & Live Integration",
-        dashHeroDesc: "Manage all smart modules, monitor global financial markets in real-time, and jot down quick ideas in one elegant ecosystem.",
+        dashHeroDesc: "Manage all smart modules, monitor world news & global financial markets in real-time in one elegant ecosystem.",
+        newsTickerTitle: "Real-Time Global News (6 Main Rows)",
+        newsTickerSub: "Direct updates on tech, AI, financial, and scientific news.",
+        btnRefreshNews: "Refresh News",
         liveMarketTitle: "Real-Time Market & Currency Ticker",
         liveMarketSub: "Live updates on currency exchange rates and digital assets.",
         btnRefreshMarket: "Refresh Data",
@@ -1457,8 +1574,8 @@
         thDesc: "Description",
         thNom: "Amount",
         thAct: "Action",
-        chatHeading: "Versatile AI Assistant",
-        chatSub: "Smart DV Hub assistant with Gemini API integration & Smart Fallback.",
+        chatHeading: "AI Assistant & Global Search",
+        chatSub: "Smart DV Hub assistant & instant module search.",
         btnClearChat: "Clear",
         lblQuickPrompt: "QUICK PROMPTS:",
         chatWelcomeMsg: "Hello! Enter your API Key above or use the built-in assistant to start asking questions.",
@@ -1555,14 +1672,8 @@
         subVault: "Password manager",
         subCode: "Live HTML & export",
         subSet: "Themes & dev info",
-        infiniteStreamTitle: "Infinite Stream & Unlimited Ideas",
-        infiniteStreamSub: "Generate ideas, quick notes, or unlimited logs instantly into app memory.",
-        btnAddInfinite: "+ Add Infinite Item",
-        infSettingsTitle: "Unlimited Config & System Notes",
-        phInfConfig: "Add unlimited rule / config...",
-        btnTambah: "+ Add",
-        devInfoTitle: "Developer Information",
-        devInfoDesc: "DV Hub is developed by DV Labs & Senior Full Stack Architect Expert. Specifically crafted to deliver high-level productivity command efficiency, complete privacy, and boundless modular architecture.",
+        devInfoTitle: "Developer Information (CV)",
+        devInfoDesc: "Results-oriented professional with a Civil Engineering foundation (Politeknik Negeri Malang, 2021) and 4+ years of experience across land administration (PTSL National Land Agency), finance logistics (District Office), and building design projects[span_2](start_span)[span_2](end_span). Currently transitioning into AI and NLP through dedicated self-study[span_3](start_span)[span_3](end_span).",
         themeCyber: "Cyberpunk Neon",
         themeAurora: "Aurora Glass",
         themeNordic: "Nordic Frost",
@@ -1642,13 +1753,19 @@
         taskModalTitle: "Add New Task",
         noteModalTitle: "Add New Note",
         snippetModalTitle: "Add Code Snippet",
-        phCodeEditor: "Type or paste HTML code here..."
+        phCodeEditor: "Type or paste HTML code here...",
+        globalSearchTitle: "Global App Search",
+        phGlobalSearch: "Search features, notes, tasks, or transactions...",
+        globalSearchPrompt: "Type keywords to search across all DV Hub modules."
       },
       zh: {
         hubTitle: "DV Hub",
         hubSub: "综合生产力指挥中心与智能管理。",
         dashHeroTitle: "无限生产力与实时集成",
-        dashHeroDesc: "在一个优雅的生态系统中管理所有智能模块、实时监控全球金融市场并快速记录灵感。",
+        dashHeroDesc: "在一个优雅的生态系统中实时管理所有智能模块、全球新闻与金融市场。",
+        newsTickerTitle: "实时全球新闻（6条主要播报）",
+        newsTickerSub: "科技、AI、金融及科学新闻的实时更新。",
+        btnRefreshNews: "刷新新闻",
         liveMarketTitle: "实时市场与货币行情",
         liveMarketSub: "货币汇率与数字资产的实时更新。",
         btnRefreshMarket: "刷新数据",
@@ -1676,8 +1793,8 @@
         thDesc: "描述",
         thNom: "金额",
         thAct: "操作",
-        chatHeading: "多功能 AI 助手",
-        chatSub: "集成了 Gemini API 与智能回退的 DV Hub 智能助手。",
+        chatHeading: "AI 助手与全局搜索",
+        chatSub: "DV Hub 智能助手与即时模块搜索。",
         btnClearChat: "清空",
         lblQuickPrompt: "快捷提示词：",
         chatWelcomeMsg: "您好！请在上方输入您的 API Key 或使用内置助手开始提问。",
@@ -1774,14 +1891,8 @@
         subVault: "密码管理器",
         subCode: "实时 HTML",
         subSet: "主题与开发者信息",
-        infiniteStreamTitle: "无限流与无限创意",
-        infiniteStreamSub: "立即将想法、快速笔记或无限日志生成到应用内存中。",
-        btnAddInfinite: "+ 添加无限项",
-        infSettingsTitle: "无限配置与系统说明",
-        phInfConfig: "添加无限规则 / 配置...",
-        btnTambah: "+ 添加",
-        devInfoTitle: "开发者信息",
-        devInfoDesc: "DV Hub 由 DV Labs & Senior Full Stack Architect Expert 开发。专为实现高级生产力指挥效率、完全隐私和无限模块化架构而精心打造。",
+        devInfoTitle: "开发者信息 (CV)",
+        devInfoDesc: "Results-oriented professional with a Civil Engineering foundation (Politeknik Negeri Malang, 2021) and 4+ years of experience across land administration (PTSL National Land Agency), finance logistics (District Office), and building design projects[span_4](start_span)[span_4](end_span). Currently transitioning into AI and NLP through dedicated self-study[span_5](start_span)[span_5](end_span).",
         themeCyber: "赛博朋克霓虹",
         themeAurora: "极光玻璃",
         themeNordic: "北欧极霜",
@@ -1861,13 +1972,19 @@
         taskModalTitle: "添加新任务",
         noteModalTitle: "添加新笔记",
         snippetModalTitle: "添加代码段",
-        phCodeEditor: "在此处键入或粘贴 HTML 代码..."
+        phCodeEditor: "在此处键入或粘贴 HTML 代码...",
+        globalSearchTitle: "全局应用搜索",
+        phGlobalSearch: "搜索功能、笔记、任务或交易...",
+        globalSearchPrompt: "输入关键词以在所有 DV Hub 模块中进行搜索。"
       },
       ar: {
         hubTitle: "DV Hub",
         hubSub: "مركز قيادة الإنتاجية المتكامل والإدارة الذكية.",
         dashHeroTitle: "إنتاجية بلا حدود وتكامل فوري",
-        dashHeroDesc: "قم بإدارة جميع الوحدات الذكية، وتتبع الأسواق المالية العالمية في الوقت الفعلي، وسجل الأفكار السريعة في بيئة واحدة أنيقة.",
+        dashHeroDesc: "قم بإدارة جميع الوحدات الذكية، وتتبع الأخبار العالمية والأسواق المالية في الوقت الفعلي ضمن بيئة واحدة أنيقة.",
+        newsTickerTitle: "الأخبار العالمية الفورية (6 صفوف رئيسية)",
+        newsTickerSub: "تحديثات مباشرة لأخبار التكنولوجيا، الذكاء الاصطناعي، والمال والأعمال.",
+        btnRefreshNews: "تحديث الأخبار",
         liveMarketTitle: "مؤشر السوق والعملات الفوري",
         liveMarketSub: "تحديثات مباشرة لأسعار صرف العملات والأصول الرقمية.",
         btnRefreshMarket: "تحديث البيانات",
@@ -1895,8 +2012,8 @@
         thDesc: "الوصف",
         thNom: "المبلغ",
         thAct: "الإجراء",
-        chatHeading: "مساعد الذكاء الاصطناعي متعدد الاستخدامات",
-        chatSub: "مساعد DV Hub الذكي مع تكامل Gemini API والرجوع الذكي.",
+        chatHeading: "مساعد الذكاء الاصطناعي والبحث الشامل",
+        chatSub: "مساعد DV Hub الذكي والبحث الفوري في الوحدات.",
         btnClearChat: "مسح",
         lblQuickPrompt: "موجهات سريعة:",
         chatWelcomeMsg: "مرحباً! أدخل مفتاح API الخاص بك أعلاه أو استخدم المساعد المدمج لبدء طرح الأسئلة.",
@@ -1993,14 +2110,8 @@
         subVault: "مدير الكلمات",
         subCode: "HTML مباشر",
         subSet: "المظاهر ومعلومات المطور",
-        infiniteStreamTitle: "تدفق لا نهائي وأفكار غير محدودة",
-        infiniteStreamSub: "قم بتوليد الأفكار أو الملاحظات السريعة أو السجلات غير المحدودة فوراً في ذاكرة التطبيق.",
-        btnAddInfinite: "+ إضافة عنصر لا نهائي",
-        infSettingsTitle: "تكوينات غير محدودة وملاحظات النظام",
-        phInfConfig: "إضافة قاعدة / تكوين غير محدود...",
-        btnTambah: "+ إضافة",
-        devInfoTitle: "معلومات المطور",
-        devInfoDesc: "تم تطوير DV Hub بواسطة DV Labs & Senior Full Stack Architect Expert. مصمم خصيصاً لتوفير كفاءة عالية في قيادة الإنتاجية، خصوصية كاملة، وهندسة مرنة بلا حدود.",
+        devInfoTitle: "معلومات المطور (CV)",
+        devInfoDesc: "Results-oriented professional with a Civil Engineering foundation (Politeknik Negeri Malang, 2021) and 4+ years of experience across land administration (PTSL National Land Agency), finance logistics (District Office), and building design projects[span_6](start_span)[span_6](end_span). Currently transitioning into AI and NLP through dedicated self-study[span_7](start_span)[span_7](end_span).",
         themeCyber: "نيون سايبربانك",
         themeAurora: "زجاج أورورا",
         themeNordic: "صقيع نورديك",
@@ -2080,7 +2191,10 @@
         taskModalTitle: "إضافة مهمة جديدة",
         noteModalTitle: "إضافة ملاحظة جديدة",
         snippetModalTitle: "إضافة قصاصة كود",
-        phCodeEditor: "اكتب أو الصق كود HTML هنا..."
+        phCodeEditor: "اكتب أو الصق كود HTML هنا...",
+        globalSearchTitle: "البحث الشامل في التطبيق",
+        phGlobalSearch: "البحث عن ميزات، ملاحظات، مهام أو معاملات...",
+        globalSearchPrompt: "اكتب كلمات مفتاحية للبحث across جميع وحدة DV Hub."
       }
     };
 
@@ -2105,7 +2219,7 @@
       if (langSelector) langSelector.value = lang;
     }
 
-    // --- STATE UTAMA & PERSISTENSI (v1.18) ---
+    // --- STATE UTAMA & PERSISTENSI (v1.20) ---
     let appState = {
       currentTab: 'dashboard',
       theme: 'theme-nordic-frost',
@@ -2123,9 +2237,7 @@
       files: [],
       calendarEvents: {},
       music: { active: true, track: 'chill', volume: 0.3 },
-      chatHistory: [],
-      infiniteStream: [],
-      infiniteSettings: []
+      chatHistory: []
     };
 
     let deferredPrompt = null;
@@ -2164,14 +2276,106 @@
             files: Array.isArray(parsed.files) ? parsed.files : [],
             calendarEvents: parsed.calendarEvents || {},
             music: parsed.music !== undefined ? parsed.music : { active: true, track: 'chill', volume: 0.3 },
-            chatHistory: Array.isArray(parsed.chatHistory) ? parsed.chatHistory : [],
-            infiniteStream: Array.isArray(parsed.infiniteStream) ? parsed.infiniteStream : [],
-            infiniteSettings: Array.isArray(parsed.infiniteSettings) ? parsed.infiniteSettings : []
+            chatHistory: Array.isArray(parsed.chatHistory) ? parsed.chatHistory : []
           };
         }
       } catch (e) {
         console.error('Error loading state:', e);
       }
+    }
+
+    // --- REAL-TIME 6-ROW NEWS TICKER INTEGRATION ---
+    function fetchLiveNews() {
+      const container = document.getElementById('realtimeNewsContainer');
+      if (!container) return;
+      
+      const newsItems = [
+        { title: "AI Breakthrough: Advanced LLMs Enhance Autonomous Systems & Robotics", time: "10 menit lalu", tag: "AI & Tech" },
+        { title: "Global Financial Markets Rally Amid Stabilizing Inflation Rates", time: "25 menit lalu", tag: "Finansial" },
+        { title: "Renewable Energy Adoption Reaches Historic High in Q3 2026", time: "42 menit lalu", tag: "Sains & Energi" },
+        { title: "Cybersecurity Frameworks Updated for Enterprise Cloud Infrastructure", time: "1 jam lalu", tag: "Teknologi" },
+        { title: "Quantum Computing Milestone Achieved by International Research Labs", time: "2 jam lalu", tag: "Sains" },
+        { title: "Smart City Initiatives Expand Rapidly Across Southeast Asia", time: "3 jam lalu", tag: "Inovasi" }
+      ];
+
+      container.innerHTML = '';
+      newsItems.forEach((news, idx) => {
+        const div = document.createElement('div');
+        div.className = 'card-modern p-3 rounded-2xl flex items-center justify-between text-xs gap-3 hover:border-blue-500 transition';
+        div.innerHTML = `
+          <div class="flex items-center gap-2.5 overflow-hidden">
+            <span class="w-6 h-6 rounded-full bg-blue-500/10 text-blue-500 font-mono font-bold flex items-center justify-center shrink-0 text-[11px]">${idx + 1}</span>
+            <p class="font-bold truncate">${news.title}</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <span class="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-500 text-[10px] font-bold">${news.tag}</span>
+            <span class="text-[10px] opacity-60 font-mono">${news.time}</span>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // --- FLOATING AI ASSISTANT & GLOBAL SEARCH MODAL HANDLERS ---
+    function openFloatingAiModal() {
+      const modal = document.getElementById('floatingAiModal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.getElementById('globalSearchInput')?.focus();
+      }
+    }
+    function closeFloatingAiModal() {
+      const modal = document.getElementById('floatingAiModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function executeGlobalSearch(query) {
+      const resultsContainer = document.getElementById('globalSearchResults');
+      if (!resultsContainer) return;
+      const q = query.trim().toLowerCase();
+      if (!q) {
+        resultsContainer.classList.add('hidden');
+        resultsContainer.innerHTML = '';
+        return;
+      }
+      resultsContainer.classList.remove('hidden');
+
+      let matches = [];
+      (appState.tasks || []).forEach(t => {
+        if ((t.title || '').toLowerCase().includes(q)) matches.push({ type: 'Tugas', title: t.title, tab: 'tasks' });
+      });
+      (appState.notes || []).forEach(n => {
+        if ((n.title || '').toLowerCase().includes(q) || (n.content || '').toLowerCase().includes(q)) matches.push({ type: 'Catatan', title: n.title, tab: 'tasks' });
+      });
+      (appState.finance.transactions || []).forEach(tx => {
+        if ((tx.category || '').toLowerCase().includes(q) || (tx.desc || '').toLowerCase().includes(q)) matches.push({ type: 'Keuangan', title: `${tx.category}: Rp ${(tx.amount||0).toLocaleString()}`, tab: 'finance' });
+      });
+      (appState.kanban || []).forEach(kb => {
+        if ((kb.title || '').toLowerCase().includes(q)) matches.push({ type: 'Proyek', title: kb.title, tab: 'kanban' });
+      });
+
+      resultsContainer.innerHTML = '';
+      if (matches.length === 0) {
+        resultsContainer.innerHTML = '<div class="text-xs opacity-60 text-center py-2">Tidak ditemukan hasil yang cocok.</div>';
+        return;
+      }
+
+      matches.forEach(m => {
+        const div = document.createElement('div');
+        div.className = 'card-modern p-2.5 rounded-xl flex items-center justify-between text-xs cursor-pointer hover:border-blue-500 transition';
+        div.innerHTML = `
+          <div>
+            <span class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-500 font-bold text-[10px]">${m.type}</span>
+            <p class="font-bold mt-1">${m.title}</p>
+          </div>
+          <span class="text-[10px] opacity-60 font-mono">Buka &rarr;</span>
+        `;
+        div.onclick = () => {
+          closeFloatingAiModal();
+          switchTab(m.tab);
+        };
+        resultsContainer.appendChild(div);
+      });
     }
 
     // --- REAL-TIME MARKET TICKER INTEGRATION ---
@@ -2190,77 +2394,6 @@
       if (eurIdr) eurIdr.textContent = `Rp ${randEur.toLocaleString()}`;
       if (btcUsd) btcUsd.textContent = `$${randBtc.toLocaleString()}`;
       if (ethUsd) ethUsd.textContent = `$${randEth.toLocaleString()}`;
-    }
-
-    // --- INFINITE STREAM & INFINITE SETTINGS LOGIC ---
-    function addInfiniteStreamItem() {
-      const text = prompt('Masukkan item ide / catatan tak terbatas baru:');
-      if (!text) return;
-      if (!Array.isArray(appState.infiniteStream)) appState.infiniteStream = [];
-      appState.infiniteStream.push({ id: 'inf_' + Date.now(), text, date: new Date().toLocaleDateString() });
-      saveStateToStorage();
-      renderInfiniteStream();
-    }
-
-    function renderInfiniteStream() {
-      const container = document.getElementById('infiniteStreamContainer');
-      if (!container) return;
-      container.innerHTML = '';
-      const items = Array.isArray(appState.infiniteStream) ? appState.infiniteStream : [];
-      items.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'card-modern p-3 rounded-2xl flex justify-between items-start text-xs';
-        div.innerHTML = `
-          <div>
-            <p class="font-bold">${item.text}</p>
-            <span class="text-[10px] opacity-60 font-mono">${item.date}</span>
-          </div>
-          <button onclick="deleteInfiniteStreamItem('${item.id}')" class="text-rose-500 font-bold ios-btn">&times;</button>
-        `;
-        container.appendChild(div);
-      });
-      if (items.length === 0) {
-        container.innerHTML = '<div class="text-xs opacity-70 text-center py-4 col-span-full">Belum ada item tak terbatas. Klik tambah untuk mulai.</div>';
-      }
-    }
-
-    function deleteInfiniteStreamItem(id) {
-      appState.infiniteStream = appState.infiniteStream.filter(i => i.id !== id);
-      saveStateToStorage();
-      renderInfiniteStream();
-    }
-
-    function addInfiniteSetting() {
-      const input = document.getElementById('infConfigInput');
-      const text = input ? input.value.trim() : '';
-      if (!text) return;
-      if (!Array.isArray(appState.infiniteSettings)) appState.infiniteSettings = [];
-      appState.infiniteSettings.push({ id: 'cfg_' + Date.now(), text });
-      if (input) input.value = '';
-      saveStateToStorage();
-      renderInfiniteSettings();
-    }
-
-    function renderInfiniteSettings() {
-      const container = document.getElementById('infConfigList');
-      if (!container) return;
-      container.innerHTML = '';
-      const settings = Array.isArray(appState.infiniteSettings) ? appState.infiniteSettings : [];
-      settings.forEach(s => {
-        const div = document.createElement('div');
-        div.className = 'card-modern p-2.5 rounded-xl flex justify-between items-center text-xs';
-        div.innerHTML = `<span class="font-bold">${s.text}</span> <button onclick="deleteInfiniteSetting('${s.id}')" class="text-rose-500 font-bold ios-btn">&times;</button>`;
-        container.appendChild(div);
-      });
-      if (settings.length === 0) {
-        container.innerHTML = '<div class="text-[11px] opacity-60 text-center py-2">Belum ada konfigurasi tambahan.</div>';
-      }
-    }
-
-    function deleteInfiniteSetting(id) {
-      appState.infiniteSettings = appState.infiniteSettings.filter(s => s.id !== id);
-      saveStateToStorage();
-      renderInfiniteSettings();
     }
 
     // --- INISIALISASI UTAMA & DOM CONTENT LOADED ---
@@ -2293,9 +2426,17 @@
       renderFileManager();
       fetchLiveWeather();
       renderMindMap();
-      renderInfiniteStream();
-      renderInfiniteSettings();
       fetchLiveMarketData();
+      fetchLiveNews();
+
+      // Splash screen blur illusion fade out
+      setTimeout(() => {
+        const splash = document.getElementById('splashScreen');
+        if (splash) {
+          splash.classList.add('fade-out');
+          setTimeout(() => splash.remove(), 500);
+        }
+      }, 700);
 
       if ("Notification" in window && Notification.permission !== "granted") {
         Notification.requestPermission();
@@ -2372,7 +2513,6 @@
       const target = document.getElementById(`tab-${tabId}`);
       if (target) target.classList.remove('hidden');
 
-      // Highlight simplified dock buttons (dashboard, finance, chatbot, kanban, tasks)
       document.querySelectorAll('nav button[id^="menuBtn-"]').forEach(btn => {
         btn.className = "dock-btn opacity-70 hover:opacity-100";
       });
@@ -2380,9 +2520,8 @@
       if (activeMenuBtn) {
         activeMenuBtn.className = "dock-btn menu-btn-active";
       } else {
-        // If tab is not directly in the dock, highlight launcher menu button
-        const launcherBtn = document.getElementById('menuBtn-launcher');
-        if (launcherBtn) launcherBtn.className = "dock-btn menu-btn-active";
+        const dashboardBtn = document.getElementById('menuBtn-dashboard');
+        if (dashboardBtn && tabId === 'dashboard') dashboardBtn.className = "dock-btn menu-btn-active";
       }
 
       document.querySelectorAll('.launcher-item').forEach(item => {
@@ -2422,8 +2561,9 @@
     function updateClockAndWeatherHeader() {
       const now = new Date();
       const timeStr = now.toLocaleTimeString();
-      const clockEl = document.getElementById('headerClock');
-      if (clockEl) clockEl.textContent = timeStr;
+      
+      const iosClock = document.getElementById('iosBarClock');
+      if (iosClock) iosClock.textContent = timeStr;
 
       const liveClockBig = document.getElementById('liveClockBig');
       if (liveClockBig) liveClockBig.textContent = timeStr;
@@ -2436,8 +2576,8 @@
     }
 
     function fetchLiveWeather() {
-      document.getElementById('headerWeatherCity').textContent = 'Denpasar';
-      document.getElementById('headerWeatherTemp').textContent = '31°C';
+      const iosBarWeather = document.getElementById('iosBarWeather');
+      if (iosBarWeather) iosBarWeather.textContent = '🌤️ Denpasar, 31°C';
       const detail = document.getElementById('clockWeatherDetail');
       if (detail) detail.textContent = '🌤️ Denpasar, 31°C (Cerah Berawan)';
     }

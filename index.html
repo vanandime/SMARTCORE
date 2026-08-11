@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WorkSpace Pro - Hub</title>
+  <title>WorkSpace Pro Hub - v1.7</title>
   <!-- PWA & Shortcut Support -->
   <link rel="manifest" href="manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -16,11 +16,65 @@
     * { transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease; }
     body { font-family: 'Plus Jakarta Sans', sans-serif; user-select: none; }
     
-    :root { --bg-main: #07090e; --bg-card: #111726; --border: #1e293b; --text-main: #f8fafc; --text-sub: #94a3b8; --input-bg: #0f172a; }
-    .theme-glass { --bg-main: #090d16; --bg-card: rgba(255, 255, 255, 0.07); --border: rgba(255, 255, 255, 0.15); --text-main: #ffffff; --text-sub: #94a3b8; --input-bg: rgba(0, 0, 0, 0.4); }
+    /* Konsistensi Tema & Variabel CSS Anti-Jomplang */
+    :root { 
+      --bg-main: #07090e; 
+      --bg-card: #111726; 
+      --border: #1e293b; 
+      --text-main: #f8fafc; 
+      --text-sub: #94a3b8; 
+      --input-bg: #0f172a; 
+      --input-text: #f8fafc;
+    }
+    .theme-glass { 
+      --bg-main: #090d16; 
+      --bg-card: rgba(255, 255, 255, 0.07); 
+      --border: rgba(255, 255, 255, 0.15); 
+      --text-main: #ffffff; 
+      --text-sub: #94a3b8; 
+      --input-bg: rgba(0, 0, 0, 0.4); 
+      --input-text: #ffffff;
+    }
+    body.light { 
+      --bg-main: #f8fafc; 
+      --bg-card: #ffffff; 
+      --border: #cbd5e1; 
+      --text-main: #0f172a; 
+      --text-sub: #64748b; 
+      --input-bg: #f1f5f9; 
+      --input-text: #0f172a;
+    }
+    body.emerald { 
+      --bg-main: #022c22; 
+      --bg-card: #064e3b; 
+      --border: #047857; 
+      --text-main: #ecfdf5; 
+      --text-sub: #a7f3d0; 
+      --input-bg: #022c22; 
+      --input-text: #ecfdf5;
+    }
+    body.ocean { 
+      --bg-main: #082f49; 
+      --bg-card: #0c4a6e; 
+      --border: #0369a1; 
+      --text-main: #f0f9ff; 
+      --text-sub: #bae6fd; 
+      --input-bg: #082f49; 
+      --input-text: #f0f9ff;
+    }
+    body.cyber { 
+      --bg-main: #2e1065; 
+      --bg-card: #4c1d95; 
+      --border: #7c3aed; 
+      --text-main: #f5f3ff; 
+      --text-sub: #ddd6fe; 
+      --input-bg: #2e1065; 
+      --input-text: #f5f3ff;
+    }
     
     body { background-color: var(--bg-main); color: var(--text-main); }
-    .card-modern { background-color: var(--bg-card); border: 1px solid var(--border); }
+    .card-modern { background-color: var(--bg-card); border: 1px solid var(--border); color: var(--text-main); }
+    .custom-input { background-color: var(--input-bg) !important; color: var(--input-text) !important; border: 1px solid var(--border) !important; }
     
     .tab-content { animation: fadeIn 0.3s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
@@ -68,17 +122,17 @@
       <div class="card-modern p-6 rounded-2xl space-y-4 bg-gradient-to-r from-indigo-950/40 via-purple-950/30 to-slate-900/50">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div>
-            <h1 class="text-xl md:text-2xl font-black text-white tracking-tight">WorkSpace Pro Hub</h1>
-            <p class="text-xs text-sub mt-1">Pusat komando produktivitas terpadu, ringkasan fitur, panduan, dan pintasan cepat seluruh modul.</p>
+            <h1 class="text-xl md:text-2xl font-black tracking-tight" data-i18n="hubTitle">WorkSpace Pro Hub</h1>
+            <p class="text-xs text-sub mt-1" data-i18n="hubSub">Pusat komando produktivitas terpadu, ringkasan fitur, panduan, dan pintasan cepat seluruh modul.</p>
           </div>
           <div class="flex gap-2 flex-wrap">
             <button onclick="downloadDeviceApp()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow flex items-center gap-1.5 transition">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-              Unduh / Pasang Pintasan
+              <span data-i18n="btnPwa">Unduh / Pasang Pintasan</span>
             </button>
             <button onclick="switchTab('chatbot')" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow flex items-center gap-1.5 transition">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
-              Tanya Asisten AI
+              <span data-i18n="btnAiChat">Tanya Asisten AI</span>
             </button>
           </div>
         </div>
@@ -87,33 +141,33 @@
       <!-- Ringkasan Statistik Cepat -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div class="card-modern p-4 rounded-2xl cursor-pointer hover:border-indigo-500 transition" onclick="switchTab('finance')">
-          <div class="text-[10px] font-bold text-sub uppercase">Total Saldo Keuangan</div>
-          <div id="hubMetricBalance" class="text-lg font-black font-mono text-emerald-400 mt-1">Rp 0</div>
-          <div class="text-[10px] text-indigo-400 mt-1 flex items-center gap-1">Kelola Keuangan &rarr;</div>
+          <div class="text-[10px] font-bold text-sub uppercase" data-i18n="statBalance">Total Saldo Keuangan</div>
+          <div id="hubMetricBalance" class="text-lg font-black font-mono text-emerald-500 mt-1">Rp 0</div>
+          <div class="text-[10px] text-indigo-500 mt-1 flex items-center gap-1">Kelola Keuangan &rarr;</div>
         </div>
         <div class="card-modern p-4 rounded-2xl cursor-pointer hover:border-indigo-500 transition" onclick="switchTab('tasks')">
-          <div class="text-[10px] font-bold text-sub uppercase">Tugas & Memo</div>
-          <div id="hubMetricTasks" class="text-lg font-black font-mono text-violet-400 mt-1">0 Selesai</div>
-          <div class="text-[10px] text-indigo-400 mt-1 flex items-center gap-1">Lihat Tugas &rarr;</div>
+          <div class="text-[10px] font-bold text-sub uppercase" data-i18n="statTasks">Tugas & Memo</div>
+          <div id="hubMetricTasks" class="text-lg font-black font-mono text-violet-500 mt-1">0 Selesai</div>
+          <div class="text-[10px] text-indigo-500 mt-1 flex items-center gap-1">Lihat Tugas &rarr;</div>
         </div>
         <div class="card-modern p-4 rounded-2xl cursor-pointer hover:border-indigo-500 transition" onclick="switchTab('kanban')">
-          <div class="text-[10px] font-bold text-sub uppercase">Proyek Kanban</div>
-          <div id="hubMetricKanban" class="text-lg font-black font-mono text-amber-400 mt-1">0 Kartu</div>
-          <div class="text-[10px] text-indigo-400 mt-1 flex items-center gap-1">Buka Papan &rarr;</div>
+          <div class="text-[10px] font-bold text-sub uppercase" data-i18n="statKanban">Proyek Kanban</div>
+          <div id="hubMetricKanban" class="text-lg font-black font-mono text-amber-500 mt-1">0 Kartu</div>
+          <div class="text-[10px] text-indigo-500 mt-1 flex items-center gap-1">Buka Papan &rarr;</div>
         </div>
-        <div class="card-modern p-4 rounded-2xl cursor-pointer hover:border-indigo-500 transition" onclick="switchTab('clock')">
-          <div class="text-[10px] font-bold text-sub uppercase">Sesi Pomodoro</div>
-          <div id="hubMetricPom" class="text-lg font-black font-mono text-indigo-400 mt-1">0 Sesi</div>
-          <div class="text-[10px] text-indigo-400 mt-1 flex items-center gap-1">Mulai Fokus &rarr;</div>
+        <div class="card-modern p-4 rounded-2xl cursor-pointer hover:border-indigo-500 transition" onclick="switchTab('habits')">
+          <div class="text-[10px] font-bold text-sub uppercase" data-i18n="statHabits">Kebiasaan Hari Ini</div>
+          <div id="hubMetricHabits" class="text-lg font-black font-mono text-sky-500 mt-1">0/0 Selesai</div>
+          <div class="text-[10px] text-indigo-500 mt-1 flex items-center gap-1">Lacak Rutinitas &rarr;</div>
         </div>
       </div>
 
       <!-- Pintasan & Panduan Modul Aplikasi -->
       <div class="space-y-3">
-        <h2 class="text-xs font-bold uppercase tracking-wider text-sub px-1">Pintasan & Panduan Modul Utama</h2>
+        <h2 class="text-xs font-bold uppercase tracking-wider text-sub px-1" data-i18n="hubShortcutsTitle">Pintasan & Panduan Modul Utama</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="card-modern p-4 rounded-2xl space-y-2 cursor-pointer hover:border-indigo-500 transition" onclick="switchTab('finance')">
-            <div class="flex items-center gap-2 text-emerald-400 font-bold text-xs">
+            <div class="flex items-center gap-2 text-emerald-500 font-bold text-xs">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
               Manajemen Keuangan
             </div>
@@ -121,15 +175,23 @@
           </div>
 
           <div class="card-modern p-4 rounded-2xl space-y-2 cursor-pointer hover:border-indigo-500 transition" onclick="switchTab('chatbot')">
-            <div class="flex items-center gap-2 text-indigo-400 font-bold text-xs">
+            <div class="flex items-center gap-2 text-indigo-500 font-bold text-xs">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
               Asisten AI Serbaguna
             </div>
             <p class="text-xs text-sub">Asisten pintar berbasis Google Gemini dengan Smart Fallback terintegrasi untuk tanya jawab, pembuatan kode, dan ringkasan teks.</p>
           </div>
 
+          <div class="card-modern p-4 rounded-2xl space-y-2 cursor-pointer hover:border-indigo-500 transition" onclick="switchTab('habits')">
+            <div class="flex items-center gap-2 text-sky-500 font-bold text-xs">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Pelacak Kebiasaan (Habit Tracker)
+            </div>
+            <p class="text-xs text-sub">Bangun kebiasaan positif harian, pantau rentetan (streak), dan capai target konsistensi gaya hidup produktif Anda.</p>
+          </div>
+
           <div class="card-modern p-4 rounded-2xl space-y-2 cursor-pointer hover:border-indigo-500 transition" onclick="switchTab('kanban')">
-            <div class="flex items-center gap-2 text-amber-400 font-bold text-xs">
+            <div class="flex items-center gap-2 text-amber-500 font-bold text-xs">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
               Kanban & Matriks Prioritas
             </div>
@@ -137,7 +199,7 @@
           </div>
 
           <div class="card-modern p-4 rounded-2xl space-y-2 cursor-pointer hover:border-indigo-500 transition" onclick="switchTab('mindmap')">
-            <div class="flex items-center gap-2 text-pink-400 font-bold text-xs">
+            <div class="flex items-center gap-2 text-pink-500 font-bold text-xs">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
               Mind Map Canvas
             </div>
@@ -145,7 +207,7 @@
           </div>
 
           <div class="card-modern p-4 rounded-2xl space-y-2 cursor-pointer hover:border-indigo-500 transition" onclick="switchTab('clock')">
-            <div class="flex items-center gap-2 text-emerald-400 font-bold text-xs">
+            <div class="flex items-center gap-2 text-emerald-500 font-bold text-xs">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
               Jam, Alarm, Timer & Pomodoro
             </div>
@@ -153,7 +215,7 @@
           </div>
 
           <div class="card-modern p-4 rounded-2xl space-y-2 cursor-pointer hover:border-indigo-500 transition" onclick="switchTab('conversion')">
-            <div class="flex items-center gap-2 text-sky-400 font-bold text-xs">
+            <div class="flex items-center gap-2 text-sky-500 font-bold text-xs">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
               Kalkulator & Konversi Terpadu
             </div>
@@ -161,7 +223,7 @@
           </div>
 
           <div class="card-modern p-4 rounded-2xl space-y-2 cursor-pointer hover:border-indigo-500 transition" onclick="switchTab('codemanager')">
-            <div class="flex items-center gap-2 text-emerald-300 font-bold text-xs">
+            <div class="flex items-center gap-2 text-emerald-500 font-bold text-xs">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
               Pengelola Kode & Live Preview
             </div>
@@ -169,19 +231,11 @@
           </div>
 
           <div class="card-modern p-4 rounded-2xl space-y-2 cursor-pointer hover:border-indigo-500 transition" onclick="switchTab('biolink')">
-            <div class="flex items-center gap-2 text-purple-400 font-bold text-xs">
+            <div class="flex items-center gap-2 text-purple-500 font-bold text-xs">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
               Bio Link & QR Code
             </div>
             <p class="text-xs text-sub">Buat halaman landing profil gaya LinkTree dengan tombol tautan kustom dan QR Code instan.</p>
-          </div>
-
-          <div class="card-modern p-4 rounded-2xl space-y-2 cursor-pointer hover:border-indigo-500 transition" onclick="switchTab('settings')">
-            <div class="flex items-center gap-2 text-indigo-300 font-bold text-xs">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/></svg>
-              Pengaturan & Musik Latar
-            </div>
-            <p class="text-xs text-sub">Kostumisasi tema visual aplikasi, pasang API Key Gemini, dan aktifkan musik latar ambient Lo-Fi untuk menemani fokus kerja.</p>
           </div>
         </div>
       </div>
@@ -213,8 +267,8 @@
             <span class="font-bold text-sub" data-i18n="lblBudgetGoal">Target Batas Pengeluaran Bulanan:</span>
             <input type="number" id="budgetLimitInput" value="5000000" onchange="renderFinance()" class="text-xs custom-input border rounded-lg px-2 py-1 w-32 font-mono font-bold text-right">
           </div>
-          <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
-            <div id="budgetProgressBar" class="bg-indigo-500 h-full transition-all duration-300" style="width: 0%"></div>
+          <div class="w-full bg-slate-800/40 h-2.5 rounded-full overflow-hidden border border-slate-700/50">
+            <div id="budgetProgressBar" class="bg-indigo-600 h-full transition-all duration-300" style="width: 0%"></div>
           </div>
           <div id="budgetProgressText" class="text-[10px] text-right font-mono text-sub">0% Terpakai</div>
         </div>
@@ -230,20 +284,20 @@
 
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div class="card-modern p-4 rounded-2xl"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblNet">Total Saldo</div><div id="metricNet" class="text-xl font-extrabold mt-1 font-mono">Rp 0</div></div>
-        <div class="card-modern p-4 rounded-2xl"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblIncome">Pemasukan</div><div id="metricIncome" class="text-xl font-extrabold text-emerald-400 mt-1 font-mono">Rp 0</div></div>
-        <div class="card-modern p-4 rounded-2xl"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblExpense">Pengeluaran</div><div id="metricExpense" class="text-xl font-extrabold text-rose-400 mt-1 font-mono">Rp 0</div></div>
+        <div class="card-modern p-4 rounded-2xl"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblIncome">Pemasukan</div><div id="metricIncome" class="text-xl font-extrabold text-emerald-500 mt-1 font-mono">Rp 0</div></div>
+        <div class="card-modern p-4 rounded-2xl"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblExpense">Pengeluaran</div><div id="metricExpense" class="text-xl font-extrabold text-rose-500 mt-1 font-mono">Rp 0</div></div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="card-modern p-5 rounded-2xl space-y-3 text-center">
           <h3 class="text-xs font-bold uppercase text-sub" data-i18n="chartIncExpTitle">Rasio Pemasukan vs Pengeluaran</h3>
-          <div id="donutIncExp" class="donut-chart"><div id="donutIncExpHole" class="donut-hole">0%</div></div>
-          <div class="flex justify-center gap-4 text-xs font-bold pt-1"><span class="text-emerald-400" data-i18n="lblIncLegend">■ Pemasukan</span><span class="text-rose-400" data-i18n="lblExpLegend">■ Pengeluaran</span></div>
+          <div id="donutIncExp" class="donut-chart flex items-center justify-center py-4"><div id="donutIncExpHole" class="text-sm font-mono font-bold text-sub">0%</div></div>
+          <div class="flex justify-center gap-4 text-xs font-bold pt-1"><span class="text-emerald-500" data-i18n="lblIncLegend">■ Pemasukan</span><span class="text-rose-500" data-i18n="lblExpLegend">■ Pengeluaran</span></div>
         </div>
         <div class="card-modern p-5 rounded-2xl space-y-3 text-center">
           <h3 class="text-xs font-bold uppercase text-sub" data-i18n="chartOnlineOfflineTitle">Rasio Online vs Offline</h3>
-          <div id="donutOnlineOffline" class="donut-chart"><div id="donutOnlineOfflineHole" class="donut-hole">0%</div></div>
-          <div class="flex justify-center gap-4 text-xs font-bold pt-1"><span class="text-indigo-400" data-i18n="lblOnlineLegend">■ Online</span><span class="text-violet-400" data-i18n="lblOfflineLegend">■ Offline</span></div>
+          <div id="donutOnlineOffline" class="donut-chart flex items-center justify-center py-4"><div id="donutOnlineOfflineHole" class="text-sm font-mono font-bold text-sub">0%</div></div>
+          <div class="flex justify-center gap-4 text-xs font-bold pt-1"><span class="text-indigo-500" data-i18n="lblOnlineLegend">■ Online</span><span class="text-violet-500" data-i18n="lblOfflineLegend">■ Offline</span></div>
         </div>
       </div>
 
@@ -286,7 +340,7 @@
           <button onclick="clearChatHistory()" class="px-3 py-1.5 rounded-xl border border-rose-500/30 bg-rose-500/10 hover:bg-rose-600 text-rose-300 hover:text-white transition text-xs font-bold flex items-center gap-1 shadow" data-i18n="btnClearChat">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg> <span data-i18n="btnClearChatText">Bersihkan Chat</span>
           </button>
-          <button onclick="exportChatHistory()" class="px-3 py-1.5 rounded-xl card-modern hover:border-indigo-500 text-indigo-400 transition text-xs font-bold flex items-center gap-1" data-i18n="btnExportChat">
+          <button onclick="exportChatHistory()" class="px-3 py-1.5 rounded-xl card-modern hover:border-indigo-500 text-indigo-500 transition text-xs font-bold flex items-center gap-1" data-i18n="btnExportChat">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> <span data-i18n="btnExportChatText">Ekspor</span>
           </button>
         </div>
@@ -294,10 +348,10 @@
 
       <div class="flex items-center gap-2 overflow-x-auto pb-2 text-xs shrink-0">
         <span class="text-sub font-bold text-[10px] uppercase whitespace-nowrap" data-i18n="lblQuickPrompt">PROMPT CEPAT:</span>
-        <button onclick="sendQuickPrompt('Ringkas teks berikut dengan jelas dan padat: ')" class="px-3 py-1 rounded-xl card-modern hover:border-indigo-500 text-indigo-400 font-semibold whitespace-nowrap">Ringkas Teks</button>
-        <button onclick="sendQuickPrompt('Buatkan kode program untuk fungsi berikut: ')" class="px-3 py-1 rounded-xl card-modern hover:border-indigo-500 text-emerald-400 font-semibold whitespace-nowrap">Buat Kode</button>
-        <button onclick="sendQuickPrompt('Perbaiki tata bahasa dan ejaan dari kalimat berikut: ')" class="px-3 py-1 rounded-xl card-modern hover:border-indigo-500 text-violet-400 font-semibold whitespace-nowrap">Cek Gramatika</button>
-        <button onclick="sendQuickPrompt('Berikan 5 ide kreatif dan solusi untuk: ')" class="px-3 py-1 rounded-xl card-modern hover:border-indigo-500 text-amber-400 font-semibold whitespace-nowrap">Brainstorming Ide</button>
+        <button onclick="sendQuickPrompt('Ringkas teks berikut dengan jelas dan padat: ')" class="px-3 py-1 rounded-xl card-modern hover:border-indigo-500 text-indigo-500 font-semibold whitespace-nowrap">Ringkas Teks</button>
+        <button onclick="sendQuickPrompt('Buatkan kode program untuk fungsi berikut: ')" class="px-3 py-1 rounded-xl card-modern hover:border-indigo-500 text-emerald-500 font-semibold whitespace-nowrap">Buat Kode</button>
+        <button onclick="sendQuickPrompt('Perbaiki tata bahasa dan ejaan dari kalimat berikut: ')" class="px-3 py-1 rounded-xl card-modern hover:border-indigo-500 text-violet-500 font-semibold whitespace-nowrap">Cek Gramatika</button>
+        <button onclick="sendQuickPrompt('Berikan 5 ide kreatif dan solusi untuk: ')" class="px-3 py-1 rounded-xl card-modern hover:border-indigo-500 text-amber-500 font-semibold whitespace-nowrap">Brainstorming Ide</button>
       </div>
 
       <div class="card-modern p-4 rounded-2xl flex-1 overflow-hidden relative flex flex-col mb-2 shadow-xl">
@@ -310,7 +364,7 @@
 
         <div class="absolute bottom-3 left-3 right-3 z-30">
           <div class="card-modern backdrop-blur-xl border border-indigo-500/40 rounded-2xl p-2 shadow-2xl flex items-center gap-2">
-            <input type="text" id="chatInputText" placeholder="Ketik pertanyaan atau perintah..." data-i18n-ph="phChatInput" class="flex-1 text-xs bg-transparent px-3 py-2 outline-none" onkeydown="if(event.key==='Enter') sendChatMessage()">
+            <input type="text" id="chatInputText" placeholder="Ketik pertanyaan atau perintah..." data-i18n-ph="phChatInput" class="flex-1 text-xs custom-input px-3 py-2 rounded-xl outline-none" onkeydown="if(event.key==='Enter') sendChatMessage()">
             <button onclick="sendChatMessage()" class="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white text-xs font-extrabold px-5 py-2.5 rounded-xl shadow-lg hover:scale-105 active:scale-95 transition flex items-center gap-1.5 shrink-0" data-i18n="btnSendChat">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg> <span data-i18n="lblSend">Kirim</span>
             </button>
@@ -319,7 +373,29 @@
       </div>
     </section>
 
-    <!-- 3. TAB KANBAN & MATRIKS -->
+    <!-- 3. TAB HABIT TRACKER -->
+    <section id="tab-habits" class="tab-content space-y-5 hidden">
+      <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
+        <div>
+          <h2 class="text-base font-extrabold" data-i18n="habitHeading">Pelacak Kebiasaan & Rutinitas Harian (Habit Tracker)</h2>
+          <p class="text-xs text-sub" data-i18n="habitSub">Bangun konsistensi dan pantau kebiasaan positif harian Anda.</p>
+        </div>
+        <button onclick="openHabitModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow transition" data-i18n="btnNewHabit">+ Tambah Kebiasaan</button>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="card-modern p-4 rounded-2xl space-y-3 md:col-span-2">
+          <h3 class="text-xs font-bold uppercase text-sub border-b border-slate-800 pb-2" data-i18n="habitListTitle">Daftar Kebiasaan Aktif</h3>
+          <div id="habitListContainer" class="space-y-3"></div>
+        </div>
+        <div class="card-modern p-4 rounded-2xl space-y-3 text-center flex flex-col justify-center">
+          <h3 class="text-xs font-bold uppercase text-sub border-b border-slate-800 pb-2" data-i18n="habitSummaryTitle">Ringkasan Konsistensi</h3>
+          <div id="habitStreakDisplay" class="text-4xl font-black font-mono text-sky-500 py-3">0 Hari</div>
+          <p class="text-xs text-sub" data-i18n="habitStreakSub">Rentetan (Streak) Selesai Beruntun</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. TAB KANBAN & MATRIKS -->
     <section id="tab-kanban" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
         <div>
@@ -338,24 +414,24 @@
       <div id="viewKanbanArea" class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="card-modern p-4 rounded-2xl space-y-3">
           <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-            <h3 class="text-xs font-extrabold text-amber-400 uppercase" data-i18n="colToDo">Belum Dikerjakan (To Do)</h3>
-            <button onclick="openKanbanModal('todo')" class="text-xs text-indigo-400 font-bold hover:underline">+</button>
+            <h3 class="text-xs font-extrabold text-amber-500 uppercase" data-i18n="colToDo">Belum Dikerjakan (To Do)</h3>
+            <button onclick="openKanbanModal('todo')" class="text-xs text-indigo-500 font-bold hover:underline">+</button>
           </div>
           <div id="kanbanColToDo" class="space-y-2 min-h-[220px]"></div>
         </div>
 
         <div class="card-modern p-4 rounded-2xl space-y-3">
           <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-            <h3 class="text-xs font-extrabold text-indigo-400 uppercase" data-i18n="colInProgress">Sedang Dikerjakan (In Progress)</h3>
-            <button onclick="openKanbanModal('in_progress')" class="text-xs text-indigo-400 font-bold hover:underline">+</button>
+            <h3 class="text-xs font-extrabold text-indigo-500 uppercase" data-i18n="colInProgress">Sedang Dikerjakan (In Progress)</h3>
+            <button onclick="openKanbanModal('in_progress')" class="text-xs text-indigo-500 font-bold hover:underline">+</button>
           </div>
           <div id="kanbanColInProgress" class="space-y-2 min-h-[220px]"></div>
         </div>
 
         <div class="card-modern p-4 rounded-2xl space-y-3">
           <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-            <h3 class="text-xs font-extrabold text-emerald-400 uppercase" data-i18n="colDone">Selesai (Done)</h3>
-            <button onclick="openKanbanModal('done')" class="text-xs text-indigo-400 font-bold hover:underline">+</button>
+            <h3 class="text-xs font-extrabold text-emerald-500 uppercase" data-i18n="colDone">Selesai (Done)</h3>
+            <button onclick="openKanbanModal('done')" class="text-xs text-indigo-500 font-bold hover:underline">+</button>
           </div>
           <div id="kanbanColDone" class="space-y-2 min-h-[220px]"></div>
         </div>
@@ -364,24 +440,24 @@
       <div id="viewMatrixArea" class="grid grid-cols-1 md:grid-cols-2 gap-4 hidden">
         <div class="card-modern p-4 rounded-2xl border-rose-500/40 space-y-2">
           <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-            <h3 class="text-xs font-extrabold text-rose-400 uppercase">1. Penting & Mendesak (Do First)</h3>
-            <button onclick="openEisenhowerModal('Q1')" class="text-xs text-rose-300 font-bold hover:underline">+</button>
+            <h3 class="text-xs font-extrabold text-rose-500 uppercase">1. Penting & Mendesak (Do First)</h3>
+            <button onclick="openEisenhowerModal('Q1')" class="text-xs text-rose-500 font-bold hover:underline">+</button>
           </div>
           <div id="eisenListQ1" class="space-y-2 min-h-[140px]"></div>
         </div>
 
         <div class="card-modern p-4 rounded-2xl border-indigo-500/40 space-y-2">
           <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-            <h3 class="text-xs font-extrabold text-indigo-400 uppercase">2. Penting & Tidak Mendesak (Schedule)</h3>
-            <button onclick="openEisenhowerModal('Q2')" class="text-xs text-indigo-300 font-bold hover:underline">+</button>
+            <h3 class="text-xs font-extrabold text-indigo-500 uppercase">2. Penting & Tidak Mendesak (Schedule)</h3>
+            <button onclick="openEisenhowerModal('Q2')" class="text-xs text-indigo-500 font-bold hover:underline">+</button>
           </div>
           <div id="eisenListQ2" class="space-y-2 min-h-[140px]"></div>
         </div>
 
         <div class="card-modern p-4 rounded-2xl border-amber-500/40 space-y-2">
           <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-            <h3 class="text-xs font-extrabold text-amber-400 uppercase">3. Tidak Penting & Mendesak (Delegate)</h3>
-            <button onclick="openEisenhowerModal('Q3')" class="text-xs text-amber-300 font-bold hover:underline">+</button>
+            <h3 class="text-xs font-extrabold text-amber-500 uppercase">3. Tidak Penting & Mendesak (Delegate)</h3>
+            <button onclick="openEisenhowerModal('Q3')" class="text-xs text-amber-500 font-bold hover:underline">+</button>
           </div>
           <div id="eisenListQ3" class="space-y-2 min-h-[140px]"></div>
         </div>
@@ -396,7 +472,7 @@
       </div>
     </section>
 
-    <!-- 4. TAB TUGAS & CATATAN -->
+    <!-- 5. TAB TUGAS & CATATAN -->
     <section id="tab-tasks" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
         <div>
@@ -413,7 +489,7 @@
         <div class="card-modern p-4 rounded-2xl space-y-3">
           <div class="flex justify-between items-center border-b border-slate-800 pb-2">
             <h3 class="text-xs font-bold uppercase text-sub" data-i18n="lblTaskList">Daftar Pekerjaan</h3>
-            <span id="taskProgressBadge" class="text-[10px] font-mono font-bold text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/25">0% Selesai</span>
+            <span id="taskProgressBadge" class="text-[10px] font-mono font-bold text-indigo-500 bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/25">0% Selesai</span>
           </div>
           <div id="taskList" class="divide-y divide-slate-800/60 space-y-2"></div>
         </div>
@@ -424,7 +500,7 @@
       </div>
     </section>
 
-    <!-- 5. TAB MIND MAP -->
+    <!-- 6. TAB MIND MAP -->
     <section id="tab-mindmap" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
         <div>
@@ -436,7 +512,7 @@
           <button onclick="editSelectedMindNode()" class="bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold px-3 py-2 rounded-xl shadow transition">Edit Node</button>
           <button onclick="deleteSelectedMindNode()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold px-3 py-2 rounded-xl shadow transition">Hapus Node</button>
           <button onclick="exportMindCanvas()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-2 rounded-xl shadow transition">Ekspor Gambar</button>
-          <button onclick="clearMindCanvas()" class="card-modern hover:border-rose-500 text-xs text-rose-400 font-bold px-3 py-2 rounded-xl transition">Bersihkan</button>
+          <button onclick="clearMindCanvas()" class="card-modern hover:border-rose-500 text-xs text-rose-500 font-bold px-3 py-2 rounded-xl transition">Bersihkan</button>
         </div>
       </div>
 
@@ -446,12 +522,12 @@
         </div>
         <div class="text-[11px] text-sub flex justify-between items-center px-1">
           <span><strong>Tips:</strong> Klik & geser simpul untuk mengatur posisi. Double-click simpul untuk edit cepat.</span>
-          <span id="mindNodeCount" class="font-mono font-bold text-indigo-400">Total Node: 0</span>
+          <span id="mindNodeCount" class="font-mono font-bold text-indigo-500">Total Node: 0</span>
         </div>
       </div>
     </section>
 
-    <!-- 6. TAB JAM, ALARM, STOPWATCH & POMODORO -->
+    <!-- 7. TAB JAM, ALARM, STOPWATCH & POMODORO -->
     <section id="tab-clock" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
         <div>
@@ -459,7 +535,7 @@
           <p class="text-xs text-sub" data-i18n="clockSub">Pusat manajemen waktu terlengkap dalam satu tempat.</p>
         </div>
         <div class="flex items-center gap-2">
-          <span id="notifStatusBadge" class="text-xs px-3 py-1 rounded-xl bg-indigo-500/20 text-indigo-300 font-bold border border-indigo-500/30" data-i18n="lblNotifActive">Memeriksa Izin...</span>
+          <span id="notifStatusBadge" class="text-xs px-3 py-1 rounded-xl bg-indigo-500/20 text-indigo-500 font-bold border border-indigo-500/30" data-i18n="lblNotifActive">Memeriksa Izin...</span>
           <button onclick="requestNotifPermission()" class="text-xs px-3 py-1 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold transition">Minta Izin</button>
         </div>
       </div>
@@ -467,7 +543,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="card-modern p-5 rounded-2xl text-center space-y-3 flex flex-col justify-center">
           <div class="text-xs font-bold uppercase text-sub" data-i18n="lblCurrentLiveTime">Waktu Lokal Perangkat</div>
-          <div id="liveClockBig" class="text-5xl font-black font-mono text-indigo-400 py-3">00:00:00 AM</div>
+          <div id="liveClockBig" class="text-5xl font-black font-mono text-indigo-500 py-3">00:00:00 AM</div>
           <div id="liveDateBig" class="text-xs font-semibold text-sub">1 Januari 2026</div>
         </div>
 
@@ -485,21 +561,21 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="card-modern p-5 rounded-2xl space-y-3 text-center">
           <h3 class="text-xs font-bold uppercase text-sub border-b border-slate-800 pb-2">Stopwatch</h3>
-          <div id="stopwatchDisplay" class="text-4xl font-black font-mono text-emerald-400 py-2">00:00:00</div>
+          <div id="stopwatchDisplay" class="text-4xl font-black font-mono text-emerald-500 py-2">00:00:00</div>
           <div class="flex justify-center gap-2">
             <button onclick="startStopwatch()" class="bg-indigo-600 text-white text-xs font-bold px-4 py-2 rounded-xl shadow" data-i18n="btnStart">Mulai</button>
             <button onclick="pauseStopwatch()" class="card-modern text-xs font-bold px-4 py-2 rounded-xl" data-i18n="btnPause">Jeda</button>
-            <button onclick="resetStopwatch()" class="card-modern text-xs font-bold px-4 py-2 rounded-xl text-rose-400" data-i18n="btnReset">Reset</button>
+            <button onclick="resetStopwatch()" class="card-modern text-xs font-bold px-4 py-2 rounded-xl text-rose-500" data-i18n="btnReset">Reset</button>
           </div>
         </div>
 
         <div class="card-modern p-5 rounded-2xl space-y-3 text-center">
           <h3 class="text-xs font-bold uppercase text-sub border-b border-slate-800 pb-2">Hitung Mundur (Timer)</h3>
-          <div id="timerDisplay" class="text-4xl font-black font-mono text-violet-400 py-1">00:00</div>
+          <div id="timerDisplay" class="text-4xl font-black font-mono text-violet-500 py-1">00:00</div>
           <div class="flex justify-center gap-2 items-center">
             <input type="number" id="timerInputMin" placeholder="Menit" data-i18n-ph="phMin" min="1" max="180" class="w-20 text-xs custom-input border rounded-xl p-2 font-mono text-center">
             <button onclick="startTimer()" class="bg-indigo-600 text-white text-xs font-bold px-4 py-2 rounded-xl shadow" data-i18n="btnStart">Mulai</button>
-            <button onclick="resetTimer()" class="card-modern text-xs font-bold px-4 py-2 rounded-xl text-rose-400" data-i18n="btnReset">Reset</button>
+            <button onclick="resetTimer()" class="card-modern text-xs font-bold px-4 py-2 rounded-xl text-rose-500" data-i18n="btnReset">Reset</button>
           </div>
         </div>
       </div>
@@ -507,45 +583,45 @@
       <div class="card-modern p-6 rounded-2xl text-center space-y-5">
         <div class="flex items-center justify-between border-b border-slate-800 pb-3 flex-wrap gap-2">
           <h3 class="text-xs font-bold uppercase text-sub">Pomodoro Focus Timer</h3>
-          <span id="pomSessionCount" class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-xl border border-emerald-500/25">Sesi Selesai: 0</span>
+          <span id="pomSessionCount" class="text-xs font-mono font-bold text-emerald-500 bg-emerald-500/10 px-3 py-1 rounded-xl border border-emerald-500/25">Sesi Selesai: 0</span>
         </div>
         <div class="flex justify-center gap-2 flex-wrap" id="pomodoroModeButtons">
           <button onclick="setPomodoroMode('work')" id="pomModeWork" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow">Fokus (25m)</button>
           <button onclick="setPomodoroMode('shortBreak')" id="pomModeShort" class="px-3.5 py-1.5 rounded-xl text-xs font-bold card-modern text-sub">Istirahat (5m)</button>
           <button onclick="setPomodoroMode('longBreak')" id="pomModeLong" class="px-3.5 py-1.5 rounded-xl text-xs font-bold card-modern text-sub">Istirahat Panjang (15m)</button>
         </div>
-        <div class="text-6xl font-black font-mono tracking-wider text-indigo-400 py-4" id="pomTimerDisplay">25:00</div>
+        <div class="text-6xl font-black font-mono tracking-wider text-indigo-500 py-4" id="pomTimerDisplay">25:00</div>
         <div class="flex justify-center gap-3">
           <button onclick="startPomodoro()" class="bg-indigo-600 text-white text-xs font-bold px-6 py-2.5 rounded-xl shadow transition" data-i18n="btnStart">Mulai</button>
           <button onclick="pausePomodoro()" class="card-modern text-xs font-bold px-6 py-2.5 rounded-xl transition" data-i18n="btnPause">Jeda</button>
-          <button onclick="resetPomodoro()" class="card-modern text-xs font-bold px-6 py-2.5 rounded-xl text-rose-400 transition" data-i18n="btnReset">Reset</button>
+          <button onclick="resetPomodoro()" class="card-modern text-xs font-bold px-6 py-2.5 rounded-xl text-rose-500 transition" data-i18n="btnReset">Reset</button>
         </div>
       </div>
     </section>
 
-    <!-- 7. TAB KALKULATOR & KONVERSI TERPADU -->
+    <!-- 8. TAB KALKULATOR & KONVERSI TERPADU -->
     <section id="tab-conversion" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl border-b border-slate-800"><h2 class="text-base font-extrabold" data-i18n="convHeading">Pusat Kalkulator Saintifik & Konversi Terpadu</h2></div>
       
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div class="card-modern p-4 rounded-2xl space-y-3">
           <h3 class="text-xs font-bold uppercase border-b border-slate-800 pb-2" data-i18n="calcStandardTitle">Kalkulator Saintifik & Standar</h3>
-          <input type="text" id="calcScreen" readonly class="w-full text-right text-xl font-mono custom-input border rounded-xl p-3 text-emerald-400 font-black shadow-inner" value="0">
+          <input type="text" id="calcScreen" readonly class="w-full text-right text-xl font-mono custom-input border rounded-xl p-3 text-emerald-500 font-black shadow-inner" value="0">
           <div class="grid grid-cols-4 gap-1.5">
-            <button onclick="calcSci('sin')" class="bg-violet-600/30 text-violet-300 p-2 rounded-lg font-bold text-xs">sin</button>
-            <button onclick="calcSci('cos')" class="bg-violet-600/30 text-violet-300 p-2 rounded-lg font-bold text-xs">cos</button>
-            <button onclick="calcSci('tan')" class="bg-violet-600/30 text-violet-300 p-2 rounded-lg font-bold text-xs">tan</button>
-            <button onclick="calcSci('sqrt')" class="bg-violet-600/30 text-violet-300 p-2 rounded-lg font-bold text-xs">√</button>
+            <button onclick="calcSci('sin')" class="bg-violet-600/30 text-violet-400 p-2 rounded-lg font-bold text-xs">sin</button>
+            <button onclick="calcSci('cos')" class="bg-violet-600/30 text-violet-400 p-2 rounded-lg font-bold text-xs">cos</button>
+            <button onclick="calcSci('tan')" class="bg-violet-600/30 text-violet-400 p-2 rounded-lg font-bold text-xs">tan</button>
+            <button onclick="calcSci('sqrt')" class="bg-violet-600/30 text-violet-400 p-2 rounded-lg font-bold text-xs">√</button>
             
-            <button onclick="calcClear()" class="bg-rose-600/30 text-rose-300 p-2 rounded-lg font-bold text-xs" data-i18n="btnCalcClear">C</button>
-            <button onclick="calcAppend('/')" class="bg-indigo-600/30 text-indigo-300 p-2 rounded-lg font-bold text-xs">÷</button>
-            <button onclick="calcAppend('*')" class="bg-indigo-600/30 text-indigo-300 p-2 rounded-lg font-bold text-xs">×</button>
-            <button onclick="calcAppend('-')" class="bg-indigo-600/30 text-indigo-300 p-2 rounded-lg font-bold text-xs">-</button>
+            <button onclick="calcClear()" class="bg-rose-600/30 text-rose-400 p-2 rounded-lg font-bold text-xs" data-i18n="btnCalcClear">C</button>
+            <button onclick="calcAppend('/')" class="bg-indigo-600/30 text-indigo-400 p-2 rounded-lg font-bold text-xs">÷</button>
+            <button onclick="calcAppend('*')" class="bg-indigo-600/30 text-indigo-400 p-2 rounded-lg font-bold text-xs">×</button>
+            <button onclick="calcAppend('-')" class="bg-indigo-600/30 text-indigo-400 p-2 rounded-lg font-bold text-xs">-</button>
 
             <button onclick="calcAppend('7')" class="card-modern p-2.5 rounded-lg font-bold text-xs">7</button>
             <button onclick="calcAppend('8')" class="card-modern p-2.5 rounded-lg font-bold text-xs">8</button>
             <button onclick="calcAppend('9')" class="card-modern p-2.5 rounded-lg font-bold text-xs">9</button>
-            <button onclick="calcAppend('+')" class="bg-indigo-600/30 text-indigo-300 p-2.5 rounded-lg font-bold text-xs">+</button>
+            <button onclick="calcAppend('+')" class="bg-indigo-600/30 text-indigo-400 p-2.5 rounded-lg font-bold text-xs">+</button>
 
             <button onclick="calcAppend('4')" class="card-modern p-2.5 rounded-lg font-bold text-xs">4</button>
             <button onclick="calcAppend('5')" class="card-modern p-2.5 rounded-lg font-bold text-xs">5</button>
@@ -562,18 +638,18 @@
         </div>
 
         <div class="card-modern p-5 rounded-2xl space-y-4">
-          <h3 class="text-xs font-bold uppercase text-emerald-400 border-b border-slate-800 pb-2" data-i18n="currHeading">Konversi Mata Uang</h3>
+          <h3 class="text-xs font-bold uppercase text-emerald-500 border-b border-slate-800 pb-2" data-i18n="currHeading">Konversi Mata Uang</h3>
           <input type="number" id="currAmount" value="1" class="w-full custom-input border rounded-xl p-2.5 text-xs font-bold font-mono" oninput="convertCurrency()">
           <div class="grid grid-cols-5 gap-2 items-center">
             <select id="currFrom" class="col-span-2 custom-input border rounded-xl p-2.5 text-xs font-bold" onchange="convertCurrency()"><option value="USD">USD ($)</option><option value="IDR" selected>IDR (Rp)</option><option value="EUR">EUR (€)</option><option value="SGD">SGD ($)</option><option value="GBP">GBP (£)</option><option value="JPY">JPY (¥)</option></select>
             <button onclick="swapCurrency()" class="col-span-1 card-modern p-2 rounded-xl font-bold text-center text-xs">⇄</button>
             <select id="currTo" class="col-span-2 custom-input border rounded-xl p-2.5 text-xs font-bold" onchange="convertCurrency()"><option value="USD" selected>USD ($)</option><option value="IDR">IDR (Rp)</option><option value="EUR">EUR (€)</option><option value="SGD">SGD ($)</option><option value="GBP">GBP (£)</option><option value="JPY">JPY (¥)</option></select>
           </div>
-          <div class="p-3 card-modern rounded-xl text-center"><div id="currResultValue" class="text-lg font-extrabold text-emerald-400 font-mono">0.00</div></div>
+          <div class="p-3 card-modern rounded-xl text-center"><div id="currResultValue" class="text-lg font-extrabold text-emerald-500 font-mono">0.00</div></div>
         </div>
 
         <div class="card-modern p-5 rounded-2xl space-y-4">
-          <h3 class="text-xs font-bold uppercase text-sky-400 border-b border-slate-800 pb-2" data-i18n="unitHeading">Konverter Satuan Pengukuran</h3>
+          <h3 class="text-xs font-bold uppercase text-sky-500 border-b border-slate-800 pb-2" data-i18n="unitHeading">Konverter Satuan Pengukuran</h3>
           <input type="number" id="unitInputVal" value="1" oninput="convertUnits()" class="w-full custom-input border rounded-xl p-2.5 text-xs font-mono">
           <div class="grid grid-cols-2 gap-2">
             <select id="unitTypeSelect" onchange="convertUnits()" class="custom-input border rounded-xl p-2.5 text-xs font-bold">
@@ -584,35 +660,35 @@
               <option value="gb-mb" data-i18n="optGbMb">Gigabyte ke Megabyte</option>
               <option value="kmh-mph" data-i18n="optKmhMph">Kecepatan: km/h ke mph</option>
             </select>
-            <div id="unitResultVal" class="p-2 card-modern rounded-xl font-bold font-mono text-sky-300 flex items-center justify-center text-xs">0.62 Mile</div>
+            <div id="unitResultVal" class="p-2 card-modern rounded-xl font-bold font-mono text-sky-500 flex items-center justify-center text-xs">0.62 Mile</div>
           </div>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="card-modern p-5 rounded-2xl space-y-3">
-          <h3 class="text-xs font-bold uppercase text-indigo-400 border-b border-slate-800 pb-2" data-i18n="discHeading">Kalkulator Diskon, Pajak & Harga Akhir</h3>
+          <h3 class="text-xs font-bold uppercase text-indigo-500 border-b border-slate-800 pb-2" data-i18n="discHeading">Kalkulator Diskon, Pajak & Harga Akhir</h3>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
             <div><label class="text-sub" data-i18n="lblInitialPrice">Harga Awal</label><input type="number" id="discPrice" value="100000" oninput="calcDiscount()" class="w-full custom-input border rounded-xl p-2 mt-1 font-mono font-bold"></div>
             <div><label class="text-sub" data-i18n="lblDiscountPct">Diskon (%)</label><input type="number" id="discPct" value="10" oninput="calcDiscount()" class="w-full custom-input border rounded-xl p-2 mt-1 font-mono"></div>
             <div><label class="text-sub" data-i18n="lblTaxPct">Pajak (%)</label><input type="number" id="taxPct" value="11" oninput="calcDiscount()" class="w-full custom-input border rounded-xl p-2 mt-1 font-mono"></div>
           </div>
-          <div class="p-3 card-modern rounded-xl text-center"><span class="text-[10px] text-sub" data-i18n="lblFinalPrice">Harga Akhir:</span><strong id="discFinalRes" class="text-indigo-400 font-mono text-sm block">Rp 99.900</strong></div>
+          <div class="p-3 card-modern rounded-xl text-center"><span class="text-[10px] text-sub" data-i18n="lblFinalPrice">Harga Akhir:</span><strong id="discFinalRes" class="text-indigo-500 font-mono text-sm block">Rp 99.900</strong></div>
         </div>
 
         <div class="card-modern p-5 rounded-2xl space-y-3">
-          <h3 class="text-xs font-bold uppercase text-sky-400 border-b border-slate-800 pb-2" data-i18n="bmiHeading">Kalkulator BMI (Body Mass Index)</h3>
+          <h3 class="text-xs font-bold uppercase text-sky-500 border-b border-slate-800 pb-2" data-i18n="bmiHeading">Kalkulator BMI (Body Mass Index)</h3>
           <div class="grid grid-cols-2 gap-2 text-xs">
             <div><label class="text-sub" data-i18n="lblBmiWeight">Berat (kg)</label><input type="number" id="bmiWeight" value="65" class="w-full custom-input border rounded-xl p-2 mt-1 font-mono"></div>
             <div><label class="text-sub" data-i18n="lblBmiHeight">Tinggi (cm)</label><input type="number" id="bmiHeight" value="170" class="w-full custom-input border rounded-xl p-2 mt-1 font-mono"></div>
           </div>
           <button onclick="calcBMI()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-xl shadow transition text-xs" data-i18n="btnCalcBmi">Hitung BMI</button>
-          <div id="bmiResult" class="p-2 card-modern rounded-xl font-bold text-sky-400 text-center font-mono text-xs">BMI: Normal (22.5)</div>
+          <div id="bmiResult" class="p-2 card-modern rounded-xl font-bold text-sky-500 text-center font-mono text-xs">BMI: Normal (22.5)</div>
         </div>
       </div>
     </section>
 
-    <!-- 8. TAB FONT GENERATOR -->
+    <!-- 9. TAB FONT GENERATOR -->
     <section id="tab-font" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="fontHeading">Font Generator & Text Stylist</h2></div>
       <div class="card-modern p-5 rounded-2xl space-y-4 max-w-2xl mx-auto">
@@ -627,7 +703,7 @@
       </div>
     </section>
 
-    <!-- 9. TAB TOOLS BERGUNA -->
+    <!-- 10. TAB TOOLS BERGUNA -->
     <section id="tab-tools" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl">
         <h2 class="text-base font-extrabold" data-i18n="toolsHeading">Kumpulan Utilitas & Tools Berguna</h2>
@@ -636,7 +712,7 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="card-modern p-5 rounded-2xl space-y-3">
-          <h3 class="text-xs font-bold uppercase text-indigo-400 border-b border-slate-800 pb-2">Pembuat Kata Sandi (Password Generator)</h3>
+          <h3 class="text-xs font-bold uppercase text-indigo-500 border-b border-slate-800 pb-2">Pembuat Kata Sandi (Password Generator)</h3>
           <div class="space-y-2 text-xs">
             <div class="flex justify-between items-center"><label class="text-sub">Panjang Karakter:</label><span id="pwdLenLabel" class="font-mono font-bold">16</span></div>
             <input type="range" id="pwdLength" min="8" max="32" value="16" class="w-full accent-indigo-500" oninput="document.getElementById('pwdLenLabel').textContent=this.value">
@@ -645,15 +721,15 @@
               <label class="flex items-center gap-1 cursor-pointer"><input type="checkbox" id="pwdNum" checked> Angka (0-9)</label>
             </div>
             <button onclick="generatePassword()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-xl shadow transition">Buat Kata Sandi</button>
-            <input type="text" id="pwdResult" readonly class="w-full text-center font-mono font-bold text-emerald-400 custom-input border rounded-xl p-2">
+            <input type="text" id="pwdResult" readonly class="w-full text-center font-mono font-bold text-emerald-500 custom-input border rounded-xl p-2">
           </div>
         </div>
 
         <div class="card-modern p-5 rounded-2xl space-y-3">
-          <h3 class="text-xs font-bold uppercase text-violet-400 border-b border-slate-800 pb-2">Generator UUID v4 & Clean URL Slug</h3>
+          <h3 class="text-xs font-bold uppercase text-violet-500 border-b border-slate-800 pb-2">Generator UUID v4 & Clean URL Slug</h3>
           <div class="space-y-2 text-xs">
             <input type="text" id="slugInputText" placeholder="Ketik kalimat untuk URL slug..." oninput="generateSlugText()" class="w-full custom-input border rounded-xl p-2 outline-none">
-            <input type="text" id="slugOutputResult" readonly placeholder="hasil-url-slug-anda" class="w-full font-mono text-indigo-400 custom-input border rounded-xl p-2">
+            <input type="text" id="slugOutputResult" readonly placeholder="hasil-url-slug-anda" class="w-full font-mono text-indigo-500 custom-input border rounded-xl p-2">
             <div class="flex gap-2">
               <button onclick="generateUUIDv4()" class="flex-1 bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 rounded-xl shadow transition">Buat UUID v4</button>
               <button onclick="navigator.clipboard.writeText(document.getElementById('slugOutputResult').value); alert('Disalin!')" class="flex-1 card-modern hover:opacity-80 font-bold py-2 rounded-xl transition">Salin Hasil</button>
@@ -662,29 +738,29 @@
         </div>
 
         <div class="card-modern p-5 rounded-2xl space-y-3">
-          <h3 class="text-xs font-bold uppercase text-emerald-400 border-b border-slate-800 pb-2">Base64 Encoder & Decoder</h3>
+          <h3 class="text-xs font-bold uppercase text-emerald-500 border-b border-slate-800 pb-2">Base64 Encoder & Decoder</h3>
           <div class="space-y-2 text-xs">
             <textarea id="base64Input" rows="2" placeholder="Masukkan teks biasa atau kode Base64..." class="w-full custom-input border rounded-xl p-2 outline-none"></textarea>
             <div class="flex gap-2">
               <button onclick="processBase64('encode')" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-xl shadow transition">Encode Base64</button>
               <button onclick="processBase64('decode')" class="flex-1 bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 rounded-xl shadow transition">Decode Base64</button>
             </div>
-            <textarea id="base64Result" rows="2" readonly placeholder="Hasil proses Base64..." class="w-full font-mono text-indigo-400 custom-input border rounded-xl p-2"></textarea>
+            <textarea id="base64Result" rows="2" readonly placeholder="Hasil proses Base64..." class="w-full font-mono text-indigo-500 custom-input border rounded-xl p-2"></textarea>
           </div>
         </div>
 
         <div class="card-modern p-5 rounded-2xl space-y-3">
-          <h3 class="text-xs font-bold uppercase text-amber-400 border-b border-slate-800 pb-2">Crypto Hash Generator (SHA-256)</h3>
+          <h3 class="text-xs font-bold uppercase text-amber-500 border-b border-slate-800 pb-2">Crypto Hash Generator (SHA-256)</h3>
           <div class="space-y-2 text-xs">
             <input type="text" id="hashInputText" placeholder="Ketik teks untuk di-hash..." oninput="generateSHA256Hash()" class="w-full custom-input border rounded-xl p-2 outline-none">
-            <input type="text" id="hashOutputResult" readonly placeholder="Hasil hash SHA-256..." class="w-full font-mono text-amber-300 custom-input border rounded-xl p-2 text-[10px]">
+            <input type="text" id="hashOutputResult" readonly placeholder="Hasil hash SHA-256..." class="w-full font-mono text-amber-500 custom-input border rounded-xl p-2 text-[10px]">
             <button onclick="navigator.clipboard.writeText(document.getElementById('hashOutputResult').value); alert('Hash disalin!')" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 rounded-xl shadow transition">Salin Hash</button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 10. TAB CUACA REAL-TIME -->
+    <!-- 11. TAB CUACA REAL-TIME -->
     <section id="tab-weather" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
         <div><h2 class="text-base font-extrabold" data-i18n="weatherHeading">Pusat Cuaca Real-Time</h2><p class="text-xs text-sub" data-i18n="weatherSub">Informasi cuaca dan iklim terkini secara langsung.</p></div>
@@ -694,14 +770,14 @@
         </div>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
-        <div class="card-modern p-5 rounded-2xl space-y-2 text-center"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblTemp">Suhu Saat Ini</div><div id="liveTemp" class="text-3xl font-black font-mono text-indigo-400">--°C</div></div>
-        <div class="card-modern p-5 rounded-2xl space-y-2 text-center"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblCondition">Kondisi</div><div id="liveCondition" class="text-lg font-bold text-emerald-400">Memuat...</div></div>
-        <div class="card-modern p-5 rounded-2xl space-y-2 text-center"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblWind">Kecepatan Angin</div><div id="liveWind" class="text-lg font-bold font-mono text-violet-400">-- km/h</div></div>
-        <div class="card-modern p-5 rounded-2xl space-y-2 text-center"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblHumidity">Kelembapan Udara</div><div id="liveHumidity" class="text-lg font-bold font-mono text-sky-400">-- %</div></div>
+        <div class="card-modern p-5 rounded-2xl space-y-2 text-center"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblTemp">Suhu Saat Ini</div><div id="liveTemp" class="text-3xl font-black font-mono text-indigo-500">--°C</div></div>
+        <div class="card-modern p-5 rounded-2xl space-y-2 text-center"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblCondition">Kondisi</div><div id="liveCondition" class="text-lg font-bold text-emerald-500">Memuat...</div></div>
+        <div class="card-modern p-5 rounded-2xl space-y-2 text-center"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblWind">Kecepatan Angin</div><div id="liveWind" class="text-lg font-bold font-mono text-violet-500">-- km/h</div></div>
+        <div class="card-modern p-5 rounded-2xl space-y-2 text-center"><div class="text-[11px] font-bold text-sub uppercase" data-i18n="lblHumidity">Kelembapan Udara</div><div id="liveHumidity" class="text-lg font-bold font-mono text-sky-500">-- %</div></div>
       </div>
     </section>
 
-    <!-- 11. TAB BIO LINK GENERATOR -->
+    <!-- 12. TAB BIO LINK GENERATOR -->
     <section id="tab-biolink" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
         <div><h2 class="text-base font-extrabold" data-i18n="bioHeading">Bio Link Generator</h2><p class="text-xs text-sub" data-i18n="bioSub">Buat halaman landing tautan profil gaya LinkTree dengan Kode QR.</p></div>
@@ -736,7 +812,7 @@
       </div>
     </section>
 
-    <!-- 12. TAB MEDIA DOWNLOADER -->
+    <!-- 13. TAB MEDIA DOWNLOADER -->
     <section id="tab-downloader" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="dlHeading">Media & Photo Downloader</h2></div>
       <div class="card-modern p-5 rounded-2xl space-y-4 max-w-xl mx-auto">
@@ -756,7 +832,7 @@
       </div>
     </section>
 
-    <!-- 13. TAB SHORTENER & QR -->
+    <!-- 14. TAB SHORTENER & QR -->
     <section id="tab-shortener" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="shortHeading">Pemendek Link (URL Shortener) & QR Generator</h2></div>
       <div class="card-modern p-5 rounded-2xl space-y-3 max-w-xl mx-auto">
@@ -766,7 +842,7 @@
         </div>
         <div id="shortResultArea" class="hidden p-3.5 card-modern rounded-xl space-y-3">
           <div class="flex gap-2">
-            <input type="text" id="shortResultOutput" readonly class="text-xs custom-input border rounded-xl px-3 py-2 flex-1 font-mono text-indigo-400 font-bold">
+            <input type="text" id="shortResultOutput" readonly class="text-xs custom-input border rounded-xl px-3 py-2 flex-1 font-mono text-indigo-500 font-bold">
             <button onclick="copyShortUrl()" class="bg-violet-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow transition" data-i18n="shortCopy">Salin</button>
           </div>
           <div class="text-center pt-2">
@@ -778,7 +854,7 @@
       </div>
     </section>
 
-    <!-- 14. TAB TRANSLATOR -->
+    <!-- 15. TAB TRANSLATOR -->
     <section id="tab-translator" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="transHeading">Penerjemah Bahasa Multi-Bahasa</h2></div>
       <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
@@ -790,13 +866,13 @@
           <button onclick="translateText()" class="w-full bg-indigo-600 text-white text-xs font-bold py-2.5 rounded-xl shadow transition" data-i18n="transBtn">Terjemahkan</button>
         </div>
         <div class="flex justify-center md:col-span-1">
-          <button onclick="swapLanguages()" class="w-10 h-10 rounded-full bg-indigo-600/20 text-indigo-300 font-bold flex items-center justify-center transition shadow border border-indigo-500/30 text-lg">⇄</button>
+          <button onclick="swapLanguages()" class="w-10 h-10 rounded-full bg-indigo-600/20 text-indigo-400 font-bold flex items-center justify-center transition shadow border border-indigo-500/30 text-lg">⇄</button>
         </div>
         <div class="card-modern p-4 rounded-2xl space-y-3 md:col-span-2">
           <select id="transTargetLang" class="custom-input border rounded-lg px-2.5 py-1.5 outline-none text-xs font-bold w-full">
             <option value="en">English (Inggris)</option><option value="id" selected>Bahasa Indonesia</option><option value="zh-CN">中文 (Mandarin)</option><option value="ar">العربية (Arab)</option>
           </select>
-          <div id="transOutputResult" class="w-full h-[96px] text-xs custom-input border rounded-xl p-3 overflow-y-auto text-indigo-400 font-medium select-all" data-i18n="transRes">Hasil terjemahan...</div>
+          <div id="transOutputResult" class="w-full h-[96px] text-xs custom-input border rounded-xl p-3 overflow-y-auto text-indigo-500 font-medium select-all" data-i18n="transRes">Hasil terjemahan...</div>
           <div class="flex gap-2">
             <button onclick="copyTranslation()" class="flex-1 card-modern hover:opacity-80 text-xs font-bold py-2 rounded-xl transition" data-i18n="transCopy">Salin Hasil</button>
             <button onclick="speakTranslation()" class="px-3 card-modern hover:opacity-80 text-xs font-bold py-2 rounded-xl transition">🔊</button>
@@ -805,7 +881,7 @@
       </div>
     </section>
 
-    <!-- 15. TAB PDF VIEWER -->
+    <!-- 16. TAB PDF VIEWER -->
     <section id="tab-pdf" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl flex justify-between items-center flex-wrap gap-2">
         <h2 class="text-base font-extrabold" data-i18n="pdfHeading">PDF Viewer Interaktif & Konverter</h2>
@@ -826,7 +902,7 @@
       </div>
     </section>
 
-    <!-- 16. TAB PHOTO EDITOR -->
+    <!-- 17. TAB PHOTO EDITOR -->
     <section id="tab-photo" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl flex justify-between items-center"><h2 class="text-base font-extrabold" data-i18n="photoHeading">Photo Editor Studio</h2><label class="bg-indigo-600 text-white text-xs font-bold px-3.5 py-2 rounded-xl cursor-pointer shadow transition"><span data-i18n="photoChoose">Pilih Foto</span><input type="file" accept="image/*" class="hidden" onchange="loadPhoto(event)"></label></div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -846,7 +922,7 @@
       </div>
     </section>
 
-    <!-- 17. TAB PENGELOLA KODE & LIVE HTML PREVIEW -->
+    <!-- 18. TAB PENGELOLA KODE & LIVE HTML PREVIEW -->
     <section id="tab-codemanager" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
         <div>
@@ -863,7 +939,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div class="card-modern p-4 rounded-2xl space-y-3">
           <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-            <span class="text-xs font-bold uppercase text-indigo-400">Editor HTML / CSS Langsung</span>
+            <span class="text-xs font-bold uppercase text-indigo-500">Editor HTML / CSS Langsung</span>
             <button onclick="loadDefaultHtmlTemplate()" class="text-[10px] text-sub hover:opacity-100 underline">Muat Contoh Template</button>
           </div>
           <textarea id="liveHtmlEditor" rows="12" class="w-full text-xs font-mono custom-input border rounded-xl p-3 outline-none" placeholder="Ketik kode HTML/CSS di sini untuk dirender...">&lt;div style=&quot;padding: 20px; text-align: center; font-family: sans-serif;&quot;&gt;
@@ -874,7 +950,7 @@
         </div>
 
         <div class="card-modern p-4 rounded-2xl space-y-3 flex flex-col">
-          <span class="text-xs font-bold uppercase text-emerald-300 border-b border-slate-800 pb-2">Pratinjau Hasil Render (Live Output)</span>
+          <span class="text-xs font-bold uppercase text-emerald-500 border-b border-slate-800 pb-2">Pratinjau Hasil Render (Live Output)</span>
           <div class="flex-1 bg-white rounded-xl overflow-hidden min-h-[280px] border border-slate-700">
             <iframe id="liveHtmlPreviewFrame" class="w-full h-full border-0"></iframe>
           </div>
@@ -888,11 +964,11 @@
       </div>
     </section>
 
-    <!-- 18. TAB KALENDER & AGENDA LENGKAP -->
+    <!-- 19. TAB KALENDER & AGENDA LENGKAP -->
     <section id="tab-calendar" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h2 class="text-base font-extrabold" data-i18n="calHeading">Kalender & Daftar Agenda Lengkap</h2>
+          <h2 class="text-base font-extrabold" data-i18n="calHeading">Kalender</h2>
           <p class="text-xs text-sub" data-i18n="calSub">Kelola kalender agenda interaktif serta daftar agenda harian lengkap dengan edit/hapus.</p>
         </div>
         <div class="flex items-center gap-2 flex-wrap">
@@ -907,7 +983,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div class="card-modern p-4 rounded-2xl space-y-3 lg:col-span-2">
           <div class="grid grid-cols-7 gap-1 text-center font-bold text-xs pb-2 border-b border-slate-800">
-            <span class="text-rose-400" data-i18n="daySun">Min</span><span class="text-sub" data-i18n="dayMon">Sen</span><span class="text-sub" data-i18n="dayTue">Sel</span><span class="text-sub" data-i18n="dayWed">Rab</span><span class="text-sub" data-i18n="dayThu">Kam</span><span class="text-emerald-400" data-i18n="dayFri">Jum</span><span class="text-sub" data-i18n="daySat">Sab</span>
+            <span class="text-rose-500" data-i18n="daySun">Min</span><span class="text-sub" data-i18n="dayMon">Sen</span><span class="text-sub" data-i18n="dayTue">Sel</span><span class="text-sub" data-i18n="dayWed">Rab</span><span class="text-sub" data-i18n="dayThu">Kam</span><span class="text-emerald-500" data-i18n="dayFri">Jum</span><span class="text-sub" data-i18n="daySat">Sab</span>
           </div>
           <div id="calendarGrid" class="grid grid-cols-7 gap-1.5"></div>
         </div>
@@ -922,12 +998,12 @@
       </div>
     </section>
 
-    <!-- 19. TAB PENGATURAN & INFO -->
+    <!-- 20. TAB PENGATURAN & INFO -->
     <section id="tab-settings" class="tab-content space-y-5 hidden">
       <div class="card-modern p-4 rounded-2xl"><h2 class="text-base font-extrabold" data-i18n="setHeading">Pengaturan & Informasi</h2></div>
       
       <div class="card-modern p-4 rounded-2xl space-y-3">
-        <h3 class="text-xs font-bold uppercase text-indigo-400">Google Gemini API Key & Smart Fallback</h3>
+        <h3 class="text-xs font-bold uppercase text-indigo-500">Google Gemini API Key & Smart Fallback</h3>
         <p class="text-[10px] text-sub">Aplikasi menggunakan Smart AI Fallback untuk memastikan Anda tidak mengalami kendala kuota atau eror autentikasi.</p>
         <div class="flex gap-2">
           <input type="password" id="geminiApiKeyInput" placeholder="AIzaSy..." class="text-xs custom-input border rounded-xl px-3 py-2 flex-1 font-mono outline-none">
@@ -941,7 +1017,7 @@
             <h3 class="text-xs font-bold uppercase text-sub" data-i18n="musicSettingTitle">Musik Latar Belakang Ambient (5 Pilihan Trek)</h3>
             <p class="text-[10px] text-sub" data-i18n="musicSettingDesc">Pilih melodi relaksasi favorit untuk menemani produktivitas Anda.</p>
           </div>
-          <button id="musicToggleBtn" onclick="toggleBackgroundMusic()" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow transition">Hentikan Musik</button>
+          <button id="musicToggleBtn" onclick="toggleBackgroundMusic()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow transition">Putar Musik</button>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
           <div>
@@ -965,30 +1041,30 @@
           <button onclick="setAppTheme('emerald')" class="p-2.5 rounded-xl border bg-emerald-950 text-emerald-200 text-xs font-bold">Emerald</button>
           <button onclick="setAppTheme('ocean')" class="p-2.5 rounded-xl border bg-sky-950 text-sky-200 text-xs font-bold">Ocean</button>
           <button onclick="setAppTheme('cyber')" class="p-2.5 rounded-xl border bg-purple-950 text-purple-200 text-xs font-bold">Cyber</button>
-          <button onclick="setAppTheme('glass')" class="p-2.5 rounded-xl border bg-slate-800/60 text-indigo-300 border-indigo-400/40 text-xs font-bold">Glass</button>
+          <button onclick="setAppTheme('glass')" class="p-2.5 rounded-xl border bg-slate-800/60 text-indigo-400 border-indigo-400/40 text-xs font-bold">Glass</button>
         </div>
       </div>
 
       <div class="card-modern p-5 rounded-2xl space-y-3">
         <h3 class="text-xs font-bold uppercase text-sub border-b border-slate-800 pb-2" data-i18n="lblAboutTitle">Tentang Aplikasi & Pengembang</h3>
         <div class="space-y-1.5 text-xs">
-          <p class="font-black text-indigo-400 text-sm">WorkSpace Pro</p>
+          <p class="font-black text-indigo-500 text-sm">WorkSpace Pro</p>
           <p class="text-sub"><span data-i18n="lblDev">Pengembang:</span> <strong>Danis Vanandi</strong></p>
           <p class="text-sub"><span data-i18n="lblField">Bidang:</span> Civil Engineer & AI / NLP Researcher</p>
-          <p class="text-sub"><span>Email:</span> <a href="mailto:vanandi@proton.me" class="text-indigo-400 font-mono font-bold hover:underline">vanandi@proton.me</a></p>
+          <p class="text-sub"><span>Email:</span> <a href="mailto:vanandi@proton.me" class="text-indigo-500 font-mono font-bold hover:underline">vanandi@proton.me</a></p>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- DOCK BAR AKSI MELAYANG BAWAH -->
+  <!-- DOCK BAR AKSI MELAYANG BAWAH (Tombol Download diganti Dashboard) -->
   <div class="fixed bottom-4 right-4 z-50">
     <div class="card-modern backdrop-blur-md p-1.5 rounded-2xl shadow-2xl flex items-center gap-2">
-      <button onclick="downloadDeviceApp()" class="w-10 h-10 rounded-xl card-modern hover:opacity-80 flex items-center justify-center text-emerald-400 shadow transition hover:scale-105 active:scale-95" title="Unduh sebagai Aplikasi Perangkat / PWA">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+      <button onclick="switchTab('dashboard')" class="w-10 h-10 rounded-xl card-modern hover:opacity-80 flex items-center justify-center text-indigo-500 shadow transition hover:scale-105 active:scale-95" title="Ke Beranda Dashboard">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
       </button>
-      <button onclick="openLoginModal()" class="w-10 h-10 rounded-xl card-modern hover:opacity-80 flex items-center justify-center text-indigo-400 shadow transition hover:scale-105 active:scale-95" title="Akun & Keamanan Data">
+      <button onclick="openLoginModal()" class="w-10 h-10 rounded-xl card-modern hover:opacity-80 flex items-center justify-center text-indigo-500 shadow transition hover:scale-105 active:scale-95" title="Akun & Keamanan Data">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
       </button>
       <button onclick="toggleFloatingMenu()" id="dockMenuToggleBtn" class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-pink-600 flex items-center justify-center text-white shadow hover:scale-105 transition active:scale-95" title="Pusat Menu Launcher">
@@ -1001,7 +1077,7 @@
   <div class="fixed bottom-4 left-4 z-50">
     <div class="rounded-2xl shadow-2xl px-3 py-2 flex items-center justify-center card-modern backdrop-blur-md cursor-pointer hover:scale-105 transition">
       <span class="text-xs mr-1">🌐</span>
-      <select id="langSelector" onchange="changeLanguage(this.value)" class="text-xs bg-transparent text-indigo-400 font-bold border-0 outline-none cursor-pointer">
+      <select id="langSelector" onchange="changeLanguage(this.value)" class="text-xs bg-transparent text-indigo-500 font-bold border-0 outline-none cursor-pointer">
         <option value="id" class="bg-slate-900 text-white">ID</option>
         <option value="en" class="bg-slate-900 text-white">EN</option>
         <option value="zh" class="bg-slate-900 text-white">ZH</option>
@@ -1014,12 +1090,12 @@
   <div id="floatingMenuModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-4">
     <div class="card-modern border-indigo-500/30 rounded-2xl max-w-md w-full p-4 space-y-3 shadow-2xl">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2.5">
-        <h3 class="font-extrabold text-xs tracking-wide text-indigo-400" data-i18n="launcherTitle">Pusat Menu Launcher</h3>
+        <h3 class="font-extrabold text-xs tracking-wide text-indigo-500" data-i18n="launcherTitle">Pusat Menu Launcher</h3>
         <div class="flex items-center gap-2">
-          <button onclick="switchTabAndClose('settings')" class="w-10 h-10 rounded-xl card-modern hover:opacity-80 text-indigo-400 flex items-center justify-center transition shadow" title="Pengaturan & Info">
+          <button onclick="switchTabAndClose('settings')" class="w-10 h-10 rounded-xl card-modern hover:opacity-80 text-indigo-500 flex items-center justify-center transition shadow" title="Pengaturan & Info">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           </button>
-          <button onclick="toggleFloatingMenu()" class="w-10 h-10 rounded-xl card-modern hover:opacity-80 text-rose-400 flex items-center justify-center transition shadow" title="Tutup">
+          <button onclick="toggleFloatingMenu()" class="w-10 h-10 rounded-xl card-modern hover:opacity-80 text-rose-500 flex items-center justify-center transition shadow" title="Tutup">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
           </button>
         </div>
@@ -1029,43 +1105,44 @@
         <div class="space-y-1.5">
           <span class="text-[10px] font-bold text-sub uppercase tracking-wider block" data-i18n="secProd">PRODUKTIVITAS & PROYEK</span>
           <div class="grid grid-cols-2 gap-2" id="launcherGrid-prod">
-            <button onclick="switchTabAndClose('dashboard')" id="menuBtn-dashboard" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></span><span>Dashboard Hub</span></button>
-            <button onclick="switchTabAndClose('finance')" id="menuBtn-finance" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span><span data-i18n="menuFinance">Keuangan</span></button>
-            <button onclick="switchTabAndClose('chatbot')" id="menuBtn-chatbot" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg></span><span data-i18n="menuChatbot">Asisten AI</span></button>
-            <button onclick="switchTabAndClose('kanban')" id="menuBtn-kanban" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg></span><span data-i18n="menuKanban">Kanban & Matriks</span></button>
-            <button onclick="switchTabAndClose('tasks')" id="menuBtn-tasks" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span data-i18n="menuTasks">Tugas & Memo</span></button>
-            <button onclick="switchTabAndClose('mindmap')" id="menuBtn-mindmap" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg></span><span data-i18n="menuMindMap">Mind Map</span></button>
-            <button onclick="switchTabAndClose('calendar')" id="menuBtn-calendar" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></span><span data-i18n="menuCalendar">Kalender & Agenda</span></button>
-            <button onclick="switchTabAndClose('clock')" id="menuBtn-clock" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span><span data-i18n="menuClock">Jam & Alarm</span></button>
+            <button onclick="switchTabAndClose('dashboard')" id="menuBtn-dashboard" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></span><span>Dashboard Hub</span></button>
+            <button onclick="switchTabAndClose('finance')" id="menuBtn-finance" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span><span data-i18n="menuFinance">Keuangan</span></button>
+            <button onclick="switchTabAndClose('chatbot')" id="menuBtn-chatbot" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg></span><span data-i18n="menuChatbot">Asisten AI</span></button>
+            <button onclick="switchTabAndClose('habits')" id="menuBtn-habits" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-sky-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span><span data-i18n="menuHabits">Pelacak Kebiasaan</span></button>
+            <button onclick="switchTabAndClose('kanban')" id="menuBtn-kanban" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg></span><span data-i18n="menuKanban">Kanban & Matriks</span></button>
+            <button onclick="switchTabAndClose('tasks')" id="menuBtn-tasks" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-violet-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span data-i18n="menuTasks">Tugas & Memo</span></button>
+            <button onclick="switchTabAndClose('mindmap')" id="menuBtn-mindmap" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-pink-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg></span><span data-i18n="menuMindMap">Mind Map</span></button>
+            <button onclick="switchTabAndClose('calendar')" id="menuBtn-calendar" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-sky-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></span><span data-i18n="menuCalendar">Kalender</span></button>
+            <button onclick="switchTabAndClose('clock')" id="menuBtn-clock" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span><span data-i18n="menuClock">Jam & Alarm</span></button>
           </div>
         </div>
 
         <div class="space-y-1.5 pt-2 border-t border-slate-800/80">
           <span class="text-[10px] font-bold text-sub uppercase tracking-wider block" data-i18n="secFin">KEUANGAN & BISNIS</span>
           <div class="grid grid-cols-2 gap-2" id="launcherGrid-fin">
-            <button onclick="switchTabAndClose('conversion')" id="menuBtn-conversion" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></span><span data-i18n="menuCalc">Kalkulator Saintifik</span></button>
-            <button onclick="switchTabAndClose('biolink')" id="menuBtn-biolink" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg></span><span data-i18n="menuBioLink">Bio Link</span></button>
+            <button onclick="switchTabAndClose('conversion')" id="menuBtn-conversion" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></span><span data-i18n="menuCalc">Kalkulator Saintifik</span></button>
+            <button onclick="switchTabAndClose('biolink')" id="menuBtn-biolink" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg></span><span data-i18n="menuBioLink">Bio Link</span></button>
           </div>
         </div>
 
         <div class="space-y-1.5 pt-2 border-t border-slate-800/80">
           <span class="text-[10px] font-bold text-sub uppercase tracking-wider block" data-i18n="secTool">UTILITAS & TOOL</span>
           <div class="grid grid-cols-2 gap-2" id="launcherGrid-tool">
-            <button onclick="switchTabAndClose('tools')" id="menuBtn-tools" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/></svg></span><span data-i18n="menuTools">Tools Berguna</span></button>
-            <button onclick="switchTabAndClose('codemanager')" id="menuBtn-codemanager" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg></span><span data-i18n="menuCode">Pengelola Kode</span></button>
-            <button onclick="switchTabAndClose('shortener')" id="menuBtn-shortener" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg></span><span data-i18n="menuShortener">Pemendek Link</span></button>
-            <button onclick="switchTabAndClose('translator')" id="menuBtn-translator" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg></span><span data-i18n="menuTranslator">Translator</span></button>
-            <button onclick="switchTabAndClose('font')" id="menuBtn-font" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"/></svg></span><span data-i18n="menuFont">Font Generator</span></button>
-            <button onclick="switchTabAndClose('pdf')" id="menuBtn-pdf" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></span><span data-i18n="menuPdf">PDF Viewer</span></button>
+            <button onclick="switchTabAndClose('tools')" id="menuBtn-tools" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-sky-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/></svg></span><span data-i18n="menuTools">Tools Berguna</span></button>
+            <button onclick="switchTabAndClose('codemanager')" id="menuBtn-codemanager" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg></span><span data-i18n="menuCode">Pengelola Kode</span></button>
+            <button onclick="switchTabAndClose('shortener')" id="menuBtn-shortener" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg></span><span data-i18n="menuShortener">Pemendek Link</span></button>
+            <button onclick="switchTabAndClose('translator')" id="menuBtn-translator" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg></span><span data-i18n="menuTranslator">Translator</span></button>
+            <button onclick="switchTabAndClose('font')" id="menuBtn-font" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"/></svg></span><span data-i18n="menuFont">Font Generator</span></button>
+            <button onclick="switchTabAndClose('pdf')" id="menuBtn-pdf" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></span><span data-i18n="menuPdf">PDF Viewer</span></button>
           </div>
         </div>
 
         <div class="space-y-1.5 pt-2 border-t border-slate-800/80">
           <span class="text-[10px] font-bold text-sub uppercase tracking-wider block" data-i18n="secMedia">MEDIA & INFORMASI</span>
           <div class="grid grid-cols-2 gap-2" id="launcherGrid-media">
-            <button onclick="switchTabAndClose('downloader')" id="menuBtn-downloader" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></span><span data-i18n="menuDownloader">Downloader</span></button>
-            <button onclick="switchTabAndClose('photo')" id="menuBtn-photo" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></span><span data-i18n="menuPhoto">Photo Editor</span></button>
-            <button onclick="switchTabAndClose('weather')" id="menuBtn-weather" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg></span><span data-i18n="menuWeather">Cuaca</span></button>
+            <button onclick="switchTabAndClose('downloader')" id="menuBtn-downloader" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-violet-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></span><span data-i18n="menuDownloader">Downloader</span></button>
+            <button onclick="switchTabAndClose('photo')" id="menuBtn-photo" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-pink-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></span><span data-i18n="menuPhoto">Photo Editor</span></button>
+            <button onclick="switchTabAndClose('weather')" id="menuBtn-weather" class="p-2.5 card-modern rounded-xl flex items-center gap-2 text-left"><span class="text-base"><svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg></span><span data-i18n="menuWeather">Cuaca</span></button>
           </div>
         </div>
       </div>
@@ -1099,6 +1176,23 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- MODAL HABIT BARU -->
+  <div id="habitModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="card-modern rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+        <h3 class="font-bold text-xs" data-i18n="habitModalTitle">Tambah Kebiasaan Baru</h3>
+        <button onclick="closeHabitModal()" class="text-sub font-bold">&times;</button>
+      </div>
+      <form id="habitForm" class="space-y-2.5">
+        <input type="text" id="habitTitleInput" placeholder="Nama Kebiasaan (Contoh: Olahraga 30 Menit)" required class="w-full text-xs custom-input border rounded-xl p-2 font-bold">
+        <div class="flex justify-end gap-2 pt-1">
+          <button type="button" onclick="closeHabitModal()" class="px-3 py-1.5 text-xs text-sub" data-i18n="btnCancel">Batal</button>
+          <button type="submit" class="px-3.5 py-1.5 text-xs bg-indigo-600 text-white rounded-xl font-bold shadow" data-i18n="btnSave">Simpan</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -1237,15 +1331,813 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (v1.5 - Sanitized Schema & Bug Fixes) -->
+  <!-- JAVASCRIPT STATE ENGINE, WEB AUDIO SYNTHESIZER & CORE LOGIC (v1.7) -->
   <script>
-    // --- STATE UTAMA & PERSISTENSI ---
+    // --- KAMUS MULTI-BAHASA LENGKAP (v1.7) ---
+    const i18nData = {
+      id: {
+        hubTitle: "WorkSpace Pro Hub",
+        hubSub: "Pusat komando produktivitas terpadu, ringkasan fitur, panduan, dan pintasan cepat seluruh modul.",
+        btnPwa: "Unduh / Pasang Pintasan",
+        btnAiChat: "Tanya Asisten AI",
+        statBalance: "Total Saldo Keuangan",
+        statTasks: "Tugas & Memo",
+        statKanban: "Proyek Kanban",
+        statHabits: "Kebiasaan Hari Ini",
+        hubShortcutsTitle: "Pintasan & Panduan Modul Utama",
+        finTitle: "Manajemen Keuangan",
+        finSub: "Pantau arus kas, grafik lingkaran, dan perbandingan online vs offline.",
+        lblBudgetGoal: "Target Batas Pengeluaran Bulanan:",
+        optInc: "Pemasukan",
+        optExp: "Pengeluaran",
+        btnExportFin: "Ekspor CSV",
+        btnPrint: "Cetak / PDF",
+        btnShareFin: "Bagikan",
+        lblNet: "Total Saldo",
+        lblIncome: "Pemasukan",
+        lblExpense: "Pengeluaran",
+        chartIncExpTitle: "Rasio Pemasukan vs Pengeluaran",
+        chartOnlineOfflineTitle: "Rasio Online vs Offline",
+        lblIncLegend: "■ Pemasukan",
+        lblExpLegend: "■ Pengeluaran",
+        lblOnlineLegend: "■ Online",
+        lblOfflineLegend: "■ Offline",
+        phSearchTx: "Cari transaksi...",
+        optAll: "Semua",
+        optOnline: "Online Saja",
+        optOffline: "Offline Saja",
+        thDate: "Tanggal",
+        thCat: "Kategori / Metode",
+        thDesc: "Keterangan",
+        thNom: "Nominal",
+        thAct: "Aksi",
+        chatHeading: "Asisten AI Serbaguna",
+        chatSub: "Asisten pintar WorkSpace untuk membantu pertanyaan, analisis, & produktivitas.",
+        btnClearChat: "Bersihkan Chat",
+        btnClearChatText: "Bersihkan Chat",
+        btnExportChat: "Ekspor",
+        btnExportChatText: "Ekspor",
+        lblQuickPrompt: "PROMPT CEPAT:",
+        chatWelcomeMsg: "Halo! Saya asisten AI WorkSpace Pro dengan Smart Fallback aktif. Silakan tanyakan apa saja.",
+        phChatInput: "Ketik pertanyaan atau perintah...",
+        btnSendChat: "Kirim",
+        lblSend: "Kirim",
+        habitHeading: "Pelacak Kebiasaan & Rutinitas Harian (Habit Tracker)",
+        habitSub: "Bangun konsistensi dan pantau kebiasaan positif harian Anda.",
+        btnNewHabit: "+ Tambah Kebiasaan",
+        habitListTitle: "Daftar Kebiasaan Aktif",
+        habitSummaryTitle: "Ringkasan Konsistensi",
+        habitStreakSub: "Rentetan (Streak) Selesai Beruntun",
+        kanbanHeading: "Manajemen Proyek & Prioritas Matriks",
+        kanbanSub: "Kelola alur kerja visual Kanban dan klasifikasi prioritas keputusan.",
+        btnNewKanbanCard: "+ Tambah Kartu Baru",
+        colToDo: "Belum Dikerjakan (To Do)",
+        colInProgress: "Sedang Dikerjakan (In Progress)",
+        colDone: "Selesai (Done)",
+        taskHeading: "Tugas & Catatan",
+        taskSub: "Pusat pengorganisasian tugas berprioritas dan memo.",
+        btnTask: "+ Tugas",
+        btnNote: "+ Catatan",
+        btnExportTask: "Ekspor",
+        lblTaskList: "Daftar Pekerjaan",
+        lblNoteList: "Catatan Saya",
+        mindmapHeading: "Papan Ide & Mind Map Canvas",
+        mindmapSub: "Visualisasikan ide, geser simpul (drag & drop), dan ekspor sketsa Anda.",
+        clockHeading: "Jam Dunia, Alarm, Stopwatch, Timer & Pomodoro",
+        clockSub: "Pusat manajemen waktu terlengkap dalam satu tempat.",
+        lblNotifActive: "Memeriksa Izin...",
+        lblCurrentLiveTime: "Waktu Lokal Perangkat",
+        lblSetAlarm: "Atur Alarm Cepat",
+        lblAlarmTime: "Waktu Alarm",
+        lblAlarmNote: "Catatan Pengingat Alarm",
+        phAlarmNote: "Contoh: Rapat Kerja",
+        btnSaveAlarm: "Pasang Alarm",
+        btnStart: "Mulai",
+        btnPause: "Jeda",
+        btnReset: "Reset",
+        phMin: "Menit",
+        convHeading: "Pusat Kalkulator Saintifik & Konversi Terpadu",
+        calcStandardTitle: "Kalkulator Saintifik & Standar",
+        btnCalcClear: "C",
+        btnCalcEquals: "=",
+        currHeading: "Konversi Mata Uang",
+        unitHeading: "Konverter Satuan Pengukuran",
+        optKmMile: "Kilometer ke Mil",
+        optKgLbs: "Kilogram ke Pon (lbs)",
+        optCF: "Celsius ke Fahrenheit",
+        optM2Sqft: "Meter Persegi ke Sq Ft",
+        optGbMb: "Gigabyte ke Megabyte",
+        optKmhMph: "Kecepatan: km/h ke mph",
+        discHeading: "Kalkulator Diskon, Pajak & Harga Akhir",
+        lblInitialPrice: "Harga Awal",
+        lblDiscountPct: "Diskon (%)",
+        lblTaxPct: "Pajak (%)",
+        lblFinalPrice: "Harga Akhir:",
+        bmiHeading: "Kalkulator BMI (Body Mass Index)",
+        lblBmiWeight: "Berat (kg)",
+        lblBmiHeight: "Tinggi (cm)",
+        btnCalcBmi: "Hitung BMI",
+        fontHeading: "Font Generator & Text Stylist",
+        toolsHeading: "Kumpulan Utilitas & Tools Berguna",
+        toolsSub: "Fitur pembantu cepat untuk tugas teknis harian Anda.",
+        weatherHeading: "Pusat Cuaca Real-Time",
+        weatherSub: "Informasi cuaca dan iklim terkini secara langsung.",
+        phCity: "Cari Kota (misal: Surabaya)",
+        btnRefreshWeather: "Cari & Perbarui",
+        lblTemp: "Suhu Saat Ini",
+        lblCondition: "Kondisi",
+        lblWind: "Kecepatan Angin",
+        lblHumidity: "Kelembapan Udara",
+        bioHeading: "Bio Link Generator",
+        bioSub: "Buat halaman landing tautan profil gaya LinkTree dengan Kode QR.",
+        bioGenBtn: "Buat Bio Link",
+        bioTitleLabel: "Judul Profil / Nama Halaman",
+        phBioTitle: "Contoh: Nama Anda / Brand",
+        bioSubtitleLabel: "Bio Singkat / Deskripsi",
+        phBioSub: "Contoh: Kreator Konten & Developer",
+        bioAddBtnLabel: "Tambah Tautan Tombol Baru",
+        phBtnText: "Teks Tombol (Misal: Instagram Saya)",
+        bioAddBtn: "+ Tambah ke Daftar Tombol",
+        bioLinksList: "Daftar Tombol Tautan Aktif",
+        bioResLabel: "Pratinjau Tampilan LinkTree",
+        bioCopy: "Salin Kode HTML Bio Link",
+        dlHeading: "Media & Photo Downloader",
+        dlProc: "Proses",
+        shortHeading: "Pemendek Link (URL Shortener) & QR Generator",
+        shortProc: "Pendekkan",
+        shortCopy: "Salin",
+        transHeading: "Penerjemah Bahasa Multi-Bahasa",
+        phTransInput: "Ketik atau tempel teks di sini...",
+        transBtn: "Terjemahkan",
+        transRes: "Hasil terjemahan...",
+        transCopy: "Salin Hasil",
+        pdfHeading: "PDF Viewer Interaktif & Konverter",
+        pdfChoose: "Pilih File PDF",
+        pdfPlaceholder: "Belum ada PDF dimuat.",
+        photoHeading: "Photo Editor Studio",
+        photoChoose: "Pilih Foto",
+        photoPlaceholder: "Belum ada foto diunggah.",
+        codeHeading: "Pengelola Kode & Live HTML Preview",
+        codeSub: "Edit kode HTML/CSS, simpan snippet, dan lihat hasil render secara langsung.",
+        calHeading: "Kalender",
+        calSub: "Kelola kalender agenda interaktif serta daftar agenda harian lengkap dengan edit/hapus.",
+        btnToday: "Hari Ini",
+        daySun: "Min", dayMon: "Sen", dayTue: "Sel", dayWed: "Rab", dayThu: "Kam", dayFri: "Jum", daySat: "Sab",
+        setHeading: "Pengaturan & Informasi",
+        musicSettingTitle: "Musik Latar Belakang Ambient (5 Pilihan Trek)",
+        musicSettingDesc: "Pilih melodi relaksasi favorit untuk menemani produktivitas Anda.",
+        lblTheme: "Tema Tampilan",
+        lblAboutTitle: "Tentang Aplikasi & Pengembang",
+        lblDev: "Pengembang:",
+        lblField: "Bidang:",
+        launcherTitle: "Pusat Menu Launcher",
+        secProd: "PRODUKTIVITAS & PROYEK",
+        menuFinance: "Keuangan",
+        menuChatbot: "Asisten AI",
+        menuHabits: "Pelacak Kebiasaan",
+        menuKanban: "Kanban & Matriks",
+        menuTasks: "Tugas & Memo",
+        menuMindMap: "Mind Map",
+        menuCalendar: "Kalender",
+        menuClock: "Jam & Alarm",
+        secFin: "KEUANGAN & BISNIS",
+        menuCalc: "Kalkulator Saintifik",
+        menuBioLink: "Bio Link",
+        secTool: "UTILITAS & TOOL",
+        menuTools: "Tools Berguna",
+        menuCode: "Pengelola Kode",
+        menuShortener: "Pemendek Link",
+        menuTranslator: "Translator",
+        menuFont: "Font Generator",
+        menuPdf: "PDF Viewer",
+        secMedia: "MEDIA & INFORMASI",
+        menuDownloader: "Downloader",
+        menuPhoto: "Photo Editor",
+        menuWeather: "Cuaca",
+        loginTitle: "Akun & Pemulihan Data Total",
+        lblUsername: "Nama Pengguna (Username)",
+        phUsername: "Nama Anda",
+        btnSaveAccount: "Simpan Akun",
+        btnResetData: "Reset Data",
+        lblFullBackup: "Backup & Restore Penuh",
+        btnDownloadJSON: "Download JSON",
+        btnRestoreJSON: "Restore File",
+        habitModalTitle: "Tambah Kebiasaan Baru",
+        kanbanFormTitle: "Tambah / Edit Kartu Kanban",
+        eisenFormTitle: "Tambah Tugas Prioritas Matriks",
+        btnCancel: "Batal",
+        btnSave: "Simpan"
+      },
+      en: {
+        hubTitle: "WorkSpace Pro Hub",
+        hubSub: "Integrated productivity command center, feature summaries, guide, and shortcuts.",
+        btnPwa: "Download / Install Shortcut",
+        btnAiChat: "Ask AI Assistant",
+        statBalance: "Total Financial Balance",
+        statTasks: "Tasks & Memos",
+        statKanban: "Kanban Projects",
+        statHabits: "Today's Habits",
+        hubShortcutsTitle: "Main Module Shortcuts & Guide",
+        finTitle: "Financial Management",
+        finSub: "Track cash flow, pie charts, and online vs offline comparison.",
+        lblBudgetGoal: "Monthly Expense Budget Limit:",
+        optInc: "Income",
+        optExp: "Expense",
+        btnExportFin: "Export CSV",
+        btnPrint: "Print / PDF",
+        btnShareFin: "Share",
+        lblNet: "Net Balance",
+        lblIncome: "Income",
+        lblExpense: "Expense",
+        chartIncExpTitle: "Income vs Expense Ratio",
+        chartOnlineOfflineTitle: "Online vs Offline Ratio",
+        lblIncLegend: "■ Income",
+        lblExpLegend: "■ Expense",
+        lblOnlineLegend: "■ Online",
+        lblOfflineLegend: "■ Offline",
+        phSearchTx: "Search transactions...",
+        optAll: "All",
+        optOnline: "Online Only",
+        optOffline: "Offline Only",
+        thDate: "Date",
+        thCat: "Category / Method",
+        thDesc: "Description",
+        thNom: "Amount",
+        thAct: "Action",
+        chatHeading: "Versatile AI Assistant",
+        chatSub: "Smart WorkSpace assistant for queries, analysis, & productivity.",
+        btnClearChat: "Clear Chat",
+        btnClearChatText: "Clear Chat",
+        btnExportChat: "Export",
+        btnExportChatText: "Export",
+        lblQuickPrompt: "QUICK PROMPTS:",
+        chatWelcomeMsg: "Hello! I am your WorkSpace Pro AI assistant with Smart Fallback active. Feel free to ask anything.",
+        phChatInput: "Type a question or command...",
+        btnSendChat: "Send",
+        lblSend: "Send",
+        habitHeading: "Habit Tracker & Daily Routine",
+        habitSub: "Build consistency and track your daily positive habits.",
+        btnNewHabit: "+ Add Habit",
+        habitListTitle: "Active Habits List",
+        habitSummaryTitle: "Consistency Summary",
+        habitStreakSub: "Consecutive Streak",
+        kanbanHeading: "Project Management & Priority Matrix",
+        kanbanSub: "Manage visual Kanban workflow and decision priority classification.",
+        btnNewKanbanCard: "+ Add New Card",
+        colToDo: "To Do",
+        colInProgress: "In Progress",
+        colDone: "Done",
+        taskHeading: "Tasks & Notes",
+        taskSub: "Priority task organizing center and memos.",
+        btnTask: "+ Task",
+        btnNote: "+ Note",
+        btnExportTask: "Export",
+        lblTaskList: "Task List",
+        lblNoteList: "My Notes",
+        mindmapHeading: "Idea Board & Mind Map Canvas",
+        mindmapSub: "Visualize ideas, drag nodes, and export your sketches.",
+        clockHeading: "World Clock, Alarm, Stopwatch, Timer & Pomodoro",
+        clockSub: "Complete time management center in one place.",
+        lblNotifActive: "Checking Permission...",
+        lblCurrentLiveTime: "Device Local Time",
+        lblSetAlarm: "Set Quick Alarm",
+        lblAlarmTime: "Alarm Time",
+        lblAlarmNote: "Alarm Note",
+        phAlarmNote: "Example: Work Meeting",
+        btnSaveAlarm: "Set Alarm",
+        btnStart: "Start",
+        btnPause: "Pause",
+        btnReset: "Reset",
+        phMin: "Minutes",
+        convHeading: "Scientific Calculator & Conversion Center",
+        calcStandardTitle: "Scientific & Standard Calculator",
+        btnCalcClear: "C",
+        btnCalcEquals: "=",
+        currHeading: "Currency Conversion",
+        unitHeading: "Measurement Unit Converter",
+        optKmMile: "Kilometers to Miles",
+        optKgLbs: "Kilograms to Pounds (lbs)",
+        optCF: "Celsius to Fahrenheit",
+        optM2Sqft: "Square Meters to Sq Ft",
+        optGbMb: "Gigabytes to Megabytes",
+        optKmhMph: "Speed: km/h to mph",
+        discHeading: "Discount, Tax & Final Price Calculator",
+        lblInitialPrice: "Initial Price",
+        lblDiscountPct: "Discount (%)",
+        lblTaxPct: "Tax (%)",
+        lblFinalPrice: "Final Price:",
+        bmiHeading: "BMI Calculator (Body Mass Index)",
+        lblBmiWeight: "Weight (kg)",
+        lblBmiHeight: "Height (cm)",
+        btnCalcBmi: "Calculate BMI",
+        fontHeading: "Font Generator & Text Stylist",
+        toolsHeading: "Utilities & Useful Tools",
+        toolsSub: "Quick helper features for your daily technical tasks.",
+        weatherHeading: "Real-Time Weather Center",
+        weatherSub: "Live weather and climate information.",
+        phCity: "Search City (e.g., London)",
+        btnRefreshWeather: "Search & Update",
+        lblTemp: "Current Temp",
+        lblCondition: "Condition",
+        lblWind: "Wind Speed",
+        lblHumidity: "Humidity",
+        bioHeading: "Bio Link Generator",
+        bioSub: "Create a LinkTree-style profile landing page with QR Code.",
+        bioGenBtn: "Generate Bio Link",
+        bioTitleLabel: "Profile Title / Page Name",
+        phBioTitle: "Example: Your Name / Brand",
+        bioSubtitleLabel: "Short Bio / Description",
+        phBioSub: "Example: Content Creator & Developer",
+        bioAddBtnLabel: "Add New Button Link",
+        phBtnText: "Button Text (e.g., My Instagram)",
+        bioAddBtn: "+ Add to Button List",
+        bioLinksList: "Active Button Links",
+        bioResLabel: "LinkTree Preview",
+        bioCopy: "Copy Bio Link HTML",
+        dlHeading: "Media & Photo Downloader",
+        dlProc: "Process",
+        shortHeading: "URL Shortener & QR Generator",
+        shortProc: "Shorten",
+        shortCopy: "Copy",
+        transHeading: "Multi-Language Translator",
+        phTransInput: "Type or paste text here...",
+        transBtn: "Translate",
+        transRes: "Translation result...",
+        transCopy: "Copy Result",
+        pdfHeading: "Interactive PDF Viewer & Converter",
+        pdfChoose: "Choose PDF File",
+        pdfPlaceholder: "No PDF loaded yet.",
+        photoHeading: "Photo Editor Studio",
+        photoChoose: "Choose Photo",
+        photoPlaceholder: "No photo uploaded yet.",
+        codeHeading: "Code Manager & Live HTML Preview",
+        codeSub: "Edit HTML/CSS code, save snippets, and view rendered output live.",
+        calHeading: "Kalender",
+        calSub: "Manage interactive calendar agendas and daily schedule lists with edit/delete.",
+        btnToday: "Today",
+        daySun: "Sun", dayMon: "Mon", dayTue: "Tue", dayWed: "Wed", dayThu: "Thu", dayFri: "Fri", daySat: "Sat",
+        setHeading: "Settings & Information",
+        musicSettingTitle: "Ambient Background Music (5 Tracks)",
+        musicSettingDesc: "Select your favorite relaxation melody to accompany your productivity.",
+        lblTheme: "Display Theme",
+        lblAboutTitle: "About App & Developer",
+        lblDev: "Developer:",
+        lblField: "Field:",
+        launcherTitle: "Launcher Menu Center",
+        secProd: "PRODUCTIVITY & PROJECTS",
+        menuFinance: "Finance",
+        menuChatbot: "AI Assistant",
+        menuHabits: "Habit Tracker",
+        menuKanban: "Kanban & Matrix",
+        menuTasks: "Tasks & Memos",
+        menuMindMap: "Mind Map",
+        menuCalendar: "Kalender",
+        menuClock: "Clock & Alarm",
+        secFin: "FINANCE & BUSINESS",
+        menuCalc: "Scientific Calc",
+        menuBioLink: "Bio Link",
+        secTool: "UTILITIES & TOOLS",
+        menuTools: "Useful Tools",
+        menuCode: "Code Manager",
+        menuShortener: "URL Shortener",
+        menuTranslator: "Translator",
+        menuFont: "Font Generator",
+        menuPdf: "PDF Viewer",
+        secMedia: "MEDIA & INFORMATION",
+        menuDownloader: "Downloader",
+        menuPhoto: "Photo Editor",
+        menuWeather: "Weather",
+        loginTitle: "Account & Total Data Recovery",
+        lblUsername: "Username",
+        phUsername: "Your Name",
+        btnSaveAccount: "Save Account",
+        btnResetData: "Reset Data",
+        lblFullBackup: "Full Backup & Restore",
+        btnDownloadJSON: "Download JSON",
+        btnRestoreJSON: "Restore File",
+        habitModalTitle: "Add New Habit",
+        kanbanFormTitle: "Add / Edit Kanban Card",
+        eisenFormTitle: "Add Priority Matrix Task",
+        btnCancel: "Cancel",
+        btnSave: "Save"
+      },
+      zh: {
+        hubTitle: "WorkSpace Pro Hub",
+        hubSub: "综合生产力指挥中心、功能摘要、指南和快捷方式。",
+        btnPwa: "下载 / 安装快捷方式",
+        btnAiChat: "咨询 AI 助手",
+        statBalance: "财务总余额",
+        statTasks: "任务与备忘录",
+        statKanban: "看板项目",
+        statHabits: "今日习惯",
+        hubShortcutsTitle: "主要模块快捷方式与指南",
+        finTitle: "财务管理",
+        finSub: "跟踪现金流、饼图以及线上与线下比较。",
+        lblBudgetGoal: "每月支出预算限额：",
+        optInc: "收入",
+        optExp: "支出",
+        btnExportFin: "导出 CSV",
+        btnPrint: "打印 / PDF",
+        btnShareFin: "分享",
+        lblNet: "净余额",
+        lblIncome: "收入",
+        lblExpense: "支出",
+        chartIncExpTitle: "收入与支出比例",
+        chartOnlineOfflineTitle: "线上与线下比例",
+        lblIncLegend: "■ 收入",
+        lblExpLegend: "■ 支出",
+        lblOnlineLegend: "■ 线上",
+        lblOfflineLegend: "■ 线下",
+        phSearchTx: "搜索交易...",
+        optAll: "全部",
+        optOnline: "仅线上",
+        optOffline: "仅线下",
+        thDate: "日期",
+        thCat: "类别 / 方式",
+        thDesc: "描述",
+        thNom: "金额",
+        thAct: "操作",
+        chatHeading: "多功能 AI 助手",
+        chatSub: "用于查询、分析和提高生产力的智能工作空间助手。",
+        btnClearChat: "清空聊天",
+        btnClearChatText: "清空聊天",
+        btnExportChat: "导出",
+        btnExportChatText: "导出",
+        lblQuickPrompt: "快捷提示词：",
+        chatWelcomeMsg: "你好！我是开启了智能回退功能的 WorkSpace Pro AI 助手。请随时提问。",
+        phChatInput: "输入问题或指令...",
+        btnSendChat: "发送",
+        lblSend: "发送",
+        habitHeading: "习惯追踪与日常例程",
+        habitSub: "培养自律并追踪您的每日积极习惯。",
+        btnNewHabit: "+ 添加习惯",
+        habitListTitle: "活跃习惯列表",
+        habitSummaryTitle: "一致性摘要",
+        habitStreakSub: "连续打卡天数",
+        kanbanHeading: "项目管理与优先级矩阵",
+        kanbanSub: "管理可视化看板工作流和决策优先级分类。",
+        btnNewKanbanCard: "+ 添加新卡片",
+        colToDo: "待办 (To Do)",
+        colInProgress: "进行中 (In Progress)",
+        colDone: "已完成 (Done)",
+        taskHeading: "任务与笔记",
+        taskSub: "优先任务组织中心和备忘录。",
+        btnTask: "+ 任务",
+        btnNote: "+ 笔记",
+        btnExportTask: "导出",
+        lblTaskList: "任务列表",
+        lblNoteList: "我的笔记",
+        mindmapHeading: "创意板与思维导图画布",
+        mindmapSub: "可视化灵感、拖拽节点并导出草图。",
+        clockHeading: "世界时钟、闹钟、秒表、计时器与番茄钟",
+        clockSub: "一站式完整时间管理中心。",
+        lblNotifActive: "正在检查权限...",
+        lblCurrentLiveTime: "设备本地时间",
+        lblSetAlarm: "设置快捷闹钟",
+        lblAlarmTime: "闹钟时间",
+        lblAlarmNote: "闹钟备注",
+        phAlarmNote: "例如：工作会议",
+        btnSaveAlarm: "设定闹钟",
+        btnStart: "开始",
+        btnPause: "暂停",
+        btnReset: "重置",
+        phMin: "分钟",
+        convHeading: "科学计算器与综合转换中心",
+        calcStandardTitle: "科学与标准计算器",
+        btnCalcClear: "C",
+        btnCalcEquals: "=",
+        currHeading: "货币转换",
+        unitHeading: "计量单位转换器",
+        optKmMile: "公里转英里",
+        optKgLbs: "公斤转磅 (lbs)",
+        optCF: "摄氏度转华氏度",
+        optM2Sqft: "平方米转平方英尺",
+        optGbMb: "吉字节转兆字节",
+        optKmhMph: "速度：km/h 转 mph",
+        discHeading: "折扣、税费与最终价格计算器",
+        lblInitialPrice: "初始价格",
+        lblDiscountPct: "折扣 (%)",
+        lblTaxPct: "税率 (%)",
+        lblFinalPrice: "最终价格：",
+        bmiHeading: "BMI 计算器（身体质量指数）",
+        lblBmiWeight: "体重 (kg)",
+        lblBmiHeight: "身高 (cm)",
+        btnCalcBmi: "计算 BMI",
+        fontHeading: "字体生成器与文本样式器",
+        toolsHeading: "实用工具集",
+        toolsSub: "用于日常技术任务的快速辅助功能。",
+        weatherHeading: "实时天气中心",
+        weatherSub: "获取实时天气与气候信息。",
+        phCity: "搜索城市（例如：北京）",
+        btnRefreshWeather: "搜索并更新",
+        lblTemp: "当前温度",
+        lblCondition: "状况",
+        lblWind: "风速",
+        lblHumidity: "湿度",
+        bioHeading: "个人主页链接生成器",
+        bioSub: "创建一个带有二维码的 LinkTree 风格个人资料落地页。",
+        bioGenBtn: "生成链接页",
+        bioTitleLabel: "资料标题 / 页面名称",
+        phBioTitle: "例如：您的名字 / 品牌",
+        bioSubtitleLabel: "简短简介 / 描述",
+        phBioSub: "例如：内容创作者与开发者",
+        bioAddBtnLabel: "添加新按钮链接",
+        phBtnText: "按钮文本（例如：我的 Instagram）",
+        bioAddBtn: "+ 添加到按钮列表",
+        bioLinksList: "活跃按钮链接",
+        bioResLabel: "主页预览",
+        bioCopy: "复制 Bio Link HTML",
+        dlHeading: "媒体与照片下载器",
+        dlProc: "处理",
+        shortHeading: "网址缩短与二维码生成器",
+        shortProc: "缩短",
+        shortCopy: "复制",
+        transHeading: "多语言翻译器",
+        phTransInput: "在此输入或粘贴文本...",
+        transBtn: "翻译",
+        transRes: "翻译结果...",
+        transCopy: "复制结果",
+        pdfHeading: "交互式 PDF 阅读器与转换器",
+        pdfChoose: "选择 PDF 文件",
+        pdfPlaceholder: "尚未加载 PDF。",
+        photoHeading: "照片编辑器工作室",
+        photoChoose: "选择照片",
+        photoPlaceholder: "尚未上传照片。",
+        codeHeading: "代码管理器与实时 HTML 预览",
+        codeSub: "编辑 HTML/CSS 代码、保存代码段并实时查看渲染结果。",
+        calHeading: "Kalender",
+        calSub: "管理交互式日历日程及带编辑/删除功能的日常计划列表。",
+        btnToday: "今天",
+        daySun: "日", dayMon: "一", dayTue: "二", dayWed: "三", dayThu: "四", dayFri: "五", daySat: "六",
+        setHeading: "设置与信息",
+        musicSettingTitle: "环境背景音乐（5首曲目）",
+        musicSettingDesc: "选择您喜爱的放松旋律来陪伴您的生产力时间。",
+        lblTheme: "显示主题",
+        lblAboutTitle: "关于应用与开发者",
+        lblDev: "开发者：",
+        lblField: "领域：",
+        launcherTitle: "启动器菜单中心",
+        secProd: "生产力与项目",
+        menuFinance: "财务",
+        menuChatbot: "AI 助手",
+        menuHabits: "习惯追踪",
+        menuKanban: "看板与矩阵",
+        menuTasks: "任务与备忘",
+        menuMindMap: "思维导图",
+        menuCalendar: "Kalender",
+        menuClock: "时钟与闹钟",
+        secFin: "财务与商业",
+        menuCalc: "科学计算器",
+        menuBioLink: "个人主页",
+        secTool: "实用工具",
+        menuTools: "实用工具",
+        menuCode: "代码管理",
+        menuShortener: "网址缩短",
+        menuTranslator: "翻译器",
+        menuFont: "字体生成",
+        menuPdf: "PDF 阅读",
+        secMedia: "媒体与信息",
+        menuDownloader: "下载器",
+        menuPhoto: "照片编辑",
+        menuWeather: "天气",
+        loginTitle: "账户与全部数据恢复",
+        lblUsername: "用户名",
+        phUsername: "您的名字",
+        btnSaveAccount: "保存账户",
+        btnResetData: "重置数据",
+        lblFullBackup: "完整备份与恢复",
+        btnDownloadJSON: "下载 JSON",
+        btnRestoreJSON: "恢复文件",
+        habitModalTitle: "添加新习惯",
+        kanbanFormTitle: "添加 / 编辑看板卡片",
+        eisenFormTitle: "添加优先级矩阵任务",
+        btnCancel: "取消",
+        btnSave: "保存"
+      },
+      ar: {
+        hubTitle: "WorkSpace Pro Hub",
+        hubSub: "مركز قيادة الإنتاجية المتكامل، ملخصات الميزات، الدليل والاختصارات.",
+        btnPwa: "تنزيل / تثبيت الاختصار",
+        btnAiChat: "اسأل مساعد الذكاء الاصطناعي",
+        statBalance: "إجمالي الرصيد المالي",
+        statTasks: "المهام والملاحظات",
+        statKanban: "مشاريع كانبان",
+        statHabits: "عادات اليوم",
+        hubShortcutsTitle: "اختصارات ودليل الوحدات الرئيسية",
+        finTitle: "الإدارة المالية",
+        finSub: "تتبع التدفق النقدي، الرسوم البيانية الدائرية، والمقارنة عبر الإنترنت وغير المتصلة.",
+        lblBudgetGoal: "حد ميزانية المصروفات الشهرية:",
+        optInc: "الدخل",
+        optExp: "المصروفات",
+        btnExportFin: "تصدير CSV",
+        btnPrint: "طباعة / PDF",
+        btnShareFin: "مشاركة",
+        lblNet: "صافي الرصيد",
+        lblIncome: "الدخل",
+        lblExpense: "المصروفات",
+        chartIncExpTitle: "نسبة الدخل إلى المصروفات",
+        chartOnlineOfflineTitle: "نسبة عبر الإنترنت مقابل دون اتصال",
+        lblIncLegend: "■ الدخل",
+        lblExpLegend: "■ المصروفات",
+        lblOnlineLegend: "■ عبر الإنترنت",
+        lblOfflineLegend: "■ دون اتصال",
+        phSearchTx: "بحث في المعاملات...",
+        optAll: "الكل",
+        optOnline: "عبر الإنترنت فقط",
+        optOffline: "دون اتصال فقط",
+        thDate: "التاريخ",
+        thCat: "الفئة / الطريقة",
+        thDesc: "الوصف",
+        thNom: "المبلغ",
+        thAct: "الإجراء",
+        chatHeading: "مساعد الذكاء الاصطناعي متعدد الاستخدامات",
+        chatSub: "مساعد WorkSpace الذكي للملخصات والأسئلة والإنتاجية.",
+        btnClearChat: "مسح الدردشة",
+        btnClearChatText: "مسح الدردشة",
+        btnExportChat: "تصدير",
+        btnExportChatText: "تصدير",
+        lblQuickPrompt: "موجهات سريعة:",
+        chatWelcomeMsg: "مرحباً! أنا مساعد WorkSpace Pro الذكي مع ميزة التراجع الذكي النشطة. لا تتردد في طرح أي سؤال.",
+        phChatInput: "اكتب سؤالاً أو أمراً...",
+        btnSendChat: "إرسال",
+        lblSend: "إرسال",
+        habitHeading: "متعقب العادات والروتين اليومي",
+        habitSub: "ابنِ الاستمرارية وتتبع عاداتك الإيجابية اليومية.",
+        btnNewHabit: "+ إضافة عادة",
+        habitListTitle: "قائمة العادات النشطة",
+        habitSummaryTitle: "ملخص الاستمرارية",
+        habitStreakSub: "سلسلة الإنجاز المتتالية",
+        kanbanHeading: "إدارة المشاريع ومصفوفة الأولويات",
+        kanbanSub: "إدارة تدفق عمل كانبان المرئي وتصنيف أولوية القرارات.",
+        btnNewKanbanCard: "+ إضافة بطاقة جديدة",
+        colToDo: "قيد الانتظار (To Do)",
+        colInProgress: "قيد التنفيذ (In Progress)",
+        colDone: "تم الانتهاء (Done)",
+        taskHeading: "المهام والملاحظات",
+        taskSub: "مركز تنظيم المهام ذات الأولوية والمذكرات.",
+        btnTask: "+ مهمة",
+        btnNote: "+ ملاحظة",
+        btnExportTask: "تصدير",
+        lblTaskList: "قائمة المهام",
+        lblNoteList: "ملاحظاتي",
+        mindmapHeading: "لوحة الأفكار وخريطة العقل",
+        mindmapSub: "تصور الأفكار، اسحب العقد، وصدر مخططاتك.",
+        clockHeading: "ساعة العالم، المنبه، الإيقاف المؤقت، المؤقت وبومودورو",
+        clockSub: "مركز إدارة الوقت المتكامل في مكان واحد.",
+        lblNotifActive: "جاري التحقق من الإذن...",
+        lblCurrentLiveTime: "التوقيت المحلي للجهاز",
+        lblSetAlarm: "ضبط منبه سريع",
+        lblAlarmTime: "وقت المنبه",
+        lblAlarmNote: "ملاحظة المنبه",
+        phAlarmNote: "مثال: اجتماع عمل",
+        btnSaveAlarm: "ضبط المنبه",
+        btnStart: "بدء",
+        btnPause: "إيقاف مؤقت",
+        btnReset: "إعادة تعيين",
+        phMin: "دقائق",
+        convHeading: "الآلة الحاسبة العلمية ومركز التحويل",
+        calcStandardTitle: "الآلة الحاسبة العلمية والقياسية",
+        btnCalcClear: "C",
+        btnCalcEquals: "=",
+        currHeading: "تحويل العملات",
+        unitHeading: "محول وحدات القياس",
+        optKmMile: "كيلومتر إلى أميال",
+        optKgLbs: "كيلوجرام إلى رطل",
+        optCF: "سيلسيوس إلى فهرنهايت",
+        optM2Sqft: "أمتار مربعة إلى قدم مربع",
+        optGbMb: "جيجابايت إلى ميجابايت",
+        optKmhMph: "السرعة: كم/س إلى ميل/س",
+        discHeading: "حاسبة الخصومات والضرائب والسعر النهائي",
+        lblInitialPrice: "السعر الأولي",
+        lblDiscountPct: "الخصم (%)",
+        lblTaxPct: "الضريبة (%)",
+        lblFinalPrice: "السعر النهائي:",
+        bmiHeading: "حاسبة مؤشر كتلة الجسم (BMI)",
+        lblBmiWeight: "الوزن (كجم)",
+        lblBmiHeight: "الطول (سم)",
+        btnCalcBmi: "حساب مؤشر كتلة الجسم",
+        fontHeading: "مولد الخطوط ومصمم النصوص",
+        toolsHeading: "الأدوات والخدمات المفيدة",
+        toolsSub: "ميزات المساعدة السريعة لمهامك التقنية اليومية.",
+        weatherHeading: "مركز الطقس في الوقت الفعلي",
+        weatherSub: "معلومات الطقس والمناخ الحية مباشرة.",
+        phCity: "ابحث عن مدينة (مثال: دبي)",
+        btnRefreshWeather: "بحث وتحديث",
+        lblTemp: "درجة الحرارة الحالية",
+        lblCondition: "الحالة",
+        lblWind: "سرعة الرياح",
+        lblHumidity: "الرطوبة",
+        bioHeading: "مولد روابط البايو (Bio Link)",
+        bioSub: "أنشئ صفحة هبوط للملف الشخصي بأسلوب LinkTree مع رمز الاستجابة السريعة.",
+        bioGenBtn: "إنشاء صفحة البايو",
+        bioTitleLabel: "عنوان الملف الشخصي / اسم الصفحة",
+        phBioTitle: "مثال: اسمك / علامتك التجارية",
+        bioSubtitleLabel: "نبذة مختصرة / الوصف",
+        phBioSub: "مثال: صانع محتوى ومطور",
+        bioAddBtnLabel: "إضافة زر رابط جديد",
+        phBtnText: "نص الزر (مثال: انستغرام الخاص بي)",
+        bioAddBtn: "+ إضافة إلى قائمة الأزرار",
+        bioLinksList: "روابط الأزرار النشطة",
+        bioResLabel: "معاينه صفحة البايو",
+        bioCopy: "نسخ كود HTML للبايو",
+        dlHeading: "محمل الوسائط والصور",
+        dlProc: "معالجة",
+        shortHeading: "مختصر الروابط ومولد QR",
+        shortProc: "تقصير",
+        shortCopy: "نسخ",
+        transHeading: "مترجم اللغات المتعددة",
+        phTransInput: "اكتب أو الصق النص هنا...",
+        transBtn: "ترجمة",
+        transRes: "نتيجة الترجمة...",
+        transCopy: "نسخ النتيجة",
+        pdfHeading: "عارض ومحول PDF التفاعلي",
+        pdfChoose: "اختر ملف PDF",
+        pdfPlaceholder: "لم يتم تحميل أي ملف PDF بعد.",
+        photoHeading: "استوديو محرر الصور",
+        photoChoose: "اختر صورة",
+        photoPlaceholder: "لم يتم رفع أي صورة بعد.",
+        codeHeading: "مدير الكود ومعاينة HTML الحية",
+        codeSub: "تعديل أكواد HTML/CSS، حفظ القصاصات، وعرض النتائج مباشرة.",
+        calHeading: "Kalender",
+        calSub: "إدارة تقويم الأحداث التفاعلي وجداول المهام اليومية مع التعديل والحذف.",
+        btnToday: "اليوم",
+        daySun: "أحد", dayMon: "ثنين", dayTue: "ثلاثاء", dayWed: "أربعاء", dayThu: "خميس", dayFri: "جمعة", daySat: "سبت",
+        setHeading: "الإعدادات والمعلومات",
+        musicSettingTitle: "موسيقى الخلفية المحيطة (5 مقطوعات)",
+        musicSettingDesc: "اختر لحن الاسترخاء المفضل لديك لمرافقة إنتاجيتك.",
+        lblTheme: "مظهر العرض",
+        lblAboutTitle: "حول التطبيق والمطور",
+        lblDev: "المطور:",
+        lblField: "المجال:",
+        launcherTitle: "مركز قائمة المشغل",
+        secProd: "الإنتاجية والمشاريع",
+        menuFinance: "المالية",
+        menuChatbot: "مساعد AI",
+        menuHabits: "متعقب العادات",
+        menuKanban: "كانبان والمصفوفة",
+        menuTasks: "المهام والمذكرات",
+        menuMindMap: "خريطة العقل",
+        menuCalendar: "Kalender",
+        menuClock: "الساعة والمنبه",
+        secFin: "المالية والأعمال",
+        menuCalc: "حاسبة علمية",
+        menuBioLink: "رابط البايو",
+        secTool: "الأدوات والخدمات",
+        menuTools: "أدوات مفيدة",
+        menuCode: "مدير الكود",
+        menuShortener: "مختصر الروابط",
+        menuTranslator: "المترجم",
+        menuFont: "مولد الخطوط",
+        menuPdf: "عارض PDF",
+        secMedia: "الوسائط والمعلومات",
+        menuDownloader: "المحمل",
+        menuPhoto: "محرر الصور",
+        menuWeather: "الطقس",
+        loginTitle: "الحساب واستعادة البيانات الشاملة",
+        lblUsername: "اسم المستخدم",
+        phUsername: "اسمك",
+        btnSaveAccount: "حفظ الحساب",
+        btnResetData: "إعادة ضبط البيانات",
+        lblFullBackup: "النسخ الاحتياطي والاستعادة الشاملة",
+        btnDownloadJSON: "تنزيل JSON",
+        btnRestoreJSON: "استعادة ملف",
+        habitModalTitle: "إضافة عادة جديدة",
+        kanbanFormTitle: "إضافة / تعديل بطاقة كانبان",
+        eisenFormTitle: "إضافة مهمة مصفوفة الأولويات",
+        btnCancel: "إلغاء",
+        btnSave: "حفظ"
+      }
+    };
+
+    function changeLanguage(lang) {
+      appState.lang = lang;
+      saveStateToStorage();
+      const dict = i18nData[lang] || i18nData['id'];
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+
+      document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const key = el.getAttribute('data-i18n-ph');
+        if (dict[key]) el.placeholder = dict[key];
+      });
+
+      const langSelector = document.getElementById('langSelector');
+      if (langSelector) langSelector.value = lang;
+    }
+
+    // --- STATE UTAMA & PERSISTENSI (v1.7) ---
     let appState = {
       currentTab: 'dashboard',
       theme: 'glass',
       lang: 'id',
       user: { name: 'Pengguna', apiKey: '' },
       finance: { currency: 'Rp', budgetLimit: 5000000, transactions: [] },
+      habits: [],
       tasks: [],
       notes: [],
       kanban: [],
@@ -1266,7 +2158,7 @@
 
     function saveStateToStorage() {
       try {
-        localStorage.setItem('SMARTCORE_STATE', JSON.stringify(appState));
+        localStorage.setItem('SMARTCORE_STATE_V17', JSON.stringify(appState));
       } catch (e) {
         console.error('Storage quota exceeded:', e);
       }
@@ -1274,7 +2166,7 @@
 
     function loadStateFromStorage() {
       try {
-        const saved = localStorage.getItem('SMARTCORE_STATE');
+        const saved = localStorage.getItem('SMARTCORE_STATE_V17') || localStorage.getItem('SMARTCORE_STATE_V16') || localStorage.getItem('SMARTCORE_STATE');
         if (saved) {
           const parsed = JSON.parse(saved);
           appState = {
@@ -1283,6 +2175,7 @@
             lang: parsed.lang || 'id',
             user: parsed.user || { name: 'Pengguna', apiKey: '' },
             finance: (parsed.finance && Array.isArray(parsed.finance.transactions)) ? parsed.finance : { currency: 'Rp', budgetLimit: 5000000, transactions: [] },
+            habits: Array.isArray(parsed.habits) ? parsed.habits : [],
             tasks: Array.isArray(parsed.tasks) ? parsed.tasks : [],
             notes: Array.isArray(parsed.notes) ? parsed.notes : [],
             kanban: Array.isArray(parsed.kanban) ? parsed.kanban : [],
@@ -1315,16 +2208,14 @@
         if (keyInput) keyInput.value = appState.user.apiKey;
       }
 
-      // Explicit initialization loop & tab restoration
       const targetTab = appState.currentTab || 'dashboard';
       switchTab(targetTab);
 
-      // Inisialisasi Tanggal & Jam Live
       setInterval(updateClockAndWeatherHeader, 1000);
       updateClockAndWeatherHeader();
 
-      // Render awal data modul dengan proteksi aman
       renderFinance();
+      renderHabits();
       renderTasksAndNotes();
       renderKanban();
       renderEisenhower();
@@ -1333,7 +2224,15 @@
       fetchLiveWeather();
       renderMindMap();
 
-      // Set default month picker ke bulan aktif
+      if (appState.music && appState.music.active) {
+        const btn = document.getElementById('musicToggleBtn');
+        if (btn) {
+          btn.textContent = 'Hentikan Musik';
+          btn.className = 'px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow transition';
+        }
+        startAmbientMusic();
+      }
+
       const monthPicker = document.getElementById('monthPicker');
       if (monthPicker && !monthPicker.value) {
         const now = new Date();
@@ -1397,7 +2296,7 @@
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
-            alert('Terima kasih! WorkSpace Pro sedang dipasang sebagai aplikasi perangkat.');
+            alert('Terima kasih! WorkSpace Pro dipasang sebagai aplikasi perangkat.');
           }
           deferredPrompt = null;
         });
@@ -1419,7 +2318,7 @@
         downloadAnchor.click();
         downloadAnchor.remove();
 
-        alert('Pintasan PWA diunduh! Untuk memasang ke Home Screen perangkat seluler:\n1. Buka menu browser (titik tiga di kanan atas).\n2. Pilih "Tambahkan ke Layar Utama" (Add to Home Screen).');
+        alert('Pintasan PWA diunduh! Untuk memasang ke Home Screen:\n1. Buka menu browser (titik tiga).\n2. Pilih "Tambahkan ke Layar Utama".');
       }
     }
 
@@ -1436,11 +2335,11 @@
       const liveDateBig = document.getElementById('liveDateBig');
       if (liveDateBig) {
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        liveDateBig.textContent = now.toLocaleDateString('id-ID', options);
+        liveDateBig.textContent = now.toLocaleDateString(appState.lang === 'en' ? 'en-US' : 'id-ID', options);
       }
     }
 
-    // --- KEUANGAN ---
+    // --- KEUANGAN & DONUT CHART ---
     function renderFinance() {
       const currency = document.getElementById('financeCurrency')?.value || appState.finance.currency || 'Rp';
       appState.finance.currency = currency;
@@ -1456,6 +2355,8 @@
 
       let totalInc = 0;
       let totalExp = 0;
+      let onlineExp = 0;
+      let offlineExp = 0;
 
       const txList = Array.isArray(appState.finance.transactions) ? appState.finance.transactions : [];
       const filtered = txList.filter(tx => {
@@ -1469,8 +2370,13 @@
       });
 
       filtered.forEach((tx) => {
-        if (tx.type === 'income') totalInc += (tx.amount || 0);
-        else totalExp += (tx.amount || 0);
+        if (tx.type === 'income') {
+          totalInc += (tx.amount || 0);
+        } else {
+          totalExp += (tx.amount || 0);
+          if (tx.isOnline) onlineExp += (tx.amount || 0);
+          else offlineExp += (tx.amount || 0);
+        }
 
         const tr = document.createElement('tr');
         tr.className = 'border-b border-slate-800/60 hover:bg-slate-900/40';
@@ -1502,6 +2408,32 @@
       if (progBar) progBar.style.width = `${pct}%`;
       const progText = document.getElementById('budgetProgressText');
       if (progText) progText.textContent = `${pct}% Terpakai dari ${currency} ${budgetLimit.toLocaleString()}`;
+
+      const totalSum = totalInc + totalExp;
+      const incPct = totalSum > 0 ? Math.round((totalInc / totalSum) * 100) : 50;
+      const donutIncExp = document.getElementById('donutIncExp');
+      if (donutIncExp) {
+        donutIncExp.style.background = `conic-gradient(#10b981 0% ${incPct}%, #f43f5e ${incPct}% 100%)`;
+        donutIncExp.style.borderRadius = '50%';
+        donutIncExp.style.width = '120px';
+        donutIncExp.style.height = '120px';
+        donutIncExp.style.margin = '0 auto';
+      }
+      const hole1 = document.getElementById('donutIncExpHole');
+      if (hole1) hole1.textContent = `${incPct}% Masuk`;
+
+      const totalOnlineOffline = onlineExp + offlineExp;
+      const onlinePct = totalOnlineOffline > 0 ? Math.round((onlineExp / totalOnlineOffline) * 100) : 50;
+      const donutOnlineOffline = document.getElementById('donutOnlineOffline');
+      if (donutOnlineOffline) {
+        donutOnlineOffline.style.background = `conic-gradient(#6366f1 0% ${onlinePct}%, #8b5cf6 ${onlinePct}% 100%)`;
+        donutOnlineOffline.style.borderRadius = '50%';
+        donutOnlineOffline.style.width = '120px';
+        donutOnlineOffline.style.height = '120px';
+        donutOnlineOffline.style.margin = '0 auto';
+      }
+      const hole2 = document.getElementById('donutOnlineOfflineHole');
+      if (hole2) hole2.textContent = `${onlinePct}% Online`;
 
       saveStateToStorage();
     }
@@ -1567,6 +2499,106 @@
       }
     }
 
+    // --- TAB 3: PELACAK KEBIASAAN (HABIT TRACKER) ---
+    function renderHabits() {
+      const container = document.getElementById('habitListContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const habitArr = Array.isArray(appState.habits) ? appState.habits : [];
+      let totalCompletedToday = 0;
+      const todayStr = new Date().toISOString().split('T')[0];
+
+      habitArr.forEach(habit => {
+        if (!habit.logs) habit.logs = {};
+        const isDoneToday = !!habit.logs[todayStr];
+        if (isDoneToday) totalCompletedToday++;
+
+        const div = document.createElement('div');
+        div.className = 'card-modern p-3.5 rounded-xl flex items-center justify-between text-xs';
+        div.innerHTML = `
+          <div class="flex items-center gap-3">
+            <input type="checkbox" ${isDoneToday ? 'checked' : ''} onchange="toggleHabitDone('${habit.id}')" class="accent-indigo-500 w-5 h-5 rounded cursor-pointer">
+            <div>
+              <h4 class="font-bold text-white">${habit.title || ''}</h4>
+              <span class="text-[10px] text-sub">Streak: ${habit.streak || 0} hari berturut-turut</span>
+            </div>
+          </div>
+          <button onclick="deleteHabit('${habit.id}')" class="text-rose-400 font-bold px-2 py-1 bg-rose-500/10 rounded hover:bg-rose-500/20">Hapus</button>
+        `;
+        container.appendChild(div);
+      });
+
+      if (habitArr.length === 0) {
+        container.innerHTML = '<div class="text-xs text-sub text-center py-6">Belum ada kebiasaan ditambahkan. Klik tombol tambah di atas!</div>';
+      }
+
+      const streakDisplay = document.getElementById('habitStreakDisplay');
+      if (streakDisplay) {
+        const maxStreak = habitArr.reduce((max, h) => Math.max(max, h.streak || 0), 0);
+        streakDisplay.textContent = `${maxStreak} Hari`;
+      }
+
+      const hubHabits = document.getElementById('hubMetricHabits');
+      if (hubHabits) hubHabits.textContent = `${totalCompletedToday}/${habitArr.length} Selesai`;
+
+      saveStateToStorage();
+    }
+
+    function openHabitModal() {
+      const modal = document.getElementById('habitModal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeHabitModal() {
+      const modal = document.getElementById('habitModal');
+      if (modal) modal.classList.add('hidden');
+      const form = document.getElementById('habitForm');
+      if (form) form.reset();
+    }
+
+    document.getElementById('habitForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const title = document.getElementById('habitTitleInput')?.value.trim();
+      if (!title) return;
+      if (!Array.isArray(appState.habits)) appState.habits = [];
+      appState.habits.push({
+        id: 'hab_' + Date.now(),
+        title,
+        streak: 0,
+        logs: {}
+      });
+      saveStateToStorage();
+      closeHabitModal();
+      renderHabits();
+    });
+
+    function toggleHabitDone(id) {
+      if (!Array.isArray(appState.habits)) return;
+      const habit = appState.habits.find(h => h.id === id);
+      if (!habit) return;
+      const todayStr = new Date().toISOString().split('T')[0];
+      if (!habit.logs) habit.logs = {};
+
+      if (habit.logs[todayStr]) {
+        habit.logs[todayStr] = false;
+        habit.streak = Math.max(0, (habit.streak || 1) - 1);
+      } else {
+        habit.logs[todayStr] = true;
+        habit.streak = (habit.streak || 0) + 1;
+      }
+      saveStateToStorage();
+      renderHabits();
+    }
+
+    function deleteHabit(id) {
+      if (Array.isArray(appState.habits)) {
+        appState.habits = appState.habits.filter(h => h.id !== id);
+        saveStateToStorage();
+        renderHabits();
+      }
+    }
+
     // --- ASISTEN AI & CHATBOT ---
     function sendChatMessage() {
       const input = document.getElementById('chatInputText');
@@ -1581,11 +2613,14 @@
       saveStateToStorage();
 
       setTimeout(() => {
-        let reply = "Saya telah menganalisis pertanyaan Anda. Berdasarkan modul WorkSpace Pro, pastikan untuk menggunakan fitur Kanban dan Catatan agar produktivitas Anda optimal.";
-        if (text.toLowerCase().includes('kode') || text.toLowerCase().includes('code')) {
-          reply = "Berikut adalah contoh struktur fungsi JavaScript modular:\n```javascript\nfunction initModule() {\n  console.log('Modul siap berjalan.');\n}\n```";
-        } else if (text.toLowerCase().includes('halo') || text.toLowerCase().includes('hi')) {
-          reply = "Halo! Ada yang bisa saya bantu terkait tugas, keuangan, atau pengembangan proyek Anda hari ini?";
+        let reply = "Saya telah menganalisis permintaan Anda. Berdasarkan modul WorkSpace Pro, pastikan untuk menggunakan fitur Kanban dan Habit Tracker agar produktivitas Anda optimal.";
+        const lower = text.toLowerCase();
+        if (lower.includes('kode') || lower.includes('code')) {
+          reply = "Berikut adalah contoh fungsi JavaScript modular:\n```javascript\nfunction initModule() {\n  console.log('Modul siap berjalan dengan aman.');\n}\n```";
+        } else if (lower.includes('halo') || lower.includes('hi')) {
+          reply = "Halo! Ada yang bisa saya bantu terkait tugas, keuangan, atau kebiasaan produktif Anda hari ini?";
+        } else if (lower.includes('ringkas')) {
+          reply = "Berikut ringkasan poin utama:\n1. Konsistensi dalam Habit Tracker membangun kedisiplinan.\n2. Alur Kanban memastikan proyek berjalan terstruktur.";
         }
         appendChatBubble('ai', reply);
         if (!Array.isArray(appState.chatHistory)) appState.chatHistory = [];
@@ -2041,8 +3076,6 @@
           pomSessions++;
           const badge = document.getElementById('pomSessionCount');
           if (badge) badge.textContent = `Sesi Selesai: ${pomSessions}`;
-          const hubPom = document.getElementById('hubMetricPom');
-          if (hubPom) hubPom.textContent = `${pomSessions} Sesi`;
           alert('Sesi Pomodoro selesai! Waktunya istirahat.');
           return;
         }
@@ -2052,6 +3085,107 @@
     }
     function pausePomodoro() { clearInterval(pomInterval); pomInterval = null; }
     function resetPomodoro() { pausePomodoro(); pomSecs = 25 * 60; updatePomDisplay(); }
+
+    // --- WEB AUDIO API SYNTHESIZER UNTUK MUSIK AMBIENT ---
+    let audioCtx = null;
+    let musicInterval = null;
+
+    function startAmbientMusic() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      if (musicInterval) clearInterval(musicInterval);
+
+      const playChord = () => {
+        if (!appState.music || !appState.music.active || !audioCtx) return;
+        const track = appState.music.track || 'chill';
+        const vol = appState.music.volume !== undefined ? appState.music.volume : 0.3;
+
+        let freqs = [220, 277.18, 329.63, 440];
+        if (track === 'dreamy') freqs = [196, 246.94, 293.66, 392];
+        else if (track === 'synth') freqs = [130.81, 164.81, 196, 261.63];
+        else if (track === 'acoustic') freqs = [261.63, 329.63, 392, 523.25];
+        else if (track === 'space') freqs = [110, 164.81, 220, 329.63];
+
+        freqs.forEach((f, idx) => {
+          try {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            const filter = audioCtx.createBiquadFilter();
+
+            osc.type = track === 'synth' ? 'sawtooth' : (track === 'space' ? 'sine' : 'triangle');
+            osc.frequency.setValueAtTime(f + (Math.random() * 2 - 1), audioCtx.currentTime);
+
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(800, audioCtx.currentTime);
+
+            gain.gain.setValueAtTime(0, audioCtx.currentTime);
+            gain.gain.linearRampToValueAtTime(vol * 0.15, audioCtx.currentTime + 1.5);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 5.5);
+
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start(audioCtx.currentTime + idx * 0.4);
+            osc.stop(audioCtx.currentTime + 6.0);
+          } catch(e) {
+            console.error('Audio node error:', e);
+          }
+        });
+      };
+
+      playChord();
+      musicInterval = setInterval(playChord, 6000);
+    }
+
+    function stopAmbientMusic() {
+      if (musicInterval) {
+        clearInterval(musicInterval);
+        musicInterval = null;
+      }
+    }
+
+    function toggleBackgroundMusic() {
+      const btn = document.getElementById('musicToggleBtn');
+      if (!appState.music) appState.music = { active: false, track: 'chill', volume: 0.3 };
+      if (!appState.music.active) {
+        appState.music.active = true;
+        if (btn) {
+          btn.textContent = 'Hentikan Musik';
+          btn.className = 'px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow transition';
+        }
+        startAmbientMusic();
+        alert('Musik latar ambient diaktifkan.');
+      } else {
+        appState.music.active = false;
+        if (btn) {
+          btn.textContent = 'Putar Musik';
+          btn.className = 'px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow transition';
+        }
+        stopAmbientMusic();
+        alert('Musik latar dihentikan.');
+      }
+      saveStateToStorage();
+    }
+
+    function changeMusicTrack(track) {
+      if (!appState.music) appState.music = { active: false, track: 'chill', volume: 0.3 };
+      appState.music.track = track;
+      saveStateToStorage();
+      if (appState.music.active) {
+        startAmbientMusic();
+      }
+    }
+
+    function changeMusicVolume(vol) {
+      if (!appState.music) appState.music = { active: false, track: 'chill', volume: 0.3 };
+      appState.music.volume = parseFloat(vol);
+      saveStateToStorage();
+    }
 
     // --- KALKULATOR & KONVERSI ---
     function calcAppend(val) {
@@ -2584,13 +3718,8 @@
       saveStateToStorage();
       const body = document.getElementById('appBody');
       if (body) {
-        body.className = `${theme === 'glass' ? 'theme-glass' : 'dark'} min-h-screen pb-28`;
+        body.className = `${theme === 'glass' ? 'theme-glass' : theme} min-h-screen pb-28`;
       }
-    }
-
-    function changeLanguage(lang) {
-      appState.lang = lang;
-      saveStateToStorage();
     }
 
     function saveApiKey() {
@@ -2615,6 +3744,8 @@
 
     function resetAppCache() {
       if (confirm('Yakin ingin mereset seluruh data aplikasi?')) {
+        localStorage.removeItem('SMARTCORE_STATE_V17');
+        localStorage.removeItem('SMARTCORE_STATE_V16');
         localStorage.removeItem('SMARTCORE_STATE');
         location.reload();
       }
@@ -2636,7 +3767,7 @@
           try {
             appState = JSON.parse(event.target.result);
             saveStateToStorage();
-            alert('Restore data berhasil! Halaman akan dimuat ulang.');
+            alert('Restore data berhasil! Halaman dimuat ulang.');
             location.reload();
           } catch (err) {
             alert('File JSON tidak valid!');
@@ -2644,38 +3775,6 @@
         };
         reader.readAsText(file);
       }
-    }
-
-    // Musik Latar Belakang Ambient
-    function toggleBackgroundMusic() {
-      const btn = document.getElementById('musicToggleBtn');
-      if (!appState.music) appState.music = { active: false, track: 'chill', volume: 0.3 };
-      if (!appState.music.active) {
-        appState.music.active = true;
-        if (btn) {
-          btn.textContent = 'Hentikan Musik';
-          btn.className = 'px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow transition';
-        }
-        alert('Musik latar ambient diaktifkan.');
-      } else {
-        appState.music.active = false;
-        if (btn) {
-          btn.textContent = 'Putar Musik';
-          btn.className = 'px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow transition';
-        }
-        alert('Musik latar dihentikan.');
-      }
-      saveStateToStorage();
-    }
-    function changeMusicTrack(track) {
-      if (!appState.music) appState.music = { active: false, track: 'chill', volume: 0.3 };
-      appState.music.track = track;
-      saveStateToStorage();
-    }
-    function changeMusicVolume(vol) {
-      if (!appState.music) appState.music = { active: false, track: 'chill', volume: 0.3 };
-      appState.music.volume = parseFloat(vol);
-      saveStateToStorage();
     }
   </script>
 </body>

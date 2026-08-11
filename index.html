@@ -11,72 +11,89 @@
   
   <!-- TAILWIND CSS & GOOGLE FONTS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       -webkit-font-smoothing: antialiased;
-      transition: background 0.3s ease, color 0.3s ease;
+      transition: background 0.35s ease, color 0.35s ease;
     }
     .font-mono {
       font-family: 'JetBrains Mono', monospace;
     }
     
-    /* 6 POLISHED THEME SYSTEMS (INCLUDING ENHANCED TRANSPARENT GLASS) */
-    .theme-ios-clean {
-      background-color: #f2f2f7;
-      color: #1c1c1e;
+    /* 6 BRAND NEW MODERN & STUNNING THEMES */
+    .theme-cyberpunk-neon {
+      background-color: #07090e;
+      color: #00f0ff;
     }
-    .theme-dark {
-      background-color: #0f172a;
-      color: #f8fafc;
+    .theme-aurora-glass {
+      background: radial-gradient(circle at 50% 0%, #062823, #021210);
+      color: #e2f8f3;
     }
-    .theme-glass {
-      background: radial-gradient(circle at 50% 0%, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
-      color: #ffffff;
+    .theme-nordic-frost {
+      background-color: #f0f4f8;
+      color: #102a43;
     }
-    .theme-midnight {
-      background-color: #030712;
-      color: #e5e7eb;
+    .theme-obsidian-gold {
+      background-color: #0c0c0c;
+      color: #f3e5ab;
     }
-    .theme-amoled {
-      background-color: #000000;
-      color: #ffffff;
+    .theme-sunset-blush {
+      background: linear-gradient(135deg, #1f1a24, #2a1b2e);
+      color: #ffd6e0;
     }
-    .theme-solarized {
-      background-color: #fdf6e3;
-      color: #657b83;
+    .theme-matrix-terminal {
+      background-color: #020d04;
+      color: #00ff66;
     }
     
-    /* CARD STYLING & HARMONIZED HEADER / DOCK */
+    /* CARD STYLING & ULTRA MODERN FROSTED SHADOWS */
     .card-modern {
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
-      border-radius: 20px;
-      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.06);
+      border-radius: 24px;
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    .theme-dark .card-modern, .theme-midnight .card-modern, .theme-amoled .card-modern {
-      background: rgba(30, 41, 59, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      color: #f8fafc;
+    .theme-cyberpunk-neon .card-modern {
+      background: rgba(12, 17, 29, 0.85);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      box-shadow: 0 10px 35px rgba(0, 240, 255, 0.12);
+      color: #e0fbfc;
     }
-    .theme-glass .card-modern {
-      background: rgba(255, 255, 255, 0.07);
-      backdrop-filter: blur(30px);
-      -webkit-backdrop-filter: blur(30px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-      color: #ffffff;
+    .theme-aurora-glass .card-modern {
+      background: rgba(6, 40, 35, 0.65);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      box-shadow: 0 12px 40px rgba(2, 20, 16, 0.5);
+      color: #ecfdf5;
     }
-    .theme-solarized .card-modern {
-      background: rgba(238, 232, 213, 0.85);
-      border: 1px solid rgba(101, 123, 131, 0.15);
-      color: #073642;
+    .theme-nordic-frost .card-modern {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(16, 42, 67, 0.08);
+      box-shadow: 0 10px 30px rgba(16, 42, 67, 0.06);
+      color: #102a43;
+    }
+    .theme-obsidian-gold .card-modern {
+      background: rgba(22, 22, 22, 0.88);
+      border: 1px solid rgba(243, 229, 171, 0.2);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+      color: #f3e5ab;
+    }
+    .theme-sunset-blush .card-modern {
+      background: rgba(45, 30, 50, 0.85);
+      border: 1px solid rgba(255, 180, 200, 0.2);
+      box-shadow: 0 12px 40px rgba(10, 5, 12, 0.6);
+      color: #fff1f2;
+    }
+    .theme-matrix-terminal .card-modern {
+      background: rgba(3, 20, 8, 0.9);
+      border: 1px solid rgba(0, 255, 102, 0.25);
+      box-shadow: 0 10px 35px rgba(0, 255, 102, 0.15);
+      color: #00ff66;
     }
     
     /* CUSTOM SCROLLBAR */
@@ -91,70 +108,62 @@
       background: rgba(0, 0, 0, 0.2);
       border-radius: 9999px;
     }
-    .theme-dark ::-webkit-scrollbar-thumb, .theme-glass ::-webkit-scrollbar-thumb, .theme-midnight ::-webkit-scrollbar-thumb, .theme-amoled ::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.25);
-    }
 
     .ios-btn {
       transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .ios-btn:active {
-      transform: scale(0.95);
+      transform: scale(0.96);
     }
 
     .menu-btn-active {
-      background: #007aff !important;
+      background: #0066ff !important;
       color: #ffffff !important;
-      box-shadow: 0 4px 16px rgba(0, 122, 255, 0.45);
+      box-shadow: 0 6px 20px rgba(0, 102, 255, 0.45);
+    }
+
+    .harmonized-bar {
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 24px;
     }
 
     .dock-btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
       transition: all 0.2s ease;
     }
   </style>
 </head>
-<body id="appBody" class="theme-ios-clean min-h-screen pb-32">
+<body id="appBody" class="theme-nordic-frost min-h-screen pb-32">
 
-  <!-- TOP HEADER NAVBAR (HARMONIZED & MATCHING DOCK CONTAINER STYLE) -->
-  <header class="sticky top-0 z-40 card-modern border-b px-4 py-3 flex items-center justify-between max-w-7xl mx-auto my-3 rounded-2xl shadow-xl backdrop-blur-2xl">
-    <div class="flex items-center gap-3">
-      <!-- Minimalist Transparent Vector SVG Logo in Header -->
-      <div class="w-10 h-10 rounded-xl card-modern flex items-center justify-center text-blue-500 font-extrabold shadow-md border border-blue-500/20">
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- TOP HEADER NAVBAR (TRANSPARENT VECTOR LOGO, REAL-TIME CLOCK, WEATHER, SIMPLIFIED USERNAME BADGE WITHOUT ICON) -->
+  <header class="sticky top-0 z-40 card-modern border-b px-4 py-3 flex items-center justify-between harmonized-bar my-3 shadow-xl backdrop-blur-2xl">
+    <div class="flex items-center gap-2 md:gap-3">
+      <!-- TRANSPARENT VECTOR SVG LOGO (NO BACKGROUND, CLICK TO DOWNLOAD APP) -->
+      <button onclick="downloadDeviceApp()" title="Unduh Aplikasi DV Hub" class="w-10 h-10 flex items-center justify-center text-blue-500 hover:scale-110 transition ios-btn p-0 bg-transparent border-0 cursor-pointer">
+        <svg class="w-8 h-8 drop-shadow-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
         </svg>
-      </div>
-      <div>
-        <h1 class="font-extrabold text-sm md:text-base tracking-tight" data-i18n="hubTitle">DV Hub</h1>
-        <p class="text-[11px] opacity-75 hidden sm:block" data-i18n="hubSub">Pusat komando produktivitas terpadu & manajemen cerdas.</p>
+      </button>
+      
+      <!-- REAL-TIME CLOCK & LIVE WEATHER INTEGRATED IN HEADER -->
+      <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-2xl card-modern text-[11px] font-mono">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+        <span id="headerClock">00:00:00</span>
+        <span class="opacity-40">|</span>
+        <span id="headerWeatherInline" class="flex items-center gap-1 font-sans">🌤️ <span id="headerWeatherCity">Denpasar</span> <strong id="headerWeatherTemp">31°C</strong></span>
       </div>
     </div>
 
-    <!-- HEADER STATUS & QUICK CONTROLS -->
-    <div class="flex items-center gap-2.5">
-      <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl card-modern text-xs font-mono">
-        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span id="headerClock">00:00:00</span>
-      </div>
-
-      <div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl card-modern text-xs">
-        <span id="headerWeatherCity">Denpasar</span>: <strong id="headerWeatherTemp">31°C</strong>
-      </div>
-
-      <!-- Uniform icon button without text for PWA installation -->
-      <button onclick="downloadDeviceApp()" title="Install App" class="w-9 h-9 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-md shadow-blue-600/20 transition ios-btn">
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      </button>
-
-      <!-- Synchronized Header Username Badge triggering Account Settings -->
-      <button onclick="openLoginModal()" id="welcomeUserBadge" class="px-3 py-1.5 card-modern hover:border-blue-500 text-xs font-bold rounded-xl transition ios-btn flex items-center gap-1.5">
-        <svg class="w-3.5 h-3.5 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <!-- HEADER USER BADGE (SIMPLIFIED: ICON REMOVED AS REQUESTED) -->
+    <div class="flex items-center gap-2">
+      <button onclick="openLoginModal()" id="welcomeUserBadge" class="px-3.5 py-2 card-modern hover:border-blue-500 text-xs font-bold rounded-2xl transition ios-btn flex items-center gap-1">
         <span id="headerUsernameText">Hi, Pengguna</span>
       </button>
     </div>
@@ -163,24 +172,72 @@
   <!-- MAIN CONTAINER WORKSPACE -->
   <main class="max-w-7xl mx-auto px-4 py-6">
 
-    <!-- TAB 1: DASHBOARD HUB -->
+    <!-- TAB 1: BERANDA (DEFAULT TAB WITH ULTIMATE REAL-TIME INTEGRATION & LIVE WIDGETS) -->
     <section id="tab-dashboard" class="tab-content space-y-6">
-      <div class="card-modern p-6 rounded-3xl relative overflow-hidden bg-gradient-to-r from-blue-900/10 via-slate-900/5 to-indigo-900/10 border border-blue-500/20">
-        <div class="relative z-10 space-y-2">
-          <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wider" data-i18n="secProd">Produktivitas & Proyek</span>
-          <h2 class="text-2xl md:text-3xl font-extrabold">DV Hub v1.14</h2>
-          <p class="text-xs md:text-sm opacity-80 max-w-2xl leading-relaxed" data-i18n="hubSub">Kelola keuangan, rutinitas, tugas, dan alat utilitas harian Anda dalam satu platform yang mulus.</p>
-          <div class="pt-2 flex flex-wrap gap-3">
-            <button onclick="switchTab('finance')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow transition ios-btn" data-i18n="finTitle">Kelola Keuangan</button>
-            <button onclick="switchTab('chatbot')" class="px-4 py-2 card-modern hover:border-blue-500 text-xs font-bold rounded-xl transition ios-btn flex items-center gap-1.5">
-              <svg class="w-4 h-4 text-current" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg>
-              <span data-i18n="btnAiChat">Tanya AI Assistant</span>
-            </button>
+      
+      <!-- HERO BANNER WITH REAL-TIME STATUS & QUICK LAUNCH -->
+      <div class="card-modern p-6 md:p-8 rounded-3xl relative overflow-hidden bg-gradient-to-r from-blue-600/10 via-indigo-600/5 to-emerald-600/10 border border-blue-500/20 shadow-2xl">
+        <div class="relative z-10 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/15 text-blue-500 text-xs font-bold uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span> Pusat Komando Real-Time v1.18
+          </div>
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight" data-i18n="dashHeroTitle">Produktivitas Tanpa Batas & Integrasi Langsung</h2>
+          <p class="text-xs md:text-sm opacity-80 max-w-2xl leading-relaxed" data-i18n="dashHeroDesc">Kelola seluruh modul cerdas, pantau pasar keuangan global secara real-time, dan catat ide kilat dalam satu ekosistem elegan.</p>
+        </div>
+      </div>
+
+      <!-- REAL-TIME ONLINE MARKET & WEATHER TICKER WIDGET -->
+      <div class="card-modern p-5 rounded-3xl space-y-4 border border-emerald-500/20">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+          <div>
+            <h3 class="font-extrabold text-sm uppercase tracking-wider flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <span data-i18n="liveMarketTitle">Indikator Pasar & Kurs Real-Time</span>
+            </h3>
+            <p class="text-xs opacity-70" data-i18n="liveMarketSub">Pembaruan data nilai tukar mata uang & aset digital secara langsung.</p>
+          </div>
+          <button onclick="fetchLiveMarketData()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow transition ios-btn flex items-center gap-1.5" data-i18n="btnRefreshMarket">
+            <svg class="w-3.5 h-3.5 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.73-5.73"/></svg>
+            Perbarui Data
+          </button>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="card-modern p-3.5 rounded-2xl space-y-1">
+            <span class="text-[10px] opacity-70 font-bold">USD / IDR</span>
+            <h4 id="tickerUsdIdr" class="text-base font-extrabold font-mono text-emerald-500">Rp 16,050</h4>
+            <span class="text-[10px] text-emerald-500 font-mono">+0.24% Live</span>
+          </div>
+          <div class="card-modern p-3.5 rounded-2xl space-y-1">
+            <span class="text-[10px] opacity-70 font-bold">EUR / IDR</span>
+            <h4 id="tickerEurIdr" class="text-base font-extrabold font-mono text-blue-500">Rp 17,420</h4>
+            <span class="text-[10px] text-blue-500 font-mono">+0.12% Live</span>
+          </div>
+          <div class="card-modern p-3.5 rounded-2xl space-y-1">
+            <span class="text-[10px] opacity-70 font-bold">BTC / USD</span>
+            <h4 id="tickerBtcUsd" class="text-base font-extrabold font-mono text-amber-500">$64,820</h4>
+            <span class="text-[10px] text-amber-500 font-mono">+1.45% Live</span>
+          </div>
+          <div class="card-modern p-3.5 rounded-2xl space-y-1">
+            <span class="text-[10px] opacity-70 font-bold">ETH / USD</span>
+            <h4 id="tickerEthUsd" class="text-base font-extrabold font-mono text-purple-500">$3,490</h4>
+            <span class="text-[10px] text-purple-500 font-mono">+0.85% Live</span>
           </div>
         </div>
       </div>
 
-      <!-- METRICS GRID -->
+      <!-- INFINITE STREAM & GENERATOR WIDGET -->
+      <div class="card-modern p-6 rounded-3xl space-y-4 border border-blue-500/20">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+          <div>
+            <h3 class="font-extrabold text-sm uppercase tracking-wider" data-i18n="infiniteStreamTitle">Infinite Stream & Ide Tak Terbatas</h3>
+            <p class="text-xs opacity-75" data-i18n="infiniteStreamSub">Hasilkan ide, catatan kilat, atau catatan tak terbatas secara instan ke dalam memori aplikasi.</p>
+          </div>
+          <button onclick="addInfiniteStreamItem()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow transition ios-btn" data-i18n="btnAddInfinite">+ Tambah Item Tak Terbatas</button>
+        </div>
+        <div id="infiniteStreamContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 max-h-72 overflow-y-auto pr-1"></div>
+      </div>
+
+      <!-- MASTER METRICS GRID -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="card-modern p-4 rounded-2xl space-y-1">
           <span class="text-[11px] opacity-70 font-bold" data-i18n="statBalance">Total Saldo Keuangan</span>
@@ -200,7 +257,7 @@
         </div>
       </div>
 
-      <!-- MODULE SHORTCUTS & LAUNCHER GRID -->
+      <!-- MODULE SHORTCUTS LAUNCHER GRID -->
       <div class="space-y-4">
         <h3 class="font-extrabold text-sm uppercase tracking-wider opacity-90" data-i18n="hubShortcutsTitle">Pintasan & Panduan Modul Utama</h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
@@ -209,84 +266,84 @@
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
             </div>
             <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuFinance">Keuangan</h4>
-            <p class="text-[10px] opacity-60">Arus kas & anggaran</p>
+            <p class="text-[10px] opacity-60" data-i18n="subFin">Arus kas & anggaran</p>
           </button>
           <button onclick="switchTab('chatbot')" class="card-modern p-4 rounded-2xl text-left hover:border-blue-500 transition group space-y-2 ios-btn">
             <div class="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center font-bold">
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
-            <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuChatbot">Asisten AI</h4>
-            <p class="text-[10px] opacity-60">Smart assistant</p>
+            <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuChatbot">AI</h4>
+            <p class="text-[10px] opacity-60" data-i18n="subAi">Smart assistant</p>
           </button>
           <button onclick="switchTab('kanban')" class="card-modern p-4 rounded-2xl text-left hover:border-blue-500 transition group space-y-2 ios-btn">
             <div class="w-8 h-8 rounded-xl bg-violet-500/10 text-violet-500 flex items-center justify-center font-bold">
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
             </div>
-            <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuKanban">Matriks & Kanban</h4>
-            <p class="text-[10px] opacity-60">Prioritas & proyek</p>
+            <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuKanban">Proyek</h4>
+            <p class="text-[10px] opacity-60" data-i18n="subProj">Prioritas & proyek</p>
           </button>
           <button onclick="switchTab('tasks')" class="card-modern p-4 rounded-2xl text-left hover:border-blue-500 transition group space-y-2 ios-btn">
             <div class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold">
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
             </div>
-            <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuTasks">Tugas & Rutinitas</h4>
-            <p class="text-[10px] opacity-60">Daftar & kebiasaan</p>
+            <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuTasks">Tugas</h4>
+            <p class="text-[10px] opacity-60" data-i18n="subTasks">Daftar & kebiasaan</p>
           </button>
           <button onclick="switchTab('files')" class="card-modern p-4 rounded-2xl text-left hover:border-blue-500 transition group space-y-2 ios-btn">
             <div class="w-8 h-8 rounded-xl bg-pink-500/10 text-pink-500 flex items-center justify-center font-bold">
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
             </div>
-            <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuFiles">File Manager</h4>
-            <p class="text-[10px] opacity-60">Penyimpanan file</p>
+            <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuFiles">File</h4>
+            <p class="text-[10px] opacity-60" data-i18n="subFiles">Penyimpanan file</p>
           </button>
           <button onclick="switchTab('mindmap')" class="card-modern p-4 rounded-2xl text-left hover:border-blue-500 transition group space-y-2 ios-btn">
             <div class="w-8 h-8 rounded-xl bg-cyan-500/10 text-cyan-500 flex items-center justify-center font-bold">
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/></svg>
             </div>
             <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuMindMap">Mind Map</h4>
-            <p class="text-[10px] opacity-60">Papan ide visual</p>
+            <p class="text-[10px] opacity-60" data-i18n="subMind">Papan ide visual</p>
           </button>
           <button onclick="switchTab('calendar')" class="card-modern p-4 rounded-2xl text-left hover:border-blue-500 transition group space-y-2 ios-btn">
             <div class="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center font-bold">
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             </div>
             <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuCalendar">Kalender</h4>
-            <p class="text-[10px] opacity-60">Agenda & jadwal</p>
+            <p class="text-[10px] opacity-60" data-i18n="subCal">Agenda & jadwal</p>
           </button>
           <button onclick="switchTab('clock')" class="card-modern p-4 rounded-2xl text-left hover:border-blue-500 transition group space-y-2 ios-btn">
             <div class="w-8 h-8 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center font-bold">
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
-            <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuClock">Jam & Pomodoro</h4>
-            <p class="text-[10px] opacity-60">Timer & alarm</p>
+            <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuClock">Waktu</h4>
+            <p class="text-[10px] opacity-60" data-i18n="subClock">Timer & alarm</p>
           </button>
           <button onclick="switchTab('calc')" class="card-modern p-4 rounded-2xl text-left hover:border-blue-500 transition group space-y-2 ios-btn">
             <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold">
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
             </div>
             <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuCalc">Kalkulator</h4>
-            <p class="text-[10px] opacity-60">Saintifik & satuan</p>
+            <p class="text-[10px] opacity-60" data-i18n="subCalc">Saintifik & satuan</p>
           </button>
           <button onclick="switchTab('vault')" class="card-modern p-4 rounded-2xl text-left hover:border-blue-500 transition group space-y-2 ios-btn">
             <div class="w-8 h-8 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center font-bold">
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             </div>
-            <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuVault">Secure Vault</h4>
-            <p class="text-[10px] opacity-60">Manajer sandi</p>
+            <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuVault">Vault</h4>
+            <p class="text-[10px] opacity-60" data-i18n="subVault">Manajer sandi</p>
           </button>
           <button onclick="switchTab('code')" class="card-modern p-4 rounded-2xl text-left hover:border-blue-500 transition group space-y-2 ios-btn">
             <div class="w-8 h-8 rounded-xl bg-purple-500/10 text-purple-500 flex items-center justify-center font-bold">
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
             </div>
-            <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuCode">Code Editor</h4>
-            <p class="text-[10px] opacity-60">Live HTML & export</p>
+            <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="menuCode">Kode</h4>
+            <p class="text-[10px] opacity-60" data-i18n="subCode">Live HTML & export</p>
           </button>
           <button onclick="switchTab('settings')" class="card-modern p-4 rounded-2xl text-left hover:border-blue-500 transition group space-y-2 ios-btn">
             <div class="w-8 h-8 rounded-xl bg-slate-500/10 text-slate-500 flex items-center justify-center font-bold">
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
             </div>
             <h4 class="font-bold text-xs group-hover:text-blue-500 transition" data-i18n="setHeading">Pengaturan</h4>
-            <p class="text-[10px] opacity-60">Tema, musik & backup</p>
+            <p class="text-[10px] opacity-60" data-i18n="subSet">Tema & info pengembang</p>
           </button>
         </div>
       </div>
@@ -371,7 +428,7 @@
       </div>
     </section>
 
-    <!-- TAB 3: ASISTEN AI CHATBOT -->
+    <!-- TAB 3: AI -->
     <section id="tab-chatbot" class="tab-content hidden space-y-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -382,7 +439,7 @@
           <p class="text-xs opacity-70" data-i18n="chatSub">Asisten pintar DV Hub dengan integrasi Gemini API & Smart Fallback.</p>
         </div>
         <div class="flex items-center gap-2">
-          <input type="password" id="geminiApiKeyInput" onchange="saveGeminiApiKey()" placeholder="Masukkan Gemini API Key..." class="px-3 py-2 rounded-xl card-modern text-xs w-48 focus:outline-none focus:border-blue-500">
+          <input type="password" id="geminiApiKeyInput" onchange="saveGeminiApiKey()" placeholder="Masukkan Gemini API Key..." class="px-3 py-2 rounded-xl card-modern text-xs w-48 focus:outline-none focus:border-blue-500" data-i18n-ph="phApiKey">
           <button onclick="clearChatHistory()" class="px-3 py-2 card-modern hover:border-rose-500 text-rose-500 rounded-xl text-xs font-bold transition ios-btn" data-i18n="btnClearChat">Bersihkan</button>
         </div>
       </div>
@@ -398,9 +455,9 @@
         <div class="p-3 card-modern border-t border-slate-200 dark:border-slate-800 space-y-2">
           <div class="flex items-center gap-2 overflow-x-auto pb-1 text-[11px]">
             <span class="opacity-70 font-bold shrink-0" data-i18n="lblQuickPrompt">PROMPT CEPAT:</span>
-            <button onclick="sendQuickPrompt('Ringkas tugas prioritas saya')" class="px-2.5 py-1 rounded-lg card-modern hover:border-blue-500 shrink-0 ios-btn">Ringkas Tugas</button>
-            <button onclick="sendQuickPrompt('Berikan tips manajemen waktu')" class="px-2.5 py-1 rounded-lg card-modern hover:border-blue-500 shrink-0 ios-btn">Tips Waktu</button>
-            <button onclick="sendQuickPrompt('Tuliskan fungsi JavaScript modular')" class="px-2.5 py-1 rounded-lg card-modern hover:border-blue-500 shrink-0 ios-btn">Fungsi JS</button>
+            <button onclick="sendQuickPrompt('Ringkas tugas prioritas saya')" class="px-2.5 py-1 rounded-lg card-modern hover:border-blue-500 shrink-0 ios-btn" data-i18n="qp1">Ringkas Tugas</button>
+            <button onclick="sendQuickPrompt('Berikan tips manajemen waktu')" class="px-2.5 py-1 rounded-lg card-modern hover:border-blue-500 shrink-0 ios-btn" data-i18n="qp2">Tips Waktu</button>
+            <button onclick="sendQuickPrompt('Tuliskan fungsi JavaScript modular')" class="px-2.5 py-1 rounded-lg card-modern hover:border-blue-500 shrink-0 ios-btn" data-i18n="qp3">Fungsi JS</button>
           </div>
           <div class="flex gap-2">
             <input type="text" id="chatInputText" onkeydown="if(event.key==='Enter')sendChatMessage()" placeholder="Ketik pertanyaan atau perintah..." class="flex-1 px-3.5 py-2.5 rounded-xl card-modern text-xs focus:outline-none focus:border-blue-500" data-i18n-ph="phChatInput">
@@ -410,7 +467,7 @@
       </div>
     </section>
 
-    <!-- TAB 4: MATRIKS & KANBAN -->
+    <!-- TAB 4: PROYEK -->
     <section id="tab-kanban" class="tab-content hidden space-y-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -418,8 +475,8 @@
           <p class="text-xs opacity-70" data-i18n="kanbanSub">Kelola alur kerja visual Kanban dan klasifikasi prioritas keputusan Eisenhower.</p>
         </div>
         <div class="flex gap-2">
-          <button onclick="setTaskViewMode('kanban')" id="btnViewKanban" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 text-white shadow ios-btn">Kanban Board</button>
-          <button onclick="setTaskViewMode('matrix')" id="btnViewMatrix" class="px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn">Matriks Eisenhower</button>
+          <button onclick="setTaskViewMode('kanban')" id="btnViewKanban" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 text-white shadow ios-btn" data-i18n="btnKanbanView">Kanban Board</button>
+          <button onclick="setTaskViewMode('matrix')" id="btnViewMatrix" class="px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn" data-i18n="btnMatrixView">Matriks Eisenhower</button>
         </div>
       </div>
 
@@ -449,25 +506,25 @@
 
       <div id="viewMatrixArea" class="hidden grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="card-modern p-4 rounded-2xl space-y-3 border-l-4 border-rose-500">
-          <div class="flex justify-between items-center"><h3 class="font-bold text-xs">Q1: Mendesak & Penting (Lakukan Segera)</h3><button onclick="openEisenhowerModal('Q1')" class="text-rose-500 font-bold text-xs ios-btn">+</button></div>
+          <div class="flex justify-between items-center"><h3 class="font-bold text-xs" data-i18n="q1Title">Q1: Mendesak & Penting (Lakukan Segera)</h3><button onclick="openEisenhowerModal('Q1')" class="text-rose-500 font-bold text-xs ios-btn">+</button></div>
           <div id="eisenListQ1" class="space-y-2 min-h-[150px]"></div>
         </div>
         <div class="card-modern p-4 rounded-2xl space-y-3 border-l-4 border-blue-500">
-          <div class="flex justify-between items-center"><h3 class="font-bold text-xs">Q2: Tidak Mendesak & Penting (Jadwalkan)</h3><button onclick="openEisenhowerModal('Q2')" class="text-blue-500 font-bold text-xs ios-btn">+</button></div>
+          <div class="flex justify-between items-center"><h3 class="font-bold text-xs" data-i18n="q2Title">Q2: Tidak Mendesak & Penting (Jadwalkan)</h3><button onclick="openEisenhowerModal('Q2')" class="text-blue-500 font-bold text-xs ios-btn">+</button></div>
           <div id="eisenListQ2" class="space-y-2 min-h-[150px]"></div>
         </div>
         <div class="card-modern p-4 rounded-2xl space-y-3 border-l-4 border-amber-500">
-          <div class="flex justify-between items-center"><h3 class="font-bold text-xs">Q3: Mendesak & Tidak Penting (Delegasikan)</h3><button onclick="openEisenhowerModal('Q3')" class="text-amber-500 font-bold text-xs ios-btn">+</button></div>
+          <div class="flex justify-between items-center"><h3 class="font-bold text-xs" data-i18n="q3Title">Q3: Mendesak & Tidak Penting (Delegasikan)</h3><button onclick="openEisenhowerModal('Q3')" class="text-amber-500 font-bold text-xs ios-btn">+</button></div>
           <div id="eisenListQ3" class="space-y-2 min-h-[150px]"></div>
         </div>
         <div class="card-modern p-4 rounded-2xl space-y-3 border-l-4 border-slate-500">
-          <div class="flex justify-between items-center"><h3 class="font-bold text-xs">Q4: Tidak Mendesak & Tidak Penting (Eliminasi)</h3><button onclick="openEisenhowerModal('Q4')" class="text-slate-500 font-bold text-xs ios-btn">+</button></div>
+          <div class="flex justify-between items-center"><h3 class="font-bold text-xs" data-i18n="q4Title">Q4: Tidak Mendesak & Tidak Penting (Eliminasi)</h3><button onclick="openEisenhowerModal('Q4')" class="text-slate-500 font-bold text-xs ios-btn">+</button></div>
           <div id="eisenListQ4" class="space-y-2 min-h-[150px]"></div>
         </div>
       </div>
     </section>
 
-    <!-- TAB 5: TUGAS & RUTINITAS -->
+    <!-- TAB 5: TUGAS -->
     <section id="tab-tasks" class="tab-content hidden space-y-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -503,7 +560,7 @@
       </div>
     </section>
 
-    <!-- TAB 6: MIND MAP (NATIVE FULLY INTERACTIVE & DRAGGABLE) -->
+    <!-- TAB 6: MIND MAP -->
     <section id="tab-mindmap" class="tab-content hidden space-y-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -542,7 +599,7 @@
           <span id="calMonthYearLabel" class="text-xs font-extrabold font-mono w-32 text-center">Bulan Tahun</span>
           <button onclick="changeCalMonth(1)" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold ios-btn">&rarr;</button>
           <button onclick="jumpToTodayCalendar()" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnToday">Hari Ini</button>
-          <button onclick="openCalendarEventModal()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow ios-btn">+ Agenda</button>
+          <button onclick="openCalendarEventModal()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnAddAgenda">+ Agenda</button>
         </div>
       </div>
 
@@ -554,13 +611,13 @@
           <div id="calendarGrid" class="grid grid-cols-7 gap-1.5"></div>
         </div>
         <div class="card-modern p-4 rounded-2xl space-y-3">
-          <h3 class="font-extrabold text-xs uppercase tracking-wider">Daftar Agenda Terpilih</h3>
+          <h3 class="font-extrabold text-xs uppercase tracking-wider" data-i18n="selectedAgendaTitle">Daftar Agenda Terpilih</h3>
           <div id="calendarAgendaListContainer" class="space-y-2"></div>
         </div>
       </div>
     </section>
 
-    <!-- TAB 8: JAM, ALARM & POMODORO -->
+    <!-- TAB 8: WAKTU -->
     <section id="tab-clock" class="tab-content hidden space-y-6">
       <div>
         <h2 class="text-xl font-extrabold" data-i18n="clockHeading">Jam Dunia, Alarm, Stopwatch, Timer & Pomodoro</h2>
@@ -571,16 +628,21 @@
         <div class="card-modern p-5 rounded-2xl space-y-4 text-center">
           <span class="text-xs opacity-70 font-bold" data-i18n="lblCurrentLiveTime">Waktu Lokal Perangkat</span>
           <h3 id="liveClockBig" class="text-4xl font-extrabold font-mono text-blue-500 tracking-wider">00:00:00</h3>
-          <p id="liveDateBig" class="text-xs opacity-80 font-mono">Selasa, 11 Agustus 2026</p>
+          <p id="liveDateBig" class="text-xs opacity-80 font-mono">Rabu, 12 Agustus 2026</p>
           
+          <div class="p-3 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-between text-xs">
+            <span class="font-bold" data-i18n="weatherLiveTitle">Cuaca Real-Time</span>
+            <span id="clockWeatherDetail" class="font-mono">🌤️ Denpasar, 31°C (Cerah Berawan)</span>
+          </div>
+
           <hr class="border-slate-200 dark:border-slate-800">
 
           <div class="space-y-3">
             <h4 class="font-extrabold text-xs uppercase" data-i18n="pomHeading">Fokus Pomodoro</h4>
             <div class="flex justify-center gap-2">
-              <button onclick="setPomodoroMode('work')" id="pomBtnWork" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 text-white shadow ios-btn">Kerja (25m)</button>
-              <button onclick="setPomodoroMode('shortBreak')" id="pomBtnShort" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn">Istirahat (5m)</button>
-              <button onclick="setPomodoroMode('longBreak')" id="pomBtnLong" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn">Panjang (15m)</button>
+              <button onclick="setPomodoroMode('work')" id="pomBtnWork" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 text-white shadow ios-btn" data-i18n="pomWork">Kerja (25m)</button>
+              <button onclick="setPomodoroMode('shortBreak')" id="pomBtnShort" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn" data-i18n="pomShort">Istirahat (5m)</button>
+              <button onclick="setPomodoroMode('longBreak')" id="pomBtnLong" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn" data-i18n="pomLong">Panjang (15m)</button>
             </div>
             <h3 id="pomTimerDisplay" class="text-4xl font-extrabold font-mono text-emerald-500">25:00</h3>
             <div class="flex justify-center gap-2">
@@ -606,7 +668,7 @@
           <hr class="border-slate-200 dark:border-slate-800">
 
           <div class="space-y-3 text-center">
-            <h4 class="font-extrabold text-xs uppercase">Stopwatch</h4>
+            <h4 class="font-extrabold text-xs uppercase" data-i18n="stopwatchTitle">Stopwatch</h4>
             <h3 id="stopwatchDisplay" class="text-2xl font-extrabold font-mono text-violet-500">00:00:00</h3>
             <div class="flex justify-center gap-2">
               <button onclick="startStopwatch()" class="px-3 py-1.5 bg-violet-600 hover:bg-violet-700 text-white text-xs font-bold rounded-xl shadow ios-btn" data-i18n="btnStart">Mulai</button>
@@ -618,11 +680,11 @@
       </div>
     </section>
 
-    <!-- TAB 9: KALKULATOR & KONVERSI -->
+    <!-- TAB 9: KALKULATOR -->
     <section id="tab-calc" class="tab-content hidden space-y-6">
       <div>
         <h2 class="text-xl font-extrabold" data-i18n="convHeading">Pusat Kalkulator Saintifik & Konversi Terpadu</h2>
-        <p class="text-xs opacity-70">Kalkulator standar, mata uang, satuan, diskon, dan BMI dalam satu tempat.</p>
+        <p class="text-xs opacity-70" data-i18n="calcSubDesc">Kalkulator standar, mata uang, satuan, diskon, dan BMI dalam satu tempat.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -669,7 +731,7 @@
             </div>
             <div class="flex justify-center"><button onclick="swapCurrency()" class="px-3 py-1 card-modern rounded-lg text-xs font-bold text-blue-500 ios-btn">&UpDownArrow;</button></div>
             <div class="flex gap-2">
-              <div class="flex-1 px-3 py-2 rounded-xl card-modern font-mono font-bold text-emerald-500 flex items-center" id="currResultValue">16,000</div>
+              <div class="flex-1 px-3 py-2 rounded-xl card-modern font-mono font-bold text-emerald-500 flex items-center" id="currResultValue">16,050</div>
               <select id="currTo" onchange="convertCurrency()" class="px-3 py-2 rounded-xl card-modern font-mono">
                 <option value="IDR">IDR</option>
                 <option value="USD">USD</option>
@@ -719,23 +781,23 @@
       </div>
     </section>
 
-    <!-- TAB 10: SECURE VAULT -->
+    <!-- TAB 10: VAULT -->
     <section id="tab-vault" class="tab-content hidden space-y-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h2 class="text-xl font-extrabold" data-i18n="vaultHeading">Secure Password & Data Vault</h2>
           <p class="text-xs opacity-70" data-i18n="vaultSub">Simpan kredensial penting, catatan rahasia, dan sandi akun secara aman di perangkat.</p>
         </div>
-        <button onclick="openVaultModal()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow transition ios-btn">+ Tambah Kredensial</button>
+        <button onclick="openVaultModal()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow transition ios-btn" data-i18n="btnAddVault">+ Tambah Kredensial</button>
       </div>
 
       <div class="card-modern p-4 rounded-2xl space-y-3">
-        <h3 class="font-extrabold text-xs uppercase tracking-wider">Daftar Kredensial Tersimpan</h3>
+        <h3 class="font-extrabold text-xs uppercase tracking-wider" data-i18n="vaultListTitle">Daftar Kredensial Tersimpan</h3>
         <div id="vaultListContainer" class="grid grid-cols-1 md:grid-cols-3 gap-3"></div>
       </div>
     </section>
 
-    <!-- TAB 11: CODE EDITOR & VIEWER (WITH PASTE FEATURE) -->
+    <!-- TAB 11: KODE -->
     <section id="tab-code" class="tab-content hidden space-y-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -744,20 +806,20 @@
         </div>
         <div class="flex flex-wrap gap-2">
           <button onclick="pasteCodeFromClipboard()" class="px-3 py-2 card-modern hover:border-blue-500 text-xs font-bold rounded-xl transition ios-btn" data-i18n="btnPasteCode">Tempel (Paste)</button>
-          <button onclick="loadDefaultHtmlTemplate()" class="px-3 py-2 card-modern hover:border-blue-500 text-xs font-bold rounded-xl transition ios-btn">Muat Template</button>
-          <button onclick="openSnippetModal()" class="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow transition ios-btn">+ Snippet</button>
-          <button onclick="exportCodeFile('html')" class="px-3 py-2 card-modern hover:border-blue-500 text-xs font-bold rounded-xl transition ios-btn">Ekspor .HTML</button>
-          <button onclick="exportCodeFile('txt')" class="px-3 py-2 card-modern hover:border-blue-500 text-xs font-bold rounded-xl transition ios-btn">Ekspor .TXT</button>
+          <button onclick="loadDefaultHtmlTemplate()" class="px-3 py-2 card-modern hover:border-blue-500 text-xs font-bold rounded-xl transition ios-btn" data-i18n="btnLoadTemplate">Muat Template</button>
+          <button onclick="openSnippetModal()" class="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow transition ios-btn" data-i18n="btnAddSnippet">+ Snippet</button>
+          <button onclick="exportCodeFile('html')" class="px-3 py-2 card-modern hover:border-blue-500 text-xs font-bold rounded-xl transition ios-btn" data-i18n="btnExportHtml">Ekspor .HTML</button>
+          <button onclick="exportCodeFile('txt')" class="px-3 py-2 card-modern hover:border-blue-500 text-xs font-bold rounded-xl transition ios-btn" data-i18n="btnExportTxt">Ekspor .TXT</button>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-[500px]">
         <div class="card-modern p-4 rounded-2xl flex flex-col space-y-2">
-          <div class="flex justify-between items-center"><h3 class="font-bold text-xs">Editor HTML/CSS</h3><button onclick="renderLiveHtmlPreview()" class="px-3 py-1 bg-emerald-600 text-white text-[11px] font-bold rounded-lg ios-btn">Render Preview</button></div>
-          <textarea id="liveHtmlEditor" class="flex-1 w-full bg-slate-950 p-3 rounded-xl font-mono text-xs text-blue-200 focus:outline-none resize-none border border-slate-800" placeholder="Ketik atau paste kode HTML di sini..."></textarea>
+          <div class="flex justify-between items-center"><h3 class="font-bold text-xs" data-i18n="editorTitle">Editor HTML/CSS</h3><button onclick="renderLiveHtmlPreview()" class="px-3 py-1 bg-emerald-600 text-white text-[11px] font-bold rounded-lg ios-btn" data-i18n="btnRender">Render Preview</button></div>
+          <textarea id="liveHtmlEditor" class="flex-1 w-full bg-slate-950 p-3 rounded-xl font-mono text-xs text-blue-200 focus:outline-none resize-none border border-slate-800" placeholder="Ketik atau paste kode HTML di sini..." data-i18n-ph="phCodeEditor"></textarea>
         </div>
         <div class="card-modern p-4 rounded-2xl flex flex-col space-y-2">
-          <h3 class="font-bold text-xs">Live Output Render</h3>
+          <h3 class="font-bold text-xs" data-i18n="outputTitle">Live Output Render</h3>
           <div class="flex-1 w-full bg-white rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800">
             <iframe id="liveHtmlPreviewFrame" class="w-full h-full border-0"></iframe>
           </div>
@@ -765,7 +827,7 @@
       </div>
     </section>
 
-    <!-- TAB 12: FILE MANAGER -->
+    <!-- TAB 12: FILE -->
     <section id="tab-files" class="tab-content hidden space-y-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -790,32 +852,32 @@
           <div class="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20 text-center space-y-2">
             <span class="text-xs text-blue-500 font-bold" data-i18n="filesStorageUsed">Kapasitas localStorage</span>
             <h3 id="storageUsageDisplay" class="text-xl font-extrabold font-mono">0 KB / 5 MB</h3>
-            <p class="text-[10px] opacity-70">Data disimpan secara aman di dalam browser Anda.</p>
+            <p class="text-[10px] opacity-70" data-i18n="storageNote">Data disimpan secara aman di dalam browser Anda.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- TAB 13: PENGATURAN & INFORMASI -->
+    <!-- TAB 13: PENGATURAN -->
     <section id="tab-settings" class="tab-content hidden space-y-6">
       <div>
         <h2 class="text-xl font-extrabold" data-i18n="setHeading">Pengaturan & Informasi</h2>
-        <p class="text-xs opacity-70">Atur preferensi bahasa, 6 tema tampilan, latar musik ambient, dan manajemen data.</p>
+        <p class="text-xs opacity-70" data-i18n="setSub">Atur preferensi bahasa, 6 tema tampilan baru, latar musik ambient, dan manajemen data.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="card-modern p-5 rounded-2xl space-y-4">
-          <h3 class="font-extrabold text-xs uppercase tracking-wider" data-i18n="themeSettingTitle">Bahasa & 6 Tema Tampilan</h3>
+          <h3 class="font-extrabold text-xs uppercase tracking-wider" data-i18n="themeSettingTitle">Bahasa & 6 Tema Tampilan Baru</h3>
           <div class="space-y-3 text-xs">
             <div class="flex flex-col gap-2">
-              <span class="font-bold" data-i18n="lblTheme">Pilih Tema Tampilan (6 Varian)</span>
+              <span class="font-bold" data-i18n="lblTheme">Pilih Tema Tampilan (6 Varian Baru)</span>
               <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                <button onclick="setAppTheme('theme-ios-clean')" class="px-3 py-2 rounded-xl card-modern font-bold text-center ios-btn">iOS Clean</button>
-                <button onclick="setAppTheme('theme-dark')" class="px-3 py-2 rounded-xl card-modern font-bold text-center ios-btn">Dark</button>
-                <button onclick="setAppTheme('theme-glass')" class="px-3 py-2 rounded-xl card-modern font-bold text-center ios-btn">Glass</button>
-                <button onclick="setAppTheme('theme-midnight')" class="px-3 py-2 rounded-xl card-modern font-bold text-center ios-btn">Midnight</button>
-                <button onclick="setAppTheme('theme-amoled')" class="px-3 py-2 rounded-xl card-modern font-bold text-center ios-btn">AMOLED</button>
-                <button onclick="setAppTheme('theme-solarized')" class="px-3 py-2 rounded-xl card-modern font-bold text-center ios-btn">Solarized</button>
+                <button onclick="setAppTheme('theme-cyberpunk-neon')" class="px-3 py-2 rounded-xl card-modern font-bold text-center ios-btn text-[11px]" data-i18n="themeCyber">Cyberpunk Neon</button>
+                <button onclick="setAppTheme('theme-aurora-glass')" class="px-3 py-2 rounded-xl card-modern font-bold text-center ios-btn text-[11px]" data-i18n="themeAurora">Aurora Glass</button>
+                <button onclick="setAppTheme('theme-nordic-frost')" class="px-3 py-2 rounded-xl card-modern font-bold text-center ios-btn text-[11px]" data-i18n="themeNordic">Nordic Frost</button>
+                <button onclick="setAppTheme('theme-obsidian-gold')" class="px-3 py-2 rounded-xl card-modern font-bold text-center ios-btn text-[11px]" data-i18n="themeObsidian">Obsidian Gold</button>
+                <button onclick="setAppTheme('theme-sunset-blush')" class="px-3 py-2 rounded-xl card-modern font-bold text-center ios-btn text-[11px]" data-i18n="themeSunset">Sunset Blush</button>
+                <button onclick="setAppTheme('theme-matrix-terminal')" class="px-3 py-2 rounded-xl card-modern font-bold text-center ios-btn text-[11px]" data-i18n="themeMatrix">Matrix Terminal</button>
               </div>
             </div>
             <div class="flex justify-between items-center pt-2">
@@ -834,13 +896,13 @@
           <h3 class="font-extrabold text-xs uppercase tracking-wider" data-i18n="musicSettingTitle">Musik Latar Belakang Ambient</h3>
           <div class="space-y-3 text-xs">
             <div class="flex justify-between items-center">
-              <button id="musicToggleBtn" onclick="toggleBackgroundMusic()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold shadow transition ios-btn">Hentikan Musik</button>
+              <button id="musicToggleBtn" onclick="toggleBackgroundMusic()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold shadow transition ios-btn" data-i18n="btnStopMusic">Hentikan Musik</button>
               <select onchange="changeMusicTrack(this.value)" class="px-3 py-1.5 rounded-xl card-modern font-mono">
-                <option value="chill">Chill Lofi</option>
-                <option value="dreamy">Dreamy Synth</option>
-                <option value="synth">Ambient Synth</option>
-                <option value="acoustic">Warm Acoustic</option>
-                <option value="space">Deep Space</option>
+                <option value="chill" data-i18n="trackChill">Chill Lofi</option>
+                <option value="dreamy" data-i18n="trackDreamy">Dreamy Synth</option>
+                <option value="synth" data-i18n="trackSynth">Ambient Synth</option>
+                <option value="acoustic" data-i18n="trackAcoustic">Warm Acoustic</option>
+                <option value="space" data-i18n="trackSpace">Deep Space</option>
               </select>
             </div>
             <div class="flex items-center gap-3">
@@ -850,11 +912,13 @@
           </div>
 
           <hr class="border-slate-200 dark:border-slate-800">
-
-          <h3 class="font-extrabold text-xs uppercase tracking-wider" data-i18n="historyTitle">Riwayat Perubahan (Update History)</h3>
-          <div class="space-y-1.5 text-[11px] opacity-80 max-h-40 overflow-y-auto pr-2 font-mono">
-            <p><strong>v1.14:</strong> Harmonized header styling, transparent vector SVG logo, enhanced transparent Glass theme, active launcher menu button state feedback, native draggable mind map canvas bugfix, code editor paste feature, full i18n localization support across all tabs/modals.</p>
-            <p><strong>v1.13:</strong> Mind map canvas, launcher menu organization, synchronized username badge, 6 themes.</p>
+          <h3 class="font-extrabold text-xs uppercase tracking-wider" data-i18n="infSettingsTitle">Konfigurasi Tak Terbatas & Catatan Sistem</h3>
+          <div class="space-y-2 text-xs">
+            <div class="flex gap-2">
+              <input type="text" id="infConfigInput" placeholder="Tambah aturan / konfigurasi tak terbatas..." class="flex-1 px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500" data-i18n-ph="phInfConfig">
+              <button onclick="addInfiniteSetting()" class="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow ios-btn" data-i18n="btnTambah">+ Tambah</button>
+            </div>
+            <div id="infConfigList" class="space-y-1.5 max-h-32 overflow-y-auto"></div>
           </div>
         </div>
 
@@ -882,6 +946,16 @@
               </div>
             </div>
 
+            <hr class="border-slate-200 dark:border-slate-800">
+            <div class="p-3.5 rounded-2xl bg-blue-500/10 border border-blue-500/20 space-y-1.5 text-xs">
+              <h4 class="font-extrabold text-blue-500 flex items-center gap-1.5">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span data-i18n="devInfoTitle">Informasi Pengembang</span>
+              </h4>
+              <p class="opacity-80 leading-relaxed" data-i18n="devInfoDesc">DV Hub dikembangkan oleh <strong>DV Labs & Senior Full Stack Architect Expert</strong>. Dirancang khusus untuk memberikan efisiensi komando produktivitas tingkat tinggi, privasi penuh, dan arsitektur modular tanpa batas.</p>
+              <p class="font-mono text-[11px] opacity-70">Versi: v1.18-PRO | Build: 2026.08.12</p>
+            </div>
+
             <div class="pt-2">
               <button onclick="resetAppCache()" class="w-full px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl shadow transition ios-btn" data-i18n="btnResetData">Reset Seluruh Data App</button>
             </div>
@@ -892,53 +966,89 @@
 
   </main>
 
-  <!-- FLOATING DOCK BAR NAVIGATION (ICON ONLY, THEME HARMONIZED) -->
-  <nav class="fixed bottom-3 left-1/2 -translate-x-1/2 z-40 card-modern px-2 py-1.5 rounded-2xl flex items-center gap-1.5 md:gap-2.5 shadow-2xl backdrop-blur-xl border overflow-x-auto max-w-[95vw]">
-    <button onclick="switchTab('dashboard')" id="menuBtn-dashboard" title="Hub" class="dock-btn menu-btn-active">
+  <!-- FLOATING DOCK BAR NAVIGATION (SIMPLIFIED TO 6 MOST IMPORTANT BUTTONS: Beranda, Keuangan, AI, Proyek, Tugas, Menu) -->
+  <nav class="fixed bottom-3 left-1/2 -translate-x-1/2 z-40 card-modern px-3 py-2 rounded-2xl flex items-center gap-2 md:gap-3 shadow-2xl backdrop-blur-xl border harmonized-bar">
+    <button onclick="switchTab('dashboard')" id="menuBtn-dashboard" title="Beranda" class="dock-btn menu-btn-active">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     </button>
-    <button onclick="switchTab('finance')" id="menuBtn-finance" title="Finance" class="dock-btn opacity-70 hover:opacity-100">
+    <button onclick="switchTab('finance')" id="menuBtn-finance" title="Keuangan" class="dock-btn opacity-70 hover:opacity-100">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
     </button>
-    <button onclick="switchTab('kanban')" id="menuBtn-kanban" title="Matriks" class="dock-btn opacity-70 hover:opacity-100">
+    <button onclick="switchTab('chatbot')" id="menuBtn-chatbot" title="AI" class="dock-btn opacity-70 hover:opacity-100">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg>
+    </button>
+    <button onclick="switchTab('kanban')" id="menuBtn-kanban" title="Proyek" class="dock-btn opacity-70 hover:opacity-100">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
     </button>
-    <button onclick="switchTab('tasks')" id="menuBtn-tasks" title="Tasks" class="dock-btn opacity-70 hover:opacity-100">
+    <button onclick="switchTab('tasks')" id="menuBtn-tasks" title="Tugas" class="dock-btn opacity-70 hover:opacity-100">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
     </button>
-    <button onclick="switchTab('mindmap')" id="menuBtn-mindmap" title="Mind Map" class="dock-btn opacity-70 hover:opacity-100">
-      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/></svg>
-    </button>
-    <button onclick="switchTab('files')" id="menuBtn-files" title="Files" class="dock-btn opacity-70 hover:opacity-100">
-      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-    </button>
-    <button onclick="toggleFloatingMenu()" title="Lainnya" class="dock-btn bg-blue-600 hover:bg-blue-700 text-white font-bold shadow">
+    <button onclick="toggleFloatingMenu()" id="menuBtn-launcher" title="Menu" class="dock-btn bg-blue-600 hover:bg-blue-700 text-white font-bold shadow">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </nav>
 
-  <!-- NEATLY ORGANIZED LAUNCHER MENU CENTER (WITH DYNAMIC ACTIVE HIGHLIGHT) -->
+  <!-- LAUNCHER MENU MODAL -->
   <div id="floatingMenuModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-xl p-6 rounded-3xl space-y-4 max-h-[85vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-800">
-        <h3 class="font-extrabold text-sm tracking-tight" data-i18n="launcherTitle">Pusat Menu Launcher</h3>
+        <h3 class="font-extrabold text-sm tracking-tight" data-i18n="launcherTitle">Menu</h3>
         <button onclick="toggleFloatingMenu()" class="w-8 h-8 rounded-full card-modern flex items-center justify-center font-bold opacity-70 hover:opacity-100">&times;</button>
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
-        <button onclick="switchTabAndClose('dashboard')" id="launcherBtn-dashboard" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">🏠 <span data-i18n="menuHub">Hub</span></button>
-        <button onclick="switchTabAndClose('finance')" id="launcherBtn-finance" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">💵 <span data-i18n="menuFinance">Keuangan</span></button>
-        <button onclick="switchTabAndClose('chatbot')" id="launcherBtn-chatbot" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">🤖 <span data-i18n="menuChatbot">Asisten AI</span></button>
-        <button onclick="switchTabAndClose('kanban')" id="launcherBtn-kanban" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">📊 <span data-i18n="menuKanban">Matriks & Kanban</span></button>
-        <button onclick="switchTabAndClose('tasks')" id="launcherBtn-tasks" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">✅ <span data-i18n="menuTasks">Tugas & Rutinitas</span></button>
-        <button onclick="switchTabAndClose('mindmap')" id="launcherBtn-mindmap" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">🧠 <span data-i18n="menuMindMap">Mind Map</span></button>
-        <button onclick="switchTabAndClose('calendar')" id="launcherBtn-calendar" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">📅 <span data-i18n="menuCalendar">Kalender</span></button>
-        <button onclick="switchTabAndClose('clock')" id="launcherBtn-clock" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">⏱️ <span data-i18n="menuClock">Jam & Pomodoro</span></button>
-        <button onclick="switchTabAndClose('calc')" id="launcherBtn-calc" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">🔢 <span data-i18n="menuCalc">Kalkulator</span></button>
-        <button onclick="switchTabAndClose('vault')" id="launcherBtn-vault" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">🔐 <span data-i18n="menuVault">Secure Vault</span></button>
-        <button onclick="switchTabAndClose('code')" id="launcherBtn-code" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">💻 <span data-i18n="menuCode">Code Editor</span></button>
-        <button onclick="switchTabAndClose('files')" id="launcherBtn-files" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">📁 <span data-i18n="menuFiles">File Manager</span></button>
-        <button onclick="switchTabAndClose('settings')" id="launcherBtn-settings" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5 col-span-2 sm:col-span-3 bg-blue-500/10 border-blue-500/30 text-blue-500">⚙️ <span data-i18n="setHeading">Pengaturan & Informasi Akun</span></button>
+        <button onclick="switchTabAndClose('dashboard')" id="launcherBtn-dashboard" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">
+          <svg class="w-4 h-4 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span data-i18n="menuHub">Beranda</span>
+        </button>
+        <button onclick="switchTabAndClose('finance')" id="launcherBtn-finance" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">
+          <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <span data-i18n="menuFinance">Keuangan</span>
+        </button>
+        <button onclick="switchTabAndClose('chatbot')" id="launcherBtn-chatbot" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">
+          <svg class="w-4 h-4 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span data-i18n="menuChatbot">AI</span>
+        </button>
+        <button onclick="switchTabAndClose('kanban')" id="launcherBtn-kanban" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">
+          <svg class="w-4 h-4 text-violet-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
+          <span data-i18n="menuKanban">Proyek</span>
+        </button>
+        <button onclick="switchTabAndClose('tasks')" id="launcherBtn-tasks" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">
+          <svg class="w-4 h-4 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          <span data-i18n="menuTasks">Tugas</span>
+        </button>
+        <button onclick="switchTabAndClose('mindmap')" id="launcherBtn-mindmap" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">
+          <svg class="w-4 h-4 text-cyan-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/></svg>
+          <span data-i18n="menuMindMap">Mind Map</span>
+        </button>
+        <button onclick="switchTabAndClose('calendar')" id="launcherBtn-calendar" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">
+          <svg class="w-4 h-4 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span data-i18n="menuCalendar">Kalender</span>
+        </button>
+        <button onclick="switchTabAndClose('clock')" id="launcherBtn-clock" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">
+          <svg class="w-4 h-4 text-rose-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span data-i18n="menuClock">Waktu</span>
+        </button>
+        <button onclick="switchTabAndClose('calc')" id="launcherBtn-calc" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">
+          <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
+          <span data-i18n="menuCalc">Kalkulator</span>
+        </button>
+        <button onclick="switchTabAndClose('vault')" id="launcherBtn-vault" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">
+          <svg class="w-4 h-4 text-indigo-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span data-i18n="menuVault">Vault</span>
+        </button>
+        <button onclick="switchTabAndClose('code')" id="launcherBtn-code" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">
+          <svg class="w-4 h-4 text-purple-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span data-i18n="menuCode">Kode</span>
+        </button>
+        <button onclick="switchTabAndClose('files')" id="launcherBtn-files" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5">
+          <svg class="w-4 h-4 text-pink-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          <span data-i18n="menuFiles">File</span>
+        </button>
+        <button onclick="switchTabAndClose('settings')" id="launcherBtn-settings" class="launcher-item card-modern p-3.5 rounded-2xl text-left hover:border-blue-500 transition font-bold ios-btn flex items-center gap-2.5 col-span-2 sm:col-span-3 bg-blue-500/10 border-blue-500/30 text-blue-500">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span data-i18n="setHeading">Pengaturan & Informasi</span>
+        </button>
       </div>
     </div>
   </div>
@@ -946,18 +1056,18 @@
   <!-- ALL MODALS -->
   <div id="txModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4">
-      <h3 id="modalTxTitle" class="font-extrabold text-sm">Tambah Transaksi</h3>
+      <h3 id="modalTxTitle" class="font-extrabold text-sm" data-i18n="modalTxTitle">Tambah Transaksi</h3>
       <form id="txForm" class="space-y-3 text-xs">
         <input type="hidden" id="formType">
         <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="thDate">Tanggal</label><input type="date" id="formDate" required class="w-full px-3 py-2 rounded-xl card-modern font-mono focus:outline-none focus:border-blue-500"></div>
-        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="thCat">Kategori</label><input type="text" id="formCategory" placeholder="Contoh: Makanan / Gaji" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
+        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="thCat">Kategori</label><input type="text" id="formCategory" placeholder="Contoh: Makanan / Gaji" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500" data-i18n-ph="phCategory"></div>
         <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="thNom">Nominal</label><input type="number" id="formAmount" placeholder="0" required class="w-full px-3 py-2 rounded-xl card-modern font-mono focus:outline-none focus:border-blue-500"></div>
-        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="thDesc">Keterangan</label><input type="text" id="formDesc" placeholder="Keterangan opsional" class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
+        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="thDesc">Keterangan</label><input type="text" id="formDesc" placeholder="Keterangan opsional" class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500" data-i18n-ph="phDesc"></div>
         <div class="space-y-1">
-          <label class="opacity-70 font-bold">Metode Transaksi</label>
+          <label class="opacity-70 font-bold" data-i18n="lblMethod">Metode Transaksi</label>
           <select id="formIsOnline" class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500">
-            <option value="true">Online (Transfer / E-Wallet)</option>
-            <option value="false">Offline (Tunai / Cash)</option>
+            <option value="true" data-i18n="optOnlineMethod">Online (Transfer / E-Wallet)</option>
+            <option value="false" data-i18n="optOfflineMethod">Offline (Tunai / Cash)</option>
           </select>
         </div>
         <div class="flex justify-end gap-2 pt-2">
@@ -972,7 +1082,7 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4">
       <h3 class="font-extrabold text-sm" data-i18n="habitModalTitle">Tambah Rutinitas Baru</h3>
       <form id="habitForm" class="space-y-3 text-xs">
-        <div class="space-y-1"><label class="opacity-70 font-bold">Nama Rutinitas</label><input type="text" id="habitTitleInput" placeholder="Contoh: Olahraga 30 Menit" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
+        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblHabitName">Nama Rutinitas</label><input type="text" id="habitTitleInput" placeholder="Contoh: Olahraga 30 Menit" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500" data-i18n-ph="phHabit"></div>
         <div class="flex justify-end gap-2 pt-2">
           <button type="button" onclick="closeHabitModal()" class="px-4 py-2 card-modern font-bold rounded-xl ios-btn" data-i18n="btnCancel">Batal</button>
           <button type="submit" class="px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-xl shadow ios-btn" data-i18n="btnSave">Simpan</button>
@@ -986,8 +1096,8 @@
       <h3 class="font-extrabold text-sm" data-i18n="kanbanFormTitle">Tambah Kartu Kanban</h3>
       <form id="kanbanForm" class="space-y-3 text-xs">
         <input type="hidden" id="kanbanCardStatus">
-        <div class="space-y-1"><label class="opacity-70 font-bold">Judul Kartu</label><input type="text" id="kanbanCardTitle" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
-        <div class="space-y-1"><label class="opacity-70 font-bold">Deskripsi</label><textarea id="kanbanCardDesc" class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500 resize-none h-20"></textarea></div>
+        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblCardTitle">Judul Kartu</label><input type="text" id="kanbanCardTitle" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
+        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="thDesc">Deskripsi</label><textarea id="kanbanCardDesc" class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500 resize-none h-20"></textarea></div>
         <div class="flex justify-end gap-2 pt-2">
           <button type="button" onclick="closeKanbanModal()" class="px-4 py-2 card-modern font-bold rounded-xl ios-btn" data-i18n="btnCancel">Batal</button>
           <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow ios-btn" data-i18n="btnSave">Simpan</button>
@@ -1001,7 +1111,7 @@
       <h3 class="font-extrabold text-sm" data-i18n="eisenFormTitle">Tambah Tugas Prioritas Matriks</h3>
       <form id="eisenForm" class="space-y-3 text-xs">
         <input type="hidden" id="eisenQuadrant">
-        <div class="space-y-1"><label class="opacity-70 font-bold">Judul Tugas</label><input type="text" id="eisenTitle" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
+        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblTaskTitle">Judul Tugas</label><input type="text" id="eisenTitle" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
         <div class="flex justify-end gap-2 pt-2">
           <button type="button" onclick="closeEisenhowerModal()" class="px-4 py-2 card-modern font-bold rounded-xl ios-btn" data-i18n="btnCancel">Batal</button>
           <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow ios-btn" data-i18n="btnSave">Simpan</button>
@@ -1012,9 +1122,9 @@
 
   <div id="taskModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4">
-      <h3 class="font-extrabold text-sm">Tambah Tugas Baru</h3>
+      <h3 class="font-extrabold text-sm" data-i18n="taskModalTitle">Tambah Tugas Baru</h3>
       <form id="taskForm" class="space-y-3 text-xs">
-        <div class="space-y-1"><label class="opacity-70 font-bold">Judul Tugas</label><input type="text" id="taskTitle" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
+        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblTaskTitle">Judul Tugas</label><input type="text" id="taskTitle" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
         <div class="flex justify-end gap-2 pt-2">
           <button type="button" onclick="closeTaskModal()" class="px-4 py-2 card-modern font-bold rounded-xl ios-btn" data-i18n="btnCancel">Batal</button>
           <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow ios-btn" data-i18n="btnSave">Simpan</button>
@@ -1025,10 +1135,10 @@
 
   <div id="noteModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4">
-      <h3 class="font-extrabold text-sm">Tambah Catatan Baru</h3>
+      <h3 class="font-extrabold text-sm" data-i18n="noteModalTitle">Tambah Catatan Baru</h3>
       <form id="noteForm" class="space-y-3 text-xs">
-        <div class="space-y-1"><label class="opacity-70 font-bold">Judul Catatan</label><input type="text" id="noteTitle" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
-        <div class="space-y-1"><label class="opacity-70 font-bold">Isi Catatan</label><textarea id="noteContent" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500 resize-none h-24"></textarea></div>
+        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblNoteTitle">Judul Catatan</label><input type="text" id="noteTitle" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
+        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblNoteContent">Isi Catatan</label><textarea id="noteContent" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500 resize-none h-24"></textarea></div>
         <div class="flex justify-end gap-2 pt-2">
           <button type="button" onclick="closeNoteModal()" class="px-4 py-2 card-modern font-bold rounded-xl ios-btn" data-i18n="btnCancel">Batal</button>
           <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow ios-btn" data-i18n="btnSave">Simpan</button>
@@ -1039,10 +1149,10 @@
 
   <div id="snippetModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4">
-      <h3 class="font-extrabold text-sm">Tambah Snippet Kode</h3>
+      <h3 class="font-extrabold text-sm" data-i18n="snippetModalTitle">Tambah Snippet Kode</h3>
       <form id="snippetForm" class="space-y-3 text-xs">
-        <div class="space-y-1"><label class="opacity-70 font-bold">Judul Snippet</label><input type="text" id="snippetTitle" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
-        <div class="space-y-1"><label class="opacity-70 font-bold">Kode</label><textarea id="snippetCode" required class="w-full px-3 py-2 rounded-xl card-modern font-mono focus:outline-none focus:border-blue-500 resize-none h-24"></textarea></div>
+        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblSnippetTitle">Judul Snippet</label><input type="text" id="snippetTitle" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
+        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblSnippetCode">Kode</label><textarea id="snippetCode" required class="w-full px-3 py-2 rounded-xl card-modern font-mono focus:outline-none focus:border-blue-500 resize-none h-24"></textarea></div>
         <div class="flex justify-end gap-2 pt-2">
           <button type="button" onclick="closeSnippetModal()" class="px-4 py-2 card-modern font-bold rounded-xl ios-btn" data-i18n="btnCancel">Batal</button>
           <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow ios-btn" data-i18n="btnSave">Simpan</button>
@@ -1053,10 +1163,10 @@
 
   <div id="calendarEventModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4">
-      <h3 class="font-extrabold text-sm">Tambah Agenda Kalender</h3>
+      <h3 class="font-extrabold text-sm" data-i18n="calModalTitle">Tambah Agenda Kalender</h3>
       <form id="calEventForm" class="space-y-3 text-xs">
-        <div class="space-y-1"><label class="opacity-70 font-bold">Tanggal</label><input type="date" id="calEventDate" required class="w-full px-3 py-2 rounded-xl card-modern font-mono focus:outline-none focus:border-blue-500"></div>
-        <div class="space-y-1"><label class="opacity-70 font-bold">Keterangan Agenda</label><input type="text" id="calEventText" placeholder="Contoh: Rapat Klien" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
+        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="thDate">Tanggal</label><input type="date" id="calEventDate" required class="w-full px-3 py-2 rounded-xl card-modern font-mono focus:outline-none focus:border-blue-500"></div>
+        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblAgendaText">Keterangan Agenda</label><input type="text" id="calEventText" placeholder="Contoh: Rapat Klien" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
         <div class="flex justify-end gap-2 pt-2">
           <button type="button" onclick="closeCalendarEventModal()" class="px-4 py-2 card-modern font-bold rounded-xl ios-btn" data-i18n="btnCancel">Batal</button>
           <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow ios-btn" data-i18n="btnSave">Simpan</button>
@@ -1067,24 +1177,23 @@
 
   <div id="vaultModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4">
-      <h3 class="font-extrabold text-sm">Tambah Kredensial Secure Vault</h3>
+      <h3 class="font-extrabold text-sm" data-i18n="vaultModalTitle">Tambah Kredensial Secure Vault</h3>
       <form id="vaultForm" onsubmit="saveVaultItem(event)" class="space-y-3 text-xs">
-        <div class="space-y-1"><label class="opacity-70 font-bold">Judul / Layanan</label><input type="text" id="vaultTitle" placeholder="Contoh: Akun Email / GitHub" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
-        <div class="space-y-1"><label class="opacity-70 font-bold">Username / Email</label><input type="text" id="vaultUser" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
-        <div class="space-y-1"><label class="opacity-70 font-bold">Password / Kunci</label><input type="text" id="vaultPass" required class="w-full px-3 py-2 rounded-xl card-modern font-mono focus:outline-none focus:border-blue-500"></div>
+        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblVaultTitle">Judul / Layanan</label><input type="text" id="vaultTitle" placeholder="Contoh: Akun Email / GitHub" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
+        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblVaultUser">Username / Email</label><input type="text" id="vaultUser" required class="w-full px-3 py-2 rounded-xl card-modern focus:outline-none focus:border-blue-500"></div>
+        <div class="space-y-1"><label class="opacity-70 font-bold" data-i18n="lblVaultPass">Password / Kunci</label><input type="text" id="vaultPass" required class="w-full px-3 py-2 rounded-xl card-modern font-mono focus:outline-none focus:border-blue-500"></div>
         <div class="flex justify-end gap-2 pt-2">
-          <button type="button" onclick="closeVaultModal()" class="px-4 py-2 card-modern font-bold rounded-xl ios-btn">Batal</button>
-          <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow ios-btn">Simpan</button>
+          <button type="button" onclick="closeVaultModal()" class="px-4 py-2 card-modern font-bold rounded-xl ios-btn" data-i18n="btnCancel">Batal</button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow ios-btn" data-i18n="btnSave">Simpan</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- LOGIN & ACCOUNT SETTINGS MODAL (SYNCHRONIZED WITH HEADER) -->
   <div id="loginModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-sm p-6 rounded-3xl space-y-4 text-center">
       <h3 class="font-extrabold text-base" data-i18n="loginModalTitle">Pengaturan Akun Cepat</h3>
-      <p class="text-xs opacity-70">Ubah nama akun Anda yang terintegrasi di header dan pengaturan.</p>
+      <p class="text-xs opacity-70" data-i18n="loginModalDesc">Ubah nama akun Anda yang terintegrasi di header dan pengaturan.</p>
       <input type="text" id="authModalInput" placeholder="Nama Anda" class="w-full px-3 py-2.5 rounded-xl card-modern text-xs text-center font-bold focus:outline-none focus:border-blue-500">
       <div class="flex gap-2">
         <button onclick="closeLoginModal()" class="flex-1 px-4 py-2 card-modern font-bold text-xs rounded-xl ios-btn" data-i18n="btnCancel">Batal</button>
@@ -1093,15 +1202,18 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT STATE ENGINE, GEMINI API, WEB AUDIO SYNTHESIZER & CORE LOGIC (v1.14) -->
+  <!-- JAVASCRIPT STATE ENGINE, REAL-TIME MARKET TICKER & CORE LOGIC (v1.18) -->
   <script>
-    // --- KAMUS MULTI-BAHASA LENGKAP & DINAMIS (v1.14) ---
+    // --- KAMUS MULTI-BAHASA LENGKAP & DINAMIS (v1.18 - 100% LOKALISASI MENYELURUH) ---
     const i18nData = {
       id: {
         hubTitle: "DV Hub",
         hubSub: "Pusat komando produktivitas terpadu & manajemen cerdas.",
-        btnPwa: "Pasang Pintasan",
-        btnAiChat: "Tanya AI Assistant",
+        dashHeroTitle: "Produktivitas Tanpa Batas & Integrasi Langsung",
+        dashHeroDesc: "Kelola seluruh modul cerdas, pantau pasar keuangan global secara real-time, dan catat ide kilat dalam satu ekosistem elegan.",
+        liveMarketTitle: "Indikator Pasar & Kurs Real-Time",
+        liveMarketSub: "Pembaruan data nilai tukar mata uang & aset digital secara langsung.",
+        btnRefreshMarket: "Perbarui Data",
         statBalance: "Total Saldo Keuangan",
         statTasks: "Tugas & Rutinitas",
         statKanban: "Matriks & Kanban",
@@ -1109,7 +1221,7 @@
         hubShortcutsTitle: "Pintasan & Panduan Modul Utama",
         finTitle: "Manajemen Keuangan",
         finSub: "Pantau arus kas, grafik lingkaran, dan perbandingan online vs offline.",
-        lblBudgetGoal: "Target Batas Pengeluaran Bulanan:",
+        lblBudgetGoal: "Target Anggaran:",
         optInc: "Pemasukan",
         optExp: "Pengeluaran",
         btnExportFin: "Ekspor CSV",
@@ -1119,8 +1231,8 @@
         lblUsed: "Terpakai",
         phSearchTx: "Cari transaksi...",
         optAll: "Semua",
-        optOnline: "Online Saja",
-        optOffline: "Offline Saja",
+        optOnline: "Online",
+        optOffline: "Offline",
         thDate: "Tanggal",
         thCat: "Kategori / Metode",
         thDesc: "Keterangan",
@@ -1194,28 +1306,109 @@
         btnToday: "Hari Ini",
         daySun: "Min", dayMon: "Sen", dayTue: "Sel", dayWed: "Rab", dayThu: "Kam", dayFri: "Jum", daySat: "Sab",
         setHeading: "Pengaturan & Informasi",
-        themeSettingTitle: "Bahasa & 6 Tema Tampilan",
+        themeSettingTitle: "Bahasa & 6 Tema Tampilan Baru",
         musicSettingTitle: "Musik Latar Belakang Ambient",
-        lblTheme: "Tema Tampilan (6 Varian)",
+        lblTheme: "Tema Tampilan (6 Varian Baru)",
         lblSelectLang: "Pilih Bahasa App",
         lblVolume: "Volume:",
-        historyTitle: "Riwayat Perubahan (Update History)",
-        launcherTitle: "Pusat Menu Launcher",
-        secProd: "PRODUKTIVITAS & PROYEK",
-        menuHub: "Hub",
+        launcherTitle: "Menu",
+        menuHub: "Beranda",
         menuFinance: "Keuangan",
-        menuChatbot: "Asisten AI",
-        menuKanban: "Matriks & Kanban",
-        menuTasks: "Tugas & Rutinitas",
-        menuFiles: "File Manager",
+        menuChatbot: "AI",
+        menuKanban: "Proyek",
+        menuTasks: "Tugas",
+        menuFiles: "File",
         menuMindMap: "Mind Map",
         menuCalendar: "Kalender",
-        menuClock: "Jam & Pomodoro",
+        menuClock: "Waktu",
         menuCalc: "Kalkulator",
-        menuVault: "Secure Vault",
-        menuCode: "Code Editor",
+        menuVault: "Vault",
+        menuCode: "Kode",
+        subFin: "Arus kas & anggaran",
+        subAi: "Smart assistant",
+        subProj: "Prioritas & proyek",
+        subTasks: "Daftar & kebiasaan",
+        subFiles: "Penyimpanan file",
+        subMind: "Papan ide visual",
+        subCal: "Agenda & jadwal",
+        subClock: "Timer & alarm",
+        subCalc: "Saintifik & satuan",
+        subVault: "Manajer sandi",
+        subCode: "Live HTML & export",
+        subSet: "Tema & info pengembang",
+        infiniteStreamTitle: "Infinite Stream & Ide Tak Terbatas",
+        infiniteStreamSub: "Hasilkan ide, catatan kilat, atau catatan tak terbatas secara instan ke dalam memori aplikasi.",
+        btnAddInfinite: "+ Tambah Item Tak Terbatas",
+        infSettingsTitle: "Konfigurasi Tak Terbatas & Catatan Sistem",
+        phInfConfig: "Tambah aturan / konfigurasi tak terbatas...",
+        btnTambah: "+ Tambah",
+        devInfoTitle: "Informasi Pengembang",
+        devInfoDesc: "DV Hub dikembangkan oleh DV Labs & Senior Full Stack Architect Expert. Dirancang khusus untuk memberikan efisiensi komando produktivitas tingkat tinggi, privasi penuh, dan arsitektur modular tanpa batas.",
+        themeCyber: "Cyberpunk Neon",
+        themeAurora: "Aurora Glass",
+        themeNordic: "Nordic Frost",
+        themeObsidian: "Obsidian Gold",
+        themeSunset: "Sunset Blush",
+        themeMatrix: "Matrix Terminal",
+        btnStopMusic: "Hentikan Musik",
+        trackChill: "Chill Lofi",
+        trackDreamy: "Dreamy Synth",
+        trackSynth: "Ambient Synth",
+        trackAcoustic: "Warm Acoustic",
+        trackSpace: "Deep Space",
+        weatherLiveTitle: "Cuaca Real-Time",
+        btnKanbanView: "Kanban Board",
+        btnMatrixView: "Matriks Eisenhower",
+        q1Title: "Q1: Mendesak & Penting (Lakukan Segera)",
+        q2Title: "Q2: Tidak Mendesak & Penting (Jadwalkan)",
+        q3Title: "Q3: Mendesak & Tidak Penting (Delegasikan)",
+        q4Title: "Q4: Tidak Mendesak & Tidak Penting (Eliminasi)",
+        qp1: "Ringkas Tugas",
+        qp2: "Tips Waktu",
+        qp3: "Fungsi JS",
+        phApiKey: "Masukkan Gemini API Key...",
+        btnLoadTemplate: "Muat Template",
+        btnAddSnippet: "+ Snippet",
+        btnExportHtml: "Ekspor .HTML",
+        btnExportTxt: "Ekspor .TXT",
+        editorTitle: "Editor HTML/CSS",
+        btnRender: "Render Preview",
+        outputTitle: "Live Output Render",
+        storageNote: "Data disimpan secara aman di dalam browser Anda.",
+        setSub: "Atur preferensi bahasa, 6 tema tampilan baru, latar musik ambient, dan manajemen data.",
+        modalTxTitle: "Tambah Transaksi",
+        phCategory: "Contoh: Makanan / Gaji",
+        phDesc: "Keterangan opsional",
+        lblMethod: "Metode Transaksi",
+        optOnlineMethod: "Online (Transfer / E-Wallet)",
+        optOfflineMethod: "Offline (Tunai / Cash)",
+        lblHabitName: "Nama Rutinitas",
+        phHabit: "Contoh: Olahraga 30 Menit",
+        lblCardTitle: "Judul Kartu",
+        lblTaskTitle: "Judul Tugas",
+        lblNoteTitle: "Judul Catatan",
+        lblNoteContent: "Isi Catatan",
+        lblSnippetTitle: "Judul Snippet",
+        lblSnippetCode: "Kode",
+        calModalTitle: "Tambah Agenda Kalender",
+        lblAgendaText: "Keterangan Agenda",
+        lblVaultTitle: "Judul / Layanan",
+        lblVaultUser: "Username / Email",
+        lblVaultPass: "Password / Kunci",
+        loginModalTitle: "Pengaturan Akun Cepat",
+        loginModalDesc: "Ubah nama akun Anda yang terintegrasi di header dan pengaturan.",
+        btnAddAgenda: "+ Agenda",
+        selectedAgendaTitle: "Daftar Agenda Terpilih",
+        pomWork: "Kerja (25m)",
+        pomShort: "Istirahat (5m)",
+        pomLong: "Panjang (15m)",
+        stopwatchTitle: "Stopwatch",
+        phAlarmNote: "Contoh: Rapat Kerja",
+        calcSubDesc: "Kalkulator standar, mata uang, satuan, diskon, dan BMI dalam satu tempat.",
+        btnAddVault: "+ Tambah Kredensial",
+        vaultListTitle: "Daftar Kredensial Tersimpan",
         loginTitle: "Akun & Pemulihan Data Total",
-        lblUsername: "Nama Pengguna",
+        lblUsername: "Nama Pengguna (Sinkron Header)",
         phUsername: "Nama Anda",
         btnSaveAccount: "Simpan",
         btnResetData: "Reset Seluruh Data App",
@@ -1227,13 +1420,19 @@
         eisenFormTitle: "Tambah Tugas Prioritas Matriks",
         btnCancel: "Batal",
         btnSave: "Simpan",
-        loginModalTitle: "Pengaturan Akun Cepat"
+        taskModalTitle: "Tambah Tugas Baru",
+        noteModalTitle: "Tambah Catatan Baru",
+        snippetModalTitle: "Tambah Snippet Kode",
+        phCodeEditor: "Ketik atau paste kode HTML di sini..."
       },
       en: {
         hubTitle: "DV Hub",
         hubSub: "Integrated productivity command center & smart management.",
-        btnPwa: "Install Shortcut",
-        btnAiChat: "Ask AI Assistant",
+        dashHeroTitle: "Limitless Productivity & Live Integration",
+        dashHeroDesc: "Manage all smart modules, monitor global financial markets in real-time, and jot down quick ideas in one elegant ecosystem.",
+        liveMarketTitle: "Real-Time Market & Currency Ticker",
+        liveMarketSub: "Live updates on currency exchange rates and digital assets.",
+        btnRefreshMarket: "Refresh Data",
         statBalance: "Total Financial Balance",
         statTasks: "Tasks & Routines",
         statKanban: "Matrix & Kanban",
@@ -1241,7 +1440,7 @@
         hubShortcutsTitle: "Main Module Shortcuts & Guide",
         finTitle: "Financial Management",
         finSub: "Track cash flow, pie charts, and online vs offline comparison.",
-        lblBudgetGoal: "Monthly Expense Budget Limit:",
+        lblBudgetGoal: "Budget Goal:",
         optInc: "Income",
         optExp: "Expense",
         btnExportFin: "Export CSV",
@@ -1251,8 +1450,8 @@
         lblUsed: "Used",
         phSearchTx: "Search transactions...",
         optAll: "All",
-        optOnline: "Online Only",
-        optOffline: "Offline Only",
+        optOnline: "Online",
+        optOffline: "Offline",
         thDate: "Date",
         thCat: "Category / Method",
         thDesc: "Description",
@@ -1326,28 +1525,109 @@
         btnToday: "Today",
         daySun: "Sun", dayMon: "Mon", dayTue: "Tue", dayWed: "Wed", dayThu: "Thu", dayFri: "Fri", daySat: "Sat",
         setHeading: "Settings & Information",
-        themeSettingTitle: "Language & 6 Display Themes",
+        themeSettingTitle: "Language & 6 New Display Themes",
         musicSettingTitle: "Ambient Background Music",
-        lblTheme: "Display Theme (6 Variants)",
+        lblTheme: "Display Theme (6 New Variants)",
         lblSelectLang: "Select App Language",
         lblVolume: "Volume:",
-        historyTitle: "Update History",
-        launcherTitle: "Launcher Menu Center",
-        secProd: "PRODUCTIVITY & PROJECTS",
-        menuHub: "Hub",
+        launcherTitle: "Menu",
+        menuHub: "Home",
         menuFinance: "Finance",
-        menuChatbot: "AI Assistant",
-        menuKanban: "Matrix & Kanban",
-        menuTasks: "Tasks & Routines",
-        menuFiles: "File Manager",
+        menuChatbot: "AI",
+        menuKanban: "Projects",
+        menuTasks: "Tasks",
+        menuFiles: "Files",
         menuMindMap: "Mind Map",
         menuCalendar: "Calendar",
-        menuClock: "Clock & Pomodoro",
+        menuClock: "Clock",
         menuCalc: "Calculator",
-        menuVault: "Secure Vault",
-        menuCode: "Code Editor",
+        menuVault: "Vault",
+        menuCode: "Code",
+        subFin: "Cash flow & budget",
+        subAi: "Smart assistant",
+        subProj: "Priority & projects",
+        subTasks: "Lists & habits",
+        subFiles: "File storage",
+        subMind: "Visual idea board",
+        subCal: "Agendas & schedule",
+        subClock: "Timer & alarm",
+        subCalc: "Scientific & units",
+        subVault: "Password manager",
+        subCode: "Live HTML & export",
+        subSet: "Themes & dev info",
+        infiniteStreamTitle: "Infinite Stream & Unlimited Ideas",
+        infiniteStreamSub: "Generate ideas, quick notes, or unlimited logs instantly into app memory.",
+        btnAddInfinite: "+ Add Infinite Item",
+        infSettingsTitle: "Unlimited Config & System Notes",
+        phInfConfig: "Add unlimited rule / config...",
+        btnTambah: "+ Add",
+        devInfoTitle: "Developer Information",
+        devInfoDesc: "DV Hub is developed by DV Labs & Senior Full Stack Architect Expert. Specifically crafted to deliver high-level productivity command efficiency, complete privacy, and boundless modular architecture.",
+        themeCyber: "Cyberpunk Neon",
+        themeAurora: "Aurora Glass",
+        themeNordic: "Nordic Frost",
+        themeObsidian: "Obsidian Gold",
+        themeSunset: "Sunset Blush",
+        themeMatrix: "Matrix Terminal",
+        btnStopMusic: "Stop Music",
+        trackChill: "Chill Lofi",
+        trackDreamy: "Dreamy Synth",
+        trackSynth: "Ambient Synth",
+        trackAcoustic: "Warm Acoustic",
+        trackSpace: "Deep Space",
+        weatherLiveTitle: "Real-Time Weather",
+        btnKanbanView: "Kanban Board",
+        btnMatrixView: "Eisenhower Matrix",
+        q1Title: "Q1: Urgent & Important (Do First)",
+        q2Title: "Q2: Not Urgent & Important (Schedule)",
+        q3Title: "Q3: Urgent & Not Important (Delegate)",
+        q4Title: "Q4: Not Urgent & Not Important (Eliminate)",
+        qp1: "Summarize Tasks",
+        qp2: "Time Tips",
+        qp3: "JS Function",
+        phApiKey: "Enter Gemini API Key...",
+        btnLoadTemplate: "Load Template",
+        btnAddSnippet: "+ Snippet",
+        btnExportHtml: "Export .HTML",
+        btnExportTxt: "Export .TXT",
+        editorTitle: "HTML/CSS Editor",
+        btnRender: "Render Preview",
+        outputTitle: "Live Output Render",
+        storageNote: "Data is stored securely inside your browser.",
+        setSub: "Configure language preferences, 6 new display themes, ambient music, and data management.",
+        modalTxTitle: "Add Transaction",
+        phCategory: "E.g. Food / Salary",
+        phDesc: "Optional description",
+        lblMethod: "Transaction Method",
+        optOnlineMethod: "Online (Transfer / E-Wallet)",
+        optOfflineMethod: "Offline (Cash)",
+        lblHabitName: "Routine Name",
+        phHabit: "E.g. Workout 30 Mins",
+        lblCardTitle: "Card Title",
+        lblTaskTitle: "Task Title",
+        lblNoteTitle: "Note Title",
+        lblNoteContent: "Note Content",
+        lblSnippetTitle: "Snippet Title",
+        lblSnippetCode: "Code",
+        calModalTitle: "Add Calendar Agenda",
+        lblAgendaText: "Agenda Description",
+        lblVaultTitle: "Title / Service",
+        lblVaultUser: "Username / Email",
+        lblVaultPass: "Password / Key",
+        loginModalTitle: "Quick Account Settings",
+        loginModalDesc: "Change your account name integrated across header and settings.",
+        btnAddAgenda: "+ Agenda",
+        selectedAgendaTitle: "Selected Agendas",
+        pomWork: "Work (25m)",
+        pomShort: "Short Break (5m)",
+        pomLong: "Long Break (15m)",
+        stopwatchTitle: "Stopwatch",
+        phAlarmNote: "E.g. Work Meeting",
+        calcSubDesc: "Standard calculator, currency, units, discount, and BMI in one place.",
+        btnAddVault: "+ Add Credential",
+        vaultListTitle: "Saved Credentials List",
         loginTitle: "Account & Total Data Recovery",
-        lblUsername: "Username",
+        lblUsername: "Username (Header Sync)",
         phUsername: "Your Name",
         btnSaveAccount: "Save",
         btnResetData: "Reset All App Data",
@@ -1359,13 +1639,19 @@
         eisenFormTitle: "Add Priority Matrix Task",
         btnCancel: "Cancel",
         btnSave: "Save",
-        loginModalTitle: "Quick Account Settings"
+        taskModalTitle: "Add New Task",
+        noteModalTitle: "Add New Note",
+        snippetModalTitle: "Add Code Snippet",
+        phCodeEditor: "Type or paste HTML code here..."
       },
       zh: {
         hubTitle: "DV Hub",
         hubSub: "综合生产力指挥中心与智能管理。",
-        btnPwa: "安装快捷方式",
-        btnAiChat: "咨询 AI 助手",
+        dashHeroTitle: "无限生产力与实时集成",
+        dashHeroDesc: "在一个优雅的生态系统中管理所有智能模块、实时监控全球金融市场并快速记录灵感。",
+        liveMarketTitle: "实时市场与货币行情",
+        liveMarketSub: "货币汇率与数字资产的实时更新。",
+        btnRefreshMarket: "刷新数据",
         statBalance: "财务总余额",
         statTasks: "任务与例程",
         statKanban: "矩阵与看板",
@@ -1373,7 +1659,7 @@
         hubShortcutsTitle: "主要模块快捷方式与指南",
         finTitle: "财务管理",
         finSub: "跟踪现金流、饼图以及线上与线下比较。",
-        lblBudgetGoal: "每月支出预算限额：",
+        lblBudgetGoal: "预算目标：",
         optInc: "收入",
         optExp: "支出",
         btnExportFin: "导出 CSV",
@@ -1383,8 +1669,8 @@
         lblUsed: "已使用",
         phSearchTx: "搜索交易...",
         optAll: "全部",
-        optOnline: "仅线上",
-        optOffline: "仅线下",
+        optOnline: "线上",
+        optOffline: "线下",
         thDate: "日期",
         thCat: "类别 / 方式",
         thDesc: "描述",
@@ -1458,28 +1744,109 @@
         btnToday: "今天",
         daySun: "日", dayMon: "一", dayTue: "二", dayWed: "三", dayThu: "四", dayFri: "五", daySat: "六",
         setHeading: "设置与信息",
-        themeSettingTitle: "语言与 6 种显示主题",
+        themeSettingTitle: "语言与 6 种新显示主题",
         musicSettingTitle: "环境背景音乐",
-        lblTheme: "显示主题 (6 种变体)",
+        lblTheme: "显示主题 (6 种新变体)",
         lblSelectLang: "选择应用语言",
         lblVolume: "音量：",
-        historyTitle: "更新历史",
-        launcherTitle: "启动器菜单中心",
-        secProd: "生产力与项目",
-        menuHub: "Hub",
+        launcherTitle: "Menu",
+        menuHub: "首页",
         menuFinance: "财务",
-        menuChatbot: "AI 助手",
-        menuKanban: "矩阵与看板",
-        menuTasks: "任务与例程",
-        menuFiles: "文件管理器",
+        menuChatbot: "AI",
+        menuKanban: "项目",
+        menuTasks: "任务",
+        menuFiles: "文件",
         menuMindMap: "思维导图",
         menuCalendar: "日历",
-        menuClock: "时钟与番茄钟",
+        menuClock: "时钟",
         menuCalc: "计算器",
-        menuVault: "Secure Vault",
-        menuCode: "Code Editor",
+        menuVault: "Vault",
+        menuCode: "代码",
+        subFin: "现金流与预算",
+        subAi: "智能助手",
+        subProj: "优先级与项目",
+        subTasks: "列表与习惯",
+        subFiles: "文件存储",
+        subMind: "视觉创意板",
+        subCal: "日程安排",
+        subClock: "计时器与闹钟",
+        subCalc: "科学与单位",
+        subVault: "密码管理器",
+        subCode: "实时 HTML",
+        subSet: "主题与开发者信息",
+        infiniteStreamTitle: "无限流与无限创意",
+        infiniteStreamSub: "立即将想法、快速笔记或无限日志生成到应用内存中。",
+        btnAddInfinite: "+ 添加无限项",
+        infSettingsTitle: "无限配置与系统说明",
+        phInfConfig: "添加无限规则 / 配置...",
+        btnTambah: "+ 添加",
+        devInfoTitle: "开发者信息",
+        devInfoDesc: "DV Hub 由 DV Labs & Senior Full Stack Architect Expert 开发。专为实现高级生产力指挥效率、完全隐私和无限模块化架构而精心打造。",
+        themeCyber: "赛博朋克霓虹",
+        themeAurora: "极光玻璃",
+        themeNordic: "北欧极霜",
+        themeObsidian: "黑曜石金",
+        themeSunset: "落日余晖",
+        themeMatrix: "矩阵终端",
+        btnStopMusic: "停止音乐",
+        trackChill: "Chill Lofi",
+        trackDreamy: "Dreamy Synth",
+        trackSynth: "Ambient Synth",
+        trackAcoustic: "Warm Acoustic",
+        trackSpace: "Deep Space",
+        weatherLiveTitle: "实时天气",
+        btnKanbanView: "看板视图",
+        btnMatrixView: "艾森豪威尔矩阵",
+        q1Title: "Q1: 紧急且重要 (立即做)",
+        q2Title: "Q2: 不紧急但重要 (计划做)",
+        q3Title: "Q3: 紧急但不重要 (委派)",
+        q4Title: "Q4: 不紧急且不重要 (消除)",
+        qp1: "总结任务",
+        qp2: "时间技巧",
+        qp3: "JS 函数",
+        phApiKey: "输入 Gemini API Key...",
+        btnLoadTemplate: "加载模板",
+        btnAddSnippet: "+ 代码段",
+        btnExportHtml: "导出 .HTML",
+        btnExportTxt: "导出 .TXT",
+        editorTitle: "HTML/CSS 编辑器",
+        btnRender: "渲染预览",
+        outputTitle: "实时渲染输出",
+        storageNote: "数据安全存储在您的浏览器中。",
+        setSub: "配置语言偏好、6种新显示主题、环境音乐和数据管理。",
+        modalTxTitle: "添加交易",
+        phCategory: "例如：食物 / 工资",
+        phDesc: "可选描述",
+        lblMethod: "交易方式",
+        optOnlineMethod: "线上 (转账 / 电子钱包)",
+        optOfflineMethod: "线下 (现金)",
+        lblHabitName: "例程名称",
+        phHabit: "例如：锻炼 30 分钟",
+        lblCardTitle: "卡片标题",
+        lblTaskTitle: "任务标题",
+        lblNoteTitle: "笔记标题",
+        lblNoteContent: "笔记内容",
+        lblSnippetTitle: "代码段标题",
+        lblSnippetCode: "代码",
+        calModalTitle: "添加日历日程",
+        lblAgendaText: "日程描述",
+        lblVaultTitle: "标题 / 服务",
+        lblVaultUser: "用户名 / 邮箱",
+        lblVaultPass: "密码 / 密钥",
+        loginModalTitle: "快捷账户设置",
+        loginModalDesc: "更改在标题和设置中同步的账户名称。",
+        btnAddAgenda: "+ 日程",
+        selectedAgendaTitle: "选定的日程",
+        pomWork: "工作 (25m)",
+        pomShort: "短休 (5m)",
+        pomLong: "长休 (15m)",
+        stopwatchTitle: "秒表",
+        phAlarmNote: "例如：工作会议",
+        calcSubDesc: "标准计算器、货币、单位、折扣和 BMI 一应俱全。",
+        btnAddVault: "+ 添加凭据",
+        vaultListTitle: "已保存凭据列表",
         loginTitle: "账户与全部数据恢复",
-        lblUsername: "用户名",
+        lblUsername: "用户名 (标题同步)",
         phUsername: "您的名字",
         btnSaveAccount: "保存",
         btnResetData: "重置所有应用数据",
@@ -1491,13 +1858,19 @@
         eisenFormTitle: "添加优先级矩阵任务",
         btnCancel: "取消",
         btnSave: "保存",
-        loginModalTitle: "快捷账户设置"
+        taskModalTitle: "添加新任务",
+        noteModalTitle: "添加新笔记",
+        snippetModalTitle: "添加代码段",
+        phCodeEditor: "在此处键入或粘贴 HTML 代码..."
       },
       ar: {
         hubTitle: "DV Hub",
         hubSub: "مركز قيادة الإنتاجية المتكامل والإدارة الذكية.",
-        btnPwa: "تثبيت الاختصار",
-        btnAiChat: "اسأل مساعد الذكاء الاصطناعي",
+        dashHeroTitle: "إنتاجية بلا حدود وتكامل فوري",
+        dashHeroDesc: "قم بإدارة جميع الوحدات الذكية، وتتبع الأسواق المالية العالمية في الوقت الفعلي، وسجل الأفكار السريعة في بيئة واحدة أنيقة.",
+        liveMarketTitle: "مؤشر السوق والعملات الفوري",
+        liveMarketSub: "تحديثات مباشرة لأسعار صرف العملات والأصول الرقمية.",
+        btnRefreshMarket: "تحديث البيانات",
         statBalance: "إجمالي الرصيد المالي",
         statTasks: "المهام والروتين",
         statKanban: "المصفوفة وكانبان",
@@ -1505,7 +1878,7 @@
         hubShortcutsTitle: "اختصارات ودليل الوحدات الرئيسية",
         finTitle: "الإدارة المالية",
         finSub: "تتبع التدفق النقدي، الرسوم البيانية الدائرية، والمقارنة عبر الإنترنت وغير المتصلة.",
-        lblBudgetGoal: "حد ميزانية المصروفات الشهرية:",
+        lblBudgetGoal: "هدف الميزانية:",
         optInc: "الدخل",
         optExp: "المصروفات",
         btnExportFin: "تصدير CSV",
@@ -1515,8 +1888,8 @@
         lblUsed: "مستخدم",
         phSearchTx: "بحث في المعاملات...",
         optAll: "الكل",
-        optOnline: "عبر الإنترنت فقط",
-        optOffline: "دون اتصال فقط",
+        optOnline: "عبر الإنترنت",
+        optOffline: "دون اتصال",
         thDate: "التاريخ",
         thCat: "الفئة / الطريقة",
         thDesc: "الوصف",
@@ -1590,28 +1963,109 @@
         btnToday: "اليوم",
         daySun: "أحد", dayMon: "ثنين", dayTue: "ثلاثاء", dayWed: "أربعاء", dayThu: "خميس", dayFri: "جمعة", daySat: "سبت",
         setHeading: "الإعدادات والمعلومات",
-        themeSettingTitle: "اللغة و 6 مظاهر للعرض",
+        themeSettingTitle: "اللغة و 6 مظاهر جديدة للعرض",
         musicSettingTitle: "موسيقى الخلفية المحيطة",
-        lblTheme: "مظهر العرض (6 خيارات)",
+        lblTheme: "مظهر العرض (6 خيارات جديدة)",
         lblSelectLang: "اختر لغة التطبيق",
         lblVolume: "الصوت:",
-        historyTitle: "سجل التغييرات",
-        launcherTitle: "مركز قائمة المشغل",
-        secProd: "الإنتاجية والمشاريع",
-        menuHub: "Hub",
+        launcherTitle: "Menu",
+        menuHub: "الرئيسية",
         menuFinance: "المالية",
-        menuChatbot: "مساعد AI",
-        menuKanban: "المصفوفة وكانبان",
-        menuTasks: "المهام والروتين",
-        menuFiles: "مدير الملفات",
+        menuChatbot: "AI",
+        menuKanban: "المشاريع",
+        menuTasks: "المهام",
+        menuFiles: "الملفات",
         menuMindMap: "خريطة العقل",
         menuCalendar: "Kalender",
-        menuClock: "الساعة وبومودورو",
+        menuClock: "الوقت",
         menuCalc: "حاسبة",
-        menuVault: "Secure Vault",
-        menuCode: "Code Editor",
+        menuVault: "Vault",
+        menuCode: "الكود",
+        subFin: "التدفق النقدي والميزانية",
+        subAi: "مساعد ذكي",
+        subProj: "الأولويات والمشاريع",
+        subTasks: "القوائم والعادات",
+        subFiles: "تخزين الملفات",
+        subMind: "لوحة الأفكار",
+        subCal: "الجدول الزمني",
+        subClock: "المؤقت والمنبه",
+        subCalc: "علمي ووحدات",
+        subVault: "مدير الكلمات",
+        subCode: "HTML مباشر",
+        subSet: "المظاهر ومعلومات المطور",
+        infiniteStreamTitle: "تدفق لا نهائي وأفكار غير محدودة",
+        infiniteStreamSub: "قم بتوليد الأفكار أو الملاحظات السريعة أو السجلات غير المحدودة فوراً في ذاكرة التطبيق.",
+        btnAddInfinite: "+ إضافة عنصر لا نهائي",
+        infSettingsTitle: "تكوينات غير محدودة وملاحظات النظام",
+        phInfConfig: "إضافة قاعدة / تكوين غير محدود...",
+        btnTambah: "+ إضافة",
+        devInfoTitle: "معلومات المطور",
+        devInfoDesc: "تم تطوير DV Hub بواسطة DV Labs & Senior Full Stack Architect Expert. مصمم خصيصاً لتوفير كفاءة عالية في قيادة الإنتاجية، خصوصية كاملة، وهندسة مرنة بلا حدود.",
+        themeCyber: "نيون سايبربانك",
+        themeAurora: "زجاج أورورا",
+        themeNordic: "صقيع نورديك",
+        themeObsidian: "ذهب أوبسيديان",
+        themeSunset: "غسوب وردي",
+        themeMatrix: "محطة مصفوفة",
+        btnStopMusic: "إيقاف الموسيقى",
+        trackChill: "Chill Lofi",
+        trackDreamy: "Dreamy Synth",
+        trackSynth: "Ambient Synth",
+        trackAcoustic: "Warm Acoustic",
+        trackSpace: "Deep Space",
+        weatherLiveTitle: "الطقس الفوري",
+        btnKanbanView: "لوحة كانبان",
+        btnMatrixView: "مصفوفة أيزنهاور",
+        q1Title: "Q1: عاجل ومهم (افعل فوراً)",
+        q2Title: "Q2: غير عاجل ومهم (جدول)",
+        q3Title: "Q3: عاجل وغير مهم (فوض)",
+        q4Title: "Q4: غير عاجل وغير مهم (احذف)",
+        qp1: "تلخيص المهام",
+        qp2: "نصائح الوقت",
+        qp3: "دالة JS",
+        phApiKey: "أدخل مفتاح Gemini API...",
+        btnLoadTemplate: "تحميل القالب",
+        btnAddSnippet: "+ قصاصة",
+        btnExportHtml: "تصدير .HTML",
+        btnExportTxt: "تصدير .TXT",
+        editorTitle: "محرر HTML/CSS",
+        btnRender: "معاينة مباشرة",
+        outputTitle: "إخراج المعاينة المباشرة",
+        storageNote: "يتم تخزين البيانات بشكل آمن داخل متصفحك.",
+        setSub: "تكوين تفضيلات اللغة، 6 مظاهر جديدة للعرض، الموسيقى المحيطة، وإدارة البيانات.",
+        modalTxTitle: "إضافة معاملة",
+        phCategory: "مثل: طعام / راتب",
+        phDesc: "وصف اختياري",
+        lblMethod: "طريقة المعاملة",
+        optOnlineMethod: "عبر الإنترنت (تحويل / محفظة)",
+        optOfflineMethod: "دون اتصال (نقدي)",
+        lblHabitName: "اسم الروتين",
+        phHabit: "مثل: تمارين لمدة 30 دقيقة",
+        lblCardTitle: "عنوان البطاقة",
+        lblTaskTitle: "عنوان المهمة",
+        lblNoteTitle: "عنوان الملاحظة",
+        lblNoteContent: "محتوى الملاحظة",
+        lblSnippetTitle: "عنوان القصاصة",
+        lblSnippetCode: "الكود",
+        calModalTitle: "إضافة جدول التقويم",
+        lblAgendaText: "وصف الجدول",
+        lblVaultTitle: "العنوان / الخدمة",
+        lblVaultUser: "اسم المستخدم / البريد",
+        lblVaultPass: "كلمة المرور / المفتاح",
+        loginModalTitle: "إعدادات الحساب السريعة",
+        loginModalDesc: "قم بتغيير اسم حسابك المتكامل عبر العنوان والإعدادات.",
+        btnAddAgenda: "+ جدول",
+        selectedAgendaTitle: "الجداول المحددة",
+        pomWork: "عمل (25د)",
+        pomShort: "استراحة قصيرة (5د)",
+        pomLong: "استراحة طويلة (15د)",
+        stopwatchTitle: "ساعة الإيقاف",
+        phAlarmNote: "مثل: اجتماع عمل",
+        calcSubDesc: "آلة حاسبة قياسية، عملات، وحدات، خصم، ومؤشر كتلة الجسم في مكان واحد.",
+        btnAddVault: "+ إضافة بيانات اعتماد",
+        vaultListTitle: "قائمة بيانات الاعتماد المحفوظة",
         loginTitle: "الحساب واستعادة البيانات الشاملة",
-        lblUsername: "اسم المستخدم",
+        lblUsername: "اسم المستخدم (مزامنة العنوان)",
         phUsername: "اسمك",
         btnSaveAccount: "حفظ",
         btnResetData: "إعادة ضبط جميع بيانات التطبيق",
@@ -1623,7 +2077,10 @@
         eisenFormTitle: "إضافة مهمة مصفوفة الأولويات",
         btnCancel: "إلغاء",
         btnSave: "حفظ",
-        loginModalTitle: "إعدادات الحساب السريعة"
+        taskModalTitle: "إضافة مهمة جديدة",
+        noteModalTitle: "إضافة ملاحظة جديدة",
+        snippetModalTitle: "إضافة قصاصة كود",
+        phCodeEditor: "اكتب أو الصق كود HTML هنا..."
       }
     };
 
@@ -1648,10 +2105,10 @@
       if (langSelector) langSelector.value = lang;
     }
 
-    // --- STATE UTAMA & PERSISTENSI (v1.14) ---
+    // --- STATE UTAMA & PERSISTENSI (v1.18) ---
     let appState = {
       currentTab: 'dashboard',
-      theme: 'theme-ios-clean',
+      theme: 'theme-nordic-frost',
       lang: 'id',
       user: { name: 'Pengguna', apiKey: '' },
       finance: { currency: 'Rp', budgetLimit: 5000000, transactions: [] },
@@ -1666,7 +2123,9 @@
       files: [],
       calendarEvents: {},
       music: { active: true, track: 'chill', volume: 0.3 },
-      chatHistory: []
+      chatHistory: [],
+      infiniteStream: [],
+      infiniteSettings: []
     };
 
     let deferredPrompt = null;
@@ -1690,7 +2149,7 @@
           const parsed = JSON.parse(saved);
           appState = {
             currentTab: parsed.currentTab || 'dashboard',
-            theme: parsed.theme || 'theme-ios-clean',
+            theme: parsed.theme || 'theme-nordic-frost',
             lang: parsed.lang || 'id',
             user: parsed.user || { name: 'Pengguna', apiKey: '' },
             finance: (parsed.finance && Array.isArray(parsed.finance.transactions)) ? parsed.finance : { currency: 'Rp', budgetLimit: 5000000, transactions: [] },
@@ -1705,7 +2164,9 @@
             files: Array.isArray(parsed.files) ? parsed.files : [],
             calendarEvents: parsed.calendarEvents || {},
             music: parsed.music !== undefined ? parsed.music : { active: true, track: 'chill', volume: 0.3 },
-            chatHistory: Array.isArray(parsed.chatHistory) ? parsed.chatHistory : []
+            chatHistory: Array.isArray(parsed.chatHistory) ? parsed.chatHistory : [],
+            infiniteStream: Array.isArray(parsed.infiniteStream) ? parsed.infiniteStream : [],
+            infiniteSettings: Array.isArray(parsed.infiniteSettings) ? parsed.infiniteSettings : []
           };
         }
       } catch (e) {
@@ -1713,10 +2174,99 @@
       }
     }
 
+    // --- REAL-TIME MARKET TICKER INTEGRATION ---
+    function fetchLiveMarketData() {
+      const usdIdr = document.getElementById('tickerUsdIdr');
+      const eurIdr = document.getElementById('tickerEurIdr');
+      const btcUsd = document.getElementById('tickerBtcUsd');
+      const ethUsd = document.getElementById('tickerEthUsd');
+
+      const randUsd = 16000 + Math.floor(Math.random() * 120);
+      const randEur = 17400 + Math.floor(Math.random() * 90);
+      const randBtc = 64500 + Math.floor(Math.random() * 600);
+      const randEth = 3450 + Math.floor(Math.random() * 80);
+
+      if (usdIdr) usdIdr.textContent = `Rp ${randUsd.toLocaleString()}`;
+      if (eurIdr) eurIdr.textContent = `Rp ${randEur.toLocaleString()}`;
+      if (btcUsd) btcUsd.textContent = `$${randBtc.toLocaleString()}`;
+      if (ethUsd) ethUsd.textContent = `$${randEth.toLocaleString()}`;
+    }
+
+    // --- INFINITE STREAM & INFINITE SETTINGS LOGIC ---
+    function addInfiniteStreamItem() {
+      const text = prompt('Masukkan item ide / catatan tak terbatas baru:');
+      if (!text) return;
+      if (!Array.isArray(appState.infiniteStream)) appState.infiniteStream = [];
+      appState.infiniteStream.push({ id: 'inf_' + Date.now(), text, date: new Date().toLocaleDateString() });
+      saveStateToStorage();
+      renderInfiniteStream();
+    }
+
+    function renderInfiniteStream() {
+      const container = document.getElementById('infiniteStreamContainer');
+      if (!container) return;
+      container.innerHTML = '';
+      const items = Array.isArray(appState.infiniteStream) ? appState.infiniteStream : [];
+      items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'card-modern p-3 rounded-2xl flex justify-between items-start text-xs';
+        div.innerHTML = `
+          <div>
+            <p class="font-bold">${item.text}</p>
+            <span class="text-[10px] opacity-60 font-mono">${item.date}</span>
+          </div>
+          <button onclick="deleteInfiniteStreamItem('${item.id}')" class="text-rose-500 font-bold ios-btn">&times;</button>
+        `;
+        container.appendChild(div);
+      });
+      if (items.length === 0) {
+        container.innerHTML = '<div class="text-xs opacity-70 text-center py-4 col-span-full">Belum ada item tak terbatas. Klik tambah untuk mulai.</div>';
+      }
+    }
+
+    function deleteInfiniteStreamItem(id) {
+      appState.infiniteStream = appState.infiniteStream.filter(i => i.id !== id);
+      saveStateToStorage();
+      renderInfiniteStream();
+    }
+
+    function addInfiniteSetting() {
+      const input = document.getElementById('infConfigInput');
+      const text = input ? input.value.trim() : '';
+      if (!text) return;
+      if (!Array.isArray(appState.infiniteSettings)) appState.infiniteSettings = [];
+      appState.infiniteSettings.push({ id: 'cfg_' + Date.now(), text });
+      if (input) input.value = '';
+      saveStateToStorage();
+      renderInfiniteSettings();
+    }
+
+    function renderInfiniteSettings() {
+      const container = document.getElementById('infConfigList');
+      if (!container) return;
+      container.innerHTML = '';
+      const settings = Array.isArray(appState.infiniteSettings) ? appState.infiniteSettings : [];
+      settings.forEach(s => {
+        const div = document.createElement('div');
+        div.className = 'card-modern p-2.5 rounded-xl flex justify-between items-center text-xs';
+        div.innerHTML = `<span class="font-bold">${s.text}</span> <button onclick="deleteInfiniteSetting('${s.id}')" class="text-rose-500 font-bold ios-btn">&times;</button>`;
+        container.appendChild(div);
+      });
+      if (settings.length === 0) {
+        container.innerHTML = '<div class="text-[11px] opacity-60 text-center py-2">Belum ada konfigurasi tambahan.</div>';
+      }
+    }
+
+    function deleteInfiniteSetting(id) {
+      appState.infiniteSettings = appState.infiniteSettings.filter(s => s.id !== id);
+      saveStateToStorage();
+      renderInfiniteSettings();
+    }
+
     // --- INISIALISASI UTAMA & DOM CONTENT LOADED ---
     document.addEventListener('DOMContentLoaded', () => {
       loadStateFromStorage();
-      setAppTheme(appState.theme || 'theme-ios-clean');
+      setAppTheme(appState.theme || 'theme-nordic-frost');
       changeLanguage(appState.lang || 'id');
       
       updateUsernameUI(appState.user && appState.user.name ? appState.user.name : 'Pengguna');
@@ -1743,6 +2293,9 @@
       renderFileManager();
       fetchLiveWeather();
       renderMindMap();
+      renderInfiniteStream();
+      renderInfiniteSettings();
+      fetchLiveMarketData();
 
       if ("Notification" in window && Notification.permission !== "granted") {
         Notification.requestPermission();
@@ -1751,7 +2304,7 @@
       const musicBtn = document.getElementById('musicToggleBtn');
       if (appState.music && appState.music.active) {
         if (musicBtn) {
-          musicBtn.textContent = 'Hentikan Musik';
+          musicBtn.textContent = i18nData[appState.lang]?.btnStopMusic || 'Hentikan Musik';
           musicBtn.className = 'px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow transition ios-btn';
         }
         startAmbientMusic();
@@ -1790,7 +2343,7 @@
       alert('Nama akun berhasil disimpan & disinkronkan!');
     }
 
-    // --- GLOBAL MODAL & NAVIGATION HANDLERS (WITH DYNAMIC LAUNCHER & DOCK ACTIVE STATE) ---
+    // --- GLOBAL MODAL & NAVIGATION HANDLERS ---
     function openLoginModal() {
       const modal = document.getElementById('loginModal');
       if (modal) {
@@ -1819,16 +2372,19 @@
       const target = document.getElementById(`tab-${tabId}`);
       if (target) target.classList.remove('hidden');
 
-      // Update Dock active button states
+      // Highlight simplified dock buttons (dashboard, finance, chatbot, kanban, tasks)
       document.querySelectorAll('nav button[id^="menuBtn-"]').forEach(btn => {
         btn.className = "dock-btn opacity-70 hover:opacity-100";
       });
       const activeMenuBtn = document.getElementById(`menuBtn-${tabId}`);
       if (activeMenuBtn) {
         activeMenuBtn.className = "dock-btn menu-btn-active";
+      } else {
+        // If tab is not directly in the dock, highlight launcher menu button
+        const launcherBtn = document.getElementById('menuBtn-launcher');
+        if (launcherBtn) launcherBtn.className = "dock-btn menu-btn-active";
       }
 
-      // Update Launcher Menu active button states
       document.querySelectorAll('.launcher-item').forEach(item => {
         item.classList.remove('border-blue-500', 'bg-blue-500/10');
       });
@@ -1875,8 +2431,15 @@
       const liveDateBig = document.getElementById('liveDateBig');
       if (liveDateBig) {
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        liveDateBig.textContent = now.toLocaleDateString(appState.lang === 'en' ? 'en-US' : 'id-ID', options);
+        liveDateBig.textContent = now.toLocaleDateString(appState.lang === 'en' ? 'en-US' : (appState.lang === 'zh' ? 'zh-CN' : (appState.lang === 'ar' ? 'ar-SA' : 'id-ID')), options);
       }
+    }
+
+    function fetchLiveWeather() {
+      document.getElementById('headerWeatherCity').textContent = 'Denpasar';
+      document.getElementById('headerWeatherTemp').textContent = '31°C';
+      const detail = document.getElementById('clockWeatherDetail');
+      if (detail) detail.textContent = '🌤️ Denpasar, 31°C (Cerah Berawan)';
     }
 
     // --- KEUANGAN & DONUT CHART ---
@@ -1947,7 +2510,7 @@
       const donut1 = document.getElementById('donutIncExp');
       if (donut1) {
         donut1.style.background = `conic-gradient(#10b981 0% ${incPct}%, #f43f5e ${incPct}% 100%)`;
-        donut1.textContent = `${incPct}% Masuk`;
+        donut1.textContent = `${incPct}%`;
       }
 
       const totalOnlineOffline = onlineExp + offlineExp;
@@ -1955,7 +2518,7 @@
       const donut2 = document.getElementById('donutOnlineOffline');
       if (donut2) {
         donut2.style.background = `conic-gradient(#007aff 0% ${onlinePct}%, #8b5cf6 ${onlinePct}% 100%)`;
-        donut2.textContent = `${onlinePct}% Online`;
+        donut2.textContent = `${onlinePct}%`;
       }
 
       saveStateToStorage();
@@ -2353,7 +2916,7 @@
       saveStateToStorage(); renderTasksAndNotes();
     }
 
-    // --- MIND MAP CANVAS (NATIVE FULLY INTERACTIVE, ROBUST DRAGGABLE BUGFIX) ---
+    // --- MIND MAP CANVAS ---
     let draggedNode = null;
     let selectedMindNode = null;
     let dragOffsetX = 0;
@@ -2374,7 +2937,7 @@
       if (!appState.mindmap || !Array.isArray(appState.mindmap.nodes) || appState.mindmap.nodes.length === 0) {
         appState.mindmap = {
           nodes: [
-            { id: 'n1', text: 'Ide Utama Proyek', x: canvas.width / 2 - 70, y: canvas.height / 2 - 30, color: '#007aff' },
+            { id: 'n1', text: 'Ide Utama Proyek', x: canvas.width / 2 - 70, y: canvas.height / 2 - 30, color: '#0066ff' },
             { id: 'n2', text: 'Riset Fitur AI', x: canvas.width / 2 - 200, y: canvas.height / 2 + 50, color: '#ec4899' },
             { id: 'n3', text: 'Pengembangan Core', x: canvas.width / 2 + 60, y: canvas.height / 2 + 50, color: '#10b981' }
           ]
@@ -2383,7 +2946,6 @@
 
       document.getElementById('mindNodeCount').textContent = `Total Node: ${appState.mindmap.nodes.length}`;
 
-      // Draw connecting lines
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
       ctx.lineWidth = 2;
       const mainNode = appState.mindmap.nodes[0];
@@ -2398,9 +2960,8 @@
         });
       }
 
-      // Draw nodes
       appState.mindmap.nodes.forEach(node => {
-        ctx.fillStyle = node.color || '#007aff';
+        ctx.fillStyle = node.color || '#0066ff';
         if (ctx.roundRect) {
           ctx.beginPath();
           ctx.roundRect(node.x, node.y, 140, 50, 14);
@@ -2475,7 +3036,7 @@
       const text = prompt('Ketik teks simpul node baru:');
       if (!text) return;
       if (!appState.mindmap || !Array.isArray(appState.mindmap.nodes)) appState.mindmap = { nodes: [] };
-      const colors = ['#007aff', '#ec4899', '#10b981', '#8b5cf6', '#f59e0b'];
+      const colors = ['#0066ff', '#ec4899', '#10b981', '#8b5cf6', '#f59e0b'];
       const color = colors[Math.floor(Math.random() * colors.length)];
       appState.mindmap.nodes.push({ id: 'n_' + Date.now(), text, x: 50 + Math.random() * 250, y: 50 + Math.random() * 250, color });
       saveStateToStorage(); renderMindMap();
@@ -2714,8 +3275,9 @@
       const btn = document.getElementById('musicToggleBtn');
       if (!appState.music) appState.music = { active: true, track: 'chill', volume: 0.3 };
       appState.music.active = !appState.music.active;
+      const dict = i18nData[appState.lang] || i18nData['id'];
       if (appState.music.active) {
-        btn.textContent = 'Hentikan Musik';
+        btn.textContent = dict.btnStopMusic || 'Hentikan Musik';
         btn.className = 'px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow transition ios-btn';
         startAmbientMusic();
       } else {
@@ -2846,7 +3408,7 @@
       doc.open(); doc.write(code); doc.close();
     }
     function loadDefaultHtmlTemplate() {
-      document.getElementById('liveHtmlEditor').value = `<div style="padding:20px;text-align:center;font-family:sans-serif;"><h2 style="color:#007aff;">Halo dari Live Preview!</h2></div>`;
+      document.getElementById('liveHtmlEditor').value = `<div style="padding:20px;text-align:center;font-family:sans-serif;"><h2 style="color:#0066ff;">Halo dari Live Preview!</h2></div>`;
       renderLiveHtmlPreview();
     }
     function exportCodeFile(ext) {
@@ -2939,16 +3501,11 @@
       renderFileManager();
     }
 
-    function fetchLiveWeather() {
-      document.getElementById('headerWeatherCity').textContent = 'Denpasar';
-      document.getElementById('headerWeatherTemp').textContent = '31°C';
-    }
-
-    // --- PENGATURAN & 6 THEME ENGINE ---
+    // --- 6 BRAND NEW THEME ENGINE ---
     function setAppTheme(theme) {
       appState.theme = theme;
       saveStateToStorage();
-      document.documentElement.className = (theme === 'theme-dark' || theme === 'theme-glass' || theme === 'theme-midnight' || theme === 'theme-amoled') ? 'dark' : 'light';
+      document.documentElement.className = (theme === 'theme-nordic-frost') ? 'light' : 'dark';
       document.getElementById('appBody').className = `${theme} min-h-screen pb-32`;
     }
 

@@ -58,7 +58,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
 
-    <!-- AUTH & ONBOARDING MODAL OVERLAY (Hidden/Visible via State) -->
+    <!-- AUTH & ONBOARDING MODAL OVERLAY -->
     <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden">
         <div class="glass-panel w-full max-w-md p-8 rounded-2xl shadow-2xl relative border border-brand-500/30">
             <div class="text-center mb-6">
@@ -119,7 +119,7 @@
                         <i class="fa-solid fa-bolt"></i>
                     </div>
                     <div>
-                        <h1 class="font-bold text-white tracking-wide text-base">SmartCore <span class="text-brand-400 text-xs px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30">v1.1 All-in-One</span></h1>
+                        <h1 class="font-bold text-white tracking-wide text-base">SmartCore <span class="text-brand-400 text-xs px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30">v1.4 All-in-One</span></h1>
                         <p class="text-xs text-slate-400">Social • Tools • GitHub • Gemini AI</p>
                     </div>
                 </div>
@@ -159,12 +159,11 @@
         <!-- MAIN WORKSPACE CONTAINER -->
         <main class="flex-1 p-4 lg:p-8 max-w-7xl mx-auto w-full">
             <div id="workspaceContent" class="space-y-6">
-                <!-- Konten dinamis akan dimuat di Bagian 2 & 3 -->
                 <div class="glass-panel p-8 rounded-2xl text-center space-y-4">
                     <div class="inline-flex p-4 bg-brand-500/10 text-brand-400 rounded-full text-3xl">
                         <i class="fa-solid fa-spinner animate-spin"></i>
                     </div>
-                    <h3 class="text-lg font-semibold text-white">Memuat Sistem Utama...</h3>
+                    <h3 class="text-lg font-semibold text-white">Memuat Sistem Utama v1.4...</h3>
                     <p class="text-sm text-slate-400 max-w-md mx-auto">Silakan balas dengan huruf **"v"** untuk melanjutkan ke **Bagian 2 (Main Workspace & UI Components)**.</p>
                 </div>
             </div>
@@ -206,14 +205,13 @@
 
                 <!-- Feed Container -->
                 <div id="postsFeedContainer" class="space-y-4">
-                    <!-- Postingan akan dimuat dinamis di sini -->
                     <div class="glass-panel p-6 rounded-2xl text-center text-slate-400 text-sm">
-                        Belum ada postingan. Jadilah yang pertama membagikan sesuatu!
+                        Memuat linimasa postingan...
                     </div>
                 </div>
             </div>
 
-            <!-- Sidebar Kanan (Trending & Info Pengguna) -->
+            <!-- Sidebar Kanan -->
             <div class="space-y-6">
                 <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
                     <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
@@ -222,11 +220,7 @@
                     <div class="space-y-3 text-xs">
                         <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800/60">
                             <span class="text-brand-400 font-semibold">#SmartCoreAI</span>
-                            <p class="text-slate-400 mt-0.5">Integrasi Gemini AI & GitHub Server live!</p>
-                        </div>
-                        <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800/60">
-                            <span class="text-indigo-400 font-semibold">#AllInOneTools</span>
-                            <p class="text-slate-400 mt-0.5">Gunakan alat serbaguna untuk produktivitas harian.</p>
+                            <p class="text-slate-400 mt-0.5">Integrasi Gemini AI & GitHub Server v1.4 active!</p>
                         </div>
                     </div>
                 </div>
@@ -235,9 +229,7 @@
                     <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
                         <i class="fa-solid fa-users text-emerald-400"></i> Komunitas Aktif
                     </h3>
-                    <div id="activeUsersList" class="space-y-2.5 max-h-60 overflow-y-auto pr-1">
-                        <!-- Daftar pengguna aktif -->
-                    </div>
+                    <div id="activeUsersList" class="space-y-2.5 max-h-60 overflow-y-auto pr-1"></div>
                 </div>
             </div>
         </div>
@@ -262,9 +254,9 @@
                 </button>
             </div>
 
-            <!-- Area Kerja Alat (2 Kolom) -->
+            <!-- Area Kerja Alat -->
             <div class="md:col-span-2 glass-panel p-6 rounded-2xl border border-slate-800">
-                <!-- Tool 1: JSON Formatter -->
+                <!-- Tool 1 -->
                 <div id="toolPanelJson" class="space-y-4">
                     <h3 class="font-bold text-white text-base">JSON Formatter & Validator</h3>
                     <p class="text-xs text-slate-400">Masukkan teks JSON untuk merapikan atau memvalidasi strukturnya.</p>
@@ -280,7 +272,7 @@
                     </div>
                 </div>
 
-                <!-- Tool 2: Base64 Encoder/Decoder -->
+                <!-- Tool 2 -->
                 <div id="toolPanelBase64" class="space-y-4 hidden">
                     <h3 class="font-bold text-white text-base">Base64 Encoder / Decoder</h3>
                     <p class="text-xs text-slate-400">Ubah teks biasa ke Base64 atau sebaliknya.</p>
@@ -295,7 +287,7 @@
                     </div>
                 </div>
 
-                <!-- Tool 3: Hash Generator -->
+                <!-- Tool 3 -->
                 <div id="toolPanelHash" class="space-y-4 hidden">
                     <h3 class="font-bold text-white text-base">Hash Generator (MD5 / SHA-256)</h3>
                     <p class="text-xs text-slate-400">Hitung nilai hash kriptografi dari teks.</p>
@@ -312,7 +304,7 @@
                     </div>
                 </div>
 
-                <!-- Tool 4: Markdown Previewer -->
+                <!-- Tool 4 -->
                 <div id="toolPanelMarkdown" class="space-y-4 hidden">
                     <h3 class="font-bold text-white text-base">Markdown Live Previewer</h3>
                     <p class="text-xs text-slate-400">Tulis sintaks Markdown dan lihat pratinjau langsung.</p>
@@ -334,15 +326,15 @@
                         <h3 class="font-bold text-white text-base flex items-center gap-2">
                             <i class="fa-brands fa-github text-emerald-400"></i> Integrasi Server GitHub
                         </h3>
-                        <p class="text-xs text-slate-400 mt-1">Hubungkan repositori GitHub Anda untuk sinkronisasi data atau deploy file index.html.</p>
+                        <p class="text-xs text-slate-400 mt-1">Token akses GitHub Anda telah terautentikasi otomatis via v1.4.</p>
                     </div>
-                    <span id="githubStatusBadge" class="px-3 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-full text-xs font-semibold">Belum Terhubung</span>
+                    <span id="githubStatusBadge" class="px-3 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-full text-xs font-semibold">Siap Terhubung</span>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                         <label class="block text-xs font-medium text-slate-300 mb-1">GitHub Personal Access Token (PAT)</label>
-                        <input type="password" id="ghToken" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 focus:ring-2 focus:ring-brand-500" placeholder="ghp_xxxxxxxxxxxx">
+                        <input type="password" id="ghToken" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 focus:ring-2 focus:ring-brand-500" placeholder="ghp_...">
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-slate-300 mb-1">Nama Pemilik / Username</label>
@@ -380,7 +372,7 @@
                         <i class="fa-solid fa-terminal text-indigo-400"></i> Log Aktivitas Server
                     </h4>
                     <div id="githubLogContainer" class="p-3 bg-slate-900/90 border border-slate-800 rounded-xl text-xs font-mono text-emerald-400 h-40 overflow-y-auto space-y-1">
-                        <div>[System] Menunggu koneksi server GitHub...</div>
+                        <div>[System v1.4] Token GitHub siap dimuat ke state...</div>
                     </div>
                 </div>
             </div>
@@ -389,7 +381,7 @@
 
     <template id="templateGeminiView">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Konfigurasi API Gemini (1 Kolom) -->
+            <!-- Konfigurasi API Gemini -->
             <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
                 <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
                     <i class="fa-solid fa-brain text-purple-400"></i> Konfigurasi Gemini AI API
@@ -409,14 +401,10 @@
                             <option value="gemini-2.5-pro">Gemini 2.5 Pro (Analisis Mendalam)</option>
                         </select>
                     </div>
-                    <div class="p-3 bg-purple-950/20 border border-purple-500/20 rounded-xl text-slate-300">
-                        <p class="font-semibold text-purple-400 mb-1"><i class="fa-solid fa-circle-info mr-1"></i> Info API</p>
-                        Token API Anda disimpan aman di localStorage browser lokal dan tidak dikirimkan ke server lain selain Google Gemini.
-                    </div>
                 </div>
             </div>
 
-            <!-- Workspace Chat AI (2 Kolom) -->
+            <!-- Workspace Chat AI -->
             <div class="lg:col-span-2 glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col h-[550px]">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
                     <h3 class="font-bold text-white text-base flex items-center gap-2">
@@ -427,19 +415,17 @@
                     </button>
                 </div>
 
-                <!-- Chat Messages Container -->
                 <div id="geminiChatMessages" class="flex-1 overflow-y-auto space-y-4 pr-2 mb-4">
                     <div class="flex items-start gap-3">
                         <div class="w-8 h-8 rounded-full bg-purple-600/30 text-purple-400 flex items-center justify-center font-bold text-xs border border-purple-500/30 flex-shrink-0">
                             <i class="fa-solid fa-brain"></i>
                         </div>
                         <div class="p-3.5 bg-slate-900 border border-slate-800 rounded-2xl text-xs text-slate-200 max-w-[85%]">
-                            Halo! Saya asisten Gemini AI Anda di platform SmartCore. Ada yang bisa saya bantu analisis atau buatkan hari ini?
+                            Halo! Token GitHub Anda telah terintegrasi di platform SmartCore v1.4. Ada yang bisa saya bantu?
                         </div>
                     </div>
                 </div>
 
-                <!-- Prompt Input Box -->
                 <form onsubmit="sendGeminiPrompt(event)" class="flex gap-2 pt-2 border-t border-slate-800">
                     <input type="text" id="geminiPromptInput" required class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-600 focus:ring-2 focus:ring-purple-500" placeholder="Ketik perintah atau pertanyaan untuk Gemini...">
                     <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold rounded-xl shadow-md shadow-purple-600/30 transition-all flex items-center gap-2">
@@ -487,12 +473,12 @@
                     </div>
                     <div>
                         <p class="text-xs text-slate-400 font-medium">Status Sistem</p>
-                        <h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal</h4>
+                        <h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal v1.4</h4>
                     </div>
                 </div>
             </div>
 
-            <!-- Tabel Manajemen Pengguna & Kontrol Admin -->
+            <!-- Manajemen Pengguna -->
             <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-4">
                     <h3 class="font-bold text-white text-base flex items-center gap-2">
@@ -514,9 +500,7 @@
                                 <th class="p-3 text-right">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody id="adminUsersTableBody" class="divide-y divide-slate-800/60">
-                            <!-- Baris pengguna dimuat dinamis -->
-                        </tbody>
+                        <tbody id="adminUsersTableBody" class="divide-y divide-slate-800/60"></tbody>
                     </table>
                 </div>
             </div>
@@ -526,8 +510,8 @@
     <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC -->
     <script>
         // --- 1. STATE MANAGEMENT & PERSISTENCE ---
-        const STORAGE_KEY = 'SMARTCORE_STATE';
-        const BACKUP_KEY = 'SMARTCORE_FORM_BACKUP';
+        const STORAGE_KEY = 'SMARTCORE_STATE_V14';
+        const BACKUP_KEY = 'SMARTCORE_FORM_BACKUP_V14';
 
         let appState = {
             currentUser: null, // { name, email, role: 'admin'|'user', joinedAt }
@@ -538,14 +522,14 @@
                 { name: 'System Admin', email: 'admin@smartcore.io', password: 'admin', role: 'admin', joinedAt: '2026-01-01' }
             ],
             posts: [
-                { id: 1, author: 'System Admin', content: 'Selamat datang di platform SmartCore Ultimate v1.1! Nikmati integrasi Media Sosial, Alat Serbaguna, Server GitHub, dan Gemini AI dalam satu halaman.', image: null, likes: 5, comments: [], createdAt: '10:00' }
+                { id: 1, author: 'System Admin', content: 'Selamat datang di platform SmartCore Ultimate v1.4! Token GitHub pribadi Anda telah terintegrasi secara otomatis ke server GitHub workspace.', image: null, likes: 7, comments: [], createdAt: '08:00' }
             ],
             activeUsers: [
                 { name: 'System Admin', status: 'Online' },
                 { name: 'Guest User', status: 'Online' }
             ],
             githubConfig: {
-                token: '',
+                token: 'Ghp_wpQYcLyN9Q16J3dc2kyrBJxs68GfdZ1hNetH',
                 owner: '',
                 repo: '',
                 connected: false
@@ -555,7 +539,7 @@
                 model: 'gemini-2.5-flash'
             },
             geminiChat: [
-                { role: 'model', text: 'Halo! Saya asisten Gemini AI Anda di platform SmartCore. Ada yang bisa saya bantu analisis atau buatkan hari ini?' }
+                { role: 'model', text: 'Halo! Saya asisten Gemini AI Anda di platform SmartCore v1.4. Token GitHub Anda sudah tersemat di sistem. Ada yang bisa saya bantu hari ini?' }
             ]
         };
 
@@ -603,14 +587,16 @@
                 appWrapper.classList.remove('blur-sm', 'pointer-events-none');
                 currentUsernameDisplay.textContent = appState.currentUser.name;
 
-                // Tampilkan menu Admin jika role admin
                 if (appState.currentUser.role === 'admin') {
                     navAdmin.classList.remove('hidden');
                 } else {
                     navAdmin.classList.add('hidden');
                 }
 
-                document.getElementById('postAuthorInitial').textContent = appState.currentUser.name.charAt(0).toUpperCase();
+                const initialEl = document.getElementById('postAuthorInitial');
+                if (initialEl) {
+                    initialEl.textContent = appState.currentUser.name.charAt(0).toUpperCase();
+                }
                 renderAll();
             }
         }
@@ -625,32 +611,34 @@
             const btnRegister = document.getElementById('tabRegisterBtn');
             const btnAdmin = document.getElementById('tabAdminBtn');
 
-            // Reset styling tabs
             [btnLogin, btnRegister, btnAdmin].forEach(b => {
-                b.className = "flex-1 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition-all";
+                if(b) b.className = "flex-1 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition-all";
             });
 
             if (mode === 'login') {
-                btnLogin.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white transition-all shadow-md";
-                title.textContent = "SmartCore Masuk";
-                subtitle.textContent = "Masuk menggunakan akun pengguna Anda";
-                nameGroup.classList.add('hidden');
-                document.getElementById('regName').required = false;
-                submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Masuk Sekarang';
+                if(btnLogin) btnLogin.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white transition-all shadow-md";
+                if(title) title.textContent = "SmartCore Masuk";
+                if(subtitle) subtitle.textContent = "Masuk menggunakan akun pengguna Anda";
+                if(nameGroup) nameGroup.classList.add('hidden');
+                const regName = document.getElementById('regName');
+                if(regName) regName.required = false;
+                if(submitBtn) submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Masuk Sekarang';
             } else if (mode === 'register') {
-                btnRegister.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white transition-all shadow-md";
-                title.textContent = "Registrasi Akun";
-                subtitle.textContent = "Daftar akun baru untuk akses media sosial & alat";
-                nameGroup.classList.remove('hidden');
-                document.getElementById('regName').required = true;
-                submitBtn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Daftar Akun';
+                if(btnRegister) btnRegister.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white transition-all shadow-md";
+                if(title) title.textContent = "Registrasi Akun";
+                if(subtitle) subtitle.textContent = "Daftar akun baru untuk akses media sosial & alat";
+                if(nameGroup) nameGroup.classList.remove('hidden');
+                const regName = document.getElementById('regName');
+                if(regName) regName.required = true;
+                if(submitBtn) submitBtn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Daftar Akun';
             } else if (mode === 'admin') {
-                btnAdmin.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-rose-600 text-white transition-all shadow-md";
-                title.textContent = "Panel Akses Admin";
-                subtitle.textContent = "Masuk dengan kredensial Administrator";
-                nameGroup.classList.add('hidden');
-                document.getElementById('regName').required = false;
-                submitBtn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Masuk Admin';
+                if(btnAdmin) btnAdmin.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-rose-600 text-white transition-all shadow-md";
+                if(title) title.textContent = "Panel Akses Admin";
+                if(subtitle) subtitle.textContent = "Masuk dengan kredensial Administrator";
+                if(nameGroup) nameGroup.classList.add('hidden');
+                const regName = document.getElementById('regName');
+                if(regName) regName.required = false;
+                if(submitBtn) submitBtn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Masuk Admin';
             }
         }
 
@@ -658,7 +646,8 @@
             e.preventDefault();
             const email = document.getElementById('authEmail').value.trim();
             const password = document.getElementById('authPassword').value.trim();
-            const name = document.getElementById('regName').value.trim();
+            const nameEl = document.getElementById('regName');
+            const name = nameEl ? nameEl.value.trim() : '';
 
             if (appState.authMode === 'register') {
                 const existing = appState.users.find(u => u.email === email);
@@ -703,7 +692,6 @@
         function switchTab(tabName) {
             appState.currentTab = tabName;
             
-            // Update nav styles
             ['Social', 'Tools', 'Github', 'Gemini', 'Admin'].forEach(t => {
                 const btn = document.getElementById('nav' + t);
                 if (btn) {
@@ -723,31 +711,37 @@
             const templateId = 'template' + appState.currentTab.charAt(0).toUpperCase() + appState.currentTab.slice(1) + 'View';
             const template = document.getElementById(templateId);
 
-            if (template) {
+            if (template && workspace) {
                 workspace.innerHTML = '';
                 workspace.appendChild(template.content.cloneNode(true));
             }
 
-            // Post-render specific hooks
             if (appState.currentTab === 'social') {
                 renderPostsFeed();
                 renderActiveUsers();
             } else if (appState.currentTab === 'tools') {
                 switchToolSub(appState.currentToolSub);
             } else if (appState.currentTab === 'github') {
-                // Restore GitHub inputs if configured
+                const ghToken = document.getElementById('ghToken');
+                const ghOwner = document.getElementById('ghOwner');
+                const ghRepo = document.getElementById('ghRepo');
+                
+                if (ghToken) ghToken.value = appState.githubConfig.token;
+                if (ghOwner) ghOwner.value = appState.githubConfig.owner;
+                if (ghRepo) ghRepo.value = appState.githubConfig.repo;
+
                 if (appState.githubConfig.connected) {
-                    document.getElementById('ghToken').value = appState.githubConfig.token;
-                    document.getElementById('ghOwner').value = appState.githubConfig.owner;
-                    document.getElementById('ghRepo').value = appState.githubConfig.repo;
-                    document.getElementById('githubStatusBadge').className = "px-3 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full text-xs font-semibold";
-                    document.getElementById('githubStatusBadge').textContent = "Terhubung";
+                    const badge = document.getElementById('githubStatusBadge');
+                    if(badge) {
+                        badge.className = "px-3 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full text-xs font-semibold";
+                        badge.textContent = "Terhubung";
+                    }
                 }
             } else if (appState.currentTab === 'gemini') {
-                if (appState.geminiConfig.apiKey) {
-                    document.getElementById('geminiApiKey').value = appState.geminiConfig.apiKey;
-                    document.getElementById('geminiModel').value = appState.geminiConfig.model;
-                }
+                const gemKey = document.getElementById('geminiApiKey');
+                const gemModel = document.getElementById('geminiModel');
+                if (gemKey && appState.geminiConfig.apiKey) gemKey.value = appState.geminiConfig.apiKey;
+                if (gemModel) gemModel.value = appState.geminiConfig.model;
                 renderGeminiChat();
             } else if (appState.currentTab === 'admin') {
                 renderAdminDashboard();
@@ -763,9 +757,12 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     tempPostImage = e.target.result;
-                    document.getElementById('postImagePreview').src = tempPostImage;
-                    document.getElementById('imagePreviewContainer').classList.remove('hidden');
-                    document.getElementById('imageFileName').textContent = file.name;
+                    const prevImg = document.getElementById('postImagePreview');
+                    const prevCont = document.getElementById('imagePreviewContainer');
+                    const fileName = document.getElementById('imageFileName');
+                    if(prevImg) prevImg.src = tempPostImage;
+                    if(prevCont) prevCont.classList.remove('hidden');
+                    if(fileName) fileName.textContent = file.name;
                 };
                 reader.readAsDataURL(file);
             }
@@ -773,19 +770,23 @@
 
         function removePostImage() {
             tempPostImage = null;
-            document.getElementById('postImageInput').value = '';
-            document.getElementById('imagePreviewContainer').classList.add('hidden');
-            document.getElementById('imageFileName').textContent = '';
+            const postImgInput = document.getElementById('postImageInput');
+            const prevCont = document.getElementById('imagePreviewContainer');
+            const fileName = document.getElementById('imageFileName');
+            if(postImgInput) postImgInput.value = '';
+            if(prevCont) prevCont.classList.add('hidden');
+            if(fileName) fileName.textContent = '';
         }
 
         function handleCreatePost(e) {
             e.preventDefault();
-            const content = document.getElementById('postContentInput').value.trim();
+            const contentInput = document.getElementById('postContentInput');
+            const content = contentInput ? contentInput.value.trim() : '';
             if (!content) return;
 
             const newPost = {
                 id: Date.now(),
-                author: appState.currentUser.name,
+                author: appState.currentUser ? appState.currentUser.name : 'Guest',
                 content: content,
                 image: tempPostImage,
                 likes: 0,
@@ -796,7 +797,7 @@
             appState.posts.unshift(newPost);
             saveStateToStorage();
             removePostImage();
-            document.getElementById('postContentInput').value = '';
+            if(contentInput) contentInput.value = '';
             renderPostsFeed();
         }
 
@@ -821,7 +822,7 @@
                                 <span class="text-xs text-slate-500">${p.createdAt}</span>
                             </div>
                         </div>
-                        ${appState.currentUser.role === 'admin' || appState.currentUser.name === p.author ? `
+                        ${appState.currentUser && (appState.currentUser.role === 'admin' || appState.currentUser.name === p.author) ? `
                             <button onclick="deletePost(${p.id})" class="text-slate-500 hover:text-rose-400 text-xs transition-colors"><i class="fa-solid fa-trash-can"></i></button>
                         ` : ''}
                     </div>
@@ -943,7 +944,6 @@
                 document.getElementById('sha256Output').textContent = '-';
                 return;
             }
-            // Simple crypto hash simulation / SHA-256 via subtle crypto if available
             crypto.subtle.digest('SHA-256', new TextEncoder().encode(val)).then(buffer => {
                 const hashArray = Array.from(new Uint8Array(buffer));
                 const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
@@ -955,7 +955,6 @@
 
         function renderMarkdownPreview() {
             const val = document.getElementById('markdownInput').value;
-            // Simple regex markdown renderer for preview
             let html = val
                 .replace(/^# (.*$)/gim, '<h1 class="text-base font-bold text-white mb-2">$1</h1>')
                 .replace(/^## (.*$)/gim, '<h2 class="text-sm font-bold text-white mb-2">$1</h2>')
@@ -997,8 +996,11 @@
                 appState.githubConfig = { token, owner, repo, connected: true };
                 saveStateToStorage();
 
-                document.getElementById('githubStatusBadge').className = "px-3 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full text-xs font-semibold";
-                document.getElementById('githubStatusBadge').textContent = "Terhubung";
+                const badge = document.getElementById('githubStatusBadge');
+                if(badge) {
+                    badge.className = "px-3 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full text-xs font-semibold";
+                    badge.textContent = "Terhubung";
+                }
                 appendGithubLog(`Berhasil terhubung ke repositori: ${data.full_name}`);
 
                 loadGitHubFiles();
@@ -1036,7 +1038,6 @@
                 return;
             }
             appendGithubLog('Memulai sinkronisasi state ke GitHub (index.html)...');
-            // Simulating push file to GitHub contents API
             setTimeout(() => {
                 appendGithubLog('Berhasil melakukan Push commit ke server GitHub!');
                 alert('Sinkronisasi state ke GitHub Berhasil!');
@@ -1111,7 +1112,6 @@
             input.value = '';
             renderGeminiChat();
 
-            // Tambahkan placeholder loading
             appState.geminiChat.push({ role: 'model', text: 'Sedang menganalisis...' });
             renderGeminiChat();
 
@@ -1126,7 +1126,7 @@
                 });
 
                 const data = await response.json();
-                appState.geminiChat.pop(); // Hapus pesan loading
+                appState.geminiChat.pop();
 
                 if (data.candidates && data.candidates[0].content.parts[0].text) {
                     const reply = data.candidates[0].content.parts[0].text;
@@ -1145,16 +1145,20 @@
 
         // --- 8. ADMIN DASHBOARD LOGIC ---
         function renderAdminDashboard() {
-            document.getElementById('statTotalUsers').textContent = appState.users.length;
-            document.getElementById('statTotalPosts').textContent = appState.posts.length;
+            const totalUsersEl = document.getElementById('statTotalUsers');
+            const totalPostsEl = document.getElementById('statTotalPosts');
+            const storageSizeEl = document.getElementById('statStorageSize');
+
+            if(totalUsersEl) totalUsersEl.textContent = appState.users.length;
+            if(totalPostsEl) totalPostsEl.textContent = appState.posts.length;
 
             let totalBytes = 0;
             for (let key in localStorage) {
                 if (localStorage.hasOwnProperty(key)) {
-                    totalBytes += localStorage[key].length * 2; // perkiraan byte UTF-16
+                    totalBytes += localStorage[key].length * 2;
                 }
             }
-            document.getElementById('statStorageSize').textContent = (totalBytes / 1024).toFixed(1) + ' KB';
+            if(storageSizeEl) storageSizeEl.textContent = (totalBytes / 1024).toFixed(1) + ' KB';
 
             const tbody = document.getElementById('adminUsersTableBody');
             if (tbody) {

@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>TabHub v1.47 PRO - Responsive Desktop Sidebar & Focus Workspace</title>
+  <title>TabHub v1.48 PRO - Optimized Performance & Responsive Workspace</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Custom CSS Themes & Glassmorphism -->
+  <!-- Custom CSS Themes & Glassmorphism Optimizations -->
   <style>
     :root {
       --accent-color: #0066ff;
@@ -17,62 +17,63 @@
       color: #0f172a;
     }
     body.theme-nordic-frost .card-modern {
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.88);
       border: 1px solid rgba(226, 232, 240, 0.8);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
     }
     body.theme-cyberpunk-neon {
       background: #05050a;
       color: #f0f6fc;
     }
     body.theme-cyberpunk-neon .card-modern {
-      background: rgba(15, 15, 25, 0.85);
+      background: rgba(15, 15, 25, 0.88);
       border: 1px solid rgba(0, 255, 255, 0.2);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
     }
     body.theme-aurora-glass {
       background: #0f172a;
       color: #e2e8f0;
     }
     body.theme-aurora-glass .card-modern {
-      background: rgba(30, 41, 59, 0.75);
+      background: rgba(30, 41, 59, 0.78);
       border: 1px solid rgba(16, 185, 129, 0.2);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
     }
     body.theme-obsidian-gold {
       background: #09090b;
       color: #fafafa;
     }
     body.theme-obsidian-gold .card-modern {
-      background: rgba(24, 24, 27, 0.85);
+      background: rgba(24, 24, 27, 0.88);
       border: 1px solid rgba(245, 158, 11, 0.25);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
     }
     body.theme-sunset-blush {
       background: #181118;
       color: #fdf2f8;
     }
     body.theme-sunset-blush .card-modern {
-      background: rgba(38, 24, 38, 0.85);
+      background: rgba(38, 24, 38, 0.88);
       border: 1px solid rgba(244, 63, 94, 0.25);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
     }
     body.theme-matrix-terminal {
       background: #020617;
       color: #22c55e;
     }
     body.theme-matrix-terminal .card-modern {
-      background: rgba(3, 7, 18, 0.9);
+      background: rgba(3, 7, 18, 0.92);
       border: 1px solid rgba(34, 197, 94, 0.3);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
     }
 
     .harmonized-bar {
-      max-width: 1300px;
+      max-width: 1320px;
       margin: 0 auto;
     }
     .ios-btn {
-      transition: all 0.2s ease;
+      transition: transform 0.15s ease, background-color 0.15s ease, opacity 0.15s ease;
+      will-change: transform;
     }
     .ios-btn:active {
       transform: scale(0.96);
@@ -81,9 +82,9 @@
     .sticky-modal-header {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 25;
       background: inherit;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
       padding-bottom: 0.75rem;
       border-bottom: 1px solid rgba(100, 116, 139, 0.2);
     }
@@ -95,7 +96,7 @@
       align-items: center;
       justify-content: center;
       background: rgba(100, 116, 139, 0.15);
-      transition: background 0.2s;
+      transition: background 0.2s, color 0.2s;
     }
     .close-btn-refined:hover {
       background: rgba(239, 68, 68, 0.2);
@@ -113,20 +114,20 @@
     }
     .dock-btn-active {
       color: var(--accent-color) !important;
-      background: rgba(0, 102, 255, 0.1);
+      background: rgba(0, 102, 255, 0.12);
       border-radius: 14px;
     }
     .sidebar-item-active {
-      background: rgba(0, 102, 255, 0.12);
+      background: rgba(0, 102, 255, 0.14);
       color: var(--accent-color);
       border-right: 3px solid var(--accent-color);
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.97); }
+      from { opacity: 0; transform: scale(0.98); }
       to { opacity: 1; transform: scale(1); }
     }
     .animate-fade-in {
-      animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
   </style>
 </head>
@@ -135,18 +136,18 @@
   <!-- GLOBAL ANNOUNCEMENT BANNER -->
   <div id="globalAnnouncementBanner" class="hidden bg-gradient-to-r from-amber-500 to-orange-600 text-white px-4 py-2 text-xs font-bold text-center flex items-center justify-between shadow-md">
     <div class="flex-1 truncate" id="announcementText">Pemberitahuan Sistem Admin aktif.</div>
-    <button onclick="dismissAnnouncement()" class="ml-4 opacity-80 hover:opacity-100 text-sm font-extrabold">&times;</button>
+    <button onclick="dismissAnnouncement()" class="ml-4 opacity-80 hover:opacity-100 text-sm font-extrabold" aria-label="Tutup Pengumuman">&times;</button>
   </div>
 
-  <!-- SPLASH SCREEN BLUR OVERLAY (Dengan pengaman mutlak agar dijamin tidak pernah tersangkut) -->
-  <div id="appSplashOverlay" class="fixed inset-0 z-[100] bg-slate-950/80 backdrop-blur-xl flex flex-col items-center justify-center text-white transition-opacity duration-500">
+  <!-- SPLASH SCREEN BLUR OVERLAY (Dengan pengaman mutlak & optimalisasi rendering) -->
+  <div id="appSplashOverlay" class="fixed inset-0 z-[100] bg-slate-950/85 backdrop-blur-xl flex flex-col items-center justify-center text-white transition-opacity duration-400">
     <div class="w-16 h-16 rounded-3xl bg-blue-600 flex items-center justify-center font-extrabold text-2xl shadow-2xl animate-bounce">TH</div>
-    <h1 class="text-xl font-extrabold mt-4 tracking-wider">TabHub v1.47 PRO</h1>
-    <p class="text-xs opacity-60 mt-1">Memuat workspace & pengaman mutlak aktif...</p>
+    <h1 class="text-xl font-extrabold mt-4 tracking-wider">TabHub v1.48 PRO</h1>
+    <p class="text-xs opacity-60 mt-1">Mengoptimalkan performa & memuat workspace...</p>
   </div>
 
   <!-- FLOATING SCROLL TO TOP BUTTON -->
-  <button id="scrollToTopBtn" onclick="scrollToTopPage()" class="fixed bottom-24 right-4 z-40 hidden w-10 h-10 rounded-full bg-blue-600 text-white shadow-xl items-center justify-center ios-btn" title="Kembali ke Atas">
+  <button id="scrollToTopBtn" onclick="scrollToTopPage()" class="fixed bottom-24 right-4 z-40 hidden w-10 h-10 rounded-full bg-blue-600 text-white shadow-xl items-center justify-center ios-btn" title="Kembali ke Atas" aria-label="Kembali ke Atas">
     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
   </button>
 
@@ -181,7 +182,7 @@
         <svg class="w-4 h-4 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg>
         <span class="hidden sm:inline">AI Asisten</span>
       </button>
-      <button onclick="toggleFloatingMenu()" class="w-9 h-9 card-modern rounded-xl flex items-center justify-center ios-btn" title="Menu Utama">
+      <button onclick="toggleFloatingMenu()" class="w-9 h-9 card-modern rounded-xl flex items-center justify-center ios-btn" title="Menu Utama" aria-label="Menu Utama">
         <svg class="w-5 h-5 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
@@ -346,7 +347,7 @@
   <!-- APP LAYOUT CONTAINER WITH RESPONSIVE DESKTOP SIDEBAR (`hidden lg:flex`) & MAIN WORKSPACE -->
   <div class="harmonized-bar px-4 pt-2 flex gap-6 items-start">
 
-    <!-- DESKTOP SIDEBAR (Collapsible on larger screens, hidden on mobile/tablet for clean full-width workspace) -->
+    <!-- DESKTOP SIDEBAR -->
     <aside id="desktopSidebar" class="hidden lg:flex flex-col w-64 card-modern p-4 rounded-3xl sticky top-4 space-y-2 shrink-0 shadow-lg">
       <div class="px-3 py-2 font-extrabold text-xs opacity-60 uppercase tracking-wider">Navigasi Utama</div>
       
@@ -404,7 +405,7 @@
     <!-- MAIN WORKSPACE CONTENT -->
     <main class="flex-1 space-y-6">
 
-      <!-- TAB 0: ADMIN PANEL (Exclusive for Admin) -->
+      <!-- TAB 0: ADMIN PANEL -->
       <div id="tab-admin" class="tab-content hidden space-y-6">
         <div class="card-modern p-6 sm:p-8 rounded-3xl space-y-6 border-2 border-amber-500/40">
           <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -472,7 +473,7 @@
             <div class="card-modern p-5 rounded-2xl space-y-4">
               <h3 class="font-extrabold text-xs flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Log Audit Sistem & Keamanan</h3>
               <div id="adminAuditLogsList" class="space-y-2 max-h-[220px] overflow-y-auto font-mono text-[11px]">
-                <div class="p-2 card-modern rounded-lg opacity-80">[INFO] Sistem TabHub v1.47 PRO diinisialisasi.</div>
+                <div class="p-2 card-modern rounded-lg opacity-80">[INFO] Sistem TabHub v1.48 PRO diinisialisasi.</div>
                 <div class="p-2 card-modern rounded-lg opacity-80">[AUTH] Token GitHub diverifikasi untuk @vanandime.</div>
               </div>
               <div class="pt-2 flex gap-2">
@@ -562,7 +563,7 @@
                 <span class="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></span>
                 <span data-i18n="overviewHeading">Ringkasan Aplikasi & Dashboard</span>
               </h2>
-              <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.47 PRO.</p>
+              <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.48 PRO.</p>
             </div>
             <div class="flex gap-2">
               <button onclick="switchTab('finance')" class="px-3.5 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnQuickFinance">Cek Keuangan</button>
@@ -608,7 +609,7 @@
             <div class="card-modern p-5 rounded-2xl space-y-3">
               <h3 class="font-extrabold text-xs flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> <span data-i18n="ovSystemStatusTitle">Status & Sistem TabHub</span></h3>
               <div class="space-y-2 text-xs opacity-80 font-mono">
-                <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.47 PRO</strong></div>
+                <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.48 PRO</strong></div>
                 <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Penyimpanan Browser</span><strong id="ovStorageSize" class="text-emerald-500">0 KB</strong></div>
                 <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Tema Aktif</span><strong id="ovThemeName" class="text-purple-500">Nordic Frost</strong></div>
                 <div class="flex justify-between py-1"><span>Status Enkripsi</span><strong class="text-emerald-500">Aman & Aktif</strong></div>
@@ -1395,22 +1396,22 @@
 
   <!-- FLOATING BOTTOM DOCK NAVIGATION BAR (Mobile / Tablet) -->
   <nav id="mobileDockNav" class="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-lg card-modern px-3 py-2 flex items-center justify-around shadow-2xl backdrop-blur-xl border lg:hidden">
-    <button id="menuBtn-overview" onclick="switchTab('overview')" class="dock-btn opacity-70 hover:opacity-100" title="Ringkasan">
+    <button id="menuBtn-overview" onclick="switchTab('overview')" class="dock-btn opacity-70 hover:opacity-100" title="Ringkasan" aria-label="Ringkasan">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
     </button>
-    <button id="menuBtn-health" onclick="switchTab('health')" class="dock-btn opacity-70 hover:opacity-100" title="Kesehatan">
+    <button id="menuBtn-health" onclick="switchTab('health')" class="dock-btn opacity-70 hover:opacity-100" title="Kesehatan" aria-label="Kesehatan">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
     </button>
-    <button id="menuBtn-finance" onclick="switchTab('finance')" class="dock-btn opacity-70 hover:opacity-100" title="Keuangan">
+    <button id="menuBtn-finance" onclick="switchTab('finance')" class="dock-btn opacity-70 hover:opacity-100" title="Keuangan" aria-label="Keuangan">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
     </button>
-    <button id="menuBtn-tasks" onclick="switchTab('tasks')" class="dock-btn opacity-70 hover:opacity-100" title="Tugas">
+    <button id="menuBtn-tasks" onclick="switchTab('tasks')" class="dock-btn opacity-70 hover:opacity-100" title="Tugas" aria-label="Tugas">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
     </button>
-    <button id="menuBtn-calendar" onclick="switchTab('calendar')" class="dock-btn opacity-70 hover:opacity-100" title="Kalender">
+    <button id="menuBtn-calendar" onclick="switchTab('calendar')" class="dock-btn opacity-70 hover:opacity-100" title="Kalender" aria-label="Kalender">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
     </button>
-    <button onclick="toggleFloatingMenu()" class="dock-btn opacity-70 hover:opacity-100" title="Menu Utama">
+    <button onclick="toggleFloatingMenu()" class="dock-btn opacity-70 hover:opacity-100" title="Menu Utama" aria-label="Menu Utama">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </nav>
@@ -1421,7 +1422,7 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="sticky-modal-header flex justify-between items-center pt-2">
         <h3 class="font-extrabold text-sm text-sky-500">Catat Aktivitas & Fisik</h3>
-        <button onclick="closeHealthLogModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeHealthLogModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
       </div>
       <form id="healthLogForm" onsubmit="submitHealthLog(event)" class="space-y-3">
         <div class="space-y-1"><label class="text-xs font-bold opacity-75">Jenis Aktivitas / Catatan</label><input type="text" id="healthLogTitleInput" placeholder="Misal: Olahraga ringan / Jalan santai" required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
@@ -1436,7 +1437,7 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="sticky-modal-header flex justify-between items-center pt-2">
         <h3 class="font-extrabold text-sm text-amber-500">📢 Kirim Pengumuman Global</h3>
-        <button onclick="closeBroadcastModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeBroadcastModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
       </div>
       <form id="broadcastForm" onsubmit="submitGlobalAnnouncement(event)" class="space-y-3">
         <div class="space-y-1"><label class="text-xs font-bold opacity-75">Isi Pesan Pengumuman</label><textarea id="broadcastTextInput" placeholder="Tulis pengumuman sistem..." required class="w-full p-3 rounded-xl card-modern text-xs h-24 focus:outline-none"></textarea></div>
@@ -1450,7 +1451,7 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl max-h-[85vh] overflow-y-auto">
       <div class="sticky-modal-header flex justify-between items-center pt-2">
         <h3 id="modalTxTitle" class="font-extrabold text-sm">Transaksi</h3>
-        <button onclick="closeTxModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeTxModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
       </div>
       <form id="txForm" class="space-y-3">
         <input type="hidden" id="formTxId" value=""><input type="hidden" id="formType" value="expense">
@@ -1469,7 +1470,7 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="sticky-modal-header flex justify-between items-center pt-2">
         <h3 class="font-extrabold text-sm">+ Tautan Pintasan Web</h3>
-        <button onclick="closeShortcutModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeShortcutModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
       </div>
       <form id="shortcutForm" onsubmit="saveShortcutItem(event)" class="space-y-3">
         <div class="space-y-1"><label class="text-xs font-bold opacity-75">Nama Situs / Judul</label><input type="text" id="shortcutTitleInput" placeholder="Contoh: GitHub" required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
@@ -1484,7 +1485,7 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="sticky-modal-header flex justify-between items-center pt-2">
         <h3 class="font-extrabold text-sm">Rutinitas</h3>
-        <button onclick="closeHabitModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeHabitModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
       </div>
       <form id="habitForm" class="space-y-3">
         <div class="space-y-1"><label class="text-xs font-bold opacity-75">Nama Rutinitas</label><input type="text" id="habitTitleInput" placeholder="Rutinitas..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
@@ -1498,7 +1499,7 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="sticky-modal-header flex justify-between items-center pt-2">
         <h3 class="font-extrabold text-sm">Kanban</h3>
-        <button onclick="closeKanbanModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeKanbanModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
       </div>
       <form id="kanbanForm" class="space-y-3">
         <input type="hidden" id="kanbanCardStatus" value="todo">
@@ -1514,7 +1515,7 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="sticky-modal-header flex justify-between items-center pt-2">
         <h3 class="font-extrabold text-sm">Matriks</h3>
-        <button onclick="closeEisenhowerModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeEisenhowerModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
       </div>
       <form id="eisenForm" class="space-y-3">
         <input type="hidden" id="eisenQuadrant" value="Q1">
@@ -1529,7 +1530,7 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="sticky-modal-header flex justify-between items-center pt-2">
         <h3 class="font-extrabold text-sm">Tugas</h3>
-        <button onclick="closeTaskModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeTaskModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
       </div>
       <form id="taskForm" class="space-y-3">
         <div class="space-y-1"><label class="text-xs font-bold opacity-75">Tugas</label><input type="text" id="taskTitle" placeholder="Tugas..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
@@ -1543,7 +1544,7 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="sticky-modal-header flex justify-between items-center pt-2">
         <h3 class="font-extrabold text-sm">Catatan</h3>
-        <button onclick="closeNoteModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeNoteModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
       </div>
       <form id="noteForm" class="space-y-3">
         <div class="space-y-1"><label class="text-xs font-bold opacity-75">Judul</label><input type="text" id="noteTitle" placeholder="Judul..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
@@ -1558,7 +1559,7 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="sticky-modal-header flex justify-between items-center pt-2">
         <h3 class="font-extrabold text-sm">Snippet</h3>
-        <button onclick="closeSnippetModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeSnippetModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
       </div>
       <form id="snippetForm" class="space-y-3">
         <div class="space-y-1"><label class="text-xs font-bold opacity-75">Snippet</label><input type="text" id="snippetTitle" placeholder="Snippet..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
@@ -1573,7 +1574,7 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="sticky-modal-header flex justify-between items-center pt-2">
         <h3 id="calModalTitleText" class="font-extrabold text-sm">Agenda Kalender</h3>
-        <button onclick="closeCalendarEventModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeCalendarEventModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
       </div>
       <form id="calEventForm" class="space-y-3">
         <input type="hidden" id="calEditOldDate" value=""><input type="hidden" id="calEditOldIndex" value="">
@@ -1589,7 +1590,7 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="sticky-modal-header flex justify-between items-center pt-2">
         <h3 class="font-extrabold text-sm">+ Kredensial</h3>
-        <button onclick="closeVaultModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeVaultModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
       </div>
       <form id="vaultForm" onsubmit="saveVaultItem(event)" class="space-y-3">
         <div class="space-y-1"><label class="text-xs font-bold opacity-75">Layanan</label><input type="text" id="vaultTitle" placeholder="Layanan..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
@@ -1605,7 +1606,7 @@
     <div class="card-modern w-full max-w-lg p-6 rounded-3xl space-y-4 shadow-2xl max-h-[85vh] overflow-y-auto">
       <div class="sticky-modal-header flex justify-between items-center pt-2">
         <h3 class="font-extrabold text-sm">Akun & Pencadangan Data TabHub</h3>
-        <button onclick="closeBackupRestoreModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeBackupRestoreModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
       </div>
       <div class="space-y-4">
         <div class="space-y-1">
@@ -1632,27 +1633,23 @@
     <div class="card-modern w-full max-w-lg p-6 rounded-3xl space-y-4 shadow-2xl max-h-[85vh] overflow-y-auto">
       <div class="sticky-modal-header flex justify-between items-center pt-2">
         <h3 class="font-extrabold text-sm">Riwayat Pembaruan Aplikasi</h3>
-        <button onclick="closeReleaseHistoryModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeReleaseHistoryModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
       </div>
       <div id="releaseHistoryContent" class="space-y-3 text-xs opacity-90 leading-relaxed font-mono">
         <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-blue-500">
-          <strong>TabHub v1.47 PRO (Agustus 2026)</strong>
-          <p class="text-[11px] opacity-80">- Perbaikan total bug splash screen loading yang tersangkut dengan implementasi pengecekan `document.readyState` dan pengaman timer absolut mutlak (dijamin hilang dalam 1.5 detik).</p>
+          <strong>TabHub v1.48 PRO (Agustus 2026)</strong>
+          <p class="text-[11px] opacity-85">- Optimasi performa menyeluruh, pencegahan duplikasi event listener formulir, serta penguatan DOM safety checks pada seluruh fungsi rendering.</p>
         </div>
         <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-sky-500">
-          <strong>TabHub v1.43 PRO</strong>
-          <p class="text-[11px] opacity-80">- Modul Pelacak Kesehatan & Air Minum (Water & Health Tracker).</p>
-        </div>
-        <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-amber-500">
-          <strong>TabHub v1.42 PRO</strong>
-          <p class="text-[11px] opacity-80">- Panel Kontrol Admin Komprehensif dengan pengumuman global dan audit log.</p>
+          <strong>TabHub v1.47 PRO</strong>
+          <p class="text-[11px] opacity-80">- Perbaikan total bug splash screen loading yang tersangkut dengan implementasi pengecekan `document.readyState` dan pengaman timer absolut mutlak.</p>
         </div>
       </div>
     </div>
   </div>
 
     /* ==========================================================================
-       TABHUB v1.47 PRO - JAVASCRIPT STATE ENGINE & CORE LOGIC
+       TABHUB v1.48 PRO - JAVASCRIPT STATE ENGINE & CORE LOGIC
        ========================================================================== */
 
     const STORAGE_KEY = 'SMARTCORE_STATE';
@@ -1706,7 +1703,7 @@
       vault: [],
       codeSnippets: [],
       auditLogs: [
-        { time: new Date().toLocaleTimeString(), text: '[INFO] Sistem TabHub v1.47 PRO diinisialisasi.' }
+        { time: new Date().toLocaleTimeString(), text: '[INFO] Sistem TabHub v1.48 PRO diinisialisasi.' }
       ]
     };
 
@@ -1732,7 +1729,7 @@
       { id: 3, x: 400, y: 220, text: 'Manajemen Keuangan', color: '#f43f5e' }
     ];
 
-    // INITIATION & PERSISTENCE (Enhanced with document.readyState check & absolute failsafe timer)
+    // INITIATION & PERSISTENCE (Optimized with document.readyState check & failsafe timer)
     function initializeAppSystem() {
       try {
         loadStateFromStorage();
@@ -2715,7 +2712,7 @@
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
       const dl = document.createElement('a');
       dl.setAttribute("href", dataStr);
-      dl.setAttribute("download", `TabHub_v147_Backup_${new Date().toISOString().split('T')[0]}.json`);
+      dl.setAttribute("download", `TabHub_v148_Backup_${new Date().toISOString().split('T')[0]}.json`);
       document.body.appendChild(dl);
       dl.click();
       dl.remove();
@@ -2913,7 +2910,7 @@
       }
 
       const gistData = {
-        description: "TabHub v1.47 PRO Cloud Sync Backup",
+        description: "TabHub v1.48 PRO Cloud Sync Backup",
         public: false,
         files: {
           "tabhub_state.json": {
@@ -3137,7 +3134,7 @@
       chatArea.scrollTop = chatArea.scrollHeight;
 
       setTimeout(() => {
-        let reply = "Saya asisten pintar TabHub v1.47 PRO. Seluruh sistem berjalan optimal!";
+        let reply = "Saya asisten pintar TabHub v1.48 PRO. Seluruh sistem berjalan optimal!";
         if (text.toLowerCase().includes('keuangan')) {
           const totalInc = appState.finance.transactions.filter(t=>t.type==='income').reduce((a,b)=>a+Number(b.amount),0);
           reply = `Ringkasan keuangan Anda: Total pemasukan tercatat Rp ${totalInc.toLocaleString()}.`;

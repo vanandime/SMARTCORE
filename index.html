@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCore Ultimate - All-in-One Platform & AI Workspace v1.8</title>
+    <title>SmartCore Ultimate - All-in-One Platform & AI Workspace v1.9</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -32,64 +32,64 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #1e1b4b; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
         ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
         .glass-panel {
-            background: rgba(30, 27, 75, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(99, 102, 241, 0.25);
         }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
 
     <!-- AUTH & ONBOARDING MODAL OVERLAY -->
-    <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden">
-        <div class="glass-panel w-full max-w-md p-8 rounded-2xl shadow-2xl relative border border-brand-500/30">
+    <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md hidden">
+        <div class="glass-panel w-full max-w-md p-8 rounded-3xl shadow-2xl relative border border-brand-500/40">
             <div class="text-center mb-6">
-                <div class="inline-flex p-3 bg-brand-600/20 text-brand-400 rounded-2xl mb-3 text-2xl">
+                <div class="inline-flex p-3.5 bg-brand-600/20 text-brand-400 rounded-2xl mb-3 text-2xl border border-brand-500/30 shadow-inner">
                     <i class="fa-solid fa-cube"></i>
                 </div>
                 <h2 id="authTitle" class="text-2xl font-bold tracking-tight text-white">SmartCore Access</h2>
-                <p id="authSubtitle" class="text-sm text-slate-400 mt-1">Masuk sebagai Admin atau Daftar Akun Baru</p>
+                <p id="authSubtitle" class="text-sm text-slate-400 mt-1">Masuk sebagai Pengguna atau Administrator</p>
             </div>
 
             <!-- Tab Switcher Auth -->
-            <div class="flex bg-slate-900/80 p-1 rounded-xl mb-6 border border-slate-800">
-                <button type="button" onclick="switchAuthTab('login')" id="tabLoginBtn" class="flex-1 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white transition-all shadow-md">Masuk</button>
-                <button type="button" onclick="switchAuthTab('register')" id="tabRegisterBtn" class="flex-1 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition-all">Registrasi</button>
-                <button type="button" onclick="switchAuthTab('admin')" id="tabAdminBtn" class="flex-1 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition-all">Admin</button>
+            <div class="flex bg-slate-900/90 p-1.5 rounded-2xl mb-6 border border-slate-800">
+                <button type="button" onclick="switchAuthTab('login')" id="tabLoginBtn" class="flex-1 py-2 text-xs font-semibold rounded-xl bg-brand-600 text-white transition-all shadow-md">Masuk</button>
+                <button type="button" onclick="switchAuthTab('register')" id="tabRegisterBtn" class="flex-1 py-2 text-xs font-semibold rounded-xl text-slate-400 hover:text-white transition-all">Registrasi</button>
+                <button type="button" onclick="switchAuthTab('admin')" id="tabAdminBtn" class="flex-1 py-2 text-xs font-semibold rounded-xl text-slate-400 hover:text-white transition-all">Admin</button>
             </div>
 
             <!-- Auth Forms Container -->
             <form id="authForm" onsubmit="handleAuthSubmit(event)" class="space-y-4">
                 <div id="nameFieldGroup" class="hidden">
-                    <label class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1">Nama Lengkap / Username</label>
+                    <label class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1.5">Nama Lengkap / Username</label>
                     <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" id="regName" class="w-full pl-10 pr-4 py-2.5 bg-slate-900/90 border border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-500 text-sm text-white placeholder-slate-500" placeholder="John Doe">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" id="regName" class="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700/80 rounded-xl focus:ring-2 focus:ring-brand-500 text-sm text-white placeholder-slate-500" placeholder="John Doe">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1">Email / Identitas</label>
+                    <label class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1.5">Email / Identitas</label>
                     <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400"><i class="fa-solid fa-envelope"></i></span>
-                        <input type="text" id="authEmail" required class="w-full pl-10 pr-4 py-2.5 bg-slate-900/90 border border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-500 text-sm text-white placeholder-slate-500" placeholder="user@smartcore.io">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-envelope"></i></span>
+                        <input type="text" id="authEmail" required class="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700/80 rounded-xl focus:ring-2 focus:ring-brand-500 text-sm text-white placeholder-slate-500" placeholder="user@smartcore.io">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1">Kata Sandi / API Token</label>
+                    <label class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1.5">Kata Sandi</label>
                     <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400"><i class="fa-solid fa-lock"></i></span>
-                        <input type="password" id="authPassword" required class="w-full pl-10 pr-4 py-2.5 bg-slate-900/90 border border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-500 text-sm text-white placeholder-slate-500" placeholder="••••••••">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-lock"></i></span>
+                        <input type="password" id="authPassword" required class="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700/80 rounded-xl focus:ring-2 focus:ring-brand-500 text-sm text-white placeholder-slate-500" placeholder="••••••••">
                     </div>
                 </div>
 
-                <button type="submit" id="authSubmitBtn" class="w-full py-3 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center justify-center gap-2">
+                <button type="submit" id="authSubmitBtn" class="w-full py-3.5 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center justify-center gap-2">
                     <i class="fa-solid fa-right-to-bracket"></i> Masuk Sekarang
                 </button>
             </form>
@@ -99,125 +99,140 @@
     <!-- MAIN APP WRAPPER -->
     <div id="appWrapper" class="flex-1 flex flex-col min-h-screen">
         <!-- TOP NAVIGATION BAR -->
-        <header class="glass-panel border-b border-slate-800 sticky top-0 z-40 px-4 lg:px-8 py-3 flex items-center justify-between">
+        <header class="glass-panel border-b border-slate-800 sticky top-0 z-40 px-4 lg:px-8 py-3.5 flex items-center justify-between shadow-lg">
             <div class="flex items-center gap-4">
-                <div class="flex items-center gap-2">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-400 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-brand-500/20">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-400 flex items-center justify-center text-white font-bold text-lg shadow-md shadow-brand-500/20">
                         <i class="fa-solid fa-bolt"></i>
                     </div>
                     <div>
-                        <h1 class="font-bold text-white tracking-wide text-base">SmartCore <span class="text-brand-400 text-xs px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30">v1.8 Ultimate</span></h1>
-                        <p class="text-xs text-slate-400">Social • Tools • Finance • Time • Live Feeds • GitHub • AI</p>
+                        <h1 class="font-bold text-white tracking-wide text-base flex items-center gap-2">
+                            SmartCore <span class="text-brand-400 text-[10px] px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold">v1.9 Ultimate</span>
+                        </h1>
+                        <p class="text-[11px] text-slate-400">All-in-One Platform & AI Workspace</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Nav Tabs -->
-            <nav class="hidden xl:flex items-center gap-1 bg-slate-900/80 p-1.5 rounded-2xl border border-slate-800 flex-wrap">
-                <button type="button" onclick="switchTab('social')" id="navSocial" class="px-3 py-1.5 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+            <!-- Responsive Nav Tabs -->
+            <nav class="hidden 2xl:flex items-center gap-1 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800/80">
+                <button type="button" onclick="switchTab('social')" id="navSocial" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-2">
                     <i class="fa-solid fa-globe text-brand-400"></i> Sosial
                 </button>
-                <button type="button" onclick="switchTab('tools')" id="navTools" class="px-3 py-1.5 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                <button type="button" onclick="switchTab('tools')" id="navTools" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-2">
                     <i class="fa-solid fa-toolbox text-indigo-400"></i> Tools
                 </button>
-                <button type="button" onclick="switchTab('finance')" id="navFinance" class="px-3 py-1.5 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                <button type="button" onclick="switchTab('finance')" id="navFinance" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-2">
                     <i class="fa-solid fa-wallet text-emerald-400"></i> Keuangan
                 </button>
-                <button type="button" onclick="switchTab('time')" id="navTime" class="px-3 py-1.5 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                <button type="button" onclick="switchTab('time')" id="navTime" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-2">
                     <i class="fa-solid fa-clock text-amber-400"></i> Waktu
                 </button>
-                <button type="button" onclick="switchTab('feeds')" id="navFeeds" class="px-3 py-1.5 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                <button type="button" onclick="switchTab('feeds')" id="navFeeds" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-2">
                     <i class="fa-solid fa-rss text-cyan-400"></i> Berita & Cuaca
                 </button>
-                <button type="button" onclick="switchTab('profile')" id="navProfile" class="px-3 py-1.5 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-user-gear text-pink-400"></i> Profil & Akun
+                <button type="button" onclick="switchTab('profile')" id="navProfile" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-user-gear text-pink-400"></i> Profil
                 </button>
-                <button type="button" onclick="switchTab('github')" id="navGithub" class="px-3 py-1.5 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                <button type="button" onclick="switchTab('github')" id="navGithub" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-2">
                     <i class="fa-brands fa-github text-emerald-400"></i> GitHub
                 </button>
-                <button type="button" onclick="switchTab('gemini')" id="navGemini" class="px-3 py-1.5 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                <button type="button" onclick="switchTab('gemini')" id="navGemini" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-2">
                     <i class="fa-solid fa-brain text-purple-400"></i> Gemini AI
                 </button>
-                <button type="button" onclick="switchTab('admin')" id="navAdmin" class="px-3 py-1.5 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5 hidden">
+                <button type="button" onclick="switchTab('admin')" id="navAdmin" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-2 hidden">
                     <i class="fa-solid fa-shield-halved text-rose-400"></i> Admin
                 </button>
             </nav>
 
             <!-- User Profile & Logout -->
             <div class="flex items-center gap-3">
-                <div id="userBadge" class="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-slate-900 rounded-xl border border-slate-800 text-xs">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <div id="userBadge" class="hidden sm:flex items-center gap-2.5 px-3.5 py-2 bg-slate-900 rounded-xl border border-slate-800 text-xs shadow-inner">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
                     <span id="currentUsernameDisplay" class="font-medium text-slate-200">Guest</span>
                 </div>
-                <button type="button" onclick="logoutUser()" title="Keluar / Ganti Akun" class="p-2.5 bg-slate-900 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 rounded-xl border border-slate-800 transition-all">
+                <button type="button" onclick="logoutUser()" title="Keluar Sesi" class="p-2.5 bg-slate-900 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 rounded-xl border border-slate-800 transition-all shadow-sm">
                     <i class="fa-solid fa-power-off"></i>
                 </button>
             </div>
         </header>
 
+        <!-- SUB NAV BAR FOR SMALLER SCREENS -->
+        <div class="2xl:hidden bg-slate-900/90 border-b border-slate-800 px-4 py-2 flex items-center gap-2 overflow-x-auto">
+            <button type="button" onclick="switchTab('social')" id="navSocialMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 bg-brand-600 text-white flex-shrink-0">Sosial</button>
+            <button type="button" onclick="switchTab('tools')" id="navToolsMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Tools</button>
+            <button type="button" onclick="switchTab('finance')" id="navFinanceMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Keuangan</button>
+            <button type="button" onclick="switchTab('time')" id="navTimeMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Waktu</button>
+            <button type="button" onclick="switchTab('feeds')" id="navFeedsMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Berita & Cuaca</button>
+            <button type="button" onclick="switchTab('profile')" id="navProfileMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Profil</button>
+            <button type="button" onclick="switchTab('github')" id="navGithubMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">GitHub</button>
+            <button type="button" onclick="switchTab('gemini')" id="navGeminiMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Gemini AI</button>
+            <button type="button" onclick="switchTab('admin')" id="navAdminMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0 hidden">Admin</button>
+        </div>
+
         <!-- MAIN WORKSPACE CONTAINER -->
         <main class="flex-1 p-4 lg:p-8 max-w-7xl mx-auto w-full">
             <div id="workspaceContent" class="space-y-6">
-                <div class="glass-panel p-8 rounded-2xl text-center space-y-4">
-                    <div class="inline-flex p-4 bg-brand-500/10 text-brand-400 rounded-full text-3xl">
+                <div class="glass-panel p-10 rounded-3xl text-center space-y-4 shadow-2xl border border-brand-500/20">
+                    <div class="inline-flex p-4 bg-brand-500/10 text-brand-400 rounded-full text-3xl animate-bounce">
                         <i class="fa-solid fa-spinner animate-spin"></i>
                     </div>
-                    <h3 class="text-lg font-semibold text-white">Memuat Sistem Utama v1.8...</h3>
-                    <p class="text-sm text-slate-400 max-w-md mx-auto">Silakan balas dengan huruf **"v"** untuk melanjutkan ke **Bagian 2 (Main Workspace & UI Components)**.</p>
+                    <h3 class="text-xl font-semibold text-white">Memuat Sistem Utama v1.9...</h3>
+                    <p class="text-sm text-slate-400 max-w-md mx-auto">Menyiapkan seluruh modul tata letak dan fungsionalitas mutakhir.</p>
                 </div>
             </div>
         </main>
     </div>
 
-        <!-- TEMPLATES FOR VIEWS (DI-RENDER DINAMIS OLEH JAVASCRIPT) -->
+    <!-- TEMPLATES FOR VIEWS (DI-RENDER DINAMIS OLEH JAVASCRIPT) -->
     
     <!-- 1. SOCIAL MEDIA VIEW -->
     <template id="templateSocialView">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div class="lg:col-span-2 space-y-6">
-                <div class="glass-panel p-5 rounded-2xl shadow-lg border border-slate-800">
+                <div class="glass-panel p-6 rounded-3xl shadow-xl border border-slate-800/80">
                     <form onsubmit="handleCreatePost(event)" class="space-y-4">
-                        <div class="flex items-start gap-3">
-                            <div class="w-10 h-10 rounded-full bg-brand-600/30 text-brand-400 flex items-center justify-center font-bold text-sm border border-brand-500/30">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-11 h-11 rounded-2xl bg-brand-600/30 text-brand-400 flex items-center justify-center font-bold text-sm border border-brand-500/30 flex-shrink-0 shadow-inner">
                                 <span id="postAuthorInitial">U</span>
                             </div>
-                            <textarea id="postContentInput" rows="3" required class="w-full bg-slate-900/90 border border-slate-700 rounded-xl p-3 text-sm text-white placeholder-slate-500 focus:ring-2 focus:ring-brand-500 resize-none" placeholder="Apa yang sedang Anda pikirkan atau bagikan hari ini?"></textarea>
+                            <textarea id="postContentInput" rows="3" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl p-3.5 text-sm text-white placeholder-slate-500 focus:ring-2 focus:ring-brand-500 resize-none shadow-inner" placeholder="Apa yang sedang Anda pikirkan atau bagikan hari ini?"></textarea>
                         </div>
-                        <div class="flex items-center justify-between pt-2 border-t border-slate-800/80">
+                        <div class="flex items-center justify-between pt-3 border-t border-slate-800/80">
                             <div class="flex items-center gap-2 text-slate-400 text-xs">
-                                <label class="cursor-pointer hover:text-brand-400 transition-colors flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 rounded-lg border border-slate-800">
+                                <label class="cursor-pointer hover:text-brand-400 transition-colors flex items-center gap-2 px-3.5 py-2 bg-slate-900/90 rounded-xl border border-slate-800 shadow-sm">
                                     <i class="fa-solid fa-image text-brand-400"></i> Lampirkan Gambar
                                     <input type="file" id="postImageInput" accept="image/*" class="hidden" onchange="previewPostImage(event)">
                                 </label>
                                 <span id="imageFileName" class="text-slate-500 italic truncate max-w-xs"></span>
                             </div>
-                            <button type="submit" class="px-5 py-2 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl shadow-md shadow-brand-600/30 transition-all flex items-center gap-2">
+                            <button type="submit" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center gap-2">
                                 <i class="fa-solid fa-paper-plane"></i> Publikasikan
                             </button>
                         </div>
-                        <div id="imagePreviewContainer" class="hidden relative mt-2 rounded-xl overflow-hidden max-h-48 border border-slate-800">
+                        <div id="imagePreviewContainer" class="hidden relative mt-3 rounded-2xl overflow-hidden max-h-56 border border-slate-800 shadow-md">
                             <img id="postImagePreview" src="" alt="Preview" class="w-full object-cover">
-                            <button type="button" onclick="removePostImage()" class="absolute top-2 right-2 p-1.5 bg-slate-900/80 hover:bg-rose-500 text-white rounded-lg transition-colors"><i class="fa-solid fa-xmark"></i></button>
+                            <button type="button" onclick="removePostImage()" class="absolute top-3 right-3 p-2 bg-slate-900/90 hover:bg-rose-500 text-white rounded-xl transition-colors shadow-lg"><i class="fa-solid fa-xmark"></i></button>
                         </div>
                     </form>
                 </div>
                 <div id="postsFeedContainer" class="space-y-4">
-                    <div class="glass-panel p-6 rounded-2xl text-center text-slate-400 text-sm">Memuat linimasa postingan...</div>
+                    <div class="glass-panel p-8 rounded-3xl text-center text-slate-400 text-sm shadow-xl">Memuat linimasa postingan...</div>
                 </div>
             </div>
             <div class="space-y-6">
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
-                        <i class="fa-solid fa-fire text-amber-400"></i> Tren & Aktivitas v1.8
+                        <i class="fa-solid fa-fire text-amber-400"></i> Tren & Aktivitas v1.9
                     </h3>
                     <div class="space-y-3 text-xs">
-                        <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800/60">
+                        <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
                             <span class="text-brand-400 font-semibold">#SmartCoreUltimate</span>
-                            <p class="text-slate-400 mt-0.5">Sinkronisasi Real-Time GitHub & Manajemen Keuangan aktif!</p>
+                            <p class="text-slate-400 mt-1">Tata letak baru dengan sinkronisasi GitHub Real-Time aktif!</p>
                         </div>
                     </div>
                 </div>
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
                         <i class="fa-solid fa-users text-emerald-400"></i> Komunitas Aktif
                     </h3>
@@ -230,48 +245,62 @@
     <!-- 2. UTILITY TOOLS VIEW -->
     <template id="templateToolsView">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="glass-panel p-4 rounded-2xl border border-slate-800 space-y-2">
+            <div class="glass-panel p-5 rounded-3xl border border-slate-800/80 space-y-2.5 shadow-xl">
                 <h3 class="font-bold text-white text-sm px-3 py-2 border-b border-slate-800 mb-2">Pilih Alat Serbaguna</h3>
-                <button type="button" onclick="switchToolSub('json')" id="toolSubJson" class="w-full text-left px-3 py-2.5 rounded-xl text-xs font-semibold bg-brand-600 text-white flex items-center gap-2 transition-all"><i class="fa-solid fa-code w-5"></i> JSON Formatter & Validator</button>
-                <button type="button" onclick="switchToolSub('base64')" id="toolSubBase64" class="w-full text-left px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900 flex items-center gap-2 transition-all"><i class="fa-solid fa-binary w-5"></i> Base64 Encoder / Decoder</button>
-                <button type="button" onclick="switchToolSub('hash')" id="toolSubHash" class="w-full text-left px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900 flex items-center gap-2 transition-all"><i class="fa-solid fa-fingerprint w-5"></i> Generator Hash MD5/SHA</button>
-                <button type="button" onclick="switchToolSub('markdown')" id="toolSubMarkdown" class="w-full text-left px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900 flex items-center gap-2 transition-all"><i class="fa-brands fa-markdown w-5"></i> Markdown Live Previewer</button>
+                <button type="button" onclick="switchToolSub('json')" id="toolSubJson" class="w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold bg-brand-600 text-white flex items-center gap-2.5 transition-all shadow-md"><i class="fa-solid fa-code w-5 text-brand-200"></i> JSON Formatter & Validator</button>
+                <button type="button" onclick="switchToolSub('base64')" id="toolSubBase64" class="w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900/90 flex items-center gap-2.5 transition-all"><i class="fa-solid fa-binary w-5 text-indigo-400"></i> Base64 Encoder / Decoder</button>
+                <button type="button" onclick="switchToolSub('hash')" id="toolSubHash" class="w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900/90 flex items-center gap-2.5 transition-all"><i class="fa-solid fa-fingerprint w-5 text-amber-400"></i> Generator Hash SHA-256</button>
+                <button type="button" onclick="switchToolSub('markdown')" id="toolSubMarkdown" class="w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900/90 flex items-center gap-2.5 transition-all"><i class="fa-brands fa-markdown w-5 text-cyan-400"></i> Markdown Live Previewer</button>
             </div>
-            <div class="md:col-span-2 glass-panel p-6 rounded-2xl border border-slate-800">
+            <div class="md:col-span-2 glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 shadow-xl">
                 <div id="toolPanelJson" class="space-y-4">
                     <h3 class="font-bold text-white text-base">JSON Formatter & Validator</h3>
-                    <textarea id="jsonInput" rows="6" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs font-mono text-white placeholder-slate-600 focus:ring-2 focus:ring-brand-500 resize-none" placeholder='{"nama": "SmartCore"}'></textarea>
-                    <div class="flex gap-2">
-                        <button type="button" onclick="formatJSON()" class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl shadow">Format / Rapikan</button>
-                        <button type="button" onclick="minifyJSON()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-xl">Minify</button>
-                        <button type="button" onclick="clearJSON()" class="px-4 py-2 bg-rose-500/20 text-rose-400 text-xs font-semibold rounded-xl ml-auto">Bersihkan</button>
+                    <p class="text-xs text-slate-400">Rapikan atau validasi struktur data objek JSON dengan instan.</p>
+                    <textarea id="jsonInput" rows="6" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl p-3.5 text-xs font-mono text-white placeholder-slate-600 focus:ring-2 focus:ring-brand-500 resize-none shadow-inner" placeholder='{"nama": "SmartCore Ultimate"}'></textarea>
+                    <div class="flex flex-wrap gap-2.5">
+                        <button type="button" onclick="formatJSON()" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl shadow-md transition-all">Format / Rapikan</button>
+                        <button type="button" onclick="minifyJSON()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-xl transition-all">Minify</button>
+                        <button type="button" onclick="clearJSON()" class="px-5 py-2.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 text-xs font-semibold rounded-xl transition-all ml-auto border border-rose-500/30">Bersihkan</button>
                     </div>
                     <div id="jsonOutputContainer" class="mt-4 hidden">
-                        <pre id="jsonOutput" class="p-3 bg-slate-900/90 border border-slate-800 rounded-xl text-xs font-mono text-emerald-400 overflow-x-auto max-h-48"></pre>
+                        <label class="block text-xs font-medium text-slate-400 mb-1.5">Hasil Output:</label>
+                        <pre id="jsonOutput" class="p-4 bg-slate-900/90 border border-slate-800 rounded-2xl text-xs font-mono text-emerald-400 overflow-x-auto max-h-56 shadow-inner"></pre>
                     </div>
                 </div>
                 <div id="toolPanelBase64" class="space-y-4 hidden">
                     <h3 class="font-bold text-white text-base">Base64 Encoder / Decoder</h3>
-                    <textarea id="base64Input" rows="5" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs font-mono text-white placeholder-slate-600 resize-none" placeholder="Masukkan teks..."></textarea>
-                    <div class="flex gap-2">
-                        <button type="button" onclick="encodeBase64()" class="px-4 py-2 bg-brand-600 text-white text-xs font-semibold rounded-xl">Encode</button>
-                        <button type="button" onclick="decodeBase64()" class="px-4 py-2 bg-indigo-600 text-white text-xs font-semibold rounded-xl">Decode</button>
+                    <p class="text-xs text-slate-400">Konversikan teks biasa ke format Base64 atau sebaliknya.</p>
+                    <textarea id="base64Input" rows="5" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl p-3.5 text-xs font-mono text-white placeholder-slate-600 resize-none shadow-inner" placeholder="Masukkan teks..."></textarea>
+                    <div class="flex gap-2.5">
+                        <button type="button" onclick="encodeBase64()" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl shadow-md transition-all">Encode Base64</button>
+                        <button type="button" onclick="decodeBase64()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-xl shadow-md transition-all">Decode Base64</button>
                     </div>
-                    <textarea id="base64Output" rows="4" readonly class="w-full bg-slate-900/90 border border-slate-800 rounded-xl p-3 text-xs font-mono text-emerald-400 resize-none"></textarea>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1.5">Hasil:</label>
+                        <textarea id="base64Output" rows="4" readonly class="w-full bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 text-xs font-mono text-emerald-400 resize-none shadow-inner" placeholder="Hasil akan muncul di sini..."></textarea>
+                    </div>
                 </div>
                 <div id="toolPanelHash" class="space-y-4 hidden">
-                    <h3 class="font-bold text-white text-base">Hash Generator (SHA-256)</h3>
-                    <input type="text" id="hashInput" oninput="generateHashes()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white" placeholder="Ketik teks...">
+                    <h3 class="font-bold text-white text-base">Generator Hash (SHA-256)</h3>
+                    <p class="text-xs text-slate-400">Hitung nilai hash kriptografi SHA-256 secara real-time.</p>
+                    <input type="text" id="hashInput" oninput="generateHashes()" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl px-4 py-3 text-xs text-white placeholder-slate-600 shadow-inner" placeholder="Ketik teks untuk di-hash...">
                     <div class="space-y-3 pt-2">
-                        <div id="sha256Output" class="p-2.5 bg-slate-900/90 border border-slate-800 rounded-xl text-xs font-mono text-brand-400 break-all select-all">-</div>
-                        <div id="hashLengthOutput" class="p-2.5 bg-slate-900/90 border border-slate-800 rounded-xl text-xs font-mono text-slate-300">0 Karakter</div>
+                        <div>
+                            <span class="text-xs text-slate-400 font-medium">SHA-256 Hash Result:</span>
+                            <div id="sha256Output" class="p-3.5 bg-slate-900/90 border border-slate-800 rounded-2xl text-xs font-mono text-brand-400 break-all select-all shadow-inner">-</div>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 font-medium">Jumlah Karakter:</span>
+                            <div id="hashLengthOutput" class="p-3.5 bg-slate-900/90 border border-slate-800 rounded-2xl text-xs font-mono text-slate-300 shadow-inner">0 Karakter</div>
+                        </div>
                     </div>
                 </div>
                 <div id="toolPanelMarkdown" class="space-y-4 hidden">
                     <h3 class="font-bold text-white text-base">Markdown Live Previewer</h3>
+                    <p class="text-xs text-slate-400">Tulis sintaks markdown dan tinjau hasilnya langsung.</p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <textarea id="markdownInput" oninput="renderMarkdownPreview()" rows="8" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs font-mono text-white resize-none" placeholder="# Judul"></textarea>
-                        <div id="markdownPreview" class="p-3 bg-slate-900/90 border border-slate-800 rounded-xl text-xs text-slate-200 overflow-y-auto max-h-52 prose prose-invert">Pratinjau...</div>
+                        <textarea id="markdownInput" oninput="renderMarkdownPreview()" rows="8" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl p-3.5 text-xs font-mono text-white resize-none shadow-inner" placeholder="# Judul Markdown&#10;- Poin pertama&#10;- Poin kedua"></textarea>
+                        <div id="markdownPreview" class="p-4 bg-slate-900/90 border border-slate-800 rounded-2xl text-xs text-slate-200 overflow-y-auto max-h-56 prose prose-invert shadow-inner">Pratinjau...</div>
                     </div>
                 </div>
             </div>
@@ -281,53 +310,72 @@
     <!-- 3. FINANCE TRACKER VIEW (PENGELOLA KEUANGAN) -->
     <template id="templateFinanceView">
         <div class="space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800">
-                    <p class="text-xs text-slate-400">Total Saldo</p>
-                    <h4 id="finTotalBalance" class="text-2xl font-bold text-white mt-1">Rp 0</h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-medium text-slate-400">Total Saldo Bersih</p>
+                        <h4 id="finTotalBalance" class="text-2xl font-bold text-white mt-1">Rp 0</h4>
+                    </div>
+                    <div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-xl border border-brand-500/30">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
                 </div>
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800">
-                    <p class="text-xs text-slate-400">Pemasukan Bulan Ini</p>
-                    <h4 id="finTotalIncome" class="text-2xl font-bold text-emerald-400 mt-1">Rp 0</h4>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-medium text-slate-400">Pemasukan Bulan Ini</p>
+                        <h4 id="finTotalIncome" class="text-2xl font-bold text-emerald-400 mt-1">Rp 0</h4>
+                    </div>
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                    </div>
                 </div>
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800">
-                    <p class="text-xs text-slate-400">Pengeluaran Bulan Ini</p>
-                    <h4 id="finTotalExpense" class="text-2xl font-bold text-rose-400 mt-1">Rp 0</h4>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-medium text-slate-400">Pengeluaran Bulan Ini</p>
+                        <h4 id="finTotalExpense" class="text-2xl font-bold text-rose-400 mt-1">Rp 0</h4>
+                    </div>
+                    <div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30">
+                        <i class="fa-solid fa-arrow-trend-down"></i>
+                    </div>
                 </div>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
-                    <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3"><i class="fa-solid fa-plus-circle text-brand-400"></i> Tambah Transaksi</h3>
-                    <form onsubmit="handleAddTransaction(event)" class="space-y-3 text-xs">
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                    <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-plus-circle text-brand-400"></i> Tambah Transaksi
+                    </h3>
+                    <form onsubmit="handleAddTransaction(event)" class="space-y-3.5 text-xs">
                         <div>
-                            <label class="block text-slate-300 mb-1">Keterangan</label>
-                            <input type="text" id="finDesc" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white" placeholder="Gaji / Belanja / Makanan">
+                            <label class="block text-slate-300 mb-1.5 font-medium">Keterangan Transaksi</label>
+                            <input type="text" id="finDesc" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="Gaji Bulanan / Belanja Server">
                         </div>
                         <div>
-                            <label class="block text-slate-300 mb-1">Nominal (Rp)</label>
-                            <input type="number" id="finAmount" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white" placeholder="50000">
+                            <label class="block text-slate-300 mb-1.5 font-medium">Nominal (Rp)</label>
+                            <input type="number" id="finAmount" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="500000">
                         </div>
                         <div>
-                            <label class="block text-slate-300 mb-1">Tipe</label>
-                            <select id="finType" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white">
+                            <label class="block text-slate-300 mb-1.5 font-medium">Tipe Transaksi</label>
+                            <select id="finType" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner">
                                 <option value="income">Pemasukan (Income)</option>
                                 <option value="expense">Pengeluaran (Expense)</option>
                             </select>
                         </div>
-                        <button type="submit" class="w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl transition-all shadow">Simpan Transaksi</button>
+                        <button type="submit" class="w-full py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl transition-all shadow-lg shadow-brand-600/30">Simpan Transaksi</button>
                     </form>
                 </div>
-                <div class="lg:col-span-2 glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
-                    <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3"><i class="fa-solid fa-list-ul text-indigo-400"></i> Riwayat Transaksi Keuangan</h3>
-                    <div class="overflow-x-auto max-h-96 overflow-y-auto">
+                <div class="lg:col-span-2 glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                    <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-list-ul text-indigo-400"></i> Riwayat Transaksi Keuangan
+                    </h3>
+                    <div class="overflow-x-auto max-h-96 overflow-y-auto pr-1">
                         <table class="w-full text-left text-xs text-slate-300">
-                            <thead class="bg-slate-900 uppercase text-slate-400 sticky top-0 border-b border-slate-800">
+                            <thead class="bg-slate-900/90 uppercase text-slate-400 sticky top-0 border-b border-slate-800 font-semibold">
                                 <tr>
-                                    <th class="p-3">Tanggal</th>
-                                    <th class="p-3">Keterangan</th>
-                                    <th class="p-3">Tipe</th>
-                                    <th class="p-3 text-right">Nominal</th>
-                                    <th class="p-3 text-center">Aksi</th>
+                                    <th class="p-3.5">Tanggal</th>
+                                    <th class="p-3.5">Keterangan</th>
+                                    <th class="p-3.5">Tipe</th>
+                                    <th class="p-3.5 text-right">Nominal</th>
+                                    <th class="p-3.5 text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody id="financeTableBody" class="divide-y divide-slate-800/60"></tbody>
@@ -341,22 +389,29 @@
     <!-- 4. TIME MANAGEMENT VIEW (PENGELOLA WAKTU & POMODORO) -->
     <template id="templateTimeView">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-6">
-                <h3 class="font-bold text-white text-base flex items-center justify-center gap-2"><i class="fa-solid fa-stopwatch text-amber-400"></i> Pomodoro Timer Fokus</h3>
-                <div id="pomodoroDisplay" class="text-6xl font-mono font-bold text-amber-400 tracking-wider">25:00</div>
-                <div class="flex justify-center gap-3">
-                    <button type="button" onclick="startPomodoro()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl shadow">Mulai</button>
-                    <button type="button" onclick="pausePomodoro()" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold rounded-xl shadow">Jeda</button>
-                    <button type="button" onclick="resetPomodoro()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-xl">Reset</button>
+            <div class="glass-panel p-8 rounded-3xl border border-slate-800/80 text-center space-y-6 shadow-xl flex flex-col justify-center items-center">
+                <h3 class="font-bold text-white text-base flex items-center gap-2">
+                    <i class="fa-solid fa-stopwatch text-amber-400"></i> Pomodoro Timer Fokus
+                </h3>
+                <div class="p-8 bg-slate-900/90 border border-slate-800/80 rounded-3xl shadow-inner w-full max-w-xs">
+                    <div id="pomodoroDisplay" class="text-6xl font-mono font-bold text-amber-400 tracking-wider">25:00</div>
+                    <p class="text-xs text-slate-400 mt-2">Sesi Fokus Produktif</p>
+                </div>
+                <div class="flex justify-center gap-3 w-full">
+                    <button type="button" onclick="startPomodoro()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl shadow-lg transition-all">Mulai</button>
+                    <button type="button" onclick="pausePomodoro()" class="flex-1 py-3 bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold rounded-xl shadow-lg transition-all">Jeda</button>
+                    <button type="button" onclick="resetPomodoro()" class="flex-1 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-xl transition-all">Reset</button>
                 </div>
             </div>
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
-                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3"><i class="fa-solid fa-list-check text-cyan-400"></i> Daftar Tugas (Task Manager)</h3>
-                <form onsubmit="handleAddTask(event)" class="flex gap-2">
-                    <input type="text" id="taskInput" required class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white" placeholder="Tambah tugas baru...">
-                    <button type="submit" class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl">Tambah</button>
+            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl flex flex-col">
+                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-cyan-400"></i> Daftar Tugas (Task Manager)
+                </h3>
+                <form onsubmit="handleAddTask(event)" class="flex gap-2.5">
+                    <input type="text" id="taskInput" required class="flex-1 bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-xs text-white shadow-inner" placeholder="Tambahkan tugas baru...">
+                    <button type="submit" class="px-5 py-3 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl shadow-md transition-all">Tambah</button>
                 </form>
-                <div id="taskListContainer" class="space-y-2 max-h-60 overflow-y-auto pr-1"></div>
+                <div id="taskListContainer" class="space-y-2.5 max-h-72 overflow-y-auto pr-1 flex-1"></div>
             </div>
         </div>
     </template>
@@ -364,38 +419,44 @@
     <!-- 5. LIVE FEEDS VIEW (BERITA, CUACA & TREN REAL-TIME) -->
     <template id="templateFeedsView">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
-                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3"><i class="fa-solid fa-cloud-sun text-cyan-400"></i> Cuaca Real-Time</h3>
-                <div id="weatherWidget" class="space-y-2 text-xs text-slate-300">
+            <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-cloud-sun text-cyan-400"></i> Cuaca Real-Time
+                </h3>
+                <div id="weatherWidget" class="space-y-2.5 text-xs text-slate-300 bg-slate-900/90 p-4 rounded-2xl border border-slate-800 shadow-inner">
                     <p class="font-bold text-white text-base">Surabaya, ID</p>
-                    <p class="text-2xl font-bold text-cyan-400">31°C <span class="text-xs text-slate-400 font-normal">Cerah Berawan</span></p>
+                    <p class="text-3xl font-bold text-cyan-400 font-mono">31°C <span class="text-xs text-slate-400 font-normal font-sans">Cerah Berawan</span></p>
                     <p class="text-slate-400">Kelembapan: 70% | Angin: 12 km/jam</p>
                 </div>
-                <button type="button" onclick="refreshWeather()" class="w-full py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded-xl text-xs font-semibold border border-slate-800">Perbarui Cuaca</button>
+                <button type="button" onclick="refreshWeather()" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded-xl text-xs font-semibold border border-slate-800 shadow-sm transition-all">Perbarui Cuaca</button>
             </div>
-            <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
-                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3"><i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama Terkini</h3>
+            <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama Terkini
+                </h3>
                 <div id="newsWidget" class="space-y-3 text-xs">
-                    <div class="p-2.5 bg-slate-900/80 rounded-xl border border-slate-800">
-                        <span class="text-[10px] text-brand-400 font-semibold">Teknologi • Hari ini</span>
-                        <h4 class="font-bold text-white mt-0.5">SmartCore Ultimate v1.8 Resmi Dirilis dengan Sinkronisasi GitHub</h4>
+                    <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-sm space-y-1">
+                        <span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">Teknologi</span>
+                        <h4 class="font-bold text-white text-sm mt-1">SmartCore Ultimate v1.9 Resmi Dirilis dengan Tata Letak UI/UX Baru</h4>
                     </div>
-                    <div class="p-2.5 bg-slate-900/80 rounded-xl border border-slate-800">
-                        <span class="text-[10px] text-brand-400 font-semibold">AI • 2 jam lalu</span>
-                        <h4 class="font-bold text-white mt-0.5">Model Gemini AI 2.5 Flash Mendukung Analisis Data Real-Time</h4>
+                    <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-sm space-y-1">
+                        <span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">AI Update</span>
+                        <h4 class="font-bold text-white text-sm mt-1">Model Gemini AI 2.5 Mendukung Analisis Sistem Terpusat</h4>
                     </div>
                 </div>
             </div>
-            <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
-                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3"><i class="fa-solid fa-chart-line text-emerald-400"></i> Tren Pasar & Kripto</h3>
-                <div id="marketWidget" class="space-y-2.5 text-xs">
-                    <div class="flex justify-between items-center p-2.5 bg-slate-900/80 rounded-xl border border-slate-800">
+            <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-chart-line text-emerald-400"></i> Tren Pasar & Kripto
+                </h3>
+                <div id="marketWidget" class="space-y-3 text-xs">
+                    <div class="flex justify-between items-center p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-sm">
                         <span class="font-semibold text-white">BTC / USD</span>
-                        <span class="text-emerald-400 font-mono">+3.45% ($68,450)</span>
+                        <span class="text-emerald-400 font-mono font-bold">+3.45% ($68,450)</span>
                     </div>
-                    <div class="flex justify-between items-center p-2.5 bg-slate-900/80 rounded-xl border border-slate-800">
+                    <div class="flex justify-between items-center p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-sm">
                         <span class="font-semibold text-white">ETH / USD</span>
-                        <span class="text-emerald-400 font-mono">+2.12% ($3,520)</span>
+                        <span class="text-emerald-400 font-mono font-bold">+2.12% ($3,520)</span>
                     </div>
                 </div>
             </div>
@@ -405,32 +466,36 @@
     <!-- 6. PROFILE & ACCOUNT SECURITY VIEW -->
     <template id="templateProfileView">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
-                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3"><i class="fa-solid fa-user-pen text-pink-400"></i> Pengaturan Profil & Akun</h3>
-                <form onsubmit="handleUpdateProfile(event)" class="space-y-3 text-xs">
+            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-user-pen text-pink-400"></i> Pengaturan Profil & Akun
+                </h3>
+                <form onsubmit="handleUpdateProfile(event)" class="space-y-4 text-xs">
                     <div>
-                        <label class="block text-slate-300 mb-1">Nama Lengkap / Username</label>
-                        <input type="text" id="profileNameInput" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white">
+                        <label class="block text-slate-300 mb-1.5 font-medium">Nama Lengkap / Username</label>
+                        <input type="text" id="profileNameInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner">
                     </div>
                     <div>
-                        <label class="block text-slate-300 mb-1">Email / Identitas</label>
-                        <input type="email" id="profileEmailInput" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white">
+                        <label class="block text-slate-300 mb-1.5 font-medium">Email / Identitas</label>
+                        <input type="email" id="profileEmailInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner">
                     </div>
-                    <button type="submit" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow">Simpan Perubahan Profil</button>
+                    <button type="submit" class="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all">Simpan Perubahan Profil</button>
                 </form>
             </div>
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
-                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3"><i class="fa-solid fa-shield-halved text-rose-400"></i> Keamanan Akun (Ubah Sandi)</h3>
-                <form onsubmit="handleUpdatePassword(event)" class="space-y-3 text-xs">
+            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-rose-400"></i> Keamanan Akun (Ubah Sandi)
+                </h3>
+                <form onsubmit="handleUpdatePassword(event)" class="space-y-4 text-xs">
                     <div>
-                        <label class="block text-slate-300 mb-1">Kata Sandi Lama</label>
-                        <input type="password" id="oldPasswordInput" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white" placeholder="••••••••">
+                        <label class="block text-slate-300 mb-1.5 font-medium">Kata Sandi Lama</label>
+                        <input type="password" id="oldPasswordInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner" placeholder="••••••••">
                     </div>
                     <div>
-                        <label class="block text-slate-300 mb-1">Kata Sandi Baru</label>
-                        <input type="password" id="newPasswordInput" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white" placeholder="••••••••">
+                        <label class="block text-slate-300 mb-1.5 font-medium">Kata Sandi Baru</label>
+                        <input type="password" id="newPasswordInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner" placeholder="••••••••">
                     </div>
-                    <button type="submit" class="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-semibold rounded-xl shadow">Perbarui Keamanan Sandi</button>
+                    <button type="submit" class="px-6 py-3 bg-rose-600 hover:bg-rose-500 text-white font-semibold rounded-xl shadow-lg shadow-rose-600/30 transition-all">Perbarui Keamanan Sandi</button>
                 </form>
             </div>
         </div>
@@ -439,42 +504,52 @@
     <!-- 7. GITHUB SERVER INTEGRATION VIEW -->
     <template id="templateGithubView">
         <div class="space-y-6">
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-5 shadow-xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-4 gap-3">
                     <div>
-                        <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-brands fa-github text-emerald-400"></i> Penginput Token & Server GitHub v1.8</h3>
+                        <h3 class="font-bold text-white text-base flex items-center gap-2">
+                            <i class="fa-brands fa-github text-emerald-400"></i> Penginput Token & Server GitHub v1.9
+                        </h3>
                         <p class="text-xs text-slate-400 mt-1">Sinkronisasi data akun, keuangan, waktu, dan postingan secara real-time ke repositori GitHub.</p>
                     </div>
-                    <span id="githubStatusBadge" class="px-3 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-full text-xs font-semibold">Belum Terhubung</span>
+                    <span id="githubStatusBadge" class="px-3 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-full text-xs font-semibold self-start sm:self-auto">Belum Terhubung</span>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                     <div>
-                        <label class="block text-slate-300 mb-1">GitHub Personal Access Token (PAT)</label>
-                        <input type="password" id="ghToken" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white" placeholder="ghp_...">
+                        <label class="block text-slate-300 mb-1.5 font-medium">GitHub Personal Access Token (PAT)</label>
+                        <input type="password" id="ghToken" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="ghp_...">
                     </div>
                     <div>
-                        <label class="block text-slate-300 mb-1">Username / Owner</label>
-                        <input type="text" id="ghOwner" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white" placeholder="username">
+                        <label class="block text-slate-300 mb-1.5 font-medium">Username / Owner</label>
+                        <input type="text" id="ghOwner" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="username">
                     </div>
                     <div>
-                        <label class="block text-slate-300 mb-1">Nama Repositori</label>
-                        <input type="text" id="ghRepo" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white" placeholder="repository">
+                        <label class="block text-slate-300 mb-1.5 font-medium">Nama Repositori</label>
+                        <input type="text" id="ghRepo" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="repository">
                     </div>
                 </div>
-                <div class="flex items-center gap-3 pt-2">
-                    <button type="button" onclick="connectGitHub()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl shadow">Hubungkan & Uji</button>
-                    <button type="button" onclick="syncToGitHub()" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl shadow"><i class="fa-solid fa-cloud-arrow-up"></i> Push State ke GitHub Real-Time</button>
+                <div class="flex flex-wrap items-center gap-3 pt-2">
+                    <button type="button" onclick="connectGitHub()" class="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl shadow-lg shadow-emerald-600/30 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-link"></i> Hubungkan & Uji
+                    </button>
+                    <button type="button" onclick="syncToGitHub()" class="px-5 py-3 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Push State ke GitHub Real-Time
+                    </button>
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3">
-                    <h4 class="font-bold text-white text-sm border-b border-slate-800 pb-2">Berkas Repositori</h4>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-3 shadow-xl">
+                    <h4 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-folder-open text-brand-400"></i> Berkas Repositori
+                    </h4>
                     <div id="githubFileList" class="space-y-2 text-xs text-slate-400"><p class="italic">Hubungkan repositori terlebih dahulu.</p></div>
                 </div>
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3">
-                    <h4 class="font-bold text-white text-sm border-b border-slate-800 pb-2">Log Aktivitas Server</h4>
-                    <div id="githubLogContainer" class="p-3 bg-slate-900/90 border border-slate-800 rounded-xl text-xs font-mono text-emerald-400 h-40 overflow-y-auto space-y-1">
-                        <div>[System v1.8] Menunggu koneksi server GitHub...</div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-3 shadow-xl">
+                    <h4 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-terminal text-indigo-400"></i> Log Aktivitas Server
+                    </h4>
+                    <div id="githubLogContainer" class="p-4 bg-slate-900/90 border border-slate-800 rounded-2xl text-xs font-mono text-emerald-400 h-48 overflow-y-auto space-y-1 shadow-inner">
+                        <div>[System v1.9] Menunggu koneksi server GitHub...</div>
                     </div>
                 </div>
             </div>
@@ -484,34 +559,40 @@
     <!-- 8. GEMINI AI VIEW -->
     <template id="templateGeminiView">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
-                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3"><i class="fa-solid fa-brain text-purple-400"></i> Penginput API Key Gemini</h3>
-                <div class="space-y-3 text-xs">
+            <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-brain text-purple-400"></i> Penginput API Key Gemini
+                </h3>
+                <div class="space-y-4 text-xs">
                     <div>
-                        <label class="block text-slate-300 mb-1">Gemini API Key</label>
+                        <label class="block text-slate-300 mb-1.5 font-medium">Gemini API Key</label>
                         <div class="flex gap-2">
-                            <input type="password" id="geminiApiKey" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white" placeholder="AIzaSy...">
-                            <button type="button" onclick="saveGeminiKey()" class="px-3 py-2 bg-purple-600 text-white font-semibold rounded-xl">Simpan</button>
+                            <input type="password" id="geminiApiKey" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="AIzaSy...">
+                            <button type="button" onclick="saveGeminiKey()" class="px-4 py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-xl shadow transition-all">Simpan</button>
                         </div>
                     </div>
                     <div>
-                        <label class="block text-slate-300 mb-1">Model AI</label>
-                        <select id="geminiModel" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white">
+                        <label class="block text-slate-300 mb-1.5 font-medium">Model AI</label>
+                        <select id="geminiModel" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner">
                             <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
                             <option value="gemini-2.5-pro">Gemini 2.5 Pro</option>
                         </select>
                     </div>
                 </div>
             </div>
-            <div class="lg:col-span-2 glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col h-[550px]">
+            <div class="lg:col-span-2 glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 flex flex-col h-[600px] shadow-xl">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
-                    <h3 class="font-bold text-white text-base">Gemini AI Workspace</h3>
-                    <button type="button" onclick="clearGeminiChat()" class="text-xs text-slate-400 hover:text-rose-400 flex items-center gap-1"><i class="fa-solid fa-trash-can"></i> Bersihkan</button>
+                    <h3 class="font-bold text-white text-base flex items-center gap-2">
+                        <i class="fa-solid fa-comments text-purple-400"></i> Gemini AI Workspace
+                    </h3>
+                    <button type="button" onclick="clearGeminiChat()" class="text-xs text-slate-400 hover:text-rose-400 flex items-center gap-1.5 transition-colors"><i class="fa-solid fa-trash-can"></i> Bersihkan</button>
                 </div>
                 <div id="geminiChatMessages" class="flex-1 overflow-y-auto space-y-4 pr-2 mb-4 text-xs"></div>
-                <form onsubmit="sendGeminiPrompt(event)" class="flex gap-2 pt-2 border-t border-slate-800">
-                    <input type="text" id="geminiPromptInput" required class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white" placeholder="Ketik perintah...">
-                    <button type="submit" class="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-xs font-semibold rounded-xl">Kirim</button>
+                <form onsubmit="sendGeminiPrompt(event)" class="flex gap-2.5 pt-3 border-t border-slate-800">
+                    <input type="text" id="geminiPromptInput" required class="flex-1 bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-xs text-white shadow-inner" placeholder="Ketik perintah atau pertanyaan untuk Gemini...">
+                    <button type="submit" class="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold rounded-xl shadow-lg shadow-purple-600/30 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> Kirim
+                    </button>
                 </form>
             </div>
         </div>
@@ -520,38 +601,62 @@
     <!-- 9. ADMIN VIEW -->
     <template id="templateAdminView">
         <div class="space-y-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-xl"><i class="fa-solid fa-users"></i></div>
-                    <div><p class="text-xs text-slate-400">Total Pengguna</p><h4 id="statTotalUsers" class="text-xl font-bold text-white mt-0.5">0</h4></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-xl border border-brand-500/30">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 font-medium">Total Pengguna</p>
+                        <h4 id="statTotalUsers" class="text-xl font-bold text-white mt-0.5">0</h4>
+                    </div>
                 </div>
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-xl"><i class="fa-solid fa-newspaper"></i></div>
-                    <div><p class="text-xs text-slate-400">Total Postingan</p><h4 id="statTotalPosts" class="text-xl font-bold text-white mt-0.5">0</h4></div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-xl border border-indigo-500/30">
+                        <i class="fa-solid fa-newspaper"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 font-medium">Total Postingan</p>
+                        <h4 id="statTotalPosts" class="text-xl font-bold text-white mt-0.5">0</h4>
+                    </div>
                 </div>
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl"><i class="fa-solid fa-database"></i></div>
-                    <div><p class="text-xs text-slate-400">Penyimpanan Storage</p><h4 id="statStorageSize" class="text-xl font-bold text-white mt-0.5">0 KB</h4></div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 font-medium">Penyimpanan Storage</p>
+                        <h4 id="statStorageSize" class="text-xl font-bold text-white mt-0.5">0 KB</h4>
+                    </div>
                 </div>
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl"><i class="fa-solid fa-shield-halved"></i></div>
-                    <div><p class="text-xs text-slate-400">Status Sistem</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal v1.8</h4></div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl">
+                    <div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 font-medium">Status Sistem</p>
+                        <h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal v1.9</h4>
+                    </div>
                 </div>
             </div>
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-5 shadow-xl">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-                    <h3 class="font-bold text-white text-base">Manajemen Pengguna Sistem</h3>
-                    <button type="button" onclick="resetSystemData()" class="px-4 py-2 bg-rose-500/20 text-rose-400 text-xs font-semibold rounded-xl border border-rose-500/30">Reset Sistem</button>
+                    <h3 class="font-bold text-white text-base flex items-center gap-2">
+                        <i class="fa-solid fa-user-gear text-rose-400"></i> Manajemen Pengguna Sistem
+                    </h3>
+                    <button type="button" onclick="resetSystemData()" class="px-4 py-2.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 text-xs font-semibold rounded-xl border border-rose-500/30 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Reset Sistem
+                    </button>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs text-slate-300">
-                        <thead class="bg-slate-900 uppercase text-slate-400 font-semibold border-b border-slate-800">
+                        <thead class="bg-slate-900/90 uppercase text-slate-400 font-semibold border-b border-slate-800">
                             <tr>
-                                <th class="p-3">Nama</th>
-                                <th class="p-3">Email</th>
-                                <th class="p-3">Peran</th>
-                                <th class="p-3">Bergabung</th>
-                                <th class="p-3 text-right">Aksi</th>
+                                <th class="p-3.5">Nama</th>
+                                <th class="p-3.5">Email</th>
+                                <th class="p-3.5">Peran</th>
+                                <th class="p-3.5">Bergabung</th>
+                                <th class="p-3.5 text-right">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="adminUsersTableBody" class="divide-y divide-slate-800/60"></tbody>
@@ -561,10 +666,10 @@
         </div>
     </template>
 
-        <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC -->
+    <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC -->
     <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE_V18';
-        const BACKUP_KEY = 'SMARTCORE_FORM_BACKUP_V18';
+        const STORAGE_KEY = 'SMARTCORE_STATE_V19';
+        const BACKUP_KEY = 'SMARTCORE_FORM_BACKUP_V19';
 
         let appState = {
             currentUser: null,
@@ -575,19 +680,19 @@
                 { name: 'System Admin', email: 'admin@smartcore.io', password: 'admin', role: 'admin', joinedAt: '2026-01-01' }
             ],
             posts: [
-                { id: 1, author: 'System Admin', content: 'Selamat datang di platform SmartCore Ultimate v1.8! Dilengkapi modul Keuangan, Waktu/Pomodoro, Berita Real-Time, Profil & Keamanan, serta Sinkronisasi GitHub.', image: null, likes: 20, comments: [], createdAt: '13:00' }
+                { id: 1, author: 'System Admin', content: 'Selamat datang di platform SmartCore Ultimate v1.9 dengan tata letak UI/UX yang telah direvisi total! Nikmati modul Keuangan, Waktu/Pomodoro, Berita Real-Time, Profil & Keamanan, serta Sinkronisasi GitHub.', image: null, likes: 25, comments: [], createdAt: '14:00' }
             ],
             financeTransactions: [
-                { id: 1, date: '2026-06-01', desc: 'Gaji Bulanan', amount: 7500000, type: 'income' },
-                { id: 2, date: '2026-06-02', desc: 'Belanja Server', amount: 350000, type: 'expense' }
+                { id: 1, date: '2026-06-01', desc: 'Gaji Bulanan', amount: 8000000, type: 'income' },
+                { id: 2, date: '2026-06-03', desc: 'Pemeliharaan Server', amount: 400000, type: 'expense' }
             ],
             tasks: [
-                { id: 1, text: 'Deploy update v1.8 ke server vanandi.me', completed: false }
+                { id: 1, text: 'Deploy update v1.9 ke server vanandi.me', completed: false }
             ],
             githubConfig: { token: '', owner: '', repo: '', connected: false },
             geminiConfig: { apiKey: '', model: 'gemini-2.5-flash' },
             geminiChat: [
-                { role: 'model', text: 'Halo! Saya asisten Gemini AI Anda di platform SmartCore v1.8. Ada yang bisa saya bantu hari ini?' }
+                { role: 'model', text: 'Halo! Saya asisten Gemini AI Anda di platform SmartCore v1.9. Ada yang bisa saya bantu analisis hari ini?' }
             ]
         };
 
@@ -625,6 +730,7 @@
             const appWrapper = document.getElementById('appWrapper');
             const currentUsernameDisplay = document.getElementById('currentUsernameDisplay');
             const navAdmin = document.getElementById('navAdmin');
+            const navAdminMob = document.getElementById('navAdminMob');
 
             if (!appState.currentUser) {
                 authModal.classList.remove('hidden');
@@ -635,9 +741,11 @@
                 currentUsernameDisplay.textContent = appState.currentUser.name;
 
                 if (appState.currentUser.role === 'admin') {
-                    navAdmin.classList.remove('hidden');
+                    if(navAdmin) navAdmin.classList.remove('hidden');
+                    if(navAdminMob) navAdminMob.classList.remove('hidden');
                 } else {
-                    navAdmin.classList.add('hidden');
+                    if(navAdmin) navAdmin.classList.add('hidden');
+                    if(navAdminMob) navAdminMob.classList.add('hidden');
                 }
 
                 const initialEl = document.getElementById('postAuthorInitial');
@@ -657,25 +765,25 @@
             const btnAdmin = document.getElementById('tabAdminBtn');
 
             [btnLogin, btnRegister, btnAdmin].forEach(b => {
-                if(b) b.className = "flex-1 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition-all";
+                if(b) b.className = "flex-1 py-2 text-xs font-semibold rounded-xl text-slate-400 hover:text-white transition-all";
             });
 
             if (mode === 'login') {
-                if(btnLogin) btnLogin.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white transition-all shadow-md";
+                if(btnLogin) btnLogin.className = "flex-1 py-2 text-xs font-semibold rounded-xl bg-brand-600 text-white transition-all shadow-md";
                 if(title) title.textContent = "SmartCore Masuk";
                 if(subtitle) subtitle.textContent = "Masuk menggunakan akun pengguna Anda";
                 if(nameGroup) nameGroup.classList.add('hidden');
                 document.getElementById('regName').required = false;
                 submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Masuk Sekarang';
             } else if (mode === 'register') {
-                if(btnRegister) btnRegister.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white transition-all shadow-md";
+                if(btnRegister) btnRegister.className = "flex-1 py-2 text-xs font-semibold rounded-xl bg-brand-600 text-white transition-all shadow-md";
                 if(title) title.textContent = "Registrasi Akun";
                 if(subtitle) subtitle.textContent = "Daftar akun baru untuk akses lengkap";
                 if(nameGroup) nameGroup.classList.remove('hidden');
                 document.getElementById('regName').required = true;
                 submitBtn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Daftar Akun';
             } else if (mode === 'admin') {
-                if(btnAdmin) btnAdmin.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-rose-600 text-white transition-all shadow-md";
+                if(btnAdmin) btnAdmin.className = "flex-1 py-2 text-xs font-semibold rounded-xl bg-rose-600 text-white transition-all shadow-md";
                 if(title) title.textContent = "Panel Akses Admin";
                 if(subtitle) subtitle.textContent = "Masuk dengan kredensial Administrator";
                 if(nameGroup) nameGroup.classList.add('hidden');
@@ -734,14 +842,16 @@
             appState.currentTab = tabName;
             ['Social', 'Tools', 'Finance', 'Time', 'Feeds', 'Profile', 'Github', 'Gemini', 'Admin'].forEach(t => {
                 const btn = document.getElementById('nav' + t);
-                if (btn) {
-                    btn.className = "px-3 py-1.5 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5";
-                }
+                const btnMob = document.getElementById('nav' + t + 'Mob');
+                const activeClasses = "px-3.5 py-2 text-xs font-semibold rounded-xl bg-brand-600 text-white transition-all flex items-center gap-2 shadow-md";
+                const inactiveClasses = "px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-2";
+                
+                const activeMobClasses = "px-3 py-1.5 text-xs font-semibold rounded-lg bg-brand-600 text-white flex-shrink-0";
+                const inactiveMobClasses = "px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0";
+
+                if (btn) btn.className = (t.toLowerCase() === tabName) ? activeClasses : inactiveClasses;
+                if (btnMob) btnMob.className = (t.toLowerCase() === tabName) ? activeMobClasses : inactiveMobClasses;
             });
-            const activeBtn = document.getElementById('nav' + tabName.charAt(0).toUpperCase() + tabName.slice(1));
-            if (activeBtn) {
-                activeBtn.className = "px-3 py-1.5 text-xs font-semibold rounded-xl bg-brand-600 text-white transition-all flex items-center gap-1.5 shadow-md";
-            }
             renderAll();
         }
 
@@ -837,25 +947,25 @@
             const container = document.getElementById('postsFeedContainer');
             if(!container) return;
             if(appState.posts.length === 0) {
-                container.innerHTML = `<div class="glass-panel p-6 rounded-2xl text-center text-slate-400 text-sm">Belum ada postingan.</div>`;
+                container.innerHTML = `<div class="glass-panel p-6 rounded-3xl text-center text-slate-400 text-sm shadow-xl">Belum ada postingan.</div>`;
                 return;
             }
             container.innerHTML = appState.posts.map(p => `
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-brand-600/30 text-brand-400 flex items-center justify-center font-bold text-sm border border-brand-500/30">${p.author.charAt(0).toUpperCase()}</div>
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-2xl bg-brand-600/30 text-brand-400 flex items-center justify-center font-bold text-sm border border-brand-500/30 shadow-inner">${p.author.charAt(0).toUpperCase()}</div>
                             <div>
                                 <h4 class="font-bold text-white text-sm">${p.author}</h4>
                                 <span class="text-xs text-slate-500">${p.createdAt}</span>
                             </div>
                         </div>
-                        ${appState.currentUser && (appState.currentUser.role === 'admin' || appState.currentUser.name === p.author) ? `<button type="button" onclick="deletePost(${p.id})" class="text-slate-500 hover:text-rose-400 text-xs"><i class="fa-solid fa-trash-can"></i></button>` : ''}
+                        ${appState.currentUser && (appState.currentUser.role === 'admin' || appState.currentUser.name === p.author) ? `<button type="button" onclick="deletePost(${p.id})" class="text-slate-500 hover:text-rose-400 text-xs transition-colors"><i class="fa-solid fa-trash-can"></i></button>` : ''}
                     </div>
                     <p class="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap">${p.content}</p>
-                    ${p.image ? `<div class="rounded-xl overflow-hidden border border-slate-800 max-h-72"><img src="${p.image}" class="w-full object-cover"></div>` : ''}
+                    ${p.image ? `<div class="rounded-2xl overflow-hidden border border-slate-800 max-h-72 shadow-md"><img src="${p.image}" class="w-full object-cover"></div>` : ''}
                     <div class="flex items-center gap-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400">
-                        <button type="button" onclick="likePost(${p.id})" class="flex items-center gap-1.5 hover:text-brand-400"><i class="fa-solid fa-heart text-rose-500"></i> ${p.likes} Suka</button>
+                        <button type="button" onclick="likePost(${p.id})" class="flex items-center gap-1.5 hover:text-brand-400 transition-colors"><i class="fa-solid fa-heart text-rose-500"></i> ${p.likes} Suka</button>
                     </div>
                 </div>
             `).join('');
@@ -875,12 +985,12 @@
             const list = document.getElementById('activeUsersList');
             if(!list) return;
             list.innerHTML = appState.users.map(u => `
-                <div class="flex items-center justify-between p-2.5 bg-slate-900/80 rounded-xl border border-slate-800/60">
-                    <div class="flex items-center gap-2">
-                        <div class="w-7 h-7 rounded-full bg-indigo-600/30 text-indigo-400 flex items-center justify-center font-bold text-xs">${u.name.charAt(0).toUpperCase()}</div>
-                        <div><span class="font-medium text-slate-200">${u.name}</span><span class="block text-[10px] text-slate-500">${u.role.toUpperCase()}</span></div>
+                <div class="flex items-center justify-between p-3 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-xl bg-indigo-600/30 text-indigo-400 flex items-center justify-center font-bold text-xs shadow-inner">${u.name.charAt(0).toUpperCase()}</div>
+                        <div><span class="font-medium text-slate-200 text-xs">${u.name}</span><span class="block text-[10px] text-slate-500">${u.role.toUpperCase()}</span></div>
                     </div>
-                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
                 </div>
             `).join('');
         }
@@ -893,10 +1003,10 @@
                 const panel = document.getElementById('toolPanel' + s);
                 if(btn && panel) {
                     if(s.toLowerCase() === sub) {
-                        btn.className = "w-full text-left px-3 py-2.5 rounded-xl text-xs font-semibold bg-brand-600 text-white flex items-center gap-2 transition-all shadow-md";
+                        btn.className = "w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold bg-brand-600 text-white flex items-center gap-2.5 transition-all shadow-md";
                         panel.classList.remove('hidden');
                     } else {
-                        btn.className = "w-full text-left px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900 flex items-center gap-2 transition-all";
+                        btn.className = "w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900/90 flex items-center gap-2.5 transition-all";
                         panel.classList.add('hidden');
                     }
                 }
@@ -975,12 +1085,12 @@
                 if(t.type === 'income') totalInc += t.amount;
                 else totalExp += t.amount;
                 return `
-                    <tr class="hover:bg-slate-900/50">
-                        <td class="p-3 text-slate-400">${t.date}</td>
-                        <td class="p-3 font-medium text-white">${t.desc}</td>
-                        <td class="p-3"><span class="px-2 py-0.5 rounded text-[10px] ${t.type === 'income' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}">${t.type.toUpperCase()}</span></td>
-                        <td class="p-3 text-right font-mono ${t.type === 'income' ? 'text-emerald-400' : 'text-rose-400'}">${t.type === 'income' ? '+' : '-'}Rp ${t.amount.toLocaleString()}</td>
-                        <td class="p-3 text-center"><button type="button" onclick="deleteTransaction(${t.id})" class="text-slate-500 hover:text-rose-400"><i class="fa-solid fa-trash-can"></i></button></td>
+                    <tr class="hover:bg-slate-900/50 transition-colors">
+                        <td class="p-3.5 text-slate-400">${t.date}</td>
+                        <td class="p-3.5 font-medium text-white">${t.desc}</td>
+                        <td class="p-3.5"><span class="px-2.5 py-1 rounded-lg text-[10px] font-semibold ${t.type === 'income' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-rose-500/20 text-rose-400 border border-rose-500/30'}">${t.type.toUpperCase()}</span></td>
+                        <td class="p-3.5 text-right font-mono font-semibold ${t.type === 'income' ? 'text-emerald-400' : 'text-rose-400'}">${t.type === 'income' ? '+' : '-'}Rp ${t.amount.toLocaleString()}</td>
+                        <td class="p-3.5 text-center"><button type="button" onclick="deleteTransaction(${t.id})" class="text-slate-500 hover:text-rose-400 transition-colors"><i class="fa-solid fa-trash-can"></i></button></td>
                     </tr>
                 `;
             }).join('');
@@ -1045,12 +1155,12 @@
             const container = document.getElementById('taskListContainer');
             if(!container) return;
             container.innerHTML = appState.tasks.map(t => `
-                <div class="flex items-center justify-between p-2.5 bg-slate-900/80 rounded-xl border border-slate-800 text-xs">
-                    <div class="flex items-center gap-2">
-                        <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTask(${t.id})" class="rounded bg-slate-800 border-slate-700 text-brand-600 focus:ring-0">
-                        <span class="${t.completed ? 'line-through text-slate-500' : 'text-slate-200'}">${t.text}</span>
+                <div class="flex items-center justify-between p-3 bg-slate-900/90 rounded-2xl border border-slate-800/80 text-xs shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTask(${t.id})" class="rounded-lg bg-slate-800 border-slate-700 text-brand-600 focus:ring-0 w-4 h-4 cursor-pointer">
+                        <span class="${t.completed ? 'line-through text-slate-500' : 'text-slate-200'} font-medium">${t.text}</span>
                     </div>
-                    <button type="button" onclick="deleteTask(${t.id})" class="text-slate-500 hover:text-rose-400"><i class="fa-solid fa-trash-can"></i></button>
+                    <button type="button" onclick="deleteTask(${t.id})" class="text-slate-500 hover:text-rose-400 transition-colors"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
             `).join('');
         }
@@ -1137,8 +1247,8 @@
                 const list = document.getElementById('githubFileList');
                 if(list && Array.isArray(files)) {
                     list.innerHTML = files.map(f => `
-                        <div class="flex items-center justify-between p-2 bg-slate-900 rounded-xl border border-slate-800">
-                            <span class="text-slate-200 font-mono"><i class="fa-solid fa-file text-brand-400 mr-2"></i>${f.name}</span>
+                        <div class="flex items-center justify-between p-3 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
+                            <span class="text-slate-200 font-mono text-xs"><i class="fa-solid fa-file text-brand-400 mr-2"></i>${f.name}</span>
                             <span class="text-[10px] text-slate-500">${(f.size/1024).toFixed(1)} KB</span>
                         </div>
                     `).join('');
@@ -1164,7 +1274,7 @@
             alert('API Key Gemini berhasil disimpan!');
         }
         function clearGeminiChat() {
-            appState.geminiChat = [{ role: 'model', text: 'Halo! Ada yang bisa saya bantu?' }];
+            appState.geminiChat = [{ role: 'model', text: 'Halo! Ada yang bisa saya bantu analisis hari ini?' }];
             saveStateToStorage();
             renderGeminiChat();
         }
@@ -1173,9 +1283,9 @@
             if(!container) return;
             container.innerHTML = appState.geminiChat.map(c => `
                 <div class="flex items-start ${c.role === 'user' ? 'justify-end' : ''} gap-3">
-                    ${c.role !== 'user' ? '<div class="w-8 h-8 rounded-full bg-purple-600/30 text-purple-400 flex items-center justify-center font-bold text-xs"><i class="fa-solid fa-brain"></i></div>' : ''}
-                    <div class="p-3.5 ${c.role === 'user' ? 'bg-brand-600/30 text-slate-100' : 'bg-slate-900 text-slate-200'} border border-slate-800 rounded-2xl max-w-[85%] whitespace-pre-wrap">${c.text}</div>
-                    ${c.role === 'user' ? '<div class="w-8 h-8 rounded-full bg-brand-600 text-white flex items-center justify-center font-bold text-xs"><i class="fa-solid fa-user"></i></div>' : ''}
+                    ${c.role !== 'user' ? '<div class="w-8 h-8 rounded-2xl bg-purple-600/30 text-purple-400 flex items-center justify-center font-bold text-xs border border-purple-500/30 shadow-inner flex-shrink-0"><i class="fa-solid fa-brain"></i></div>' : ''}
+                    <div class="p-4 ${c.role === 'user' ? 'bg-brand-600/30 text-slate-100 border-brand-500/30' : 'bg-slate-900/90 text-slate-200 border-slate-800'} border rounded-2xl max-w-[85%] whitespace-pre-wrap shadow-sm">${c.text}</div>
+                    ${c.role === 'user' ? '<div class="w-8 h-8 rounded-2xl bg-brand-600 text-white flex items-center justify-center font-bold text-xs shadow-inner flex-shrink-0"><i class="fa-solid fa-user"></i></div>' : ''}
                 </div>
             `).join('');
             container.scrollTop = container.scrollHeight;
@@ -1227,12 +1337,12 @@
             const tbody = document.getElementById('adminUsersTableBody');
             if(tbody) {
                 tbody.innerHTML = appState.users.map((u, idx) => `
-                    <tr class="hover:bg-slate-900/50">
-                        <td class="p-3 font-medium text-white">${u.name}</td>
-                        <td class="p-3 text-slate-400">${u.email}</td>
-                        <td class="p-3"><span class="px-2.5 py-1 rounded-full text-[10px] ${u.role === 'admin' ? 'bg-rose-500/20 text-rose-400' : 'bg-brand-500/20 text-brand-400'}">${u.role.toUpperCase()}</span></td>
-                        <td class="p-3 text-slate-400">${u.joinedAt || '2026-01-01'}</td>
-                        <td class="p-3 text-right">${u.role !== 'admin' ? `<button type="button" onclick="deleteUser(${idx})" class="text-slate-500 hover:text-rose-400"><i class="fa-solid fa-trash-can"></i></button>` : '-'}</td>
+                    <tr class="hover:bg-slate-900/50 transition-colors">
+                        <td class="p-3.5 font-medium text-white">${u.name}</td>
+                        <td class="p-3.5 text-slate-400">${u.email}</td>
+                        <td class="p-3.5"><span class="px-2.5 py-1 rounded-lg text-[10px] font-semibold ${u.role === 'admin' ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30' : 'bg-brand-500/20 text-brand-400 border border-brand-500/30'}">${u.role.toUpperCase()}</span></td>
+                        <td class="p-3.5 text-slate-400">${u.joinedAt || '2026-01-01'}</td>
+                        <td class="p-3.5 text-right">${u.role !== 'admin' ? `<button type="button" onclick="deleteUser(${idx})" class="text-slate-500 hover:text-rose-400 transition-colors"><i class="fa-solid fa-trash-can"></i></button>` : '-'}</td>
                     </tr>
                 `).join('');
             }
@@ -1253,3 +1363,4 @@
     </script>
 </body>
 </html>
+

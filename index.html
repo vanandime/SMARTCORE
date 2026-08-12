@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>TabHub v1.38 PRO - Ultimate Productivity Workspace</title>
+  <title>TabHub v1.39 PRO - Ultimate Productivity Workspace</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Custom CSS Themes & Glassmorphism -->
@@ -130,7 +130,7 @@
   <!-- SPLASH SCREEN BLUR OVERLAY -->
   <div id="appSplashOverlay" class="fixed inset-0 z-[100] bg-slate-950/80 backdrop-blur-xl flex flex-col items-center justify-center text-white transition-opacity duration-500">
     <div class="w-16 h-16 rounded-3xl bg-blue-600 flex items-center justify-center font-extrabold text-2xl shadow-2xl animate-bounce">TH</div>
-    <h1 class="text-xl font-extrabold mt-4 tracking-wider">TabHub v1.38 PRO</h1>
+    <h1 class="text-xl font-extrabold mt-4 tracking-wider">TabHub v1.39 PRO</h1>
     <p class="text-xs opacity-60 mt-1">Menyiapkan Workspace & Cloud Sync...</p>
   </div>
 
@@ -148,7 +148,7 @@
         <div class="flex items-center gap-2 text-[10px] opacity-70 font-mono">
           <span id="iosBarClock">00:00:00</span>
           <span>•</span>
-          <span id="iosBarWeather">Surabaya, 32°C</span>
+          <span id="iosBarWeather">Bali, 31°C</span>
         </div>
       </div>
     </div>
@@ -323,7 +323,7 @@
               <span class="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></span>
               <span data-i18n="overviewHeading">Ringkasan Aplikasi & Dashboard</span>
             </h2>
-            <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.38 PRO.</p>
+            <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.39 PRO.</p>
           </div>
           <div class="flex gap-2">
             <button onclick="switchTab('finance')" class="px-3.5 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnQuickFinance">Cek Keuangan</button>
@@ -369,7 +369,7 @@
           <div class="card-modern p-5 rounded-2xl space-y-3">
             <h3 class="font-extrabold text-xs flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> <span data-i18n="ovSystemStatusTitle">Status & Sistem TabHub</span></h3>
             <div class="space-y-2 text-xs opacity-80 font-mono">
-              <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.38 PRO</strong></div>
+              <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.39 PRO</strong></div>
               <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Penyimpanan Browser</span><strong id="ovStorageSize" class="text-emerald-500">0 KB</strong></div>
               <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Tema Aktif</span><strong id="ovThemeName" class="text-purple-500">Nordic Frost</strong></div>
               <div class="flex justify-between py-1"><span>Status Enkripsi</span><strong class="text-emerald-500">Aman & Aktif</strong></div>
@@ -682,8 +682,8 @@
           <div class="card-modern p-6 rounded-2xl text-center space-y-2 flex flex-col justify-center">
             <span class="text-xs font-bold opacity-60">Waktu Lokal</span>
             <div id="liveClockBig" class="text-3xl font-extrabold font-mono text-blue-500">00:00:00</div>
-            <div id="liveDateBig" class="text-xs font-bold opacity-80">Rabu, 12 Agustus 2026</div>
-            <div id="clockWeatherDetail" class="text-[11px] opacity-70 pt-1">Surabaya, 32°C</div>
+            <div id="liveDateBig" class="text-xs font-bold opacity-80">Kamis, 13 Agustus 2026</div>
+            <div id="clockWeatherDetail" class="text-[11px] opacity-70 pt-1">Bali, 31°C</div>
           </div>
           <div class="card-modern p-6 rounded-2xl text-center space-y-4">
             <h3 class="font-extrabold text-xs">Fokus Pomodoro</h3>
@@ -1365,18 +1365,18 @@
       </div>
       <div id="releaseHistoryContent" class="space-y-3 text-xs opacity-90 leading-relaxed font-mono">
         <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-blue-500">
-          <strong>TabHub v1.38 PRO (Agustus 2026)</strong>
-          <p class="text-[11px] opacity-80">- Integrasi penuh fitur GitHub Cloud Sync (Gist API) untuk penyimpanan data online.<br>- Penambahan antarmuka input PAT token di Tab Pengaturan.<br>- Perbaikan sticky header modal dan optimalisasi state sync.</p>
+          <strong>TabHub v1.39 PRO (Agustus 2026)</strong>
+          <p class="text-[11px] opacity-80">- Pembaruan protokol keamanan dan stabilitas Cloud Sync.<br>- Penyesuaian konfigurasi token dan optimasi UI/UX.</p>
         </div>
         <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-emerald-500">
-          <strong>TabHub v1.37 PRO</strong>
-          <p class="text-[11px] opacity-80">- Perbaikan sticky header modal & pergantian sistem login auth ke backup kode JSON.</p>
+          <strong>TabHub v1.38 PRO</strong>
+          <p class="text-[11px] opacity-80">- Integrasi penuh fitur GitHub Cloud Sync (Gist API) untuk penyimpanan data online.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (TabHub v1.38 PRO) -->
+  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (TabHub v1.39 PRO) -->
   <script>
     // --- XSS SECURITY & SANITIZATION ENGINE ---
     function sanitizeHtml(str) {
@@ -1388,12 +1388,12 @@
                 .replace(/'/g, '&#039;');
     }
 
-    // --- MULTI-LANGUAGE DICTIONARY (v1.38) ---
+    // --- MULTI-LANGUAGE DICTIONARY (v1.39) ---
     const i18nData = {
       id: {
         hubTitle: "TabHub",
         overviewHeading: "Ringkasan Aplikasi & Dashboard",
-        overviewSub: "Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.38.",
+        overviewSub: "Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.39.",
         btnQuickFinance: "Cek Keuangan",
         btnQuickTasks: "Lihat Tugas",
         ovStatBalance: "Total Saldo Keuangan",
@@ -1445,7 +1445,7 @@
       en: {
         hubTitle: "TabHub",
         overviewHeading: "Application Overview & Dashboard",
-        overviewSub: "Quick monitoring center for all TabHub v1.38 productivity modules.",
+        overviewSub: "Quick monitoring center for all TabHub v1.39 productivity modules.",
         btnQuickFinance: "Check Finance",
         btnQuickTasks: "View Tasks",
         ovStatBalance: "Total Financial Balance",
@@ -1497,7 +1497,7 @@
       zh: {
         hubTitle: "TabHub",
         overviewHeading: "应用程序概览与仪表盘",
-        overviewSub: "所有 TabHub v1.38 生产力模块的快速监控中心。",
+        overviewSub: "所有 TabHub v1.39 生产力模块的快速监控中心。",
         btnQuickFinance: "查看财务",
         btnQuickTasks: "查看任务",
         ovStatBalance: "总财务余额",
@@ -1549,7 +1549,7 @@
       ar: {
         hubTitle: "TabHub",
         overviewHeading: "نظرة عامة على التطبيق لوحة القيادة",
-        overviewSub: "مركز مراقبة سريع لجميع وحدات الإنتاجية TabHub v1.38.",
+        overviewSub: "مركز مراقبة سريع لجميع وحدات الإنتاجية TabHub v1.39.",
         btnQuickFinance: "التحقق من المالية",
         btnQuickTasks: "عرض المهام",
         ovStatBalance: "إجمالي الرصيد المالي",
@@ -1718,7 +1718,7 @@
             'Accept': 'application/vnd.github.v3+json'
           },
           body: JSON.stringify({
-            description: "TabHub v1.38 PRO - Cloud Data Backup",
+            description: "TabHub v1.39 PRO - Cloud Data Backup",
             public: false,
             files: {
               "tabhub_state.json": {
@@ -1932,7 +1932,7 @@
               const data = await res.json();
               if (data && data.current_weather) {
                 const temp = Math.round(data.current_weather.temperature);
-                const str = `Surabaya, ${temp}°C`;
+                const str = `Bali, ${temp}°C`;
                 if (iosWeather) iosWeather.textContent = str;
                 if (clockWeather) clockWeather.textContent = str;
               }
@@ -1946,8 +1946,8 @@
     function fallbackWeather() {
       const iosWeather = document.getElementById('iosBarWeather');
       const clockWeather = document.getElementById('clockWeatherDetail');
-      if (iosWeather) iosWeather.textContent = 'Surabaya, 32°C';
-      if (clockWeather) clockWeather.textContent = 'Surabaya, 32°C';
+      if (iosWeather) iosWeather.textContent = 'Bali, 31°C';
+      if (clockWeather) clockWeather.textContent = 'Bali, 31°C';
     }
 
     function renderAll() {
@@ -2511,7 +2511,7 @@
       }
 
       setTimeout(() => {
-        let reply = "Halo! Saya adalah AI TabHub v1.38 PRO. Saya dapat membantu meringkas keuangan, mencari tugas, mengelola jadwal kalender, atau memberikan informasi sistem secara offline.";
+        let reply = "Halo! Saya adalah AI TabHub v1.39 PRO. Saya dapat membantu meringkas keuangan, mencari tugas, mengelola jadwal kalender, atau memberikan informasi sistem secara offline.";
         
         if (lower.includes('keuangan') || lower.includes('saldo') || lower.includes('uang')) {
           const totalInc = (appState.finance.transactions || []).filter(t=>t.type==='income').reduce((a,b)=>a+b.amount,0);

@@ -1,202 +1,173 @@
 <!DOCTYPE html>
-<html lang="id" dir="ltr" class="light">
+<html lang="id" class="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TabHub v1.37 PRO - Mohammad Danis Muria Vanandi</title>
-  
-  <!-- MINIMALIST TRANSPARENT VECTOR SVG FAVICON -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23007aff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
-  
-  <!-- TAILWIND CSS & GOOGLE FONTS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TabHub v1.38 PRO - Ultimate Productivity Workspace</title>
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  
+  <!-- Custom CSS Themes & Glassmorphism -->
   <style>
     :root {
       --accent-color: #0066ff;
     }
-    body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      transition: background 0.35s ease, color 0.35s ease;
-      padding-top: 76px;
-      padding-bottom: 110px;
+    /* Theme Definitions */
+    body.theme-nordic-frost {
+      background: #f8fafc;
+      color: #0f172a;
     }
-    .font-mono {
-      font-family: 'JetBrains Mono', monospace;
+    body.theme-nordic-frost .card-modern {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      backdrop-filter: blur(12px);
     }
-    
-    /* THEMES WITH ACCURATE CONTRAST & ACTIVE INDICATORS */
-    .theme-nordic-frost { background-color: #f0f4f8; color: #102a43; }
-    .theme-cyberpunk-neon { background-color: #07090e; color: #00f0ff; }
-    .theme-aurora-glass { background: radial-gradient(circle at 50% 0%, #062823, #021210); color: #e2f8f3; }
-    .theme-obsidian-gold { background-color: #0c0c0c; color: #f3e5ab; }
-    .theme-sunset-blush { background: linear-gradient(135deg, #1f1a24, #2a1b2e); color: #ffd6e0; }
-    .theme-matrix-terminal { background-color: #020d04; color: #00ff66; }
-    
-    .card-modern {
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.06);
-      border-radius: 24px;
-      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    body.theme-cyberpunk-neon {
+      background: #05050a;
+      color: #f0f6fc;
     }
-    .theme-cyberpunk-neon .card-modern { background: rgba(12, 17, 29, 0.88); border: 1px solid rgba(0, 240, 255, 0.2); box-shadow: 0 10px 35px rgba(0, 240, 255, 0.12); color: #e0fbfc; }
-    .theme-aurora-glass .card-modern { background: rgba(6, 40, 35, 0.7); border: 1px solid rgba(52, 211, 153, 0.25); box-shadow: 0 12px 40px rgba(2, 20, 16, 0.5); color: #ecfdf5; }
-    .theme-nordic-frost .card-modern { background: rgba(255, 255, 255, 0.94); border: 1px solid rgba(16, 42, 67, 0.08); box-shadow: 0 10px 30px rgba(16, 42, 67, 0.06); color: #102a43; }
-    .theme-obsidian-gold .card-modern { background: rgba(22, 22, 22, 0.9); border: 1px solid rgba(243, 229, 171, 0.2); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7); color: #f3e5ab; }
-    .theme-sunset-blush .card-modern { background: rgba(45, 30, 50, 0.88); border: 1px solid rgba(255, 180, 200, 0.2); box-shadow: 0 12px 40px rgba(10, 5, 12, 0.6); color: #fff1f2; }
-    .theme-matrix-terminal .card-modern { background: rgba(3, 20, 8, 0.92); border: 1px solid rgba(0, 255, 102, 0.25); box-shadow: 0 10px 35px rgba(0, 255, 102, 0.15); color: #00ff66; }
-    
-    ::-webkit-scrollbar { width: 4px; height: 4px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.2); border-radius: 9999px; }
-
-    .ios-btn { transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1); cursor: pointer; }
-    .ios-btn:active { transform: scale(0.96); }
-
-    .menu-btn-active, .dock-btn-active {
-      background: var(--accent-color) !important;
-      color: #ffffff !important;
-      box-shadow: 0 6px 20px rgba(0, 102, 255, 0.45);
-      opacity: 1 !important;
+    body.theme-cyberpunk-neon .card-modern {
+      background: rgba(15, 15, 25, 0.85);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
     }
-
-    .harmonized-bar { max-width: 1100px; margin-left: auto; margin-right: auto; border-radius: 24px; padding-top: 4px; }
-    .dock-btn { display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 14px; transition: all 0.2s ease; cursor: pointer; }
-
-    .close-btn-refined, .settings-btn-refined {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      border-radius: 12px;
-      background: rgba(0, 102, 255, 0.08);
-      color: #0066ff;
-      border: 1px solid rgba(0, 102, 255, 0.2);
-      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-      cursor: pointer;
+    body.theme-aurora-glass {
+      background: #0f172a;
+      color: #e2e8f0;
     }
-    .close-btn-refined {
-      background: rgba(239, 68, 68, 0.12);
-      color: #ef4444;
-      border: 1px solid rgba(239, 68, 68, 0.3);
+    body.theme-aurora-glass .card-modern {
+      background: rgba(30, 41, 59, 0.75);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      backdrop-filter: blur(12px);
     }
-    .close-btn-refined:hover { background: rgba(239, 68, 68, 0.25); transform: scale(1.05); }
-    .settings-btn-refined:hover { background: rgba(0, 102, 255, 0.2); transform: scale(1.05); }
-
-    .tab-content { animation: tabFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-    @keyframes tabFadeIn {
-      from { opacity: 0; transform: translateY(6px) scale(0.995); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+    body.theme-obsidian-gold {
+      background: #09090b;
+      color: #fafafa;
+    }
+    body.theme-obsidian-gold .card-modern {
+      background: rgba(24, 24, 27, 0.85);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      backdrop-filter: blur(12px);
+    }
+    body.theme-sunset-blush {
+      background: #181118;
+      color: #fdf2f8;
+    }
+    body.theme-sunset-blush .card-modern {
+      background: rgba(38, 24, 38, 0.85);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      backdrop-filter: blur(12px);
+    }
+    body.theme-matrix-terminal {
+      background: #020617;
+      color: #22c55e;
+    }
+    body.theme-matrix-terminal .card-modern {
+      background: rgba(3, 7, 18, 0.9);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      backdrop-filter: blur(12px);
     }
 
-    /* STICKY MODAL HEADER FIX (Issue 1: Close button never disappears when scrolling) */
+    .harmonized-bar {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .ios-btn {
+      transition: all 0.2s ease;
+    }
+    .ios-btn:active {
+      transform: scale(0.96);
+    }
+    /* Sticky Modal Header Fix */
     .sticky-modal-header {
       position: sticky;
       top: 0;
-      z-index: 40;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      padding-bottom: 12px;
-      margin-bottom: 16px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      z-index: 20;
+      background: inherit;
+      backdrop-filter: blur(8px);
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(100, 116, 139, 0.2);
     }
-    .theme-cyberpunk-neon .sticky-modal-header { background: rgba(12, 17, 29, 0.92); border-bottom: 1px solid rgba(0, 240, 255, 0.2); }
-    .theme-aurora-glass .sticky-modal-header { background: rgba(6, 40, 35, 0.85); border-bottom: 1px solid rgba(52, 211, 153, 0.25); }
-    .theme-nordic-frost .sticky-modal-header { background: rgba(255, 255, 255, 0.95); border-bottom: 1px solid rgba(16, 42, 67, 0.08); }
-    .theme-obsidian-gold .sticky-modal-header { background: rgba(22, 22, 22, 0.92); border-bottom: 1px solid rgba(243, 229, 171, 0.2); }
-    .theme-sunset-blush .sticky-modal-header { background: rgba(45, 30, 50, 0.92); border-bottom: 1px solid rgba(255, 180, 200, 0.2); }
-    .theme-matrix-terminal .sticky-modal-header { background: rgba(3, 20, 8, 0.94); border-bottom: 1px solid rgba(0, 255, 102, 0.25); }
-
-    #scrollToTopBtn {
-      position: fixed;
-      bottom: 105px;
-      right: 25px;
-      z-index: 45;
-      display: none;
-      width: 44px;
-      height: 44px;
+    .close-btn-refined {
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
-      background: var(--accent-color);
-      color: #ffffff;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 8px 25px rgba(0, 102, 255, 0.4);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    #scrollToTopBtn:hover { transform: scale(1.1); }
-
-    /* FULL BLUR SPLASH OVERLAY (Issue 9) */
-    #appSplashOverlay {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: rgba(10, 15, 30, 0.75);
-      backdrop-filter: blur(30px);
-      -webkit-backdrop-filter: blur(30px);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
+      background: rgba(100, 116, 139, 0.15);
+      transition: background 0.2s;
+    }
+    .close-btn-refined:hover {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+    }
+    .settings-btn-refined {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(100, 116, 139, 0.15);
+      transition: background 0.2s;
+    }
+    .dock-btn-active {
+      color: var(--accent-color) !important;
+      background: rgba(0, 102, 255, 0.1);
+      border-radius: 14px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.97); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
   </style>
 </head>
-<body id="appBody" class="theme-nordic-frost min-h-screen">
+<body id="appBody" class="theme-nordic-frost min-h-screen pb-32">
 
-  <!-- FULL SCREEN BLUR LOADING SPLASH OVERLAY (Issue 9) -->
-  <div id="appSplashOverlay">
-    <div class="card-modern p-8 rounded-3xl flex flex-col items-center space-y-4 shadow-2xl animate-pulse">
-      <div class="w-14 h-14 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-extrabold text-2xl shadow-lg">TH</div>
-      <div class="text-center">
-        <h2 class="font-extrabold text-base">TabHub v1.37 PRO</h2>
-        <p class="text-xs opacity-60 mt-1">Memuat ruang kerja cerdas Anda...</p>
-      </div>
-      <div class="w-36 h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-        <div class="bg-blue-600 h-full rounded-full animate-[pulse_1s_infinite]" style="width: 75%"></div>
-      </div>
-    </div>
+  <!-- SPLASH SCREEN BLUR OVERLAY -->
+  <div id="appSplashOverlay" class="fixed inset-0 z-[100] bg-slate-950/80 backdrop-blur-xl flex flex-col items-center justify-center text-white transition-opacity duration-500">
+    <div class="w-16 h-16 rounded-3xl bg-blue-600 flex items-center justify-center font-extrabold text-2xl shadow-2xl animate-bounce">TH</div>
+    <h1 class="text-xl font-extrabold mt-4 tracking-wider">TabHub v1.38 PRO</h1>
+    <p class="text-xs opacity-60 mt-1">Menyiapkan Workspace & Cloud Sync...</p>
   </div>
 
-  <!-- SYMMETRIC TOP HEADER BAR (Issue 3 Fixed) -->
-  <header class="fixed top-3 left-1/2 -translate-x-1/2 z-40 w-[95%] max-w-7xl card-modern px-4 py-2.5 text-[11px] font-mono flex items-center justify-between shadow-xl backdrop-blur-xl border">
+  <!-- FLOATING SCROLL TO TOP BUTTON -->
+  <button id="scrollToTopBtn" onclick="scrollToTopPage()" class="fixed bottom-24 right-4 z-40 hidden w-10 h-10 rounded-full bg-blue-600 text-white shadow-xl items-center justify-center ios-btn" title="Kembali ke Atas">
+    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- TOP iOS-STYLE HARMONIZED HEADER BAR -->
+  <header class="harmonized-bar px-4 pt-4 pb-2 flex justify-between items-center">
     <div class="flex items-center gap-3">
-      <div class="flex items-center gap-2 font-bold">
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span id="iosBarClock">00:00:00</span>
+      <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white font-extrabold text-sm shadow-md">TH</div>
+      <div>
+        <h1 class="text-xs font-extrabold tracking-wide" id="iosBarUsername">Hi, Pengguna</h1>
+        <div class="flex items-center gap-2 text-[10px] opacity-70 font-mono">
+          <span id="iosBarClock">00:00:00</span>
+          <span>•</span>
+          <span id="iosBarWeather">Surabaya, 32°C</span>
+        </div>
       </div>
-      <span class="opacity-30">|</span>
-      <button onclick="openBackupRestoreModal()" class="hover:text-blue-500 transition text-left cursor-pointer bg-transparent border-0 p-0 font-mono font-bold truncate max-w-[140px]" title="Kelola Cadangan & Pemulihan Data">
-        <span id="iosBarUsername">Hi, Pengguna</span>
-      </button>
     </div>
-    <div class="flex items-center gap-3">
-      <span id="iosBarWeather" class="hidden sm:inline opacity-80">Surabaya, 32°C</span>
-      <span class="hidden sm:inline opacity-30">|</span>
-      <button onclick="openFloatingAiModal()" title="Buka AI & Pencarian" class="hover:text-blue-500 transition cursor-pointer bg-transparent border-0 p-0 font-mono font-bold text-blue-500 flex items-center gap-1.5 ios-btn">
-        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg>
-        AI
+    <div class="flex items-center gap-2">
+      <button onclick="openFloatingAiModal()" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold flex items-center gap-1.5 ios-btn" title="AI & Search">
+        <svg class="w-4 h-4 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span class="hidden sm:inline">AI Asisten</span>
+      </button>
+      <button onclick="toggleFloatingMenu()" class="w-9 h-9 card-modern rounded-xl flex items-center justify-center ios-btn" title="Menu Utama">
+        <svg class="w-5 h-5 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
   </header>
-
-  <!-- FLOATING SCROLL TO TOP BUTTON -->
-  <button id="scrollToTopBtn" onclick="scrollToTopPage()" title="Geser ke Atas" aria-label="Geser ke Atas">
-    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-  </button>
 
   <!-- MENU MODAL (Fixed sticky header & active state indication with all new modules) -->
   <div id="floatingMenuModal" class="hidden fixed inset-0 z-[60] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-2xl p-6 rounded-3xl space-y-4 shadow-2xl animate-fade-in max-h-[85vh] overflow-y-auto">
       
-      <!-- STICKY MODAL HEADER (Issue 1 Fixed: Close button never disappears) -->
+      <!-- STICKY MODAL HEADER -->
       <div class="sticky-modal-header flex justify-between items-center pt-2">
         <h3 class="font-extrabold text-sm flex items-center gap-2">
           <svg class="w-4 h-4 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
@@ -340,10 +311,10 @@
     </div>
   </div>
 
-  <!-- MAIN CONTAINER WRAPPER (Issue 3 Fixed: Harmonized Top Margin) -->
+  <!-- MAIN CONTAINER WRAPPER (All 20 Tabs) -->
   <main class="harmonized-bar px-4 space-y-6 pt-2">
 
-    <!-- TAB 1: APPLICATION OVERVIEW & DASHBOARD -->
+    <!-- TAB 1: OVERVIEW -->
     <div id="tab-overview" class="tab-content space-y-6">
       <div class="card-modern p-6 sm:p-8 rounded-3xl space-y-6">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -352,7 +323,7 @@
               <span class="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></span>
               <span data-i18n="overviewHeading">Ringkasan Aplikasi & Dashboard</span>
             </h2>
-            <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.37 PRO.</p>
+            <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.38 PRO.</p>
           </div>
           <div class="flex gap-2">
             <button onclick="switchTab('finance')" class="px-3.5 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnQuickFinance">Cek Keuangan</button>
@@ -398,7 +369,7 @@
           <div class="card-modern p-5 rounded-2xl space-y-3">
             <h3 class="font-extrabold text-xs flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> <span data-i18n="ovSystemStatusTitle">Status & Sistem TabHub</span></h3>
             <div class="space-y-2 text-xs opacity-80 font-mono">
-              <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.37 PRO</strong></div>
+              <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.38 PRO</strong></div>
               <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Penyimpanan Browser</span><strong id="ovStorageSize" class="text-emerald-500">0 KB</strong></div>
               <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Tema Aktif</span><strong id="ovThemeName" class="text-purple-500">Nordic Frost</strong></div>
               <div class="flex justify-between py-1"><span>Status Enkripsi</span><strong class="text-emerald-500">Aman & Aktif</strong></div>
@@ -408,7 +379,7 @@
       </div>
     </div>
 
-    <!-- TAB 2: FINANCE MANAGEMENT -->
+    <!-- TAB 2: FINANCE -->
     <div id="tab-finance" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -494,7 +465,7 @@
       </div>
     </div>
 
-    <!-- TAB 3: TASKS & ROUTINES -->
+    <!-- TAB 3: TASKS -->
     <div id="tab-tasks" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -535,7 +506,7 @@
       </div>
     </div>
 
-    <!-- TAB 4: KANBAN & PROJECTS -->
+    <!-- TAB 4: KANBAN -->
     <div id="tab-kanban" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -625,7 +596,7 @@
       </div>
     </div>
 
-    <!-- TAB 6: WEB SHORTCUTS -->
+    <!-- TAB 6: SHORTCUTS -->
     <div id="tab-shortcuts" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -639,7 +610,7 @@
       </div>
     </div>
 
-    <!-- TAB 7: FILE MANAGER & BACKUP MODULE -->
+    <!-- TAB 7: FILES -->
     <div id="tab-files" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -675,7 +646,7 @@
       </div>
     </div>
 
-    <!-- TAB 8: MIND MAP CANVAS -->
+    <!-- TAB 8: MIND MAP -->
     <div id="tab-mindmap" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 rounded-3xl space-y-4">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -700,7 +671,7 @@
       </div>
     </div>
 
-    <!-- TAB 9: CLOCK & POMODORO -->
+    <!-- TAB 9: CLOCK -->
     <div id="tab-clock" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -753,7 +724,7 @@
       </div>
     </div>
 
-    <!-- TAB 10: CALCULATOR & CONVERTERS -->
+    <!-- TAB 10: CALC -->
     <div id="tab-calc" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -906,7 +877,7 @@
       </div>
     </div>
 
-    <!-- TAB 14: TRANSLATOR MODULE -->
+    <!-- TAB 14: TRANSLATOR -->
     <div id="tab-translator" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -942,7 +913,7 @@
       </div>
     </div>
 
-    <!-- TAB 15: PDF MANAGER MODULE -->
+    <!-- TAB 15: PDF MANAGER -->
     <div id="tab-pdf" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -968,7 +939,7 @@
       </div>
     </div>
 
-    <!-- TAB 16: YOUTUBE DOWNLOADER MODULE -->
+    <!-- TAB 16: YOUTUBE DOWNLOADER -->
     <div id="tab-youtube" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -997,7 +968,7 @@
       </div>
     </div>
 
-    <!-- TAB 17: TIKTOK DOWNLOADER MODULE -->
+    <!-- TAB 17: TIKTOK DOWNLOADER -->
     <div id="tab-tiktok" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -1017,7 +988,7 @@
       </div>
     </div>
 
-    <!-- TAB 18: FONT GENERATOR MODULE -->
+    <!-- TAB 18: FONT GENERATOR -->
     <div id="tab-fonts" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -1031,7 +1002,7 @@
       </div>
     </div>
 
-    <!-- TAB 19: BLANK CHARACTER MODULE -->
+    <!-- TAB 19: BLANK CHARACTER -->
     <div id="tab-blank" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -1047,7 +1018,7 @@
       </div>
     </div>
 
-    <!-- TAB 20: SETTINGS & PERSONALIZATION -->
+    <!-- TAB 20: SETTINGS -->
     <div id="tab-settings" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 sm:p-8 rounded-3xl space-y-8">
         <div class="pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -1055,7 +1026,7 @@
           <p class="text-xs opacity-70">Atur bahasa, tema, keamanan, dan cadangan data.</p>
         </div>
         
-        <!-- BACKUP & RESTORE SECTION IN SETTINGS (Issue 8) -->
+        <!-- BACKUP & RESTORE SECTION IN SETTINGS -->
         <div class="space-y-4">
           <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500">Pencadangan & Pemulihan Data (File & Kode)</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1078,6 +1049,22 @@
                 <button onclick="openRestoreCodeModal()" class="px-3.5 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn">Tempel Kode</button>
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- GITHUB CLOUD SYNC SETTINGS -->
+        <div class="space-y-4 pt-4 border-t border-slate-200/50 dark:border-slate-800/50">
+          <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500">GitHub Cloud Sync (Gist)</h3>
+          <div class="space-y-2">
+            <label class="text-xs font-bold opacity-75">GitHub Personal Access Token (PAT)</label>
+            <div class="flex gap-2">
+              <input type="password" id="githubTokenInput" placeholder="ghp_..." class="flex-1 px-4 py-2.5 rounded-xl card-modern text-xs font-mono focus:outline-none" autocomplete="off">
+              <button onclick="saveGitHubToken()" class="px-4 py-2.5 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-xl text-xs font-bold shadow ios-btn">Simpan Token</button>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <button onclick="syncToGitHubGist()" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow ios-btn">Simpan ke GitHub Cloud</button>
+            <button onclick="loadFromGitHubGist()" class="px-4 py-2.5 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn">Muat dari GitHub Cloud</button>
           </div>
         </div>
 
@@ -1164,7 +1151,7 @@
 
   </main>
 
-  <!-- FLOATING BOTTOM DOCK NAVIGATION BAR (Issue 6 Fixed: Reordered by Importance) -->
+  <!-- FLOATING BOTTOM DOCK NAVIGATION BAR -->
   <nav class="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-lg card-modern px-3 py-2 flex items-center justify-around shadow-2xl backdrop-blur-xl border">
     <button id="menuBtn-overview" onclick="switchTab('overview')" class="dock-btn opacity-70 hover:opacity-100" title="Ringkasan">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
@@ -1342,7 +1329,7 @@
     </div>
   </div>
 
-  <!-- BACKUP & RESTORE / ACCOUNT MANAGEMENT MODAL (Issue 2 Fixed: Replaced Password view with Code & File backup/restore) -->
+  <!-- BACKUP & RESTORE MODAL -->
   <div id="backupRestoreModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-lg p-6 rounded-3xl space-y-4 shadow-2xl max-h-[85vh] overflow-y-auto">
       <div class="sticky-modal-header flex justify-between items-center pt-2">
@@ -1378,18 +1365,18 @@
       </div>
       <div id="releaseHistoryContent" class="space-y-3 text-xs opacity-90 leading-relaxed font-mono">
         <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-blue-500">
-          <strong>TabHub v1.37 PRO (Agustus 2026)</strong>
-          <p class="text-[11px] opacity-80">- Perbaikan sticky header modal (tombol close tidak hilang saat digulir).<br>- Penggantian fitur login sandi menjadi sistem Backup & Pemulihan kode JSON / File.<br>- Penyelarasan margin atas tab (harmonized-bar) & urutan tombol dock berdasarkan prioritas.<br>- Penyempurnaan tombol bar, penambahan opsi pengaturan lengkap, & animasi splash blur penuh.</p>
+          <strong>TabHub v1.38 PRO (Agustus 2026)</strong>
+          <p class="text-[11px] opacity-80">- Integrasi penuh fitur GitHub Cloud Sync (Gist API) untuk penyimpanan data online.<br>- Penambahan antarmuka input PAT token di Tab Pengaturan.<br>- Perbaikan sticky header modal dan optimalisasi state sync.</p>
         </div>
         <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-emerald-500">
-          <strong>TabHub v1.36</strong>
-          <p class="text-[11px] opacity-80">- Penambahan 6 modul baru: Penerjemah, Pengelola PDF, Downloader YouTube & TikTok, Penghasil Huruf & Karakter Kosong.</p>
+          <strong>TabHub v1.37 PRO</strong>
+          <p class="text-[11px] opacity-80">- Perbaikan sticky header modal & pergantian sistem login auth ke backup kode JSON.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (TabHub v1.37 PRO) -->
+  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (TabHub v1.38 PRO) -->
   <script>
     // --- XSS SECURITY & SANITIZATION ENGINE ---
     function sanitizeHtml(str) {
@@ -1401,12 +1388,12 @@
                 .replace(/'/g, '&#039;');
     }
 
-    // --- MULTI-LANGUAGE DICTIONARY (v1.37) ---
+    // --- MULTI-LANGUAGE DICTIONARY (v1.38) ---
     const i18nData = {
       id: {
         hubTitle: "TabHub",
         overviewHeading: "Ringkasan Aplikasi & Dashboard",
-        overviewSub: "Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.37.",
+        overviewSub: "Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.38.",
         btnQuickFinance: "Cek Keuangan",
         btnQuickTasks: "Lihat Tugas",
         ovStatBalance: "Total Saldo Keuangan",
@@ -1458,7 +1445,7 @@
       en: {
         hubTitle: "TabHub",
         overviewHeading: "Application Overview & Dashboard",
-        overviewSub: "Quick monitoring center for all TabHub v1.37 productivity modules.",
+        overviewSub: "Quick monitoring center for all TabHub v1.38 productivity modules.",
         btnQuickFinance: "Check Finance",
         btnQuickTasks: "View Tasks",
         ovStatBalance: "Total Financial Balance",
@@ -1510,7 +1497,7 @@
       zh: {
         hubTitle: "TabHub",
         overviewHeading: "应用程序概览与仪表盘",
-        overviewSub: "所有 TabHub v1.37 生产力模块的快速监控中心。",
+        overviewSub: "所有 TabHub v1.38 生产力模块的快速监控中心。",
         btnQuickFinance: "查看财务",
         btnQuickTasks: "查看任务",
         ovStatBalance: "总财务余额",
@@ -1562,7 +1549,7 @@
       ar: {
         hubTitle: "TabHub",
         overviewHeading: "نظرة عامة على التطبيق لوحة القيادة",
-        overviewSub: "مركز مراقبة سريع لجميع وحدات الإنتاجية TabHub v1.37.",
+        overviewSub: "مركز مراقبة سريع لجميع وحدات الإنتاجية TabHub v1.38.",
         btnQuickFinance: "التحقق من المالية",
         btnQuickTasks: "عرض المهام",
         ovStatBalance: "إجمالي الرصيد المالي",
@@ -1636,7 +1623,7 @@
       renderAll();
     }
 
-    // --- STATE UTAMA & PERSISTENSI (TabHub v1.37) ---
+    // --- STATE UTAMA & PERSISTENSI ---
     let appState = {
       currentTab: 'overview',
       theme: 'theme-nordic-frost',
@@ -1704,7 +1691,96 @@
       }
     }
 
-    // --- BACKUP & RESTORE CODE & FILE (Issue 2 & 8) ---
+    // --- GITHUB GIST CLOUD SYNC ENGINE ---
+    function saveGitHubToken() {
+      const token = document.getElementById('githubTokenInput')?.value.trim() || '';
+      if (!token) {
+        alert('Masukkan token GitHub terlebih dahulu!');
+        return;
+      }
+      localStorage.setItem('GITHUB_ACCESS_TOKEN', token);
+      alert('GitHub Token berhasil disimpan secara lokal untuk autentikasi cloud!');
+    }
+
+    async function syncToGitHubGist() {
+      const token = localStorage.getItem('GITHUB_ACCESS_TOKEN');
+      if (!token) {
+        alert('Harap simpan GitHub Token terlebih dahulu di pengaturan!');
+        return;
+      }
+
+      try {
+        const response = await fetch('https://api.github.com/gists', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify({
+            description: "TabHub v1.38 PRO - Cloud Data Backup",
+            public: false,
+            files: {
+              "tabhub_state.json": {
+                content: JSON.stringify(appState, null, 2)
+              }
+            }
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          localStorage.setItem('GITHUB_GIST_ID', data.id);
+          alert('Berhasil! Data TabHub telah disinkronkan ke GitHub Gist privat Anda.');
+        } else {
+          const errData = await response.json();
+          alert('Gagal menyinkronkan ke GitHub: ' + (errData.message || 'Token tidak valid'));
+        }
+      } catch (error) {
+        console.error('GitHub Gist Error:', error);
+        alert('Terjadi kesalahan jaringan saat terhubung ke GitHub.');
+      }
+    }
+
+    async function loadFromGitHubGist() {
+      const token = localStorage.getItem('GITHUB_ACCESS_TOKEN');
+      const gistId = localStorage.getItem('GITHUB_GIST_ID');
+      
+      if (!token || !gistId) {
+        alert('Token atau Gist ID tidak ditemukan. Lakukan "Simpan ke GitHub Cloud" terlebih dahulu atau pastikan token sudah benar.');
+        return;
+      }
+
+      try {
+        const response = await fetch(`https://api.github.com/gists/${gistId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const fileContent = data.files['tabhub_state.json']?.content;
+          if (fileContent) {
+            const parsed = JSON.parse(fileContent);
+            appState = parsed;
+            saveStateToStorage();
+            renderAll();
+            alert('Data TabHub berhasil ditarik dan dipulihkan dari GitHub Cloud!');
+          } else {
+            alert('File cadangan "tabhub_state.json" tidak ditemukan di Gist tersebut.');
+          }
+        } else {
+          alert('Gagal memuat data dari Gist. Periksa kembali token Anda.');
+        }
+      } catch (error) {
+        console.error('GitHub Load Error:', error);
+        alert('Terjadi kesalahan jaringan saat memuat data.');
+      }
+    }
+
+    // --- BACKUP & RESTORE CODE & FILE ---
     function exportAppBackupJson() {
       try {
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
@@ -1889,7 +1965,7 @@
       renderMindMap();
     }
 
-    // --- INSTANT LOADING INITIALIZATION & SPLASH BLUR REMOVAL (Issue 9) ---
+    // --- INSTANT LOADING INITIALIZATION & SPLASH BLUR REMOVAL ---
     document.addEventListener('DOMContentLoaded', () => {
       loadStateFromStorage();
       setAppTheme(appState.theme || 'theme-nordic-frost');
@@ -1900,6 +1976,12 @@
       if (appState.user && appState.user.apiKey) {
         const keyInput = document.getElementById('geminiApiKeyInput');
         if (keyInput) keyInput.value = appState.user.apiKey;
+      }
+
+      const savedToken = localStorage.getItem('GITHUB_ACCESS_TOKEN');
+      if (savedToken) {
+        const tokenInput = document.getElementById('githubTokenInput');
+        if (tokenInput) tokenInput.value = savedToken;
       }
 
       switchTab(appState.currentTab || 'overview');
@@ -1919,7 +2001,6 @@
         startAmbientMusic();
       }
 
-      // Hide Full Blur Splash Overlay smoothly after init
       setTimeout(() => {
         const splash = document.getElementById('appSplashOverlay');
         if (splash) {
@@ -1946,7 +2027,7 @@
       }
     }
 
-    // --- TAB SWITCHING & SYNCHRONIZED DOCK/LAUNCHER HIGHLIGHTS (Issue 5 Fixed) ---
+    // --- TAB SWITCHING & SYNCHRONIZED DOCK/LAUNCHER HIGHLIGHTS ---
     function switchTab(tabId) {
       if (tabId === 'chatbot') {
         openFloatingAiModal();
@@ -1960,12 +2041,10 @@
       const target = document.getElementById(`tab-${tabId}`);
       if (target) target.classList.remove('hidden');
 
-      // Reset all dock buttons
       document.querySelectorAll('nav button[id^="menuBtn-"], nav button.dock-btn').forEach(btn => {
         btn.className = "dock-btn opacity-70 hover:opacity-100";
       });
       
-      // Highlight matching dock button if present
       const activeMenuBtn = document.getElementById(`menuBtn-${tabId}`);
       if (activeMenuBtn) {
         activeMenuBtn.className = "dock-btn dock-btn-active";
@@ -2432,7 +2511,7 @@
       }
 
       setTimeout(() => {
-        let reply = "Halo! Saya adalah AI TabHub v1.37 PRO. Saya dapat membantu meringkas keuangan, mencari tugas, mengelola jadwal kalender, atau memberikan informasi sistem secara offline.";
+        let reply = "Halo! Saya adalah AI TabHub v1.38 PRO. Saya dapat membantu meringkas keuangan, mencari tugas, mengelola jadwal kalender, atau memberikan informasi sistem secara offline.";
         
         if (lower.includes('keuangan') || lower.includes('saldo') || lower.includes('uang')) {
           const totalInc = (appState.finance.transactions || []).filter(t=>t.type==='income').reduce((a,b)=>a+b.amount,0);

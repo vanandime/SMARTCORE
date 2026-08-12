@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCore Ultimate - All-in-One Platform & AI Workspace</title>
+    <title>SmartCore Ultimate - All-in-One Platform & AI Workspace v1.5</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -119,7 +119,7 @@
                         <i class="fa-solid fa-bolt"></i>
                     </div>
                     <div>
-                        <h1 class="font-bold text-white tracking-wide text-base">SmartCore <span class="text-brand-400 text-xs px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30">v1.4 All-in-One</span></h1>
+                        <h1 class="font-bold text-white tracking-wide text-base">SmartCore <span class="text-brand-400 text-xs px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30">v1.5 All-in-One</span></h1>
                         <p class="text-xs text-slate-400">Social • Tools • GitHub • Gemini AI</p>
                     </div>
                 </div>
@@ -163,7 +163,7 @@
                     <div class="inline-flex p-4 bg-brand-500/10 text-brand-400 rounded-full text-3xl">
                         <i class="fa-solid fa-spinner animate-spin"></i>
                     </div>
-                    <h3 class="text-lg font-semibold text-white">Memuat Sistem Utama v1.4...</h3>
+                    <h3 class="text-lg font-semibold text-white">Memuat Sistem Utama v1.5...</h3>
                     <p class="text-sm text-slate-400 max-w-md mx-auto">Silakan balas dengan huruf **"v"** untuk melanjutkan ke **Bagian 2 (Main Workspace & UI Components)**.</p>
                 </div>
             </div>
@@ -220,7 +220,7 @@
                     <div class="space-y-3 text-xs">
                         <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800/60">
                             <span class="text-brand-400 font-semibold">#SmartCoreAI</span>
-                            <p class="text-slate-400 mt-0.5">Integrasi Gemini AI & GitHub Server v1.4 active!</p>
+                            <p class="text-slate-400 mt-0.5">Integrasi Gemini AI & GitHub Server v1.5 active!</p>
                         </div>
                     </div>
                 </div>
@@ -326,9 +326,9 @@
                         <h3 class="font-bold text-white text-base flex items-center gap-2">
                             <i class="fa-brands fa-github text-emerald-400"></i> Integrasi Server GitHub
                         </h3>
-                        <p class="text-xs text-slate-400 mt-1">Token akses GitHub Anda telah terautentikasi otomatis via v1.4.</p>
+                        <p class="text-xs text-slate-400 mt-1">Hubungkan repositori GitHub Anda untuk sinkronisasi data atau deploy file index.html.</p>
                     </div>
-                    <span id="githubStatusBadge" class="px-3 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-full text-xs font-semibold">Siap Terhubung</span>
+                    <span id="githubStatusBadge" class="px-3 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-full text-xs font-semibold">Belum Terhubung</span>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -372,7 +372,7 @@
                         <i class="fa-solid fa-terminal text-indigo-400"></i> Log Aktivitas Server
                     </h4>
                     <div id="githubLogContainer" class="p-3 bg-slate-900/90 border border-slate-800 rounded-xl text-xs font-mono text-emerald-400 h-40 overflow-y-auto space-y-1">
-                        <div>[System v1.4] Token GitHub siap dimuat ke state...</div>
+                        <div>[System v1.5] Menunggu koneksi server GitHub...</div>
                     </div>
                 </div>
             </div>
@@ -421,7 +421,7 @@
                             <i class="fa-solid fa-brain"></i>
                         </div>
                         <div class="p-3.5 bg-slate-900 border border-slate-800 rounded-2xl text-xs text-slate-200 max-w-[85%]">
-                            Halo! Token GitHub Anda telah terintegrasi di platform SmartCore v1.4. Ada yang bisa saya bantu?
+                            Halo! Saya asisten Gemini AI Anda di platform SmartCore v1.5. Ada yang bisa saya bantu analisis atau buatkan hari ini?
                         </div>
                     </div>
                 </div>
@@ -473,7 +473,7 @@
                     </div>
                     <div>
                         <p class="text-xs text-slate-400 font-medium">Status Sistem</p>
-                        <h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal v1.4</h4>
+                        <h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal v1.5</h4>
                     </div>
                 </div>
             </div>
@@ -510,8 +510,8 @@
     <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC -->
     <script>
         // --- 1. STATE MANAGEMENT & PERSISTENCE ---
-        const STORAGE_KEY = 'SMARTCORE_STATE_V14';
-        const BACKUP_KEY = 'SMARTCORE_FORM_BACKUP_V14';
+        const STORAGE_KEY = 'SMARTCORE_STATE';
+        const BACKUP_KEY = 'SMARTCORE_FORM_BACKUP';
 
         let appState = {
             currentUser: null, // { name, email, role: 'admin'|'user', joinedAt }
@@ -522,14 +522,14 @@
                 { name: 'System Admin', email: 'admin@smartcore.io', password: 'admin', role: 'admin', joinedAt: '2026-01-01' }
             ],
             posts: [
-                { id: 1, author: 'System Admin', content: 'Selamat datang di platform SmartCore Ultimate v1.4! Token GitHub pribadi Anda telah terintegrasi secara otomatis ke server GitHub workspace.', image: null, likes: 7, comments: [], createdAt: '08:00' }
+                { id: 1, author: 'System Admin', content: 'Selamat datang di platform SmartCore Ultimate v1.5! Nikmati integrasi Media Sosial, Alat Serbaguna, Server GitHub, dan Gemini AI dalam satu file mandiri.', image: null, likes: 10, comments: [], createdAt: '09:00' }
             ],
             activeUsers: [
                 { name: 'System Admin', status: 'Online' },
                 { name: 'Guest User', status: 'Online' }
             ],
             githubConfig: {
-                token: 'Ghp_wpQYcLyN9Q16J3dc2kyrBJxs68GfdZ1hNetH',
+                token: '',
                 owner: '',
                 repo: '',
                 connected: false
@@ -539,7 +539,7 @@
                 model: 'gemini-2.5-flash'
             },
             geminiChat: [
-                { role: 'model', text: 'Halo! Saya asisten Gemini AI Anda di platform SmartCore v1.4. Token GitHub Anda sudah tersemat di sistem. Ada yang bisa saya bantu hari ini?' }
+                { role: 'model', text: 'Halo! Saya asisten Gemini AI Anda di platform SmartCore v1.5. Ada yang bisa saya bantu analisis atau buatkan hari ini?' }
             ]
         };
 
@@ -957,7 +957,7 @@
             const val = document.getElementById('markdownInput').value;
             let html = val
                 .replace(/^# (.*$)/gim, '<h1 class="text-base font-bold text-white mb-2">$1</h1>')
-                .replace(/^## (.*$)/gim, '<h2 class="text-sm font-bold text-white mb-2">$1</h2>')
+                .replace(/^## (.*$)/gim, '<h2 class="text-sm font-bold text-white mb-2">$2</h2>')
                 .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
                 .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
                 .replace(/\n/g, '<br>');

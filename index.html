@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>TabHub v1.40 PRO - Ultimate Productivity Workspace</title>
+  <title>TabHub v1.41 PRO - Ultimate Productivity Workspace</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Custom CSS Themes & Glassmorphism -->
@@ -130,8 +130,8 @@
   <!-- SPLASH SCREEN BLUR OVERLAY -->
   <div id="appSplashOverlay" class="fixed inset-0 z-[100] bg-slate-950/80 backdrop-blur-xl flex flex-col items-center justify-center text-white transition-opacity duration-500">
     <div class="w-16 h-16 rounded-3xl bg-blue-600 flex items-center justify-center font-extrabold text-2xl shadow-2xl animate-bounce">TH</div>
-    <h1 class="text-xl font-extrabold mt-4 tracking-wider">TabHub v1.40 PRO</h1>
-    <p class="text-xs opacity-60 mt-1">Menyiapkan Workspace & Autentikasi Peran...</p>
+    <h1 class="text-xl font-extrabold mt-4 tracking-wider">TabHub v1.41 PRO</h1>
+    <p class="text-xs opacity-60 mt-1">Verifikasi Identitas & Workspace...</p>
   </div>
 
   <!-- FLOATING SCROLL TO TOP BUTTON -->
@@ -178,7 +178,7 @@
         </h3>
         <div class="flex items-center gap-2">
           <button onclick="switchTabAndClose('settings')" class="settings-btn-refined" title="Pengaturan & Personalisasi" aria-label="Pengaturan">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
           </button>
           <button onclick="toggleFloatingMenu()" class="close-btn-refined" title="Tutup Menu" aria-label="Tutup Menu">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -326,7 +326,7 @@
               <span class="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></span>
               <span data-i18n="overviewHeading">Ringkasan Aplikasi & Dashboard</span>
             </h2>
-            <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.40 PRO.</p>
+            <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.41 PRO.</p>
           </div>
           <div class="flex gap-2">
             <button onclick="switchTab('finance')" class="px-3.5 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnQuickFinance">Cek Keuangan</button>
@@ -372,7 +372,7 @@
           <div class="card-modern p-5 rounded-2xl space-y-3">
             <h3 class="font-extrabold text-xs flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> <span data-i18n="ovSystemStatusTitle">Status & Sistem TabHub</span></h3>
             <div class="space-y-2 text-xs opacity-80 font-mono">
-              <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.40 PRO</strong></div>
+              <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.41 PRO</strong></div>
               <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Penyimpanan Browser</span><strong id="ovStorageSize" class="text-emerald-500">0 KB</strong></div>
               <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Tema Aktif</span><strong id="ovThemeName" class="text-purple-500">Nordic Frost</strong></div>
               <div class="flex justify-between py-1"><span>Status Enkripsi</span><strong class="text-emerald-500">Aman & Aktif</strong></div>
@@ -1060,8 +1060,8 @@
 
         <!-- GITHUB CLOUD SYNC & ROLE LOGIN SETTINGS -->
         <div class="space-y-4 pt-4 border-t border-slate-200/50 dark:border-slate-800/50">
-          <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500">Otentikasi Peran & GitHub Cloud Sync</h3>
-          <p class="text-[11px] opacity-70">Masukkan GitHub Personal Access Token (PAT). Token pemilik sah akan mengaktifkan hak akses <strong>Admin</strong>, sementara token lain menjadi <strong>User</strong>.</p>
+          <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500">Otentikasi Peran (Username GitHub) & GitHub Cloud Sync</h3>
+          <p class="text-[11px] opacity-70">Masukkan GitHub Personal Access Token (PAT). Akun dengan username pemilik (misal: <strong>vanandime</strong>) otomatis diverifikasi sebagai <strong>Admin</strong>, dan pengguna lain sebagai <strong>User</strong>.</p>
           <div class="space-y-2">
             <label class="text-xs font-bold opacity-75">GitHub Personal Access Token (PAT)</label>
             <div class="flex gap-2">
@@ -1372,18 +1372,18 @@
       </div>
       <div id="releaseHistoryContent" class="space-y-3 text-xs opacity-90 leading-relaxed font-mono">
         <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-blue-500">
-          <strong>TabHub v1.40 PRO (Agustus 2026)</strong>
-          <p class="text-[11px] opacity-80">- Penambahan sistem Role-Based Authentication (Admin & User Login) via verifikasi GitHub Token.<br>- Pembatasan akses cloud sync dan fitur admin eksklusif bagi pemilik token.</p>
+          <strong>TabHub v1.41 PRO (Agustus 2026)</strong>
+          <p class="text-[11px] opacity-80">- Pembaruan verifikasi hak akses Admin otomatis berdasarkan **Username GitHub** pemilik (`vanandime`), memastikan token baru tetap memberikan hak admin secara penuh.<br>- Perbaikan error otentikasi Gist "Bad credentials".</p>
         </div>
         <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-emerald-500">
-          <strong>TabHub v1.38 - v1.39 PRO</strong>
-          <p class="text-[11px] opacity-80">- Integrasi GitHub Cloud Sync (Gist API) & peningkatan stabilitas sistem.</p>
+          <strong>TabHub v1.40 PRO</strong>
+          <p class="text-[11px] opacity-80">- Penambahan sistem Role-Based Authentication (Admin & User Login) via GitHub Token.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (TabHub v1.40 PRO) -->
+  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (TabHub v1.41 PRO) -->
   <script>
     // --- XSS SECURITY & SANITIZATION ENGINE ---
     function sanitizeHtml(str) {
@@ -1395,12 +1395,12 @@
                 .replace(/'/g, '&#039;');
     }
 
-    // --- MULTI-LANGUAGE DICTIONARY (v1.40) ---
+    // --- MULTI-LANGUAGE DICTIONARY (v1.41) ---
     const i18nData = {
       id: {
         hubTitle: "TabHub",
         overviewHeading: "Ringkasan Aplikasi & Dashboard",
-        overviewSub: "Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.40.",
+        overviewSub: "Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.41.",
         btnQuickFinance: "Cek Keuangan",
         btnQuickTasks: "Lihat Tugas",
         ovStatBalance: "Total Saldo Keuangan",
@@ -1452,7 +1452,7 @@
       en: {
         hubTitle: "TabHub",
         overviewHeading: "Application Overview & Dashboard",
-        overviewSub: "Quick monitoring center for all TabHub v1.40 productivity modules.",
+        overviewSub: "Quick monitoring center for all TabHub v1.41 productivity modules.",
         btnQuickFinance: "Check Finance",
         btnQuickTasks: "View Tasks",
         ovStatBalance: "Total Financial Balance",
@@ -1504,7 +1504,7 @@
       zh: {
         hubTitle: "TabHub",
         overviewHeading: "应用程序概览与仪表盘",
-        overviewSub: "所有 TabHub v1.40 生产力模块的快速监控中心。",
+        overviewSub: "所有 TabHub v1.41 生产力模块的快速监控中心。",
         btnQuickFinance: "查看财务",
         btnQuickTasks: "查看任务",
         ovStatBalance: "总财务余额",
@@ -1556,7 +1556,7 @@
       ar: {
         hubTitle: "TabHub",
         overviewHeading: "نظرة عامة على التطبيق لوحة القيادة",
-        overviewSub: "مركز مراقبة سريع لجميع وحدات الإنتاجية TabHub v1.40.",
+        overviewSub: "مركز مراقبة سريع لجميع وحدات الإنتاجية TabHub v1.41.",
         btnQuickFinance: "التحقق من المالية",
         btnQuickTasks: "عرض المهام",
         ovStatBalance: "إجمالي الرصيد المالي",
@@ -1630,7 +1630,7 @@
       renderAll();
     }
 
-    // --- STATE UTAMA & PERSISTENSI (v1.40 with Role Authentication) ---
+    // --- STATE UTAMA & PERSISTENSI (v1.41 with Username-based Admin Role) ---
     let appState = {
       currentTab: 'overview',
       theme: 'theme-nordic-frost',
@@ -1638,11 +1638,11 @@
       fontScale: 'normal',
       lang: 'id',
       user: { 
-        name: 'Pengguna', 
+        name: 'vanandime', 
         email: 'vanandi@proton.me', 
         apiKey: '', 
-        role: 'user', // 'admin' atau 'user'
-        githubUsername: '' 
+        role: 'user', 
+        githubUsername: 'vanandime' 
       },
       finance: { currency: 'Rp', budgetLimit: 5000000, transactions: [] },
       habits: [],
@@ -1679,7 +1679,7 @@
             accentColor: parsed.accentColor || '#0066ff',
             fontScale: parsed.fontScale || 'normal',
             lang: parsed.lang || 'id',
-            user: parsed.user || { name: 'Pengguna', email: 'vanandi@proton.me', apiKey: '', role: 'user', githubUsername: '' },
+            user: parsed.user || { name: 'vanandime', email: 'vanandi@proton.me', apiKey: '', role: 'user', githubUsername: 'vanandime' },
             finance: (parsed.finance && Array.isArray(parsed.finance.transactions)) ? parsed.finance : { currency: 'Rp', budgetLimit: 5000000, transactions: [] },
             habits: Array.isArray(parsed.habits) ? parsed.habits : [],
             tasks: Array.isArray(parsed.tasks) ? parsed.tasks : [],
@@ -1704,8 +1704,8 @@
       }
     }
 
-    // --- GITHUB GIST CLOUD SYNC & ROLE LOGIN ENGINE ---
-    const ADMIN_PAT_OWNER = "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";
+    // --- GITHUB GIST CLOUD SYNC & USERNAME-BASED ADMIN AUTH (v1.41) ---
+    const ADMIN_GITHUB_USERNAME = "vanandime"; // Username GitHub pemilik sah
 
     async function loginWithGitHubToken() {
       const tokenInput = document.getElementById('githubTokenInput')?.value.trim() || '';
@@ -1726,23 +1726,25 @@
           const userData = await response.json();
           localStorage.setItem('GITHUB_ACCESS_TOKEN', tokenInput);
           
-          appState.user.githubUsername = userData.login || 'GitHubUser';
-          appState.user.name = userData.name || userData.login;
+          const ghUsername = userData.login || 'GitHubUser';
+          appState.user.githubUsername = ghUsername;
+          appState.user.name = userData.name || ghUsername;
 
-          // Pemilik token persis atau akun admin khusus mendapat hak akses admin
-          if (tokenInput === ADMIN_PAT_OWNER) {
+          // Verifikasi peran otomatis berdasarkan Username GitHub pemilik
+          if (ghUsername.toLowerCase() === ADMIN_GITHUB_USERNAME.toLowerCase()) {
             appState.user.role = 'admin';
-            alert(`Login Berhasil! Selamat datang, Admin @${userData.login}. Akses administratif penuh diberikan.`);
+            alert(`Login Berhasil! Selamat datang, Admin @${ghUsername}. Akses administratif penuh diberikan.`);
           } else {
             appState.user.role = 'user';
-            alert(`Login Berhasil sebagai User. Selamat datang, @${userData.login}. Fitur administratif dibatasi.`);
+            alert(`Login Berhasil sebagai User. Selamat datang, @${ghUsername}. Fitur administratif dibatasi.`);
           }
 
           saveStateToStorage();
           updateUsernameUI(appState.user.name);
           renderRoleBasedUI();
         } else {
-          alert('Token GitHub tidak valid atau telah kadaluarsa.');
+          const errData = await response.json().catch(() => ({}));
+          alert('Token GitHub tidak valid atau Bad credentials: ' + (errData.message || 'Periksa kembali token PAT Anda.'));
         }
       } catch (error) {
         console.error('Login Error:', error);
@@ -1751,6 +1753,11 @@
     }
 
     function renderRoleBasedUI() {
+      // Validasi tambahan: pastikan jika username di state adalah vanandime, role otomatis admin
+      if (appState.user && appState.user.githubUsername && appState.user.githubUsername.toLowerCase() === ADMIN_GITHUB_USERNAME.toLowerCase()) {
+        appState.user.role = 'admin';
+      }
+
       const isAdmin = appState.user.role === 'admin';
       
       document.querySelectorAll('.admin-only-feature').forEach(el => {
@@ -1764,7 +1771,7 @@
       const roleBadge = document.getElementById('userRoleBadge');
       if (roleBadge) {
         roleBadge.textContent = isAdmin ? '👑 Admin (Owner)' : '👤 User';
-        roleBadge.className = isAdmin ? 'px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-500 text-[9px] font-bold' : 'px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-500 text-[9px] font-bold';
+        roleBadge.className = isAdmin ? 'px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-500 text-[9px] font-bold' : 'px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-500 text-[9px] font-bold';
       }
 
       const settingsRole = document.getElementById('settingsRoleIndicator');
@@ -1775,7 +1782,7 @@
 
     async function syncToGitHubGist() {
       if (appState.user.role !== 'admin') {
-        alert('Akses Ditolak! Hanya Admin (pemilik token resmi) yang dapat melakukan sinkronisasi cloud GitHub Gist.');
+        alert('Akses Ditolak! Hanya Admin (pemilik akun vanandime) yang dapat melakukan sinkronisasi cloud GitHub Gist.');
         return;
       }
 
@@ -1794,7 +1801,7 @@
             'Accept': 'application/vnd.github.v3+json'
           },
           body: JSON.stringify({
-            description: "TabHub v1.40 PRO - Cloud Data Backup (Admin)",
+            description: "TabHub v1.41 PRO - Cloud Data Backup (Admin)",
             public: false,
             files: {
               "tabhub_state.json": {
@@ -2596,7 +2603,7 @@
       }
 
       setTimeout(() => {
-        let reply = "Halo! Saya adalah AI TabHub v1.40 PRO. Saya dapat membantu meringkas keuangan, mencari tugas, mengelola jadwal kalender, atau memberikan informasi sistem secara offline.";
+        let reply = "Halo! Saya adalah AI TabHub v1.41 PRO. Saya dapat membantu meringkas keuangan, mencari tugas, mengelola jadwal kalender, atau memberikan informasi sistem secara offline.";
         
         if (lower.includes('keuangan') || lower.includes('saldo') || lower.includes('uang')) {
           const totalInc = (appState.finance.transactions || []).filter(t=>t.type==='income').reduce((a,b)=>a+b.amount,0);

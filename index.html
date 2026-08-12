@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>TabHub v1.46 PRO - Responsive Desktop Sidebar & Focus Workspace</title>
+  <title>TabHub v1.47 PRO - Responsive Desktop Sidebar & Focus Workspace</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Custom CSS Themes & Glassmorphism -->
@@ -138,11 +138,11 @@
     <button onclick="dismissAnnouncement()" class="ml-4 opacity-80 hover:opacity-100 text-sm font-extrabold">&times;</button>
   </div>
 
-  <!-- SPLASH SCREEN BLUR OVERLAY (Dengan proteksi try-catch agar tidak tersangkut) -->
+  <!-- SPLASH SCREEN BLUR OVERLAY (Dengan pengaman mutlak agar dijamin tidak pernah tersangkut) -->
   <div id="appSplashOverlay" class="fixed inset-0 z-[100] bg-slate-950/80 backdrop-blur-xl flex flex-col items-center justify-center text-white transition-opacity duration-500">
     <div class="w-16 h-16 rounded-3xl bg-blue-600 flex items-center justify-center font-extrabold text-2xl shadow-2xl animate-bounce">TH</div>
-    <h1 class="text-xl font-extrabold mt-4 tracking-wider">TabHub v1.46 PRO</h1>
-    <p class="text-xs opacity-60 mt-1">Memuat workspace & pengaman sistem aktif...</p>
+    <h1 class="text-xl font-extrabold mt-4 tracking-wider">TabHub v1.47 PRO</h1>
+    <p class="text-xs opacity-60 mt-1">Memuat workspace & pengaman mutlak aktif...</p>
   </div>
 
   <!-- FLOATING SCROLL TO TOP BUTTON -->
@@ -472,7 +472,7 @@
             <div class="card-modern p-5 rounded-2xl space-y-4">
               <h3 class="font-extrabold text-xs flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Log Audit Sistem & Keamanan</h3>
               <div id="adminAuditLogsList" class="space-y-2 max-h-[220px] overflow-y-auto font-mono text-[11px]">
-                <div class="p-2 card-modern rounded-lg opacity-80">[INFO] Sistem TabHub v1.46 PRO diinisialisasi.</div>
+                <div class="p-2 card-modern rounded-lg opacity-80">[INFO] Sistem TabHub v1.47 PRO diinisialisasi.</div>
                 <div class="p-2 card-modern rounded-lg opacity-80">[AUTH] Token GitHub diverifikasi untuk @vanandime.</div>
               </div>
               <div class="pt-2 flex gap-2">
@@ -562,7 +562,7 @@
                 <span class="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></span>
                 <span data-i18n="overviewHeading">Ringkasan Aplikasi & Dashboard</span>
               </h2>
-              <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.46 PRO.</p>
+              <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.47 PRO.</p>
             </div>
             <div class="flex gap-2">
               <button onclick="switchTab('finance')" class="px-3.5 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnQuickFinance">Cek Keuangan</button>
@@ -608,7 +608,7 @@
             <div class="card-modern p-5 rounded-2xl space-y-3">
               <h3 class="font-extrabold text-xs flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> <span data-i18n="ovSystemStatusTitle">Status & Sistem TabHub</span></h3>
               <div class="space-y-2 text-xs opacity-80 font-mono">
-                <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.46 PRO</strong></div>
+                <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.47 PRO</strong></div>
                 <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Penyimpanan Browser</span><strong id="ovStorageSize" class="text-emerald-500">0 KB</strong></div>
                 <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Tema Aktif</span><strong id="ovThemeName" class="text-purple-500">Nordic Frost</strong></div>
                 <div class="flex justify-between py-1"><span>Status Enkripsi</span><strong class="text-emerald-500">Aman & Aktif</strong></div>
@@ -1636,8 +1636,8 @@
       </div>
       <div id="releaseHistoryContent" class="space-y-3 text-xs opacity-90 leading-relaxed font-mono">
         <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-blue-500">
-          <strong>TabHub v1.46 PRO (Agustus 2026)</strong>
-          <p class="text-[11px] opacity-80">- Perbaikan bug splash screen loading yang tersangkut dengan pengaman inisialisasi `try-catch-finally`.</p>
+          <strong>TabHub v1.47 PRO (Agustus 2026)</strong>
+          <p class="text-[11px] opacity-80">- Perbaikan total bug splash screen loading yang tersangkut dengan implementasi pengecekan `document.readyState` dan pengaman timer absolut mutlak (dijamin hilang dalam 1.5 detik).</p>
         </div>
         <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-sky-500">
           <strong>TabHub v1.43 PRO</strong>
@@ -1652,7 +1652,7 @@
   </div>
 
     /* ==========================================================================
-       TABHUB v1.46 PRO - JAVASCRIPT STATE ENGINE & CORE LOGIC
+       TABHUB v1.47 PRO - JAVASCRIPT STATE ENGINE & CORE LOGIC
        ========================================================================== */
 
     const STORAGE_KEY = 'SMARTCORE_STATE';
@@ -1661,7 +1661,7 @@
     let appState = {
       user: {
         name: 'vanandime',
-        role: 'Admin', // Admin jika username 'vanandime' atau terverifikasi via PAT token pemilik
+        role: 'Admin',
         token: ''
       },
       settings: {
@@ -1706,7 +1706,7 @@
       vault: [],
       codeSnippets: [],
       auditLogs: [
-        { time: new Date().toLocaleTimeString(), text: '[INFO] Sistem TabHub v1.46 PRO diinisialisasi.' }
+        { time: new Date().toLocaleTimeString(), text: '[INFO] Sistem TabHub v1.47 PRO diinisialisasi.' }
       ]
     };
 
@@ -1726,32 +1726,204 @@
     let stopwatchSeconds = 0;
     let stopwatchRunning = false;
 
-    let selectedMindNode = null;
     let mindNodes = [
       { id: 1, x: 200, y: 150, text: 'Ide Utama TabHub', color: '#0066ff' },
       { id: 2, x: 400, y: 100, text: 'Fitur AI & Cloud', color: '#10b981' },
       { id: 3, x: 400, y: 220, text: 'Manajemen Keuangan', color: '#f43f5e' }
     ];
 
-    // INITIATION & PERSISTENCE (Dilengkapi try-catch-finally agar splash screen dijamin hilang)
-    window.addEventListener('DOMContentLoaded', () => {
+    // INITIATION & PERSISTENCE (Enhanced with document.readyState check & absolute failsafe timer)
+    function initializeAppSystem() {
       try {
         loadStateFromStorage();
         applySettingsToDOM();
         initClock();
         renderAll();
+        bindFormSubmissions();
       } catch (err) {
         console.error('Error saat inisialisasi aplikasi TabHub:', err);
         addAuditLog(`[CRITICAL ERROR] ${err.message}`);
       } finally {
-        // Memastikan splash screen SELALU dihapus terlepas ada error atau tidak
-        const splash = document.getElementById('appSplashOverlay');
-        if (splash) {
-          splash.style.opacity = '0';
-          setTimeout(() => splash.remove(), 500);
-        }
+        removeSplashOverlay();
       }
-    });
+    }
+
+    function removeSplashOverlay() {
+      const splash = document.getElementById('appSplashOverlay');
+      if (splash) {
+        splash.style.opacity = '0';
+        setTimeout(() => splash.remove(), 400);
+      }
+    }
+
+    // Absolute failsafe timer to guarantee splash screen is removed within 1.5s
+    setTimeout(removeSplashOverlay, 1500);
+
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', initializeAppSystem);
+    } else {
+      initializeAppSystem();
+    }
+
+    function bindFormSubmissions() {
+      const txForm = document.getElementById('txForm');
+      if (txForm && !txForm.dataset.bound) {
+        txForm.dataset.bound = 'true';
+        txForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const type = document.getElementById('formType').value;
+          const date = document.getElementById('formDate').value || new Date().toISOString().split('T')[0];
+          const category = document.getElementById('formCategory').value.trim();
+          const amount = parseFloat(document.getElementById('formAmount').value) || 0;
+          const desc = document.getElementById('formDesc').value.trim();
+          const isOnline = document.getElementById('formIsOnline').value === 'true';
+
+          if (!category || amount <= 0) {
+            alert('Masukkan kategori dan nominal yang valid.');
+            return;
+          }
+
+          appState.finance.transactions.unshift({
+            id: Date.now(),
+            type,
+            date,
+            category,
+            amount,
+            desc,
+            isOnline
+          });
+          saveStateToStorage();
+          closeTxModal();
+          txForm.reset();
+          renderFinance();
+          renderOverview();
+          addAuditLog(`[FINANCE] Menambahkan transaksi ${type}: ${category} (${amount})`);
+        });
+      }
+
+      const taskForm = document.getElementById('taskForm');
+      if (taskForm && !taskForm.dataset.bound) {
+        taskForm.dataset.bound = 'true';
+        taskForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const title = document.getElementById('taskTitle').value.trim();
+          if (!title) return;
+          appState.tasks.items.push({ id: Date.now(), title, completed: false });
+          saveStateToStorage();
+          closeTaskModal();
+          taskForm.reset();
+          renderTasks();
+          renderOverview();
+          addAuditLog(`[TASKS] Menambahkan tugas: ${title}`);
+        });
+      }
+
+      const habitForm = document.getElementById('habitForm');
+      if (habitForm && !habitForm.dataset.bound) {
+        habitForm.dataset.bound = 'true';
+        habitForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const title = document.getElementById('habitTitleInput').value.trim();
+          if (!title) return;
+          appState.tasks.habits.push({ id: Date.now(), title, streak: 0 });
+          saveStateToStorage();
+          closeHabitModal();
+          habitForm.reset();
+          renderTasks();
+          addAuditLog(`[HABITS] Menambahkan rutinitas: ${title}`);
+        });
+      }
+
+      const noteForm = document.getElementById('noteForm');
+      if (noteForm && !noteForm.dataset.bound) {
+        noteForm.dataset.bound = 'true';
+        noteForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const title = document.getElementById('noteTitle').value.trim();
+          const content = document.getElementById('noteContent').value.trim();
+          if (!title) return;
+          appState.tasks.notes.push({ id: Date.now(), title, content });
+          saveStateToStorage();
+          closeNoteModal();
+          noteForm.reset();
+          renderTasks();
+          addAuditLog(`[NOTES] Menambahkan catatan: ${title}`);
+        });
+      }
+
+      const kanbanForm = document.getElementById('kanbanForm');
+      if (kanbanForm && !kanbanForm.dataset.bound) {
+        kanbanForm.dataset.bound = 'true';
+        kanbanForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const status = document.getElementById('kanbanCardStatus').value;
+          const title = document.getElementById('kanbanCardTitle').value.trim();
+          const desc = document.getElementById('kanbanCardDesc').value.trim();
+          if (!title) return;
+          if (!appState.tasks.kanban[status]) appState.tasks.kanban[status] = [];
+          appState.tasks.kanban[status].push({ id: Date.now(), title, desc });
+          saveStateToStorage();
+          closeKanbanModal();
+          kanbanForm.reset();
+          renderKanban();
+          addAuditLog(`[KANBAN] Menambahkan kartu ke ${status}: ${title}`);
+        });
+      }
+
+      const eisenForm = document.getElementById('eisenForm');
+      if (eisenForm && !eisenForm.dataset.bound) {
+        eisenForm.dataset.bound = 'true';
+        eisenForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const q = document.getElementById('eisenQuadrant').value;
+          const title = document.getElementById('eisenTitle').value.trim();
+          if (!title) return;
+          if (!appState.tasks.eisenhower[q]) appState.tasks.eisenhower[q] = [];
+          appState.tasks.eisenhower[q].push({ id: Date.now(), title });
+          saveStateToStorage();
+          closeEisenhowerModal();
+          eisenForm.reset();
+          renderKanban();
+          addAuditLog(`[MATRIX] Menambahkan tugas ke ${q}: ${title}`);
+        });
+      }
+
+      const calEventForm = document.getElementById('calEventForm');
+      if (calEventForm && !calEventForm.dataset.bound) {
+        calEventForm.dataset.bound = 'true';
+        calEventForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const dateStr = document.getElementById('calEventDate').value;
+          const text = document.getElementById('calEventText').value.trim();
+          if (!dateStr || !text) return;
+          if (!appState.calendar.events[dateStr]) appState.calendar.events[dateStr] = [];
+          appState.calendar.events[dateStr].push(text);
+          saveStateToStorage();
+          closeCalendarEventModal();
+          calEventForm.reset();
+          renderCalendar();
+          selectCalendarDate(dateStr);
+          addAuditLog(`[CALENDAR] Menambahkan agenda pada ${dateStr}`);
+        });
+      }
+
+      const snippetForm = document.getElementById('snippetForm');
+      if (snippetForm && !snippetForm.dataset.bound) {
+        snippetForm.dataset.bound = 'true';
+        snippetForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const title = document.getElementById('snippetTitle').value.trim();
+          const code = document.getElementById('snippetCode').value.trim();
+          if (!title) return;
+          appState.codeSnippets.push({ id: Date.now(), title, code });
+          saveStateToStorage();
+          closeSnippetModal();
+          snippetForm.reset();
+          renderCodeSnippets();
+          addAuditLog(`[SNIPPET] Menyimpan snippet: ${title}`);
+        });
+      }
+    }
 
     function saveStateToStorage() {
       try {
@@ -1793,6 +1965,7 @@
       renderShortcuts();
       renderFiles();
       renderVault();
+      renderCodeSnippets();
       renderAdminPanel();
       updateHeaderUserBadge();
       updateStorageUsageInfo();
@@ -1814,13 +1987,9 @@
       const settingsRole = document.getElementById('settingsRoleIndicator');
       if (settingsRole) settingsRole.textContent = `Peran: ${appState.user.role}`;
 
-      // Toggle admin elements visibility
       document.querySelectorAll('.admin-only-feature').forEach(el => {
-        if (isAdmin) {
-          el.classList.remove('hidden');
-        } else {
-          el.classList.add('hidden');
-        }
+        if (isAdmin) el.classList.remove('hidden');
+        else el.classList.add('hidden');
       });
 
       const topAdminBtn = document.getElementById('topAdminPanelBtn');
@@ -1829,7 +1998,6 @@
         else topAdminBtn.classList.add('hidden');
       }
 
-      // Announcement Banner
       const banner = document.getElementById('globalAnnouncementBanner');
       const annText = document.getElementById('announcementText');
       if (banner && annText) {
@@ -1851,7 +2019,6 @@
         target.classList.add('animate-fade-in');
       }
 
-      // Update Desktop Sidebar & Mobile Dock Active State
       document.querySelectorAll('#desktopSidebar button').forEach(btn => {
         btn.classList.remove('sidebar-item-active');
       });
@@ -2129,11 +2296,13 @@
       });
       const net = income - expense;
 
-      document.getElementById('metricIncome').textContent = `${curr} ${income.toLocaleString()}`;
-      document.getElementById('metricExpense').textContent = `${curr} ${expense.toLocaleString()}`;
-      document.getElementById('metricNet').textContent = `${curr} ${net.toLocaleString()}`;
+      const metricInc = document.getElementById('metricIncome');
+      if (metricInc) metricInc.textContent = `${curr} ${income.toLocaleString()}`;
+      const metricExp = document.getElementById('metricExpense');
+      if (metricExp) metricExp.textContent = `${curr} ${expense.toLocaleString()}`;
+      const metricNet = document.getElementById('metricNet');
+      if (metricNet) metricNet.textContent = `${curr} ${net.toLocaleString()}`;
 
-      // Budget limit progress
       const budgetLimit = Number(document.getElementById('budgetLimitInput')?.value || 5000000);
       appState.finance.budgetLimit = budgetLimit;
       const budgetPct = Math.min(100, Math.round((expense / budgetLimit) * 100));
@@ -2142,7 +2311,6 @@
       const budgetText = document.getElementById('budgetProgressText');
       if (budgetText) budgetText.textContent = `${budgetPct}% Terpakai`;
 
-      // Filtered table
       const filtered = txs.filter(t => {
         const matchSearch = t.category.toLowerCase().includes(search) || t.desc.toLowerCase().includes(search);
         if (!matchSearch) return false;
@@ -2191,7 +2359,7 @@
       document.body.appendChild(dlAnchor);
       dlAnchor.click();
       dlAnchor.remove();
-      addAuditLog('[FINANCE] Mengekspor data keuangan ke CSV/JSON.');
+      addAuditLog('[FINANCE] Mengekspor data keuangan.');
     }
 
     // TASKS & ROUTINES
@@ -2547,7 +2715,7 @@
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
       const dl = document.createElement('a');
       dl.setAttribute("href", dataStr);
-      dl.setAttribute("download", `TabHub_v146_Backup_${new Date().toISOString().split('T')[0]}.json`);
+      dl.setAttribute("download", `TabHub_v147_Backup_${new Date().toISOString().split('T')[0]}.json`);
       document.body.appendChild(dl);
       dl.click();
       dl.remove();
@@ -2745,7 +2913,7 @@
       }
 
       const gistData = {
-        description: "TabHub v1.46 PRO Cloud Sync Backup",
+        description: "TabHub v1.47 PRO Cloud Sync Backup",
         public: false,
         files: {
           "tabhub_state.json": {
@@ -2911,7 +3079,8 @@
           pausePomodoro();
           pomodoroSessions++;
           alert('Sesi Pomodoro selesai!');
-          document.getElementById('pomSessionCount').textContent = `Sesi Selesai: ${pomodoroSessions}`;
+          const sessionCountEl = document.getElementById('pomSessionCount');
+          if (sessionCountEl) sessionCountEl.textContent = `Sesi Selesai: ${pomodoroSessions}`;
         }
       }, 1000);
     }
@@ -2968,7 +3137,7 @@
       chatArea.scrollTop = chatArea.scrollHeight;
 
       setTimeout(() => {
-        let reply = "Saya asisten pintar TabHub v1.46 PRO. Seluruh sistem berjalan optimal!";
+        let reply = "Saya asisten pintar TabHub v1.47 PRO. Seluruh sistem berjalan optimal!";
         if (text.toLowerCase().includes('keuangan')) {
           const totalInc = appState.finance.transactions.filter(t=>t.type==='income').reduce((a,b)=>a+Number(b.amount),0);
           reply = `Ringkasan keuangan Anda: Total pemasukan tercatat Rp ${totalInc.toLocaleString()}.`;
@@ -3014,6 +3183,32 @@
         renderLiveHtmlPreview();
       }
     }
+
+    function renderCodeSnippets() {
+      const list = document.getElementById('snippetList');
+      if (list) {
+        const snippets = appState.codeSnippets || [];
+        if (snippets.length === 0) {
+          list.innerHTML = '<div class="col-span-3 p-3 card-modern rounded-xl opacity-75 text-xs">Belum ada snippet tersimpan.</div>';
+        } else {
+          list.innerHTML = snippets.map(s => `
+            <div class="p-3 card-modern rounded-xl space-y-1">
+              <div class="flex justify-between font-bold text-xs"><span>${s.title}</span><button onclick="deleteSnippet(${s.id})" class="text-rose-500">×</button></div>
+              <pre class="text-[10px] font-mono opacity-75 overflow-x-auto">${s.code}</pre>
+            </div>
+          `).join('');
+        }
+      }
+    }
+
+    function deleteSnippet(id) {
+      appState.codeSnippets = appState.codeSnippets.filter(s => s.id !== id);
+      saveStateToStorage();
+      renderCodeSnippets();
+    }
+
+    function openSnippetModal() { document.getElementById('snippetModal').classList.remove('hidden'); }
+    function closeSnippetModal() { document.getElementById('snippetModal').classList.add('hidden'); }
 
     function generateFancyFonts() {
       const txt = document.getElementById('fontInputText')?.value || '';
@@ -3077,7 +3272,6 @@
       if (area) area.classList.remove('hidden');
     }
 
-    // Media Editor placeholders
     function handleMediaUpload(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -3086,11 +3280,13 @@
         const img = new Image();
         img.onload = function() {
           const canvas = document.getElementById('mediaCanvas');
+          if (!canvas) return;
           const ctx = canvas.getContext('2d');
           canvas.width = img.width;
           canvas.height = img.height;
           ctx.drawImage(img, 0, 0);
-          document.getElementById('mediaPlaceholderText').style.display = 'none';
+          const placeholder = document.getElementById('mediaPlaceholderText');
+          if (placeholder) placeholder.style.display = 'none';
         };
         img.src = evt.target.result;
       };
@@ -3115,6 +3311,7 @@
       let draggingNode = null;
 
       function resizeCanvas() {
+        if (!canvas.parentElement) return;
         canvas.width = canvas.parentElement.clientWidth;
         canvas.height = canvas.parentElement.clientHeight;
         drawMindMap();

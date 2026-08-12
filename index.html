@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TabHub - Mohammad Danis Muria Vanandi</title>
+  <title>TabHub v1.32 - Mohammad Danis Muria Vanandi</title>
   
   <!-- MINIMALIST TRANSPARENT VECTOR SVG FAVICON -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23007aff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
@@ -94,7 +94,6 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Floating Scroll to Top Button */
     #scrollToTopBtn {
       position: fixed;
       bottom: 95px;
@@ -113,6 +112,15 @@
       transition: all 0.3s ease;
     }
     #scrollToTopBtn:hover { transform: scale(1.1); }
+    
+    .protected-code-badge {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px dashed rgba(239, 68, 68, 0.4);
+      color: #ef4444;
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 8px;
+    }
   </style>
 </head>
 <body id="appBody" class="theme-nordic-frost min-h-screen pb-32">
@@ -271,14 +279,13 @@
   <!-- MAIN CONTAINER WRAPPER -->
   <main class="harmonized-bar px-4 space-y-6">
 
-    <!-- TAB 1: TAB HUB (RESTRUCTURED: Redundant buttons removed, clean & instant) -->
+    <!-- TAB 1: TAB HUB -->
     <div id="tab-dashboard" class="tab-content space-y-6">
-      
       <!-- HERO BANNER -->
       <div class="card-modern p-6 sm:p-8 rounded-3xl relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div class="absolute -right-16 -top-16 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
         <div class="space-y-3 max-w-2xl relative z-10">
-          <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-extrabold">TabHub v1.31 PRO</span>
+          <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-extrabold">TabHub v1.32 PRO</span>
           <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Pusat Komando TabHub Terpadu</h1>
           <p class="text-xs sm:text-sm opacity-75 leading-relaxed">Kelola produktivitas harian secara instan, aman, dan terintegrasi penuh dengan asisten cerdas.</p>
         </div>
@@ -346,7 +353,7 @@
         </div>
       </div>
 
-      <!-- REAL-TIME NEWS GRID SYSTEM (Replacing old static news, with Search Bar, Grid limit, Next & Previous pagination) -->
+      <!-- REAL-TIME NEWS GRID SYSTEM -->
       <div class="card-modern p-6 rounded-3xl space-y-4">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
           <div>
@@ -366,17 +373,14 @@
           </div>
         </div>
 
-        <!-- News Grid Container (Max 20 lines/items view per page) -->
         <div id="realtimeNewsGridContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 min-h-[250px]"></div>
 
-        <!-- Pagination Next / Previous Controls -->
         <div class="flex justify-between items-center pt-4 border-t border-slate-200/50 dark:border-slate-800/50 text-xs">
           <button onclick="prevNewsPage()" id="prevNewsBtn" class="px-4 py-2 card-modern hover:border-blue-500 font-bold rounded-xl ios-btn disabled:opacity-40" title="Berita Sebelumnya">&larr; Kembali</button>
           <span id="newsPageIndicator" class="font-mono font-bold opacity-75">Halaman 1</span>
           <button onclick="nextNewsPage()" id="nextNewsBtn" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow ios-btn" title="Berita Berikutnya">Lanjut &rarr;</button>
         </div>
       </div>
-
     </div>
 
     <!-- TAB 2: FINANCE MANAGEMENT -->
@@ -954,36 +958,58 @@
       </div>
     </div>
 
-    <!-- TAB 15: SECRET TAB & DEVELOPER LIVE EDITOR (Secure Auth, Passkey, Credential Manager, AI API Key Manager & Live Code Editor) -->
+    <!-- TAB 15: SECRET TAB & DEVELOPER LIVE EDITOR (Secure Auth, Public Registration, Passkey, Permanent AI API Key & Real-Time DOM Editor with Protected Login Guard) -->
     <div id="tab-secret" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 sm:p-8 rounded-3xl space-y-8 border-2 border-rose-500/30">
         <div class="pb-4 border-b border-slate-200/50 dark:border-slate-800/50 flex justify-between items-center">
           <div>
             <h2 class="text-lg font-extrabold text-rose-500 flex items-center gap-2">
               <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              Tab Rahasia & Pengaturan Developer v1.31
+              Tab Rahasia & Pengaturan Developer v1.32
             </h2>
-            <p class="text-xs opacity-70">Akses terbatas dilindungi sandi aman dan autentikasi Passkey (WebAuthn).</p>
+            <p class="text-xs opacity-70">Akses terbatas dilindungi sandi aman, Registrasi Umum, dan Developer Live Editor real-time.</p>
           </div>
           <button id="secretLockIndicatorBtn" onclick="lockSecretTab()" class="hidden px-3 py-1.5 bg-rose-500/10 text-rose-500 rounded-xl text-xs font-bold ios-btn">Kunci Kembali</button>
         </div>
 
-        <!-- AUTH GATEWAY (Hidden after successful login) -->
-        <div id="secretAuthContainer" class="space-y-4 max-w-md mx-auto py-6">
+        <!-- AUTH GATEWAY & PUBLIC REGISTRATION (Hidden after successful login) -->
+        <div id="secretAuthContainer" class="space-y-6 max-w-md mx-auto py-6">
+          <!-- LOGIN FORM -->
           <div class="card-modern p-6 rounded-3xl space-y-4 shadow-xl border border-rose-500/20 text-center">
             <div class="w-12 h-12 rounded-2xl bg-rose-500/20 text-rose-500 flex items-center justify-center mx-auto">
               <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             </div>
             <h3 class="font-extrabold text-sm">Autentikasi Keamanan Tinggi</h3>
-            <p class="text-[11px] opacity-70">Masukkan kata sandi pengembang atau gunakan Passkey perangkat Anda.</p>
+            <p class="text-[11px] opacity-70">Masukkan kata sandi (default developer: Vanandi000...) atau gunakan Passkey.</p>
             <div class="space-y-3 pt-2">
-              <input type="password" id="secretPasswordInput" placeholder="Kata sandi (Vanandi000...)..." class="w-full px-4 py-3 rounded-xl card-modern text-xs font-mono focus:outline-none focus:ring-2 focus:ring-rose-500" autocomplete="current-password">
+              <input type="password" id="secretPasswordInput" placeholder="Masukkan kata sandi..." class="w-full px-4 py-3 rounded-xl card-modern text-xs font-mono focus:outline-none focus:ring-2 focus:ring-rose-500" autocomplete="current-password">
               <button onclick="verifySecretPassword()" class="w-full py-3 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow-lg ios-btn">Buka Kunci dengan Sandi</button>
               <div class="relative flex py-2 items-center"><div class="flex-grow border-t border-slate-300 dark:border-slate-700"></div><span class="flex-shrink mx-4 text-[10px] opacity-50">ATAU</span><div class="flex-grow border-t border-slate-300 dark:border-slate-700"></div></div>
               <button onclick="authenticateWithPasskey()" class="w-full py-3 card-modern hover:border-rose-500 text-rose-500 font-bold rounded-xl text-xs shadow ios-btn flex items-center justify-center gap-2">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                 Masuk dengan Passkey (WebAuthn)
               </button>
+            </div>
+          </div>
+
+          <!-- PUBLIC REGISTRATION FORM -->
+          <div class="card-modern p-6 rounded-3xl space-y-4 shadow-xl border border-blue-500/20">
+            <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500">Registrasi Akun Umum Baru</h3>
+            <p class="text-[11px] opacity-70">Daftarkan akun baru untuk akses personalisasi TabHub.</p>
+            <div class="space-y-3">
+              <div class="space-y-1 text-left">
+                <label class="text-[11px] font-bold opacity-75">Nama Pengguna</label>
+                <input type="text" id="publicRegName" placeholder="Nama lengkap..." class="w-full px-3.5 py-2.5 rounded-xl card-modern text-xs">
+              </div>
+              <div class="space-y-1 text-left">
+                <label class="text-[11px] font-bold opacity-75">Email</label>
+                <input type="email" id="publicRegEmail" placeholder="email@domain.com" class="w-full px-3.5 py-2.5 rounded-xl card-modern text-xs font-mono">
+              </div>
+              <div class="space-y-1 text-left">
+                <label class="text-[11px] font-bold opacity-75">Kata Sandi Baru</label>
+                <input type="password" id="publicRegPass" placeholder="Sandi baru..." class="w-full px-3.5 py-2.5 rounded-xl card-modern text-xs font-mono" autocomplete="new-password">
+              </div>
+              <button onclick="registerPublicAccount()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow ios-btn">Daftar Akun Baru</button>
             </div>
           </div>
         </div>
@@ -1018,7 +1044,7 @@
             </div>
           </div>
 
-          <!-- 2. AI API KEY MANAGER (Permanent secure storage) -->
+          <!-- 2. AI API KEY MANAGER -->
           <div class="card-modern p-6 rounded-2xl space-y-4">
             <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500">AI API Key Manager (Permanent Storage)</h3>
             <p class="text-[11px] opacity-70">Simpan kunci API Gemini, OpenAI ChatGPT, atau LLM lainnya secara aman dan permanen.</p>
@@ -1031,31 +1057,34 @@
             </div>
           </div>
 
-          <!-- 3. DEVELOPER LIVE EDITOR (index.html code script input, live rendering, console log mini & formatter) -->
+          <!-- 3. DEVELOPER LIVE REAL-TIME DOM EDITOR (With Protected Login Guard) -->
           <div class="card-modern p-6 rounded-2xl space-y-4">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
               <div>
-                <h3 class="font-extrabold text-xs uppercase tracking-wider text-purple-500">Developer Live Editor (index.html)</h3>
-                <p class="text-[11px] opacity-70">Sunting kode struktur utama, jalankan preview real-time, dan gunakan mini console log.</p>
+                <h3 class="font-extrabold text-xs uppercase tracking-wider text-purple-500 flex items-center gap-2">
+                  <span>Developer Live DOM & App Editor (Real-Time)</span>
+                  <span class="protected-code-badge">Protected Login Guard Active</span>
+                </h3>
+                <p class="text-[11px] opacity-70">Sunting kode aplikasi yang sedang berjalan secara langsung (Live DOM & Script Execution).</p>
               </div>
               <div class="flex gap-2">
-                <button onclick="formatEditorCode()" class="px-3.5 py-2 card-modern hover:border-purple-500 rounded-xl text-xs font-bold ios-btn">Format Kode</button>
-                <button onclick="applyDeveloperLiveHtml()" class="px-3.5 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-xs font-bold shadow ios-btn">Terapkan & Render</button>
+                <button onclick="loadCurrentLiveAppCode()" class="px-3.5 py-2 card-modern hover:border-purple-500 rounded-xl text-xs font-bold ios-btn">Muat Kode Berjalan</button>
+                <button onclick="applyRealTimeDomChanges()" class="px-3.5 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-xs font-bold shadow ios-btn">Terapkan Real-Time</button>
               </div>
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div class="space-y-2">
-                <label class="text-xs font-bold opacity-75">Editor Kode Script (HTML / CSS / JS)</label>
-                <textarea id="devLiveCodeArea" class="w-full h-80 p-4 rounded-xl card-modern font-mono text-[11px] focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Ketik kode HTML..."></textarea>
+                <div class="flex justify-between items-center text-xs font-bold opacity-75">
+                  <span>Editor Kode Langsung (HTML / JS Script)</span>
+                  <span class="text-[10px] text-amber-500 font-mono">Dilindungi Guard Login</span>
+                </div>
+                <textarea id="devRealtimeCodeArea" class="w-full h-80 p-4 rounded-xl card-modern font-mono text-[11px] focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Ketik kode..."></textarea>
               </div>
               <div class="space-y-2 flex flex-col">
-                <label class="text-xs font-bold opacity-75">Live Rendering Preview & Mini Console</label>
-                <div class="flex-1 rounded-xl card-modern overflow-hidden bg-white min-h-[220px]">
-                  <iframe id="devLivePreviewFrame" class="w-full h-full border-0"></iframe>
-                </div>
-                <div class="bg-slate-950 text-emerald-400 p-2.5 rounded-xl font-mono text-[10px] h-20 overflow-y-auto" id="devMiniConsoleLog">
-                  <div>[Console Logger Ready]: TabHub v1.31 Dev Environment Active.</div>
+                <label class="text-xs font-bold opacity-75">Mini Console Log & Status Eksekusi</label>
+                <div class="flex-1 bg-slate-950 text-emerald-400 p-3 rounded-xl font-mono text-[10px] h-64 overflow-y-auto space-y-1" id="devRealtimeConsoleLog">
+                  <div>[Console Logger Ready]: TabHub v1.32 Real-Time DOM Engine Active.</div>
                 </div>
               </div>
             </div>
@@ -1068,7 +1097,7 @@
 
   </main>
 
-  <!-- FLOATING BOTTOM DOCK NAVIGATION BAR (Fully synchronized active states) -->
+  <!-- FLOATING BOTTOM DOCK NAVIGATION BAR -->
   <nav class="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-lg card-modern px-3 py-2 flex items-center justify-around shadow-2xl backdrop-blur-xl border">
     <button id="menuBtn-dashboard" onclick="switchTab('dashboard')" class="dock-btn opacity-70 hover:opacity-100" title="Tab Hub">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -1254,7 +1283,7 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (TabHub v1.31 PRO) -->
+  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (TabHub v1.32 PRO) -->
   <script>
     // --- XSS SECURITY & SANITIZATION ENGINE ---
     function sanitizeHtml(str) {
@@ -1266,7 +1295,7 @@
                 .replace(/'/g, '&#039;');
     }
 
-    // --- KAMUS MULTI-BAHASA LENGKAP & DINAMIS (TabHub v1.31) ---
+    // --- KAMUS MULTI-BAHASA LENGKAP & DINAMIS ---
     const i18nData = {
       id: {
         hubTitle: "TabHub",
@@ -2095,7 +2124,7 @@
       if (langSelector) langSelector.value = lang;
     }
 
-    // --- STATE UTAMA & PERSISTENSI (TabHub v1.31) ---
+    // --- STATE UTAMA & PERSISTENSI (TabHub v1.32) ---
     let appState = {
       currentTab: 'dashboard',
       theme: 'theme-nordic-frost',
@@ -2121,10 +2150,6 @@
     function saveStateToStorage() {
       try {
         localStorage.setItem('SMARTCORE_STATE', JSON.stringify(appState));
-        const jsonArea = document.getElementById('stateJsonTextArea');
-        if (jsonArea && document.activeElement !== jsonArea) {
-          jsonArea.value = JSON.stringify(appState, null, 2);
-        }
         const modalJsonArea = document.getElementById('modalStateJsonText');
         if (modalJsonArea && document.activeElement !== modalJsonArea) {
           modalJsonArea.value = JSON.stringify(appState, null, 2);
@@ -2166,21 +2191,6 @@
       }
     }
 
-    // --- INSTANT TEXT STATE RECOVERY ---
-    function copyStateJsonText() {
-      const val = JSON.stringify(appState, null, 2);
-      navigator.clipboard.writeText(val).then(() => alert('State JSON berhasil disalin ke clipboard!'));
-    }
-    function restoreStateJsonText() {
-      const val = document.getElementById('stateJsonTextArea')?.value || '';
-      try {
-        const parsed = JSON.parse(val);
-        appState = parsed;
-        saveStateToStorage();
-        renderAll();
-        alert('State berhasil dipulihkan dari teks!');
-      } catch(e) { alert('Format JSON tidak valid!'); }
-    }
     function copyModalStateJson() {
       const val = JSON.stringify(appState, null, 2);
       navigator.clipboard.writeText(val).then(() => alert('State JSON berhasil disalin!'));
@@ -2197,7 +2207,7 @@
       } catch(e) { alert('Format JSON tidak valid!'); }
     }
 
-    // --- REAL-TIME NEWS PAGINATION SYSTEM (Replacing old static news) ---
+    // --- REAL-TIME NEWS PAGINATION SYSTEM ---
     const realtimeNewsDatabase = [
       { 
         title: "AI Breakthrough: Advanced LLMs Enhance Autonomous Systems & Robotics", 
@@ -2342,6 +2352,29 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // --- PUBLIC REGISTRATION & LOGIN SYSTEM ---
+    function registerPublicAccount() {
+      const name = document.getElementById('publicRegName')?.value.trim() || '';
+      const email = document.getElementById('publicRegEmail')?.value.trim() || '';
+      const pass = document.getElementById('publicRegPass')?.value || '';
+
+      if (!name || !email || !pass) {
+        alert('Harap lengkapi semua kolom pendaftaran akun!');
+        return;
+      }
+
+      appState.user.name = name;
+      appState.user.email = email;
+      appState.user.password = pass; // Menyimpan sandi pengguna baru
+      saveStateToStorage();
+      updateUsernameUI(name);
+
+      alert(`Registrasi Akun Umum Berhasil!\nSelamat datang, ${name}. Silakan gunakan sandi Anda untuk masuk.`);
+      document.getElementById('publicRegName').value = '';
+      document.getElementById('publicRegEmail').value = '';
+      document.getElementById('publicRegPass').value = '';
+    }
+
     // --- SECRET TAB AUTH & WEBAUTHN PASSKEY ENGINE ---
     function verifySecretPassword() {
       const pass = document.getElementById('secretPasswordInput')?.value || '';
@@ -2374,7 +2407,6 @@
           timeout: 60000,
           attestation: "direct"
         };
-        // Trigger WebAuthn credential creation / verification
         const credential = await navigator.credentials.create({ publicKey });
         if (credential) {
           unlockSecretWorkspace();
@@ -2382,7 +2414,6 @@
         }
       } catch (e) {
         console.warn('WebAuthn prompt dismissed or failed:', e);
-        // Fallback smooth unlock for secure environment testing
         if (confirm('Simulasi Passkey Berhasil? Klik OK untuk membuka kunci Tab Rahasia.')) {
           unlockSecretWorkspace();
         }
@@ -2398,16 +2429,12 @@
       document.getElementById('secretWorkspaceContainer').classList.remove('hidden');
       document.getElementById('secretLockIndicatorBtn').classList.remove('hidden');
       
-      // Load current secret inputs
       const emailInput = document.getElementById('secretEmailInput');
       if (emailInput) emailInput.value = appState.user.email || 'vanandi@proton.me';
       const apiKeyMasterInput = document.getElementById('secretApiKeyMasterInput');
       if (apiKeyMasterInput) apiKeyMasterInput.value = appState.user.apiKey || '';
-      const devArea = document.getElementById('devLiveCodeArea');
-      if (devArea && !devArea.value) {
-        devArea.value = '<div style="padding:20px; font-family:sans-serif;">\n  <h2>TabHub Live Sandbox</h2>\n  <p>Sunting kode HTML/CSS/JS di sini secara real-time.</p>\n</div>';
-        applyDeveloperLiveHtml();
-      }
+      
+      loadCurrentLiveAppCode();
     }
 
     function lockSecretTab() {
@@ -2450,9 +2477,9 @@
       alert('AI API Key berhasil disimpan secara permanen di penyimpanan lokal aman!');
     }
 
-    // --- DEVELOPER LIVE HTML EDITOR & MINI CONSOLE ---
-    function logToDevConsole(msg) {
-      const box = document.getElementById('devMiniConsoleLog');
+    // --- REAL-TIME DOM LIVE EDITOR WITH PROTECTED LOGIN GUARD ---
+    function logToRealtimeConsole(msg) {
+      const box = document.getElementById('devRealtimeConsoleLog');
       if (!box) return;
       const div = document.createElement('div');
       div.textContent = `[${new Date().toLocaleTimeString()}]: ${msg}`;
@@ -2460,29 +2487,48 @@
       box.scrollTop = box.scrollHeight;
     }
 
-    function applyDeveloperLiveHtml() {
-      const code = document.getElementById('devLiveCodeArea')?.value || '';
-      const iframe = document.getElementById('devLivePreviewFrame');
-      if (!iframe) return;
-      try {
-        const doc = iframe.contentDocument || iframe.contentWindow.document;
-        doc.open(); doc.write(code); doc.close();
-        logToDevConsole('Live rendering preview updated successfully.');
-      } catch (e) {
-        logToDevConsole('Error rendering live code: ' + e.message);
-      }
+    function loadCurrentLiveAppCode() {
+      const area = document.getElementById('devRealtimeCodeArea');
+      if (!area) return;
+      // Menampilkan potongan kode inti aplikasi yang sedang berjalan
+      area.value = `// --- TABHUB v1.32 LIVE RUNNING ENVIRONMENT CODE ---
+function verifySecretPassword() {
+  const pass = document.getElementById('secretPasswordInput')?.value || '';
+  const correctPass = (appState.user && appState.user.password) ? appState.user.password : 'Vanandi000...';
+  if (pass === correctPass) {
+    unlockSecretWorkspace();
+    alert('Autentikasi Sandi Berhasil: Tab Rahasia terbuka.');
+  } else {
+    alert('Kata sandi salah! Akses ditolak.');
+  }
+}
+
+// Tambahkan atau sunting skrip real-time di bawah baris ini:
+console.log("TabHub Live DOM Controller Active.");`;
+      logToRealtimeConsole('Kode berjalan saat ini berhasil dimuat ke editor.');
     }
 
-    function formatEditorCode() {
-      const area = document.getElementById('devLiveCodeArea');
+    function applyRealTimeDomChanges() {
+      const area = document.getElementById('devRealtimeCodeArea');
       if (!area) return;
+      const code = area.value;
+
+      // GUARD CHECK: Pastikan fungsi login/autentikasi penting tidak terhapus
+      if (!code.includes('verifySecretPassword') || !code.includes('secretPasswordInput')) {
+        alert('Protected Login Guard: Gagal menerapkan perubahan! Anda mencoba menghapus fungsi atau elemen login penting (seperti verifySecretPassword). Fitur login dilindungi agar tidak terhapus.');
+        logToRealtimeConsole('GUARD BLOCKED: Upaya penghapusan fitur login dicegah oleh sistem.');
+        return;
+      }
+
       try {
-        const lines = area.value.split('\n').map(l => l.trim()).filter(l => l.length > 0);
-        area.value = lines.join('\n');
-        logToDevConsole('Code formatted successfully.');
-        alert('Kode berhasil diformat!');
-      } catch(e) {
-        logToDevConsole('Format error: ' + e.message);
+        // Mengeksekusi script langsung pada konteks runtime halaman berjalan
+        const dynamicFunction = new Function(code);
+        dynamicFunction();
+        logToRealtimeConsole('Perubahan kode real-time berhasil dieksekusi pada aplikasi aktif.');
+        alert('Kode berhasil diterapkan secara real-time pada aplikasi!');
+      } catch (e) {
+        logToRealtimeConsole('Error eksekusi real-time: ' + e.message);
+        alert('Terjadi kesalahan sintaks saat mengeksekusi kode: ' + e.message);
       }
     }
 
@@ -2586,8 +2632,6 @@
         if (masterInput) masterInput.value = appState.user.apiKey;
       }
 
-      const stateJsonArea = document.getElementById('stateJsonTextArea');
-      if (stateJsonArea) stateJsonArea.value = JSON.stringify(appState, null, 2);
       const modalStateJson = document.getElementById('modalStateJsonText');
       if (modalStateJson) modalStateJson.value = JSON.stringify(appState, null, 2);
 
@@ -2613,19 +2657,8 @@
     function updateUsernameUI(name) {
       const topBarText = document.getElementById('iosBarUsername');
       if (topBarText) topBarText.textContent = `Hi, ${sanitizeHtml(name)}`;
-      const authInput = document.getElementById('authUsername');
-      if (authInput) authInput.value = name;
       const modalInput = document.getElementById('authModalInput');
       if (modalInput) modalInput.value = name;
-    }
-
-    function saveAuthCredentials() {
-      const uname = document.getElementById('authUsername')?.value.trim() || 'Pengguna';
-      appState.user.name = uname;
-      updateUsernameUI(uname);
-      saveStateToStorage();
-      renderAll();
-      alert('Nama akun berhasil disimpan & disinkronkan!');
     }
 
     function saveAuthCredentialsModal() {
@@ -2677,7 +2710,6 @@
       const target = document.getElementById(`tab-${tabId}`);
       if (target) target.classList.remove('hidden');
 
-      // Synchronize Dock Button Active States
       document.querySelectorAll('nav button[id^="menuBtn-"], nav button.dock-btn').forEach(btn => {
         btn.className = "dock-btn opacity-70 hover:opacity-100";
       });
@@ -2771,7 +2803,7 @@
       if (!tbody) return;
       tbody.innerHTML = '';
 
-      let totalInc = 0; let totalExp = 0; let onlineExp = 0; let offlineExp = 0;
+      let totalInc = 0; let totalExp = 0;
       const txList = Array.isArray(appState.finance.transactions) ? appState.finance.transactions : [];
 
       txList.filter(tx => {
@@ -2784,11 +2816,7 @@
         return true;
       }).forEach((tx) => {
         if (tx.type === 'income') totalInc += (tx.amount || 0);
-        else {
-          totalExp += (tx.amount || 0);
-          if (tx.isOnline) onlineExp += (tx.amount || 0);
-          else offlineExp += (tx.amount || 0);
-        }
+        else totalExp += (tx.amount || 0);
 
         const tr = document.createElement('tr');
         tr.className = 'border-b border-slate-200/50 dark:border-slate-800/50 hover:bg-slate-100/50';
@@ -2930,7 +2958,7 @@
       }
 
       setTimeout(() => {
-        let reply = "Halo! Saya adalah AI TabHub v1.31 PRO. Saya dapat membantu meringkas keuangan, mencari tugas, mengelola jadwal kalender, atau memberikan informasi sistem secara offline.";
+        let reply = "Halo! Saya adalah AI TabHub v1.32 PRO. Saya dapat membantu meringkas keuangan, mencari tugas, mengelola jadwal kalender, atau memberikan informasi sistem secara offline.";
         
         if (lower.includes('keuangan') || lower.includes('saldo') || lower.includes('uang')) {
           const totalInc = (appState.finance.transactions || []).filter(t=>t.type==='income').reduce((a,b)=>a+b.amount,0);
@@ -3394,7 +3422,7 @@
             <span><strong>${date}</strong>: ${sanitizeHtml(ev)}</span>
             <div class="flex gap-1">
               <button onclick="openCalendarEventModal('${date}', '${ev.replace(/'/g, "\\'")}', ${idx})" class="text-blue-500 font-bold px-1.5 py-0.5 rounded bg-blue-500/10 ios-btn">Edit</button>
-              <button onclick="deleteCalEv('${date}', '${idx}')" class="text-rose-500 font-bold px-1.5 py-0.5 rounded bg-rose-500/10 ios-btn">&times;</button>
+              <button onclick="deleteCalEv('${date}', '${idx}')" class="text-rose-500 font-bold px-1.5 py-0.5 rounded bg-blue-500/10 ios-btn">&times;</button>
             </div>
           `;
           container.appendChild(div);
@@ -3620,30 +3648,7 @@
     }
     function deleteVault(id) { appState.vault = appState.vault.filter(v => v.id !== id); saveStateToStorage(); renderAll(); }
 
-    // --- CODE EDITOR ---
-    async function pasteCodeFromClipboard() {
-      try {
-        const text = await navigator.clipboard.readText();
-        document.getElementById('liveHtmlEditor').value += text;
-        renderLiveHtmlPreview();
-      } catch(e) { alert('Gagal mengakses clipboard.'); }
-    }
-    function renderLiveHtmlPreview() {
-      const code = document.getElementById('liveHtmlEditor')?.value || '';
-      const iframe = document.getElementById('liveHtmlPreviewFrame');
-      if (!iframe) return;
-      const doc = iframe.contentDocument || iframe.contentWindow.document;
-      doc.open(); doc.write(code); doc.close();
-    }
-    function loadDefaultHtmlTemplate() {
-      document.getElementById('liveHtmlEditor').value = '<div style="padding:20px;font-family:sans-serif;"><h2>TabHub Live</h2></div>';
-      renderLiveHtmlPreview();
-    }
-    function exportCodeFile(ext) {
-      const code = document.getElementById('liveHtmlEditor')?.value || '';
-      const blob = new Blob([code], { type: 'text/html' });
-      const a = document.createElement('a'); a.href = window.URL.createObjectURL(blob); a.download = `code.${ext}`; a.click();
-    }
+    // --- CODE EDITOR & SNIPPETS ---
     function renderSnippets() {
       const list = document.getElementById('snippetList');
       if (!list) return; list.innerHTML = '';

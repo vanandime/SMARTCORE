@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>TabHub v1.45 PRO - Responsive Desktop Sidebar & Focus Workspace</title>
+  <title>TabHub v1.46 PRO - Responsive Desktop Sidebar & Focus Workspace</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Custom CSS Themes & Glassmorphism -->
@@ -138,11 +138,11 @@
     <button onclick="dismissAnnouncement()" class="ml-4 opacity-80 hover:opacity-100 text-sm font-extrabold">&times;</button>
   </div>
 
-  <!-- SPLASH SCREEN BLUR OVERLAY -->
+  <!-- SPLASH SCREEN BLUR OVERLAY (Dengan proteksi try-catch agar tidak tersangkut) -->
   <div id="appSplashOverlay" class="fixed inset-0 z-[100] bg-slate-950/80 backdrop-blur-xl flex flex-col items-center justify-center text-white transition-opacity duration-500">
     <div class="w-16 h-16 rounded-3xl bg-blue-600 flex items-center justify-center font-extrabold text-2xl shadow-2xl animate-bounce">TH</div>
-    <h1 class="text-xl font-extrabold mt-4 tracking-wider">TabHub v1.45 PRO</h1>
-    <p class="text-xs opacity-60 mt-1">Memperbaiki responsivitas sidebar & workspace...</p>
+    <h1 class="text-xl font-extrabold mt-4 tracking-wider">TabHub v1.46 PRO</h1>
+    <p class="text-xs opacity-60 mt-1">Memuat workspace & pengaman sistem aktif...</p>
   </div>
 
   <!-- FLOATING SCROLL TO TOP BUTTON -->
@@ -472,7 +472,7 @@
             <div class="card-modern p-5 rounded-2xl space-y-4">
               <h3 class="font-extrabold text-xs flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Log Audit Sistem & Keamanan</h3>
               <div id="adminAuditLogsList" class="space-y-2 max-h-[220px] overflow-y-auto font-mono text-[11px]">
-                <div class="p-2 card-modern rounded-lg opacity-80">[INFO] Sistem TabHub v1.45 PRO diinisialisasi.</div>
+                <div class="p-2 card-modern rounded-lg opacity-80">[INFO] Sistem TabHub v1.46 PRO diinisialisasi.</div>
                 <div class="p-2 card-modern rounded-lg opacity-80">[AUTH] Token GitHub diverifikasi untuk @vanandime.</div>
               </div>
               <div class="pt-2 flex gap-2">
@@ -562,7 +562,7 @@
                 <span class="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></span>
                 <span data-i18n="overviewHeading">Ringkasan Aplikasi & Dashboard</span>
               </h2>
-              <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.45 PRO.</p>
+              <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.46 PRO.</p>
             </div>
             <div class="flex gap-2">
               <button onclick="switchTab('finance')" class="px-3.5 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnQuickFinance">Cek Keuangan</button>
@@ -608,7 +608,7 @@
             <div class="card-modern p-5 rounded-2xl space-y-3">
               <h3 class="font-extrabold text-xs flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> <span data-i18n="ovSystemStatusTitle">Status & Sistem TabHub</span></h3>
               <div class="space-y-2 text-xs opacity-80 font-mono">
-                <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.45 PRO</strong></div>
+                <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.46 PRO</strong></div>
                 <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Penyimpanan Browser</span><strong id="ovStorageSize" class="text-emerald-500">0 KB</strong></div>
                 <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Tema Aktif</span><strong id="ovThemeName" class="text-purple-500">Nordic Frost</strong></div>
                 <div class="flex justify-between py-1"><span>Status Enkripsi</span><strong class="text-emerald-500">Aman & Aktif</strong></div>
@@ -1636,8 +1636,8 @@
       </div>
       <div id="releaseHistoryContent" class="space-y-3 text-xs opacity-90 leading-relaxed font-mono">
         <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-blue-500">
-          <strong>TabHub v1.45 PRO (Agustus 2026)</strong>
-          <p class="text-[11px] opacity-80">- Perbaikan responsivitas layout mobile dengan menyembunyikan sidebar pada layar kecil (menggunakan `hidden lg:flex`).<br>- Focus Mode & workspace interaktif.</p>
+          <strong>TabHub v1.46 PRO (Agustus 2026)</strong>
+          <p class="text-[11px] opacity-80">- Perbaikan bug splash screen loading yang tersangkut dengan pengaman inisialisasi `try-catch-finally`.</p>
         </div>
         <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-sky-500">
           <strong>TabHub v1.43 PRO</strong>
@@ -1652,7 +1652,7 @@
   </div>
 
     /* ==========================================================================
-       TABHUB v1.45 PRO - JAVASCRIPT STATE ENGINE & CORE LOGIC
+       TABHUB v1.46 PRO - JAVASCRIPT STATE ENGINE & CORE LOGIC
        ========================================================================== */
 
     const STORAGE_KEY = 'SMARTCORE_STATE';
@@ -1706,7 +1706,7 @@
       vault: [],
       codeSnippets: [],
       auditLogs: [
-        { time: new Date().toLocaleTimeString(), text: '[INFO] Sistem TabHub v1.45 PRO diinisialisasi.' }
+        { time: new Date().toLocaleTimeString(), text: '[INFO] Sistem TabHub v1.46 PRO diinisialisasi.' }
       ]
     };
 
@@ -1733,21 +1733,24 @@
       { id: 3, x: 400, y: 220, text: 'Manajemen Keuangan', color: '#f43f5e' }
     ];
 
-    // INITIATION & PERSISTENCE
+    // INITIATION & PERSISTENCE (Dilengkapi try-catch-finally agar splash screen dijamin hilang)
     window.addEventListener('DOMContentLoaded', () => {
-      loadStateFromStorage();
-      applySettingsToDOM();
-      initClock();
-      renderAll();
-      
-      // Remove Splash Screen
-      setTimeout(() => {
+      try {
+        loadStateFromStorage();
+        applySettingsToDOM();
+        initClock();
+        renderAll();
+      } catch (err) {
+        console.error('Error saat inisialisasi aplikasi TabHub:', err);
+        addAuditLog(`[CRITICAL ERROR] ${err.message}`);
+      } finally {
+        // Memastikan splash screen SELALU dihapus terlepas ada error atau tidak
         const splash = document.getElementById('appSplashOverlay');
         if (splash) {
           splash.style.opacity = '0';
           setTimeout(() => splash.remove(), 500);
         }
-      }, 400);
+      }
     });
 
     function saveStateToStorage() {
@@ -1924,7 +1927,6 @@
         return;
       }
 
-      // Verify via GitHub API v3 user endpoint
       fetch('https://api.github.com/user', {
         headers: {
           'Authorization': `token ${token}`,
@@ -1940,7 +1942,6 @@
         appState.user.name = username;
         appState.user.token = token;
         
-        // Admin verification rule: Must be 'vanandime'
         if (username.toLowerCase() === 'vanandime') {
           appState.user.role = 'Admin';
           alert(`Berhasil Login! Selamat datang kembali, Administrator @${username}. Hak akses Admin penuh diberikan.`);
@@ -2297,7 +2298,6 @@
         if (areaKanban) areaKanban.classList.remove('hidden');
         if (areaMatrix) areaMatrix.classList.add('hidden');
 
-        // Render Kanban columns
         ['todo', 'in_progress', 'done'].forEach(col => {
           const container = document.getElementById(`kanbanCol${col === 'todo' ? 'ToDo' : col === 'in_progress' ? 'InProgress' : 'Done'}`);
           if (container) {
@@ -2547,7 +2547,7 @@
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
       const dl = document.createElement('a');
       dl.setAttribute("href", dataStr);
-      dl.setAttribute("download", `TabHub_v145_Backup_${new Date().toISOString().split('T')[0]}.json`);
+      dl.setAttribute("download", `TabHub_v146_Backup_${new Date().toISOString().split('T')[0]}.json`);
       document.body.appendChild(dl);
       dl.click();
       dl.remove();
@@ -2745,7 +2745,7 @@
       }
 
       const gistData = {
-        description: "TabHub v1.45 PRO Cloud Sync Backup",
+        description: "TabHub v1.46 PRO Cloud Sync Backup",
         public: false,
         files: {
           "tabhub_state.json": {
@@ -2968,7 +2968,7 @@
       chatArea.scrollTop = chatArea.scrollHeight;
 
       setTimeout(() => {
-        let reply = "Saya asisten pintar TabHub v1.45 PRO. Seluruh sistem berjalan optimal!";
+        let reply = "Saya asisten pintar TabHub v1.46 PRO. Seluruh sistem berjalan optimal!";
         if (text.toLowerCase().includes('keuangan')) {
           const totalInc = appState.finance.transactions.filter(t=>t.type==='income').reduce((a,b)=>a+Number(b.amount),0);
           reply = `Ringkasan keuangan Anda: Total pemasukan tercatat Rp ${totalInc.toLocaleString()}.`;

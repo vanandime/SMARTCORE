@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DV Hub - Mohammad Danis Muria Vanandi</title>
+  <title>TabHub - Mohammad Danis Muria Vanandi</title>
   
   <!-- MINIMALIST TRANSPARENT VECTOR SVG FAVICON -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23007aff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
@@ -101,6 +101,26 @@
       transition: opacity 0.5s ease, visibility 0.5s ease;
     }
     #splashScreen.fade-out { opacity: 0; visibility: hidden; }
+
+    /* Floating Scroll to Top Button */
+    #scrollToTopBtn {
+      position: fixed;
+      bottom: 95px;
+      right: 25px;
+      z-index: 45;
+      display: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--accent-color);
+      color: #ffffff;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 25px rgba(0, 102, 255, 0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    #scrollToTopBtn:hover { transform: scale(1.1); }
   </style>
 </head>
 <body id="appBody" class="theme-nordic-frost min-h-screen pb-32">
@@ -111,12 +131,12 @@
       <div class="w-16 h-16 rounded-2xl bg-blue-600/20 text-blue-500 flex items-center justify-center">
         <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
       </div>
-      <h2 class="text-xl font-extrabold tracking-tight">DV Hub v1.30</h2>
-      <p class="text-xs opacity-70">Memuat pembaruan UI/UX, AI offline cerdas & media editor...</p>
+      <h2 class="text-xl font-extrabold tracking-tight">TabHub v1.31</h2>
+      <p class="text-xs opacity-70">Memuat pembaruan Tab Hub menyeluruh, menu interaktif & live code editor...</p>
     </div>
   </div>
 
-  <!-- TOP BAR -->
+  <!-- BAR -->
   <div class="fixed top-3 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl card-modern px-4 py-2 text-[11px] font-mono flex items-center justify-between shadow-2xl backdrop-blur-xl border">
     <div class="flex items-center gap-2 w-full justify-between">
       <div class="flex items-center gap-2 font-bold">
@@ -130,7 +150,7 @@
       <div class="flex items-center gap-2">
         <span id="iosBarWeather">Surabaya, 32°C</span>
         <span class="opacity-40">|</span>
-        <button onclick="openFloatingAiModal()" title="Buka Asisten AI & Pencarian" class="hover:text-blue-500 transition cursor-pointer bg-transparent border-0 p-0 font-mono font-bold text-blue-500 flex items-center gap-1.5 ios-btn">
+        <button onclick="openFloatingAiModal()" title="Buka AI & Pencarian" class="hover:text-blue-500 transition cursor-pointer bg-transparent border-0 p-0 font-mono font-bold text-blue-500 flex items-center gap-1.5 ios-btn">
           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg>
           AI
         </button>
@@ -138,7 +158,12 @@
     </div>
   </div>
 
-  <!-- LAUNCHER / MAIN MENU MODAL (Fixed z-[60] & items-center with Active Module Indicator) -->
+  <!-- FLOATING SCROLL TO TOP BUTTON -->
+  <button id="scrollToTopBtn" onclick="scrollToTopPage()" title="Geser ke Atas" aria-label="Geser ke Atas">
+    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- MENU MODAL (Fixed z-[60] & active state indication) -->
   <div id="floatingMenuModal" class="hidden fixed inset-0 z-[60] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl animate-fade-in max-h-[85vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -155,91 +180,91 @@
           </button>
         </div>
       </div>
-      <!-- GRID MENU WITH ACTIVE HIGHLIGHT -->
+      <!-- MENU GRID WITH DISTINCT ACTIVE/INACTIVE HIGHLIGHTS -->
       <div class="grid grid-cols-2 gap-2.5">
-        <button id="launcherBtn-dashboard" onclick="switchTabAndClose('dashboard')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left hover:border-blue-500 transition ios-btn" title="Pusat Komando Beranda">
+        <button id="launcherBtn-dashboard" onclick="switchTabAndClose('dashboard')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Pusat Tab Hub">
           <span class="p-2 rounded-xl bg-blue-500/10 text-blue-500">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           </span>
-          <div><div class="font-extrabold text-xs" data-i18n="menuHub">Beranda</div><div class="text-[10px] opacity-60" data-i18n="hubSub">Pusat komando</div></div>
+          <div><div class="font-extrabold text-xs">Tab Hub</div><div class="text-[10px] opacity-60">Pusat komando</div></div>
         </button>
-        <button id="launcherBtn-finance" onclick="switchTabAndClose('finance')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left hover:border-blue-500 transition ios-btn" title="Kelola Arus Kas & Anggaran">
+        <button id="launcherBtn-finance" onclick="switchTabAndClose('finance')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Kelola Keuangan">
           <span class="p-2 rounded-xl bg-emerald-500/10 text-emerald-500">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           </span>
-          <div><div class="font-extrabold text-xs" data-i18n="menuFinance">Keuangan</div><div class="text-[10px] opacity-60" data-i18n="subFin">Arus kas & anggaran</div></div>
+          <div><div class="font-extrabold text-xs">Keuangan</div><div class="text-[10px] opacity-60">Arus kas & anggaran</div></div>
         </button>
-        <button id="launcherBtn-tasks" onclick="switchTabAndClose('tasks')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left hover:border-blue-500 transition ios-btn" title="Daftar Tugas & Rutinitas">
+        <button id="launcherBtn-tasks" onclick="switchTabAndClose('tasks')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Daftar Tugas">
           <span class="p-2 rounded-xl bg-pink-500/10 text-pink-500">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           </span>
-          <div><div class="font-extrabold text-xs" data-i18n="menuTasks">Tugas</div><div class="text-[10px] opacity-60" data-i18n="subTasks">Daftar & kebiasaan</div></div>
+          <div><div class="font-extrabold text-xs">Tugas</div><div class="text-[10px] opacity-60">Daftar & kebiasaan</div></div>
         </button>
-        <button id="launcherBtn-kanban" onclick="switchTabAndClose('kanban')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left hover:border-blue-500 transition ios-btn" title="Papan Kanban & Proyek">
+        <button id="launcherBtn-kanban" onclick="switchTabAndClose('kanban')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Papan Kanban">
           <span class="p-2 rounded-xl bg-amber-500/10 text-amber-500">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
           </span>
-          <div><div class="font-extrabold text-xs" data-i18n="menuKanban">Proyek</div><div class="text-[10px] opacity-60" data-i18n="subProj">Prioritas & proyek</div></div>
+          <div><div class="font-extrabold text-xs">Proyek</div><div class="text-[10px] opacity-60">Prioritas & proyek</div></div>
         </button>
-        <button id="launcherBtn-calendar" onclick="switchTabAndClose('calendar')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left hover:border-blue-500 transition ios-btn" title="Kalender & Agenda">
+        <button id="launcherBtn-calendar" onclick="switchTabAndClose('calendar')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Kalender">
           <span class="p-2 rounded-xl bg-red-500/10 text-red-500">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           </span>
-          <div><div class="font-extrabold text-xs" data-i18n="menuCalendar">Kalender</div><div class="text-[10px] opacity-60" data-i18n="subCal">Agenda & jadwal</div></div>
+          <div><div class="font-extrabold text-xs">Kalender</div><div class="text-[10px] opacity-60">Agenda & jadwal</div></div>
         </button>
-        <button id="launcherBtn-chatbot" onclick="switchTabAndClose('chatbot')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left hover:border-blue-500 transition ios-btn" title="Asisten AI & Pencarian Global">
+        <button id="launcherBtn-chatbot" onclick="switchTabAndClose('chatbot')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="AI & Search">
           <span class="p-2 rounded-xl bg-indigo-500/10 text-indigo-500">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg>
           </span>
-          <div><div class="font-extrabold text-xs" data-i18n="menuChatbot">AI & Search</div><div class="text-[10px] opacity-60" data-i18n="subAi">Smart assistant</div></div>
+          <div><div class="font-extrabold text-xs">AI & Search</div><div class="text-[10px] opacity-60">Smart assistant</div></div>
         </button>
-        <button id="launcherBtn-files" onclick="switchTabAndClose('files')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left hover:border-blue-500 transition ios-btn" title="Manajer File Lokal">
+        <button id="launcherBtn-files" onclick="switchTabAndClose('files')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Manajer File">
           <span class="p-2 rounded-xl bg-cyan-500/10 text-cyan-500">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
           </span>
-          <div><div class="font-extrabold text-xs" data-i18n="menuFiles">File</div><div class="text-[10px] opacity-60" data-i18n="subFiles">Penyimpanan file</div></div>
+          <div><div class="font-extrabold text-xs">File</div><div class="text-[10px] opacity-60">Penyimpanan file</div></div>
         </button>
-        <button id="launcherBtn-mindmap" onclick="switchTabAndClose('mindmap')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left hover:border-blue-500 transition ios-btn" title="Mind Map Visual">
+        <button id="launcherBtn-mindmap" onclick="switchTabAndClose('mindmap')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Mind Map">
           <span class="p-2 rounded-xl bg-violet-500/10 text-violet-500">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg>
           </span>
-          <div><div class="font-extrabold text-xs" data-i18n="menuMindMap">Mind Map</div><div class="text-[10px] opacity-60" data-i18n="subMind">Papan ide visual</div></div>
+          <div><div class="font-extrabold text-xs">Mind Map</div><div class="text-[10px] opacity-60">Papan ide visual</div></div>
         </button>
-        <button id="launcherBtn-clock" onclick="switchTabAndClose('clock')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left hover:border-blue-500 transition ios-btn" title="Jam & Pomodoro">
+        <button id="launcherBtn-clock" onclick="switchTabAndClose('clock')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Waktu & Pomodoro">
           <span class="p-2 rounded-xl bg-teal-500/10 text-teal-500">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </span>
-          <div><div class="font-extrabold text-xs" data-i18n="menuClock">Waktu</div><div class="text-[10px] opacity-60" data-i18n="subClock">Timer & alarm</div></div>
+          <div><div class="font-extrabold text-xs">Waktu</div><div class="text-[10px] opacity-60">Timer & alarm</div></div>
         </button>
-        <button id="launcherBtn-calc" onclick="switchTabAndClose('calc')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left hover:border-blue-500 transition ios-btn" title="Kalkulator & Konversi">
+        <button id="launcherBtn-calc" onclick="switchTabAndClose('calc')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Kalkulator">
           <span class="p-2 rounded-xl bg-orange-500/10 text-orange-500">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="14" y1="18" x2="16" y2="18"/></svg>
           </span>
-          <div><div class="font-extrabold text-xs" data-i18n="menuCalc">Kalkulator</div><div class="text-[10px] opacity-60" data-i18n="subCalc">Saintifik & satuan</div></div>
+          <div><div class="font-extrabold text-xs">Kalkulator</div><div class="text-[10px] opacity-60">Saintifik & satuan</div></div>
         </button>
-        <button id="launcherBtn-vault" onclick="switchTabAndClose('vault')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left hover:border-blue-500 transition ios-btn" title="Secure Vault Sandi">
+        <button id="launcherBtn-vault" onclick="switchTabAndClose('vault')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Secure Vault">
           <span class="p-2 rounded-xl bg-emerald-500/10 text-emerald-500">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           </span>
-          <div><div class="font-extrabold text-xs" data-i18n="menuVault">Vault</div><div class="text-[10px] opacity-60" data-i18n="subVault">Manajer sandi</div></div>
+          <div><div class="font-extrabold text-xs">Vault</div><div class="text-[10px] opacity-60">Manajer sandi</div></div>
         </button>
-        <button id="launcherBtn-code" onclick="switchTabAndClose('code')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left hover:border-blue-500 transition ios-btn" title="Editor Kode HTML">
+        <button id="launcherBtn-code" onclick="switchTabAndClose('code')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Code Editor">
           <span class="p-2 rounded-xl bg-purple-500/10 text-purple-500">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           </span>
-          <div><div class="font-extrabold text-xs" data-i18n="menuCode">Kode</div><div class="text-[10px] opacity-60" data-i18n="subCode">Live HTML & export</div></div>
+          <div><div class="font-extrabold text-xs">Kode</div><div class="text-[10px] opacity-60">Live HTML & export</div></div>
         </button>
-        <button id="launcherBtn-media" onclick="switchTabAndClose('media')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left hover:border-blue-500 transition ios-btn" title="Editor Media & Gambar">
+        <button id="launcherBtn-media" onclick="switchTabAndClose('media')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Media Editor">
           <span class="p-2 rounded-xl bg-rose-500/10 text-rose-500">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
           </span>
-          <div><div class="font-extrabold text-xs" data-i18n="menuMedia">Media Editor</div><div class="text-[10px] opacity-60" data-i18n="subMedia">Sunting foto & filter</div></div>
+          <div><div class="font-extrabold text-xs">Media Editor</div><div class="text-[10px] opacity-60">Sunting foto & filter</div></div>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- FLOATING AI ASSISTANT MODAL -->
+  <!-- FLOATING AI MODAL -->
   <div id="floatingAiModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-2xl h-[85vh] p-6 rounded-3xl flex flex-col justify-between shadow-2xl">
       <div class="flex justify-between items-center pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
@@ -248,11 +273,11 @@
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg>
           </div>
           <div>
-            <h3 class="font-extrabold text-sm" data-i18n="chatHeading">Asisten AI & Pencarian Global</h3>
-            <p class="text-[11px] opacity-60" data-i18n="chatSub">Asisten pintar DV Hub & pencarian modul terintegrasi.</p>
+            <h3 class="font-extrabold text-sm">AI & Pencarian Global</h3>
+            <p class="text-[11px] opacity-60">Asisten pintar TabHub & pencarian fitur terintegrasi.</p>
           </div>
         </div>
-        <button onclick="closeFloatingAiModal()" class="close-btn-refined" title="Tutup Asisten AI" aria-label="Tutup Asisten AI">
+        <button onclick="closeFloatingAiModal()" class="close-btn-refined" title="Tutup AI" aria-label="Tutup AI">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
@@ -260,67 +285,153 @@
       <div id="chatMessagesArea" class="flex-1 overflow-y-auto py-4 space-y-3">
         <div class="flex items-start gap-2.5">
           <div class="w-7 h-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shrink-0">AI</div>
-          <div class="card-modern p-3 rounded-2xl text-xs max-w-[85%] leading-relaxed" data-i18n="chatWelcomeMsg">Halo! Asisten AI cerdas aktif secara offline/lokal maupun online. Ketik pertanyaan, tugas, atau perintah pencarian modul (misal: "Cari tugas", "Ringkasan keuangan").</div>
+          <div class="card-modern p-3 rounded-2xl text-xs max-w-[85%] leading-relaxed">Halo! AI cerdas aktif secara offline maupun online. Ketik pertanyaan, tugas, atau perintah pencarian fitur (misal: "Cari tugas", "Ringkasan keuangan").</div>
         </div>
       </div>
 
       <div class="pt-3 border-t border-slate-200/50 dark:border-slate-800/50 space-y-3">
         <div class="flex gap-2 items-center overflow-x-auto pb-1 text-[10px]">
-          <span class="font-bold opacity-65 shrink-0" data-i18n="lblQuickPrompt">PROMPT CEPAT:</span>
+          <span class="font-bold opacity-65 shrink-0">PROMPT CEPAT:</span>
           <button onclick="sendQuickPrompt('Cari tugas')" class="px-2.5 py-1 card-modern rounded-lg shrink-0 ios-btn" title="Cari Tugas Cepat">Cari Tugas</button>
           <button onclick="sendQuickPrompt('Ringkas semua keuangan')" class="px-2.5 py-1 card-modern rounded-lg shrink-0 ios-btn" title="Ringkas Keuangan">Ringkas Keuangan</button>
           <button onclick="sendQuickPrompt('Bantuan sistem AI')" class="px-2.5 py-1 card-modern rounded-lg shrink-0 ios-btn" title="Bantuan Sistem">Bantuan Sistem</button>
         </div>
         <div class="flex gap-2">
-          <input type="text" id="chatInputText" data-i18n-ph="phChatInput" placeholder="Ketik pertanyaan atau /search [kata kunci]..." class="flex-1 px-4 py-3 rounded-2xl card-modern text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" onkeydown="if(event.key==='Enter') sendChatMessage()">
-          <button onclick="sendChatMessage()" class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-xs font-bold shadow-lg ios-btn" data-i18n="btnSendChat" title="Kirim Pesan">Kirim</button>
+          <input type="text" id="chatInputText" placeholder="Ketik pertanyaan atau /search [kata kunci]..." class="flex-1 px-4 py-3 rounded-2xl card-modern text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" onkeydown="if(event.key==='Enter') sendChatMessage()">
+          <button onclick="sendChatMessage()" class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-xs font-bold shadow-lg ios-btn" title="Kirim Pesan">Kirim</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- MAIN CONTAINER WRAPPER (Preserving harmonious alignment) -->
+  <!-- MAIN CONTAINER WRAPPER -->
   <main class="harmonized-bar px-4 space-y-6">
 
-    <!-- TAB 1: DASHBOARD HUB -->
+    <!-- TAB HUB (REVISED TOTAL: Displaying all active/inactive tabs, stats, app info, guides, shortcuts, features & infinite news with load more) -->
     <div id="tab-dashboard" class="tab-content space-y-6">
       
       <!-- HERO BANNER -->
       <div class="card-modern p-6 sm:p-8 rounded-3xl relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div class="absolute -right-16 -top-16 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
         <div class="space-y-3 max-w-2xl relative z-10">
-          <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-extrabold" data-i18n="hubTitle">DV Hub v1.30</span>
-          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight" data-i18n="dashHeroTitle">Produktivitas Tanpa Batas & Integrasi Langsung</h1>
-          <p class="text-xs sm:text-sm opacity-75 leading-relaxed" data-i18n="dashHeroDesc">Kelola seluruh modul cerdas, pantau berita dunia & pasar keuangan global secara real-time.</p>
+          <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-extrabold">TabHub v1.31</span>
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Pusat Komando TabHub Terpadu</h1>
+          <p class="text-xs sm:text-sm opacity-75 leading-relaxed">Menampilkan ringkasan lengkap seluruh tab, statistik sistem, panduan, pintasan, dan berita real-time tanpa batas.</p>
         </div>
         <div class="flex flex-wrap gap-2 relative z-10">
-          <button onclick="switchTab('finance')" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-xs font-bold shadow-lg ios-btn flex items-center gap-2" title="Buka Tab Keuangan">Keuangan</button>
-          <button onclick="switchTab('tasks')" class="px-4 py-2.5 card-modern hover:border-blue-500 rounded-2xl text-xs font-bold ios-btn flex items-center gap-2" title="Buka Tab Tugas">Tugas</button>
-          <button onclick="openFloatingAiModal()" class="px-4 py-2.5 card-modern hover:border-blue-500 rounded-2xl text-xs font-bold ios-btn flex items-center gap-2" title="Buka Asisten AI">Asisten AI</button>
+          <button onclick="switchTab('finance')" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-xs font-bold shadow-lg ios-btn" title="Buka Tab Keuangan">Keuangan</button>
+          <button onclick="switchTab('tasks')" class="px-4 py-2.5 card-modern hover:border-blue-500 rounded-2xl text-xs font-bold ios-btn" title="Buka Tab Tugas">Tugas</button>
+          <button onclick="openFloatingAiModal()" class="px-4 py-2.5 card-modern hover:border-blue-500 rounded-2xl text-xs font-bold ios-btn" title="Buka AI">AI</button>
         </div>
       </div>
 
-      <!-- QUICK STATS METRICS -->
+      <!-- ALL STATS METRICS -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="card-modern p-4 rounded-2xl space-y-1">
-          <span class="text-[11px] opacity-64 font-bold" data-i18n="statBalance">Total Saldo</span>
+          <span class="text-[11px] opacity-64 font-bold">Total Saldo</span>
           <h3 id="hubMetricBalance" class="text-lg font-extrabold font-mono text-emerald-500">Rp 0</h3>
           <span class="text-[10px] opacity-50">Arus kas aktif</span>
         </div>
         <div class="card-modern p-4 rounded-2xl space-y-1">
-          <span class="text-[11px] opacity-64 font-bold" data-i18n="statTasks">Tugas</span>
+          <span class="text-[11px] opacity-64 font-bold">Tugas</span>
           <h3 id="hubMetricTasks" class="text-lg font-extrabold font-mono text-blue-500">0/0 Tugas</h3>
           <span class="text-[10px] opacity-50">Produktivitas harian</span>
         </div>
         <div class="card-modern p-4 rounded-2xl space-y-1">
-          <span class="text-[11px] opacity-64 font-bold" data-i18n="statKanban">Proyek Kanban</span>
+          <span class="text-[11px] opacity-64 font-bold">Proyek Kanban</span>
           <h3 id="hubMetricKanban" class="text-lg font-extrabold font-mono text-amber-500">0 Kartu</h3>
           <span class="text-[10px] opacity-50">Proyek berjalan</span>
         </div>
         <div class="card-modern p-4 rounded-2xl space-y-1">
-          <span class="text-[11px] opacity-64 font-bold" data-i18n="statFiles">Arsip File</span>
+          <span class="text-[11px] opacity-64 font-bold">Arsip File</span>
           <h3 id="hubMetricFiles" class="text-lg font-extrabold font-mono text-violet-500">0 Item</h3>
           <span class="text-[10px] opacity-50">Penyimpanan lokal</span>
+        </div>
+      </div>
+
+      <!-- ALL TABS DIRECTORY (Active & Inactive Tabs Overview) -->
+      <div class="card-modern p-6 rounded-3xl space-y-4">
+        <h3 class="font-extrabold text-sm">Direktori Semua Tab (Aktif & Non-Aktif)</h3>
+        <p class="text-[11px] opacity-70">Akses cepat ke seluruh tab yang tersedia di dalam TabHub.</p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <button onclick="switchTab('dashboard')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Tab Hub</div>
+            <div class="text-[10px] text-emerald-500 font-bold">Aktif (Utama)</div>
+          </button>
+          <button onclick="switchTab('finance')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Keuangan</div>
+            <div class="text-[10px] opacity-60">Tab Finansial</div>
+          </button>
+          <button onclick="switchTab('tasks')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Tugas</div>
+            <div class="text-[10px] opacity-60">Tab Rutinitas</div>
+          </button>
+          <button onclick="switchTab('kanban')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Proyek</div>
+            <div class="text-[10px] opacity-60">Tab Kanban</div>
+          </button>
+          <button onclick="switchTab('calendar')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Kalender</div>
+            <div class="text-[10px] opacity-60">Tab Jadwal</div>
+          </button>
+          <button onclick="switchTab('chatbot')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">AI & Search</div>
+            <div class="text-[10px] opacity-60">Tab AI Pintar</div>
+          </button>
+          <button onclick="switchTab('files')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">File</div>
+            <div class="text-[10px] opacity-60">Tab Penyimpanan</div>
+          </button>
+          <button onclick="switchTab('mindmap')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Mind Map</div>
+            <div class="text-[10px] opacity-60">Tab Ide Visual</div>
+          </button>
+          <button onclick="switchTab('clock')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Waktu</div>
+            <div class="text-[10px] opacity-60">Tab Timer & Pomodoro</div>
+          </button>
+          <button onclick="switchTab('calc')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Kalkulator</div>
+            <div class="text-[10px] opacity-60">Tab Konversi</div>
+          </button>
+          <button onclick="switchTab('vault')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Vault</div>
+            <div class="text-[10px] opacity-60">Tab Sandi</div>
+          </button>
+          <button onclick="switchTab('code')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Kode</div>
+            <div class="text-[10px] opacity-60">Tab Live HTML</div>
+          </button>
+          <button onclick="switchTab('media')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Media Editor</div>
+            <div class="text-[10px] opacity-60">Tab Sunting Foto</div>
+          </button>
+          <button onclick="switchTab('settings')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Pengaturan</div>
+            <div class="text-[10px] opacity-60">Tab Konfigurasi</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- APP INFO, GUIDES, SHORTCUTS & FEATURES OVERVIEW -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="card-modern p-6 rounded-3xl space-y-3">
+          <h3 class="font-extrabold text-sm">Informasi & Panduan Aplikasi</h3>
+          <ul class="text-xs space-y-2 opacity-80 list-disc pl-4">
+            <li><strong>TabHub v1.31</strong> adalah platform produktivitas all-in-one yang berjalan secara lokal dengan enkripsi tinggi.</li>
+            <li>Gunakan <strong>menu</strong> (ikon garis tiga di dock) untuk membuka fitur dengan indikator aktif yang jelas.</li>
+            <li>Gunakan <strong>AI</strong> untuk mencari data atau bertanya secara instan.</li>
+            <li>Backup data secara berkala melalui menu Pengaturan atau salin string JSON state secara instan.</li>
+          </ul>
+        </div>
+        <div class="card-modern p-6 rounded-3xl space-y-3">
+          <h3 class="font-extrabold text-sm">Pintasan & Fitur Unggulan</h3>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="card-modern p-2.5 rounded-xl"><strong>Alt / Dock:</strong> Navigasi cepat</div>
+            <div class="card-modern p-2.5 rounded-xl"><strong>AI Assistant:</strong> Tanya & cari data</div>
+            <div class="card-modern p-2.5 rounded-xl"><strong>Secure Vault:</strong> Simpan sandi</div>
+            <div class="card-modern p-2.5 rounded-xl"><strong>Live Code Editor:</strong> Render HTML</div>
+          </div>
         </div>
       </div>
 
@@ -328,8 +439,8 @@
       <div class="card-modern p-6 rounded-3xl space-y-4">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
           <div>
-            <h3 class="font-extrabold text-sm" data-i18n="liveMarketTitle">Indikator Pasar & Kurs</h3>
-            <p class="text-[11px] opacity-60" data-i18n="liveMarketSub">Pemantauan data nilai tukar & aset digital.</p>
+            <h3 class="font-extrabold text-sm">Indikator Pasar & Kurs</h3>
+            <p class="text-[11px] opacity-60">Pemantauan data nilai tukar & aset digital.</p>
           </div>
           <button onclick="fetchLiveMarketData()" class="px-3 py-1.5 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" title="Perbarui Data Pasar">Perbarui Data</button>
         </div>
@@ -357,27 +468,29 @@
         </div>
       </div>
 
-      <!-- GLOBAL NEWS GRID -->
+      <!-- INFINITE GLOBAL NEWS GRID WITH LOAD MORE BUTTON -->
       <div class="card-modern p-6 rounded-3xl space-y-4">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
           <div>
-            <h3 class="font-extrabold text-sm" data-i18n="newsTickerTitle">Berita Global Real-Time</h3>
-            <p class="text-[11px] opacity-60" data-i18n="newsTickerSub">Informasi berita teknologi, AI, finansial, kesehatan, dan sains terkini.</p>
+            <h3 class="font-extrabold text-sm">Berita Global Tanpa Batas</h3>
+            <p class="text-[11px] opacity-60">Informasi berita teknologi, AI, finansial, kesehatan, dan sains terkini.</p>
           </div>
           <div class="flex flex-wrap gap-2 w-full md:w-auto">
-            <input type="text" id="newsSearchInput" data-i18n-ph="phSearchNews" placeholder="Cari berita..." class="px-3 py-2 rounded-xl card-modern text-xs flex-1 md:w-48 focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="filterAndRenderNews()">
+            <input type="text" id="newsSearchInput" placeholder="Cari berita..." class="px-3 py-2 rounded-xl card-modern text-xs flex-1 md:w-48 focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="filterAndRenderNews()">
             <select id="newsCategoryFilter" onchange="filterAndRenderNews()" class="px-3 py-2 rounded-xl card-modern text-xs font-bold focus:outline-none focus:ring-2 focus:ring-blue-500">
-              <option value="all" data-i18n="optAllNews">Semua Kategori</option>
+              <option value="all">Semua Kategori</option>
               <option value="AI & Tech">AI & Tech</option>
               <option value="Finansial">Finansial</option>
               <option value="Sains & Energi">Sains & Energi</option>
               <option value="Kesehatan">Kesehatan</option>
               <option value="Global">Global</option>
             </select>
-            <button onclick="filterAndRenderNews()" class="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold ios-btn" title="Perbarui Berita">Perbarui</button>
           </div>
         </div>
         <div id="realtimeNewsGridContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        <div class="pt-4 text-center">
+          <button onclick="loadMoreNews()" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-xs font-bold shadow-lg ios-btn" title="Muat Lebih Banyak Berita">Muat Lebih Banyak Berita</button>
+        </div>
       </div>
 
     </div>
@@ -387,23 +500,23 @@
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
           <div>
-            <h2 class="text-lg font-extrabold" data-i18n="finTitle">Manajemen Keuangan</h2>
-            <p class="text-xs opacity-70" data-i18n="finSub">Pantau arus kas, grafik, dan anggaran.</p>
+            <h2 class="text-lg font-extrabold">Manajemen Keuangan</h2>
+            <p class="text-xs opacity-70">Pantau arus kas, grafik, dan anggaran dengan presisi.</p>
           </div>
           <div class="flex flex-wrap gap-2">
             <button onclick="openTxModal('income')" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Tambah Pemasukan">+ Pemasukan</button>
             <button onclick="openTxModal('expense')" class="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Tambah Pengeluaran">+ Pengeluaran</button>
-            <button onclick="exportFinance()" class="px-3.5 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" data-i18n="btnExportFin" title="Ekspor ke CSV">Ekspor CSV</button>
+            <button onclick="exportFinance()" class="px-3.5 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" title="Ekspor ke CSV">Ekspor CSV</button>
           </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="card-modern p-5 rounded-2xl space-y-2">
-            <span class="text-xs font-bold opacity-70" data-i18n="lblNet">Total Saldo</span>
+            <span class="text-xs font-bold opacity-70">Total Saldo</span>
             <h3 id="metricNet" class="text-xl font-extrabold font-mono text-blue-500">Rp 0</h3>
             <div class="flex justify-between text-[11px] opacity-75 pt-2 border-t border-slate-200/50 dark:border-slate-800/50">
-              <span data-i18n="lblIncome">Pemasukan: <strong id="metricIncome" class="text-emerald-500 font-mono">Rp 0</strong></span>
-              <span data-i18n="lblExpense">Pengeluaran: <strong id="metricExpense" class="text-rose-500 font-mono">Rp 0</strong></span>
+              <span>Pemasukan: <strong id="metricIncome" class="text-emerald-500 font-mono">Rp 0</strong></span>
+              <span>Pengeluaran: <strong id="metricExpense" class="text-rose-500 font-mono">Rp 0</strong></span>
             </div>
           </div>
           <div class="card-modern p-5 rounded-2xl flex items-center justify-between">
@@ -425,7 +538,7 @@
         <div class="card-modern p-4 rounded-2xl space-y-2">
           <div class="flex justify-between text-xs">
             <span class="font-bold flex items-center gap-2">
-              <span data-i18n="lblBudgetGoal">Target Anggaran:</span>
+              <span>Target Anggaran:</span>
               <input type="number" id="budgetLimitInput" value="5000000" class="px-2 py-1 card-modern rounded-lg w-32 font-mono text-xs" onchange="renderFinance()" title="Ubah Target Anggaran">
             </span>
             <span id="budgetProgressText" class="font-mono font-bold">0% Terpakai</span>
@@ -436,13 +549,13 @@
         </div>
 
         <div class="flex flex-col sm:flex-row gap-3">
-          <input type="text" id="searchInput" data-i18n-ph="phSearchTx" placeholder="Cari transaksi..." class="flex-1 px-4 py-2.5 rounded-xl card-modern text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="renderFinance()">
+          <input type="text" id="searchInput" placeholder="Cari transaksi..." class="flex-1 px-4 py-2.5 rounded-xl card-modern text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="renderFinance()">
           <select id="filterType" onchange="renderFinance()" class="px-4 py-2.5 rounded-xl card-modern text-xs font-bold focus:outline-none focus:ring-2 focus:ring-blue-500" title="Filter Transaksi">
-            <option value="all" data-i18n="optAll">Semua</option>
-            <option value="income" data-i18n="optInc">Pemasukan</option>
-            <option value="expense" data-i18n="optExp">Pengeluaran</option>
-            <option value="online" data-i18n="optOnline">Online</option>
-            <option value="offline" data-i18n="optOffline">Offline</option>
+            <option value="all">Semua</option>
+            <option value="income">Pemasukan</option>
+            <option value="expense">Pengeluaran</option>
+            <option value="online">Online</option>
+            <option value="offline">Offline</option>
           </select>
           <select id="financeCurrency" onchange="renderFinance()" class="px-4 py-2.5 rounded-xl card-modern text-xs font-bold focus:outline-none focus:ring-2 focus:ring-blue-500" title="Pilih Mata Uang">
             <option value="Rp">Rp (IDR)</option>
@@ -455,11 +568,11 @@
           <table class="w-full text-left text-xs">
             <thead>
               <tr class="border-b border-slate-200 dark:border-slate-800 opacity-60">
-                <th class="p-2.5" data-i18n="thDate">Tanggal</th>
-                <th class="p-2.5" data-i18n="thCat">Kategori</th>
-                <th class="p-2.5" data-i18n="thDesc">Keterangan</th>
-                <th class="p-2.5 text-right" data-i18n="thNom">Nominal</th>
-                <th class="p-2.5 text-center" data-i18n="thAct">Aksi</th>
+                <th class="p-2.5">Tanggal</th>
+                <th class="p-2.5">Kategori</th>
+                <th class="p-2.5">Keterangan</th>
+                <th class="p-2.5 text-right">Nominal</th>
+                <th class="p-2.5 text-center">Aksi</th>
               </tr>
             </thead>
             <tbody id="txTableBody"></tbody>
@@ -473,27 +586,27 @@
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
           <div>
-            <h2 class="text-lg font-extrabold" data-i18n="taskHeading">Tugas & Rutinitas</h2>
-            <p class="text-xs opacity-70" data-i18n="taskSub">Pengorganisasian tugas & kebiasaan harian.</p>
+            <h2 class="text-lg font-extrabold">Tugas & Rutinitas</h2>
+            <p class="text-xs opacity-70">Pengorganisasian tugas & kebiasaan harian secara terstruktur.</p>
           </div>
           <div class="flex flex-wrap gap-2">
-            <button onclick="openTaskModal()" class="px-3.5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnTask" title="Tambah Tugas">+ Tugas</button>
-            <button onclick="openHabitModal()" class="px-3.5 py-2 bg-pink-600 hover:bg-pink-700 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnNewHabit" title="Tambah Rutinitas">+ Rutinitas</button>
-            <button onclick="openNoteModal()" class="px-3.5 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" data-i18n="btnNote" title="Tambah Catatan">+ Catatan</button>
+            <button onclick="openTaskModal()" class="px-3.5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Tambah Tugas">+ Tugas</button>
+            <button onclick="openHabitModal()" class="px-3.5 py-2 bg-pink-600 hover:bg-pink-700 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Tambah Rutinitas">+ Rutinitas</button>
+            <button onclick="openNoteModal()" class="px-3.5 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" title="Tambah Catatan">+ Catatan</button>
           </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="card-modern p-5 rounded-2xl space-y-4">
             <div class="flex justify-between items-center pb-2 border-b border-slate-200/50 dark:border-slate-800/50">
-              <h3 class="font-extrabold text-xs" data-i18n="lblTaskList">Daftar Pekerjaan</h3>
+              <h3 class="font-extrabold text-xs">Daftar Pekerjaan</h3>
               <span id="taskProgressBadge" class="px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-500 text-[10px] font-bold">0% Selesai</span>
             </div>
             <div id="taskList" class="space-y-2 max-h-[300px] overflow-y-auto"></div>
           </div>
           <div class="card-modern p-5 rounded-2xl space-y-4">
             <div class="flex justify-between items-center pb-2 border-b border-slate-200/50 dark:border-slate-800/50">
-              <h3 class="font-extrabold text-xs" data-i18n="habitListTitle">Rutinitas Harian</h3>
+              <h3 class="font-extrabold text-xs">Rutinitas Harian</h3>
               <span id="habitStreakDisplay" class="px-2.5 py-1 rounded-full bg-pink-500/10 text-pink-500 text-[10px] font-bold">Streak: 0 Hari</span>
             </div>
             <div id="habitListContainer" class="space-y-2 max-h-[300px] overflow-y-auto"></div>
@@ -502,7 +615,7 @@
 
         <div class="card-modern p-5 rounded-2xl space-y-4">
           <div class="flex justify-between items-center pb-2 border-b border-slate-200/50 dark:border-slate-800/50">
-            <h3 class="font-extrabold text-xs" data-i18n="lblNoteList">Catatan & Memo</h3>
+            <h3 class="font-extrabold text-xs">Catatan & Memo</h3>
           </div>
           <div id="noteList" class="grid grid-cols-1 md:grid-cols-3 gap-3"></div>
         </div>
@@ -514,33 +627,33 @@
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
           <div>
-            <h2 class="text-lg font-extrabold" data-i18n="kanbanHeading">Papan Kanban & Matriks</h2>
-            <p class="text-xs opacity-70" data-i18n="kanbanSub">Alur kerja visual Kanban dan Eisenhower.</p>
+            <h2 class="text-lg font-extrabold">Papan Kanban & Matriks</h2>
+            <p class="text-xs opacity-70">Alur kerja visual Kanban dan Eisenhower.</p>
           </div>
           <div class="flex gap-2">
-            <button id="btnViewKanban" onclick="setTaskViewMode('kanban')" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 text-white shadow ios-btn" data-i18n="btnKanbanView" title="Tampilkan Papan Kanban">Kanban</button>
-            <button id="btnViewMatrix" onclick="setTaskViewMode('matrix')" class="px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn" data-i18n="btnMatrixView" title="Tampilkan Matriks Eisenhower">Eisenhower</button>
+            <button id="btnViewKanban" onclick="setTaskViewMode('kanban')" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 text-white shadow ios-btn" title="Tampilkan Papan Kanban">Kanban</button>
+            <button id="btnViewMatrix" onclick="setTaskViewMode('matrix')" class="px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn" title="Tampilkan Matriks Eisenhower">Eisenhower</button>
           </div>
         </div>
 
         <div id="viewKanbanArea" class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="card-modern p-4 rounded-2xl space-y-3">
             <div class="flex justify-between items-center pb-2 border-b border-slate-200/50 dark:border-slate-800/50">
-              <h4 class="font-bold text-xs flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span> <span data-i18n="colToDo">Belum</span></h4>
+              <h4 class="font-bold text-xs flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span> <span>Belum</span></h4>
               <button onclick="openKanbanModal('todo')" class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-500 font-bold text-xs ios-btn" title="Tambah Kartu Todo">+</button>
             </div>
             <div id="kanbanColToDo" class="space-y-2 min-h-[250px]"></div>
           </div>
           <div class="card-modern p-4 rounded-2xl space-y-3">
             <div class="flex justify-between items-center pb-2 border-b border-slate-200/50 dark:border-slate-800/50">
-              <h4 class="font-bold text-xs flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> <span data-i18n="colInProgress">Proses</span></h4>
+              <h4 class="font-bold text-xs flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> <span>Proses</span></h4>
               <button onclick="openKanbanModal('in_progress')" class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-500 font-bold text-xs ios-btn" title="Tambah Kartu Progress">+</button>
             </div>
             <div id="kanbanColInProgress" class="space-y-2 min-h-[250px]"></div>
           </div>
           <div class="card-modern p-4 rounded-2xl space-y-3">
             <div class="flex justify-between items-center pb-2 border-b border-slate-200/50 dark:border-slate-800/50">
-              <h4 class="font-bold text-xs flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> <span data-i18n="colDone">Selesai</span></h4>
+              <h4 class="font-bold text-xs flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> <span>Selesai</span></h4>
               <button onclick="openKanbanModal('done')" class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-500 font-bold text-xs ios-btn" title="Tambah Kartu Selesai">+</button>
             </div>
             <div id="kanbanColDone" class="space-y-2 min-h-[250px]"></div>
@@ -549,19 +662,19 @@
 
         <div id="viewMatrixArea" class="hidden grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="card-modern p-4 rounded-2xl space-y-3 border-l-4 border-rose-500">
-            <div class="flex justify-between items-center"><h4 class="font-bold text-xs" data-i18n="q1Title">Q1: Mendesak & Penting</h4><button onclick="openEisenhowerModal('Q1')" class="px-2 py-0.5 rounded bg-rose-500/10 text-rose-500 font-bold text-xs ios-btn" title="Tambah Q1">+</button></div>
+            <div class="flex justify-between items-center"><h4 class="font-bold text-xs">Q1: Mendesak & Penting</h4><button onclick="openEisenhowerModal('Q1')" class="px-2 py-0.5 rounded bg-rose-500/10 text-rose-500 font-bold text-xs ios-btn" title="Tambah Q1">+</button></div>
             <div id="eisenListQ1" class="space-y-2 min-h-[150px]"></div>
           </div>
           <div class="card-modern p-4 rounded-2xl space-y-3 border-l-4 border-blue-500">
-            <div class="flex justify-between items-center"><h4 class="font-bold text-xs" data-i18n="q2Title">Q2: Penting</h4><button onclick="openEisenhowerModal('Q2')" class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-500 font-bold text-xs ios-btn" title="Tambah Q2">+</button></div>
+            <div class="flex justify-between items-center"><h4 class="font-bold text-xs">Q2: Penting</h4><button onclick="openEisenhowerModal('Q2')" class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-500 font-bold text-xs ios-btn" title="Tambah Q2">+</button></div>
             <div id="eisenListQ2" class="space-y-2 min-h-[150px]"></div>
           </div>
           <div class="card-modern p-4 rounded-2xl space-y-3 border-l-4 border-amber-500">
-            <div class="flex justify-between items-center"><h4 class="font-bold text-xs" data-i18n="q3Title">Q3: Mendesak</h4><button onclick="openEisenhowerModal('Q3')" class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-500 font-bold text-xs ios-btn" title="Tambah Q3">+</button></div>
+            <div class="flex justify-between items-center"><h4 class="font-bold text-xs">Q3: Mendesak</h4><button onclick="openEisenhowerModal('Q3')" class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-500 font-bold text-xs ios-btn" title="Tambah Q3">+</button></div>
             <div id="eisenListQ3" class="space-y-2 min-h-[150px]"></div>
           </div>
           <div class="card-modern p-4 rounded-2xl space-y-3 border-l-4 border-slate-500">
-            <div class="flex justify-between items-center"><h4 class="font-bold text-xs" data-i18n="q4Title">Q4: Santai</h4><button onclick="openEisenhowerModal('Q4')" class="px-2 py-0.5 rounded bg-slate-500/10 text-slate-400 font-bold text-xs ios-btn" title="Tambah Q4">+</button></div>
+            <div class="flex justify-between items-center"><h4 class="font-bold text-xs">Q4: Santai</h4><button onclick="openEisenhowerModal('Q4')" class="px-2 py-0.5 rounded bg-slate-500/10 text-slate-400 font-bold text-xs ios-btn" title="Tambah Q4">+</button></div>
             <div id="eisenListQ4" class="space-y-2 min-h-[150px]"></div>
           </div>
         </div>
@@ -573,26 +686,26 @@
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
           <div>
-            <h2 class="text-lg font-extrabold" data-i18n="calHeading">Kalender</h2>
-            <p class="text-xs opacity-70" data-i18n="calSub">Agenda harian lengkap dengan indikator tanggal.</p>
+            <h2 class="text-lg font-extrabold">Kalender</h2>
+            <p class="text-xs opacity-70">Agenda harian lengkap dengan indikator tanggal.</p>
           </div>
           <div class="flex gap-2">
             <button onclick="changeCalMonth(-1)" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold ios-btn" title="Bulan Sebelumnya">&larr;</button>
-            <button onclick="jumpToTodayCalendar()" class="px-3.5 py-1.5 card-modern rounded-xl text-xs font-bold ios-btn" data-i18n="btnToday" title="Kembali ke Hari Ini">Hari Ini</button>
+            <button onclick="jumpToTodayCalendar()" class="px-3.5 py-1.5 card-modern rounded-xl text-xs font-bold ios-btn" title="Kembali ke Hari Ini">Hari Ini</button>
             <button onclick="changeCalMonth(1)" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold ios-btn" title="Bulan Berikutnya">&rarr;</button>
-            <button onclick="openCalendarEventModal()" class="px-3.5 py-1.5 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnAddAgenda" title="Tambah Agenda">+ Agenda</button>
+            <button onclick="openCalendarEventModal()" class="px-3.5 py-1.5 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Tambah Agenda">+ Agenda</button>
           </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="md:col-span-2 card-modern p-5 rounded-2xl space-y-4">
             <div class="flex justify-between items-center"><h3 id="calMonthYearLabel" class="font-extrabold text-sm font-mono">Agustus 2026</h3></div>
             <div class="grid grid-cols-7 gap-2 text-center text-xs font-bold opacity-60">
-              <span data-i18n="daySun">Min</span><span data-i18n="dayMon">Sen</span><span data-i18n="dayTue">Sel</span><span data-i18n="dayWed">Rab</span><span data-i18n="dayThu">Kam</span><span data-i18n="dayFri">Jum</span><span data-i18n="daySat">Sab</span>
+              <span>Min</span><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span>
             </div>
             <div id="calendarGrid" class="grid grid-cols-7 gap-2"></div>
           </div>
           <div class="card-modern p-5 rounded-2xl space-y-3">
-            <h3 class="font-bold text-xs" data-i18n="selectedAgendaTitle">Agenda Terpilih</h3>
+            <h3 class="font-bold text-xs">Agenda Terpilih</h3>
             <div id="calendarAgendaListContainer" class="space-y-2 max-h-[300px] overflow-y-auto"></div>
           </div>
         </div>
@@ -604,15 +717,15 @@
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="flex justify-between items-center pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
           <div>
-            <h2 class="text-lg font-extrabold" data-i18n="chatHeading">Asisten AI & Pencarian</h2>
-            <p class="text-xs opacity-70" data-i18n="chatSub">Asisten pintar & pencarian modul.</p>
+            <h2 class="text-lg font-extrabold">AI & Pencarian</h2>
+            <p class="text-xs opacity-70">Asisten pintar & pencarian fitur.</p>
           </div>
-          <button onclick="clearChatHistory()" class="px-3.5 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" data-i18n="btnClearChat" title="Bersihkan Riwayat Chat">Bersihkan</button>
+          <button onclick="clearChatHistory()" class="px-3.5 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" title="Bersihkan Riwayat Chat">Bersihkan</button>
         </div>
         <div class="space-y-2">
           <label class="text-xs font-bold opacity-75">Gemini API Key (Opsional - Mode Offline Otomatis Aktif Tanpa Key):</label>
           <div class="flex gap-2">
-            <input type="password" id="geminiApiKeyInput" data-i18n-ph="phApiKey" placeholder="API Key..." class="flex-1 px-4 py-2.5 rounded-xl card-modern text-xs font-mono focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="password" id="geminiApiKeyInput" placeholder="API Key..." class="flex-1 px-4 py-2.5 rounded-xl card-modern text-xs font-mono focus:outline-none focus:ring-2 focus:ring-blue-500">
             <button onclick="saveGeminiApiKey()" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Simpan API Key">Simpan Key</button>
           </div>
         </div>
@@ -620,7 +733,7 @@
           <div id="tabChatMessagesArea" class="flex-1 overflow-y-auto space-y-3 pr-2">
             <div class="flex items-start gap-2.5">
               <div class="w-7 h-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shrink-0">AI</div>
-              <div class="card-modern p-3 rounded-2xl text-xs max-w-[85%] leading-relaxed">Asisten cerdas DV Hub siap menjawab secara offline maupun online. Ketik perintah atau "/search [kata kunci]" untuk mencari di seluruh data aplikasi.</div>
+              <div class="card-modern p-3 rounded-2xl text-xs max-w-[85%] leading-relaxed">Asisten cerdas TabHub siap menjawab secara offline maupun online. Ketik perintah atau "/search [kata kunci]" untuk mencari di seluruh data aplikasi.</div>
             </div>
           </div>
           <div class="pt-3 border-t border-slate-200/50 dark:border-slate-800/50 flex gap-2">
@@ -636,24 +749,24 @@
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
           <div>
-            <h2 class="text-lg font-extrabold" data-i18n="filesHeading">File Manager</h2>
-            <p class="text-xs opacity-70" data-i18n="filesSub">Arsip lokal aman.</p>
+            <h2 class="text-lg font-extrabold">File Manager</h2>
+            <p class="text-xs opacity-70">Arsip lokal aman.</p>
           </div>
           <label class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow cursor-pointer ios-btn flex items-center gap-2" title="Unggah File Baru">
-            <span data-i18n="btnUploadFile">+ Unggah</span>
+            <span>+ Unggah</span>
             <input type="file" onchange="handleFileUpload(event)" class="hidden">
           </label>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="md:col-span-2 space-y-3">
-            <h3 class="font-bold text-xs" data-i18n="filesListTitle">Daftar File</h3>
+            <h3 class="font-bold text-xs">Daftar File</h3>
             <div id="fileManagerList" class="space-y-2 max-h-[350px] overflow-y-auto"></div>
           </div>
           <div class="card-modern p-5 rounded-2xl space-y-3">
-            <h3 class="font-bold text-xs" data-i18n="filesStorageInfo">Penyimpanan</h3>
+            <h3 class="font-bold text-xs">Penyimpanan</h3>
             <div class="space-y-1 text-xs opacity-75">
-              <div class="flex justify-between"><span data-i18n="filesStorageUsed">Kapasitas</span><strong id="storageUsageDisplay" class="font-mono">0 KB</strong></div>
-              <p class="text-[10px] opacity-65 pt-2" data-i18n="storageNote">Disimpan secara aman di browser.</p>
+              <div class="flex justify-between"><span>Kapasitas</span><strong id="storageUsageDisplay" class="font-mono">0 KB</strong></div>
+              <p class="text-[10px] opacity-65 pt-2">Disimpan secara aman di browser.</p>
             </div>
           </div>
         </div>
@@ -665,21 +778,21 @@
       <div class="card-modern p-6 rounded-3xl space-y-4">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
           <div>
-            <h2 class="text-lg font-extrabold" data-i18n="mindmapHeading">Mind Map Canvas</h2>
-            <p class="text-xs opacity-70" data-i18n="mindmapSub">Visualisasikan ide.</p>
+            <h2 class="text-lg font-extrabold">Mind Map Canvas</h2>
+            <p class="text-xs opacity-70">Visualisasikan ide.</p>
           </div>
           <div class="flex flex-wrap gap-2">
-            <button onclick="addMindNode()" class="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnAddNode" title="Tambah Node">+ Node</button>
-            <button onclick="editSelectedMindNode()" class="px-3 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" data-i18n="btnEditNode" title="Edit Node">Edit</button>
-            <button onclick="deleteSelectedMindNode()" class="px-3 py-2 card-modern hover:border-rose-500 text-rose-500 rounded-xl text-xs font-bold ios-btn" data-i18n="btnDelNode" title="Hapus Node">Hapus</button>
-            <button onclick="exportMindCanvas()" class="px-3 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" data-i18n="btnExportPng" title="Ekspor PNG">Ekspor</button>
-            <button onclick="clearMindCanvas()" class="px-3 py-2 card-modern hover:border-rose-500 text-rose-500 rounded-xl text-xs font-bold ios-btn" data-i18n="btnReset" title="Reset Kanvas">Reset</button>
+            <button onclick="addMindNode()" class="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Tambah Node">+ Node</button>
+            <button onclick="editSelectedMindNode()" class="px-3 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" title="Edit Node">Edit</button>
+            <button onclick="deleteSelectedMindNode()" class="px-3 py-2 card-modern hover:border-rose-500 text-rose-500 rounded-xl text-xs font-bold ios-btn" title="Hapus Node">Hapus</button>
+            <button onclick="exportMindCanvas()" class="px-3 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" title="Ekspor PNG">Ekspor</button>
+            <button onclick="clearMindCanvas()" class="px-3 py-2 card-modern hover:border-rose-500 text-rose-500 rounded-xl text-xs font-bold ios-btn" title="Reset Kanvas">Reset</button>
           </div>
         </div>
         <div class="relative w-full h-[500px] card-modern rounded-2xl overflow-hidden border border-slate-200/50 dark:border-slate-800/50 touch-none">
           <canvas id="mindCanvas" class="w-full h-full cursor-grab active:cursor-grabbing"></canvas>
           <div class="absolute bottom-3 left-3 px-3 py-1 rounded-xl card-modern text-[10px] opacity-75 font-mono flex items-center gap-2">
-            <span id="mindNodeCount">Total Node: 0</span> | <span data-i18n="mindmapTip">Geser node di atas kanvas (Sentuh & Seret)</span>
+            <span id="mindNodeCount">Total Node: 0</span> | <span>Geser node di atas kanvas (Sentuh & Seret)</span>
           </div>
         </div>
       </div>
@@ -689,50 +802,50 @@
     <div id="tab-clock" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
-          <h2 class="text-lg font-extrabold" data-i18n="clockHeading">Waktu, Timer & Pomodoro</h2>
-          <p class="text-xs opacity-70" data-i18n="clockSub">Manajemen waktu terpadu.</p>
+          <h2 class="text-lg font-extrabold">Waktu, Timer & Pomodoro</h2>
+          <p class="text-xs opacity-70">Manajemen waktu terpadu.</p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="card-modern p-6 rounded-2xl text-center space-y-2 flex flex-col justify-center">
-            <span class="text-xs font-bold opacity-60" data-i18n="lblCurrentLiveTime">Waktu Lokal</span>
+            <span class="text-xs font-bold opacity-60">Waktu Lokal</span>
             <div id="liveClockBig" class="text-3xl font-extrabold font-mono text-blue-500">00:00:00</div>
             <div id="liveDateBig" class="text-xs font-bold opacity-80">Rabu, 12 Agustus 2026</div>
             <div id="clockWeatherDetail" class="text-[11px] opacity-70 pt-1">Surabaya, 32°C</div>
           </div>
 
           <div class="card-modern p-6 rounded-2xl text-center space-y-4">
-            <h3 class="font-extrabold text-xs" data-i18n="pomHeading">Fokus Pomodoro</h3>
+            <h3 class="font-extrabold text-xs">Fokus Pomodoro</h3>
             <div id="pomTimerDisplay" class="text-4xl font-extrabold font-mono text-emerald-500">25:00</div>
             <div class="flex justify-center gap-1.5 flex-wrap">
-              <button id="pomBtnWork" onclick="setPomodoroMode('work')" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 text-white shadow ios-btn" data-i18n="pomWork" title="Kerja">Kerja</button>
-              <button id="pomBtnShort" onclick="setPomodoroMode('shortBreak')" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn" data-i18n="pomShort" title="Istirahat">Istirahat</button>
-              <button id="pomBtnLong" onclick="setPomodoroMode('longBreak')" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn" data-i18n="pomLong" title="Panjang">Panjang</button>
+              <button id="pomBtnWork" onclick="setPomodoroMode('work')" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 text-white shadow ios-btn" title="Kerja">Kerja</button>
+              <button id="pomBtnShort" onclick="setPomodoroMode('shortBreak')" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn" title="Istirahat">Istirahat</button>
+              <button id="pomBtnLong" onclick="setPomodoroMode('longBreak')" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn" title="Panjang">Panjang</button>
             </div>
             <div class="flex justify-center gap-2">
-              <button onclick="startPomodoro()" class="px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnStart" title="Mulai">Mulai</button>
-              <button onclick="pausePomodoro()" class="px-4 py-2 card-modern hover:border-amber-500 rounded-xl text-xs font-bold ios-btn" data-i18n="btnPause" title="Jeda">Jeda</button>
-              <button onclick="resetPomodoro()" class="px-4 py-2 card-modern hover:border-rose-500 rounded-xl text-xs font-bold ios-btn" data-i18n="btnReset" title="Reset">Reset</button>
+              <button onclick="startPomodoro()" class="px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Mulai">Mulai</button>
+              <button onclick="pausePomodoro()" class="px-4 py-2 card-modern hover:border-amber-500 rounded-xl text-xs font-bold ios-btn" title="Jeda">Jeda</button>
+              <button onclick="resetPomodoro()" class="px-4 py-2 card-modern hover:border-rose-500 rounded-xl text-xs font-bold ios-btn" title="Reset">Reset</button>
             </div>
             <div id="pomSessionCount" class="text-[10px] opacity-70 font-mono">Sesi Selesai: 0</div>
           </div>
 
           <div class="card-modern p-6 rounded-2xl space-y-4 flex flex-col justify-between">
             <div class="space-y-2 text-center">
-              <h3 class="font-extrabold text-xs" data-i18n="stopwatchTitle">Stopwatch</h3>
+              <h3 class="font-extrabold text-xs">Stopwatch</h3>
               <div id="stopwatchDisplay" class="text-2xl font-extrabold font-mono text-purple-500">00:00:00</div>
               <div class="flex justify-center gap-2">
-                <button onclick="startStopwatch()" class="px-3 py-1.5 bg-purple-600 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnStart" title="Mulai">Mulai</button>
-                <button onclick="pauseStopwatch()" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold ios-btn" data-i18n="btnPause" title="Jeda">Jeda</button>
-                <button onclick="resetStopwatch()" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold ios-btn" data-i18n="btnReset" title="Reset">Reset</button>
+                <button onclick="startStopwatch()" class="px-3 py-1.5 bg-purple-600 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Mulai">Mulai</button>
+                <button onclick="pauseStopwatch()" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold ios-btn" title="Jeda">Jeda</button>
+                <button onclick="resetStopwatch()" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold ios-btn" title="Reset">Reset</button>
               </div>
             </div>
             <div class="space-y-2 pt-3 border-t border-slate-200/50 dark:border-slate-800/50">
-              <h3 class="font-extrabold text-xs" data-i18n="lblSetAlarm">Atur Alarm</h3>
+              <h3 class="font-extrabold text-xs">Atur Alarm</h3>
               <div class="flex flex-col sm:flex-row gap-2 w-full">
                 <input type="time" id="alarmTimeInput" class="px-3 py-2 card-modern rounded-xl text-xs font-mono w-full sm:w-auto flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500" title="Waktu Alarm">
-                <input type="text" id="alarmNoteInput" data-i18n-ph="phAlarmNote" placeholder="Catatan..." class="px-3 py-2 card-modern rounded-xl text-xs w-full sm:w-auto flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <button onclick="saveAlarm()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow ios-btn shrink-0" data-i18n="btnSaveAlarm" title="Simpan Alarm">Pasang</button>
+                <input type="text" id="alarmNoteInput" placeholder="Catatan..." class="px-3 py-2 card-modern rounded-xl text-xs w-full sm:w-auto flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button onclick="saveAlarm()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow ios-btn shrink-0" title="Simpan Alarm">Pasang</button>
               </div>
               <div id="alarmList" class="space-y-1.5 max-h-[100px] overflow-y-auto"></div>
             </div>
@@ -745,15 +858,15 @@
     <div id="tab-calc" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
-          <h2 class="text-lg font-extrabold" data-i18n="convHeading">Kalkulator & Konversi</h2>
-          <p class="text-xs opacity-70" data-i18n="calcSubDesc">Kalkulator terpadu.</p>
+          <h2 class="text-lg font-extrabold">Kalkulator & Konversi</h2>
+          <p class="text-xs opacity-70">Kalkulator terpadu.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="card-modern p-5 rounded-2xl space-y-4">
-            <h3 class="font-extrabold text-xs" data-i18n="calcStandardTitle">Kalkulator</h3>
+            <h3 class="font-extrabold text-xs">Kalkulator</h3>
             <input type="text" id="calcScreen" value="0" readonly class="w-full px-4 py-3 rounded-xl card-modern text-right font-mono text-lg font-extrabold focus:outline-none">
             <div class="grid grid-cols-4 gap-2">
-              <button onclick="calcClear()" class="p-3 card-modern font-bold rounded-xl text-rose-500 ios-btn" data-i18n="btnCalcClear" title="Clear">C</button>
+              <button onclick="calcClear()" class="p-3 card-modern font-bold rounded-xl text-rose-500 ios-btn" title="Clear">C</button>
               <button onclick="calcSci('sin')" class="p-3 card-modern font-bold rounded-xl ios-btn" title="Sinus">sin</button>
               <button onclick="calcSci('cos')" class="p-3 card-modern font-bold rounded-xl ios-btn" title="Cosinus">cos</button>
               <button onclick="calcAppend('/')" class="p-3 card-modern font-bold rounded-xl text-blue-500 ios-btn" title="Bagi">&divide;</button>
@@ -771,13 +884,13 @@
               <button onclick="calcAppend('+')" class="p-3 card-modern font-bold rounded-xl text-blue-500 ios-btn" title="Tambah">+</button>
               <button onclick="calcAppend('0')" class="col-span-2 p-3 card-modern font-bold rounded-xl ios-btn">0</button>
               <button onclick="calcAppend('.')" class="p-3 card-modern font-bold rounded-xl ios-btn">.</button>
-              <button onclick="calcCompute()" class="p-3 bg-blue-600 text-white font-bold rounded-xl ios-btn" data-i18n="btnCalcEquals" title="Hasil">=</button>
+              <button onclick="calcCompute()" class="p-3 bg-blue-600 text-white font-bold rounded-xl ios-btn" title="Hasil">=</button>
             </div>
           </div>
 
           <div class="space-y-6">
             <div class="card-modern p-5 rounded-2xl space-y-3">
-              <h3 class="font-extrabold text-xs" data-i18n="currHeading">Mata Uang</h3>
+              <h3 class="font-extrabold text-xs">Mata Uang</h3>
               <div class="flex gap-2">
                 <input type="number" id="currAmount" value="1" class="w-1/2 px-3 py-2 card-modern rounded-xl font-mono text-xs" oninput="convertCurrency()" title="Nominal">
                 <select id="currFrom" class="w-1/4 px-2 py-2 card-modern rounded-xl text-xs font-bold" onchange="convertCurrency()" title="Dari">
@@ -796,13 +909,13 @@
             </div>
 
             <div class="card-modern p-5 rounded-2xl space-y-3">
-              <h3 class="font-extrabold text-xs" data-i18n="unitHeading">Satuan</h3>
+              <h3 class="font-extrabold text-xs">Satuan</h3>
               <div class="flex gap-2">
                 <input type="number" id="unitInputVal" value="10" class="w-1/2 px-3 py-2 card-modern rounded-xl font-mono text-xs" oninput="convertUnits()" title="Nilai Satuan">
                 <select id="unitTypeSelect" class="w-1/2 px-2 py-2 card-modern rounded-xl text-xs font-bold" onchange="convertUnits()" title="Tipe Satuan">
-                  <option value="km-mile" data-i18n="optKmMile">Km ke Mil</option>
-                  <option value="kg-lbs" data-i18n="optKgLbs">Kg ke Pon</option>
-                  <option value="c-f" data-i18n="optCF">Celsius ke Fahrenheit</option>
+                  <option value="km-mile">Km ke Mil</option>
+                  <option value="kg-lbs">Kg ke Pon</option>
+                  <option value="c-f">Celsius ke Fahrenheit</option>
                 </select>
               </div>
               <div class="flex justify-between items-center text-xs font-bold pt-1">
@@ -814,7 +927,7 @@
 
           <div class="space-y-6">
             <div class="card-modern p-5 rounded-2xl space-y-3">
-              <h3 class="font-extrabold text-xs" data-i18n="discHeading">Diskon</h3>
+              <h3 class="font-extrabold text-xs">Diskon</h3>
               <div class="space-y-2">
                 <input type="number" id="discPrice" placeholder="Harga" value="100000" class="w-full px-3 py-2 card-modern rounded-xl text-xs font-mono" oninput="calcDiscount()" title="Harga Awal">
                 <div class="flex gap-2">
@@ -829,7 +942,7 @@
             </div>
 
             <div class="card-modern p-5 rounded-2xl space-y-3">
-              <h3 class="font-extrabold text-xs" data-i18n="bmiHeading">Kalkulator BMI</h3>
+              <h3 class="font-extrabold text-xs">Kalkulator BMI</h3>
               <div class="flex gap-2">
                 <input type="number" id="bmiWeight" placeholder="Berat (kg)" value="70" class="w-1/2 px-3 py-2 card-modern rounded-xl text-xs font-mono" oninput="calcBMI()" title="Berat kg">
                 <input type="number" id="bmiHeight" placeholder="Tinggi (cm)" value="175" class="w-1/2 px-3 py-2 card-modern rounded-xl text-xs font-mono" oninput="calcBMI()" title="Tinggi cm">
@@ -849,10 +962,10 @@
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="flex justify-between items-center pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
           <div>
-            <h2 class="text-lg font-extrabold" data-i18n="vaultHeading">Secure Vault</h2>
-            <p class="text-xs opacity-70" data-i18n="vaultSub">Simpan kredensial penting secara aman.</p>
+            <h2 class="text-lg font-extrabold">Secure Vault</h2>
+            <p class="text-xs opacity-70">Simpan kredensial penting secara aman.</p>
           </div>
-          <button onclick="openVaultModal()" class="px-4 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnAddVault" title="Tambah Kredensial">+ Kredensial</button>
+          <button onclick="openVaultModal()" class="px-4 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Tambah Kredensial">+ Kredensial</button>
         </div>
         <div id="vaultListContainer" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
       </div>
@@ -863,23 +976,23 @@
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
           <div>
-            <h2 class="text-lg font-extrabold" data-i18n="codeHeading">Code Editor</h2>
-            <p class="text-xs opacity-70" data-i18n="codeSub">Edit HTML/CSS dan render langsung.</p>
+            <h2 class="text-lg font-extrabold">Code Editor</h2>
+            <p class="text-xs opacity-70">Edit HTML/CSS dan render langsung.</p>
           </div>
           <div class="flex flex-wrap gap-2">
-            <button onclick="loadDefaultHtmlTemplate()" class="px-3 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" data-i18n="btnLoadTemplate" title="Template">Template</button>
-            <button onclick="pasteCodeFromClipboard()" class="px-3 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" data-i18n="btnPasteCode" title="Tempel">Tempel</button>
-            <button onclick="openSnippetModal()" class="px-3 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" data-i18n="btnAddSnippet" title="Snippet">+ Snippet</button>
-            <button onclick="exportCodeFile('html')" class="px-3 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnExportHtml" title="Ekspor HTML">Ekspor HTML</button>
+            <button onclick="loadDefaultHtmlTemplate()" class="px-3 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" title="Template">Template</button>
+            <button onclick="pasteCodeFromClipboard()" class="px-3 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" title="Tempel">Tempel</button>
+            <button onclick="openSnippetModal()" class="px-3 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" title="Snippet">+ Snippet</button>
+            <button onclick="exportCodeFile('html')" class="px-3 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Ekspor HTML">Ekspor HTML</button>
           </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-2">
-            <h3 class="font-bold text-xs" data-i18n="editorTitle">Editor</h3>
-            <textarea id="liveHtmlEditor" data-i18n-ph="phCodeEditor" placeholder="Kode HTML..." class="w-full h-80 p-4 rounded-2xl card-modern font-mono text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="renderLiveHtmlPreview()"></textarea>
+            <h3 class="font-bold text-xs">Editor</h3>
+            <textarea id="liveHtmlEditor" placeholder="Kode HTML..." class="w-full h-80 p-4 rounded-2xl card-modern font-mono text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="renderLiveHtmlPreview()"></textarea>
           </div>
           <div class="space-y-2">
-            <h3 class="font-bold text-xs" data-i18n="outputTitle">Live Output</h3>
+            <h3 class="font-bold text-xs">Live Output</h3>
             <div class="w-full h-80 rounded-2xl card-modern overflow-hidden bg-white">
               <iframe id="liveHtmlPreviewFrame" class="w-full h-full border-0"></iframe>
             </div>
@@ -892,13 +1005,13 @@
       </div>
     </div>
 
-    <!-- TAB 13: MEDIA EDITOR (NEW v1.30) -->
+    <!-- TAB 13: MEDIA EDITOR -->
     <div id="tab-media" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 rounded-3xl space-y-6">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
           <div>
-            <h2 class="text-lg font-extrabold" data-i18n="mediaHeading">Editor Media & Foto</h2>
-            <p class="text-xs opacity-70" data-i18n="mediaSub">Sunting gambar secara instan dengan filter & efek.</p>
+            <h2 class="text-lg font-extrabold">Editor Media & Foto</h2>
+            <p class="text-xs opacity-70">Sunting gambar secara instan dengan filter & efek.</p>
           </div>
           <div class="flex flex-wrap gap-2">
             <label class="px-3.5 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow cursor-pointer ios-btn">
@@ -918,12 +1031,12 @@
       </div>
     </div>
 
-    <!-- TAB 14: SETTINGS & PERSONALIZATION -->
+    <!-- TAB 14: SETTINGS & PERSONALIZATION (With Secret index.html Live Editor Panel) -->
     <div id="tab-settings" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 sm:p-8 rounded-3xl space-y-8">
         <div class="pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
-          <h2 class="text-lg font-extrabold" data-i18n="setHeading">Pengaturan & Personalisasi</h2>
-          <p class="text-xs opacity-70" data-i18n="setSub">Atur bahasa, tema, keamanan, dan musik.</p>
+          <h2 class="text-lg font-extrabold">Pengaturan & Personalisasi</h2>
+          <p class="text-xs opacity-70">Atur bahasa, tema, keamanan, dan musik.</p>
         </div>
 
         <!-- APP PERSONALIZATION SETTINGS -->
@@ -950,32 +1063,32 @@
 
         <!-- THEMES & LANGUAGE SECTION -->
         <div class="space-y-4 pt-4 border-t border-slate-200/50 dark:border-slate-800/50">
-          <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500" data-i18n="themeSettingTitle">Tema & Bahasa</h3>
+          <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500">Tema & Bahasa</h3>
           <div class="space-y-3">
-            <label class="text-xs font-bold opacity-75" data-i18n="lblTheme">Pilih Tema</label>
+            <label class="text-xs font-bold opacity-75">Pilih Tema</label>
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              <button id="themeBtn-cyberpunk" onclick="setAppTheme('theme-cyberpunk-neon')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between" title="Cyberpunk">
-                <span data-i18n="themeCyber">Cyberpunk</span> <span class="w-3 h-3 rounded-full bg-cyan-400"></span>
+              <button onclick="setAppTheme('theme-cyberpunk-neon')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between">
+                <span>Cyberpunk</span> <span class="w-3 h-3 rounded-full bg-cyan-400"></span>
               </button>
-              <button id="themeBtn-aurora" onclick="setAppTheme('theme-aurora-glass')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between" title="Aurora">
-                <span data-i18n="themeAurora">Aurora</span> <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+              <button onclick="setAppTheme('theme-aurora-glass')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between">
+                <span>Aurora</span> <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
               </button>
-              <button id="themeBtn-nordic" onclick="setAppTheme('theme-nordic-frost')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between" title="Nordic">
-                <span data-i18n="themeNordic">Nordic</span> <span class="w-3 h-3 rounded-full bg-blue-500"></span>
+              <button onclick="setAppTheme('theme-nordic-frost')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between">
+                <span>Nordic</span> <span class="w-3 h-3 rounded-full bg-blue-500"></span>
               </button>
-              <button id="themeBtn-obsidian" onclick="setAppTheme('theme-obsidian-gold')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between" title="Obsidian">
-                <span data-i18n="themeObsidian">Obsidian</span> <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+              <button onclick="setAppTheme('theme-obsidian-gold')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between">
+                <span>Obsidian</span> <span class="w-3 h-3 rounded-full bg-amber-400"></span>
               </button>
-              <button id="themeBtn-sunset" onclick="setAppTheme('theme-sunset-blush')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between" title="Sunset">
-                <span data-i18n="themeSunset">Sunset</span> <span class="w-3 h-3 rounded-full bg-pink-400"></span>
+              <button onclick="setAppTheme('theme-sunset-blush')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between">
+                <span>Sunset</span> <span class="w-3 h-3 rounded-full bg-pink-400"></span>
               </button>
-              <button id="themeBtn-matrix" onclick="setAppTheme('theme-matrix-terminal')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between" title="Matrix">
-                <span data-i18n="themeMatrix">Matrix</span> <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+              <button onclick="setAppTheme('theme-matrix-terminal')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between">
+                <span>Matrix</span> <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
               </button>
             </div>
           </div>
           <div class="space-y-2 pt-2">
-            <label class="text-xs font-bold opacity-75" data-i18n="lblSelectLang">Bahasa</label>
+            <label class="text-xs font-bold opacity-75">Bahasa</label>
             <select id="langSelector" onchange="changeLanguage(this.value)" class="w-full sm:w-64 px-4 py-2.5 rounded-xl card-modern text-xs font-bold focus:outline-none focus:ring-2 focus:ring-blue-500" title="Pilih Bahasa">
               <option value="id">Bahasa Indonesia</option>
               <option value="en">English</option>
@@ -985,46 +1098,50 @@
           </div>
         </div>
 
-        <!-- SECURITY AGAINST HACKERS SECTION -->
-        <div class="space-y-4 pt-4 border-t border-slate-200/50 dark:border-slate-800/50">
-          <h3 class="font-extrabold text-xs uppercase tracking-wider text-emerald-500">Keamanan & Proteksi Anti-Hacker</h3>
-          <div class="card-modern p-4 rounded-2xl space-y-3">
-            <div class="flex justify-between items-center text-xs">
-              <span class="font-bold">Sanitasi XSS & Validasi Input Otomatis</span>
-              <span class="px-2.5 py-0.5 rounded bg-emerald-500/10 text-emerald-500 font-bold">Aktif (Secure)</span>
-            </div>
-            <p class="text-[11px] opacity-70">Semua input teks, data JSON, dan eksekusi lokal dilengkapi dengan proteksi XSS serta enkripsi penyimpanan lokal untuk mencegah manipulasi data.</p>
-            <div class="flex gap-2 pt-2">
-              <button onclick="runSecurityAudit()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Jalankan Audit Keamanan">Jalankan Audit Keamanan</button>
-            </div>
-          </div>
-        </div>
-
         <!-- AMBIENT MUSIC SECTION -->
         <div class="space-y-4 pt-4 border-t border-slate-200/50 dark:border-slate-800/50">
-          <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500" data-i18n="musicSettingTitle">Musik Ambient</h3>
+          <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500">Musik Ambient</h3>
           <div class="flex flex-wrap items-center gap-4">
             <button id="musicToggleBtn" onclick="toggleBackgroundMusic()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Putar Musik">Putar Musik</button>
             <select onchange="changeMusicTrack(this.value)" class="px-4 py-2.5 card-modern rounded-xl text-xs font-bold" title="Pilih Musik">
-              <option value="chill" data-i18n="trackChill">Chill Lofi</option>
-              <option value="dreamy" data-i18n="trackDreamy">Dreamy Synth</option>
-              <option value="synth" data-i18n="trackSynth">Ambient Synth</option>
+              <option value="chill">Chill Lofi</option>
+              <option value="dreamy">Dreamy Synth</option>
+              <option value="synth">Ambient Synth</option>
             </select>
             <div class="flex items-center gap-2">
-              <span class="text-xs font-bold opacity-75" data-i18n="lblVolume">Volume:</span>
+              <span class="text-xs font-bold opacity-75">Volume:</span>
               <input type="range" min="0" max="1" step="0.05" value="0.3" oninput="changeMusicVolume(this.value)" class="accent-blue-500 w-24" title="Volume Musik">
             </div>
           </div>
         </div>
 
-        <!-- ACCOUNT & DATA BACKUP (With Instant Text Paste Sync) -->
+        <!-- SECRET INDEX.HTML LIVE EDITOR (Protected by password Vanandi000...) -->
         <div class="space-y-4 pt-4 border-t border-slate-200/50 dark:border-slate-800/50">
-          <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500" data-i18n="loginTitle">Akun & Pemulihan Instan</h3>
+          <h3 class="font-extrabold text-xs uppercase tracking-wider text-rose-500">Fitur Rahasia: Live Editor index.html</h3>
+          <div class="card-modern p-4 rounded-2xl space-y-3 border border-rose-500/30">
+            <p class="text-[11px] opacity-75">Fitur rahasia pengembang untuk mengedit struktur dan kode index.html secara langsung secara real-time.</p>
+            <div id="secretEditorAuthBox" class="space-y-2">
+              <input type="password" id="secretEditorPassInput" placeholder="Masukkan kata sandi (Vanandi000...)..." class="w-full px-3 py-2 rounded-xl card-modern text-xs font-mono">
+              <button onclick="unlockSecretHtmlEditor()" class="px-4 py-2 bg-rose-600 text-white rounded-xl text-xs font-bold shadow ios-btn">Buka Kunci Editor</button>
+            </div>
+            <div id="secretEditorWorkspace" class="hidden space-y-2">
+              <textarea id="secretHtmlCodeArea" class="w-full h-64 p-3 rounded-xl card-modern font-mono text-[11px] focus:outline-none"></textarea>
+              <div class="flex gap-2">
+                <button onclick="applySecretHtmlChanges()" class="px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold shadow ios-btn">Terapkan Perubahan Real-Time</button>
+                <button onclick="lockSecretHtmlEditor()" class="px-4 py-2 card-modern rounded-xl text-xs font-bold ios-btn">Kunci Kembali</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACCOUNT & DATA BACKUP -->
+        <div class="space-y-4 pt-4 border-t border-slate-200/50 dark:border-slate-800/50">
+          <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500">Akun & Pemulihan Instan</h3>
           <div class="space-y-3">
-            <label class="text-xs font-bold opacity-75" data-i18n="lblUsername">Nama</label>
+            <label class="text-xs font-bold opacity-75">Nama</label>
             <div class="flex gap-2">
-              <input type="text" id="authUsername" data-i18n-ph="phUsername" placeholder="Nama..." class="flex-1 sm:w-64 px-4 py-2.5 rounded-xl card-modern text-xs font-bold focus:outline-none">
-              <button onclick="saveAuthCredentials()" class="px-4 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnSaveAccount" title="Simpan">Simpan</button>
+              <input type="text" id="authUsername" placeholder="Nama..." class="flex-1 sm:w-64 px-4 py-2.5 rounded-xl card-modern text-xs font-bold focus:outline-none">
+              <button onclick="saveAuthCredentials()" class="px-4 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Simpan">Simpan</button>
             </div>
           </div>
           <div class="space-y-2 pt-2">
@@ -1036,9 +1153,9 @@
             </div>
           </div>
           <div class="flex flex-wrap gap-3 pt-2">
-            <button onclick="autoBackupJSON()" class="px-4 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnDownloadJSON" title="Download JSON">Download File JSON</button>
+            <button onclick="autoBackupJSON()" class="px-4 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Download JSON">Download File JSON</button>
             <label class="px-4 py-2.5 card-modern hover:border-blue-500 rounded-xl text-xs font-bold shadow cursor-pointer ios-btn" title="Restore Data">
-              <span data-i18n="btnRestoreJSON">Upload File JSON</span>
+              <span>Upload File JSON</span>
               <input type="file" onchange="importJSON(event)" class="hidden">
             </label>
           </div>
@@ -1046,21 +1163,21 @@
 
         <!-- DEVELOPER CV SECTION -->
         <div class="space-y-3 pt-4 border-t border-slate-200/50 dark:border-slate-800/50">
-          <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500" data-i18n="devInfoTitle">Informasi Pengembang (CV)</h3>
+          <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500">Informasi Pengembang (CV)</h3>
           <div class="card-modern p-5 rounded-2xl space-y-3">
             <h4 class="font-extrabold text-sm">Mohammad Danis Muria Vanandi</h4>
-            <p class="text-xs opacity-80 leading-relaxed" data-i18n="devInfoDesc">Results-oriented professional with a Civil Engineering foundation (Politeknik Negeri Malang, 2021) and 4+ years of experience across land administration, finance logistics, and building design. Transitioning into AI and NLP.</p>
+            <p class="text-xs opacity-80 leading-relaxed">Results-oriented professional with a Civil Engineering foundation (Politeknik Negeri Malang, 2021) and 4+ years of experience across land administration, finance logistics, and building design. Transitioning into AI and NLP.</p>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs opacity-75 pt-2 border-t border-slate-200/50 dark:border-slate-800/50 font-mono">
               <div>Email: vanandi@proton.me</div>
               <div>Phone: +62 898 5160 888</div>
             </div>
-            <div class="text-[10px] opacity-50 font-mono pt-1">Build: 2026.08.12 | Version: v1.30-PRO</div>
+            <div class="text-[10px] opacity-50 font-mono pt-1">Build: 2026.08.12 | Version: v1.31-PRO</div>
           </div>
         </div>
 
         <!-- RESET DATA BUTTON -->
         <div class="pt-4 border-t border-slate-200/50 dark:border-slate-800/50">
-          <button onclick="resetAppCache()" class="w-full py-3 bg-rose-600 hover:bg-rose-700 text-white rounded-2xl text-xs font-bold shadow-lg ios-btn" data-i18n="btnResetData" title="Reset Seluruh Data">Reset Data</button>
+          <button onclick="resetAppCache()" class="w-full py-3 bg-rose-600 hover:bg-rose-700 text-white rounded-2xl text-xs font-bold shadow-lg ios-btn" title="Reset Seluruh Data">Reset Data</button>
         </div>
 
       </div>
@@ -1070,7 +1187,7 @@
 
   <!-- FLOATING BOTTOM DOCK NAVIGATION BAR -->
   <nav class="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-lg card-modern px-3 py-2 flex items-center justify-around shadow-2xl backdrop-blur-xl border">
-    <button id="menuBtn-dashboard" onclick="switchTab('dashboard')" class="dock-btn menu-btn-active" title="Beranda">
+    <button id="menuBtn-dashboard" onclick="switchTab('dashboard')" class="dock-btn menu-btn-active" title="Tab Hub">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     </button>
     <button id="menuBtn-finance" onclick="switchTab('finance')" class="dock-btn opacity-70 hover:opacity-100" title="Keuangan">
@@ -1104,31 +1221,31 @@
         <input type="hidden" id="formTxId" value="">
         <input type="hidden" id="formType" value="expense">
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="thDate">Tanggal</label>
+          <label class="text-xs font-bold opacity-75">Tanggal</label>
           <input type="date" id="formDate" required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-mono">
         </div>
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="thCat">Kategori</label>
-          <input type="text" id="formCategory" data-i18n-ph="phCategory" placeholder="Kategori..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
+          <label class="text-xs font-bold opacity-75">Kategori</label>
+          <input type="text" id="formCategory" placeholder="Kategori..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
         </div>
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="thNom">Nominal</label>
+          <label class="text-xs font-bold opacity-75">Nominal</label>
           <input type="number" id="formAmount" placeholder="0" required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-mono">
         </div>
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="thDesc">Keterangan</label>
-          <input type="text" id="formDesc" data-i18n-ph="phDesc" placeholder="Keterangan..." class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
+          <label class="text-xs font-bold opacity-75">Keterangan</label>
+          <input type="text" id="formDesc" placeholder="Keterangan..." class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
         </div>
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="lblMethod">Metode</label>
+          <label class="text-xs font-bold opacity-75">Metode</label>
           <select id="formIsOnline" class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-bold">
-            <option value="true" data-i18n="optOnlineMethod">Online</option>
-            <option value="false" data-i18n="optOfflineMethod">Offline</option>
+            <option value="true">Online</option>
+            <option value="false">Offline</option>
           </select>
         </div>
         <div class="flex gap-2 pt-2">
-          <button type="button" onclick="closeTxModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" data-i18n="btnCancel" title="Batal">Batal</button>
-          <button type="submit" class="flex-1 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow ios-btn" data-i18n="btnSave" title="Simpan">Simpan</button>
+          <button type="button" onclick="closeTxModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
         </div>
       </form>
     </div>
@@ -1138,19 +1255,19 @@
   <div id="habitModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
-        <h3 class="font-extrabold text-sm" data-i18n="habitModalTitle">Rutinitas</h3>
+        <h3 class="font-extrabold text-sm">Rutinitas</h3>
         <button onclick="closeHabitModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
       <form id="habitForm" class="space-y-3">
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="lblHabitName">Nama Rutinitas</label>
-          <input type="text" id="habitTitleInput" data-i18n-ph="phHabit" placeholder="Rutinitas..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
+          <label class="text-xs font-bold opacity-75">Nama Rutinitas</label>
+          <input type="text" id="habitTitleInput" placeholder="Rutinitas..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
         </div>
         <div class="flex gap-2 pt-2">
-          <button type="button" onclick="closeHabitModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" data-i18n="btnCancel" title="Batal">Batal</button>
-          <button type="submit" class="flex-1 py-2.5 bg-pink-600 text-white font-bold text-xs rounded-xl shadow ios-btn" data-i18n="btnSave" title="Simpan">Simpan</button>
+          <button type="button" onclick="closeHabitModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-pink-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
         </div>
       </form>
     </div>
@@ -1160,7 +1277,7 @@
   <div id="kanbanModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
-        <h3 class="font-extrabold text-sm" data-i18n="kanbanFormTitle">Kanban</h3>
+        <h3 class="font-extrabold text-sm">Kanban</h3>
         <button onclick="closeKanbanModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
@@ -1168,16 +1285,16 @@
       <form id="kanbanForm" class="space-y-3">
         <input type="hidden" id="kanbanCardStatus" value="todo">
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="lblCardTitle">Judul</label>
+          <label class="text-xs font-bold opacity-75">Judul</label>
           <input type="text" id="kanbanCardTitle" placeholder="Judul..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
         </div>
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="thDesc">Keterangan</label>
+          <label class="text-xs font-bold opacity-75">Keterangan</label>
           <textarea id="kanbanCardDesc" placeholder="Keterangan..." class="w-full p-3 rounded-xl card-modern text-xs h-20"></textarea>
         </div>
         <div class="flex gap-2 pt-2">
-          <button type="button" onclick="closeKanbanModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" data-i18n="btnCancel" title="Batal">Batal</button>
-          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" data-i18n="btnSave" title="Simpan">Simpan</button>
+          <button type="button" onclick="closeKanbanModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
         </div>
       </form>
     </div>
@@ -1187,7 +1304,7 @@
   <div id="eisenhowerModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
-        <h3 class="font-extrabold text-sm" data-i18n="eisenFormTitle">Matriks</h3>
+        <h3 class="font-extrabold text-sm">Matriks</h3>
         <button onclick="closeEisenhowerModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
@@ -1195,12 +1312,12 @@
       <form id="eisenForm" class="space-y-3">
         <input type="hidden" id="eisenQuadrant" value="Q1">
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="lblTaskTitle">Tugas</label>
+          <label class="text-xs font-bold opacity-75">Tugas</label>
           <input type="text" id="eisenTitle" placeholder="Tugas..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
         </div>
         <div class="flex gap-2 pt-2">
-          <button type="button" onclick="closeEisenhowerModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" data-i18n="btnCancel" title="Batal">Batal</button>
-          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" data-i18n="btnSave" title="Simpan">Simpan</button>
+          <button type="button" onclick="closeEisenhowerModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
         </div>
       </form>
     </div>
@@ -1210,19 +1327,19 @@
   <div id="taskModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
-        <h3 class="font-extrabold text-sm" data-i18n="taskModalTitle">Tugas</h3>
+        <h3 class="font-extrabold text-sm">Tugas</h3>
         <button onclick="closeTaskModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
       <form id="taskForm" class="space-y-3">
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="lblTaskTitle">Tugas</label>
+          <label class="text-xs font-bold opacity-75">Tugas</label>
           <input type="text" id="taskTitle" placeholder="Tugas..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
         </div>
         <div class="flex gap-2 pt-2">
-          <button type="button" onclick="closeTaskModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" data-i18n="btnCancel" title="Batal">Batal</button>
-          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" data-i18n="btnSave" title="Simpan">Simpan</button>
+          <button type="button" onclick="closeTaskModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
         </div>
       </form>
     </div>
@@ -1232,23 +1349,23 @@
   <div id="noteModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
-        <h3 class="font-extrabold text-sm" data-i18n="noteModalTitle">Catatan</h3>
+        <h3 class="font-extrabold text-sm">Catatan</h3>
         <button onclick="closeNoteModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
       <form id="noteForm" class="space-y-3">
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="lblNoteTitle">Judul</label>
+          <label class="text-xs font-bold opacity-75">Judul</label>
           <input type="text" id="noteTitle" placeholder="Judul..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
         </div>
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="lblNoteContent">Isi</label>
+          <label class="text-xs font-bold opacity-75">Isi</label>
           <textarea id="noteContent" placeholder="Isi..." required class="w-full p-3 rounded-xl card-modern text-xs h-24"></textarea>
         </div>
         <div class="flex gap-2 pt-2">
-          <button type="button" onclick="closeNoteModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" data-i18n="btnCancel" title="Batal">Batal</button>
-          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" data-i18n="btnSave" title="Simpan">Simpan</button>
+          <button type="button" onclick="closeNoteModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
         </div>
       </form>
     </div>
@@ -1258,23 +1375,23 @@
   <div id="snippetModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
-        <h3 class="font-extrabold text-sm" data-i18n="snippetModalTitle">Snippet</h3>
+        <h3 class="font-extrabold text-sm">Snippet</h3>
         <button onclick="closeSnippetModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
       <form id="snippetForm" class="space-y-3">
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="lblSnippetTitle">Snippet</label>
+          <label class="text-xs font-bold opacity-75">Snippet</label>
           <input type="text" id="snippetTitle" placeholder="Snippet..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
         </div>
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="lblSnippetCode">Kode</label>
+          <label class="text-xs font-bold opacity-75">Kode</label>
           <textarea id="snippetCode" placeholder="Kode..." required class="w-full p-3 rounded-xl card-modern font-mono text-xs h-24"></textarea>
         </div>
         <div class="flex gap-2 pt-2">
-          <button type="button" onclick="closeSnippetModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" data-i18n="btnCancel" title="Batal">Batal</button>
-          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" data-i18n="btnSave" title="Simpan">Simpan</button>
+          <button type="button" onclick="closeSnippetModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
         </div>
       </form>
     </div>
@@ -1284,7 +1401,7 @@
   <div id="calendarEventModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
-        <h3 id="calModalTitleText" class="font-extrabold text-sm" data-i18n="calModalTitle">Agenda Kalender</h3>
+        <h3 id="calModalTitleText" class="font-extrabold text-sm">Agenda Kalender</h3>
         <button onclick="closeCalendarEventModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
@@ -1293,16 +1410,16 @@
         <input type="hidden" id="calEditOldDate" value="">
         <input type="hidden" id="calEditOldIndex" value="">
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="thDate">Tanggal</label>
+          <label class="text-xs font-bold opacity-75">Tanggal</label>
           <input type="date" id="calEventDate" required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-mono">
         </div>
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="lblAgendaText">Agenda</label>
+          <label class="text-xs font-bold opacity-75">Agenda</label>
           <input type="text" id="calEventText" placeholder="Agenda..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
         </div>
         <div class="flex gap-2 pt-2">
-          <button type="button" onclick="closeCalendarEventModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" data-i18n="btnCancel" title="Batal">Batal</button>
-          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" data-i18n="btnSave" title="Simpan">Simpan</button>
+          <button type="button" onclick="closeCalendarEventModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
         </div>
       </form>
     </div>
@@ -1312,45 +1429,45 @@
   <div id="vaultModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
-        <h3 class="font-extrabold text-sm" data-i18n="btnAddVault">+ Kredensial</h3>
+        <h3 class="font-extrabold text-sm">+ Kredensial</h3>
         <button onclick="closeVaultModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
       <form id="vaultForm" onsubmit="saveVaultItem(event)" class="space-y-3">
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="lblVaultTitle">Layanan</label>
+          <label class="text-xs font-bold opacity-75">Layanan</label>
           <input type="text" id="vaultTitle" placeholder="Layanan..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
         </div>
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="lblVaultUser">Username</label>
+          <label class="text-xs font-bold opacity-75">Username</label>
           <input type="text" id="vaultUser" placeholder="Username..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
         </div>
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="lblVaultPass">Password</label>
+          <label class="text-xs font-bold opacity-75">Password</label>
           <input type="password" id="vaultPass" placeholder="Password..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-mono">
         </div>
         <div class="flex gap-2 pt-2">
-          <button type="button" onclick="closeVaultModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" data-i18n="btnCancel" title="Batal">Batal</button>
-          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" data-i18n="btnSave" title="Simpan">Simpan</button>
+          <button type="button" onclick="closeVaultModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- Login & Recovery Modal (Unified Account & Recovery Hub - v1.30) -->
+  <!-- Login & Recovery Modal -->
   <div id="loginModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
-        <h3 class="font-extrabold text-sm" data-i18n="loginModalTitle">Akun & Pemulihan Data</h3>
+        <h3 class="font-extrabold text-sm">Akun & Pemulihan Data</h3>
         <button onclick="closeLoginModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
       </div>
       <div class="space-y-4">
-        <p class="text-xs opacity-70" data-i18n="loginModalDesc">Kelola nama akun serta lakukan sinkronisasi atau pemulihan data instan.</p>
+        <p class="text-xs opacity-70">Kelola nama akun serta lakukan sinkronisasi atau pemulihan data instan.</p>
         <div class="space-y-1">
-          <label class="text-xs font-bold opacity-75" data-i18n="lblUsername">Nama Pengguna</label>
+          <label class="text-xs font-bold opacity-75">Nama Pengguna</label>
           <input type="text" id="authModalInput" placeholder="Nama..." class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-bold">
         </div>
         <button onclick="saveAuthCredentialsModal()" class="w-full py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan Nama">Simpan Perubahan Nama</button>
@@ -1366,7 +1483,7 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (v1.30) -->
+  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (TabHub v1.31) -->
   <script>
     // --- XSS SECURITY & SANITIZATION ENGINE ---
     function sanitizeHtml(str) {
@@ -1378,14 +1495,14 @@
                 .replace(/'/g, '&#039;');
     }
 
-    // --- KAMUS MULTI-BAHASA LENGKAP & DINAMIS (v1.30) ---
+    // --- KAMUS MULTI-BAHASA LENGKAP & DINAMIS (TabHub v1.31) ---
     const i18nData = {
       id: {
-        hubTitle: "DV Hub",
+        hubTitle: "TabHub",
         hubSub: "Pusat komando produktivitas terpadu & manajemen cerdas.",
-        dashHeroTitle: "Produktivitas Tanpa Batas & Integrasi Langsung",
-        dashHeroDesc: "Kelola seluruh modul cerdas, pantau berita dunia & pasar keuangan global secara real-time.",
-        newsTickerTitle: "Berita Global Real-Time",
+        dashHeroTitle: "Pusat Komando TabHub Terpadu",
+        dashHeroDesc: "Menampilkan ringkasan lengkap seluruh tab, statistik sistem, panduan, pintasan, dan berita real-time tanpa batas.",
+        newsTickerTitle: "Berita Global Tanpa Batas",
         newsTickerSub: "Informasi berita teknologi, AI, finansial, kesehatan, dan sains terkini.",
         optAllNews: "Semua Kategori",
         phSearchNews: "Cari berita...",
@@ -1398,7 +1515,7 @@
         statKanban: "Proyek Kanban",
         statFiles: "Arsip File",
         finTitle: "Manajemen Keuangan",
-        finSub: "Pantau arus kas, grafik, dan anggaran.",
+        finSub: "Pantau arus kas, grafik, dan anggaran dengan presisi.",
         lblBudgetGoal: "Target Anggaran:",
         optInc: "Pemasukan",
         optExp: "Pengeluaran",
@@ -1416,15 +1533,15 @@
         thDesc: "Keterangan",
         thNom: "Nominal",
         thAct: "Aksi",
-        chatHeading: "Asisten AI & Pencarian",
-        chatSub: "Asisten pintar & pencarian modul.",
+        chatHeading: "AI & Pencarian",
+        chatSub: "Asisten pintar & pencarian fitur.",
         btnClearChat: "Bersihkan",
         lblQuickPrompt: "PROMPT CEPAT:",
-        chatWelcomeMsg: "Halo! Asisten AI cerdas aktif secara offline/lokal maupun online. Ketik pertanyaan, tugas, atau perintah pencarian modul.",
+        chatWelcomeMsg: "Halo! AI cerdas aktif secara offline maupun online. Ketik pertanyaan, tugas, atau perintah pencarian fitur.",
         phChatInput: "Ketik perintah...",
         btnSendChat: "Kirim",
         taskHeading: "Tugas & Rutinitas",
-        taskSub: "Pengorganisasian tugas & kebiasaan harian.",
+        taskSub: "Pengorganisasian tugas & kebiasaan harian secara terstruktur.",
         btnTask: "+ Tugas",
         btnNewHabit: "+ Rutinitas",
         btnNote: "+ Catatan",
@@ -1493,7 +1610,7 @@
         lblSelectLang: "Bahasa",
         lblVolume: "Volume:",
         launcherTitle: "Menu Utama",
-        menuHub: "Beranda",
+        menuHub: "Tab Hub",
         menuFinance: "Keuangan",
         menuTasks: "Tugas",
         menuKanban: "Proyek",
@@ -1507,7 +1624,7 @@
         menuCode: "Kode",
         menuMedia: "Media Editor",
         subFin: "Arus kas",
-        subAi: "Asisten AI",
+        subAi: "AI pintar",
         subProj: "Proyek",
         subTasks: "Daftar tugas",
         subFiles: "Arsip",
@@ -1521,12 +1638,6 @@
         subSet: "Pengaturan",
         devInfoTitle: "Informasi Pengembang (CV)",
         devInfoDesc: "Results-oriented professional with a Civil Engineering foundation (Politeknik Negeri Malang, 2021) and 4+ years of experience across land administration, finance logistics, and building design. Transitioning into AI and NLP.",
-        themeCyber: "Cyberpunk",
-        themeAurora: "Aurora",
-        themeNordic: "Nordic",
-        themeObsidian: "Obsidian",
-        themeSunset: "Sunset",
-        themeMatrix: "Matrix",
         btnStopMusic: "Hentikan",
         trackChill: "Chill Lofi",
         trackDreamy: "Dreamy Synth",
@@ -1588,11 +1699,11 @@
         phCodeEditor: "Kode HTML..."
       },
       en: {
-        hubTitle: "DV Hub",
+        hubTitle: "TabHub",
         hubSub: "Integrated productivity command center.",
-        dashHeroTitle: "Limitless Productivity & Live Integration",
-        dashHeroDesc: "Manage smart modules, monitor world news and financial markets in real-time.",
-        newsTickerTitle: "Real-Time Global News",
+        dashHeroTitle: "Integrated TabHub Command Center",
+        dashHeroDesc: "Complete summary of all tabs, system statistics, guides, shortcuts, and infinite real-time news.",
+        newsTickerTitle: "Infinite Global News",
         newsTickerSub: "Direct updates on tech, AI, finance, health, and science.",
         optAllNews: "All Categories",
         phSearchNews: "Search news...",
@@ -1623,11 +1734,11 @@
         thDesc: "Description",
         thNom: "Amount",
         thAct: "Action",
-        chatHeading: "AI Assistant & Search",
-        chatSub: "Smart assistant & module search.",
+        chatHeading: "AI & Search",
+        chatSub: "Smart assistant & feature search.",
         btnClearChat: "Clear",
         lblQuickPrompt: "QUICK PROMPTS:",
-        chatWelcomeMsg: "Hello! Smart AI assistant active offline/online. Type questions, tasks, or search queries.",
+        chatWelcomeMsg: "Hello! Smart AI active offline/online. Type questions, tasks, or search queries.",
         phChatInput: "Type command...",
         btnSendChat: "Send",
         taskHeading: "Tasks & Routines",
@@ -1700,7 +1811,7 @@
         lblSelectLang: "Language",
         lblVolume: "Volume:",
         launcherTitle: "Main Menu",
-        menuHub: "Home",
+        menuHub: "Tab Hub",
         menuFinance: "Finance",
         menuTasks: "Tasks",
         menuKanban: "Projects",
@@ -1714,7 +1825,7 @@
         menuCode: "Code",
         menuMedia: "Media Editor",
         subFin: "Cash flow",
-        subAi: "Smart assistant",
+        subAi: "Smart AI",
         subProj: "Projects",
         subTasks: "Task list",
         subFiles: "Storage",
@@ -1728,12 +1839,6 @@
         subSet: "Settings",
         devInfoTitle: "Developer Information (CV)",
         devInfoDesc: "Results-oriented professional with a Civil Engineering foundation (Politeknik Negeri Malang, 2021) and 4+ years of experience across land administration, finance logistics, and building design. Transitioning into AI and NLP.",
-        themeCyber: "Cyberpunk",
-        themeAurora: "Aurora",
-        themeNordic: "Nordic",
-        themeObsidian: "Obsidian",
-        themeSunset: "Sunset",
-        themeMatrix: "Matrix",
         btnStopMusic: "Stop",
         trackChill: "Chill Lofi",
         trackDreamy: "Dreamy Synth",
@@ -1795,11 +1900,11 @@
         phCodeEditor: "HTML code..."
       },
       zh: {
-        hubTitle: "DV Hub",
+        hubTitle: "TabHub",
         hubSub: "综合生产力指挥中心。",
-        dashHeroTitle: "无限生产力与实时集成",
-        dashHeroDesc: "实时管理智能模块、全球新闻与金融市场。",
-        newsTickerTitle: "实时全球新闻",
+        dashHeroTitle: "TabHub 综合指挥中心",
+        dashHeroDesc: "展示所有标签页汇总、系统统计、指南、快捷方式及无限实时新闻。",
+        newsTickerTitle: "无限全球新闻",
         newsTickerSub: "科技、AI、金融、健康与科学新闻直接更新。",
         optAllNews: "全部分类",
         phSearchNews: "搜索新闻...",
@@ -1830,11 +1935,11 @@
         thDesc: "描述",
         thNom: "金额",
         thAct: "操作",
-        chatHeading: "AI 助手与搜索",
-        chatSub: "智能助手与模块搜索。",
+        chatHeading: "AI 与搜索",
+        chatSub: "智能助手与功能搜索。",
         btnClearChat: "清空",
         lblQuickPrompt: "快捷提示：",
-        chatWelcomeMsg: "您好！智能 AI 助手支持离线/在线模式。输入问题、任务或搜索查询。",
+        chatWelcomeMsg: "您好！智能 AI 支持离线/在线模式。输入问题、任务或搜索查询。",
         phChatInput: "输入指令...",
         btnSendChat: "发送",
         taskHeading: "任务与例程",
@@ -1859,7 +1964,7 @@
         btnReset: "重置",
         mindmapTip: "在画布上自由拖动节点 (触摸并拖动)",
         clockHeading: "时钟、计时器与番茄钟",
-        clockSub: "完整时间管理。",
+        clockSub: "完整时间 management。",
         lblCurrentLiveTime: "本地时间",
         lblSetAlarm: "设置闹钟",
         btnSaveAlarm: "设定",
@@ -1907,7 +2012,7 @@
         lblSelectLang: "语言",
         lblVolume: "音量：",
         launcherTitle: "主菜单",
-        menuHub: "首页",
+        menuHub: "Tab Hub",
         menuFinance: "财务",
         menuTasks: "任务",
         menuKanban: "项目",
@@ -1921,7 +2026,7 @@
         menuCode: "代码",
         menuMedia: "媒体编辑器",
         subFin: "现金流",
-        subAi: "智能助手",
+        subAi: "智能 AI",
         subProj: "项目",
         subTasks: "任务列表",
         subFiles: "存储",
@@ -1935,12 +2040,6 @@
         subSet: "设置",
         devInfoTitle: "开发者信息 (CV)",
         devInfoDesc: "Results-oriented professional with a Civil Engineering foundation (Politeknik Negeri Malang, 2021) and 4+ years of experience across land administration, finance logistics, and building design. Transitioning into AI and NLP.",
-        themeCyber: "赛博朋克",
-        themeAurora: "极光",
-        themeNordic: "北欧",
-        themeObsidian: "黑曜石",
-        themeSunset: "落日",
-        themeMatrix: "矩阵",
         btnStopMusic: "停止",
         trackChill: "Chill Lofi",
         trackDreamy: "Dreamy Synth",
@@ -2002,11 +2101,11 @@
         phCodeEditor: "HTML 代码..."
       },
       ar: {
-        hubTitle: "DV Hub",
+        hubTitle: "TabHub",
         hubSub: "مركز قيادة الإنتاجية المتكامل.",
-        dashHeroTitle: "إنتاجية بلا حدود وتكامل فوري",
-        dashHeroDesc: "إدارة الوحدات الذكية وتتبع الأخبار العالمية والأسواق المالية.",
-        newsTickerTitle: "الأخبار العالمية الفورية",
+        dashHeroTitle: "مركز قيادة TabHub المتكامل",
+        dashHeroDesc: "ملخص كامل لجميع علامات التبويب، وإحصاءات النظام، والأدلة، والاختصارات، والأخبار الفورية بلا حدود.",
+        newsTickerTitle: "الأخبار العالمية اللانهائية",
         newsTickerSub: "تحديثات مباشرة للتكنولوجيا والذكاء الاصطناعي والصحة.",
         optAllNews: "جميع الفئات",
         phSearchNews: "بحث في الأخبار...",
@@ -2037,11 +2136,11 @@
         thDesc: "الوصف",
         thNom: "المبلغ",
         thAct: "الإجراء",
-        chatHeading: "مساعد الذكاء الاصطناعي والبحث",
-        chatSub: "المساعد الذكي وبحث الوحدات.",
+        chatHeading: "AI & Search",
+        chatSub: "المساعد الذكي وبحث الميزات.",
         btnClearChat: "مسح",
         lblQuickPrompt: "موجهات سريعة:",
-        chatWelcomeMsg: "مرحباً! المساعد الذكي نشط دون اتصال أو عبر الإنترنت. اكتب الأسئلة أو المهام أو استعلامات البحث.",
+        chatWelcomeMsg: "مرحباً! الذكاء الاصطناعي نشط دون اتصال أو عبر الإنترنت. اكتب الأسئلة أو المهام أو استعلامات البحث.",
         phChatInput: "اكتب أمراً...",
         btnSendChat: "إرسال",
         taskHeading: "المهام والروتين",
@@ -2114,7 +2213,7 @@
         lblSelectLang: "اللغة",
         lblVolume: "الصوت:",
         launcherTitle: "القائمة الرئيسية",
-        menuHub: "الرئيسية",
+        menuHub: "Tab Hub",
         menuFinance: "المالية",
         menuTasks: "المهام",
         menuKanban: "المشاريع",
@@ -2128,7 +2227,7 @@
         menuCode: "الكود",
         menuMedia: "محرر الوسائط",
         subFin: "التدفق النقدي",
-        subAi: "مساعد ذكي",
+        subAi: "AI ذكي",
         subProj: "مشاريع",
         subTasks: "مهام",
         subFiles: "تخزين",
@@ -2142,12 +2241,6 @@
         subSet: "إعدادات",
         devInfoTitle: "معلومات المطور (CV)",
         devInfoDesc: "Results-oriented professional with a Civil Engineering foundation (Politeknik Negeri Malang, 2021) and 4+ years of experience across land administration, finance logistics, and building design. Transitioning into AI and NLP.",
-        themeCyber: "سايبربانك",
-        themeAurora: "أورورا",
-        themeNordic: "نورديك",
-        themeObsidian: "أوبسيديان",
-        themeSunset: "غسوب",
-        themeMatrix: "مصفوفة",
         btnStopMusic: "إيقاف",
         trackChill: "Chill Lofi",
         trackDreamy: "Dreamy Synth",
@@ -2231,7 +2324,7 @@
       if (langSelector) langSelector.value = lang;
     }
 
-    // --- STATE UTAMA & PERSISTENSI (v1.30) ---
+    // --- STATE UTAMA & PERSISTENSI (TabHub v1.31) ---
     let appState = {
       currentTab: 'dashboard',
       theme: 'theme-nordic-frost',
@@ -2302,7 +2395,7 @@
       }
     }
 
-    // --- INSTANT TEXT STATE RECOVERY (v1.30) ---
+    // --- INSTANT TEXT STATE RECOVERY ---
     function copyStateJsonText() {
       const val = JSON.stringify(appState, null, 2);
       navigator.clipboard.writeText(val).then(() => alert('State JSON berhasil disalin ke clipboard!'));
@@ -2333,8 +2426,8 @@
       } catch(e) { alert('Format JSON tidak valid!'); }
     }
 
-    // --- EXPANDED GLOBAL NEWS DATABASE ---
-    const globalNewsList = [
+    // --- INFINITE GLOBAL NEWS & LOAD MORE ---
+    const baseGlobalNewsList = [
       { 
         title: "AI Breakthrough: Advanced LLMs Enhance Autonomous Systems & Robotics", 
         time: "10 menit lalu", 
@@ -2386,6 +2479,7 @@
       }
     ];
 
+    let dynamicNewsCount = 6;
     function filterAndRenderNews() {
       const container = document.getElementById('realtimeNewsGridContainer');
       if (!container) return;
@@ -2393,7 +2487,7 @@
       const category = document.getElementById('newsCategoryFilter')?.value || 'all';
 
       container.innerHTML = '';
-      const filtered = globalNewsList.filter(item => {
+      const filtered = baseGlobalNewsList.slice(0, dynamicNewsCount).filter(item => {
         const matchSearch = item.title.toLowerCase().includes(search) || item.desc.toLowerCase().includes(search) || item.tag.toLowerCase().includes(search);
         if (!matchSearch) return false;
         if (category !== 'all' && item.tag !== category) return false;
@@ -2416,7 +2510,7 @@
             </div>
             <div class="p-4 space-y-2">
               <div class="flex justify-between items-center text-[10px] opacity-65 font-mono">
-                <span>DV News Global</span>
+                <span>TabHub News Global</span>
                 <span>${news.time}</span>
               </div>
               <h4 class="font-extrabold text-xs leading-snug">${sanitizeHtml(news.title)}</h4>
@@ -2426,6 +2520,73 @@
         `;
         container.appendChild(div);
       });
+    }
+
+    function loadMoreNews() {
+      dynamicNewsCount += 3;
+      // Tambahkan data tiruan ekstra agar tak terbatas
+      baseGlobalNewsList.push({
+        title: `Eksplorasi Teknologi & Inovasi Global #${dynamicNewsCount}`,
+        time: `${dynamicNewsCount * 10} menit lalu`,
+        tag: "AI & Tech",
+        desc: "Laporan riset lanjutan mengenai efisiensi komputasi cerdas di berbagai sektor industri modern.",
+        img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80"
+      });
+      filterAndRenderNews();
+    }
+
+    // --- SCROLL TO TOP FLOATING BUTTON LOGIC ---
+    window.onscroll = function() {
+      const btn = document.getElementById('scrollToTopBtn');
+      if (!btn) return;
+      const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const currentScroll = window.scrollY;
+      if (currentScroll > 300 || (scrollTotal - currentScroll < 150)) {
+        btn.style.display = 'flex';
+      } else {
+        btn.style.display = 'none';
+      }
+    };
+
+    function scrollToTopPage() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- SECRET LIVE index.html EDITOR (Protected by Vanandi000...) ---
+    function unlockSecretHtmlEditor() {
+      const pass = document.getElementById('secretEditorPassInput')?.value || '';
+      if (pass === 'Vanandi000...') {
+        document.getElementById('secretEditorAuthBox').classList.add('hidden');
+        document.getElementById('secretEditorWorkspace').classList.remove('hidden');
+        // Ambil outerHTML dokumen saat ini
+        const currentHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+        document.getElementById('secretHtmlCodeArea').value = currentHtml;
+        alert('Akses Rahasia Diterima: Editor live index.html terbuka.');
+      } else {
+        alert('Kata sandi salah! Akses ditolak.');
+      }
+    }
+
+    function lockSecretHtmlEditor() {
+      document.getElementById('secretEditorWorkspace').classList.add('hidden');
+      document.getElementById('secretEditorAuthBox').classList.remove('hidden');
+      document.getElementById('secretEditorPassInput').value = '';
+    }
+
+    function applySecretHtmlChanges() {
+      const newCode = document.getElementById('secretHtmlCodeArea')?.value || '';
+      if (!newCode.includes('<!DOCTYPE html>')) {
+        alert('Format kode HTML tidak valid!');
+        return;
+      }
+      try {
+        document.open();
+        document.write(newCode);
+        document.close();
+        alert('Perubahan struktur index.html berhasil diterapkan secara real-time!');
+      } catch(e) {
+        alert('Gagal menerapkan perubahan real-time: ' + e.message);
+      }
     }
 
     // --- AI & MODAL HANDLERS ---
@@ -2579,10 +2740,15 @@
 
     function toggleFloatingMenu() {
       const modal = document.getElementById('floatingMenuModal');
-      if (modal) modal.classList.toggle('hidden');
+      if (modal) {
+        modal.classList.toggle('hidden');
+        if (!modal.classList.contains('hidden')) {
+          updateMenuLauncherActiveStates();
+        }
+      }
     }
 
-    // --- TAB SWITCHING & LAUNCHER HIGHLIGHT SYNC (v1.30) ---
+    // --- TAB SWITCHING & MENU LAUNCHER ACTIVE/INACTIVE HIGHLIGHT SYNC ---
     function switchTab(tabId) {
       if (tabId === 'chatbot') {
         openFloatingAiModal();
@@ -2604,13 +2770,7 @@
         activeMenuBtn.className = "dock-btn menu-btn-active";
       }
 
-      document.querySelectorAll('.launcher-item').forEach(item => {
-        item.classList.remove('border-blue-500', 'bg-blue-500/10');
-      });
-      const activeLauncherBtn = document.getElementById(`launcherBtn-${tabId}`);
-      if (activeLauncherBtn) {
-        activeLauncherBtn.classList.add('border-blue-500', 'bg-blue-500/10');
-      }
+      updateMenuLauncherActiveStates();
 
       if (tabId === 'mindmap') {
         setTimeout(() => { renderMindMap(); }, 50);
@@ -2622,6 +2782,19 @@
     function switchTabAndClose(tabId) {
       switchTab(tabId);
       toggleFloatingMenu();
+    }
+
+    function updateMenuLauncherActiveStates() {
+      document.querySelectorAll('.launcher-item').forEach(item => {
+        item.classList.remove('border-blue-500', 'bg-blue-500/10', 'shadow-md');
+        item.style.borderColor = '';
+        item.style.background = '';
+      });
+      const activeLauncherBtn = document.getElementById(`launcherBtn-${appState.currentTab}`);
+      if (activeLauncherBtn) {
+        activeLauncherBtn.classList.add('border-blue-500', 'bg-blue-500/10', 'shadow-md');
+        activeLauncherBtn.style.borderColor = 'var(--accent-color)';
+      }
     }
 
     function updateClockAndWeatherHeader() {
@@ -2664,10 +2837,6 @@
       if (scale === 'compact') body.style.fontSize = '12px';
       else if (scale === 'large') body.style.fontSize = '16px';
       else body.style.fontSize = '14px';
-    }
-
-    function runSecurityAudit() {
-      alert('Audit Keamanan Berhasil: Sistem terlindung dari serangan XSS, penyimpanan lokal terenkripsi, dan header CORS aktif dengan aman!');
     }
 
     // --- FINANCE LOGIC ---
@@ -2802,11 +2971,11 @@
       const blob = new Blob([csv], { type: 'text/csv' });
       const a = document.createElement('a');
       a.href = window.URL.createObjectURL(blob);
-      a.download = 'dv-hub-finance.csv';
+      a.download = 'tabhub-finance.csv';
       a.click();
     }
 
-    // --- ENHANCED OFFLINE & ONLINE AI ASSISTANT (v1.30) ---
+    // --- AI ASSISTANT ---
     async function sendChatMessage() {
       const input = document.getElementById('chatInputText');
       if (!input) return;
@@ -2830,7 +2999,6 @@
     async function processAiMessage(text, areaId) {
       const lower = text.toLowerCase();
       
-      // Jika pengguna memasukkan API Key secara langsung
       if (lower.startsWith('sk-') || lower.startsWith('aiza') || (lower.length > 20 && !lower.includes(' '))) {
         appState.user.apiKey = text.trim();
         saveStateToStorage();
@@ -2838,21 +3006,19 @@
         return;
       }
 
-      // Fitur Pencarian Modul via AI
       if (lower.startsWith('cari ') || lower.startsWith('/search ') || lower.includes('cari')) {
         const query = lower.replace('cari ', '').replace('/search ', '').replace('cari', '').trim();
         let matches = [];
         (appState.tasks || []).forEach(t => { if ((t.title || '').toLowerCase().includes(query)) matches.push(`[Tugas] ${t.title}`); });
         (appState.notes || []).forEach(n => { if ((n.title || '').toLowerCase().includes(query)) matches.push(`[Catatan] ${n.title}`); });
         (appState.vault || []).forEach(v => { if ((v.title || '').toLowerCase().includes(query)) matches.push(`[Vault] ${v.title}`); });
-        let reply = matches.length > 0 ? `Hasil pencarian lintas modul untuk "${query}":\n` + matches.join('\n') : `Tidak ditemukan data yang sesuai dengan kata kunci "${query}".`;
+        let reply = matches.length > 0 ? `Hasil pencarian lintas fitur untuk "${query}":\n` + matches.join('\n') : `Tidak ditemukan data yang sesuai dengan kata kunci "${query}".`;
         appendChatBubble('ai', reply, areaId);
         return;
       }
 
-      // Cerdas Offline Fallback Patterns (Menyediakan jawaban kaya meskipun offline tanpa API key)
       setTimeout(() => {
-        let reply = "Halo! Saya adalah Asisten AI DV Hub v1.30. Saya dapat membantu meringkas keuangan, mencari tugas, mengelola jadwal kalender, atau memberikan informasi sistem secara offline.";
+        let reply = "Halo! Saya adalah AI TabHub v1.31. Saya dapat membantu meringkas keuangan, mencari tugas, mengelola jadwal kalender, atau memberikan informasi sistem secara offline.";
         
         if (lower.includes('keuangan') || lower.includes('saldo') || lower.includes('uang')) {
           const totalInc = (appState.finance.transactions || []).filter(t=>t.type==='income').reduce((a,b)=>a+b.amount,0);
@@ -2867,9 +3033,9 @@
           const evKeys = Object.keys(appState.calendarEvents || {});
           reply = `📅 Agenda Kalender:\nTerdapat jadwal agenda yang tercatat pada ${evKeys.length} tanggal berbeda di kalender Anda.`;
         } else if (lower.includes('halo') || lower.includes('hi') || lower.includes('hai')) {
-          reply = `Halo ${appState.user.name || 'Pengguna'}! Ada yang bisa saya bantu hari ini di DV Hub?`;
+          reply = `Halo ${appState.user.name || 'Pengguna'}! Ada yang bisa saya bantu hari ini di TabHub?`;
         } else if (lower.includes('bantuan') || lower.includes('help')) {
-          reply = `💡 Bantuan AI DV Hub:\n- Ketik "Keuangan" untuk melihat ringkasan saldo.\n- Ketik "Cari [kata kunci]" untuk mencari catatan atau tugas.\n- Ketik "Tugas" untuk melihat status pekerjaan harian.`;
+          reply = `💡 Bantuan AI TabHub:\n- Ketik "Keuangan" untuk melihat ringkasan saldo.\n- Ketik "Cari [kata kunci]" untuk mencari catatan atau tugas.\n- Ketik "Tugas" untuk melihat status pekerjaan harian.`;
         }
 
         appendChatBubble('ai', reply, areaId);
@@ -3243,7 +3409,7 @@
       if (confirm('Reset mind map?')) { appState.mindmap = { nodes: [] }; saveStateToStorage(); renderMindMap(); }
     }
 
-    // --- CALENDAR & AGENDA WITH VISUAL DATE INDICATORS (v1.30) ---
+    // --- CALENDAR & AGENDA ---
     let calDateNav = new Date();
     function renderCalendar() {
       const grid = document.getElementById('calendarGrid');
@@ -3341,7 +3507,7 @@
       }
     }
 
-    // --- MEDIA EDITOR MODULE (NEW v1.30) ---
+    // --- MEDIA EDITOR MODULE ---
     let currentMediaImg = null;
     let currentFilterType = 'normal';
 
@@ -3569,7 +3735,7 @@
       doc.open(); doc.write(code); doc.close();
     }
     function loadDefaultHtmlTemplate() {
-      document.getElementById('liveHtmlEditor').value = '<div style="padding:20px;font-family:sans-serif;"><h2>DV Hub Live</h2></div>';
+      document.getElementById('liveHtmlEditor').value = '<div style="padding:20px;font-family:sans-serif;"><h2>TabHub Live</h2></div>';
       renderLiveHtmlPreview();
     }
     function exportCodeFile(ext) {
@@ -3639,7 +3805,7 @@
     function resetAppCache() { if (confirm('Reset seluruh data aplikasi?')) { localStorage.clear(); location.reload(); } }
     function autoBackupJSON() {
       const blob = new Blob([JSON.stringify(appState, null, 2)], { type: 'application/json' });
-      const a = document.createElement('a'); a.href = window.URL.createObjectURL(blob); a.download = 'dv-hub-backup.json'; a.click();
+      const a = document.createElement('a'); a.href = window.URL.createObjectURL(blob); a.download = 'tabhub-backup.json'; a.click();
     }
     function importJSON(e) {
       const file = e.target.files[0];

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TabHub v1.32 - Mohammad Danis Muria Vanandi</title>
+  <title>TabHub - Mohammad Danis Muria Vanandi</title>
   
   <!-- MINIMALIST TRANSPARENT VECTOR SVG FAVICON -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23007aff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
@@ -57,11 +57,10 @@
     .ios-btn { transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1); }
     .ios-btn:active { transform: scale(0.96); }
 
-    .menu-btn-active, .dock-btn-active {
+    .menu-btn-active {
       background: var(--accent-color) !important;
       color: #ffffff !important;
       box-shadow: 0 6px 20px rgba(0, 102, 255, 0.45);
-      opacity: 1 !important;
     }
 
     .harmonized-bar { max-width: 1100px; margin-left: auto; margin-right: auto; border-radius: 24px; }
@@ -88,12 +87,22 @@
     .close-btn-refined:hover { background: rgba(239, 68, 68, 0.25); transform: scale(1.05); }
     .settings-btn-refined:hover { background: rgba(0, 102, 255, 0.2); transform: scale(1.05); }
 
-    .tab-content { animation: tabFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .tab-content { animation: tabFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
     @keyframes tabFadeIn {
-      from { opacity: 0; transform: translateY(6px) scale(0.995); }
+      from { opacity: 0; transform: translateY(10px) scale(0.99); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
+    #splashScreen {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    #splashScreen.fade-out { opacity: 0; visibility: hidden; }
+
+    /* Floating Scroll to Top Button */
     #scrollToTopBtn {
       position: fixed;
       bottom: 95px;
@@ -112,27 +121,29 @@
       transition: all 0.3s ease;
     }
     #scrollToTopBtn:hover { transform: scale(1.1); }
-    
-    .protected-code-badge {
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px dashed rgba(239, 68, 68, 0.4);
-      color: #ef4444;
-      font-size: 10px;
-      padding: 4px 8px;
-      border-radius: 8px;
-    }
   </style>
 </head>
 <body id="appBody" class="theme-nordic-frost min-h-screen pb-32">
 
-  <!-- TOP BAR -->
+  <!-- SPLASH SCREEN -->
+  <div id="splashScreen">
+    <div class="card-modern p-8 rounded-3xl flex flex-col items-center space-y-4 shadow-2xl">
+      <div class="w-16 h-16 rounded-2xl bg-blue-600/20 text-blue-500 flex items-center justify-center">
+        <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <h2 class="text-xl font-extrabold tracking-tight">TabHub v1.31</h2>
+      <p class="text-xs opacity-70">Memuat pembaruan Tab Hub menyeluruh, menu interaktif & live code editor...</p>
+    </div>
+  </div>
+
+  <!-- BAR -->
   <div class="fixed top-3 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl card-modern px-4 py-2 text-[11px] font-mono flex items-center justify-between shadow-2xl backdrop-blur-xl border">
     <div class="flex items-center gap-2 w-full justify-between">
       <div class="flex items-center gap-2 font-bold">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
         <span id="iosBarClock">00:00:00</span>
         <span class="opacity-40">|</span>
-        <button onclick="openLoginModal()" class="hover:text-blue-500 transition text-left cursor-pointer bg-transparent border-0 p-0 font-mono font-bold" title="Kelola Akun & Kredensial">
+        <button onclick="openLoginModal()" class="hover:text-blue-500 transition text-left cursor-pointer bg-transparent border-0 p-0 font-mono font-bold" title="Kelola Akun & Pemulihan Data">
           <span id="iosBarUsername">Hi, Pengguna</span>
         </button>
       </div>
@@ -142,11 +153,6 @@
         <button onclick="openFloatingAiModal()" title="Buka AI & Pencarian" class="hover:text-blue-500 transition cursor-pointer bg-transparent border-0 p-0 font-mono font-bold text-blue-500 flex items-center gap-1.5 ios-btn">
           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg>
           AI
-        </button>
-        <span class="opacity-40">|</span>
-        <button onclick="switchTab('secret')" title="Akses Tab Rahasia" class="hover:text-rose-500 transition cursor-pointer bg-transparent border-0 p-0 font-mono font-bold text-rose-500 flex items-center gap-1 ios-btn">
-          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Rahasia
         </button>
       </div>
     </div>
@@ -174,63 +180,85 @@
           </button>
         </div>
       </div>
-      <!-- MENU GRID WITH SYNCHRONIZED ACTIVE HIGHLIGHTS -->
+      <!-- MENU GRID WITH DISTINCT ACTIVE/INACTIVE HIGHLIGHTS -->
       <div class="grid grid-cols-2 gap-2.5">
         <button id="launcherBtn-dashboard" onclick="switchTabAndClose('dashboard')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Pusat Tab Hub">
-          <span class="p-2 rounded-xl bg-blue-500/10 text-blue-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+          <span class="p-2 rounded-xl bg-blue-500/10 text-blue-500">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </span>
           <div><div class="font-extrabold text-xs">Tab Hub</div><div class="text-[10px] opacity-60">Pusat komando</div></div>
         </button>
         <button id="launcherBtn-finance" onclick="switchTabAndClose('finance')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Kelola Keuangan">
-          <span class="p-2 rounded-xl bg-emerald-500/10 text-emerald-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+          <span class="p-2 rounded-xl bg-emerald-500/10 text-emerald-500">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </span>
           <div><div class="font-extrabold text-xs">Keuangan</div><div class="text-[10px] opacity-60">Arus kas & anggaran</div></div>
         </button>
         <button id="launcherBtn-tasks" onclick="switchTabAndClose('tasks')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Daftar Tugas">
-          <span class="p-2 rounded-xl bg-pink-500/10 text-pink-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+          <span class="p-2 rounded-xl bg-pink-500/10 text-pink-500">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </span>
           <div><div class="font-extrabold text-xs">Tugas</div><div class="text-[10px] opacity-60">Daftar & kebiasaan</div></div>
         </button>
         <button id="launcherBtn-kanban" onclick="switchTabAndClose('kanban')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Papan Kanban">
-          <span class="p-2 rounded-xl bg-amber-500/10 text-amber-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/></svg></span>
+          <span class="p-2 rounded-xl bg-amber-500/10 text-amber-500">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
+          </span>
           <div><div class="font-extrabold text-xs">Proyek</div><div class="text-[10px] opacity-60">Prioritas & proyek</div></div>
         </button>
         <button id="launcherBtn-calendar" onclick="switchTabAndClose('calendar')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Kalender">
-          <span class="p-2 rounded-xl bg-red-500/10 text-red-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+          <span class="p-2 rounded-xl bg-red-500/10 text-red-500">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </span>
           <div><div class="font-extrabold text-xs">Kalender</div><div class="text-[10px] opacity-60">Agenda & jadwal</div></div>
         </button>
         <button id="launcherBtn-chatbot" onclick="switchTabAndClose('chatbot')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="AI & Search">
-          <span class="p-2 rounded-xl bg-indigo-500/10 text-indigo-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg></span>
+          <span class="p-2 rounded-xl bg-indigo-500/10 text-indigo-500">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg>
+          </span>
           <div><div class="font-extrabold text-xs">AI & Search</div><div class="text-[10px] opacity-60">Smart assistant</div></div>
         </button>
         <button id="launcherBtn-files" onclick="switchTabAndClose('files')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Manajer File">
-          <span class="p-2 rounded-xl bg-cyan-500/10 text-cyan-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>
+          <span class="p-2 rounded-xl bg-cyan-500/10 text-cyan-500">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          </span>
           <div><div class="font-extrabold text-xs">File</div><div class="text-[10px] opacity-60">Penyimpanan file</div></div>
         </button>
         <button id="launcherBtn-mindmap" onclick="switchTabAndClose('mindmap')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Mind Map">
-          <span class="p-2 rounded-xl bg-violet-500/10 text-violet-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg></span>
+          <span class="p-2 rounded-xl bg-violet-500/10 text-violet-500">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg>
+          </span>
           <div><div class="font-extrabold text-xs">Mind Map</div><div class="text-[10px] opacity-60">Papan ide visual</div></div>
         </button>
         <button id="launcherBtn-clock" onclick="switchTabAndClose('clock')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Waktu & Pomodoro">
-          <span class="p-2 rounded-xl bg-teal-500/10 text-teal-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <span class="p-2 rounded-xl bg-teal-500/10 text-teal-500">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </span>
           <div><div class="font-extrabold text-xs">Waktu</div><div class="text-[10px] opacity-60">Timer & alarm</div></div>
         </button>
         <button id="launcherBtn-calc" onclick="switchTabAndClose('calc')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Kalkulator">
-          <span class="p-2 rounded-xl bg-orange-500/10 text-orange-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="14" y1="18" x2="16" y2="18"/></svg></span>
+          <span class="p-2 rounded-xl bg-orange-500/10 text-orange-500">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="14" y1="18" x2="16" y2="18"/></svg>
+          </span>
           <div><div class="font-extrabold text-xs">Kalkulator</div><div class="text-[10px] opacity-60">Saintifik & satuan</div></div>
         </button>
         <button id="launcherBtn-vault" onclick="switchTabAndClose('vault')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Secure Vault">
-          <span class="p-2 rounded-xl bg-emerald-500/10 text-emerald-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+          <span class="p-2 rounded-xl bg-emerald-500/10 text-emerald-500">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
           <div><div class="font-extrabold text-xs">Vault</div><div class="text-[10px] opacity-60">Manajer sandi</div></div>
         </button>
         <button id="launcherBtn-code" onclick="switchTabAndClose('code')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Code Editor">
-          <span class="p-2 rounded-xl bg-purple-500/10 text-purple-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
+          <span class="p-2 rounded-xl bg-purple-500/10 text-purple-500">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </span>
           <div><div class="font-extrabold text-xs">Kode</div><div class="text-[10px] opacity-60">Live HTML & export</div></div>
         </button>
         <button id="launcherBtn-media" onclick="switchTabAndClose('media')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn" title="Media Editor">
-          <span class="p-2 rounded-xl bg-rose-500/10 text-rose-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span>
+          <span class="p-2 rounded-xl bg-rose-500/10 text-rose-500">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </span>
           <div><div class="font-extrabold text-xs">Media Editor</div><div class="text-[10px] opacity-60">Sunting foto & filter</div></div>
-        </button>
-        <button id="launcherBtn-secret" onclick="switchTabAndClose('secret')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn border border-rose-500/30" title="Tab Rahasia & Developer">
-          <span class="p-2 rounded-xl bg-rose-500/10 text-rose-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-          <div><div class="font-extrabold text-xs text-rose-500">Tab Rahasia</div><div class="text-[10px] opacity-60">Developer & Passkey</div></div>
         </button>
       </div>
     </div>
@@ -257,7 +285,7 @@
       <div id="chatMessagesArea" class="flex-1 overflow-y-auto py-4 space-y-3">
         <div class="flex items-start gap-2.5">
           <div class="w-7 h-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shrink-0">AI</div>
-          <div class="card-modern p-3 rounded-2xl text-xs max-w-[85%] leading-relaxed">Halo! AI cerdas aktif secara offline maupun online. Masukkan API Key Anda di Tab Rahasia atau ketik pertanyaan langsung di sini.</div>
+          <div class="card-modern p-3 rounded-2xl text-xs max-w-[85%] leading-relaxed">Halo! AI cerdas aktif secara offline maupun online. Ketik pertanyaan, tugas, atau perintah pencarian fitur (misal: "Cari tugas", "Ringkasan keuangan").</div>
         </div>
       </div>
 
@@ -279,15 +307,16 @@
   <!-- MAIN CONTAINER WRAPPER -->
   <main class="harmonized-bar px-4 space-y-6">
 
-    <!-- TAB 1: TAB HUB -->
+    <!-- TAB HUB (REVISED TOTAL: Displaying all active/inactive tabs, stats, app info, guides, shortcuts, features & infinite news with load more) -->
     <div id="tab-dashboard" class="tab-content space-y-6">
+      
       <!-- HERO BANNER -->
       <div class="card-modern p-6 sm:p-8 rounded-3xl relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div class="absolute -right-16 -top-16 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
         <div class="space-y-3 max-w-2xl relative z-10">
-          <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-extrabold">TabHub v1.32 PRO</span>
+          <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-extrabold">TabHub v1.31</span>
           <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Pusat Komando TabHub Terpadu</h1>
-          <p class="text-xs sm:text-sm opacity-75 leading-relaxed">Kelola produktivitas harian secara instan, aman, dan terintegrasi penuh dengan asisten cerdas.</p>
+          <p class="text-xs sm:text-sm opacity-75 leading-relaxed">Menampilkan ringkasan lengkap seluruh tab, statistik sistem, panduan, pintasan, dan berita real-time tanpa batas.</p>
         </div>
         <div class="flex flex-wrap gap-2 relative z-10">
           <button onclick="switchTab('finance')" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-xs font-bold shadow-lg ios-btn" title="Buka Tab Keuangan">Keuangan</button>
@@ -296,7 +325,7 @@
         </div>
       </div>
 
-      <!-- METRICS & STATS -->
+      <!-- ALL STATS METRICS -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="card-modern p-4 rounded-2xl space-y-1">
           <span class="text-[11px] opacity-64 font-bold">Total Saldo</span>
@@ -317,6 +346,92 @@
           <span class="text-[11px] opacity-64 font-bold">Arsip File</span>
           <h3 id="hubMetricFiles" class="text-lg font-extrabold font-mono text-violet-500">0 Item</h3>
           <span class="text-[10px] opacity-50">Penyimpanan lokal</span>
+        </div>
+      </div>
+
+      <!-- ALL TABS DIRECTORY (Active & Inactive Tabs Overview) -->
+      <div class="card-modern p-6 rounded-3xl space-y-4">
+        <h3 class="font-extrabold text-sm">Direktori Semua Tab (Aktif & Non-Aktif)</h3>
+        <p class="text-[11px] opacity-70">Akses cepat ke seluruh tab yang tersedia di dalam TabHub.</p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <button onclick="switchTab('dashboard')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Tab Hub</div>
+            <div class="text-[10px] text-emerald-500 font-bold">Aktif (Utama)</div>
+          </button>
+          <button onclick="switchTab('finance')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Keuangan</div>
+            <div class="text-[10px] opacity-60">Tab Finansial</div>
+          </button>
+          <button onclick="switchTab('tasks')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Tugas</div>
+            <div class="text-[10px] opacity-60">Tab Rutinitas</div>
+          </button>
+          <button onclick="switchTab('kanban')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Proyek</div>
+            <div class="text-[10px] opacity-60">Tab Kanban</div>
+          </button>
+          <button onclick="switchTab('calendar')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Kalender</div>
+            <div class="text-[10px] opacity-60">Tab Jadwal</div>
+          </button>
+          <button onclick="switchTab('chatbot')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">AI & Search</div>
+            <div class="text-[10px] opacity-60">Tab AI Pintar</div>
+          </button>
+          <button onclick="switchTab('files')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">File</div>
+            <div class="text-[10px] opacity-60">Tab Penyimpanan</div>
+          </button>
+          <button onclick="switchTab('mindmap')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Mind Map</div>
+            <div class="text-[10px] opacity-60">Tab Ide Visual</div>
+          </button>
+          <button onclick="switchTab('clock')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Waktu</div>
+            <div class="text-[10px] opacity-60">Tab Timer & Pomodoro</div>
+          </button>
+          <button onclick="switchTab('calc')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Kalkulator</div>
+            <div class="text-[10px] opacity-60">Tab Konversi</div>
+          </button>
+          <button onclick="switchTab('vault')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Vault</div>
+            <div class="text-[10px] opacity-60">Tab Sandi</div>
+          </button>
+          <button onclick="switchTab('code')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Kode</div>
+            <div class="text-[10px] opacity-60">Tab Live HTML</div>
+          </button>
+          <button onclick="switchTab('media')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Media Editor</div>
+            <div class="text-[10px] opacity-60">Tab Sunting Foto</div>
+          </button>
+          <button onclick="switchTab('settings')" class="p-3 card-modern rounded-2xl text-left hover:border-blue-500 transition ios-btn">
+            <div class="font-extrabold text-xs">Pengaturan</div>
+            <div class="text-[10px] opacity-60">Tab Konfigurasi</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- APP INFO, GUIDES, SHORTCUTS & FEATURES OVERVIEW -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="card-modern p-6 rounded-3xl space-y-3">
+          <h3 class="font-extrabold text-sm">Informasi & Panduan Aplikasi</h3>
+          <ul class="text-xs space-y-2 opacity-80 list-disc pl-4">
+            <li><strong>TabHub v1.31</strong> adalah platform produktivitas all-in-one yang berjalan secara lokal dengan enkripsi tinggi.</li>
+            <li>Gunakan <strong>menu</strong> (ikon garis tiga di dock) untuk membuka fitur dengan indikator aktif yang jelas.</li>
+            <li>Gunakan <strong>AI</strong> untuk mencari data atau bertanya secara instan.</li>
+            <li>Backup data secara berkala melalui menu Pengaturan atau salin string JSON state secara instan.</li>
+          </ul>
+        </div>
+        <div class="card-modern p-6 rounded-3xl space-y-3">
+          <h3 class="font-extrabold text-sm">Pintasan & Fitur Unggulan</h3>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="card-modern p-2.5 rounded-xl"><strong>Alt / Dock:</strong> Navigasi cepat</div>
+            <div class="card-modern p-2.5 rounded-xl"><strong>AI Assistant:</strong> Tanya & cari data</div>
+            <div class="card-modern p-2.5 rounded-xl"><strong>Secure Vault:</strong> Simpan sandi</div>
+            <div class="card-modern p-2.5 rounded-xl"><strong>Live Code Editor:</strong> Render HTML</div>
+          </div>
         </div>
       </div>
 
@@ -353,15 +468,15 @@
         </div>
       </div>
 
-      <!-- REAL-TIME NEWS GRID SYSTEM -->
+      <!-- INFINITE GLOBAL NEWS GRID WITH LOAD MORE BUTTON -->
       <div class="card-modern p-6 rounded-3xl space-y-4">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
           <div>
-            <h3 class="font-extrabold text-sm">Berita Real-Time Global</h3>
+            <h3 class="font-extrabold text-sm">Berita Global Tanpa Batas</h3>
             <p class="text-[11px] opacity-60">Informasi berita teknologi, AI, finansial, kesehatan, dan sains terkini.</p>
           </div>
           <div class="flex flex-wrap gap-2 w-full md:w-auto">
-            <input type="text" id="newsSearchInput" placeholder="Cari berita real-time..." class="px-3 py-2 rounded-xl card-modern text-xs flex-1 md:w-56 focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="filterAndRenderNews()">
+            <input type="text" id="newsSearchInput" placeholder="Cari berita..." class="px-3 py-2 rounded-xl card-modern text-xs flex-1 md:w-48 focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="filterAndRenderNews()">
             <select id="newsCategoryFilter" onchange="filterAndRenderNews()" class="px-3 py-2 rounded-xl card-modern text-xs font-bold focus:outline-none focus:ring-2 focus:ring-blue-500">
               <option value="all">Semua Kategori</option>
               <option value="AI & Tech">AI & Tech</option>
@@ -372,15 +487,12 @@
             </select>
           </div>
         </div>
-
-        <div id="realtimeNewsGridContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 min-h-[250px]"></div>
-
-        <div class="flex justify-between items-center pt-4 border-t border-slate-200/50 dark:border-slate-800/50 text-xs">
-          <button onclick="prevNewsPage()" id="prevNewsBtn" class="px-4 py-2 card-modern hover:border-blue-500 font-bold rounded-xl ios-btn disabled:opacity-40" title="Berita Sebelumnya">&larr; Kembali</button>
-          <span id="newsPageIndicator" class="font-mono font-bold opacity-75">Halaman 1</span>
-          <button onclick="nextNewsPage()" id="nextNewsBtn" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow ios-btn" title="Berita Berikutnya">Lanjut &rarr;</button>
+        <div id="realtimeNewsGridContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        <div class="pt-4 text-center">
+          <button onclick="loadMoreNews()" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-xs font-bold shadow-lg ios-btn" title="Muat Lebih Banyak Berita">Muat Lebih Banyak Berita</button>
         </div>
       </div>
+
     </div>
 
     <!-- TAB 2: FINANCE MANAGEMENT -->
@@ -611,17 +723,17 @@
           <button onclick="clearChatHistory()" class="px-3.5 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" title="Bersihkan Riwayat Chat">Bersihkan</button>
         </div>
         <div class="space-y-2">
-          <label class="text-xs font-bold opacity-75">Gemini / OpenAI API Key (Atur di Tab Rahasia):</label>
+          <label class="text-xs font-bold opacity-75">Gemini API Key (Opsional - Mode Offline Otomatis Aktif Tanpa Key):</label>
           <div class="flex gap-2">
-            <input type="password" id="geminiApiKeyInput" placeholder="API Key tersimpan otomatis..." class="flex-1 px-4 py-2.5 rounded-xl card-modern text-xs font-mono focus:outline-none" readonly>
-            <button onclick="switchTab('secret')" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow ios-btn">Atur Key</button>
+            <input type="password" id="geminiApiKeyInput" placeholder="API Key..." class="flex-1 px-4 py-2.5 rounded-xl card-modern text-xs font-mono focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button onclick="saveGeminiApiKey()" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Simpan API Key">Simpan Key</button>
           </div>
         </div>
         <div class="card-modern p-4 rounded-2xl h-[50vh] flex flex-col justify-between">
           <div id="tabChatMessagesArea" class="flex-1 overflow-y-auto space-y-3 pr-2">
             <div class="flex items-start gap-2.5">
               <div class="w-7 h-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shrink-0">AI</div>
-              <div class="card-modern p-3 rounded-2xl text-xs max-w-[85%] leading-relaxed">Asisten cerdas TabHub siap menjawab. Ketik perintah atau "/search [kata kunci]" untuk mencari di seluruh data aplikasi.</div>
+              <div class="card-modern p-3 rounded-2xl text-xs max-w-[85%] leading-relaxed">Asisten cerdas TabHub siap menjawab secara offline maupun online. Ketik perintah atau "/search [kata kunci]" untuk mencari di seluruh data aplikasi.</div>
             </div>
           </div>
           <div class="pt-3 border-t border-slate-200/50 dark:border-slate-800/50 flex gap-2">
@@ -693,6 +805,7 @@
           <h2 class="text-lg font-extrabold">Waktu, Timer & Pomodoro</h2>
           <p class="text-xs opacity-70">Manajemen waktu terpadu.</p>
         </div>
+        
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="card-modern p-6 rounded-2xl text-center space-y-2 flex flex-col justify-center">
             <span class="text-xs font-bold opacity-60">Waktu Lokal</span>
@@ -700,37 +813,39 @@
             <div id="liveDateBig" class="text-xs font-bold opacity-80">Rabu, 12 Agustus 2026</div>
             <div id="clockWeatherDetail" class="text-[11px] opacity-70 pt-1">Surabaya, 32°C</div>
           </div>
+
           <div class="card-modern p-6 rounded-2xl text-center space-y-4">
             <h3 class="font-extrabold text-xs">Fokus Pomodoro</h3>
             <div id="pomTimerDisplay" class="text-4xl font-extrabold font-mono text-emerald-500">25:00</div>
             <div class="flex justify-center gap-1.5 flex-wrap">
-              <button id="pomBtnWork" onclick="setPomodoroMode('work')" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 text-white shadow ios-btn">Kerja</button>
-              <button id="pomBtnShort" onclick="setPomodoroMode('shortBreak')" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn">Istirahat</button>
-              <button id="pomBtnLong" onclick="setPomodoroMode('longBreak')" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn">Panjang</button>
+              <button id="pomBtnWork" onclick="setPomodoroMode('work')" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 text-white shadow ios-btn" title="Kerja">Kerja</button>
+              <button id="pomBtnShort" onclick="setPomodoroMode('shortBreak')" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn" title="Istirahat">Istirahat</button>
+              <button id="pomBtnLong" onclick="setPomodoroMode('longBreak')" class="pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn" title="Panjang">Panjang</button>
             </div>
             <div class="flex justify-center gap-2">
-              <button onclick="startPomodoro()" class="px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold shadow ios-btn">Mulai</button>
-              <button onclick="pausePomodoro()" class="px-4 py-2 card-modern hover:border-amber-500 rounded-xl text-xs font-bold ios-btn">Jeda</button>
-              <button onclick="resetPomodoro()" class="px-4 py-2 card-modern hover:border-rose-500 rounded-xl text-xs font-bold ios-btn">Reset</button>
+              <button onclick="startPomodoro()" class="px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Mulai">Mulai</button>
+              <button onclick="pausePomodoro()" class="px-4 py-2 card-modern hover:border-amber-500 rounded-xl text-xs font-bold ios-btn" title="Jeda">Jeda</button>
+              <button onclick="resetPomodoro()" class="px-4 py-2 card-modern hover:border-rose-500 rounded-xl text-xs font-bold ios-btn" title="Reset">Reset</button>
             </div>
             <div id="pomSessionCount" class="text-[10px] opacity-70 font-mono">Sesi Selesai: 0</div>
           </div>
+
           <div class="card-modern p-6 rounded-2xl space-y-4 flex flex-col justify-between">
             <div class="space-y-2 text-center">
               <h3 class="font-extrabold text-xs">Stopwatch</h3>
               <div id="stopwatchDisplay" class="text-2xl font-extrabold font-mono text-purple-500">00:00:00</div>
               <div class="flex justify-center gap-2">
-                <button onclick="startStopwatch()" class="px-3 py-1.5 bg-purple-600 text-white rounded-xl text-xs font-bold shadow ios-btn">Mulai</button>
-                <button onclick="pauseStopwatch()" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold ios-btn">Jeda</button>
-                <button onclick="resetStopwatch()" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold ios-btn">Reset</button>
+                <button onclick="startStopwatch()" class="px-3 py-1.5 bg-purple-600 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Mulai">Mulai</button>
+                <button onclick="pauseStopwatch()" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold ios-btn" title="Jeda">Jeda</button>
+                <button onclick="resetStopwatch()" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold ios-btn" title="Reset">Reset</button>
               </div>
             </div>
             <div class="space-y-2 pt-3 border-t border-slate-200/50 dark:border-slate-800/50">
               <h3 class="font-extrabold text-xs">Atur Alarm</h3>
               <div class="flex flex-col sm:flex-row gap-2 w-full">
-                <input type="time" id="alarmTimeInput" class="px-3 py-2 card-modern rounded-xl text-xs font-mono w-full sm:w-auto flex-1 focus:outline-none">
-                <input type="text" id="alarmNoteInput" placeholder="Catatan..." class="px-3 py-2 card-modern rounded-xl text-xs w-full sm:w-auto flex-1 focus:outline-none">
-                <button onclick="saveAlarm()" class="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn shrink-0">Pasang</button>
+                <input type="time" id="alarmTimeInput" class="px-3 py-2 card-modern rounded-xl text-xs font-mono w-full sm:w-auto flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500" title="Waktu Alarm">
+                <input type="text" id="alarmNoteInput" placeholder="Catatan..." class="px-3 py-2 card-modern rounded-xl text-xs w-full sm:w-auto flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button onclick="saveAlarm()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow ios-btn shrink-0" title="Simpan Alarm">Pasang</button>
               </div>
               <div id="alarmList" class="space-y-1.5 max-h-[100px] overflow-y-auto"></div>
             </div>
@@ -751,67 +866,91 @@
             <h3 class="font-extrabold text-xs">Kalkulator</h3>
             <input type="text" id="calcScreen" value="0" readonly class="w-full px-4 py-3 rounded-xl card-modern text-right font-mono text-lg font-extrabold focus:outline-none">
             <div class="grid grid-cols-4 gap-2">
-              <button onclick="calcClear()" class="p-3 card-modern font-bold rounded-xl text-rose-500 ios-btn">C</button>
-              <button onclick="calcSci('sin')" class="p-3 card-modern font-bold rounded-xl ios-btn">sin</button>
-              <button onclick="calcSci('cos')" class="p-3 card-modern font-bold rounded-xl ios-btn">cos</button>
-              <button onclick="calcAppend('/')" class="p-3 card-modern font-bold rounded-xl text-blue-500 ios-btn">&divide;</button>
+              <button onclick="calcClear()" class="p-3 card-modern font-bold rounded-xl text-rose-500 ios-btn" title="Clear">C</button>
+              <button onclick="calcSci('sin')" class="p-3 card-modern font-bold rounded-xl ios-btn" title="Sinus">sin</button>
+              <button onclick="calcSci('cos')" class="p-3 card-modern font-bold rounded-xl ios-btn" title="Cosinus">cos</button>
+              <button onclick="calcAppend('/')" class="p-3 card-modern font-bold rounded-xl text-blue-500 ios-btn" title="Bagi">&divide;</button>
               <button onclick="calcAppend('7')" class="p-3 card-modern font-bold rounded-xl ios-btn">7</button>
               <button onclick="calcAppend('8')" class="p-3 card-modern font-bold rounded-xl ios-btn">8</button>
               <button onclick="calcAppend('9')" class="p-3 card-modern font-bold rounded-xl ios-btn">9</button>
-              <button onclick="calcAppend('*')" class="p-3 card-modern font-bold rounded-xl text-blue-500 ios-btn">&times;</button>
+              <button onclick="calcAppend('*')" class="p-3 card-modern font-bold rounded-xl text-blue-500 ios-btn" title="Kali">&times;</button>
               <button onclick="calcAppend('4')" class="p-3 card-modern font-bold rounded-xl ios-btn">4</button>
               <button onclick="calcAppend('5')" class="p-3 card-modern font-bold rounded-xl ios-btn">5</button>
               <button onclick="calcAppend('6')" class="p-3 card-modern font-bold rounded-xl ios-btn">6</button>
-              <button onclick="calcAppend('-')" class="p-3 card-modern font-bold rounded-xl text-blue-500 ios-btn">-</button>
+              <button onclick="calcAppend('-')" class="p-3 card-modern font-bold rounded-xl text-blue-500 ios-btn" title="Kurang">-</button>
               <button onclick="calcAppend('1')" class="p-3 card-modern font-bold rounded-xl ios-btn">1</button>
               <button onclick="calcAppend('2')" class="p-3 card-modern font-bold rounded-xl ios-btn">2</button>
               <button onclick="calcAppend('3')" class="p-3 card-modern font-bold rounded-xl ios-btn">3</button>
-              <button onclick="calcAppend('+')" class="p-3 card-modern font-bold rounded-xl text-blue-500 ios-btn">+</button>
+              <button onclick="calcAppend('+')" class="p-3 card-modern font-bold rounded-xl text-blue-500 ios-btn" title="Tambah">+</button>
               <button onclick="calcAppend('0')" class="col-span-2 p-3 card-modern font-bold rounded-xl ios-btn">0</button>
               <button onclick="calcAppend('.')" class="p-3 card-modern font-bold rounded-xl ios-btn">.</button>
-              <button onclick="calcCompute()" class="p-3 bg-blue-600 text-white font-bold rounded-xl ios-btn">=</button>
+              <button onclick="calcCompute()" class="p-3 bg-blue-600 text-white font-bold rounded-xl ios-btn" title="Hasil">=</button>
             </div>
           </div>
+
           <div class="space-y-6">
             <div class="card-modern p-5 rounded-2xl space-y-3">
               <h3 class="font-extrabold text-xs">Mata Uang</h3>
               <div class="flex gap-2">
-                <input type="number" id="currAmount" value="1" class="w-1/2 px-3 py-2 card-modern rounded-xl font-mono text-xs" oninput="convertCurrency()">
-                <select id="currFrom" class="w-1/4 px-2 py-2 card-modern rounded-xl text-xs font-bold" onchange="convertCurrency()"><option value="USD">USD</option><option value="IDR">IDR</option></select>
-                <select id="currTo" class="w-1/4 px-2 py-2 card-modern rounded-xl text-xs font-bold" onchange="convertCurrency()"><option value="IDR">IDR</option><option value="USD">USD</option></select>
+                <input type="number" id="currAmount" value="1" class="w-1/2 px-3 py-2 card-modern rounded-xl font-mono text-xs" oninput="convertCurrency()" title="Nominal">
+                <select id="currFrom" class="w-1/4 px-2 py-2 card-modern rounded-xl text-xs font-bold" onchange="convertCurrency()" title="Dari">
+                  <option value="USD">USD</option>
+                  <option value="IDR">IDR</option>
+                </select>
+                <select id="currTo" class="w-1/4 px-2 py-2 card-modern rounded-xl text-xs font-bold" onchange="convertCurrency()" title="Ke">
+                  <option value="IDR">IDR</option>
+                  <option value="USD">USD</option>
+                </select>
               </div>
-              <div class="flex justify-between items-center text-xs font-bold pt-1"><span>Hasil:</span><span id="currResultValue" class="font-mono text-blue-500 text-sm">16,000 IDR</span></div>
+              <div class="flex justify-between items-center text-xs font-bold pt-1">
+                <span>Hasil:</span>
+                <span id="currResultValue" class="font-mono text-blue-500 text-sm">16,000 IDR</span>
+              </div>
             </div>
+
             <div class="card-modern p-5 rounded-2xl space-y-3">
               <h3 class="font-extrabold text-xs">Satuan</h3>
               <div class="flex gap-2">
-                <input type="number" id="unitInputVal" value="10" class="w-1/2 px-3 py-2 card-modern rounded-xl font-mono text-xs" oninput="convertUnits()">
-                <select id="unitTypeSelect" class="w-1/2 px-2 py-2 card-modern rounded-xl text-xs font-bold" onchange="convertUnits()">
-                  <option value="km-mile">Km ke Mil</option><option value="kg-lbs">Kg ke Pon</option><option value="c-f">Celsius ke Fahrenheit</option>
+                <input type="number" id="unitInputVal" value="10" class="w-1/2 px-3 py-2 card-modern rounded-xl font-mono text-xs" oninput="convertUnits()" title="Nilai Satuan">
+                <select id="unitTypeSelect" class="w-1/2 px-2 py-2 card-modern rounded-xl text-xs font-bold" onchange="convertUnits()" title="Tipe Satuan">
+                  <option value="km-mile">Km ke Mil</option>
+                  <option value="kg-lbs">Kg ke Pon</option>
+                  <option value="c-f">Celsius ke Fahrenheit</option>
                 </select>
               </div>
-              <div class="flex justify-between items-center text-xs font-bold pt-1"><span>Hasil:</span><span id="unitResultVal" class="font-mono text-emerald-500 text-sm">6.21 Mil</span></div>
+              <div class="flex justify-between items-center text-xs font-bold pt-1">
+                <span>Hasil:</span>
+                <span id="unitResultVal" class="font-mono text-emerald-500 text-sm">6.21 Mil</span>
+              </div>
             </div>
           </div>
+
           <div class="space-y-6">
             <div class="card-modern p-5 rounded-2xl space-y-3">
               <h3 class="font-extrabold text-xs">Diskon</h3>
               <div class="space-y-2">
-                <input type="number" id="discPrice" placeholder="Harga" value="100000" class="w-full px-3 py-2 card-modern rounded-xl text-xs font-mono" oninput="calcDiscount()">
+                <input type="number" id="discPrice" placeholder="Harga" value="100000" class="w-full px-3 py-2 card-modern rounded-xl text-xs font-mono" oninput="calcDiscount()" title="Harga Awal">
                 <div class="flex gap-2">
-                  <input type="number" id="discPct" placeholder="Diskon %" value="20" class="w-1/2 px-3 py-2 card-modern rounded-xl text-xs font-mono" oninput="calcDiscount()">
-                  <input type="number" id="taxPct" placeholder="Pajak %" value="10" class="w-1/2 px-3 py-2 card-modern rounded-xl text-xs font-mono" oninput="calcDiscount()">
+                  <input type="number" id="discPct" placeholder="Diskon %" value="20" class="w-1/2 px-3 py-2 card-modern rounded-xl text-xs font-mono" oninput="calcDiscount()" title="Diskon %">
+                  <input type="number" id="taxPct" placeholder="Pajak %" value="10" class="w-1/2 px-3 py-2 card-modern rounded-xl text-xs font-mono" oninput="calcDiscount()" title="Pajak %">
                 </div>
               </div>
-              <div class="flex justify-between items-center text-xs font-bold pt-1"><span>Harga Akhir:</span><span id="discFinalRes" class="font-mono text-blue-500 text-sm">Rp 88,000</span></div>
+              <div class="flex justify-between items-center text-xs font-bold pt-1">
+                <span>Harga Akhir:</span>
+                <span id="discFinalRes" class="font-mono text-blue-500 text-sm">Rp 88,000</span>
+              </div>
             </div>
+
             <div class="card-modern p-5 rounded-2xl space-y-3">
               <h3 class="font-extrabold text-xs">Kalkulator BMI</h3>
               <div class="flex gap-2">
-                <input type="number" id="bmiWeight" placeholder="Berat (kg)" value="70" class="w-1/2 px-3 py-2 card-modern rounded-xl text-xs font-mono" oninput="calcBMI()">
-                <input type="number" id="bmiHeight" placeholder="Tinggi (cm)" value="175" class="w-1/2 px-3 py-2 card-modern rounded-xl text-xs font-mono" oninput="calcBMI()">
+                <input type="number" id="bmiWeight" placeholder="Berat (kg)" value="70" class="w-1/2 px-3 py-2 card-modern rounded-xl text-xs font-mono" oninput="calcBMI()" title="Berat kg">
+                <input type="number" id="bmiHeight" placeholder="Tinggi (cm)" value="175" class="w-1/2 px-3 py-2 card-modern rounded-xl text-xs font-mono" oninput="calcBMI()" title="Tinggi cm">
               </div>
-              <div class="flex justify-between items-center text-xs font-bold pt-1"><span>Status BMI:</span><span id="bmiResult" class="font-mono text-emerald-500 text-sm">BMI: 22.9</span></div>
+              <div class="flex justify-between items-center text-xs font-bold pt-1">
+                <span>Status BMI:</span>
+                <span id="bmiResult" class="font-mono text-emerald-500 text-sm">BMI: 22.9</span>
+              </div>
             </div>
           </div>
         </div>
@@ -826,7 +965,7 @@
             <h2 class="text-lg font-extrabold">Secure Vault</h2>
             <p class="text-xs opacity-70">Simpan kredensial penting secara aman.</p>
           </div>
-          <button onclick="openVaultModal()" class="px-4 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn">+ Kredensial</button>
+          <button onclick="openVaultModal()" class="px-4 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Tambah Kredensial">+ Kredensial</button>
         </div>
         <div id="vaultListContainer" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
       </div>
@@ -841,10 +980,10 @@
             <p class="text-xs opacity-70">Edit HTML/CSS dan render langsung.</p>
           </div>
           <div class="flex flex-wrap gap-2">
-            <button onclick="loadDefaultHtmlTemplate()" class="px-3 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn">Template</button>
-            <button onclick="pasteCodeFromClipboard()" class="px-3 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn">Tempel</button>
-            <button onclick="openSnippetModal()" class="px-3 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn">+ Snippet</button>
-            <button onclick="exportCodeFile('html')" class="px-3 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn">Ekspor HTML</button>
+            <button onclick="loadDefaultHtmlTemplate()" class="px-3 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" title="Template">Template</button>
+            <button onclick="pasteCodeFromClipboard()" class="px-3 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" title="Tempel">Tempel</button>
+            <button onclick="openSnippetModal()" class="px-3 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" title="Snippet">+ Snippet</button>
+            <button onclick="exportCodeFile('html')" class="px-3 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Ekspor HTML">Ekspor HTML</button>
           </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -892,26 +1031,28 @@
       </div>
     </div>
 
-    <!-- TAB 14: SETTINGS & PERSONALIZATION -->
+    <!-- TAB 14: SETTINGS & PERSONALIZATION (With Secret index.html Live Editor Panel) -->
     <div id="tab-settings" class="tab-content hidden space-y-6">
       <div class="card-modern p-6 sm:p-8 rounded-3xl space-y-8">
         <div class="pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
           <h2 class="text-lg font-extrabold">Pengaturan & Personalisasi</h2>
           <p class="text-xs opacity-70">Atur bahasa, tema, keamanan, dan musik.</p>
         </div>
+
+        <!-- APP PERSONALIZATION SETTINGS -->
         <div class="space-y-4">
           <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500">Personalisasi Tampilan & Warna Aksen</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="space-y-2">
               <label class="text-xs font-bold opacity-75">Warna Aksen Utama</label>
               <div class="flex gap-2 items-center">
-                <input type="color" id="accentColorPicker" value="#0066ff" onchange="changeAccentColor(this.value)" class="w-12 h-10 rounded-xl cursor-pointer card-modern p-1">
+                <input type="color" id="accentColorPicker" value="#0066ff" onchange="changeAccentColor(this.value)" class="w-12 h-10 rounded-xl cursor-pointer card-modern p-1" title="Pilih Warna Aksen">
                 <span class="text-xs font-mono opacity-75" id="accentColorHex">#0066ff</span>
               </div>
             </div>
             <div class="space-y-2">
               <label class="text-xs font-bold opacity-75">Skala Font Antarmuka</label>
-              <select id="fontScaleSelector" onchange="changeFontScale(this.value)" class="w-full px-4 py-2.5 rounded-xl card-modern text-xs font-bold">
+              <select id="fontScaleSelector" onchange="changeFontScale(this.value)" class="w-full px-4 py-2.5 rounded-xl card-modern text-xs font-bold" title="Pilih Ukuran Font">
                 <option value="normal">Normal (Default)</option>
                 <option value="compact">Kompak (Kecil)</option>
                 <option value="large">Besar (Aksesibilitas)</option>
@@ -919,177 +1060,124 @@
             </div>
           </div>
         </div>
+
+        <!-- THEMES & LANGUAGE SECTION -->
         <div class="space-y-4 pt-4 border-t border-slate-200/50 dark:border-slate-800/50">
           <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500">Tema & Bahasa</h3>
           <div class="space-y-3">
             <label class="text-xs font-bold opacity-75">Pilih Tema</label>
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              <button onclick="setAppTheme('theme-cyberpunk-neon')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between"><span>Cyberpunk</span> <span class="w-3 h-3 rounded-full bg-cyan-400"></span></button>
-              <button onclick="setAppTheme('theme-aurora-glass')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between"><span>Aurora</span> <span class="w-3 h-3 rounded-full bg-emerald-400"></span></button>
-              <button onclick="setAppTheme('theme-nordic-frost')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between"><span>Nordic</span> <span class="w-3 h-3 rounded-full bg-blue-500"></span></button>
-              <button onclick="setAppTheme('theme-obsidian-gold')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between"><span>Obsidian</span> <span class="w-3 h-3 rounded-full bg-amber-400"></span></button>
-              <button onclick="setAppTheme('theme-sunset-blush')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between"><span>Sunset</span> <span class="w-3 h-3 rounded-full bg-pink-400"></span></button>
-              <button onclick="setAppTheme('theme-matrix-terminal')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between"><span>Matrix</span> <span class="w-3 h-3 rounded-full bg-emerald-500"></span></button>
+              <button onclick="setAppTheme('theme-cyberpunk-neon')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between">
+                <span>Cyberpunk</span> <span class="w-3 h-3 rounded-full bg-cyan-400"></span>
+              </button>
+              <button onclick="setAppTheme('theme-aurora-glass')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between">
+                <span>Aurora</span> <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+              </button>
+              <button onclick="setAppTheme('theme-nordic-frost')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between">
+                <span>Nordic</span> <span class="w-3 h-3 rounded-full bg-blue-500"></span>
+              </button>
+              <button onclick="setAppTheme('theme-obsidian-gold')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between">
+                <span>Obsidian</span> <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+              </button>
+              <button onclick="setAppTheme('theme-sunset-blush')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between">
+                <span>Sunset</span> <span class="w-3 h-3 rounded-full bg-pink-400"></span>
+              </button>
+              <button onclick="setAppTheme('theme-matrix-terminal')" class="p-3 rounded-2xl card-modern font-bold text-xs text-left hover:border-blue-500 transition ios-btn flex items-center justify-between">
+                <span>Matrix</span> <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+              </button>
             </div>
           </div>
           <div class="space-y-2 pt-2">
             <label class="text-xs font-bold opacity-75">Bahasa</label>
-            <select id="langSelector" onchange="changeLanguage(this.value)" class="w-full sm:w-64 px-4 py-2.5 rounded-xl card-modern text-xs font-bold focus:outline-none">
-              <option value="id">Bahasa Indonesia</option><option value="en">English</option><option value="zh">中文</option><option value="ar">العربية</option>
+            <select id="langSelector" onchange="changeLanguage(this.value)" class="w-full sm:w-64 px-4 py-2.5 rounded-xl card-modern text-xs font-bold focus:outline-none focus:ring-2 focus:ring-blue-500" title="Pilih Bahasa">
+              <option value="id">Bahasa Indonesia</option>
+              <option value="en">English</option>
+              <option value="zh">中文 (Chinese)</option>
+              <option value="ar">العربية (Arabic)</option>
             </select>
           </div>
         </div>
+
+        <!-- AMBIENT MUSIC SECTION -->
         <div class="space-y-4 pt-4 border-t border-slate-200/50 dark:border-slate-800/50">
           <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500">Musik Ambient</h3>
           <div class="flex flex-wrap items-center gap-4">
-            <button id="musicToggleBtn" onclick="toggleBackgroundMusic()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow ios-btn">Putar Musik</button>
-            <select onchange="changeMusicTrack(this.value)" class="px-4 py-2.5 card-modern rounded-xl text-xs font-bold">
-              <option value="chill">Chill Lofi</option><option value="dreamy">Dreamy Synth</option><option value="synth">Ambient Synth</option>
+            <button id="musicToggleBtn" onclick="toggleBackgroundMusic()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Putar Musik">Putar Musik</button>
+            <select onchange="changeMusicTrack(this.value)" class="px-4 py-2.5 card-modern rounded-xl text-xs font-bold" title="Pilih Musik">
+              <option value="chill">Chill Lofi</option>
+              <option value="dreamy">Dreamy Synth</option>
+              <option value="synth">Ambient Synth</option>
             </select>
             <div class="flex items-center gap-2">
               <span class="text-xs font-bold opacity-75">Volume:</span>
-              <input type="range" min="0" max="1" step="0.05" value="0.3" oninput="changeMusicVolume(this.value)" class="accent-blue-500 w-24">
+              <input type="range" min="0" max="1" step="0.05" value="0.3" oninput="changeMusicVolume(this.value)" class="accent-blue-500 w-24" title="Volume Musik">
             </div>
           </div>
         </div>
+
+        <!-- SECRET INDEX.HTML LIVE EDITOR (Protected by password Vanandi000...) -->
+        <div class="space-y-4 pt-4 border-t border-slate-200/50 dark:border-slate-800/50">
+          <h3 class="font-extrabold text-xs uppercase tracking-wider text-rose-500">Fitur Rahasia: Live Editor index.html</h3>
+          <div class="card-modern p-4 rounded-2xl space-y-3 border border-rose-500/30">
+            <p class="text-[11px] opacity-75">Fitur rahasia pengembang untuk mengedit struktur dan kode index.html secara langsung secara real-time.</p>
+            <div id="secretEditorAuthBox" class="space-y-2">
+              <input type="password" id="secretEditorPassInput" placeholder="Masukkan kata sandi (Vanandi000...)..." class="w-full px-3 py-2 rounded-xl card-modern text-xs font-mono">
+              <button onclick="unlockSecretHtmlEditor()" class="px-4 py-2 bg-rose-600 text-white rounded-xl text-xs font-bold shadow ios-btn">Buka Kunci Editor</button>
+            </div>
+            <div id="secretEditorWorkspace" class="hidden space-y-2">
+              <textarea id="secretHtmlCodeArea" class="w-full h-64 p-3 rounded-xl card-modern font-mono text-[11px] focus:outline-none"></textarea>
+              <div class="flex gap-2">
+                <button onclick="applySecretHtmlChanges()" class="px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold shadow ios-btn">Terapkan Perubahan Real-Time</button>
+                <button onclick="lockSecretHtmlEditor()" class="px-4 py-2 card-modern rounded-xl text-xs font-bold ios-btn">Kunci Kembali</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACCOUNT & DATA BACKUP -->
+        <div class="space-y-4 pt-4 border-t border-slate-200/50 dark:border-slate-800/50">
+          <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500">Akun & Pemulihan Instan</h3>
+          <div class="space-y-3">
+            <label class="text-xs font-bold opacity-75">Nama</label>
+            <div class="flex gap-2">
+              <input type="text" id="authUsername" placeholder="Nama..." class="flex-1 sm:w-64 px-4 py-2.5 rounded-xl card-modern text-xs font-bold focus:outline-none">
+              <button onclick="saveAuthCredentials()" class="px-4 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Simpan">Simpan</button>
+            </div>
+          </div>
+          <div class="space-y-2 pt-2">
+            <label class="text-xs font-bold opacity-75">Salin / Muat State JSON (Pemulihan Tanpa File)</label>
+            <textarea id="stateJsonTextArea" placeholder="Tempel atau salin string JSON state di sini..." class="w-full h-24 p-3 rounded-xl card-modern font-mono text-[11px] focus:outline-none"></textarea>
+            <div class="flex gap-2">
+              <button onclick="copyStateJsonText()" class="px-3.5 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn">Salin State</button>
+              <button onclick="restoreStateJsonText()" class="px-3.5 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn">Muat State</button>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <button onclick="autoBackupJSON()" class="px-4 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" title="Download JSON">Download File JSON</button>
+            <label class="px-4 py-2.5 card-modern hover:border-blue-500 rounded-xl text-xs font-bold shadow cursor-pointer ios-btn" title="Restore Data">
+              <span>Upload File JSON</span>
+              <input type="file" onchange="importJSON(event)" class="hidden">
+            </label>
+          </div>
+        </div>
+
+        <!-- DEVELOPER CV SECTION -->
+        <div class="space-y-3 pt-4 border-t border-slate-200/50 dark:border-slate-800/50">
+          <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500">Informasi Pengembang (CV)</h3>
+          <div class="card-modern p-5 rounded-2xl space-y-3">
+            <h4 class="font-extrabold text-sm">Mohammad Danis Muria Vanandi</h4>
+            <p class="text-xs opacity-80 leading-relaxed">Results-oriented professional with a Civil Engineering foundation (Politeknik Negeri Malang, 2021) and 4+ years of experience across land administration, finance logistics, and building design. Transitioning into AI and NLP.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs opacity-75 pt-2 border-t border-slate-200/50 dark:border-slate-800/50 font-mono">
+              <div>Email: vanandi@proton.me</div>
+              <div>Phone: +62 898 5160 888</div>
+            </div>
+            <div class="text-[10px] opacity-50 font-mono pt-1">Build: 2026.08.12 | Version: v1.31-PRO</div>
+          </div>
+        </div>
+
+        <!-- RESET DATA BUTTON -->
         <div class="pt-4 border-t border-slate-200/50 dark:border-slate-800/50">
-          <button onclick="resetAppCache()" class="w-full py-3 bg-rose-600 hover:bg-rose-700 text-white rounded-2xl text-xs font-bold shadow-lg ios-btn">Reset Data</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 15: SECRET TAB & DEVELOPER LIVE EDITOR (Secure Auth, Public Registration, Passkey, Permanent AI API Key & Real-Time DOM Editor with Protected Login Guard) -->
-    <div id="tab-secret" class="tab-content hidden space-y-6">
-      <div class="card-modern p-6 sm:p-8 rounded-3xl space-y-8 border-2 border-rose-500/30">
-        <div class="pb-4 border-b border-slate-200/50 dark:border-slate-800/50 flex justify-between items-center">
-          <div>
-            <h2 class="text-lg font-extrabold text-rose-500 flex items-center gap-2">
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              Tab Rahasia & Pengaturan Developer v1.32
-            </h2>
-            <p class="text-xs opacity-70">Akses terbatas dilindungi sandi aman, Registrasi Umum, dan Developer Live Editor real-time.</p>
-          </div>
-          <button id="secretLockIndicatorBtn" onclick="lockSecretTab()" class="hidden px-3 py-1.5 bg-rose-500/10 text-rose-500 rounded-xl text-xs font-bold ios-btn">Kunci Kembali</button>
-        </div>
-
-        <!-- AUTH GATEWAY & PUBLIC REGISTRATION (Hidden after successful login) -->
-        <div id="secretAuthContainer" class="space-y-6 max-w-md mx-auto py-6">
-          <!-- LOGIN FORM -->
-          <div class="card-modern p-6 rounded-3xl space-y-4 shadow-xl border border-rose-500/20 text-center">
-            <div class="w-12 h-12 rounded-2xl bg-rose-500/20 text-rose-500 flex items-center justify-center mx-auto">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            </div>
-            <h3 class="font-extrabold text-sm">Autentikasi Keamanan Tinggi</h3>
-            <p class="text-[11px] opacity-70">Masukkan kata sandi (default developer: Vanandi000...) atau gunakan Passkey.</p>
-            <div class="space-y-3 pt-2">
-              <input type="password" id="secretPasswordInput" placeholder="Masukkan kata sandi..." class="w-full px-4 py-3 rounded-xl card-modern text-xs font-mono focus:outline-none focus:ring-2 focus:ring-rose-500" autocomplete="current-password">
-              <button onclick="verifySecretPassword()" class="w-full py-3 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow-lg ios-btn">Buka Kunci dengan Sandi</button>
-              <div class="relative flex py-2 items-center"><div class="flex-grow border-t border-slate-300 dark:border-slate-700"></div><span class="flex-shrink mx-4 text-[10px] opacity-50">ATAU</span><div class="flex-grow border-t border-slate-300 dark:border-slate-700"></div></div>
-              <button onclick="authenticateWithPasskey()" class="w-full py-3 card-modern hover:border-rose-500 text-rose-500 font-bold rounded-xl text-xs shadow ios-btn flex items-center justify-center gap-2">
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                Masuk dengan Passkey (WebAuthn)
-              </button>
-            </div>
-          </div>
-
-          <!-- PUBLIC REGISTRATION FORM -->
-          <div class="card-modern p-6 rounded-3xl space-y-4 shadow-xl border border-blue-500/20">
-            <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500">Registrasi Akun Umum Baru</h3>
-            <p class="text-[11px] opacity-70">Daftarkan akun baru untuk akses personalisasi TabHub.</p>
-            <div class="space-y-3">
-              <div class="space-y-1 text-left">
-                <label class="text-[11px] font-bold opacity-75">Nama Pengguna</label>
-                <input type="text" id="publicRegName" placeholder="Nama lengkap..." class="w-full px-3.5 py-2.5 rounded-xl card-modern text-xs">
-              </div>
-              <div class="space-y-1 text-left">
-                <label class="text-[11px] font-bold opacity-75">Email</label>
-                <input type="email" id="publicRegEmail" placeholder="email@domain.com" class="w-full px-3.5 py-2.5 rounded-xl card-modern text-xs font-mono">
-              </div>
-              <div class="space-y-1 text-left">
-                <label class="text-[11px] font-bold opacity-75">Kata Sandi Baru</label>
-                <input type="password" id="publicRegPass" placeholder="Sandi baru..." class="w-full px-3.5 py-2.5 rounded-xl card-modern text-xs font-mono" autocomplete="new-password">
-              </div>
-              <button onclick="registerPublicAccount()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow ios-btn">Daftar Akun Baru</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- PROTECTED SECRET WORKSPACE (Unlocked) -->
-        <div id="secretWorkspaceContainer" class="hidden space-y-8">
-          
-          <!-- 1. ACCOUNT & CREDENTIALS MANAGER -->
-          <div class="card-modern p-6 rounded-2xl space-y-4">
-            <h3 class="font-extrabold text-xs uppercase tracking-wider text-rose-500">Manajemen Akun & Kredensial</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="space-y-2">
-                <label class="text-xs font-bold opacity-75">Ubah Email Akun</label>
-                <div class="flex gap-2">
-                  <input type="email" id="secretEmailInput" placeholder="email@domain.com" class="flex-1 px-3.5 py-2.5 rounded-xl card-modern text-xs font-mono">
-                  <button onclick="saveSecretEmail()" class="px-4 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn">Simpan</button>
-                </div>
-              </div>
-              <div class="space-y-2">
-                <label class="text-xs font-bold opacity-75">Ubah Kata Sandi Utama</label>
-                <div class="flex gap-2">
-                  <input type="password" id="secretNewPasswordInput" placeholder="Sandi baru..." class="flex-1 px-3.5 py-2.5 rounded-xl card-modern text-xs font-mono" autocomplete="new-password">
-                  <button onclick="saveSecretNewPassword()" class="px-4 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn">Perbarui</button>
-                </div>
-              </div>
-            </div>
-            <div class="flex flex-wrap items-center justify-between pt-2">
-              <button onclick="triggerEmailPasswordReset()" class="text-xs text-blue-500 font-bold hover:underline bg-transparent border-0 p-0 cursor-pointer">Kirim Verifikasi Reset Kata Sandi ke Email</button>
-              <div class="flex items-center gap-2">
-                <button onclick="registerNewPasskey()" class="px-3.5 py-2 card-modern hover:border-rose-500 text-rose-500 rounded-xl text-xs font-bold ios-btn">+ Daftarkan Passkey Baru</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- 2. AI API KEY MANAGER -->
-          <div class="card-modern p-6 rounded-2xl space-y-4">
-            <h3 class="font-extrabold text-xs uppercase tracking-wider text-blue-500">AI API Key Manager (Permanent Storage)</h3>
-            <p class="text-[11px] opacity-70">Simpan kunci API Gemini, OpenAI ChatGPT, atau LLM lainnya secara aman dan permanen.</p>
-            <div class="space-y-2">
-              <label class="text-xs font-bold opacity-75">API Key (Gemini / OpenAI)</label>
-              <div class="flex gap-2">
-                <input type="password" id="secretApiKeyMasterInput" placeholder="sk-... atau AIzaSy..." class="flex-1 px-4 py-3 rounded-xl card-modern text-xs font-mono focus:outline-none focus:ring-2 focus:ring-blue-500" autocomplete="off">
-                <button onclick="saveMasterApiKey()" class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow ios-btn">Simpan Permanen</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- 3. DEVELOPER LIVE REAL-TIME DOM EDITOR (With Protected Login Guard) -->
-          <div class="card-modern p-6 rounded-2xl space-y-4">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
-              <div>
-                <h3 class="font-extrabold text-xs uppercase tracking-wider text-purple-500 flex items-center gap-2">
-                  <span>Developer Live DOM & App Editor (Real-Time)</span>
-                  <span class="protected-code-badge">Protected Login Guard Active</span>
-                </h3>
-                <p class="text-[11px] opacity-70">Sunting kode aplikasi yang sedang berjalan secara langsung (Live DOM & Script Execution).</p>
-              </div>
-              <div class="flex gap-2">
-                <button onclick="loadCurrentLiveAppCode()" class="px-3.5 py-2 card-modern hover:border-purple-500 rounded-xl text-xs font-bold ios-btn">Muat Kode Berjalan</button>
-                <button onclick="applyRealTimeDomChanges()" class="px-3.5 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-xs font-bold shadow ios-btn">Terapkan Real-Time</button>
-              </div>
-            </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <div class="space-y-2">
-                <div class="flex justify-between items-center text-xs font-bold opacity-75">
-                  <span>Editor Kode Langsung (HTML / JS Script)</span>
-                  <span class="text-[10px] text-amber-500 font-mono">Dilindungi Guard Login</span>
-                </div>
-                <textarea id="devRealtimeCodeArea" class="w-full h-80 p-4 rounded-xl card-modern font-mono text-[11px] focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Ketik kode..."></textarea>
-              </div>
-              <div class="space-y-2 flex flex-col">
-                <label class="text-xs font-bold opacity-75">Mini Console Log & Status Eksekusi</label>
-                <div class="flex-1 bg-slate-950 text-emerald-400 p-3 rounded-xl font-mono text-[10px] h-64 overflow-y-auto space-y-1" id="devRealtimeConsoleLog">
-                  <div>[Console Logger Ready]: TabHub v1.32 Real-Time DOM Engine Active.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+          <button onclick="resetAppCache()" class="w-full py-3 bg-rose-600 hover:bg-rose-700 text-white rounded-2xl text-xs font-bold shadow-lg ios-btn" title="Reset Seluruh Data">Reset Data</button>
         </div>
 
       </div>
@@ -1099,7 +1187,7 @@
 
   <!-- FLOATING BOTTOM DOCK NAVIGATION BAR -->
   <nav class="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-lg card-modern px-3 py-2 flex items-center justify-around shadow-2xl backdrop-blur-xl border">
-    <button id="menuBtn-dashboard" onclick="switchTab('dashboard')" class="dock-btn opacity-70 hover:opacity-100" title="Tab Hub">
+    <button id="menuBtn-dashboard" onclick="switchTab('dashboard')" class="dock-btn menu-btn-active" title="Tab Hub">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     </button>
     <button id="menuBtn-finance" onclick="switchTab('finance')" class="dock-btn opacity-70 hover:opacity-100" title="Keuangan">
@@ -1125,16 +1213,40 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
         <h3 id="modalTxTitle" class="font-extrabold text-sm">Transaksi</h3>
-        <button onclick="closeTxModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeTxModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
       <form id="txForm" class="space-y-3">
-        <input type="hidden" id="formTxId" value=""><input type="hidden" id="formType" value="expense">
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Tanggal</label><input type="date" id="formDate" required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-mono"></div>
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Kategori</label><input type="text" id="formCategory" placeholder="Kategori..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Nominal</label><input type="number" id="formAmount" placeholder="0" required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-mono"></div>
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Keterangan</label><input type="text" id="formDesc" placeholder="Keterangan..." class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Metode</label><select id="formIsOnline" class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-bold"><option value="true">Online</option><option value="false">Offline</option></select></div>
-        <div class="flex gap-2 pt-2"><button type="button" onclick="closeTxModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn">Batal</button><button type="submit" class="flex-1 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow ios-btn">Simpan</button></div>
+        <input type="hidden" id="formTxId" value="">
+        <input type="hidden" id="formType" value="expense">
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Tanggal</label>
+          <input type="date" id="formDate" required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-mono">
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Kategori</label>
+          <input type="text" id="formCategory" placeholder="Kategori..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Nominal</label>
+          <input type="number" id="formAmount" placeholder="0" required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-mono">
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Keterangan</label>
+          <input type="text" id="formDesc" placeholder="Keterangan..." class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Metode</label>
+          <select id="formIsOnline" class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-bold">
+            <option value="true">Online</option>
+            <option value="false">Offline</option>
+          </select>
+        </div>
+        <div class="flex gap-2 pt-2">
+          <button type="button" onclick="closeTxModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
+        </div>
       </form>
     </div>
   </div>
@@ -1144,11 +1256,19 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
         <h3 class="font-extrabold text-sm">Rutinitas</h3>
-        <button onclick="closeHabitModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeHabitModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
       <form id="habitForm" class="space-y-3">
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Nama Rutinitas</label><input type="text" id="habitTitleInput" placeholder="Rutinitas..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
-        <div class="flex gap-2 pt-2"><button type="button" onclick="closeHabitModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn">Batal</button><button type="submit" class="flex-1 py-2.5 bg-pink-600 text-white font-bold text-xs rounded-xl shadow ios-btn">Simpan</button></div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Nama Rutinitas</label>
+          <input type="text" id="habitTitleInput" placeholder="Rutinitas..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
+        </div>
+        <div class="flex gap-2 pt-2">
+          <button type="button" onclick="closeHabitModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-pink-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
+        </div>
       </form>
     </div>
   </div>
@@ -1158,13 +1278,24 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
         <h3 class="font-extrabold text-sm">Kanban</h3>
-        <button onclick="closeKanbanModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeKanbanModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
       <form id="kanbanForm" class="space-y-3">
         <input type="hidden" id="kanbanCardStatus" value="todo">
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Judul</label><input type="text" id="kanbanCardTitle" placeholder="Judul..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Keterangan</label><textarea id="kanbanCardDesc" placeholder="Keterangan..." class="w-full p-3 rounded-xl card-modern text-xs h-20"></textarea></div>
-        <div class="flex gap-2 pt-2"><button type="button" onclick="closeKanbanModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn">Batal</button><button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn">Simpan</button></div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Judul</label>
+          <input type="text" id="kanbanCardTitle" placeholder="Judul..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Keterangan</label>
+          <textarea id="kanbanCardDesc" placeholder="Keterangan..." class="w-full p-3 rounded-xl card-modern text-xs h-20"></textarea>
+        </div>
+        <div class="flex gap-2 pt-2">
+          <button type="button" onclick="closeKanbanModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
+        </div>
       </form>
     </div>
   </div>
@@ -1174,12 +1305,20 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
         <h3 class="font-extrabold text-sm">Matriks</h3>
-        <button onclick="closeEisenhowerModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeEisenhowerModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
       <form id="eisenForm" class="space-y-3">
         <input type="hidden" id="eisenQuadrant" value="Q1">
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Tugas</label><input type="text" id="eisenTitle" placeholder="Tugas..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
-        <div class="flex gap-2 pt-2"><button type="button" onclick="closeEisenhowerModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn">Batal</button><button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn">Simpan</button></div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Tugas</label>
+          <input type="text" id="eisenTitle" placeholder="Tugas..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
+        </div>
+        <div class="flex gap-2 pt-2">
+          <button type="button" onclick="closeEisenhowerModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
+        </div>
       </form>
     </div>
   </div>
@@ -1189,11 +1328,19 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
         <h3 class="font-extrabold text-sm">Tugas</h3>
-        <button onclick="closeTaskModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeTaskModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
       <form id="taskForm" class="space-y-3">
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Tugas</label><input type="text" id="taskTitle" placeholder="Tugas..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
-        <div class="flex gap-2 pt-2"><button type="button" onclick="closeTaskModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn">Batal</button><button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn">Simpan</button></div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Tugas</label>
+          <input type="text" id="taskTitle" placeholder="Tugas..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
+        </div>
+        <div class="flex gap-2 pt-2">
+          <button type="button" onclick="closeTaskModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
+        </div>
       </form>
     </div>
   </div>
@@ -1203,12 +1350,23 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
         <h3 class="font-extrabold text-sm">Catatan</h3>
-        <button onclick="closeNoteModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeNoteModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
       <form id="noteForm" class="space-y-3">
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Judul</label><input type="text" id="noteTitle" placeholder="Judul..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Isi</label><textarea id="noteContent" placeholder="Isi..." required class="w-full p-3 rounded-xl card-modern text-xs h-24"></textarea></div>
-        <div class="flex gap-2 pt-2"><button type="button" onclick="closeNoteModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn">Batal</button><button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn">Simpan</button></div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Judul</label>
+          <input type="text" id="noteTitle" placeholder="Judul..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Isi</label>
+          <textarea id="noteContent" placeholder="Isi..." required class="w-full p-3 rounded-xl card-modern text-xs h-24"></textarea>
+        </div>
+        <div class="flex gap-2 pt-2">
+          <button type="button" onclick="closeNoteModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
+        </div>
       </form>
     </div>
   </div>
@@ -1218,12 +1376,23 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
         <h3 class="font-extrabold text-sm">Snippet</h3>
-        <button onclick="closeSnippetModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeSnippetModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
       <form id="snippetForm" class="space-y-3">
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Snippet</label><input type="text" id="snippetTitle" placeholder="Snippet..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Kode</label><textarea id="snippetCode" placeholder="Kode..." required class="w-full p-3 rounded-xl card-modern font-mono text-xs h-24"></textarea></div>
-        <div class="flex gap-2 pt-2"><button type="button" onclick="closeSnippetModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn">Batal</button><button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn">Simpan</button></div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Snippet</label>
+          <input type="text" id="snippetTitle" placeholder="Snippet..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Kode</label>
+          <textarea id="snippetCode" placeholder="Kode..." required class="w-full p-3 rounded-xl card-modern font-mono text-xs h-24"></textarea>
+        </div>
+        <div class="flex gap-2 pt-2">
+          <button type="button" onclick="closeSnippetModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
+        </div>
       </form>
     </div>
   </div>
@@ -1233,13 +1402,25 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
         <h3 id="calModalTitleText" class="font-extrabold text-sm">Agenda Kalender</h3>
-        <button onclick="closeCalendarEventModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeCalendarEventModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
       <form id="calEventForm" class="space-y-3">
-        <input type="hidden" id="calEditOldDate" value=""><input type="hidden" id="calEditOldIndex" value="">
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Tanggal</label><input type="date" id="calEventDate" required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-mono"></div>
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Agenda</label><input type="text" id="calEventText" placeholder="Agenda..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
-        <div class="flex gap-2 pt-2"><button type="button" onclick="closeCalendarEventModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn">Batal</button><button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn">Simpan</button></div>
+        <input type="hidden" id="calEditOldDate" value="">
+        <input type="hidden" id="calEditOldIndex" value="">
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Tanggal</label>
+          <input type="date" id="calEventDate" required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-mono">
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Agenda</label>
+          <input type="text" id="calEventText" placeholder="Agenda..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
+        </div>
+        <div class="flex gap-2 pt-2">
+          <button type="button" onclick="closeCalendarEventModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
+        </div>
       </form>
     </div>
   </div>
@@ -1249,13 +1430,27 @@
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
         <h3 class="font-extrabold text-sm">+ Kredensial</h3>
-        <button onclick="closeVaultModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <button onclick="closeVaultModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
       <form id="vaultForm" onsubmit="saveVaultItem(event)" class="space-y-3">
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Layanan</label><input type="text" id="vaultTitle" placeholder="Layanan..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Username</label><input type="text" id="vaultUser" placeholder="Username..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Password</label><input type="password" id="vaultPass" placeholder="Password..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-mono" autocomplete="current-password"></div>
-        <div class="flex gap-2 pt-2"><button type="button" onclick="closeVaultModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn">Batal</button><button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn">Simpan</button></div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Layanan</label>
+          <input type="text" id="vaultTitle" placeholder="Layanan..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Username</label>
+          <input type="text" id="vaultUser" placeholder="Username..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs">
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Password</label>
+          <input type="password" id="vaultPass" placeholder="Password..." required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-mono">
+        </div>
+        <div class="flex gap-2 pt-2">
+          <button type="button" onclick="closeVaultModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn" title="Batal">Batal</button>
+          <button type="submit" class="flex-1 py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan">Simpan</button>
+        </div>
       </form>
     </div>
   </div>
@@ -1264,13 +1459,18 @@
   <div id="loginModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200/50 dark:border-slate-800/50">
-        <h3 class="font-extrabold text-sm">Akun & Kredensial</h3>
-        <button onclick="closeLoginModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <h3 class="font-extrabold text-sm">Akun & Pemulihan Data</h3>
+        <button onclick="closeLoginModal()" class="close-btn-refined" title="Tutup" aria-label="Tutup">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
       <div class="space-y-4">
         <p class="text-xs opacity-70">Kelola nama akun serta lakukan sinkronisasi atau pemulihan data instan.</p>
-        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Nama Pengguna</label><input type="text" id="authModalInput" placeholder="Nama..." class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-bold" autocomplete="username"></div>
-        <button onclick="saveAuthCredentialsModal()" class="w-full py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn">Simpan Perubahan Nama</button>
+        <div class="space-y-1">
+          <label class="text-xs font-bold opacity-75">Nama Pengguna</label>
+          <input type="text" id="authModalInput" placeholder="Nama..." class="w-full px-3 py-2.5 rounded-xl card-modern text-xs font-bold">
+        </div>
+        <button onclick="saveAuthCredentialsModal()" class="w-full py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow ios-btn" title="Simpan Nama">Simpan Perubahan Nama</button>
         <div class="pt-2 border-t border-slate-200/50 dark:border-slate-800/50 space-y-2">
           <label class="text-xs font-bold opacity-75">Pemulihan Instan (Salin / Tempel State JSON)</label>
           <textarea id="modalStateJsonText" placeholder="Tempel string JSON state di sini..." class="w-full h-20 p-2.5 rounded-xl card-modern font-mono text-[10px] focus:outline-none"></textarea>
@@ -1283,7 +1483,7 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (TabHub v1.32 PRO) -->
+  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (TabHub v1.31) -->
   <script>
     // --- XSS SECURITY & SANITIZATION ENGINE ---
     function sanitizeHtml(str) {
@@ -1295,17 +1495,17 @@
                 .replace(/'/g, '&#039;');
     }
 
-    // --- KAMUS MULTI-BAHASA LENGKAP & DINAMIS ---
+    // --- KAMUS MULTI-BAHASA LENGKAP & DINAMIS (TabHub v1.31) ---
     const i18nData = {
       id: {
         hubTitle: "TabHub",
         hubSub: "Pusat komando produktivitas terpadu & manajemen cerdas.",
         dashHeroTitle: "Pusat Komando TabHub Terpadu",
-        dashHeroDesc: "Kelola produktivitas harian secara instan, aman, dan terintegrasi penuh dengan asisten cerdas.",
-        newsTickerTitle: "Berita Real-Time Global",
+        dashHeroDesc: "Menampilkan ringkasan lengkap seluruh tab, statistik sistem, panduan, pintasan, dan berita real-time tanpa batas.",
+        newsTickerTitle: "Berita Global Tanpa Batas",
         newsTickerSub: "Informasi berita teknologi, AI, finansial, kesehatan, dan sains terkini.",
         optAllNews: "Semua Kategori",
-        phSearchNews: "Cari berita real-time...",
+        phSearchNews: "Cari berita...",
         btnRefreshNews: "Perbarui Berita",
         liveMarketTitle: "Indikator Pasar & Kurs",
         liveMarketSub: "Pemantauan data nilai tukar & aset digital.",
@@ -1337,7 +1537,7 @@
         chatSub: "Asisten pintar & pencarian fitur.",
         btnClearChat: "Bersihkan",
         lblQuickPrompt: "PROMPT CEPAT:",
-        chatWelcomeMsg: "Halo! AI cerdas aktif secara offline maupun online. Masukkan API Key Anda di Tab Rahasia atau ketik pertanyaan langsung di sini.",
+        chatWelcomeMsg: "Halo! AI cerdas aktif secara offline maupun online. Ketik pertanyaan, tugas, atau perintah pencarian fitur.",
         phChatInput: "Ketik perintah...",
         btnSendChat: "Kirim",
         taskHeading: "Tugas & Rutinitas",
@@ -1469,7 +1669,7 @@
         lblVaultTitle: "Layanan",
         lblVaultUser: "Username",
         lblVaultPass: "Password",
-        loginModalTitle: "Akun & Kredensial",
+        loginModalTitle: "Akun & Pemulihan Data",
         loginModalDesc: "Kelola nama akun serta lakukan sinkronisasi atau pemulihan data instan.",
         btnAddAgenda: "+ Agenda",
         selectedAgendaTitle: "Agenda Terpilih",
@@ -1502,11 +1702,11 @@
         hubTitle: "TabHub",
         hubSub: "Integrated productivity command center.",
         dashHeroTitle: "Integrated TabHub Command Center",
-        dashHeroDesc: "Manage daily productivity instantly, securely, and fully integrated with smart assistants.",
-        newsTickerTitle: "Real-Time Global News",
+        dashHeroDesc: "Complete summary of all tabs, system statistics, guides, shortcuts, and infinite real-time news.",
+        newsTickerTitle: "Infinite Global News",
         newsTickerSub: "Direct updates on tech, AI, finance, health, and science.",
         optAllNews: "All Categories",
-        phSearchNews: "Search real-time news...",
+        phSearchNews: "Search news...",
         btnRefreshNews: "Refresh",
         liveMarketTitle: "Market Ticker",
         liveMarketSub: "Live currency & digital asset rates.",
@@ -1538,7 +1738,7 @@
         chatSub: "Smart assistant & feature search.",
         btnClearChat: "Clear",
         lblQuickPrompt: "QUICK PROMPTS:",
-        chatWelcomeMsg: "Hello! Smart AI active. Enter your API Key in the Secret Tab or type questions here.",
+        chatWelcomeMsg: "Hello! Smart AI active offline/online. Type questions, tasks, or search queries.",
         phChatInput: "Type command...",
         btnSendChat: "Send",
         taskHeading: "Tasks & Routines",
@@ -1670,7 +1870,7 @@
         lblVaultTitle: "Service",
         lblVaultUser: "Username",
         lblVaultPass: "Password",
-        loginModalTitle: "Account & Credentials",
+        loginModalTitle: "Account & Data Recovery",
         loginModalDesc: "Manage account name and perform instant state sync or recovery.",
         btnAddAgenda: "+ Agenda",
         selectedAgendaTitle: "Selected Agendas",
@@ -1703,11 +1903,11 @@
         hubTitle: "TabHub",
         hubSub: "综合生产力指挥中心。",
         dashHeroTitle: "TabHub 综合指挥中心",
-        dashHeroDesc: "即时、安全且全面集成智能助手管理日常生产力。",
-        newsTickerTitle: "实时全球新闻",
+        dashHeroDesc: "展示所有标签页汇总、系统统计、指南、快捷方式及无限实时新闻。",
+        newsTickerTitle: "无限全球新闻",
         newsTickerSub: "科技、AI、金融、健康与科学新闻直接更新。",
         optAllNews: "全部分类",
-        phSearchNews: "搜索实时新闻...",
+        phSearchNews: "搜索新闻...",
         btnRefreshNews: "刷新",
         liveMarketTitle: "市场行情",
         liveMarketSub: "实时货币与数字资产汇率。",
@@ -1739,7 +1939,7 @@
         chatSub: "智能助手与功能搜索。",
         btnClearChat: "清空",
         lblQuickPrompt: "快捷提示：",
-        chatWelcomeMsg: "您好！智能 AI 已激活。请在秘密标签页中输入 API 密钥或在此输入问题。",
+        chatWelcomeMsg: "您好！智能 AI 支持离线/在线模式。输入问题、任务或搜索查询。",
         phChatInput: "输入指令...",
         btnSendChat: "发送",
         taskHeading: "任务与例程",
@@ -1764,7 +1964,7 @@
         btnReset: "重置",
         mindmapTip: "在画布上自由拖动节点 (触摸并拖动)",
         clockHeading: "时钟、计时器与番茄钟",
-        clockSub: "完整时间管理。",
+        clockSub: "完整时间 management。",
         lblCurrentLiveTime: "本地时间",
         lblSetAlarm: "设置闹钟",
         btnSaveAlarm: "设定",
@@ -1871,7 +2071,7 @@
         lblVaultTitle: "服务",
         lblVaultUser: "用户名",
         lblVaultPass: "密码",
-        loginModalTitle: "账户与凭据",
+        loginModalTitle: "账户与数据恢复",
         loginModalDesc: "管理账户名称并执行即时状态同步或恢复。",
         btnAddAgenda: "+ 日程",
         selectedAgendaTitle: "选定日程",
@@ -1904,11 +2104,11 @@
         hubTitle: "TabHub",
         hubSub: "مركز قيادة الإنتاجية المتكامل.",
         dashHeroTitle: "مركز قيادة TabHub المتكامل",
-        dashHeroDesc: "إدارة الإنتاجية اليومية فورياً وبأمان كامل مع المساعد الذكي.",
-        newsTickerTitle: "الأخبار العالمية الفورية",
+        dashHeroDesc: "ملخص كامل لجميع علامات التبويب، وإحصاءات النظام، والأدلة، والاختصارات، والأخبار الفورية بلا حدود.",
+        newsTickerTitle: "الأخبار العالمية اللانهائية",
         newsTickerSub: "تحديثات مباشرة للتكنولوجيا والذكاء الاصطناعي والصحة.",
         optAllNews: "جميع الفئات",
-        phSearchNews: "بحث في الأخبار الفورية...",
+        phSearchNews: "بحث في الأخبار...",
         btnRefreshNews: "تحديث",
         liveMarketTitle: "مؤشر السوق",
         liveMarketSub: "أسعار العملات والأصول الحية.",
@@ -1940,7 +2140,7 @@
         chatSub: "المساعد الذكي وبحث الميزات.",
         btnClearChat: "مسح",
         lblQuickPrompt: "موجهات سريعة:",
-        chatWelcomeMsg: "مرحباً! الذكاء الاصطناعي نشط. أدخل مفتاح API في Tab Rahasia أو اكتب الأسئلة هنا.",
+        chatWelcomeMsg: "مرحباً! الذكاء الاصطناعي نشط دون اتصال أو عبر الإنترنت. اكتب الأسئلة أو المهام أو استعلامات البحث.",
         phChatInput: "اكتب أمراً...",
         btnSendChat: "إرسال",
         taskHeading: "المهام والروتين",
@@ -2072,7 +2272,7 @@
         lblVaultTitle: "الخدمة",
         lblVaultUser: "المستخدم",
         lblVaultPass: "كلمة المرور",
-        loginModalTitle: "الحساب وبيانات الاعتماد",
+        loginModalTitle: "الحساب واستعادة البيانات",
         loginModalDesc: "إدارة اسم الحساب وإجراء المزامنة أو الاستعادة الفورية للبيانات.",
         btnAddAgenda: "+ جدول",
         selectedAgendaTitle: "الجداول المحددة",
@@ -2124,14 +2324,14 @@
       if (langSelector) langSelector.value = lang;
     }
 
-    // --- STATE UTAMA & PERSISTENSI (TabHub v1.32) ---
+    // --- STATE UTAMA & PERSISTENSI (TabHub v1.31) ---
     let appState = {
       currentTab: 'dashboard',
       theme: 'theme-nordic-frost',
       accentColor: '#0066ff',
       fontScale: 'normal',
       lang: 'id',
-      user: { name: 'Pengguna', email: 'vanandi@proton.me', apiKey: '', password: 'Vanandi000...' },
+      user: { name: 'Pengguna', apiKey: '' },
       finance: { currency: 'Rp', budgetLimit: 5000000, transactions: [] },
       habits: [],
       tasks: [],
@@ -2150,6 +2350,10 @@
     function saveStateToStorage() {
       try {
         localStorage.setItem('SMARTCORE_STATE', JSON.stringify(appState));
+        const jsonArea = document.getElementById('stateJsonTextArea');
+        if (jsonArea && document.activeElement !== jsonArea) {
+          jsonArea.value = JSON.stringify(appState, null, 2);
+        }
         const modalJsonArea = document.getElementById('modalStateJsonText');
         if (modalJsonArea && document.activeElement !== modalJsonArea) {
           modalJsonArea.value = JSON.stringify(appState, null, 2);
@@ -2170,7 +2374,7 @@
             accentColor: parsed.accentColor || '#0066ff',
             fontScale: parsed.fontScale || 'normal',
             lang: parsed.lang || 'id',
-            user: parsed.user || { name: 'Pengguna', email: 'vanandi@proton.me', apiKey: '', password: 'Vanandi000...' },
+            user: parsed.user || { name: 'Pengguna', apiKey: '' },
             finance: (parsed.finance && Array.isArray(parsed.finance.transactions)) ? parsed.finance : { currency: 'Rp', budgetLimit: 5000000, transactions: [] },
             habits: Array.isArray(parsed.habits) ? parsed.habits : [],
             tasks: Array.isArray(parsed.tasks) ? parsed.tasks : [],
@@ -2191,6 +2395,21 @@
       }
     }
 
+    // --- INSTANT TEXT STATE RECOVERY ---
+    function copyStateJsonText() {
+      const val = JSON.stringify(appState, null, 2);
+      navigator.clipboard.writeText(val).then(() => alert('State JSON berhasil disalin ke clipboard!'));
+    }
+    function restoreStateJsonText() {
+      const val = document.getElementById('stateJsonTextArea')?.value || '';
+      try {
+        const parsed = JSON.parse(val);
+        appState = parsed;
+        saveStateToStorage();
+        renderAll();
+        alert('State berhasil dipulihkan dari teks!');
+      } catch(e) { alert('Format JSON tidak valid!'); }
+    }
     function copyModalStateJson() {
       const val = JSON.stringify(appState, null, 2);
       navigator.clipboard.writeText(val).then(() => alert('State JSON berhasil disalin!'));
@@ -2207,8 +2426,8 @@
       } catch(e) { alert('Format JSON tidak valid!'); }
     }
 
-    // --- REAL-TIME NEWS PAGINATION SYSTEM ---
-    const realtimeNewsDatabase = [
+    // --- INFINITE GLOBAL NEWS & LOAD MORE ---
+    const baseGlobalNewsList = [
       { 
         title: "AI Breakthrough: Advanced LLMs Enhance Autonomous Systems & Robotics", 
         time: "10 menit lalu", 
@@ -2257,82 +2476,63 @@
         tag: "Global", 
         desc: "Konsorsium antariksa internasional mengumumkan rencana pembangunan pangkalan permanen di bulan.",
         img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80"
-      },
-      { 
-        title: "Autonomous EV Fleets Expand Across Major Metropolitan Hubs", 
-        time: "5 jam lalu", 
-        tag: "AI & Tech", 
-        desc: "Kendaraan otonom berbasis AI memperluas jangkauan operasional di perkotaan besar.",
-        img: "https://images.unsplash.com/photo-1558449028-b53a39d100fc?auto=format&fit=crop&w=600&q=80"
       }
     ];
 
-    let currentNewsPage = 1;
-    const newsPageSize = 3;
-
+    let dynamicNewsCount = 6;
     function filterAndRenderNews() {
       const container = document.getElementById('realtimeNewsGridContainer');
       if (!container) return;
       const search = document.getElementById('newsSearchInput')?.value.toLowerCase().trim() || '';
       const category = document.getElementById('newsCategoryFilter')?.value || 'all';
 
-      const filtered = realtimeNewsDatabase.filter(item => {
+      container.innerHTML = '';
+      const filtered = baseGlobalNewsList.slice(0, dynamicNewsCount).filter(item => {
         const matchSearch = item.title.toLowerCase().includes(search) || item.desc.toLowerCase().includes(search) || item.tag.toLowerCase().includes(search);
         if (!matchSearch) return false;
         if (category !== 'all' && item.tag !== category) return false;
         return true;
       });
 
-      const totalPages = Math.max(1, Math.ceil(filtered.length / newsPageSize));
-      if (currentNewsPage > totalPages) currentNewsPage = totalPages;
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="col-span-full text-center py-8 text-xs opacity-70">Tidak ada berita yang sesuai dengan kata kunci atau kategori tersebut.</div>';
+        return;
+      }
 
-      const startIdx = (currentNewsPage - 1) * newsPageSize;
-      const paginatedItems = filtered.slice(startIdx, startIdx + newsPageSize);
-
-      container.innerHTML = '';
-      if (paginatedItems.length === 0) {
-        container.innerHTML = '<div class="col-span-full text-center py-8 text-xs opacity-70">Tidak ada berita real-time yang ditemukan.</div>';
-      } else {
-        paginatedItems.forEach(news => {
-          const div = document.createElement('div');
-          div.className = 'card-modern rounded-2xl overflow-hidden flex flex-col justify-between hover:border-blue-500 transition group';
-          div.innerHTML = `
-            <div>
-              <div class="h-36 overflow-hidden relative">
-                <img src="${news.img}" alt="${sanitizeHtml(news.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                <span class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold">${news.tag}</span>
-              </div>
-              <div class="p-4 space-y-2">
-                <div class="flex justify-between items-center text-[10px] opacity-65 font-mono">
-                  <span>TabHub Real-Time</span>
-                  <span>${news.time}</span>
-                </div>
-                <h4 class="font-extrabold text-xs leading-snug">${sanitizeHtml(news.title)}</h4>
-                <p class="text-[11px] opacity-75 leading-relaxed">${sanitizeHtml(news.desc)}</p>
-              </div>
+      filtered.forEach((news) => {
+        const div = document.createElement('div');
+        div.className = 'card-modern rounded-2xl overflow-hidden flex flex-col justify-between hover:border-blue-500 transition group';
+        div.innerHTML = `
+          <div>
+            <div class="h-36 overflow-hidden relative">
+              <img src="${news.img}" alt="${sanitizeHtml(news.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <span class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold">${news.tag}</span>
             </div>
-          `;
-          container.appendChild(div);
-        });
-      }
-
-      const pageIndicator = document.getElementById('newsPageIndicator');
-      if (pageIndicator) pageIndicator.textContent = `Halaman ${currentNewsPage} dari ${totalPages}`;
-      const prevBtn = document.getElementById('prevNewsBtn');
-      if (prevBtn) prevBtn.disabled = currentNewsPage <= 1;
-      const nextBtn = document.getElementById('nextNewsBtn');
-      if (nextBtn) nextBtn.disabled = currentNewsPage >= totalPages;
+            <div class="p-4 space-y-2">
+              <div class="flex justify-between items-center text-[10px] opacity-65 font-mono">
+                <span>TabHub News Global</span>
+                <span>${news.time}</span>
+              </div>
+              <h4 class="font-extrabold text-xs leading-snug">${sanitizeHtml(news.title)}</h4>
+              <p class="text-[11px] opacity-75 leading-relaxed">${sanitizeHtml(news.desc)}</p>
+            </div>
+          </div>
+        `;
+        container.appendChild(div);
+      });
     }
 
-    function nextNewsPage() {
-      currentNewsPage++;
+    function loadMoreNews() {
+      dynamicNewsCount += 3;
+      // Tambahkan data tiruan ekstra agar tak terbatas
+      baseGlobalNewsList.push({
+        title: `Eksplorasi Teknologi & Inovasi Global #${dynamicNewsCount}`,
+        time: `${dynamicNewsCount * 10} menit lalu`,
+        tag: "AI & Tech",
+        desc: "Laporan riset lanjutan mengenai efisiensi komputasi cerdas di berbagai sektor industri modern.",
+        img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80"
+      });
       filterAndRenderNews();
-    }
-    function prevNewsPage() {
-      if (currentNewsPage > 1) {
-        currentNewsPage--;
-        filterAndRenderNews();
-      }
     }
 
     // --- SCROLL TO TOP FLOATING BUTTON LOGIC ---
@@ -2352,204 +2552,40 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // --- PUBLIC REGISTRATION & LOGIN SYSTEM ---
-    function registerPublicAccount() {
-      const name = document.getElementById('publicRegName')?.value.trim() || '';
-      const email = document.getElementById('publicRegEmail')?.value.trim() || '';
-      const pass = document.getElementById('publicRegPass')?.value || '';
-
-      if (!name || !email || !pass) {
-        alert('Harap lengkapi semua kolom pendaftaran akun!');
-        return;
-      }
-
-      appState.user.name = name;
-      appState.user.email = email;
-      appState.user.password = pass; // Menyimpan sandi pengguna baru
-      saveStateToStorage();
-      updateUsernameUI(name);
-
-      alert(`Registrasi Akun Umum Berhasil!\nSelamat datang, ${name}. Silakan gunakan sandi Anda untuk masuk.`);
-      document.getElementById('publicRegName').value = '';
-      document.getElementById('publicRegEmail').value = '';
-      document.getElementById('publicRegPass').value = '';
-    }
-
-    // --- SECRET TAB AUTH & WEBAUTHN PASSKEY ENGINE ---
-    function verifySecretPassword() {
-      const pass = document.getElementById('secretPasswordInput')?.value || '';
-      const correctPass = (appState.user && appState.user.password) ? appState.user.password : 'Vanandi000...';
-      if (pass === correctPass) {
-        unlockSecretWorkspace();
-        alert('Autentikasi Sandi Berhasil: Tab Rahasia terbuka.');
+    // --- SECRET LIVE index.html EDITOR (Protected by Vanandi000...) ---
+    function unlockSecretHtmlEditor() {
+      const pass = document.getElementById('secretEditorPassInput')?.value || '';
+      if (pass === 'Vanandi000...') {
+        document.getElementById('secretEditorAuthBox').classList.add('hidden');
+        document.getElementById('secretEditorWorkspace').classList.remove('hidden');
+        // Ambil outerHTML dokumen saat ini
+        const currentHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+        document.getElementById('secretHtmlCodeArea').value = currentHtml;
+        alert('Akses Rahasia Diterima: Editor live index.html terbuka.');
       } else {
         alert('Kata sandi salah! Akses ditolak.');
       }
     }
 
-    async function authenticateWithPasskey() {
-      if (!window.PublicKeyCredential) {
-        alert('WebAuthn Passkey tidak didukung oleh browser ini. Gunakan kata sandi.');
+    function lockSecretHtmlEditor() {
+      document.getElementById('secretEditorWorkspace').classList.add('hidden');
+      document.getElementById('secretEditorAuthBox').classList.remove('hidden');
+      document.getElementById('secretEditorPassInput').value = '';
+    }
+
+    function applySecretHtmlChanges() {
+      const newCode = document.getElementById('secretHtmlCodeArea')?.value || '';
+      if (!newCode.includes('<!DOCTYPE html>')) {
+        alert('Format kode HTML tidak valid!');
         return;
       }
       try {
-        const challenge = new Uint8Array(32);
-        window.crypto.getRandomValues(challenge);
-        const publicKey = {
-          challenge: challenge,
-          rp: { name: "TabHub Pro Secure" },
-          user: {
-            id: Uint8Array.from("TabHubUser", c => c.charCodeAt(0)),
-            name: appState.user.email || "vanandi@proton.me",
-            displayName: appState.user.name || "Mohammad Danis Muria Vanandi"
-          },
-          pubKeyCredParams: [{ alg: -7, type: "public-key" }],
-          timeout: 60000,
-          attestation: "direct"
-        };
-        const credential = await navigator.credentials.create({ publicKey });
-        if (credential) {
-          unlockSecretWorkspace();
-          alert('Passkey WebAuthn terverifikasi sukses! Tab Rahasia dibuka.');
-        }
-      } catch (e) {
-        console.warn('WebAuthn prompt dismissed or failed:', e);
-        if (confirm('Simulasi Passkey Berhasil? Klik OK untuk membuka kunci Tab Rahasia.')) {
-          unlockSecretWorkspace();
-        }
-      }
-    }
-
-    function registerNewPasskey() {
-      alert('Kunci Passkey baru berhasil didaftarkan dan disimpan di penyimpanan aman perangkat.');
-    }
-
-    function unlockSecretWorkspace() {
-      document.getElementById('secretAuthContainer').classList.add('hidden');
-      document.getElementById('secretWorkspaceContainer').classList.remove('hidden');
-      document.getElementById('secretLockIndicatorBtn').classList.remove('hidden');
-      
-      const emailInput = document.getElementById('secretEmailInput');
-      if (emailInput) emailInput.value = appState.user.email || 'vanandi@proton.me';
-      const apiKeyMasterInput = document.getElementById('secretApiKeyMasterInput');
-      if (apiKeyMasterInput) apiKeyMasterInput.value = appState.user.apiKey || '';
-      
-      loadCurrentLiveAppCode();
-    }
-
-    function lockSecretTab() {
-      document.getElementById('secretWorkspaceContainer').classList.add('hidden');
-      document.getElementById('secretLockIndicatorBtn').classList.add('hidden');
-      document.getElementById('secretAuthContainer').classList.remove('hidden');
-      document.getElementById('secretPasswordInput').value = '';
-      alert('Tab Rahasia dikunci kembali.');
-    }
-
-    function saveSecretEmail() {
-      const email = document.getElementById('secretEmailInput')?.value.trim() || '';
-      if (!email) { alert('Masukkan email yang valid!'); return; }
-      appState.user.email = email;
-      saveStateToStorage();
-      alert('Email akun berhasil diperbarui!');
-    }
-
-    function saveSecretNewPassword() {
-      const pass = document.getElementById('secretNewPasswordInput')?.value || '';
-      if (!pass) { alert('Masukkan kata sandi baru!'); return; }
-      appState.user.password = pass;
-      saveStateToStorage();
-      document.getElementById('secretNewPasswordInput').value = '';
-      alert('Kata sandi utama berhasil diperbarui!');
-    }
-
-    function triggerEmailPasswordReset() {
-      const email = appState.user.email || 'vanandi@proton.me';
-      alert(`Email tautan reset kata sandi telah dikirim ke ${email}! Silakan periksa inbox Anda.`);
-    }
-
-    // --- PERMANENT AI API KEY MANAGER ---
-    function saveMasterApiKey() {
-      const key = document.getElementById('secretApiKeyMasterInput')?.value.trim() || '';
-      appState.user.apiKey = key;
-      saveStateToStorage();
-      const geminiInput = document.getElementById('geminiApiKeyInput');
-      if (geminiInput) geminiInput.value = key;
-      alert('AI API Key berhasil disimpan secara permanen di penyimpanan lokal aman!');
-    }
-
-    // --- REAL-TIME DOM LIVE EDITOR WITH PROTECTED LOGIN GUARD ---
-    function logToRealtimeConsole(msg) {
-      const box = document.getElementById('devRealtimeConsoleLog');
-      if (!box) return;
-      const div = document.createElement('div');
-      div.textContent = `[${new Date().toLocaleTimeString()}]: ${msg}`;
-      box.appendChild(div);
-      box.scrollTop = box.scrollHeight;
-    }
-
-    function loadCurrentLiveAppCode() {
-      const area = document.getElementById('devRealtimeCodeArea');
-      if (!area) return;
-      // Menampilkan potongan kode inti aplikasi yang sedang berjalan
-      area.value = `// --- TABHUB v1.32 LIVE RUNNING ENVIRONMENT CODE ---
-function verifySecretPassword() {
-  const pass = document.getElementById('secretPasswordInput')?.value || '';
-  const correctPass = (appState.user && appState.user.password) ? appState.user.password : 'Vanandi000...';
-  if (pass === correctPass) {
-    unlockSecretWorkspace();
-    alert('Autentikasi Sandi Berhasil: Tab Rahasia terbuka.');
-  } else {
-    alert('Kata sandi salah! Akses ditolak.');
-  }
-}
-
-// Tambahkan atau sunting skrip real-time di bawah baris ini:
-console.log("TabHub Live DOM Controller Active.");`;
-      logToRealtimeConsole('Kode berjalan saat ini berhasil dimuat ke editor.');
-    }
-
-    function applyRealTimeDomChanges() {
-      const area = document.getElementById('devRealtimeCodeArea');
-      if (!area) return;
-      const code = area.value;
-
-      // GUARD CHECK: Pastikan fungsi login/autentikasi penting tidak terhapus
-      if (!code.includes('verifySecretPassword') || !code.includes('secretPasswordInput')) {
-        alert('Protected Login Guard: Gagal menerapkan perubahan! Anda mencoba menghapus fungsi atau elemen login penting (seperti verifySecretPassword). Fitur login dilindungi agar tidak terhapus.');
-        logToRealtimeConsole('GUARD BLOCKED: Upaya penghapusan fitur login dicegah oleh sistem.');
-        return;
-      }
-
-      try {
-        // Mengeksekusi script langsung pada konteks runtime halaman berjalan
-        const dynamicFunction = new Function(code);
-        dynamicFunction();
-        logToRealtimeConsole('Perubahan kode real-time berhasil dieksekusi pada aplikasi aktif.');
-        alert('Kode berhasil diterapkan secara real-time pada aplikasi!');
-      } catch (e) {
-        logToRealtimeConsole('Error eksekusi real-time: ' + e.message);
-        alert('Terjadi kesalahan sintaks saat mengeksekusi kode: ' + e.message);
-      }
-    }
-
-    // --- AUTOMATED DEVICE PERMISSIONS ---
-    function requestDevicePermissionsAutomatically() {
-      if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            console.log('Device Geolocation permission granted automatically.');
-            fetchRealTimeLocationWeather();
-          },
-          (err) => {
-            console.warn('Geolocation permission denied or prompt skipped.');
-          },
-          { timeout: 5000 }
-        );
-      }
-      if ('Notification' in window && Notification.permission === 'default') {
-        Notification.requestPermission().then(permission => {
-          if (permission === 'granted') console.log('Notification permission granted.');
-        });
+        document.open();
+        document.write(newCode);
+        document.close();
+        alert('Perubahan struktur index.html berhasil diterapkan secara real-time!');
+      } catch(e) {
+        alert('Gagal menerapkan perubahan real-time: ' + e.message);
       }
     }
 
@@ -2617,7 +2653,7 @@ console.log("TabHub Live DOM Controller Active.");`;
       renderMindMap();
     }
 
-    // --- INSTANT LOADING INITIALIZATION ---
+    // --- INITIALIZATION ---
     document.addEventListener('DOMContentLoaded', () => {
       loadStateFromStorage();
       setAppTheme(appState.theme || 'theme-nordic-frost');
@@ -2628,10 +2664,10 @@ console.log("TabHub Live DOM Controller Active.");`;
       if (appState.user && appState.user.apiKey) {
         const keyInput = document.getElementById('geminiApiKeyInput');
         if (keyInput) keyInput.value = appState.user.apiKey;
-        const masterInput = document.getElementById('secretApiKeyMasterInput');
-        if (masterInput) masterInput.value = appState.user.apiKey;
       }
 
+      const stateJsonArea = document.getElementById('stateJsonTextArea');
+      if (stateJsonArea) stateJsonArea.value = JSON.stringify(appState, null, 2);
       const modalStateJson = document.getElementById('modalStateJsonText');
       if (modalStateJson) modalStateJson.value = JSON.stringify(appState, null, 2);
 
@@ -2641,8 +2677,13 @@ console.log("TabHub Live DOM Controller Active.");`;
       updateClockAndWeatherHeader();
 
       renderAll();
-      requestDevicePermissionsAutomatically();
+      fetchRealTimeLocationWeather();
       fetchLiveMarketData();
+
+      setTimeout(() => {
+        const splash = document.getElementById('splashScreen');
+        if (splash) { splash.classList.add('fade-out'); setTimeout(() => splash.remove(), 500); }
+      }, 700);
 
       const musicBtn = document.getElementById('musicToggleBtn');
       if (appState.music && appState.music.active) {
@@ -2657,8 +2698,19 @@ console.log("TabHub Live DOM Controller Active.");`;
     function updateUsernameUI(name) {
       const topBarText = document.getElementById('iosBarUsername');
       if (topBarText) topBarText.textContent = `Hi, ${sanitizeHtml(name)}`;
+      const authInput = document.getElementById('authUsername');
+      if (authInput) authInput.value = name;
       const modalInput = document.getElementById('authModalInput');
       if (modalInput) modalInput.value = name;
+    }
+
+    function saveAuthCredentials() {
+      const uname = document.getElementById('authUsername')?.value.trim() || 'Pengguna';
+      appState.user.name = uname;
+      updateUsernameUI(uname);
+      saveStateToStorage();
+      renderAll();
+      alert('Nama akun berhasil disimpan & disinkronkan!');
     }
 
     function saveAuthCredentialsModal() {
@@ -2696,7 +2748,7 @@ console.log("TabHub Live DOM Controller Active.");`;
       }
     }
 
-    // --- TAB SWITCHING & SYNCHRONIZED DOCK/LAUNCHER HIGHLIGHTS ---
+    // --- TAB SWITCHING & MENU LAUNCHER ACTIVE/INACTIVE HIGHLIGHT SYNC ---
     function switchTab(tabId) {
       if (tabId === 'chatbot') {
         openFloatingAiModal();
@@ -2710,12 +2762,12 @@ console.log("TabHub Live DOM Controller Active.");`;
       const target = document.getElementById(`tab-${tabId}`);
       if (target) target.classList.remove('hidden');
 
-      document.querySelectorAll('nav button[id^="menuBtn-"], nav button.dock-btn').forEach(btn => {
+      document.querySelectorAll('nav button[id^="menuBtn-"]').forEach(btn => {
         btn.className = "dock-btn opacity-70 hover:opacity-100";
       });
       const activeMenuBtn = document.getElementById(`menuBtn-${tabId}`);
       if (activeMenuBtn) {
-        activeMenuBtn.className = "dock-btn dock-btn-active";
+        activeMenuBtn.className = "dock-btn menu-btn-active";
       }
 
       updateMenuLauncherActiveStates();
@@ -2734,7 +2786,7 @@ console.log("TabHub Live DOM Controller Active.");`;
 
     function updateMenuLauncherActiveStates() {
       document.querySelectorAll('.launcher-item').forEach(item => {
-        item.classList.remove('border-blue-500', 'bg-blue-500/10', 'shadow-md', 'border-rose-500');
+        item.classList.remove('border-blue-500', 'bg-blue-500/10', 'shadow-md');
         item.style.borderColor = '';
         item.style.background = '';
       });
@@ -2803,7 +2855,7 @@ console.log("TabHub Live DOM Controller Active.");`;
       if (!tbody) return;
       tbody.innerHTML = '';
 
-      let totalInc = 0; let totalExp = 0;
+      let totalInc = 0; let totalExp = 0; let onlineExp = 0; let offlineExp = 0;
       const txList = Array.isArray(appState.finance.transactions) ? appState.finance.transactions : [];
 
       txList.filter(tx => {
@@ -2816,7 +2868,11 @@ console.log("TabHub Live DOM Controller Active.");`;
         return true;
       }).forEach((tx) => {
         if (tx.type === 'income') totalInc += (tx.amount || 0);
-        else totalExp += (tx.amount || 0);
+        else {
+          totalExp += (tx.amount || 0);
+          if (tx.isOnline) onlineExp += (tx.amount || 0);
+          else offlineExp += (tx.amount || 0);
+        }
 
         const tr = document.createElement('tr');
         tr.className = 'border-b border-slate-200/50 dark:border-slate-800/50 hover:bg-slate-100/50';
@@ -2826,8 +2882,8 @@ console.log("TabHub Live DOM Controller Active.");`;
           <td class="p-2.5 opacity-80">${sanitizeHtml(tx.desc)}</td>
           <td class="p-2.5 text-right font-mono font-bold ${tx.type==='income'?'text-emerald-500':'text-rose-500'}">${tx.type==='income'?'+':'-'} ${currency} ${(tx.amount || 0).toLocaleString()}</td>
           <td class="p-2.5 text-center flex justify-center gap-1.5">
-            <button onclick="editTx('${tx.id}')" class="text-blue-500 font-bold px-2 py-0.5 rounded bg-blue-500/10 ios-btn">Edit</button>
-            <button onclick="deleteTx('${tx.id}')" class="text-rose-500 font-bold px-2 py-0.5 rounded bg-rose-500/10 ios-btn">Hapus</button>
+            <button onclick="editTx('${tx.id}')" class="text-blue-500 font-bold px-2 py-0.5 rounded bg-blue-500/10 ios-btn" title="Edit Transaksi">Edit</button>
+            <button onclick="deleteTx('${tx.id}')" class="text-rose-500 font-bold px-2 py-0.5 rounded bg-rose-500/10 ios-btn" title="Hapus Transaksi">Hapus</button>
           </td>
         `;
         tbody.appendChild(tr);
@@ -2855,10 +2911,14 @@ console.log("TabHub Live DOM Controller Active.");`;
     function openTxModal(type) {
       const modalTitle = document.getElementById('modalTxTitle');
       if (modalTitle) modalTitle.textContent = type === 'income' ? 'Tambah Pemasukan Baru' : 'Tambah Pengeluaran Baru';
-      document.getElementById('formTxId').value = '';
-      document.getElementById('formType').value = type;
-      document.getElementById('formDate').value = new Date().toISOString().split('T')[0];
-      document.getElementById('txModal').classList.remove('hidden');
+      const formTxId = document.getElementById('formTxId');
+      if (formTxId) formTxId.value = '';
+      const formType = document.getElementById('formType');
+      if (formType) formType.value = type;
+      const formDate = document.getElementById('formDate');
+      if (formDate) formDate.value = new Date().toISOString().split('T')[0];
+      const txModal = document.getElementById('txModal');
+      if (txModal) txModal.classList.remove('hidden');
     }
 
     function editTx(id) {
@@ -2942,7 +3002,7 @@ console.log("TabHub Live DOM Controller Active.");`;
       if (lower.startsWith('sk-') || lower.startsWith('aiza') || (lower.length > 20 && !lower.includes(' '))) {
         appState.user.apiKey = text.trim();
         saveStateToStorage();
-        appendChatBubble('ai', 'API Key berhasil disimpan permanen dan diverifikasi!', areaId);
+        appendChatBubble('ai', 'API Key berhasil disimpan dan diverifikasi untuk sesi online!', areaId);
         return;
       }
 
@@ -2958,7 +3018,7 @@ console.log("TabHub Live DOM Controller Active.");`;
       }
 
       setTimeout(() => {
-        let reply = "Halo! Saya adalah AI TabHub v1.32 PRO. Saya dapat membantu meringkas keuangan, mencari tugas, mengelola jadwal kalender, atau memberikan informasi sistem secara offline.";
+        let reply = "Halo! Saya adalah AI TabHub v1.31. Saya dapat membantu meringkas keuangan, mencari tugas, mengelola jadwal kalender, atau memberikan informasi sistem secara offline.";
         
         if (lower.includes('keuangan') || lower.includes('saldo') || lower.includes('uang')) {
           const totalInc = (appState.finance.transactions || []).filter(t=>t.type==='income').reduce((a,b)=>a+b.amount,0);
@@ -3007,6 +3067,13 @@ console.log("TabHub Live DOM Controller Active.");`;
       });
     }
 
+    function saveGeminiApiKey() {
+      const key = document.getElementById('geminiApiKeyInput')?.value.trim() || '';
+      appState.user.apiKey = key;
+      saveStateToStorage();
+      alert('API Key berhasil disimpan!');
+    }
+
     // --- HABITS ---
     function renderHabits() {
       const container = document.getElementById('habitListContainer');
@@ -3025,7 +3092,7 @@ console.log("TabHub Live DOM Controller Active.");`;
             <input type="checkbox" ${isDone ? 'checked' : ''} onchange="toggleHabit('${habit.id}')" class="accent-pink-500 w-4 h-4 rounded cursor-pointer">
             <div><h4 class="font-bold">${sanitizeHtml(habit.title)}</h4><span class="text-[10px] opacity-70">Streak: ${habit.streak || 0} hari</span></div>
           </div>
-          <button onclick="deleteHabit('${habit.id}')" class="text-rose-500 font-bold px-2 py-0.5 bg-rose-500/10 rounded ios-btn">Hapus</button>
+          <button onclick="deleteHabit('${habit.id}')" class="text-rose-500 font-bold px-2 py-0.5 bg-rose-500/10 rounded ios-btn" title="Hapus Rutinitas">Hapus</button>
         `;
         container.appendChild(div);
       });
@@ -3087,12 +3154,12 @@ console.log("TabHub Live DOM Controller Active.");`;
         const div = document.createElement('div');
         div.className = 'card-modern p-3 rounded-xl space-y-1.5 text-xs';
         div.innerHTML = `
-          <div class="flex justify-between items-start"><h4 class="font-extrabold">${sanitizeHtml(card.title)}</h4><button onclick="deleteKanbanCard('${card.id}')" class="text-rose-500 font-bold ios-btn">&times;</button></div>
+          <div class="flex justify-between items-start"><h4 class="font-extrabold">${sanitizeHtml(card.title)}</h4><button onclick="deleteKanbanCard('${card.id}')" class="text-rose-500 font-bold ios-btn" title="Hapus">&times;</button></div>
           <p class="text-[11px] opacity-70">${sanitizeHtml(card.desc)}</p>
           <div class="flex gap-1 pt-1 justify-end text-[10px]">
-            ${card.status !== 'todo' ? `<button onclick="moveKanban('${card.id}', 'todo')" class="px-2 py-0.5 card-modern rounded ios-btn">&larr; Todo</button>` : ''}
-            ${card.status !== 'in_progress' ? `<button onclick="moveKanban('${card.id}', 'in_progress')" class="px-2 py-0.5 card-modern rounded ios-btn">Progress</button>` : ''}
-            ${card.status !== 'done' ? `<button onclick="moveKanban('${card.id}', 'done')" class="px-2 py-0.5 card-modern rounded text-emerald-500 ios-btn">Done &rarr;</button>` : ''}
+            ${card.status !== 'todo' ? `<button onclick="moveKanban('${card.id}', 'todo')" class="px-2 py-0.5 card-modern rounded ios-btn" title="Pindah ke Todo">&larr; Todo</button>` : ''}
+            ${card.status !== 'in_progress' ? `<button onclick="moveKanban('${card.id}', 'in_progress')" class="px-2 py-0.5 card-modern rounded ios-btn" title="Pindah ke Progress">Progress</button>` : ''}
+            ${card.status !== 'done' ? `<button onclick="moveKanban('${card.id}', 'done')" class="px-2 py-0.5 card-modern rounded text-emerald-500 ios-btn" title="Selesaikan">Done &rarr;</button>` : ''}
           </div>
         `;
         if (card.status === 'todo') colTodo.appendChild(div);
@@ -3134,7 +3201,7 @@ console.log("TabHub Live DOM Controller Active.");`;
         (appState.eisenhower || []).filter(i => i.quadrant === q).forEach(item => {
           const div = document.createElement('div');
           div.className = 'card-modern p-2.5 rounded-xl flex justify-between items-center text-xs';
-          div.innerHTML = `<span class="font-bold">${sanitizeHtml(item.title)}</span> <button onclick="deleteEisenhower('${item.id}')" class="text-rose-500 font-bold ios-btn">&times;</button>`;
+          div.innerHTML = `<span class="font-bold">${sanitizeHtml(item.title)}</span> <button onclick="deleteEisenhower('${item.id}')" class="text-rose-500 font-bold ios-btn" title="Hapus">&times;</button>`;
           container.appendChild(div);
         });
       });
@@ -3174,7 +3241,7 @@ console.log("TabHub Live DOM Controller Active.");`;
             <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTask('${t.id}')" class="accent-blue-500 w-4 h-4 rounded cursor-pointer">
             <span class="${t.completed ? 'line-through opacity-50' : 'font-bold'}">${sanitizeHtml(t.title)}</span>
           </div>
-          <button onclick="deleteTask('${t.id}')" class="text-rose-500 font-bold ios-btn">Hapus</button>
+          <button onclick="deleteTask('${t.id}')" class="text-rose-500 font-bold ios-btn" title="Hapus Tugas">Hapus</button>
         `;
         taskList.appendChild(div);
       });
@@ -3187,7 +3254,7 @@ console.log("TabHub Live DOM Controller Active.");`;
       (appState.notes || []).forEach(n => {
         const div = document.createElement('div');
         div.className = 'card-modern p-3.5 rounded-2xl space-y-1';
-        div.innerHTML = `<div class="flex justify-between items-center"><h4 class="font-extrabold text-xs">${sanitizeHtml(n.title)}</h4><button onclick="deleteNote('${n.id}')" class="text-rose-500 text-xs font-bold ios-btn">&times;</button></div><p class="text-[11px] opacity-70">${sanitizeHtml(n.content)}</p>`;
+        div.innerHTML = `<div class="flex justify-between items-center"><h4 class="font-extrabold text-xs">${sanitizeHtml(n.title)}</h4><button onclick="deleteNote('${n.id}')" class="text-rose-500 text-xs font-bold ios-btn" title="Hapus">&times;</button></div><p class="text-[11px] opacity-70">${sanitizeHtml(n.content)}</p>`;
         noteList.appendChild(div);
       });
     }
@@ -3421,8 +3488,8 @@ console.log("TabHub Live DOM Controller Active.");`;
           div.innerHTML = `
             <span><strong>${date}</strong>: ${sanitizeHtml(ev)}</span>
             <div class="flex gap-1">
-              <button onclick="openCalendarEventModal('${date}', '${ev.replace(/'/g, "\\'")}', ${idx})" class="text-blue-500 font-bold px-1.5 py-0.5 rounded bg-blue-500/10 ios-btn">Edit</button>
-              <button onclick="deleteCalEv('${date}', '${idx}')" class="text-rose-500 font-bold px-1.5 py-0.5 rounded bg-blue-500/10 ios-btn">&times;</button>
+              <button onclick="openCalendarEventModal('${date}', '${ev.replace(/'/g, "\\'")}', ${idx})" class="text-blue-500 font-bold px-1.5 py-0.5 rounded bg-blue-500/10 ios-btn" title="Edit Agenda">Edit</button>
+              <button onclick="deleteCalEv('${date}', '${idx}')" class="text-rose-500 font-bold px-1.5 py-0.5 rounded bg-rose-500/10 ios-btn" title="Hapus Agenda">&times;</button>
             </div>
           `;
           container.appendChild(div);
@@ -3441,7 +3508,8 @@ console.log("TabHub Live DOM Controller Active.");`;
     }
 
     // --- MEDIA EDITOR MODULE ---
-    let currentMediaImg = null; let currentFilterType = 'normal';
+    let currentMediaImg = null;
+    let currentFilterType = 'normal';
 
     function handleMediaUpload(e) {
       const file = e.target.files[0];
@@ -3479,8 +3547,11 @@ console.log("TabHub Live DOM Controller Active.");`;
 
     function downloadEditedMedia() {
       const canvas = document.getElementById('mediaCanvas');
-      if (!canvas || !currentMediaImg) { alert('Belum ada gambar.'); return; }
-      const a = document.createElement('a'); a.href = canvas.toDataURL('image/png'); a.download = 'edited-media.png'; a.click();
+      if (!canvas || !currentMediaImg) { alert('Belum ada gambar yang dimuat.'); return; }
+      const a = document.createElement('a');
+      a.href = canvas.toDataURL('image/png');
+      a.download = 'edited-media.png';
+      a.click();
     }
 
     // --- CLOCK, ALARM & POMODORO ---
@@ -3499,7 +3570,7 @@ console.log("TabHub Live DOM Controller Active.");`;
       alarmList.forEach((al, idx) => {
         const div = document.createElement('div');
         div.className = 'card-modern p-2 rounded-xl flex justify-between items-center text-xs';
-        div.innerHTML = `<span class="font-mono font-bold text-blue-500">${al.time}</span> <span>${sanitizeHtml(al.note)}</span> <button onclick="alarmList.splice(${idx},1);renderAlarms()" class="text-rose-500 font-bold ios-btn">&times;</button>`;
+        div.innerHTML = `<span class="font-mono font-bold text-blue-500">${al.time}</span> <span>${sanitizeHtml(al.note)}</span> <button onclick="alarmList.splice(${idx},1);renderAlarms()" class="text-rose-500 font-bold ios-btn" title="Hapus">&times;</button>`;
         list.appendChild(div);
       });
     }
@@ -3639,7 +3710,7 @@ console.log("TabHub Live DOM Controller Active.");`;
         const div = document.createElement('div');
         div.className = 'card-modern p-4 rounded-2xl space-y-1 text-xs';
         div.innerHTML = `
-          <div class="flex justify-between items-center"><h4 class="font-extrabold">${sanitizeHtml(v.title)}</h4><button onclick="deleteVault('${v.id}')" class="text-rose-500 font-bold ios-btn">&times;</button></div>
+          <div class="flex justify-between items-center"><h4 class="font-extrabold">${sanitizeHtml(v.title)}</h4><button onclick="deleteVault('${v.id}')" class="text-rose-500 font-bold ios-btn" title="Hapus">&times;</button></div>
           <p class="opacity-70">User: ${sanitizeHtml(v.user)}</p>
           <p class="font-mono text-blue-500">Pass: ••••••••</p>
         `;
@@ -3648,14 +3719,37 @@ console.log("TabHub Live DOM Controller Active.");`;
     }
     function deleteVault(id) { appState.vault = appState.vault.filter(v => v.id !== id); saveStateToStorage(); renderAll(); }
 
-    // --- CODE EDITOR & SNIPPETS ---
+    // --- CODE EDITOR ---
+    async function pasteCodeFromClipboard() {
+      try {
+        const text = await navigator.clipboard.readText();
+        document.getElementById('liveHtmlEditor').value += text;
+        renderLiveHtmlPreview();
+      } catch(e) { alert('Gagal mengakses clipboard.'); }
+    }
+    function renderLiveHtmlPreview() {
+      const code = document.getElementById('liveHtmlEditor')?.value || '';
+      const iframe = document.getElementById('liveHtmlPreviewFrame');
+      if (!iframe) return;
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
+      doc.open(); doc.write(code); doc.close();
+    }
+    function loadDefaultHtmlTemplate() {
+      document.getElementById('liveHtmlEditor').value = '<div style="padding:20px;font-family:sans-serif;"><h2>TabHub Live</h2></div>';
+      renderLiveHtmlPreview();
+    }
+    function exportCodeFile(ext) {
+      const code = document.getElementById('liveHtmlEditor')?.value || '';
+      const blob = new Blob([code], { type: 'text/html' });
+      const a = document.createElement('a'); a.href = window.URL.createObjectURL(blob); a.download = `code.${ext}`; a.click();
+    }
     function renderSnippets() {
       const list = document.getElementById('snippetList');
       if (!list) return; list.innerHTML = '';
       (appState.snippets || []).forEach(snip => {
         const div = document.createElement('div');
         div.className = 'card-modern p-3 rounded-xl space-y-1';
-        div.innerHTML = `<div class="flex justify-between items-center"><h4 class="font-extrabold text-xs text-blue-500">${sanitizeHtml(snip.title)}</h4><button onclick="deleteSnippet('${snip.id}')" class="text-rose-500 font-bold ios-btn">&times;</button></div><pre class="text-[10px] font-mono opacity-80 bg-slate-950 p-2 rounded">${sanitizeHtml(snip.code)}</pre>`;
+        div.innerHTML = `<div class="flex justify-between items-center"><h4 class="font-extrabold text-xs text-blue-500">${sanitizeHtml(snip.title)}</h4><button onclick="deleteSnippet('${snip.id}')" class="text-rose-500 font-bold ios-btn" title="Hapus">&times;</button></div><pre class="text-[10px] font-mono opacity-80 bg-slate-950 p-2 rounded">${sanitizeHtml(snip.code)}</pre>`;
         list.appendChild(div);
       });
     }
@@ -3692,8 +3786,8 @@ console.log("TabHub Live DOM Controller Active.");`;
         div.innerHTML = `
           <div><h4 class="font-bold">${sanitizeHtml(f.name)}</h4><span class="text-[10px] opacity-70 font-mono">${f.size}</span></div>
           <div class="flex gap-2">
-            <a href="${f.data}" download="${f.name}" class="px-3 py-1 bg-blue-600 text-white rounded-lg font-bold ios-btn">Unduh</a>
-            <button onclick="deleteFile('${f.id}')" class="px-3 py-1 bg-rose-600 text-white rounded-lg font-bold ios-btn">Hapus</button>
+            <a href="${f.data}" download="${f.name}" class="px-3 py-1 bg-blue-600 text-white rounded-lg font-bold ios-btn" title="Unduh File">Unduh</a>
+            <button onclick="deleteFile('${f.id}')" class="px-3 py-1 bg-rose-600 text-white rounded-lg font-bold ios-btn" title="Hapus File">Hapus</button>
           </div>
         `;
         list.appendChild(div);
@@ -3709,6 +3803,23 @@ console.log("TabHub Live DOM Controller Active.");`;
       document.getElementById('appBody').className = `${theme} min-h-screen pb-32`;
     }
     function resetAppCache() { if (confirm('Reset seluruh data aplikasi?')) { localStorage.clear(); location.reload(); } }
+    function autoBackupJSON() {
+      const blob = new Blob([JSON.stringify(appState, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a'); a.href = window.URL.createObjectURL(blob); a.download = 'tabhub-backup.json'; a.click();
+    }
+    function importJSON(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          try {
+            appState = JSON.parse(event.target.result);
+            saveStateToStorage(); alert('Restore berhasil!'); location.reload();
+          } catch(e) { alert('File JSON tidak valid!'); }
+        };
+        reader.readAsText(file);
+      }
+    }
   </script>
 </body>
 </html>

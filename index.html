@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>TabHub v1.41 PRO - Ultimate Productivity Workspace</title>
+  <title>TabHub v1.42 PRO - Ultimate Productivity & Admin Workspace</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Custom CSS Themes & Glassmorphism -->
@@ -127,11 +127,17 @@
 </head>
 <body id="appBody" class="theme-nordic-frost min-h-screen pb-32">
 
+  <!-- GLOBAL ANNOUNCEMENT BANNER -->
+  <div id="globalAnnouncementBanner" class="hidden bg-gradient-to-r from-amber-500 to-orange-600 text-white px-4 py-2 text-xs font-bold text-center flex items-center justify-between shadow-md">
+    <div class="flex-1 truncate" id="announcementText">Pemberitahuan Sistem Admin aktif.</div>
+    <button onclick="dismissAnnouncement()" class="ml-4 opacity-80 hover:opacity-100 text-sm font-extrabold">&times;</button>
+  </div>
+
   <!-- SPLASH SCREEN BLUR OVERLAY -->
   <div id="appSplashOverlay" class="fixed inset-0 z-[100] bg-slate-950/80 backdrop-blur-xl flex flex-col items-center justify-center text-white transition-opacity duration-500">
     <div class="w-16 h-16 rounded-3xl bg-blue-600 flex items-center justify-center font-extrabold text-2xl shadow-2xl animate-bounce">TH</div>
-    <h1 class="text-xl font-extrabold mt-4 tracking-wider">TabHub v1.41 PRO</h1>
-    <p class="text-xs opacity-60 mt-1">Verifikasi Identitas & Workspace...</p>
+    <h1 class="text-xl font-extrabold mt-4 tracking-wider">TabHub v1.42 PRO</h1>
+    <p class="text-xs opacity-60 mt-1">Memuat Modul Administrator & Workspace...</p>
   </div>
 
   <!-- FLOATING SCROLL TO TOP BUTTON -->
@@ -156,6 +162,11 @@
       </div>
     </div>
     <div class="flex items-center gap-2">
+      <!-- Admin Quick Button (Visible only to Admin) -->
+      <button id="topAdminPanelBtn" onclick="switchTab('admin')" class="hidden px-3 py-1.5 bg-amber-500/10 text-amber-500 border border-amber-500/30 rounded-xl text-xs font-bold flex items-center gap-1.5 ios-btn" title="Panel Admin">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <span>Admin</span>
+      </button>
       <button onclick="openFloatingAiModal()" class="px-3 py-1.5 card-modern rounded-xl text-xs font-bold flex items-center gap-1.5 ios-btn" title="AI & Search">
         <svg class="w-4 h-4 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg>
         <span class="hidden sm:inline">AI Asisten</span>
@@ -166,7 +177,7 @@
     </div>
   </header>
 
-  <!-- MENU MODAL (Fixed sticky header & active state indication with all new modules) -->
+  <!-- MENU MODAL (Fixed sticky header & active state indication with Admin Panel) -->
   <div id="floatingMenuModal" class="hidden fixed inset-0 z-[60] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-2xl p-6 rounded-3xl space-y-4 shadow-2xl animate-fade-in max-h-[85vh] overflow-y-auto">
       
@@ -188,6 +199,12 @@
       
       <!-- LAUNCHER GRID -->
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+        <!-- Admin Panel Launcher Item (Admin Only) -->
+        <button id="launcherBtn-admin" onclick="switchTabAndClose('admin')" class="admin-only-feature launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn border-amber-500/50 bg-amber-500/5">
+          <span class="p-2 rounded-xl bg-amber-500/10 text-amber-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+          <div><div class="font-extrabold text-xs text-amber-500">Panel Admin</div><div class="text-[10px] opacity-60">Kontrol penuh sistem</div></div>
+        </button>
+
         <button id="launcherBtn-overview" onclick="switchTabAndClose('overview')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn">
           <span class="p-2 rounded-xl bg-blue-500/10 text-blue-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
           <div><div class="font-extrabold text-xs" data-i18n="menuOverview">Ringkasan</div><div class="text-[10px] opacity-60" data-i18n="subOverview">Dashboard utama</div></div>
@@ -314,8 +331,88 @@
     </div>
   </div>
 
-  <!-- MAIN CONTAINER WRAPPER (All 20 Tabs) -->
+  <!-- MAIN CONTAINER WRAPPER (All 21 Tabs including Admin Panel) -->
   <main class="harmonized-bar px-4 space-y-6 pt-2">
+
+    <!-- TAB 0: ADMIN PANEL (Exclusive for Admin) -->
+    <div id="tab-admin" class="tab-content hidden space-y-6">
+      <div class="card-modern p-6 sm:p-8 rounded-3xl space-y-6 border-2 border-amber-500/40">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-500 flex items-center justify-center font-extrabold text-xl">👑</div>
+            <div>
+              <h2 class="text-xl font-extrabold text-amber-500">Panel Kontrol Administrator</h2>
+              <p class="text-xs opacity-70">Pusat kendali eksklusif pemilik akun untuk manajemen sistem, siaran, dan audit log.</p>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="openBroadcastModal()" class="px-4 py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-xl text-xs font-bold shadow ios-btn flex items-center gap-2">
+              <span>📢 Kirim Pengumuman Global</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="card-modern p-5 rounded-2xl space-y-2">
+            <span class="text-xs font-bold opacity-70">Status Akses Akun</span>
+            <h3 class="text-base font-extrabold text-amber-500">ADMIN (Owner)</h3>
+            <p id="adminUsernameDisplay" class="text-[10px] font-mono opacity-60">@vanandime</p>
+          </div>
+          <div class="card-modern p-5 rounded-2xl space-y-2">
+            <span class="text-xs font-bold opacity-70">Total Entitas Data</span>
+            <h3 id="adminStatTotalItems" class="text-lg font-extrabold font-mono text-blue-500">0 Item</h3>
+            <p class="text-[10px] opacity-60">Seluruh modul tersimpan</p>
+          </div>
+          <div class="card-modern p-5 rounded-2xl space-y-2">
+            <span class="text-xs font-bold opacity-70">Kapasitas LocalStorage</span>
+            <h3 id="adminStatStorageSize" class="text-lg font-extrabold font-mono text-emerald-500">0 KB</h3>
+            <p class="text-[10px] opacity-60">Dari kuota browser</p>
+          </div>
+          <div class="card-modern p-5 rounded-2xl space-y-2">
+            <span class="text-xs font-bold opacity-70">Sinkronisasi Cloud Gist</span>
+            <h3 id="adminCloudStatus" class="text-lg font-extrabold font-mono text-purple-500">Siap Hubung</h3>
+            <p class="text-[10px] opacity-60">GitHub Gist API v3</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="card-modern p-5 rounded-2xl space-y-4">
+            <h3 class="font-extrabold text-xs flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Pengelolaan Sesi & Pengguna Aktif</h3>
+            <div class="space-y-3">
+              <div class="p-3 card-modern rounded-xl flex justify-between items-center text-xs">
+                <div>
+                  <strong class="block text-amber-500">vanandime (Pemilik Utama)</strong>
+                  <span class="text-[10px] opacity-60">Hak Akses: Administrator Penuh</span>
+                </div>
+                <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-500 font-bold rounded-full text-[10px]">Aktif</span>
+              </div>
+              <div class="p-3 card-modern rounded-xl flex justify-between items-center text-xs">
+                <div>
+                  <strong class="block">Sesi Tamu / Pengguna Umum</strong>
+                  <span class="text-[10px] opacity-60">Hak Akses: Terbatas (Read & Local Write)</span>
+                </div>
+                <span class="px-2.5 py-1 bg-blue-500/10 text-blue-500 font-bold rounded-full text-[10px]">Tersedia</span>
+              </div>
+            </div>
+            <div class="pt-2">
+              <button onclick="forceSyncAllAdminData()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow ios-btn">Sinkronisasi Paksa ke GitHub Cloud Gist</button>
+            </div>
+          </div>
+
+          <div class="card-modern p-5 rounded-2xl space-y-4">
+            <h3 class="font-extrabold text-xs flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Log Audit Sistem & Keamanan</h3>
+            <div id="adminAuditLogsList" class="space-y-2 max-h-[220px] overflow-y-auto font-mono text-[11px]">
+              <div class="p-2 card-modern rounded-lg opacity-80">[INFO] Sistem TabHub v1.42 PRO diinisialisasi.</div>
+              <div class="p-2 card-modern rounded-lg opacity-80">[AUTH] Token GitHub diverifikasi untuk @vanandime.</div>
+            </div>
+            <div class="pt-2 flex gap-2">
+              <button onclick="clearSystemAuditLogs()" class="flex-1 py-2 card-modern hover:border-rose-500 text-rose-500 font-bold rounded-xl text-xs ios-btn">Bersihkan Log</button>
+              <button onclick="resetAppCache()" class="flex-1 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-xs shadow ios-btn">Reset Total Data Sistem</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- TAB 1: OVERVIEW -->
     <div id="tab-overview" class="tab-content space-y-6">
@@ -326,7 +423,7 @@
               <span class="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></span>
               <span data-i18n="overviewHeading">Ringkasan Aplikasi & Dashboard</span>
             </h2>
-            <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.41 PRO.</p>
+            <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.42 PRO.</p>
           </div>
           <div class="flex gap-2">
             <button onclick="switchTab('finance')" class="px-3.5 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnQuickFinance">Cek Keuangan</button>
@@ -372,7 +469,7 @@
           <div class="card-modern p-5 rounded-2xl space-y-3">
             <h3 class="font-extrabold text-xs flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> <span data-i18n="ovSystemStatusTitle">Status & Sistem TabHub</span></h3>
             <div class="space-y-2 text-xs opacity-80 font-mono">
-              <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.41 PRO</strong></div>
+              <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.42 PRO</strong></div>
               <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Penyimpanan Browser</span><strong id="ovStorageSize" class="text-emerald-500">0 KB</strong></div>
               <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Tema Aktif</span><strong id="ovThemeName" class="text-purple-500">Nordic Frost</strong></div>
               <div class="flex justify-between py-1"><span>Status Enkripsi</span><strong class="text-emerald-500">Aman & Aktif</strong></div>
@@ -1181,6 +1278,20 @@
   </nav>
 
   <!-- MODALS CONTAINER -->
+  <!-- Admin Announcement Modal -->
+  <div id="adminBroadcastModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
+      <div class="sticky-modal-header flex justify-between items-center pt-2">
+        <h3 class="font-extrabold text-sm text-amber-500">📢 Kirim Pengumuman Global</h3>
+        <button onclick="closeBroadcastModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+      </div>
+      <form id="broadcastForm" onsubmit="submitGlobalAnnouncement(event)" class="space-y-3">
+        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Isi Pesan Pengumuman</label><textarea id="broadcastTextInput" placeholder="Tulis pengumuman sistem..." required class="w-full p-3 rounded-xl card-modern text-xs h-24 focus:outline-none"></textarea></div>
+        <div class="flex gap-2 pt-2"><button type="button" onclick="closeBroadcastModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn">Batal</button><button type="submit" class="flex-1 py-2.5 bg-amber-600 text-white font-bold text-xs rounded-xl shadow ios-btn">Siarkan Sekarang</button></div>
+      </form>
+    </div>
+  </div>
+
   <!-- Transaction Modal -->
   <div id="txModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl max-h-[85vh] overflow-y-auto">
@@ -1371,19 +1482,19 @@
         <button onclick="closeReleaseHistoryModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
       </div>
       <div id="releaseHistoryContent" class="space-y-3 text-xs opacity-90 leading-relaxed font-mono">
-        <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-blue-500">
-          <strong>TabHub v1.41 PRO (Agustus 2026)</strong>
-          <p class="text-[11px] opacity-80">- Pembaruan verifikasi hak akses Admin otomatis berdasarkan **Username GitHub** pemilik (`vanandime`), memastikan token baru tetap memberikan hak admin secara penuh.<br>- Perbaikan error otentikasi Gist "Bad credentials".</p>
+        <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-amber-500">
+          <strong>TabHub v1.42 PRO (Agustus 2026)</strong>
+          <p class="text-[11px] opacity-80">- Penambahan **Panel Kontrol Admin Komprehensif** eksklusif (`vanandime`).<br>- Fitur Pengumuman Global (Broadcast), Log Audit Sistem, Manajemen Sesi Pengguna, dan Force Sync GitHub Gist.</p>
         </div>
-        <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-emerald-500">
-          <strong>TabHub v1.40 PRO</strong>
-          <p class="text-[11px] opacity-80">- Penambahan sistem Role-Based Authentication (Admin & User Login) via GitHub Token.</p>
+        <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-blue-500">
+          <strong>TabHub v1.41 PRO</strong>
+          <p class="text-[11px] opacity-80">- Otentikasi Peran Admin berbasis Username GitHub (`vanandime`) dan perbaikan error *Bad credentials*.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (TabHub v1.41 PRO) -->
+  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (TabHub v1.42 PRO) -->
   <script>
     // --- XSS SECURITY & SANITIZATION ENGINE ---
     function sanitizeHtml(str) {
@@ -1395,12 +1506,12 @@
                 .replace(/'/g, '&#039;');
     }
 
-    // --- MULTI-LANGUAGE DICTIONARY (v1.41) ---
+    // --- MULTI-LANGUAGE DICTIONARY (v1.42) ---
     const i18nData = {
       id: {
         hubTitle: "TabHub",
         overviewHeading: "Ringkasan Aplikasi & Dashboard",
-        overviewSub: "Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.41.",
+        overviewSub: "Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.42.",
         btnQuickFinance: "Cek Keuangan",
         btnQuickTasks: "Lihat Tugas",
         ovStatBalance: "Total Saldo Keuangan",
@@ -1452,7 +1563,7 @@
       en: {
         hubTitle: "TabHub",
         overviewHeading: "Application Overview & Dashboard",
-        overviewSub: "Quick monitoring center for all TabHub v1.41 productivity modules.",
+        overviewSub: "Quick monitoring center for all TabHub v1.42 productivity modules.",
         btnQuickFinance: "Check Finance",
         btnQuickTasks: "View Tasks",
         ovStatBalance: "Total Financial Balance",
@@ -1504,7 +1615,7 @@
       zh: {
         hubTitle: "TabHub",
         overviewHeading: "应用程序概览与仪表盘",
-        overviewSub: "所有 TabHub v1.41 生产力模块的快速监控中心。",
+        overviewSub: "所有 TabHub v1.42 生产力模块的快速监控中心。",
         btnQuickFinance: "查看财务",
         btnQuickTasks: "查看任务",
         ovStatBalance: "总财务余额",
@@ -1556,7 +1667,7 @@
       ar: {
         hubTitle: "TabHub",
         overviewHeading: "نظرة عامة على التطبيق لوحة القيادة",
-        overviewSub: "مركز مراقبة سريع لجميع وحدات الإنتاجية TabHub v1.41.",
+        overviewSub: "مركز مراقبة سريع لجميع وحدات الإنتاجية TabHub v1.42.",
         btnQuickFinance: "التحقق من المالية",
         btnQuickTasks: "عرض المهام",
         ovStatBalance: "إجمالي الرصيد المالي",
@@ -1630,7 +1741,7 @@
       renderAll();
     }
 
-    // --- STATE UTAMA & PERSISTENSI (v1.41 with Username-based Admin Role) ---
+    // --- STATE UTAMA & PERSISTENSI (v1.42 with Admin Audit Logs & Announcement) ---
     let appState = {
       currentTab: 'overview',
       theme: 'theme-nordic-frost',
@@ -1657,7 +1768,9 @@
       files: [],
       calendarEvents: {},
       music: { active: true, track: 'chill', volume: 0.3 },
-      chatHistory: []
+      chatHistory: [],
+      announcement: '',
+      auditLogs: []
     };
 
     function saveStateToStorage() {
@@ -1696,7 +1809,9 @@
             files: Array.isArray(parsed.files) ? parsed.files : [],
             calendarEvents: parsed.calendarEvents || {},
             music: parsed.music !== undefined ? parsed.music : { active: true, track: 'chill', volume: 0.3 },
-            chatHistory: Array.isArray(parsed.chatHistory) ? parsed.chatHistory : []
+            chatHistory: Array.isArray(parsed.chatHistory) ? parsed.chatHistory : [],
+            announcement: parsed.announcement || '',
+            auditLogs: Array.isArray(parsed.auditLogs) ? parsed.auditLogs : []
           };
         }
       } catch (e) {
@@ -1704,7 +1819,106 @@
       }
     }
 
-    // --- GITHUB GIST CLOUD SYNC & USERNAME-BASED ADMIN AUTH (v1.41) ---
+    // --- ADMIN PANEL & BROADCAST FUNCTIONS ---
+    function addSystemAuditLog(msg) {
+      if (!Array.isArray(appState.auditLogs)) appState.auditLogs = [];
+      const timestamp = new Date().toLocaleTimeString();
+      appState.auditLogs.unshift(`[${timestamp}] ${msg}`);
+      if (appState.auditLogs.length > 50) appState.auditLogs.pop();
+      saveStateToStorage();
+    }
+
+    function openBroadcastModal() {
+      if (appState.user.role !== 'admin') {
+        alert('Akses Ditolak! Hanya Admin yang dapat mengirim pengumuman global.');
+        return;
+      }
+      document.getElementById('adminBroadcastModal')?.classList.remove('hidden');
+    }
+
+    function closeBroadcastModal() {
+      document.getElementById('adminBroadcastModal')?.classList.add('hidden');
+      document.getElementById('broadcastForm')?.reset();
+    }
+
+    function submitGlobalAnnouncement(e) {
+      e.preventDefault();
+      const text = sanitizeHtml(document.getElementById('broadcastTextInput')?.value || '');
+      if (!text) return;
+      appState.announcement = text;
+      addSystemAuditLog(`Admin menyiarkan pengumuman global: "${text}"`);
+      saveStateToStorage();
+      closeBroadcastModal();
+      renderAnnouncementBanner();
+      alert('Pengumuman global berhasil disiarkan ke seluruh antarmuka!');
+    }
+
+    function dismissAnnouncement() {
+      appState.announcement = '';
+      saveStateToStorage();
+      renderAnnouncementBanner();
+    }
+
+    function renderAnnouncementBanner() {
+      const banner = document.getElementById('globalAnnouncementBanner');
+      const textEl = document.getElementById('announcementText');
+      if (!banner || !textEl) return;
+      if (appState.announcement && appState.announcement.trim() !== '') {
+        textEl.textContent = appState.announcement;
+        banner.classList.remove('hidden');
+      } else {
+        banner.classList.add('hidden');
+      }
+    }
+
+    async function forceSyncAllAdminData() {
+      if (appState.user.role !== 'admin') {
+        alert('Akses Ditolak!');
+        return;
+      }
+      addSystemAuditLog('Admin memicu sinkronisasi paksa GitHub Cloud Gist.');
+      await syncToGitHubGist();
+    }
+
+    function clearSystemAuditLogs() {
+      if (appState.user.role !== 'admin') return;
+      appState.auditLogs = [];
+      saveStateToStorage();
+      renderAdminPanel();
+      alert('Log audit sistem berhasil dibersihkan.');
+    }
+
+    function renderAdminPanel() {
+      if (appState.user.role !== 'admin') return;
+      const unameDisp = document.getElementById('adminUsernameDisplay');
+      if (unameDisp) unameDisp.textContent = `@${appState.user.githubUsername || 'vanandime'}`;
+
+      let totalItems = (appState.tasks || []).length + (appState.finance.transactions || []).length + (appState.vault || []).length + (appState.shortcuts || []).length;
+      const totalItEl = document.getElementById('adminStatTotalItems');
+      if (totalItEl) totalItEl.textContent = `${totalItems} Item`;
+
+      const storageSize = (JSON.stringify(localStorage).length / 1024).toFixed(1);
+      const stSizeEl = document.getElementById('adminStatStorageSize');
+      if (stSizeEl) stSizeEl.textContent = `${storageSize} KB`;
+
+      const cloudStatusEl = document.getElementById('adminCloudStatus');
+      const gistId = localStorage.getItem('GITHUB_GIST_ID');
+      if (cloudStatusEl) cloudStatusEl.textContent = gistId ? 'Terhubung (Gist)' : 'Belum Sinkron';
+
+      const logsContainer = document.getElementById('adminAuditLogsList');
+      if (logsContainer) {
+        logsContainer.innerHTML = '';
+        const logs = Array.isArray(appState.auditLogs) && appState.auditLogs.length > 0 ? appState.auditLogs : ['[INFO] Tidak ada log aktivitas terbaru.'];
+        logs.forEach(lg => {
+          const div = document.createElement('div');
+          div.className = 'p-2 card-modern rounded-lg opacity-80';
+          div.textContent = lg;
+          logsContainer.appendChild(div);
+        });
+      }
+    }
+
+    // --- GITHUB GIST CLOUD SYNC & USERNAME-BASED ADMIN AUTH (v1.42) ---
     const ADMIN_GITHUB_USERNAME = "vanandime"; // Username GitHub pemilik sah
 
     async function loginWithGitHubToken() {
@@ -1733,9 +1947,11 @@
           // Verifikasi peran otomatis berdasarkan Username GitHub pemilik
           if (ghUsername.toLowerCase() === ADMIN_GITHUB_USERNAME.toLowerCase()) {
             appState.user.role = 'admin';
+            addSystemAuditLog(`Admin @${ghUsername} berhasil login dengan token PAT.`);
             alert(`Login Berhasil! Selamat datang, Admin @${ghUsername}. Akses administratif penuh diberikan.`);
           } else {
             appState.user.role = 'user';
+            addSystemAuditLog(`User @${ghUsername} berhasil login.`);
             alert(`Login Berhasil sebagai User. Selamat datang, @${ghUsername}. Fitur administratif dibatasi.`);
           }
 
@@ -1753,7 +1969,6 @@
     }
 
     function renderRoleBasedUI() {
-      // Validasi tambahan: pastikan jika username di state adalah vanandime, role otomatis admin
       if (appState.user && appState.user.githubUsername && appState.user.githubUsername.toLowerCase() === ADMIN_GITHUB_USERNAME.toLowerCase()) {
         appState.user.role = 'admin';
       }
@@ -1767,6 +1982,12 @@
           el.classList.add('hidden');
         }
       });
+
+      const topAdminBtn = document.getElementById('topAdminPanelBtn');
+      if (topAdminBtn) {
+        if (isAdmin) topAdminBtn.classList.remove('hidden');
+        else topAdminBtn.classList.add('hidden');
+      }
 
       const roleBadge = document.getElementById('userRoleBadge');
       if (roleBadge) {
@@ -1801,7 +2022,7 @@
             'Accept': 'application/vnd.github.v3+json'
           },
           body: JSON.stringify({
-            description: "TabHub v1.41 PRO - Cloud Data Backup (Admin)",
+            description: "TabHub v1.42 PRO - Cloud Data Backup (Admin)",
             public: false,
             files: {
               "tabhub_state.json": {
@@ -1814,6 +2035,7 @@
         if (response.ok) {
           const data = await response.json();
           localStorage.setItem('GITHUB_GIST_ID', data.id);
+          addSystemAuditLog('Berhasil sinkronisasi state ke GitHub Gist cloud.');
           alert('Berhasil! Data TabHub telah disinkronkan ke GitHub Gist privat Anda.');
         } else {
           const errData = await response.json();
@@ -1855,6 +2077,7 @@
             saveStateToStorage();
             renderAll();
             renderRoleBasedUI();
+            addSystemAuditLog('Berhasil memuat state dari GitHub Gist cloud.');
             alert('Data TabHub berhasil ditarik dan dipulihkan dari GitHub Cloud!');
           } else {
             alert('File cadangan "tabhub_state.json" tidak ditemukan di Gist tersebut.');
@@ -1878,6 +2101,7 @@
         document.body.appendChild(downloadAnchor);
         downloadAnchor.click();
         downloadAnchor.remove();
+        addSystemAuditLog('Mengekspor backup file JSON.');
       } catch(e) {
         alert('Gagal mengekspor file cadangan.');
       }
@@ -1895,6 +2119,7 @@
             saveStateToStorage();
             renderAll();
             renderRoleBasedUI();
+            addSystemAuditLog('Memulihkan aplikasi dari file JSON.');
             alert('Data aplikasi berhasil dipulihkan dari file JSON!');
             closeBackupRestoreModal();
           } else {
@@ -1931,6 +2156,7 @@
           saveStateToStorage();
           renderAll();
           renderRoleBasedUI();
+          addSystemAuditLog('Memulihkan aplikasi dari teks kode JSON.');
           alert('Data aplikasi berhasil dipulihkan dari kode teks!');
           closeBackupRestoreModal();
         } else {
@@ -2053,6 +2279,8 @@
       renderCalendar();
       renderFileManager();
       renderMindMap();
+      renderAdminPanel();
+      renderAnnouncementBanner();
     }
 
     // --- INSTANT LOADING INITIALIZATION & SPLASH BLUR REMOVAL ---
@@ -2150,6 +2378,9 @@
       if (tabId === 'overview') {
         renderOverviewDashboard();
       }
+      if (tabId === 'admin') {
+        renderAdminPanel();
+      }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -2161,7 +2392,7 @@
 
     function updateMenuLauncherActiveStates() {
       document.querySelectorAll('.launcher-item').forEach(item => {
-        item.classList.remove('border-blue-500', 'bg-blue-500/10', 'shadow-md');
+        item.classList.remove('border-blue-500', 'bg-blue-500/10', 'shadow-md', 'border-amber-500');
         item.style.borderColor = '';
         item.style.background = '';
       });
@@ -2603,7 +2834,7 @@
       }
 
       setTimeout(() => {
-        let reply = "Halo! Saya adalah AI TabHub v1.41 PRO. Saya dapat membantu meringkas keuangan, mencari tugas, mengelola jadwal kalender, atau memberikan informasi sistem secara offline.";
+        let reply = "Halo! Saya adalah AI TabHub v1.42 PRO. Saya dapat membantu meringkas keuangan, mencari tugas, mengelola jadwal kalender, atau memberikan informasi sistem secara offline.";
         
         if (lower.includes('keuangan') || lower.includes('saldo') || lower.includes('uang')) {
           const totalInc = (appState.finance.transactions || []).filter(t=>t.type==='income').reduce((a,b)=>a+b.amount,0);

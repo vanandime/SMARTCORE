@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>TabHub v1.42 PRO - Ultimate Productivity & Admin Workspace</title>
+  <title>TabHub v1.43 PRO - Ultimate Productivity, Admin & Health Workspace</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Custom CSS Themes & Glassmorphism -->
@@ -136,8 +136,8 @@
   <!-- SPLASH SCREEN BLUR OVERLAY -->
   <div id="appSplashOverlay" class="fixed inset-0 z-[100] bg-slate-950/80 backdrop-blur-xl flex flex-col items-center justify-center text-white transition-opacity duration-500">
     <div class="w-16 h-16 rounded-3xl bg-blue-600 flex items-center justify-center font-extrabold text-2xl shadow-2xl animate-bounce">TH</div>
-    <h1 class="text-xl font-extrabold mt-4 tracking-wider">TabHub v1.42 PRO</h1>
-    <p class="text-xs opacity-60 mt-1">Memuat Modul Administrator & Workspace...</p>
+    <h1 class="text-xl font-extrabold mt-4 tracking-wider">TabHub v1.43 PRO</h1>
+    <p class="text-xs opacity-60 mt-1">Memuat Modul Kesehatan, Admin & Workspace...</p>
   </div>
 
   <!-- FLOATING SCROLL TO TOP BUTTON -->
@@ -177,7 +177,7 @@
     </div>
   </header>
 
-  <!-- MENU MODAL (Fixed sticky header & active state indication with Admin Panel) -->
+  <!-- MENU MODAL (Fixed sticky header & active state indication with Health Tracker) -->
   <div id="floatingMenuModal" class="hidden fixed inset-0 z-[60] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-2xl p-6 rounded-3xl space-y-4 shadow-2xl animate-fade-in max-h-[85vh] overflow-y-auto">
       
@@ -203,6 +203,12 @@
         <button id="launcherBtn-admin" onclick="switchTabAndClose('admin')" class="admin-only-feature launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn border-amber-500/50 bg-amber-500/5">
           <span class="p-2 rounded-xl bg-amber-500/10 text-amber-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
           <div><div class="font-extrabold text-xs text-amber-500">Panel Admin</div><div class="text-[10px] opacity-60">Kontrol penuh sistem</div></div>
+        </button>
+
+        <!-- NEW: Health Tracker Launcher Item -->
+        <button id="launcherBtn-health" onclick="switchTabAndClose('health')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn">
+          <span class="p-2 rounded-xl bg-sky-500/10 text-sky-500"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></span>
+          <div><div class="font-extrabold text-xs" data-i18n="menuHealth">Kesehatan & Air</div><div class="text-[10px] opacity-60" data-i18n="subHealth">Hidrasi & kalori</div></div>
         </button>
 
         <button id="launcherBtn-overview" onclick="switchTabAndClose('overview')" class="launcher-item card-modern p-3 rounded-2xl flex items-center gap-3 text-left transition ios-btn">
@@ -321,7 +327,7 @@
           <span class="font-bold opacity-65 shrink-0" data-i18n="lblQuickPrompt">PROMPT CEPAT:</span>
           <button onclick="sendQuickPrompt('Cari tugas')" class="px-2.5 py-1 card-modern rounded-lg shrink-0 ios-btn">Cari Tugas</button>
           <button onclick="sendQuickPrompt('Ringkas semua keuangan')" class="px-2.5 py-1 card-modern rounded-lg shrink-0 ios-btn">Ringkas Keuangan</button>
-          <button onclick="sendQuickPrompt('Bantuan sistem AI')" class="px-2.5 py-1 card-modern rounded-lg shrink-0 ios-btn">Bantuan Sistem</button>
+          <button onclick="sendQuickPrompt('Cek status kesehatan')" class="px-2.5 py-1 card-modern rounded-lg shrink-0 ios-btn">Status Kesehatan</button>
         </div>
         <div class="flex gap-2">
           <input type="text" id="chatInputText" data-i18n-ph="phChatInput" placeholder="Ketik pertanyaan atau /search [kata kunci]..." class="flex-1 px-4 py-3 rounded-2xl card-modern text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" onkeydown="if(event.key==='Enter') sendChatMessage()">
@@ -331,7 +337,7 @@
     </div>
   </div>
 
-  <!-- MAIN CONTAINER WRAPPER (All 21 Tabs including Admin Panel) -->
+  <!-- MAIN CONTAINER WRAPPER (All Tabs including Admin Panel & Health Tracker) -->
   <main class="harmonized-bar px-4 space-y-6 pt-2">
 
     <!-- TAB 0: ADMIN PANEL (Exclusive for Admin) -->
@@ -402,13 +408,82 @@
           <div class="card-modern p-5 rounded-2xl space-y-4">
             <h3 class="font-extrabold text-xs flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Log Audit Sistem & Keamanan</h3>
             <div id="adminAuditLogsList" class="space-y-2 max-h-[220px] overflow-y-auto font-mono text-[11px]">
-              <div class="p-2 card-modern rounded-lg opacity-80">[INFO] Sistem TabHub v1.42 PRO diinisialisasi.</div>
+              <div class="p-2 card-modern rounded-lg opacity-80">[INFO] Sistem TabHub v1.43 PRO diinisialisasi.</div>
               <div class="p-2 card-modern rounded-lg opacity-80">[AUTH] Token GitHub diverifikasi untuk @vanandime.</div>
             </div>
             <div class="pt-2 flex gap-2">
               <button onclick="clearSystemAuditLogs()" class="flex-1 py-2 card-modern hover:border-rose-500 text-rose-500 font-bold rounded-xl text-xs ios-btn">Bersihkan Log</button>
               <button onclick="resetAppCache()" class="flex-1 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-xs shadow ios-btn">Reset Total Data Sistem</button>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEW TAB: HEALTH TRACKER (Water & Calorie/Health Monitoring) -->
+    <div id="tab-health" class="tab-content hidden space-y-6">
+      <div class="card-modern p-6 sm:p-8 rounded-3xl space-y-6">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-200/50 dark:border-slate-800/50">
+          <div>
+            <h2 class="text-xl font-extrabold flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-sky-500 animate-pulse"></span>
+              <span data-i18n="healthHeading">Pelacak Kesehatan & Air Minum</span>
+            </h2>
+            <p class="text-xs opacity-70" data-i18n="healthSub">Pantau hidrasi harian, kalori, dan catatan kebugaran Anda.</p>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="resetWaterToday()" class="px-3.5 py-2 card-modern hover:border-sky-500 rounded-xl text-xs font-bold ios-btn">Reset Air Hari Ini</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div class="card-modern p-5 rounded-2xl space-y-3">
+            <span class="text-xs font-bold opacity-70" data-i18n="healthWaterTitle">Hidrasi Air Minum</span>
+            <div class="flex items-baseline gap-2">
+              <h3 id="waterIntakeDisplay" class="text-2xl font-extrabold font-mono text-sky-500">0 ml</h3>
+              <span class="text-xs opacity-60">/ 2000 ml target</span>
+            </div>
+            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
+              <div id="waterProgressBar" class="bg-sky-500 h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+            <div class="flex gap-2 pt-2">
+              <button onclick="addWater(250)" class="flex-1 py-2 bg-sky-500/10 hover:bg-sky-500/20 text-sky-500 font-bold rounded-xl text-xs ios-btn">+ 250 ml (Gelas)</button>
+              <button onclick="addWater(500)" class="flex-1 py-2 bg-sky-600 text-white font-bold rounded-xl text-xs shadow ios-btn">+ 500 ml (Botol)</button>
+            </div>
+          </div>
+
+          <div class="card-modern p-5 rounded-2xl space-y-3">
+            <span class="text-xs font-bold opacity-70" data-i18n="healthCalorieTitle">Konsumsi Kalori Harian</span>
+            <div class="flex items-baseline gap-2">
+              <h3 id="calorieIntakeDisplay" class="text-2xl font-extrabold font-mono text-amber-500">0 kkal</h3>
+              <span class="text-xs opacity-60">/ 2200 kkal</span>
+            </div>
+            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
+              <div id="calorieProgressBar" class="bg-amber-500 h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+            <div class="pt-2 flex gap-2">
+              <input type="number" id="quickCalorieInput" placeholder="Jumlah kkal..." class="flex-1 px-3 py-2 card-modern rounded-xl text-xs font-mono focus:outline-none">
+              <button onclick="addCalories()" class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl text-xs shadow ios-btn">Tambah</button>
+            </div>
+          </div>
+
+          <div class="card-modern p-5 rounded-2xl space-y-3">
+            <span class="text-xs font-bold opacity-70" data-i18n="healthStatusTitle">Indikator Kebugaran</span>
+            <div class="space-y-1 text-xs">
+              <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Status Hidrasi</span><strong id="healthHydrationStatus" class="text-sky-500">Perlu Minum</strong></div>
+              <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Status Kalori</span><strong id="healthCalorieStatus" class="text-amber-500">Normal</strong></div>
+              <div class="flex justify-between py-1"><span>Catatan Hari Ini</span><strong class="text-emerald-500">Aktif</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-modern p-5 rounded-2xl space-y-4">
+          <div class="flex justify-between items-center pb-2 border-b border-slate-200/50 dark:border-slate-800/50">
+            <h3 class="font-extrabold text-xs">Riwayat Catatan Kesehatan & Aktivitas</h3>
+            <button onclick="openHealthLogModal()" class="px-3 py-1.5 bg-sky-600 text-white rounded-xl text-xs font-bold shadow ios-btn">+ Catatan Fisik</button>
+          </div>
+          <div id="healthLogsList" class="space-y-2 max-h-[220px] overflow-y-auto text-xs">
+            <div class="p-3 card-modern rounded-xl opacity-75">Belum ada catatan kesehatan fisik hari ini.</div>
           </div>
         </div>
       </div>
@@ -423,11 +498,11 @@
               <span class="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></span>
               <span data-i18n="overviewHeading">Ringkasan Aplikasi & Dashboard</span>
             </h2>
-            <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.42 PRO.</p>
+            <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.43 PRO.</p>
           </div>
           <div class="flex gap-2">
             <button onclick="switchTab('finance')" class="px-3.5 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnQuickFinance">Cek Keuangan</button>
-            <button onclick="switchTab('tasks')" class="px-3.5 py-2 card-modern hover:border-blue-500 rounded-xl text-xs font-bold ios-btn" data-i18n="btnQuickTasks">Lihat Tugas</button>
+            <button onclick="switchTab('health')" class="px-3.5 py-2 bg-sky-600 text-white rounded-xl text-xs font-bold shadow ios-btn">Cek Kesehatan</button>
           </div>
         </div>
 
@@ -443,9 +518,9 @@
             <p class="text-[10px] opacity-60">Progres harian</p>
           </div>
           <div class="card-modern p-5 rounded-2xl space-y-2">
-            <span class="text-xs font-bold opacity-70" data-i18n="ovStatShortcuts">Pintasan Web</span>
-            <h3 id="ovMetricShortcuts" class="text-lg font-extrabold font-mono text-purple-500">0 Tautan</h3>
-            <p class="text-[10px] opacity-60">Bookmark tersimpan</p>
+            <span class="text-xs font-bold opacity-70">Hidrasi Hari Ini</span>
+            <h3 id="ovMetricWater" class="text-lg font-extrabold font-mono text-sky-500">0 ml</h3>
+            <p class="text-[10px] opacity-60">Target 2000 ml</p>
           </div>
           <div class="card-modern p-5 rounded-2xl space-y-2">
             <span class="text-xs font-bold opacity-70" data-i18n="ovStatVault">Kredensial Vault</span>
@@ -458,18 +533,18 @@
           <div class="card-modern p-5 rounded-2xl space-y-3">
             <h3 class="font-extrabold text-xs flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-blue-500"></span> <span data-i18n="ovQuickLauncherTitle">Navigasi Cepat Modul</span></h3>
             <div class="grid grid-cols-2 gap-2 text-xs">
+              <button onclick="switchTab('health')" class="p-3 card-modern text-left rounded-xl hover:border-sky-500 transition ios-btn font-bold flex items-center justify-between text-sky-500"><span>Kesehatan & Air</span> &rarr;</button>
               <button onclick="switchTab('finance')" class="p-3 card-modern text-left rounded-xl hover:border-blue-500 transition ios-btn font-bold flex items-center justify-between"><span>Keuangan</span> &rarr;</button>
               <button onclick="switchTab('tasks')" class="p-3 card-modern text-left rounded-xl hover:border-blue-500 transition ios-btn font-bold flex items-center justify-between"><span>Tugas & Rutinitas</span> &rarr;</button>
               <button onclick="switchTab('kanban')" class="p-3 card-modern text-left rounded-xl hover:border-blue-500 transition ios-btn font-bold flex items-center justify-between"><span>Papan Kanban</span> &rarr;</button>
               <button onclick="switchTab('calendar')" class="p-3 card-modern text-left rounded-xl hover:border-blue-500 transition ios-btn font-bold flex items-center justify-between"><span>Kalender Agenda</span> &rarr;</button>
               <button onclick="switchTab('translator')" class="p-3 card-modern text-left rounded-xl hover:border-blue-500 transition ios-btn font-bold flex items-center justify-between"><span>Penerjemah</span> &rarr;</button>
-              <button onclick="switchTab('pdf')" class="p-3 card-modern text-left rounded-xl hover:border-blue-500 transition ios-btn font-bold flex items-center justify-between"><span>Pengelola PDF</span> &rarr;</button>
             </div>
           </div>
           <div class="card-modern p-5 rounded-2xl space-y-3">
             <h3 class="font-extrabold text-xs flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> <span data-i18n="ovSystemStatusTitle">Status & Sistem TabHub</span></h3>
             <div class="space-y-2 text-xs opacity-80 font-mono">
-              <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.42 PRO</strong></div>
+              <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.43 PRO</strong></div>
               <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Penyimpanan Browser</span><strong id="ovStorageSize" class="text-emerald-500">0 KB</strong></div>
               <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Tema Aktif</span><strong id="ovThemeName" class="text-purple-500">Nordic Frost</strong></div>
               <div class="flex justify-between py-1"><span>Status Enkripsi</span><strong class="text-emerald-500">Aman & Aktif</strong></div>
@@ -1260,14 +1335,14 @@
     <button id="menuBtn-overview" onclick="switchTab('overview')" class="dock-btn opacity-70 hover:opacity-100" title="Ringkasan">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
     </button>
+    <button id="menuBtn-health" onclick="switchTab('health')" class="dock-btn opacity-70 hover:opacity-100" title="Kesehatan">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+    </button>
     <button id="menuBtn-finance" onclick="switchTab('finance')" class="dock-btn opacity-70 hover:opacity-100" title="Keuangan">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
     </button>
     <button id="menuBtn-tasks" onclick="switchTab('tasks')" class="dock-btn opacity-70 hover:opacity-100" title="Tugas">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-    </button>
-    <button id="menuBtn-kanban" onclick="switchTab('kanban')" class="dock-btn opacity-70 hover:opacity-100" title="Proyek">
-      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
     </button>
     <button id="menuBtn-calendar" onclick="switchTab('calendar')" class="dock-btn opacity-70 hover:opacity-100" title="Kalender">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -1278,6 +1353,21 @@
   </nav>
 
   <!-- MODALS CONTAINER -->
+  <!-- Health Log Modal -->
+  <div id="healthLogModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
+      <div class="sticky-modal-header flex justify-between items-center pt-2">
+        <h3 class="font-extrabold text-sm text-sky-500">Catat Aktivitas & Fisik</h3>
+        <button onclick="closeHealthLogModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+      </div>
+      <form id="healthLogForm" onsubmit="submitHealthLog(event)" class="space-y-3">
+        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Jenis Aktivitas / Catatan</label><input type="text" id="healthLogTitleInput" placeholder="Misal: Olahraga ringan / Jalan santai" required class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
+        <div class="space-y-1"><label class="text-xs font-bold opacity-75">Durasi / Keterangan</label><input type="text" id="healthLogDescInput" placeholder="Misal: 30 menit" class="w-full px-3 py-2.5 rounded-xl card-modern text-xs"></div>
+        <div class="flex gap-2 pt-2"><button type="button" onclick="closeHealthLogModal()" class="flex-1 py-2.5 card-modern font-bold text-xs rounded-xl ios-btn">Batal</button><button type="submit" class="flex-1 py-2.5 bg-sky-600 text-white font-bold text-xs rounded-xl shadow ios-btn">Simpan Catatan</button></div>
+      </form>
+    </div>
+  </div>
+
   <!-- Admin Announcement Modal -->
   <div id="adminBroadcastModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
     <div class="card-modern w-full max-w-md p-6 rounded-3xl space-y-4 shadow-2xl">
@@ -1482,19 +1572,19 @@
         <button onclick="closeReleaseHistoryModal()" class="close-btn-refined" title="Tutup"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
       </div>
       <div id="releaseHistoryContent" class="space-y-3 text-xs opacity-90 leading-relaxed font-mono">
-        <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-amber-500">
-          <strong>TabHub v1.42 PRO (Agustus 2026)</strong>
-          <p class="text-[11px] opacity-80">- Penambahan **Panel Kontrol Admin Komprehensif** eksklusif (`vanandime`).<br>- Fitur Pengumuman Global (Broadcast), Log Audit Sistem, Manajemen Sesi Pengguna, dan Force Sync GitHub Gist.</p>
+        <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-sky-500">
+          <strong>TabHub v1.43 PRO (Agustus 2026)</strong>
+          <p class="text-[11px] opacity-80">- Penambahan modul **Pelacak Kesehatan & Air Minum (Water & Health Tracker)**.<br>- Pemantauan hidrasi harian, target kalori, dan riwayat fisik terintegrasi.</p>
         </div>
-        <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-blue-500">
-          <strong>TabHub v1.41 PRO</strong>
-          <p class="text-[11px] opacity-80">- Otentikasi Peran Admin berbasis Username GitHub (`vanandime`) dan perbaikan error *Bad credentials*.</p>
+        <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-amber-500">
+          <strong>TabHub v1.42 PRO</strong>
+          <p class="text-[11px] opacity-80">- Panel Kontrol Admin Komprehensif dengan pengumuman global dan audit log.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (TabHub v1.42 PRO) -->
+  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (TabHub v1.43 PRO) -->
   <script>
     // --- XSS SECURITY & SANITIZATION ENGINE ---
     function sanitizeHtml(str) {
@@ -1506,12 +1596,12 @@
                 .replace(/'/g, '&#039;');
     }
 
-    // --- MULTI-LANGUAGE DICTIONARY (v1.42) ---
+    // --- MULTI-LANGUAGE DICTIONARY (v1.43) ---
     const i18nData = {
       id: {
         hubTitle: "TabHub",
         overviewHeading: "Ringkasan Aplikasi & Dashboard",
-        overviewSub: "Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.42.",
+        overviewSub: "Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.43.",
         btnQuickFinance: "Cek Keuangan",
         btnQuickTasks: "Lihat Tugas",
         ovStatBalance: "Total Saldo Keuangan",
@@ -1558,12 +1648,19 @@
         menuYoutube: "Downloader YT",
         menuTiktok: "TikTok No Watermark",
         menuFonts: "Penghasil Huruf",
-        menuBlank: "Karakter Kosong"
+        menuBlank: "Karakter Kosong",
+        menuHealth: "Kesehatan & Air",
+        subHealth: "Hidrasi & kalori",
+        healthHeading: "Pelacak Kesehatan & Air Minum",
+        healthSub: "Pantau hidrasi harian, kalori, dan catatan kebugaran Anda.",
+        healthWaterTitle: "Hidrasi Air Minum",
+        healthCalorieTitle: "Konsumsi Kalori Harian",
+        healthStatusTitle: "Indikator Kebugaran"
       },
       en: {
         hubTitle: "TabHub",
         overviewHeading: "Application Overview & Dashboard",
-        overviewSub: "Quick monitoring center for all TabHub v1.42 productivity modules.",
+        overviewSub: "Quick monitoring center for all TabHub v1.43 productivity modules.",
         btnQuickFinance: "Check Finance",
         btnQuickTasks: "View Tasks",
         ovStatBalance: "Total Financial Balance",
@@ -1610,12 +1707,19 @@
         menuYoutube: "YT Downloader",
         menuTiktok: "TikTok No Watermark",
         menuFonts: "Font Generator",
-        menuBlank: "Blank Character"
+        menuBlank: "Blank Character",
+        menuHealth: "Health & Water",
+        subHealth: "Hydration & calories",
+        healthHeading: "Health & Water Tracker",
+        healthSub: "Monitor daily hydration, calories, and fitness notes.",
+        healthWaterTitle: "Drinking Water Hydration",
+        healthCalorieTitle: "Daily Calorie Intake",
+        healthStatusTitle: "Fitness Status"
       },
       zh: {
         hubTitle: "TabHub",
         overviewHeading: "应用程序概览与仪表盘",
-        overviewSub: "所有 TabHub v1.42 生产力模块的快速监控中心。",
+        overviewSub: "所有 TabHub v1.43 生产力模块的快速监控中心。",
         btnQuickFinance: "查看财务",
         btnQuickTasks: "查看任务",
         ovStatBalance: "总财务余额",
@@ -1662,12 +1766,19 @@
         menuYoutube: "YT 下载器",
         menuTiktok: "TikTok 无水印",
         menuFonts: "字体生成器",
-        menuBlank: "空白字符"
+        menuBlank: "空白字符",
+        menuHealth: "健康与饮水",
+        subHealth: "水分与卡路里",
+        healthHeading: "健康与饮水追踪器",
+        healthSub: "监控每日水分摄入、卡路里和健身记录。",
+        healthWaterTitle: "饮水量",
+        healthCalorieTitle: "每日卡路里摄入",
+        healthStatusTitle: "健身状态"
       },
       ar: {
         hubTitle: "TabHub",
         overviewHeading: "نظرة عامة على التطبيق لوحة القيادة",
-        overviewSub: "مركز مراقبة سريع لجميع وحدات الإنتاجية TabHub v1.42.",
+        overviewSub: "مركز مراقبة سريع لجميع وحدات الإنتاجية TabHub v1.43.",
         btnQuickFinance: "التحقق من المالية",
         btnQuickTasks: "عرض المهام",
         ovStatBalance: "إجمالي الرصيد المالي",
@@ -1714,7 +1825,14 @@
         menuYoutube: "تحميل يوتيوب",
         menuTiktok: "تيك توك بدون علامة مائية",
         menuFonts: "مولد الخطوط",
-        menuBlank: "حرف فارغ"
+        menuBlank: "حرف فارغ",
+        menuHealth: "الصحة والماء",
+        subHealth: "الترطيب والسعرات",
+        healthHeading: "متتبع الصحة والماء",
+        healthSub: "راقب الترطيب اليومي والسعرات الحرارية وملاحظات اللياقة.",
+        healthWaterTitle: "ترطيب مياه الشرب",
+        healthCalorieTitle: "السعرات الحرارية اليومية",
+        healthStatusTitle: "حالة اللياقة"
       }
     };
 
@@ -1741,7 +1859,7 @@
       renderAll();
     }
 
-    // --- STATE UTAMA & PERSISTENSI (v1.42 with Admin Audit Logs & Announcement) ---
+    // --- STATE UTAMA & PERSISTENSI (v1.43 with Health Tracker) ---
     let appState = {
       currentTab: 'overview',
       theme: 'theme-nordic-frost',
@@ -1770,7 +1888,8 @@
       music: { active: true, track: 'chill', volume: 0.3 },
       chatHistory: [],
       announcement: '',
-      auditLogs: []
+      auditLogs: [],
+      health: { water: 0, targetWater: 2000, calories: 0, targetCalories: 2200, logs: [] }
     };
 
     function saveStateToStorage() {
@@ -1811,11 +1930,125 @@
             music: parsed.music !== undefined ? parsed.music : { active: true, track: 'chill', volume: 0.3 },
             chatHistory: Array.isArray(parsed.chatHistory) ? parsed.chatHistory : [],
             announcement: parsed.announcement || '',
-            auditLogs: Array.isArray(parsed.auditLogs) ? parsed.auditLogs : []
+            auditLogs: Array.isArray(parsed.auditLogs) ? parsed.auditLogs : [],
+            health: parsed.health || { water: 0, targetWater: 2000, calories: 0, targetCalories: 2200, logs: [] }
           };
         }
       } catch (e) {
         console.error('Error loading state:', e);
+      }
+    }
+
+    // --- HEALTH TRACKER FUNCTIONS (v1.43) ---
+    function addWater(amount) {
+      if (!appState.health) appState.health = { water: 0, targetWater: 2000, calories: 0, targetCalories: 2200, logs: [] };
+      appState.health.water = (appState.health.water || 0) + amount;
+      saveStateToStorage();
+      renderHealthTracker();
+      renderOverviewDashboard();
+    }
+
+    function resetWaterToday() {
+      if (!appState.health) appState.health = { water: 0, targetWater: 2000, calories: 0, targetCalories: 2200, logs: [] };
+      appState.health.water = 0;
+      saveStateToStorage();
+      renderHealthTracker();
+      renderOverviewDashboard();
+    }
+
+    function addCalories() {
+      const input = document.getElementById('quickCalorieInput');
+      if (!input) return;
+      const val = parseInt(input.value) || 0;
+      if (val <= 0) return;
+      if (!appState.health) appState.health = { water: 0, targetWater: 2000, calories: 0, targetCalories: 2200, logs: [] };
+      appState.health.calories = (appState.health.calories || 0) + val;
+      input.value = '';
+      saveStateToStorage();
+      renderHealthTracker();
+    }
+
+    function openHealthLogModal() {
+      document.getElementById('healthLogModal')?.classList.remove('hidden');
+    }
+
+    function closeHealthLogModal() {
+      document.getElementById('healthLogModal')?.classList.add('hidden');
+      document.getElementById('healthLogForm')?.reset();
+    }
+
+    function submitHealthLog(e) {
+      e.preventDefault();
+      const title = sanitizeHtml(document.getElementById('healthLogTitleInput')?.value || '');
+      const desc = sanitizeHtml(document.getElementById('healthLogDescInput')?.value || '');
+      if (!title) return;
+      if (!appState.health) appState.health = { water: 0, targetWater: 2000, calories: 0, targetCalories: 2200, logs: [] };
+      if (!Array.isArray(appState.health.logs)) appState.health.logs = [];
+      appState.health.logs.unshift({ id: 'hl_' + Date.now(), time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}), title, desc });
+      saveStateToStorage();
+      closeHealthLogModal();
+      renderHealthTracker();
+    }
+
+    function deleteHealthLog(id) {
+      if (!appState.health || !Array.isArray(appState.health.logs)) return;
+      appState.health.logs = appState.health.logs.filter(l => l.id !== id);
+      saveStateToStorage();
+      renderHealthTracker();
+    }
+
+    function renderHealthTracker() {
+      if (!appState.health) appState.health = { water: 0, targetWater: 2000, calories: 0, targetCalories: 2200, logs: [] };
+      const water = appState.health.water || 0;
+      const targetWater = appState.health.targetWater || 2000;
+      const calories = appState.health.calories || 0;
+      const targetCalories = appState.health.targetCalories || 2200;
+
+      const waterDisp = document.getElementById('waterIntakeDisplay');
+      if (waterDisp) waterDisp.textContent = `${water} ml`;
+      const waterProg = document.getElementById('waterProgressBar');
+      if (waterProg) waterProg.style.width = `${Math.min(Math.round((water / targetWater) * 100), 100)}%`;
+
+      const calDisp = document.getElementById('calorieIntakeDisplay');
+      if (calDisp) calDisp.textContent = `${calories} kkal`;
+      const calProg = document.getElementById('calorieProgressBar');
+      if (calProg) calProg.style.width = `${Math.min(Math.round((calories / targetCalories) * 100), 100)}%`;
+
+      const hydStatus = document.getElementById('healthHydrationStatus');
+      if (hydStatus) {
+        if (water >= targetWater) { hydStatus.textContent = 'Terhidrasi Optimal 💧'; hydStatus.className = 'text-emerald-500 font-bold'; }
+        else if (water >= targetWater / 2) { hydStatus.textContent = 'Cukup Baik 👍'; hydStatus.className = 'text-blue-500 font-bold'; }
+        else { hydStatus.textContent = 'Perlu Minum ⚠️'; hydStatus.className = 'text-sky-500 font-bold'; }
+      }
+
+      const calStatus = document.getElementById('healthCalorieStatus');
+      if (calStatus) {
+        if (calories > targetCalories) { calStatus.textContent = 'Melebihi Target ⚠️'; calStatus.className = 'text-rose-500 font-bold'; }
+        else { calStatus.textContent = 'Normal / Terkendali 👍'; calStatus.className = 'text-amber-500 font-bold'; }
+      }
+
+      const ovWater = document.getElementById('ovMetricWater');
+      if (ovWater) ovWater.textContent = `${water} ml`;
+
+      const logsContainer = document.getElementById('healthLogsList');
+      if (logsContainer) {
+        logsContainer.innerHTML = '';
+        const logs = appState.health.logs || [];
+        logs.forEach(log => {
+          const div = document.createElement('div');
+          div.className = 'p-3 card-modern rounded-xl flex justify-between items-center text-xs';
+          div.innerHTML = `
+            <div>
+              <strong class="block">${sanitizeHtml(log.title)}</strong>
+              <span class="text-[10px] opacity-60 font-mono">${log.time} - ${sanitizeHtml(log.desc || '')}</span>
+            </div>
+            <button onclick="deleteHealthLog('${log.id}')" class="text-rose-500 font-bold px-2 py-1 rounded bg-rose-500/10 ios-btn">&times;</button>
+          `;
+          logsContainer.appendChild(div);
+        });
+        if (logs.length === 0) {
+          logsContainer.innerHTML = '<div class="p-3 card-modern rounded-xl opacity-75 text-center">Belum ada catatan kesehatan fisik hari ini.</div>';
+        }
       }
     }
 
@@ -1918,7 +2151,7 @@
       }
     }
 
-    // --- GITHUB GIST CLOUD SYNC & USERNAME-BASED ADMIN AUTH (v1.42) ---
+    // --- GITHUB GIST CLOUD SYNC & USERNAME-BASED ADMIN AUTH (v1.43) ---
     const ADMIN_GITHUB_USERNAME = "vanandime"; // Username GitHub pemilik sah
 
     async function loginWithGitHubToken() {
@@ -1944,7 +2177,6 @@
           appState.user.githubUsername = ghUsername;
           appState.user.name = userData.name || ghUsername;
 
-          // Verifikasi peran otomatis berdasarkan Username GitHub pemilik
           if (ghUsername.toLowerCase() === ADMIN_GITHUB_USERNAME.toLowerCase()) {
             appState.user.role = 'admin';
             addSystemAuditLog(`Admin @${ghUsername} berhasil login dengan token PAT.`);
@@ -2022,7 +2254,7 @@
             'Accept': 'application/vnd.github.v3+json'
           },
           body: JSON.stringify({
-            description: "TabHub v1.42 PRO - Cloud Data Backup (Admin)",
+            description: "TabHub v1.43 PRO - Cloud Data Backup (Admin)",
             public: false,
             files: {
               "tabhub_state.json": {
@@ -2281,6 +2513,7 @@
       renderMindMap();
       renderAdminPanel();
       renderAnnouncementBanner();
+      renderHealthTracker();
     }
 
     // --- INSTANT LOADING INITIALIZATION & SPLASH BLUR REMOVAL ---
@@ -2381,6 +2614,9 @@
       if (tabId === 'admin') {
         renderAdminPanel();
       }
+      if (tabId === 'health') {
+        renderHealthTracker();
+      }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -2432,9 +2668,9 @@
       const elTasks = document.getElementById('ovMetricTasks');
       if (elTasks) elTasks.textContent = `${doneT} / ${totalT}`;
 
-      const totalSc = (appState.shortcuts || []).length;
-      const elSc = document.getElementById('ovMetricShortcuts');
-      if (elSc) elSc.textContent = `${totalSc} Tautan`;
+      const water = appState.health ? (appState.health.water || 0) : 0;
+      const elWater = document.getElementById('ovMetricWater');
+      if (elWater) elWater.textContent = `${water} ml`;
 
       const totalVlt = (appState.vault || []).length;
       const elVlt = document.getElementById('ovMetricVault');
@@ -2834,7 +3070,7 @@
       }
 
       setTimeout(() => {
-        let reply = "Halo! Saya adalah AI TabHub v1.42 PRO. Saya dapat membantu meringkas keuangan, mencari tugas, mengelola jadwal kalender, atau memberikan informasi sistem secara offline.";
+        let reply = "Halo! Saya adalah AI TabHub v1.43 PRO. Saya dapat membantu meringkas keuangan, melacak kesehatan, mencari tugas, atau mengelola jadwal kalender secara offline.";
         
         if (lower.includes('keuangan') || lower.includes('saldo') || lower.includes('uang')) {
           const totalInc = (appState.finance.transactions || []).filter(t=>t.type==='income').reduce((a,b)=>a+b.amount,0);
@@ -2845,9 +3081,10 @@
           const totalT = (appState.tasks || []).length;
           const doneT = (appState.tasks || []).filter(t=>t.completed).length;
           reply = `📋 Status Tugas:\nAnda telah menyelesaikan ${doneT} dari ${totalT} tugas yang terdaftar di sistem.`;
-        } else if (lower.includes('kalender') || lower.includes('agenda') || lower.includes('jadwal')) {
-          const evKeys = Object.keys(appState.calendarEvents || {});
-          reply = `📅 Agenda Kalender:\nTerdapat jadwal agenda yang tercatat pada ${evKeys.length} tanggal berbeda di kalender Anda.`;
+        } else if (lower.includes('kesehatan') || lower.includes('air') || lower.includes('hidrasi')) {
+          const water = appState.health ? (appState.health.water || 0) : 0;
+          const cals = appState.health ? (appState.health.calories || 0) : 0;
+          reply = `💧 Status Kesehatan & Hidrasi:\n- Air Minum: ${water} ml dari target 2000 ml\n- Kalori Harian: ${cals} kkal`;
         }
 
         appendChatBubble('ai', reply, areaId);

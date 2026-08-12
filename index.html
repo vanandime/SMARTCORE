@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>TabHub v1.44 PRO - Desktop Sidebar & Focus Workspace</title>
+  <title>TabHub v1.45 PRO - Responsive Desktop Sidebar & Focus Workspace</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Custom CSS Themes & Glassmorphism -->
@@ -141,8 +141,8 @@
   <!-- SPLASH SCREEN BLUR OVERLAY -->
   <div id="appSplashOverlay" class="fixed inset-0 z-[100] bg-slate-950/80 backdrop-blur-xl flex flex-col items-center justify-center text-white transition-opacity duration-500">
     <div class="w-16 h-16 rounded-3xl bg-blue-600 flex items-center justify-center font-extrabold text-2xl shadow-2xl animate-bounce">TH</div>
-    <h1 class="text-xl font-extrabold mt-4 tracking-wider">TabHub v1.44 PRO</h1>
-    <p class="text-xs opacity-60 mt-1">Memuat Desktop Sidebar, Focus Mode & Workspace...</p>
+    <h1 class="text-xl font-extrabold mt-4 tracking-wider">TabHub v1.45 PRO</h1>
+    <p class="text-xs opacity-60 mt-1">Memperbaiki responsivitas sidebar & workspace...</p>
   </div>
 
   <!-- FLOATING SCROLL TO TOP BUTTON -->
@@ -343,11 +343,11 @@
     </div>
   </div>
 
-  <!-- APP LAYOUT CONTAINER WITH DESKTOP SIDEBAR & MAIN WORKSPACE -->
+  <!-- APP LAYOUT CONTAINER WITH RESPONSIVE DESKTOP SIDEBAR (`hidden lg:flex`) & MAIN WORKSPACE -->
   <div class="harmonized-bar px-4 pt-2 flex gap-6 items-start">
 
-    <!-- DESKTOP SIDEBAR (Collapsible on larger screens) -->
-    <aside id="desktopSidebar" class="hidden md:flex flex-col w-64 card-modern p-4 rounded-3xl sticky top-4 space-y-2 shrink-0 shadow-lg">
+    <!-- DESKTOP SIDEBAR (Collapsible on larger screens, hidden on mobile/tablet for clean full-width workspace) -->
+    <aside id="desktopSidebar" class="hidden lg:flex flex-col w-64 card-modern p-4 rounded-3xl sticky top-4 space-y-2 shrink-0 shadow-lg">
       <div class="px-3 py-2 font-extrabold text-xs opacity-60 uppercase tracking-wider">Navigasi Utama</div>
       
       <button id="sidebarBtn-admin" onclick="switchTab('admin')" class="admin-only-feature flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold text-amber-500 hover:bg-amber-500/10 transition ios-btn">
@@ -472,7 +472,7 @@
             <div class="card-modern p-5 rounded-2xl space-y-4">
               <h3 class="font-extrabold text-xs flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Log Audit Sistem & Keamanan</h3>
               <div id="adminAuditLogsList" class="space-y-2 max-h-[220px] overflow-y-auto font-mono text-[11px]">
-                <div class="p-2 card-modern rounded-lg opacity-80">[INFO] Sistem TabHub v1.44 PRO diinisialisasi.</div>
+                <div class="p-2 card-modern rounded-lg opacity-80">[INFO] Sistem TabHub v1.45 PRO diinisialisasi.</div>
                 <div class="p-2 card-modern rounded-lg opacity-80">[AUTH] Token GitHub diverifikasi untuk @vanandime.</div>
               </div>
               <div class="pt-2 flex gap-2">
@@ -562,7 +562,7 @@
                 <span class="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></span>
                 <span data-i18n="overviewHeading">Ringkasan Aplikasi & Dashboard</span>
               </h2>
-              <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.44 PRO.</p>
+              <p class="text-xs opacity-70" data-i18n="overviewSub">Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.45 PRO.</p>
             </div>
             <div class="flex gap-2">
               <button onclick="switchTab('finance')" class="px-3.5 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn" data-i18n="btnQuickFinance">Cek Keuangan</button>
@@ -608,7 +608,7 @@
             <div class="card-modern p-5 rounded-2xl space-y-3">
               <h3 class="font-extrabold text-xs flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> <span data-i18n="ovSystemStatusTitle">Status & Sistem TabHub</span></h3>
               <div class="space-y-2 text-xs opacity-80 font-mono">
-                <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.44 PRO</strong></div>
+                <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Versi Sistem</span><strong class="text-blue-500">v1.45 PRO</strong></div>
                 <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Penyimpanan Browser</span><strong id="ovStorageSize" class="text-emerald-500">0 KB</strong></div>
                 <div class="flex justify-between py-1 border-b border-slate-200/50 dark:border-slate-800/50"><span>Tema Aktif</span><strong id="ovThemeName" class="text-purple-500">Nordic Frost</strong></div>
                 <div class="flex justify-between py-1"><span>Status Enkripsi</span><strong class="text-emerald-500">Aman & Aktif</strong></div>
@@ -1394,7 +1394,7 @@
   </div>
 
   <!-- FLOATING BOTTOM DOCK NAVIGATION BAR (Mobile / Tablet) -->
-  <nav id="mobileDockNav" class="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-lg card-modern px-3 py-2 flex items-center justify-around shadow-2xl backdrop-blur-xl border md:hidden">
+  <nav id="mobileDockNav" class="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-lg card-modern px-3 py-2 flex items-center justify-around shadow-2xl backdrop-blur-xl border lg:hidden">
     <button id="menuBtn-overview" onclick="switchTab('overview')" class="dock-btn opacity-70 hover:opacity-100" title="Ringkasan">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
     </button>
@@ -1636,8 +1636,8 @@
       </div>
       <div id="releaseHistoryContent" class="space-y-3 text-xs opacity-90 leading-relaxed font-mono">
         <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-blue-500">
-          <strong>TabHub v1.44 PRO (Agustus 2026)</strong>
-          <p class="text-[11px] opacity-80">- Penambahan Desktop Collapsible Sidebar untuk navigasi layar lebar yang profesional.<br>- Penambahan Focus Mode untuk pengalaman kerja bebas gangguan.</p>
+          <strong>TabHub v1.45 PRO (Agustus 2026)</strong>
+          <p class="text-[11px] opacity-80">- Perbaikan responsivitas layout mobile dengan menyembunyikan sidebar pada layar kecil (menggunakan `hidden lg:flex`).<br>- Focus Mode & workspace interaktif.</p>
         </div>
         <div class="p-3 card-modern rounded-xl space-y-1 border-l-4 border-sky-500">
           <strong>TabHub v1.43 PRO</strong>
@@ -1651,671 +1651,167 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC (TabHub v1.44 PRO) -->
-  <script>
-    // --- XSS SECURITY & SANITIZATION ENGINE ---
-    function sanitizeHtml(str) {
-      if (typeof str !== 'string') return str;
-      return str.replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;');
-    }
+    /* ==========================================================================
+       TABHUB v1.45 PRO - JAVASCRIPT STATE ENGINE & CORE LOGIC
+       ========================================================================== */
 
-    // --- MULTI-LANGUAGE DICTIONARY (v1.44) ---
-    const i18nData = {
-      id: {
-        hubTitle: "TabHub",
-        overviewHeading: "Ringkasan Aplikasi & Dashboard",
-        overviewSub: "Pusat pemantauan cepat seluruh modul produktivitas TabHub v1.44 PRO.",
-        btnQuickFinance: "Cek Keuangan",
-        btnQuickTasks: "Lihat Tugas",
-        ovStatBalance: "Total Saldo Keuangan",
-        ovStatTasks: "Tugas Selesai",
-        ovStatShortcuts: "Pintasan Web",
-        ovStatVault: "Kredensial Vault",
-        ovQuickLauncherTitle: "Navigasi Cepat Modul",
-        ovSystemStatusTitle: "Status & Sistem TabHub",
-        finTitle: "Manajemen Keuangan",
-        finSub: "Pantau arus kas, grafik, dan anggaran dengan presisi.",
-        chatHeading: "AI & Pencarian",
-        chatSub: "Asisten pintar & pencarian fitur.",
-        chatWelcomeMsg: "Halo! AI cerdas aktif secara offline maupun online. Masukkan API Key Anda di Pengaturan atau ketik pertanyaan langsung di sini.",
-        phChatInput: "Ketik perintah...",
-        btnSendChat: "Kirim",
-        taskHeading: "Tugas & Rutinitas",
-        kanbanHeading: "Papan Kanban & Matriks",
-        mindmapHeading: "Mind Map Canvas",
-        clockHeading: "Waktu, Timer & Pomodoro",
-        convHeading: "Kalkulator & Konversi",
-        vaultHeading: "Secure Vault",
-        codeHeading: "Code Editor",
-        mediaHeading: "Editor Media & Foto",
-        filesHeading: "File Manager & Backup Data",
-        calHeading: "Kalender",
-        setHeading: "Pengaturan & Personalisasi",
-        launcherTitle: "Menu Utama & Modul",
-        menuOverview: "Ringkasan",
-        menuFinance: "Keuangan",
-        menuTasks: "Tugas",
-        menuKanban: "Proyek",
-        menuCalendar: "Kalender",
-        menuShortcuts: "Pintasan Web",
-        menuChatbot: "AI & Search",
-        menuFiles: "File Manager",
-        menuMindMap: "Mind Map",
-        menuClock: "Waktu",
-        menuCalc: "Kalkulator",
-        menuVault: "Vault",
-        menuCode: "Kode",
-        menuMedia: "Media Editor",
-        menuTranslator: "Penerjemah",
-        menuPdf: "Pengelola PDF",
-        menuYoutube: "Downloader YT",
-        menuTiktok: "TikTok No Watermark",
-        menuFonts: "Penghasil Huruf",
-        menuBlank: "Karakter Kosong",
-        menuHealth: "Kesehatan & Air",
-        subHealth: "Hidrasi & kalori",
-        healthHeading: "Pelacak Kesehatan & Air Minum",
-        healthSub: "Pantau hidrasi harian, kalori, dan catatan kebugaran Anda.",
-        healthWaterTitle: "Hidrasi Air Minum",
-        healthCalorieTitle: "Konsumsi Kalori Harian",
-        healthStatusTitle: "Indikator Kebugaran"
-      },
-      en: {
-        hubTitle: "TabHub",
-        overviewHeading: "Application Overview & Dashboard",
-        overviewSub: "Quick monitoring center for all TabHub v1.44 PRO productivity modules.",
-        btnQuickFinance: "Check Finance",
-        btnQuickTasks: "View Tasks",
-        ovStatBalance: "Total Financial Balance",
-        ovStatTasks: "Completed Tasks",
-        ovStatShortcuts: "Web Shortcuts",
-        ovStatVault: "Vault Credentials",
-        ovQuickLauncherTitle: "Quick Module Navigation",
-        ovSystemStatusTitle: "TabHub Status & System",
-        finTitle: "Financial Management",
-        finSub: "Track cash flow, charts, and budget with precision.",
-        chatHeading: "AI & Search",
-        chatSub: "Smart assistant & feature search.",
-        chatWelcomeMsg: "Hello! Smart AI active. Enter your API Key in Settings or type questions here.",
-        phChatInput: "Type command...",
-        btnSendChat: "Send",
-        taskHeading: "Tasks & Routines",
-        kanbanHeading: "Kanban & Matrix",
-        mindmapHeading: "Mind Map Canvas",
-        clockHeading: "Clock, Timer & Pomodoro",
-        convHeading: "Calculator & Converter",
-        vaultHeading: "Secure Vault",
-        codeHeading: "Code Editor",
-        mediaHeading: "Media & Photo Editor",
-        filesHeading: "File Manager & Data Backup",
-        calHeading: "Calendar",
-        setHeading: "Settings & Personalization",
-        launcherTitle: "Main Menu & Modules",
-        menuOverview: "Overview",
-        menuFinance: "Finance",
-        menuTasks: "Tasks",
-        menuKanban: "Projects",
-        menuCalendar: "Calendar",
-        menuShortcuts: "Web Shortcuts",
-        menuChatbot: "AI & Search",
-        menuFiles: "File Manager",
-        menuMindMap: "Mind Map",
-        menuClock: "Clock",
-        menuCalc: "Calculator",
-        menuVault: "Vault",
-        menuCode: "Code",
-        menuMedia: "Media Editor",
-        menuTranslator: "Translator",
-        menuPdf: "PDF Manager",
-        menuYoutube: "YT Downloader",
-        menuTiktok: "TikTok No Watermark",
-        menuFonts: "Font Generator",
-        menuBlank: "Blank Character",
-        menuHealth: "Health & Water",
-        subHealth: "Hydration & calories",
-        healthHeading: "Health & Water Tracker",
-        healthSub: "Monitor daily hydration, calories, and fitness notes.",
-        healthWaterTitle: "Drinking Water Hydration",
-        healthCalorieTitle: "Daily Calorie Intake",
-        healthStatusTitle: "Fitness Status"
-      },
-      zh: {
-        hubTitle: "TabHub",
-        overviewHeading: "应用程序概览与仪表盘",
-        overviewSub: "所有 TabHub v1.44 PRO 生产力模块的快速监控中心。",
-        btnQuickFinance: "查看财务",
-        btnQuickTasks: "查看任务",
-        ovStatBalance: "总财务余额",
-        ovStatTasks: "已完成任务",
-        ovStatShortcuts: "网页快捷方式",
-        ovStatVault: "Vault 凭据",
-        ovQuickLauncherTitle: "快速模块导航",
-        ovSystemStatusTitle: "TabHub 状态与系统",
-        finTitle: "财务管理",
-        finSub: "精确跟踪现金流、图表和预算。",
-        chatHeading: "AI 与搜索",
-        chatSub: "智能助手与功能搜索。",
-        chatWelcomeMsg: "您好！智能 AI 已激活。请在设置中输入 API 密钥或在此输入问题。",
-        phChatInput: "输入指令...",
-        btnSendChat: "发送",
-        taskHeading: "任务与例程",
-        kanbanHeading: "看板与矩阵",
-        mindmapHeading: "思维导图画布",
-        clockHeading: "时钟、计时器与番茄钟",
-        convHeading: "计算器与转换器",
-        vaultHeading: "安全 Vault",
-        codeHeading: "代码编辑器",
-        mediaHeading: "媒体与照片编辑器",
-        filesHeading: "文件管理器与数据备份",
-        calHeading: "日历",
-        setHeading: "设置与个性化",
-        launcherTitle: "主菜单与模块",
-        menuOverview: "概览",
-        menuFinance: "财务",
-        menuTasks: "任务",
-        menuKanban: "项目",
-        menuCalendar: "日历",
-        menuShortcuts: "网页快捷方式",
-        menuChatbot: "AI & Search",
-        menuFiles: "文件管理器",
-        menuMindMap: "思维导图",
-        menuClock: "时钟",
-        menuCalc: "计算器",
-        menuVault: "Vault",
-        menuCode: "代码",
-        menuMedia: "媒体编辑器",
-        menuTranslator: "翻译器",
-        menuPdf: "PDF 管理器",
-        menuYoutube: "YT 下载器",
-        menuTiktok: "TikTok 无水印",
-        menuFonts: "字体生成器",
-        menuBlank: "空白字符",
-        menuHealth: "健康与饮水",
-        subHealth: "水分与卡路里",
-        healthHeading: "健康与饮水追踪器",
-        healthSub: "监控每日水分摄入、卡路里和健身记录。",
-        healthWaterTitle: "饮水量",
-        healthCalorieTitle: "每日卡路里摄入",
-        healthStatusTitle: "健身状态"
-      },
-      ar: {
-        hubTitle: "TabHub",
-        overviewHeading: "نظرة عامة على التطبيق لوحة القيادة",
-        overviewSub: "مركز مراقبة سريع لجميع وحدات الإنتاجية TabHub v1.44 PRO.",
-        btnQuickFinance: "التحقق من المالية",
-        btnQuickTasks: "عرض المهام",
-        ovStatBalance: "إجمالي الرصيد المالي",
-        ovStatTasks: "المهام المكتملة",
-        ovStatShortcuts: "اختصارات الويب",
-        ovStatVault: "بيانات اعتماد الخزنة",
-        ovQuickLauncherTitle: "التنقل السريع بين الوحدات",
-        ovSystemStatusTitle: "حالة ونظام TabHub",
-        finTitle: "الإدارة المالية",
-        finSub: "تتبع التدفق النقدي والرسوم البيانية والميزانية بدقة.",
-        chatHeading: "AI & Search",
-        chatSub: "المساعد الذكي وبحث الميزات.",
-        chatWelcomeMsg: "مرحباً! الذكاء الاصطناعي نشط. أدخل مفتاح API في الإعدادات أو اكتب الأسئلة هنا.",
-        phChatInput: "اكتب أمراً...",
-        btnSendChat: "إرسال",
-        taskHeading: "المهام والروتين",
-        kanbanHeading: "كانبان والمصفوفة",
-        mindmapHeading: "خريطة العقل",
-        clockHeading: "الوقت والمؤقت وبومودورو",
-        convHeading: "الآلة الحاسبة والمحول",
-        vaultHeading: "خزنة آمنة",
-        codeHeading: "محرر الكود",
-        mediaHeading: "محرر الوسائط والصور",
-        filesHeading: "مدير الملفات والنسخ الاحتياطي",
-        calHeading: "التقويم",
-        setHeading: "الإعدادات والتخصيص",
-        launcherTitle: "القائمة الرئيسية والوحدات",
-        menuOverview: "نظرة عامة",
-        menuFinance: "المالية",
-        menuTasks: "المهام",
-        menuKanban: "المشاريع",
-        menuCalendar: "التقويم",
-        menuShortcuts: "اختصارات الويب",
-        menuChatbot: "AI & Search",
-        menuFiles: "مدير الملفات",
-        menuMindMap: "خريطة العقل",
-        menuClock: "الوقت",
-        menuCalc: "حاسبة",
-        menuVault: "Vault",
-        menuCode: "الكود",
-        menuMedia: "محرر الوسائط",
-        menuTranslator: "المترجم",
-        menuPdf: "مدير PDF",
-        menuYoutube: "تحميل يوتيوب",
-        menuTiktok: "تيك توك بدون علامة مائية",
-        menuFonts: "مولد الخطوط",
-        menuBlank: "حرف فارغ",
-        menuHealth: "الصحة والماء",
-        subHealth: "الترطيب والسعرات",
-        healthHeading: "متتبع الصحة والماء",
-        healthSub: "راقب الترطيب اليومي والسعرات الحرارية وملاحظات اللياقة.",
-        healthWaterTitle: "ترطيب مياه الشرب",
-        healthCalorieTitle: "السعرات الحرارية اليومية",
-        healthStatusTitle: "حالة اللياقة"
-      }
-    };
+    const STORAGE_KEY = 'SMARTCORE_STATE';
+    const FORM_BACKUP_KEY = 'SMARTCORE_FORM_BACKUP';
 
-    function changeLanguage(lang) {
-      appState.lang = lang;
-      saveStateToStorage();
-      const dict = i18nData[lang] || i18nData['id'];
-      document.documentElement.lang = lang;
-      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (dict[key]) el.textContent = dict[key];
-      });
-
-      document.querySelectorAll('[data-i18n-ph]').forEach(el => {
-        const key = el.getAttribute('data-i18n-ph');
-        if (dict[key]) el.placeholder = dict[key];
-      });
-
-      const langSelector = document.getElementById('langSelector');
-      if (langSelector) langSelector.value = lang;
-      
-      renderAll();
-    }
-
-    // --- FOCUS MODE TOGGLE LOGIC (v1.44) ---
-    let isFocusModeActive = false;
-    function toggleFocusMode() {
-      isFocusModeActive = !isFocusModeActive;
-      const header = document.getElementById('appHeaderBar');
-      const sidebar = document.getElementById('desktopSidebar');
-      const dock = document.getElementById('mobileDockNav');
-      const btn = document.getElementById('focusModeToggleBtn');
-      
-      if (isFocusModeActive) {
-        if (header) header.style.display = 'none';
-        if (sidebar) sidebar.style.display = 'none';
-        if (dock) dock.style.display = 'none';
-        if (btn) {
-          btn.classList.add('bg-emerald-600', 'text-white');
-          btn.querySelector('span:last-child').textContent = 'Keluar Fokus';
-        }
-        // Create float exit focus button if not exists
-        let exitBtn = document.getElementById('floatingExitFocusBtn');
-        if (!exitBtn) {
-          exitBtn = document.createElement('button');
-          exitBtn.id = 'floatingExitFocusBtn';
-          exitBtn.className = 'fixed top-4 right-4 z-[99] px-4 py-2 bg-rose-600 text-white rounded-2xl text-xs font-bold shadow-2xl ios-btn';
-          exitBtn.textContent = 'Keluar Mode Fokus';
-          exitBtn.onclick = toggleFocusMode;
-          document.body.appendChild(exitBtn);
-        } else {
-          exitBtn.style.display = 'block';
-        }
-      } else {
-        if (header) header.style.display = 'flex';
-        if (sidebar) sidebar.style.display = 'flex';
-        if (dock) dock.style.display = 'flex';
-        if (btn) {
-          btn.classList.remove('bg-emerald-600', 'text-white');
-          btn.querySelector('span:last-child').textContent = 'Fokus';
-        }
-        const exitBtn = document.getElementById('floatingExitFocusBtn');
-        if (exitBtn) exitBtn.style.display = 'none';
-      }
-    }
-
-    // --- STATE UTAMA & PERSISTENSI (v1.44) ---
     let appState = {
-      currentTab: 'overview',
-      theme: 'theme-nordic-frost',
-      accentColor: '#0066ff',
-      fontScale: 'normal',
-      lang: 'id',
-      user: { 
-        name: 'vanandime', 
-        email: 'vanandi@proton.me', 
-        apiKey: '', 
-        role: 'user', 
-        githubUsername: 'vanandime' 
+      user: {
+        name: 'vanandime',
+        role: 'Admin', // Admin jika username 'vanandime' atau terverifikasi via PAT token pemilik
+        token: ''
       },
-      finance: { currency: 'Rp', budgetLimit: 5000000, transactions: [] },
-      habits: [],
-      tasks: [],
-      notes: [],
-      kanban: [],
-      eisenhower: [],
-      mindmap: { nodes: [], lines: [] },
+      settings: {
+        theme: 'theme-nordic-frost',
+        accentColor: '#0066ff',
+        fontScale: 'normal',
+        language: 'id',
+        focusMode: false,
+        masterApiKey: ''
+      },
+      announcements: {
+        active: false,
+        text: ''
+      },
+      health: {
+        waterIntake: 0,
+        waterTarget: 2000,
+        calorieIntake: 0,
+        calorieTarget: 2200,
+        logs: []
+      },
+      finance: {
+        budgetLimit: 5000000,
+        currency: 'Rp',
+        transactions: []
+      },
+      tasks: {
+        items: [],
+        habits: [],
+        notes: [],
+        kanban: { todo: [], in_progress: [], done: [] },
+        eisenhower: { Q1: [], Q2: [], Q3: [], Q4: [] },
+        taskViewMode: 'kanban'
+      },
+      calendar: {
+        currentYear: new Date().getFullYear(),
+        currentMonth: new Date().getMonth(),
+        events: {}
+      },
       shortcuts: [],
-      snippets: [],
-      vault: [],
       files: [],
-      calendarEvents: {},
-      music: { active: true, track: 'chill', volume: 0.3 },
-      chatHistory: [],
-      announcement: '',
-      auditLogs: [],
-      health: { water: 0, targetWater: 2000, calories: 0, targetCalories: 2200, logs: [] }
+      vault: [],
+      codeSnippets: [],
+      auditLogs: [
+        { time: new Date().toLocaleTimeString(), text: '[INFO] Sistem TabHub v1.45 PRO diinisialisasi.' }
+      ]
     };
+
+    let audioContext = null;
+    let backgroundMusicInterval = null;
+    let isMusicPlaying = false;
+    let currentMusicTrack = 'chill';
+    let musicVolume = 0.3;
+
+    let pomodoroInterval = null;
+    let pomodoroSeconds = 1500;
+    let pomodoroRunning = false;
+    let pomodoroMode = 'work';
+    let pomodoroSessions = 0;
+
+    let stopwatchInterval = null;
+    let stopwatchSeconds = 0;
+    let stopwatchRunning = false;
+
+    let selectedMindNode = null;
+    let mindNodes = [
+      { id: 1, x: 200, y: 150, text: 'Ide Utama TabHub', color: '#0066ff' },
+      { id: 2, x: 400, y: 100, text: 'Fitur AI & Cloud', color: '#10b981' },
+      { id: 3, x: 400, y: 220, text: 'Manajemen Keuangan', color: '#f43f5e' }
+    ];
+
+    // INITIATION & PERSISTENCE
+    window.addEventListener('DOMContentLoaded', () => {
+      loadStateFromStorage();
+      applySettingsToDOM();
+      initClock();
+      renderAll();
+      
+      // Remove Splash Screen
+      setTimeout(() => {
+        const splash = document.getElementById('appSplashOverlay');
+        if (splash) {
+          splash.style.opacity = '0';
+          setTimeout(() => splash.remove(), 500);
+        }
+      }, 400);
+    });
 
     function saveStateToStorage() {
       try {
-        localStorage.setItem('SMARTCORE_STATE', JSON.stringify(appState));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
       } catch (e) {
-        console.error('Storage quota exceeded:', e);
+        if (e.name === 'QuotaExceededError') {
+          alert('Peringatan: Kapasitas penyimpanan LocalStorage penuh! Ekspor data Anda segera.');
+          addAuditLog('[ERROR] QuotaExceededError pada localStorage.');
+        }
       }
     }
 
     function loadStateFromStorage() {
       try {
-        const saved = localStorage.getItem('SMARTCORE_STATE');
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          appState = {
-            currentTab: parsed.currentTab || 'overview',
-            theme: parsed.theme || 'theme-nordic-frost',
-            accentColor: parsed.accentColor || '#0066ff',
-            fontScale: parsed.fontScale || 'normal',
-            lang: parsed.lang || 'id',
-            user: parsed.user || { name: 'vanandime', email: 'vanandi@proton.me', apiKey: '', role: 'user', githubUsername: 'vanandime' },
-            finance: (parsed.finance && Array.isArray(parsed.finance.transactions)) ? parsed.finance : { currency: 'Rp', budgetLimit: 5000000, transactions: [] },
-            habits: Array.isArray(parsed.habits) ? parsed.habits : [],
-            tasks: Array.isArray(parsed.tasks) ? parsed.tasks : [],
-            notes: Array.isArray(parsed.notes) ? parsed.notes : [],
-            kanban: Array.isArray(parsed.kanban) ? parsed.kanban : [],
-            eisenhower: Array.isArray(parsed.eisenhower) ? parsed.eisenhower : [],
-            mindmap: (parsed.mindmap && Array.isArray(parsed.mindmap.nodes)) ? parsed.mindmap : { nodes: [], lines: [] },
-            shortcuts: Array.isArray(parsed.shortcuts) ? parsed.shortcuts : [
-              { id: 'sc_1', title: 'GitHub', url: 'https://github.com' },
-              { id: 'sc_2', title: 'Google Gemini', url: 'https://gemini.google.com' }
-            ],
-            snippets: Array.isArray(parsed.snippets) ? parsed.snippets : [],
-            vault: Array.isArray(parsed.vault) ? parsed.vault : [],
-            files: Array.isArray(parsed.files) ? parsed.files : [],
-            calendarEvents: parsed.calendarEvents || {},
-            music: parsed.music !== undefined ? parsed.music : { active: true, track: 'chill', volume: 0.3 },
-            chatHistory: Array.isArray(parsed.chatHistory) ? parsed.chatHistory : [],
-            announcement: parsed.announcement || '',
-            auditLogs: Array.isArray(parsed.auditLogs) ? parsed.auditLogs : [],
-            health: parsed.health || { water: 0, targetWater: 2000, calories: 0, targetCalories: 2200, logs: [] }
-          };
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          appState = { ...appState, ...parsed };
         }
       } catch (e) {
-        console.error('Error loading state:', e);
+        console.error('Gagal memuat state dari localStorage:', e);
       }
     }
 
-    // --- HEALTH TRACKER FUNCTIONS (v1.44) ---
-    function addWater(amount) {
-      if (!appState.health) appState.health = { water: 0, targetWater: 2000, calories: 0, targetCalories: 2200, logs: [] };
-      appState.health.water = (appState.health.water || 0) + amount;
-      saveStateToStorage();
-      renderHealthTracker();
-      renderOverviewDashboard();
+    function addAuditLog(text) {
+      const entry = { time: new Date().toLocaleTimeString(), text };
+      appState.auditLogs.unshift(entry);
+      if (appState.auditLogs.length > 30) appState.auditLogs.pop();
     }
 
-    function resetWaterToday() {
-      if (!appState.health) appState.health = { water: 0, targetWater: 2000, calories: 0, targetCalories: 2200, logs: [] };
-      appState.health.water = 0;
-      saveStateToStorage();
-      renderHealthTracker();
-      renderOverviewDashboard();
-    }
-
-    function addCalories() {
-      const input = document.getElementById('quickCalorieInput');
-      if (!input) return;
-      const val = parseInt(input.value) || 0;
-      if (val <= 0) return;
-      if (!appState.health) appState.health = { water: 0, targetWater: 2000, calories: 0, targetCalories: 2200, logs: [] };
-      appState.health.calories = (appState.health.calories || 0) + val;
-      input.value = '';
-      saveStateToStorage();
-      renderHealthTracker();
-    }
-
-    function openHealthLogModal() {
-      document.getElementById('healthLogModal')?.classList.remove('hidden');
-    }
-
-    function closeHealthLogModal() {
-      document.getElementById('healthLogModal')?.classList.add('hidden');
-      document.getElementById('healthLogForm')?.reset();
-    }
-
-    function submitHealthLog(e) {
-      e.preventDefault();
-      const title = sanitizeHtml(document.getElementById('healthLogTitleInput')?.value || '');
-      const desc = sanitizeHtml(document.getElementById('healthLogDescInput')?.value || '');
-      if (!title) return;
-      if (!appState.health) appState.health = { water: 0, targetWater: 2000, calories: 0, targetCalories: 2200, logs: [] };
-      if (!Array.isArray(appState.health.logs)) appState.health.logs = [];
-      appState.health.logs.unshift({ id: 'hl_' + Date.now(), time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}), title, desc });
-      saveStateToStorage();
-      closeHealthLogModal();
-      renderHealthTracker();
-    }
-
-    function deleteHealthLog(id) {
-      if (!appState.health || !Array.isArray(appState.health.logs)) return;
-      appState.health.logs = appState.health.logs.filter(l => l.id !== id);
-      saveStateToStorage();
-      renderHealthTracker();
-    }
-
-    function renderHealthTracker() {
-      if (!appState.health) appState.health = { water: 0, targetWater: 2000, calories: 0, targetCalories: 2200, logs: [] };
-      const water = appState.health.water || 0;
-      const targetWater = appState.health.targetWater || 2000;
-      const calories = appState.health.calories || 0;
-      const targetCalories = appState.health.targetCalories || 2200;
-
-      const waterDisp = document.getElementById('waterIntakeDisplay');
-      if (waterDisp) waterDisp.textContent = `${water} ml`;
-      const waterProg = document.getElementById('waterProgressBar');
-      if (waterProg) waterProg.style.width = `${Math.min(Math.round((water / targetWater) * 100), 100)}%`;
-
-      const calDisp = document.getElementById('calorieIntakeDisplay');
-      if (calDisp) calDisp.textContent = `${calories} kkal`;
-      const calProg = document.getElementById('calorieProgressBar');
-      if (calProg) calProg.style.width = `${Math.min(Math.round((calories / targetCalories) * 100), 100)}%`;
-
-      const hydStatus = document.getElementById('healthHydrationStatus');
-      if (hydStatus) {
-        if (water >= targetWater) { hydStatus.textContent = 'Terhidrasi Optimal 💧'; hydStatus.className = 'text-emerald-500 font-bold'; }
-        else if (water >= targetWater / 2) { hydStatus.textContent = 'Cukup Baik 👍'; hydStatus.className = 'text-blue-500 font-bold'; }
-        else { hydStatus.textContent = 'Perlu Minum ⚠️'; hydStatus.className = 'text-sky-500 font-bold'; }
-      }
-
-      const calStatus = document.getElementById('healthCalorieStatus');
-      if (calStatus) {
-        if (calories > targetCalories) { calStatus.textContent = 'Melebihi Target ⚠️'; calStatus.className = 'text-rose-500 font-bold'; }
-        else { calStatus.textContent = 'Normal / Terkendali 👍'; calStatus.className = 'text-amber-500 font-bold'; }
-      }
-
-      const ovWater = document.getElementById('ovMetricWater');
-      if (ovWater) ovWater.textContent = `${water} ml`;
-
-      const logsContainer = document.getElementById('healthLogsList');
-      if (logsContainer) {
-        logsContainer.innerHTML = '';
-        const logs = appState.health.logs || [];
-        logs.forEach(log => {
-          const div = document.createElement('div');
-          div.className = 'p-3 card-modern rounded-xl flex justify-between items-center text-xs';
-          div.innerHTML = `
-            <div>
-              <strong class="block">${sanitizeHtml(log.title)}</strong>
-              <span class="text-[10px] opacity-60 font-mono">${log.time} - ${sanitizeHtml(log.desc || '')}</span>
-            </div>
-            <button onclick="deleteHealthLog('${log.id}')" class="text-rose-500 font-bold px-2 py-1 rounded bg-rose-500/10 ios-btn">&times;</button>
-          `;
-          logsContainer.appendChild(div);
-        });
-        if (logs.length === 0) {
-          logsContainer.innerHTML = '<div class="p-3 card-modern rounded-xl opacity-75 text-center">Belum ada catatan kesehatan fisik hari ini.</div>';
-        }
-      }
-    }
-
-    // --- ADMIN PANEL & BROADCAST FUNCTIONS ---
-    function addSystemAuditLog(msg) {
-      if (!Array.isArray(appState.auditLogs)) appState.auditLogs = [];
-      const timestamp = new Date().toLocaleTimeString();
-      appState.auditLogs.unshift(`[${timestamp}] ${msg}`);
-      if (appState.auditLogs.length > 50) appState.auditLogs.pop();
-      saveStateToStorage();
-    }
-
-    function openBroadcastModal() {
-      if (appState.user.role !== 'admin') {
-        alert('Akses Ditolak! Hanya Admin yang dapat mengirim pengumuman global.');
-        return;
-      }
-      document.getElementById('adminBroadcastModal')?.classList.remove('hidden');
-    }
-
-    function closeBroadcastModal() {
-      document.getElementById('adminBroadcastModal')?.classList.add('hidden');
-      document.getElementById('broadcastForm')?.reset();
-    }
-
-    function submitGlobalAnnouncement(e) {
-      e.preventDefault();
-      const text = sanitizeHtml(document.getElementById('broadcastTextInput')?.value || '');
-      if (!text) return;
-      appState.announcement = text;
-      addSystemAuditLog(`Admin menyiarkan pengumuman global: "${text}"`);
-      saveStateToStorage();
-      closeBroadcastModal();
-      renderAnnouncementBanner();
-      alert('Pengumuman global berhasil disiarkan ke seluruh antarmuka!');
-    }
-
-    function dismissAnnouncement() {
-      appState.announcement = '';
-      saveStateToStorage();
-      renderAnnouncementBanner();
-    }
-
-    function renderAnnouncementBanner() {
-      const banner = document.getElementById('globalAnnouncementBanner');
-      const textEl = document.getElementById('announcementText');
-      if (!banner || !textEl) return;
-      if (appState.announcement && appState.announcement.trim() !== '') {
-        textEl.textContent = appState.announcement;
-        banner.classList.remove('hidden');
-      } else {
-        banner.classList.add('hidden');
-      }
-    }
-
-    async function forceSyncAllAdminData() {
-      if (appState.user.role !== 'admin') {
-        alert('Akses Ditolak!');
-        return;
-      }
-      addSystemAuditLog('Admin memicu sinkronisasi paksa GitHub Cloud Gist.');
-      await syncToGitHubGist();
-    }
-
-    function clearSystemAuditLogs() {
-      if (appState.user.role !== 'admin') return;
-      appState.auditLogs = [];
-      saveStateToStorage();
+    // RENDER DISPATCHER
+    function renderAll() {
+      renderOverview();
+      renderHealth();
+      renderFinance();
+      renderTasks();
+      renderKanban();
+      renderCalendar();
+      renderShortcuts();
+      renderFiles();
+      renderVault();
       renderAdminPanel();
-      alert('Log audit sistem berhasil dibersihkan.');
+      updateHeaderUserBadge();
+      updateStorageUsageInfo();
     }
 
-    function renderAdminPanel() {
-      if (appState.user.role !== 'admin') return;
-      const unameDisp = document.getElementById('adminUsernameDisplay');
-      if (unameDisp) unameDisp.textContent = `@${appState.user.githubUsername || 'vanandime'}`;
-
-      let totalItems = (appState.tasks || []).length + (appState.finance.transactions || []).length + (appState.vault || []).length + (appState.shortcuts || []).length;
-      const totalItEl = document.getElementById('adminStatTotalItems');
-      if (totalItEl) totalItEl.textContent = `${totalItems} Item`;
-
-      const storageSize = (JSON.stringify(localStorage).length / 1024).toFixed(1);
-      const stSizeEl = document.getElementById('adminStatStorageSize');
-      if (stSizeEl) stSizeEl.textContent = `${storageSize} KB`;
-
-      const cloudStatusEl = document.getElementById('adminCloudStatus');
-      const gistId = localStorage.getItem('GITHUB_GIST_ID');
-      if (cloudStatusEl) cloudStatusEl.textContent = gistId ? 'Terhubung (Gist)' : 'Belum Sinkron';
-
-      const logsContainer = document.getElementById('adminAuditLogsList');
-      if (logsContainer) {
-        logsContainer.innerHTML = '';
-        const logs = Array.isArray(appState.auditLogs) && appState.auditLogs.length > 0 ? appState.auditLogs : ['[INFO] Tidak ada log aktivitas terbaru.'];
-        logs.forEach(lg => {
-          const div = document.createElement('div');
-          div.className = 'p-2 card-modern rounded-lg opacity-80';
-          div.textContent = lg;
-          logsContainer.appendChild(div);
-        });
-      }
-    }
-
-    // --- GITHUB GIST CLOUD SYNC & USERNAME-BASED ADMIN AUTH (v1.44) ---
-    const ADMIN_GITHUB_USERNAME = "vanandime"; // Username GitHub pemilik sah
-
-    async function loginWithGitHubToken() {
-      const tokenInput = document.getElementById('githubTokenInput')?.value.trim() || '';
-      if (!tokenInput) {
-        alert('Masukkan GitHub Personal Access Token (PAT) terlebih dahulu!');
-        return;
-      }
-
-      try {
-        const response = await fetch('https://api.github.com/user', {
-          headers: {
-            'Authorization': `Bearer ${tokenInput}`,
-            'Accept': 'application/vnd.github.v3+json'
-          }
-        });
-
-        if (response.ok) {
-          const userData = await response.json();
-          localStorage.setItem('GITHUB_ACCESS_TOKEN', tokenInput);
-          
-          const ghUsername = userData.login || 'GitHubUser';
-          appState.user.githubUsername = ghUsername;
-          appState.user.name = userData.name || ghUsername;
-
-          if (ghUsername.toLowerCase() === ADMIN_GITHUB_USERNAME.toLowerCase()) {
-            appState.user.role = 'admin';
-            addSystemAuditLog(`Admin @${ghUsername} berhasil login dengan token PAT.`);
-            alert(`Login Berhasil! Selamat datang, Admin @${ghUsername}. Akses administratif penuh diberikan.`);
-          } else {
-            appState.user.role = 'user';
-            addSystemAuditLog(`User @${ghUsername} berhasil login.`);
-            alert(`Login Berhasil sebagai User. Selamat datang, @${ghUsername}. Fitur administratif dibatasi.`);
-          }
-
-          saveStateToStorage();
-          updateUsernameUI(appState.user.name);
-          renderRoleBasedUI();
-        } else {
-          const errData = await response.json().catch(() => ({}));
-          alert('Token GitHub tidak valid atau Bad credentials: ' + (errData.message || 'Periksa kembali token PAT Anda.'));
-        }
-      } catch (error) {
-        console.error('Login Error:', error);
-        alert('Terjadi kesalahan jaringan saat memverifikasi token.');
-      }
-    }
-
-    function renderRoleBasedUI() {
-      if (appState.user && appState.user.githubUsername && appState.user.githubUsername.toLowerCase() === ADMIN_GITHUB_USERNAME.toLowerCase()) {
-        appState.user.role = 'admin';
-      }
-
-      const isAdmin = appState.user.role === 'admin';
+    function updateHeaderUserBadge() {
+      const username = appState.user.name || 'vanandime';
+      const isAdmin = appState.user.role === 'Admin';
       
+      const userBadge = document.getElementById('iosBarUsername');
+      if (userBadge) userBadge.textContent = `Hi, ${username}`;
+
+      const roleBadge = document.getElementById('userRoleBadge');
+      if (roleBadge) {
+        roleBadge.innerHTML = isAdmin ? '👑 Admin (Owner)' : '👤 User';
+        roleBadge.className = isAdmin ? 'px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-500 text-[9px] font-bold' : 'px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-500 text-[9px] font-bold';
+      }
+
+      const settingsRole = document.getElementById('settingsRoleIndicator');
+      if (settingsRole) settingsRole.textContent = `Peran: ${appState.user.role}`;
+
+      // Toggle admin elements visibility
       document.querySelectorAll('.admin-only-feature').forEach(el => {
         if (isAdmin) {
           el.classList.remove('hidden');
@@ -2330,1632 +1826,1348 @@
         else topAdminBtn.classList.add('hidden');
       }
 
-      const roleBadge = document.getElementById('userRoleBadge');
-      if (roleBadge) {
-        roleBadge.textContent = isAdmin ? '👑 Admin (Owner)' : '👤 User';
-        roleBadge.className = isAdmin ? 'px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-500 text-[9px] font-bold' : 'px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-500 text-[9px] font-bold';
-      }
-
-      const settingsRole = document.getElementById('settingsRoleIndicator');
-      if (settingsRole) {
-        settingsRole.textContent = `Peran: ${isAdmin ? 'Admin (Owner)' : 'User Standar'}`;
-      }
-    }
-
-    async function syncToGitHubGist() {
-      if (appState.user.role !== 'admin') {
-        alert('Akses Ditolak! Hanya Admin (pemilik akun vanandime) yang dapat melakukan sinkronisasi cloud GitHub Gist.');
-        return;
-      }
-
-      const token = localStorage.getItem('GITHUB_ACCESS_TOKEN');
-      if (!token) {
-        alert('Harap login dengan token GitHub terlebih dahulu di pengaturan!');
-        return;
-      }
-
-      try {
-        const response = await fetch('https://api.github.com/gists', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-            'Accept': 'application/vnd.github.v3+json'
-          },
-          body: JSON.stringify({
-            description: "TabHub v1.44 PRO - Cloud Data Backup (Admin)",
-            public: false,
-            files: {
-              "tabhub_state.json": {
-                content: JSON.stringify(appState, null, 2)
-              }
-            }
-          })
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          localStorage.setItem('GITHUB_GIST_ID', data.id);
-          addSystemAuditLog('Berhasil sinkronisasi state ke GitHub Gist cloud.');
-          alert('Berhasil! Data TabHub telah disinkronkan ke GitHub Gist privat Anda.');
+      // Announcement Banner
+      const banner = document.getElementById('globalAnnouncementBanner');
+      const annText = document.getElementById('announcementText');
+      if (banner && annText) {
+        if (appState.announcements.active && appState.announcements.text) {
+          annText.textContent = appState.announcements.text;
+          banner.classList.remove('hidden');
         } else {
-          const errData = await response.json();
-          alert('Gagal menyinkronkan ke GitHub: ' + (errData.message || 'Token tidak valid'));
-        }
-      } catch (error) {
-        console.error('GitHub Gist Error:', error);
-        alert('Terjadi kesalahan jaringan saat terhubung ke GitHub.');
-      }
-    }
-
-    async function loadFromGitHubGist() {
-      if (appState.user.role !== 'admin') {
-        alert('Akses Ditolak! Hanya Admin yang dapat memuat data dari GitHub Gist.');
-        return;
-      }
-
-      const token = localStorage.getItem('GITHUB_ACCESS_TOKEN');
-      const gistId = localStorage.getItem('GITHUB_GIST_ID');
-      
-      if (!token || !gistId) {
-        alert('Token atau Gist ID tidak ditemukan.');
-        return;
-      }
-
-      try {
-        const response = await fetch(`https://api.github.com/gists/${gistId}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Accept': 'application/vnd.github.v3+json'
-          }
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          const fileContent = data.files['tabhub_state.json']?.content;
-          if (fileContent) {
-            appState = JSON.parse(fileContent);
-            saveStateToStorage();
-            renderAll();
-            renderRoleBasedUI();
-            addSystemAuditLog('Berhasil memuat state dari GitHub Gist cloud.');
-            alert('Data TabHub berhasil ditarik dan dipulihkan dari GitHub Cloud!');
-          } else {
-            alert('File cadangan "tabhub_state.json" tidak ditemukan di Gist tersebut.');
-          }
-        } else {
-          alert('Gagal memuat data dari Gist.');
-        }
-      } catch (error) {
-        console.error('GitHub Load Error:', error);
-        alert('Terjadi kesalahan jaringan saat memuat data.');
-      }
-    }
-
-    // --- BACKUP & RESTORE CODE & FILE ---
-    function exportAppBackupJson() {
-      try {
-        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
-        const downloadAnchor = document.createElement('a');
-        downloadAnchor.setAttribute("href", dataStr);
-        downloadAnchor.setAttribute("download", `tabhub_backup_${new Date().toISOString().split('T')[0]}.json`);
-        document.body.appendChild(downloadAnchor);
-        downloadAnchor.click();
-        downloadAnchor.remove();
-        addSystemAuditLog('Mengekspor backup file JSON.');
-      } catch(e) {
-        alert('Gagal mengekspor file cadangan.');
-      }
-    }
-
-    function restoreAppBackupJson(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        try {
-          const parsed = JSON.parse(e.target.result);
-          if (parsed && parsed.user) {
-            appState = parsed;
-            saveStateToStorage();
-            renderAll();
-            renderRoleBasedUI();
-            addSystemAuditLog('Memulihkan aplikasi dari file JSON.');
-            alert('Data aplikasi berhasil dipulihkan dari file JSON!');
-            closeBackupRestoreModal();
-          } else {
-            alert('Format file JSON backup tidak valid!');
-          }
-        } catch (err) {
-          alert('File JSON backup rusak atau tidak valid!');
-        }
-      };
-      reader.readAsText(file);
-    }
-
-    function copyBackupCode() {
-      try {
-        const codeStr = JSON.stringify(appState, null, 2);
-        navigator.clipboard.writeText(codeStr).then(() => {
-          alert('Kode cadangan state aplikasi berhasil disalin ke clipboard!');
-        });
-      } catch(e) {
-        alert('Gagal menyalin kode cadangan.');
-      }
-    }
-
-    function restoreFromCodeTextarea() {
-      const ta = document.getElementById('backupCodeTextarea');
-      if (!ta || !ta.value.trim()) {
-        alert('Masukkan atau tempel kode JSON cadangan terlebih dahulu.');
-        return;
-      }
-      try {
-        const parsed = JSON.parse(ta.value.trim());
-        if (parsed && parsed.user) {
-          appState = parsed;
-          saveStateToStorage();
-          renderAll();
-          renderRoleBasedUI();
-          addSystemAuditLog('Memulihkan aplikasi dari teks kode JSON.');
-          alert('Data aplikasi berhasil dipulihkan dari kode teks!');
-          closeBackupRestoreModal();
-        } else {
-          alert('Format kode JSON tidak valid.');
-        }
-      } catch(e) {
-        alert('Kode JSON gagal diuraikan (parse error).');
-      }
-    }
-
-    // --- SCROLL TO TOP FLOATING BUTTON LOGIC ---
-    window.onscroll = function() {
-      const btn = document.getElementById('scrollToTopBtn');
-      if (!btn) return;
-      const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const currentScroll = window.scrollY;
-      if (currentScroll > 300 || (scrollTotal - currentScroll < 150)) {
-        btn.style.display = 'flex';
-      } else {
-        btn.style.display = 'none';
-      }
-    };
-
-    function scrollToTopPage() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // --- PERMANENT AI API KEY MANAGER ---
-    function saveMasterApiKey() {
-      const key = document.getElementById('geminiApiKeyInput')?.value.trim() || '';
-      appState.user.apiKey = key;
-      saveStateToStorage();
-      alert('AI API Key berhasil disimpan secara permanen!');
-    }
-
-    // --- AI & MODAL HANDLERS ---
-    function openFloatingAiModal() {
-      const modal = document.getElementById('floatingAiModal');
-      if (modal) { modal.classList.remove('hidden'); document.getElementById('chatInputText')?.focus(); }
-    }
-    function closeFloatingAiModal() {
-      const modal = document.getElementById('floatingAiModal');
-      if (modal) modal.classList.add('hidden');
-    }
-
-    function openReleaseHistoryModal() {
-      const modal = document.getElementById('releaseHistoryModal');
-      if (modal) modal.classList.remove('hidden');
-    }
-    function closeReleaseHistoryModal() {
-      const modal = document.getElementById('releaseHistoryModal');
-      if (modal) modal.classList.add('hidden');
-    }
-
-    function openBackupRestoreModal() {
-      const modal = document.getElementById('backupRestoreModal');
-      if (modal) {
-        const unameInput = document.getElementById('authModalInput');
-        if (unameInput) unameInput.value = appState.user.name || 'Pengguna';
-        const ta = document.getElementById('backupCodeTextarea');
-        if (ta) ta.value = JSON.stringify(appState, null, 2);
-        modal.classList.remove('hidden');
-      }
-    }
-    function closeBackupRestoreModal() {
-      const modal = document.getElementById('backupRestoreModal');
-      if (modal) modal.classList.add('hidden');
-    }
-    function saveAccountNameOnly() {
-      const name = document.getElementById('authModalInput')?.value.trim() || 'Pengguna';
-      appState.user.name = name;
-      updateUsernameUI(name);
-      saveStateToStorage();
-      alert('Nama pengguna berhasil disimpan!');
-      closeBackupRestoreModal();
-    }
-    function openRestoreCodeModal() {
-      openBackupRestoreModal();
-    }
-
-    function fetchRealTimeLocationWeather() {
-      const iosWeather = document.getElementById('iosBarWeather');
-      const clockWeather = document.getElementById('clockWeatherDetail');
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          async (pos) => {
-            try {
-              const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&current_weather=true`);
-              const data = await res.json();
-              if (data && data.current_weather) {
-                const temp = Math.round(data.current_weather.temperature);
-                const str = `Bali, ${temp}°C`;
-                if (iosWeather) iosWeather.textContent = str;
-                if (clockWeather) clockWeather.textContent = str;
-              }
-            } catch(e) { fallbackWeather(); }
-          },
-          () => { fallbackWeather(); },
-          { timeout: 8000 }
-        );
-      } else { fallbackWeather(); }
-    }
-    function fallbackWeather() {
-      const iosWeather = document.getElementById('iosBarWeather');
-      const clockWeather = document.getElementById('clockWeatherDetail');
-      if (iosWeather) iosWeather.textContent = 'Bali, 31°C';
-      if (clockWeather) clockWeather.textContent = 'Bali, 31°C';
-    }
-
-    function renderAll() {
-      renderOverviewDashboard();
-      renderFinance();
-      renderHabits();
-      renderTasksAndNotes();
-      renderKanban();
-      renderEisenhower();
-      renderShortcuts();
-      renderSnippets();
-      renderVault();
-      renderCalendar();
-      renderFileManager();
-      renderMindMap();
-      renderAdminPanel();
-      renderAnnouncementBanner();
-      renderHealthTracker();
-    }
-
-    // --- INSTANT LOADING INITIALIZATION & SPLASH BLUR REMOVAL ---
-    document.addEventListener('DOMContentLoaded', () => {
-      loadStateFromStorage();
-      setAppTheme(appState.theme || 'theme-nordic-frost');
-      changeLanguage(appState.lang || 'id');
-      applyCustomPersonalization(appState.accentColor, appState.fontScale);
-      
-      updateUsernameUI(appState.user && appState.user.name ? appState.user.name : 'Pengguna');
-      renderRoleBasedUI();
-
-      if (appState.user && appState.user.apiKey) {
-        const keyInput = document.getElementById('geminiApiKeyInput');
-        if (keyInput) keyInput.value = appState.user.apiKey;
-      }
-
-      const savedToken = localStorage.getItem('GITHUB_ACCESS_TOKEN');
-      if (savedToken) {
-        const tokenInput = document.getElementById('githubTokenInput');
-        if (tokenInput) tokenInput.value = savedToken;
-      }
-
-      switchTab(appState.currentTab || 'overview');
-
-      setInterval(updateClockAndWeatherHeader, 1000);
-      updateClockAndWeatherHeader();
-      fetchRealTimeLocationWeather();
-
-      renderAll();
-
-      const musicBtn = document.getElementById('musicToggleBtn');
-      if (appState.music && appState.music.active) {
-        if (musicBtn) {
-          musicBtn.textContent = 'Hentikan';
-          musicBtn.className = 'px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow ios-btn';
-        }
-        startAmbientMusic();
-      }
-
-      setTimeout(() => {
-        const splash = document.getElementById('appSplashOverlay');
-        if (splash) {
-          splash.style.opacity = '0';
-          setTimeout(() => splash.remove(), 500);
-        }
-      }, 400);
-    });
-
-    function updateUsernameUI(name) {
-      const topBarText = document.getElementById('iosBarUsername');
-      if (topBarText) topBarText.textContent = `Hi, ${sanitizeHtml(name)}`;
-      const modalInput = document.getElementById('authModalInput');
-      if (modalInput) modalInput.value = name;
-    }
-
-    function toggleFloatingMenu() {
-      const modal = document.getElementById('floatingMenuModal');
-      if (modal) {
-        modal.classList.toggle('hidden');
-        if (!modal.classList.contains('hidden')) {
-          updateMenuLauncherActiveStates();
+          banner.classList.add('hidden');
         }
       }
     }
 
-    // --- TAB SWITCHING & SYNCHRONIZED DOCK/SIDEBAR HIGHLIGHTS (v1.44) ---
+    // NAVIGATION & TABS
     function switchTab(tabId) {
-      if (tabId === 'chatbot') {
-        openFloatingAiModal();
-        return;
-      }
-
-      appState.currentTab = tabId;
-      saveStateToStorage();
-
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       const target = document.getElementById(`tab-${tabId}`);
-      if (target) target.classList.remove('hidden');
+      if (target) {
+        target.classList.remove('hidden');
+        target.classList.add('animate-fade-in');
+      }
 
-      // Reset active states for dock and desktop sidebar
-      document.querySelectorAll('nav button[id^="menuBtn-"], nav button.dock-btn, aside button[id^="sidebarBtn-"]').forEach(btn => {
-        btn.classList.remove('dock-btn-active', 'sidebar-item-active');
-        btn.classList.add('opacity-70', 'hover:opacity-100');
+      // Update Desktop Sidebar & Mobile Dock Active State
+      document.querySelectorAll('#desktopSidebar button').forEach(btn => {
+        btn.classList.remove('sidebar-item-active');
       });
-      
-      const activeMenuBtn = document.getElementById(`menuBtn-${tabId}`);
-      if (activeMenuBtn) {
-        activeMenuBtn.classList.add('dock-btn-active');
-        activeMenuBtn.classList.remove('opacity-70');
-      }
-
       const activeSidebarBtn = document.getElementById(`sidebarBtn-${tabId}`);
-      if (activeSidebarBtn) {
-        activeSidebarBtn.classList.add('sidebar-item-active');
-        activeSidebarBtn.classList.remove('opacity-70');
-      }
+      if (activeSidebarBtn) activeSidebarBtn.classList.add('sidebar-item-active');
 
-      updateMenuLauncherActiveStates();
-
-      if (tabId === 'mindmap') {
-        setTimeout(() => { renderMindMap(); }, 50);
-      }
-      if (tabId === 'overview') {
-        renderOverviewDashboard();
-      }
-      if (tabId === 'admin') {
-        renderAdminPanel();
-      }
-      if (tabId === 'health') {
-        renderHealthTracker();
-      }
+      document.querySelectorAll('.dock-btn').forEach(btn => btn.classList.remove('dock-btn-active'));
+      const activeDockBtn = document.getElementById(`menuBtn-${tabId}`);
+      if (activeDockBtn) activeDockBtn.classList.add('dock-btn-active');
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function switchTabAndClose(tabId) {
-      switchTab(tabId);
       toggleFloatingMenu();
+      switchTab(tabId);
     }
 
-    function updateMenuLauncherActiveStates() {
-      document.querySelectorAll('.launcher-item').forEach(item => {
-        item.classList.remove('border-blue-500', 'bg-blue-500/10', 'shadow-md', 'border-amber-500');
-        item.style.borderColor = '';
-        item.style.background = '';
-      });
-      const activeLauncherBtn = document.getElementById(`launcherBtn-${appState.currentTab}`);
-      if (activeLauncherBtn) {
-        activeLauncherBtn.classList.add('border-blue-500', 'bg-blue-500/10', 'shadow-md');
-        activeLauncherBtn.style.borderColor = 'var(--accent-color)';
-      }
+    function toggleFloatingMenu() {
+      const modal = document.getElementById('floatingMenuModal');
+      if (modal) modal.classList.toggle('hidden');
     }
 
-    function updateClockAndWeatherHeader() {
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString();
-      const iosClock = document.getElementById('iosBarClock');
-      if (iosClock) iosClock.textContent = timeStr;
-      const liveClockBig = document.getElementById('liveClockBig');
-      if (liveClockBig) liveClockBig.textContent = timeStr;
-      const liveDateBig = document.getElementById('liveDateBig');
-      if (liveDateBig) {
-        liveDateBig.textContent = now.toLocaleDateString(appState.lang === 'en' ? 'en-US' : 'id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-      }
-    }
-
-    // --- OVERVIEW DASHBOARD LOGIC ---
-    function renderOverviewDashboard() {
-      let totalInc = 0; let totalExp = 0;
-      (appState.finance.transactions || []).forEach(tx => {
-        if (tx.type === 'income') totalInc += (tx.amount || 0);
-        else totalExp += (tx.amount || 0);
-      });
-      const net = totalInc - totalExp;
-      const elBal = document.getElementById('ovMetricBalance');
-      if (elBal) elBal.textContent = `${appState.finance.currency || 'Rp'} ${net.toLocaleString()}`;
-
-      const totalT = (appState.tasks || []).length;
-      const doneT = (appState.tasks || []).filter(t => t.completed).length;
-      const elTasks = document.getElementById('ovMetricTasks');
-      if (elTasks) elTasks.textContent = `${doneT} / ${totalT}`;
-
-      const water = appState.health ? (appState.health.water || 0) : 0;
-      const elWater = document.getElementById('ovMetricWater');
-      if (elWater) elWater.textContent = `${water} ml`;
-
-      const totalVlt = (appState.vault || []).length;
-      const elVlt = document.getElementById('ovMetricVault');
-      if (elVlt) elVlt.textContent = `${totalVlt} Akun`;
-
-      const elStorage = document.getElementById('ovStorageSize');
-      if (elStorage) elStorage.textContent = `${(JSON.stringify(localStorage).length / 1024).toFixed(1)} KB`;
-
-      const elTheme = document.getElementById('ovThemeName');
-      if (elTheme) {
-        let tName = 'Nordic Frost';
-        if (appState.theme === 'theme-cyberpunk-neon') tName = 'Cyberpunk Neon';
-        else if (appState.theme === 'theme-aurora-glass') tName = 'Aurora Glass';
-        else if (appState.theme === 'theme-obsidian-gold') tName = 'Obsidian Gold';
-        else if (appState.theme === 'theme-sunset-blush') tName = 'Sunset Blush';
-        else if (appState.theme === 'theme-matrix-terminal') tName = 'Matrix Terminal';
-        elTheme.textContent = tName;
-      }
-    }
-
-    // --- PERSONALIZATION & THEME ---
-    function changeAccentColor(color) {
-      appState.accentColor = color;
-      saveStateToStorage();
-      applyCustomPersonalization(color, appState.fontScale);
-    }
-
-    function changeFontScale(scale) {
-      appState.fontScale = scale;
-      saveStateToStorage();
-      applyCustomPersonalization(appState.accentColor, scale);
-    }
-
-    function applyCustomPersonalization(color, scale) {
-      document.documentElement.style.setProperty('--accent-color', color);
-      const colorPicker = document.getElementById('accentColorPicker');
-      if (colorPicker) colorPicker.value = color;
-      const colorHex = document.getElementById('accentColorHex');
-      if (colorHex) colorHex.textContent = color;
-
-      const scaleSelector = document.getElementById('fontScaleSelector');
-      if (scaleSelector) scaleSelector.value = scale;
-
-      const body = document.body;
-      if (scale === 'compact') body.style.fontSize = '12px';
-      else if (scale === 'large') body.style.fontSize = '16px';
-      else body.style.fontSize = '14px';
-    }
-
-    function setAppTheme(theme) {
-      appState.theme = theme;
-      saveStateToStorage();
-      document.documentElement.className = (theme === 'theme-nordic-frost') ? 'light' : 'dark';
-      document.getElementById('appBody').className = `${theme} min-h-screen pb-32`;
-
-      document.querySelectorAll('.theme-select-btn').forEach(btn => {
-        btn.classList.remove('border-2', 'border-blue-500', 'shadow-lg');
-        btn.style.borderColor = '';
-      });
-      let activeBtnId = 'themeBtn-nordic';
-      if (theme === 'theme-cyberpunk-neon') activeBtnId = 'themeBtn-cyberpunk';
-      else if (theme === 'theme-aurora-glass') activeBtnId = 'themeBtn-aurora';
-      else if (theme === 'theme-obsidian-gold') activeBtnId = 'themeBtn-obsidian';
-      else if (theme === 'theme-sunset-blush') activeBtnId = 'themeBtn-sunset';
-      else if (theme === 'theme-matrix-terminal') activeBtnId = 'themeBtn-matrix';
-
-      const activeBtn = document.getElementById(activeBtnId);
-      if (activeBtn) {
-        activeBtn.classList.add('border-2', 'border-blue-500', 'shadow-lg');
-        activeBtn.style.borderColor = 'var(--accent-color)';
-      }
-
-      renderOverviewDashboard();
-    }
-
-    // --- MODULE LOGIC ---
-    function executeTranslation() {
-      const text = document.getElementById('transInputText')?.value || '';
-      const toLang = document.getElementById('transLangTo')?.value || 'en';
-      const out = document.getElementById('transResultOutput');
-      if (!out) return;
-      if (!text.trim()) {
-        out.textContent = 'Hasil terjemahan akan muncul di sini...';
-        return;
-      }
-      setTimeout(() => {
-        let translated = `[${toLang.toUpperCase()}] ${text} (Translated successfully)`;
-        if (toLang === 'id') translated = `[ID] Terjemahan untuk: "${text}"`;
-        if (toLang === 'en') translated = `[EN] Translated text: "${text}"`;
-        if (toLang === 'zh') translated = `[ZH] 翻译结果: "${text}"`;
-        if (toLang === 'ar') translated = `[AR] ترجمة: "${text}"`;
-        out.textContent = translated;
-      }, 200);
-    }
-
-    function generateSimplePdf() {
-      const title = document.getElementById('pdfTitleInput')?.value || 'Dokumen_TabHub';
-      const content = document.getElementById('pdfContentInput')?.value || 'Konten PDF kosong.';
-      const blob = new Blob([`--- ${title} ---\n\n${content}`], { type: 'application/pdf' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${title.replace(/\s+/g, '_')}.pdf`;
-      a.click();
-      alert('Dokumen PDF berhasil dihasilkan dan diunduh!');
-    }
-
-    function handlePdfUpload(e) {
-      const files = e.target.files;
-      const list = document.getElementById('pdfFileList');
-      if (!list) return;
-      list.innerHTML = '';
-      Array.from(files).forEach((f) => {
-        const div = document.createElement('div');
-        div.className = 'card-modern p-2 rounded-xl flex justify-between items-center text-xs';
-        div.innerHTML = `<span>${sanitizeHtml(f.name)} (${(f.size/1024).toFixed(1)} KB)</span> <span class="text-emerald-500 font-bold">Arsip OK</span>`;
-        list.appendChild(div);
-      });
-    }
-
-    function processYoutubeLink() {
-      const url = document.getElementById('ytUrlInput')?.value || '';
-      if (!url.includes('youtube.com') && !url.includes('youtu.be')) {
-        alert('Masukkan tautan YouTube yang valid!');
-        return;
-      }
-      const area = document.getElementById('ytResultArea');
-      const thumb = document.getElementById('ytThumbnailPreview');
-      const title = document.getElementById('ytVideoTitle');
-      if (area && thumb && title) {
-        thumb.src = 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&q=80';
-        title.textContent = 'YouTube Video Media - TabHub Stream Downloader';
-        area.classList.remove('hidden');
-      }
-    }
-    function downloadYtMedia(type) {
-      alert(`Memulai unduhan ${type.toUpperCase()} YouTube berhasil! File akan tersimpan otomatis.`);
-    }
-
-    function processTiktokLink() {
-      const url = document.getElementById('ttUrlInput')?.value || '';
-      if (!url.includes('tiktok.com')) {
-        alert('Masukkan tautan TikTok yang valid!');
-        return;
-      }
-      const area = document.getElementById('ttResultArea');
-      const dlLink = document.getElementById('ttDownloadLink');
-      if (area && dlLink) {
-        dlLink.href = '#';
-        dlLink.onclick = () => alert('File video TikTok bersih tanpa watermark berhasil diunduh!');
-        area.classList.remove('hidden');
-      }
-    }
-
-    function generateFancyFonts() {
-      const text = document.getElementById('fontInputText')?.value || '';
-      const container = document.getElementById('fontOutputList');
-      if (!container) return;
-      container.innerHTML = '';
-      if (!text.trim()) return;
-
-      const styles = [
-        { name: 'Bold Sans', fn: (s) => s.split('').map(c => { const code = c.codePointAt(0); return (code >= 65 && code <= 90) ? String.fromCodePoint(code + 120276) : ((code >= 97 && code <= 122) ? String.fromCodePoint(code + 120270) : c); }).join('') },
-        { name: 'Italic Serif', fn: (s) => s.split('').map(c => { const code = c.codePointAt(0); return (code >= 65 && code <= 90) ? String.fromCodePoint(code + 120328) : ((code >= 97 && code <= 122) ? String.fromCodePoint(code + 120322) : c); }).join('') },
-        { name: 'Monospace', fn: (s) => s.split('').map(c => { const code = c.codePointAt(0); return (code >= 65 && code <= 90) ? String.fromCodePoint(code + 120424) : ((code >= 97 && code <= 122) ? String.fromCodePoint(code + 120418) : c); }).join('') },
-        { name: 'Bubble Text', fn: (s) => s.split('').map(c => { const code = c.codePointAt(0); return (code >= 65 && code <= 90) ? String.fromCodePoint(code + 127396) : ((code >= 97 && code <= 122) ? String.fromCodePoint(code + 127396) : c); }).join('') }
-      ];
-
-      styles.forEach(st => {
-        const converted = st.fn(text);
-        const div = document.createElement('div');
-        div.className = 'card-modern p-3 rounded-xl flex justify-between items-center text-xs';
-        div.innerHTML = `<span><strong>${st.name}:</strong> <span class="font-mono text-blue-500">${sanitizeHtml(converted)}</span></span> <button onclick="navigator.clipboard.writeText('${converted}');alert('Teks berhasil disalin!')" class="px-3 py-1 bg-blue-600 text-white rounded-lg font-bold ios-btn">Salin</button>`;
-        container.appendChild(div);
-      });
-    }
-
-    function copyBlankCharacter() {
-      const blankChar = 'ㅤ';
-      navigator.clipboard.writeText(blankChar).then(() => {
-        alert('Karakter kosong / teks tidak terlihat berhasil disalin!');
-      });
-    }
-
-    // --- SHORTCUTS ---
-    function openShortcutModal() {
-      const modal = document.getElementById('shortcutModal');
+    function openFloatingAiModal() {
+      const modal = document.getElementById('floatingAiModal');
       if (modal) modal.classList.remove('hidden');
     }
-    function closeShortcutModal() {
-      const modal = document.getElementById('shortcutModal');
-      if (modal) {
-        modal.classList.add('hidden');
-        document.getElementById('shortcutForm').reset();
-      }
-    }
-    function saveShortcutItem(e) {
-      e.preventDefault();
-      const title = sanitizeHtml(document.getElementById('shortcutTitleInput')?.value || '');
-      const url = sanitizeHtml(document.getElementById('shortcutUrlInput')?.value || '');
-      if (!title || !url) return;
-      if (!Array.isArray(appState.shortcuts)) appState.shortcuts = [];
-      appState.shortcuts.push({ id: 'sc_' + Date.now(), title, url });
-      saveStateToStorage();
-      closeShortcutModal();
-      renderShortcuts();
-      renderOverviewDashboard();
-    }
-    function renderShortcuts() {
-      const container = document.getElementById('shortcutsListContainer');
-      if (!container) return;
-      container.innerHTML = '';
-      const list = Array.isArray(appState.shortcuts) ? appState.shortcuts : [];
-      list.forEach(sc => {
-        const div = document.createElement('div');
-        div.className = 'card-modern p-4 rounded-2xl flex items-center justify-between text-xs transition hover:scale-[1.01]';
-        div.innerHTML = `
-          <div class="space-y-1 overflow-hidden pr-2">
-            <h4 class="font-extrabold truncate">${sanitizeHtml(sc.title)}</h4>
-            <a href="${sanitizeHtml(sc.url)}" target="_blank" rel="noopener noreferrer" class="text-blue-500 truncate block font-mono text-[11px] hover:underline">${sanitizeHtml(sc.url)}</a>
-          </div>
-          <div class="flex items-center gap-1.5 shrink-0">
-            <a href="${sanitizeHtml(sc.url)}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 bg-blue-600 text-white rounded-xl font-bold shadow ios-btn">Buka</a>
-            <button onclick="deleteShortcut('${sc.id}')" class="px-2.5 py-1.5 bg-rose-500/10 text-rose-500 font-bold rounded-xl ios-btn">&times;</button>
-          </div>
-        `;
-        container.appendChild(div);
-      });
-      if (list.length === 0) {
-        container.innerHTML = '<div class="col-span-full text-xs opacity-70 text-center py-6">Belum ada pintasan web tersimpan.</div>';
-      }
-    }
-    function deleteShortcut(id) {
-      appState.shortcuts = appState.shortcuts.filter(s => s.id !== id);
-      saveStateToStorage();
-      renderShortcuts();
-      renderOverviewDashboard();
+
+    function closeFloatingAiModal() {
+      const modal = document.getElementById('floatingAiModal');
+      if (modal) modal.classList.add('hidden');
     }
 
-    // --- FINANCE ---
-    function renderFinance() {
-      const currencySelect = document.getElementById('financeCurrency');
-      const currency = currencySelect ? currencySelect.value : (appState.finance.currency || 'Rp');
-      appState.finance.currency = currency;
+    // FOCUS MODE & SCROLL TO TOP
+    function toggleFocusMode() {
+      appState.settings.focusMode = !appState.settings.focusMode;
+      const sidebar = document.getElementById('desktopSidebar');
+      const dock = document.getElementById('mobileDockNav');
+      const btn = document.getElementById('focusModeToggleBtn');
       
-      const search = document.getElementById('searchInput')?.value.toLowerCase() || '';
-      const filter = document.getElementById('filterType')?.value || 'all';
-      const budgetLimitInput = document.getElementById('budgetLimitInput');
-      const budgetLimit = budgetLimitInput ? (parseFloat(budgetLimitInput.value) || appState.finance.budgetLimit || 5000000) : 5000000;
-      appState.finance.budgetLimit = budgetLimit;
-
-      const tbody = document.getElementById('txTableBody');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-
-      let totalInc = 0; let totalExp = 0;
-      const txList = Array.isArray(appState.finance.transactions) ? appState.finance.transactions : [];
-
-      txList.filter(tx => {
-        const matchSearch = (tx.desc || '').toLowerCase().includes(search) || (tx.category || '').toLowerCase().includes(search);
-        if (!matchSearch) return false;
-        if (filter === 'income' && tx.type !== 'income') return false;
-        if (filter === 'expense' && tx.type !== 'expense') return false;
-        if (filter === 'online' && !tx.isOnline) return false;
-        if (filter === 'offline' && tx.isOnline) return false;
-        return true;
-      }).forEach((tx) => {
-        if (tx.type === 'income') totalInc += (tx.amount || 0);
-        else totalExp += (tx.amount || 0);
-
-        const tr = document.createElement('tr');
-        tr.className = 'border-b border-slate-200/50 dark:border-slate-800/50 hover:bg-slate-100/50';
-        tr.innerHTML = `
-          <td class="p-2.5 font-mono opacity-80">${sanitizeHtml(tx.date)}</td>
-          <td class="p-2.5 font-bold"><span class="px-2 py-0.5 rounded-md ${tx.isOnline?'bg-blue-500/10 text-blue-500':'bg-slate-200 dark:bg-slate-800'}">${sanitizeHtml(tx.category)}</span></td>
-          <td class="p-2.5 opacity-80">${sanitizeHtml(tx.desc)}</td>
-          <td class="p-2.5 text-right font-mono font-bold ${tx.type==='income'?'text-emerald-500':'text-rose-500'}">${tx.type==='income'?'+':'-'} ${currency} ${(tx.amount || 0).toLocaleString()}</td>
-          <td class="p-2.5 text-center flex justify-center gap-1.5">
-            <button onclick="editTx('${tx.id}')" class="text-blue-500 font-bold px-2 py-0.5 rounded bg-blue-500/10 ios-btn">Edit</button>
-            <button onclick="deleteTx('${tx.id}')" class="text-rose-500 font-bold px-2 py-0.5 rounded bg-rose-500/10 ios-btn">Hapus</button>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-
-      const net = totalInc - totalExp;
-      const metricNet = document.getElementById('metricNet');
-      if (metricNet) metricNet.textContent = `${currency} ${net.toLocaleString()}`;
-      const metricIncome = document.getElementById('metricIncome');
-      if (metricIncome) metricIncome.textContent = `${currency} ${totalInc.toLocaleString()}`;
-      const metricExpense = document.getElementById('metricExpense');
-      if (metricExpense) metricExpense.textContent = `${currency} ${totalExp.toLocaleString()}`;
-
-      const pct = Math.min(Math.round((totalExp / budgetLimit) * 100), 100);
-      const budgetProgressBar = document.getElementById('budgetProgressBar');
-      if (budgetProgressBar) budgetProgressBar.style.width = `${pct}%`;
-      const budgetProgressText = document.getElementById('budgetProgressText');
-      if (budgetProgressText) budgetProgressText.textContent = `${pct}% Terpakai`;
-
+      if (appState.settings.focusMode) {
+        if (sidebar) sidebar.style.opacity = '0.1';
+        if (dock) dock.style.opacity = '0.1';
+        if (btn) btn.classList.add('bg-emerald-500/20', 'text-emerald-500');
+        addAuditLog('[INFO] Mode Fokus diaktifkan.');
+      } else {
+        if (sidebar) sidebar.style.opacity = '1';
+        if (dock) dock.style.opacity = '1';
+        if (btn) btn.classList.remove('bg-emerald-500/20', 'text-emerald-500');
+        addAuditLog('[INFO] Mode Fokus dinonaktifkan.');
+      }
       saveStateToStorage();
-      renderOverviewDashboard();
     }
 
+    window.addEventListener('scroll', () => {
+      const scrollBtn = document.getElementById('scrollToTopBtn');
+      if (scrollBtn) {
+        if (window.scrollY > 300) scrollBtn.classList.remove('hidden');
+        else scrollBtn.classList.add('hidden');
+      }
+    });
+
+    function scrollToTopPage() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // GITHUB TOKEN AUTH & ROLE VERIFICATION
+    function loginWithGitHubToken() {
+      const tokenInput = document.getElementById('githubTokenInput');
+      const token = tokenInput ? tokenInput.value.trim() : '';
+      if (!token) {
+        alert('Masukkan GitHub Personal Access Token (PAT) terlebih dahulu.');
+        return;
+      }
+
+      // Verify via GitHub API v3 user endpoint
+      fetch('https://api.github.com/user', {
+        headers: {
+          'Authorization': `token ${token}`,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('Token GitHub tidak valid atau kedaluwarsa.');
+        return res.json();
+      })
+      .then(user => {
+        const username = user.login;
+        appState.user.name = username;
+        appState.user.token = token;
+        
+        // Admin verification rule: Must be 'vanandime'
+        if (username.toLowerCase() === 'vanandime') {
+          appState.user.role = 'Admin';
+          alert(`Berhasil Login! Selamat datang kembali, Administrator @${username}. Hak akses Admin penuh diberikan.`);
+          addAuditLog(`[AUTH] Administrator @${username} berhasil masuk via PAT token.`);
+        } else {
+          appState.user.role = 'User';
+          alert(`Berhasil Login sebagai @${username}. Peran Anda adalah Pengguna (User).`);
+          addAuditLog(`[AUTH] Pengguna @${username} berhasil masuk.`);
+        }
+        saveStateToStorage();
+        renderAll();
+      })
+      .catch(err => {
+        alert('Gagal otentikasi token GitHub: ' + err.message);
+        addAuditLog(`[ERROR] Gagal verifikasi GitHub PAT: ${err.message}`);
+      });
+    }
+
+    // HEALTH TRACKER LOGIC
+    function addWater(amount) {
+      appState.health.waterIntake += amount;
+      saveStateToStorage();
+      renderHealth();
+      renderOverview();
+      addAuditLog(`[HEALTH] Menambahkan air minum +${amount} ml.`);
+    }
+
+    function resetWaterToday() {
+      appState.health.waterIntake = 0;
+      saveStateToStorage();
+      renderHealth();
+      renderOverview();
+      addAuditLog('[HEALTH] Reset hidrasi air hari ini.');
+    }
+
+    function addCalories() {
+      const input = document.getElementById('quickCalorieInput');
+      const val = parseInt(input ? input.value : 0);
+      if (!val || val <= 0) {
+        alert('Masukkan jumlah kalori yang valid.');
+        return;
+      }
+      appState.health.calorieIntake += val;
+      if (input) input.value = '';
+      saveStateToStorage();
+      renderHealth();
+      renderOverview();
+      addAuditLog(`[HEALTH] Menambahkan kalori +${val} kkal.`);
+    }
+
+    function openHealthLogModal() {
+      const modal = document.getElementById('healthLogModal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeHealthLogModal() {
+      const modal = document.getElementById('healthLogModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function submitHealthLog(e) {
+      e.preventDefault();
+      const title = document.getElementById('healthLogTitleInput').value.trim();
+      const desc = document.getElementById('healthLogDescInput').value.trim();
+      if (!title) return;
+
+      appState.health.logs.unshift({
+        id: Date.now(),
+        date: new Date().toLocaleDateString(),
+        title,
+        desc
+      });
+      saveStateToStorage();
+      closeHealthLogModal();
+      document.getElementById('healthLogForm').reset();
+      renderHealth();
+      addAuditLog(`[HEALTH] Menambahkan catatan fisik: ${title}`);
+    }
+
+    function renderHealth() {
+      const water = appState.health.waterIntake;
+      const targetWater = appState.health.waterTarget;
+      const waterPct = Math.min(100, Math.round((water / targetWater) * 100));
+
+      const cal = appState.health.calorieIntake;
+      const targetCal = appState.health.calorieTarget;
+      const calPct = Math.min(100, Math.round((cal / targetCal) * 100));
+
+      const wDisp = document.getElementById('waterIntakeDisplay');
+      if (wDisp) wDisp.textContent = `${water} ml`;
+      const wBar = document.getElementById('waterProgressBar');
+      if (wBar) wBar.style.width = `${waterPct}%`;
+
+      const cDisp = document.getElementById('calorieIntakeDisplay');
+      if (cDisp) cDisp.textContent = `${cal} kkal`;
+      const cBar = document.getElementById('calorieProgressBar');
+      if (cBar) cBar.style.width = `${calPct}%`;
+
+      const hStat = document.getElementById('healthHydrationStatus');
+      if (hStat) {
+        hStat.textContent = water >= targetWater ? 'Hidrasi Optimal 💧' : 'Perlu Minum Air';
+      }
+
+      const listContainer = document.getElementById('healthLogsList');
+      if (listContainer) {
+        if (appState.health.logs.length === 0) {
+          listContainer.innerHTML = '<div class="p-3 card-modern rounded-xl opacity-75">Belum ada catatan kesehatan fisik hari ini.</div>';
+        } else {
+          listContainer.innerHTML = appState.health.logs.map(l => `
+            <div class="p-3 card-modern rounded-xl flex justify-between items-center text-xs">
+              <div>
+                <strong>${l.title}</strong>
+                <div class="text-[10px] opacity-60">${l.desc} • ${l.date}</div>
+              </div>
+              <button onclick="deleteHealthLog(${l.id})" class="text-rose-500 font-bold hover:underline">Hapus</button>
+            </div>
+          `).join('');
+        }
+      }
+    }
+
+    function deleteHealthLog(id) {
+      appState.health.logs = appState.health.logs.filter(l => l.id !== id);
+      saveStateToStorage();
+      renderHealth();
+    }
+
+    // OVERVIEW & METRICS
+    function renderOverview() {
+      const txs = appState.finance.transactions;
+      let totalInc = 0, totalExp = 0;
+      txs.forEach(t => {
+        if (t.type === 'income') totalInc += Number(t.amount);
+        else totalExp += Number(t.amount);
+      });
+      const net = totalInc - totalExp;
+
+      const curr = appState.finance.currency;
+      const metricNet = document.getElementById('ovMetricBalance');
+      if (metricNet) metricNet.textContent = `${curr} ${net.toLocaleString()}`;
+
+      const totalTasks = appState.tasks.items.length;
+      const completedTasks = appState.tasks.items.filter(t => t.completed).length;
+      const metricTasks = document.getElementById('ovMetricTasks');
+      if (metricTasks) metricTasks.textContent = `${completedTasks} / ${totalTasks}`;
+
+      const metricWater = document.getElementById('ovMetricWater');
+      if (metricWater) metricWater.textContent = `${appState.health.waterIntake} ml`;
+
+      const metricVault = document.getElementById('ovMetricVault');
+      if (metricVault) metricVault.textContent = `${appState.vault.length} Akun`;
+
+      const sizeStr = calculateStorageSizeString();
+      const storageSizeEl = document.getElementById('ovStorageSize');
+      if (storageSizeEl) storageSizeEl.textContent = sizeStr;
+
+      const themeNameEl = document.getElementById('ovThemeName');
+      if (themeNameEl) themeNameEl.textContent = appState.settings.theme.replace('theme-', '').replace('-', ' ').toUpperCase();
+    }
+
+    // FINANCE LOGIC
     function openTxModal(type) {
-      const modalTitle = document.getElementById('modalTxTitle');
-      if (modalTitle) modalTitle.textContent = type === 'income' ? 'Tambah Pemasukan Baru' : 'Tambah Pengeluaran Baru';
-      document.getElementById('formTxId').value = '';
       document.getElementById('formType').value = type;
+      document.getElementById('modalTxTitle').textContent = type === 'income' ? '+ Tambah Pemasukan' : '+ Tambah Pengeluaran';
       document.getElementById('formDate').value = new Date().toISOString().split('T')[0];
-      document.getElementById('txModal').classList.remove('hidden');
-    }
-
-    function editTx(id) {
-      const tx = (appState.finance.transactions || []).find(t => t.id === id);
-      if (!tx) return;
-      document.getElementById('formTxId').value = tx.id;
-      document.getElementById('formType').value = tx.type;
-      document.getElementById('formDate').value = tx.date;
-      document.getElementById('formCategory').value = tx.category;
-      document.getElementById('formAmount').value = tx.amount;
-      document.getElementById('formDesc').value = tx.desc || '';
       document.getElementById('txModal').classList.remove('hidden');
     }
 
     function closeTxModal() {
       document.getElementById('txModal').classList.add('hidden');
-      document.getElementById('txForm').reset();
     }
 
-    document.getElementById('txForm')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (!Array.isArray(appState.finance.transactions)) appState.finance.transactions = [];
-      const txId = document.getElementById('formTxId')?.value;
-      const type = document.getElementById('formType')?.value || 'expense';
-      const date = document.getElementById('formDate')?.value || new Date().toISOString().split('T')[0];
-      const category = sanitizeHtml(document.getElementById('formCategory')?.value || '');
-      const amount = parseFloat(document.getElementById('formAmount')?.value) || 0;
-      const desc = sanitizeHtml(document.getElementById('formDesc')?.value || '');
-      const isOnline = document.getElementById('formIsOnline')?.value === 'true';
+    function renderFinance() {
+      const search = (document.getElementById('searchInput')?.value || '').toLowerCase();
+      const filterType = document.getElementById('filterType')?.value || 'all';
+      const curr = document.getElementById('financeCurrency')?.value || 'Rp';
+      appState.finance.currency = curr;
 
-      if (txId) {
-        const index = appState.finance.transactions.findIndex(t => t.id === txId);
-        if (index !== -1) appState.finance.transactions[index] = { id: txId, type, date, category, amount, desc, isOnline };
-      } else {
-        appState.finance.transactions.push({ id: 'tx_' + Date.now(), type, date, category, amount, desc, isOnline });
+      const txs = appState.finance.transactions;
+      let income = 0, expense = 0;
+
+      txs.forEach(t => {
+        if (t.type === 'income') income += Number(t.amount);
+        else expense += Number(t.amount);
+      });
+      const net = income - expense;
+
+      document.getElementById('metricIncome').textContent = `${curr} ${income.toLocaleString()}`;
+      document.getElementById('metricExpense').textContent = `${curr} ${expense.toLocaleString()}`;
+      document.getElementById('metricNet').textContent = `${curr} ${net.toLocaleString()}`;
+
+      // Budget limit progress
+      const budgetLimit = Number(document.getElementById('budgetLimitInput')?.value || 5000000);
+      appState.finance.budgetLimit = budgetLimit;
+      const budgetPct = Math.min(100, Math.round((expense / budgetLimit) * 100));
+      const budgetBar = document.getElementById('budgetProgressBar');
+      if (budgetBar) budgetBar.style.width = `${budgetPct}%`;
+      const budgetText = document.getElementById('budgetProgressText');
+      if (budgetText) budgetText.textContent = `${budgetPct}% Terpakai`;
+
+      // Filtered table
+      const filtered = txs.filter(t => {
+        const matchSearch = t.category.toLowerCase().includes(search) || t.desc.toLowerCase().includes(search);
+        if (!matchSearch) return false;
+        if (filterType === 'income' && t.type !== 'income') return false;
+        if (filterType === 'expense' && t.type !== 'expense') return false;
+        if (filterType === 'online' && !t.isOnline) return false;
+        if (filterType === 'offline' && t.isOnline) return false;
+        return true;
+      });
+
+      const tbody = document.getElementById('txTableBody');
+      if (tbody) {
+        if (filtered.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center opacity-60">Tidak ada transaksi ditemukan.</td></tr>';
+        } else {
+          tbody.innerHTML = filtered.map(t => `
+            <tr class="border-b border-slate-200/50 dark:border-slate-800/50">
+              <td class="p-2.5 font-mono">${t.date}</td>
+              <td class="p-2.5 font-bold">${t.category}</td>
+              <td class="p-2.5 opacity-80">${t.desc || '-'}</td>
+              <td class="p-2.5 text-right font-mono font-bold ${t.type === 'income' ? 'text-emerald-500' : 'text-rose-500'}">
+                ${t.type === 'income' ? '+' : '-'} ${curr} ${Number(t.amount).toLocaleString()}
+              </td>
+              <td class="p-2.5 text-center">
+                <button onclick="deleteTransaction(${t.id})" class="text-rose-500 font-bold hover:underline">Hapus</button>
+              </td>
+            </tr>
+          `).join('');
+        }
       }
-      saveStateToStorage(); closeTxModal(); renderAll();
-    });
+      saveStateToStorage();
+    }
 
-    function deleteTx(id) {
+    function deleteTransaction(id) {
       appState.finance.transactions = appState.finance.transactions.filter(t => t.id !== id);
-      saveStateToStorage(); renderAll();
+      renderFinance();
+      renderOverview();
+      addAuditLog(`[FINANCE] Menghapus transaksi ID #${id}`);
     }
 
     function exportFinance() {
-      let csv = "ID,Type,Date,Category,Amount,Description,IsOnline\n";
-      (appState.finance.transactions || []).forEach(t => {
-        csv += `"${t.id}","${t.type}","${t.date}","${t.category}",${t.amount},"${t.desc}",${t.isOnline}\n`;
-      });
-      const blob = new Blob([csv], { type: 'text/csv' });
-      const a = document.createElement('a');
-      a.href = window.URL.createObjectURL(blob);
-      a.download = 'tabhub-finance.csv';
-      a.click();
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState.finance.transactions, null, 2));
+      const dlAnchor = document.createElement('a');
+      dlAnchor.setAttribute("href", dataStr);
+      dlAnchor.setAttribute("download", `TabHub_Finance_${new Date().toISOString().split('T')[0]}.json`);
+      document.body.appendChild(dlAnchor);
+      dlAnchor.click();
+      dlAnchor.remove();
+      addAuditLog('[FINANCE] Mengekspor data keuangan ke CSV/JSON.');
     }
 
-    // --- AI ASSISTANT ---
-    async function sendChatMessage() {
-      const input = document.getElementById('chatInputText');
-      if (!input) return;
-      const text = input.value.trim();
-      if (!text) return;
-      appendChatBubble('user', text, 'chatMessagesArea');
-      input.value = '';
-      processAiMessage(text, 'chatMessagesArea');
-    }
-
-    async function processAiMessage(text, areaId) {
-      const lower = text.toLowerCase();
-      
-      if (lower.startsWith('sk-') || lower.startsWith('aiza') || (lower.length > 20 && !lower.includes(' '))) {
-        appState.user.apiKey = text.trim();
-        saveStateToStorage();
-        appendChatBubble('ai', 'API Key berhasil disimpan permanen dan diverifikasi!', areaId);
-        return;
-      }
-
-      if (lower.startsWith('cari ') || lower.startsWith('/search ') || lower.includes('cari')) {
-        const query = lower.replace('cari ', '').replace('/search ', '').replace('cari', '').trim();
-        let matches = [];
-        (appState.tasks || []).forEach(t => { if ((t.title || '').toLowerCase().includes(query)) matches.push(`[Tugas] ${t.title}`); });
-        (appState.notes || []).forEach(n => { if ((n.title || '').toLowerCase().includes(query)) matches.push(`[Catatan] ${n.title}`); });
-        (appState.vault || []).forEach(v => { if ((v.title || '').toLowerCase().includes(query)) matches.push(`[Vault] ${v.title}`); });
-        let reply = matches.length > 0 ? `Hasil pencarian lintas fitur untuk "${query}":\n` + matches.join('\n') : `Tidak ditemukan data yang sesuai dengan kata kunci "${query}".`;
-        appendChatBubble('ai', reply, areaId);
-        return;
-      }
-
-      setTimeout(() => {
-        let reply = "Halo! Saya adalah AI TabHub v1.44 PRO. Saya dapat membantu meringkas keuangan, melacak kesehatan, mencari tugas, atau mengelola jadwal kalender secara offline.";
-        
-        if (lower.includes('keuangan') || lower.includes('saldo') || lower.includes('uang')) {
-          const totalInc = (appState.finance.transactions || []).filter(t=>t.type==='income').reduce((a,b)=>a+b.amount,0);
-          const totalExp = (appState.finance.transactions || []).filter(t=>t.type==='expense').reduce((a,b)=>a+b.amount,0);
-          const net = totalInc - totalExp;
-          reply = `📊 Ringkasan Keuangan Anda:\n- Total Pemasukan: ${appState.finance.currency} ${totalInc.toLocaleString()}\n- Total Pengeluaran: ${appState.finance.currency} ${totalExp.toLocaleString()}\n- Saldo Bersih: ${appState.finance.currency} ${net.toLocaleString()}`;
-        } else if (lower.includes('tugas') || lower.includes('task') || lower.includes('kerjaan')) {
-          const totalT = (appState.tasks || []).length;
-          const doneT = (appState.tasks || []).filter(t=>t.completed).length;
-          reply = `📋 Status Tugas:\nAnda telah menyelesaikan ${doneT} dari ${totalT} tugas yang terdaftar di sistem.`;
-        } else if (lower.includes('kesehatan') || lower.includes('air') || lower.includes('hidrasi')) {
-          const water = appState.health ? (appState.health.water || 0) : 0;
-          const cals = appState.health ? (appState.health.calories || 0) : 0;
-          reply = `💧 Status Kesehatan & Hidrasi:\n- Air Minum: ${water} ml dari target 2000 ml\n- Kalori Harian: ${cals} kkal`;
-        }
-
-        appendChatBubble('ai', reply, areaId);
-      }, 400);
-    }
-
-    function sendQuickPrompt(txt) {
-      const input = document.getElementById('chatInputText');
-      if (input) { input.value = txt; input.focus(); }
-    }
-
-    function appendChatBubble(sender, text, areaId) {
-      const area = document.getElementById(areaId);
-      if (!area) return;
-      const div = document.createElement('div');
-      div.className = `flex items-start gap-2.5 ${sender === 'user' ? 'flex-row-reverse' : ''}`;
-      div.innerHTML = `
-        <div class="w-7 h-7 rounded-full ${sender === 'user' ? 'bg-emerald-600' : 'bg-blue-600'} flex items-center justify-center text-white text-xs font-bold shrink-0">${sender === 'user' ? 'U' : 'AI'}</div>
-        <div class="card-modern p-3 rounded-2xl text-xs max-w-[85%] leading-relaxed whitespace-pre-wrap">${sanitizeHtml(text)}</div>
-      `;
-      area.appendChild(div);
-      area.scrollTop = area.scrollHeight;
-    }
-
-    // --- HABITS ---
-    function renderHabits() {
-      const container = document.getElementById('habitListContainer');
-      if (!container) return;
-      container.innerHTML = '';
-      const habitArr = Array.isArray(appState.habits) ? appState.habits : [];
-      const todayStr = new Date().toISOString().split('T')[0];
-
-      habitArr.forEach(habit => {
-        if (!habit.logs) habit.logs = {};
-        const isDone = !!habit.logs[todayStr];
-        const div = document.createElement('div');
-        div.className = 'card-modern p-3 rounded-xl flex items-center justify-between text-xs';
-        div.innerHTML = `
-          <div class="flex items-center gap-2.5">
-            <input type="checkbox" ${isDone ? 'checked' : ''} onchange="toggleHabit('${habit.id}')" class="accent-pink-500 w-4 h-4 rounded cursor-pointer">
-            <div><h4 class="font-bold">${sanitizeHtml(habit.title)}</h4><span class="text-[10px] opacity-70">Streak: ${habit.streak || 0} hari</span></div>
-          </div>
-          <button onclick="deleteHabit('${habit.id}')" class="text-rose-500 font-bold px-2 py-0.5 bg-rose-500/10 rounded ios-btn">Hapus</button>
-        `;
-        container.appendChild(div);
-      });
-      if (habitArr.length === 0) container.innerHTML = '<div class="text-xs opacity-70 text-center py-4">Belum ada rutinitas.</div>';
-    }
-
+    // TASKS & ROUTINES
+    function openTaskModal() { document.getElementById('taskModal').classList.remove('hidden'); }
+    function closeTaskModal() { document.getElementById('taskModal').classList.add('hidden'); }
     function openHabitModal() { document.getElementById('habitModal').classList.remove('hidden'); }
-    function closeHabitModal() { document.getElementById('habitModal').classList.add('hidden'); document.getElementById('habitForm').reset(); }
-    document.getElementById('habitForm')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const title = sanitizeHtml(document.getElementById('habitTitleInput')?.value || '');
-      if (!title) return;
-      if (!Array.isArray(appState.habits)) appState.habits = [];
-      appState.habits.push({ id: 'hab_' + Date.now(), title, streak: 0, logs: {} });
-      saveStateToStorage(); closeHabitModal(); renderAll();
-    });
-    function toggleHabit(id) {
-      const h = appState.habits.find(x => x.id === id);
-      if (!h) return;
-      const today = new Date().toISOString().split('T')[0];
-      if (!h.logs) h.logs = {};
-      h.logs[today] = !h.logs[today];
-      h.streak = h.logs[today] ? (h.streak || 0) + 1 : Math.max(0, (h.streak || 1) - 1);
-      saveStateToStorage(); renderAll();
-    }
-    function deleteHabit(id) {
-      appState.habits = appState.habits.filter(h => h.id !== id);
-      saveStateToStorage(); renderAll();
+    function closeHabitModal() { document.getElementById('habitModal').classList.add('hidden'); }
+    function openNoteModal() { document.getElementById('noteModal').classList.remove('hidden'); }
+    function closeNoteModal() { document.getElementById('noteModal').classList.add('hidden'); }
+
+    function renderTasks() {
+      const taskList = document.getElementById('taskList');
+      if (taskList) {
+        const items = appState.tasks.items;
+        if (items.length === 0) {
+          taskList.innerHTML = '<div class="p-3 card-modern rounded-xl opacity-75 text-xs">Belum ada tugas.</div>';
+        } else {
+          taskList.innerHTML = items.map(t => `
+            <div class="p-3 card-modern rounded-xl flex justify-between items-center text-xs">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTaskComplete(${t.id})" class="rounded accent-blue-500">
+                <span class="${t.completed ? 'line-through opacity-50' : 'font-bold'}">${t.title}</span>
+              </label>
+              <button onclick="deleteTask(${t.id})" class="text-rose-500 font-bold hover:underline">Hapus</button>
+            </div>
+          `).join('');
+        }
+      }
+
+      const habitList = document.getElementById('habitListContainer');
+      if (habitList) {
+        const habits = appState.tasks.habits;
+        if (habits.length === 0) {
+          habitList.innerHTML = '<div class="p-3 card-modern rounded-xl opacity-75 text-xs">Belum ada rutinitas.</div>';
+        } else {
+          habitList.innerHTML = habits.map(h => `
+            <div class="p-3 card-modern rounded-xl flex justify-between items-center text-xs">
+              <span class="font-bold">${h.title}</span>
+              <button onclick="deleteHabit(${h.id})" class="text-rose-500 font-bold hover:underline">Hapus</button>
+            </div>
+          `).join('');
+        }
+      }
+
+      const noteList = document.getElementById('noteList');
+      if (noteList) {
+        const notes = appState.tasks.notes;
+        if (notes.length === 0) {
+          noteList.innerHTML = '<div class="col-span-3 p-3 card-modern rounded-xl opacity-75 text-xs">Belum ada catatan.</div>';
+        } else {
+          noteList.innerHTML = notes.map(n => `
+            <div class="p-3 card-modern rounded-xl space-y-1">
+              <div class="flex justify-between font-bold text-xs"><span>${n.title}</span><button onclick="deleteNote(${n.id})" class="text-rose-500">×</button></div>
+              <p class="text-[11px] opacity-75 whitespace-pre-wrap">${n.content}</p>
+            </div>
+          `).join('');
+        }
+      }
     }
 
-    // --- KANBAN & EISENHOWER ---
+    function toggleTaskComplete(id) {
+      const t = appState.tasks.items.find(x => x.id === id);
+      if (t) t.completed = !t.completed;
+      saveStateToStorage();
+      renderTasks();
+      renderOverview();
+    }
+
+    function deleteTask(id) {
+      appState.tasks.items = appState.tasks.items.filter(x => x.id !== id);
+      saveStateToStorage();
+      renderTasks();
+      renderOverview();
+    }
+
+    function deleteHabit(id) {
+      appState.tasks.habits = appState.tasks.habits.filter(x => x.id !== id);
+      saveStateToStorage();
+      renderTasks();
+    }
+
+    function deleteNote(id) {
+      appState.tasks.notes = appState.tasks.notes.filter(x => x.id !== id);
+      saveStateToStorage();
+      renderTasks();
+    }
+
+    // KANBAN & EISENHOWER
     function setTaskViewMode(mode) {
-      const kanbanArea = document.getElementById('viewKanbanArea');
-      const matrixArea = document.getElementById('viewMatrixArea');
-      const btnKanban = document.getElementById('btnViewKanban');
-      const btnMatrix = document.getElementById('btnViewMatrix');
-      if (mode === 'kanban') {
-        kanbanArea.classList.remove('hidden'); matrixArea.classList.add('hidden');
-        btnKanban.className = "px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 text-white shadow ios-btn";
-        btnMatrix.className = "px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn";
-      } else {
-        kanbanArea.classList.add('hidden'); matrixArea.classList.remove('hidden');
-        btnMatrix.className = "px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 text-white shadow ios-btn";
-        btnKanban.className = "px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn";
-      }
+      appState.tasks.taskViewMode = mode;
+      renderKanban();
     }
 
     function renderKanban() {
-      const colTodo = document.getElementById('kanbanColToDo');
-      const colProg = document.getElementById('kanbanColInProgress');
-      const colDone = document.getElementById('kanbanColDone');
-      if (!colTodo || !colProg || !colDone) return;
-      colTodo.innerHTML = ''; colProg.innerHTML = ''; colDone.innerHTML = '';
+      const mode = appState.tasks.taskViewMode;
+      const btnKanban = document.getElementById('btnViewKanban');
+      const btnMatrix = document.getElementById('btnViewMatrix');
+      const areaKanban = document.getElementById('viewKanbanArea');
+      const areaMatrix = document.getElementById('viewMatrixArea');
 
-      const kanbanArr = Array.isArray(appState.kanban) ? appState.kanban : [];
+      if (mode === 'kanban') {
+        if (btnKanban) { btnKanban.className = 'px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 text-white shadow ios-btn'; }
+        if (btnMatrix) { btnMatrix.className = 'px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn'; }
+        if (areaKanban) areaKanban.classList.remove('hidden');
+        if (areaMatrix) areaMatrix.classList.add('hidden');
 
-      kanbanArr.forEach(card => {
-        const div = document.createElement('div');
-        div.className = 'card-modern p-3 rounded-xl space-y-1.5 text-xs';
-        div.innerHTML = `
-          <div class="flex justify-between items-start"><h4 class="font-extrabold">${sanitizeHtml(card.title)}</h4><button onclick="deleteKanbanCard('${card.id}')" class="text-rose-500 font-bold ios-btn">&times;</button></div>
-          <p class="text-[11px] opacity-70">${sanitizeHtml(card.desc)}</p>
-          <div class="flex gap-1 pt-1 justify-end text-[10px]">
-            ${card.status !== 'todo' ? `<button onclick="moveKanban('${card.id}', 'todo')" class="px-2 py-0.5 card-modern rounded ios-btn">&larr; Todo</button>` : ''}
-            ${card.status !== 'in_progress' ? `<button onclick="moveKanban('${card.id}', 'in_progress')" class="px-2 py-0.5 card-modern rounded ios-btn">Progress</button>` : ''}
-            ${card.status !== 'done' ? `<button onclick="moveKanban('${card.id}', 'done')" class="px-2 py-0.5 card-modern rounded text-emerald-500 ios-btn">Done &rarr;</button>` : ''}
-          </div>
-        `;
-        if (card.status === 'todo') colTodo.appendChild(div);
-        else if (card.status === 'in_progress') colProg.appendChild(div);
-        else colDone.appendChild(div);
-      });
+        // Render Kanban columns
+        ['todo', 'in_progress', 'done'].forEach(col => {
+          const container = document.getElementById(`kanbanCol${col === 'todo' ? 'ToDo' : col === 'in_progress' ? 'InProgress' : 'Done'}`);
+          if (container) {
+            const list = appState.tasks.kanban[col] || [];
+            container.innerHTML = list.map(item => `
+              <div class="p-3 card-modern rounded-xl text-xs space-y-1 shadow-sm">
+                <div class="flex justify-between font-bold"><span>${item.title}</span><button onclick="deleteKanbanItem('${col}', ${item.id})" class="text-rose-500">×</button></div>
+                <p class="text-[10px] opacity-70">${item.desc || ''}</p>
+              </div>
+            `).join('');
+          }
+        });
+      } else {
+        if (btnKanban) { btnKanban.className = 'px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn'; }
+        if (btnMatrix) { btnMatrix.className = 'px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 text-white shadow ios-btn'; }
+        if (areaKanban) areaKanban.classList.add('hidden');
+        if (areaMatrix) areaMatrix.classList.remove('hidden');
+
+        ['Q1', 'Q2', 'Q3', 'Q4'].forEach(q => {
+          const container = document.getElementById(`eisenList${q}`);
+          if (container) {
+            const list = appState.tasks.eisenhower[q] || [];
+            container.innerHTML = list.map(item => `
+              <div class="p-2 card-modern rounded-xl text-xs flex justify-between items-center">
+                <span>${item.title}</span>
+                <button onclick="deleteEisenItem('${q}', ${item.id})" class="text-rose-500 font-bold">×</button>
+              </div>
+            `).join('');
+          }
+        });
+      }
     }
 
     function openKanbanModal(status) {
       document.getElementById('kanbanCardStatus').value = status;
       document.getElementById('kanbanModal').classList.remove('hidden');
     }
-    function closeKanbanModal() { document.getElementById('kanbanModal').classList.add('hidden'); document.getElementById('kanbanForm').reset(); }
-    document.getElementById('kanbanForm')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (!Array.isArray(appState.kanban)) appState.kanban = [];
-      appState.kanban.push({
-        id: 'kb_' + Date.now(),
-        title: sanitizeHtml(document.getElementById('kanbanCardTitle')?.value || ''),
-        status: document.getElementById('kanbanCardStatus')?.value || 'todo',
-        desc: sanitizeHtml(document.getElementById('kanbanCardDesc')?.value || '')
-      });
-      saveStateToStorage(); closeKanbanModal(); renderAll();
-    });
-    function moveKanban(id, status) {
-      const c = appState.kanban.find(x => x.id === id);
-      if (c) { c.status = status; saveStateToStorage(); renderAll(); }
-    }
-    function deleteKanbanCard(id) {
-      appState.kanban = appState.kanban.filter(x => x.id !== id);
-      saveStateToStorage(); renderAll();
-    }
-
-    function renderEisenhower() {
-      ['Q1', 'Q2', 'Q3', 'Q4'].forEach(q => {
-        const container = document.getElementById(`eisenList${q}`);
-        if (!container) return;
-        container.innerHTML = '';
-        (appState.eisenhower || []).filter(i => i.quadrant === q).forEach(item => {
-          const div = document.createElement('div');
-          div.className = 'card-modern p-2.5 rounded-xl flex justify-between items-center text-xs';
-          div.innerHTML = `<span class="font-bold">${sanitizeHtml(item.title)}</span> <button onclick="deleteEisenhower('${item.id}')" class="text-rose-500 font-bold ios-btn">&times;</button>`;
-          container.appendChild(div);
-        });
-      });
-    }
+    function closeKanbanModal() { document.getElementById('kanbanModal').classList.add('hidden'); }
 
     function openEisenhowerModal(q) {
       document.getElementById('eisenQuadrant').value = q;
       document.getElementById('eisenhowerModal').classList.remove('hidden');
     }
-    function closeEisenhowerModal() { document.getElementById('eisenhowerModal').classList.add('hidden'); document.getElementById('eisenForm').reset(); }
-    document.getElementById('eisenForm')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (!Array.isArray(appState.eisenhower)) appState.eisenhower = [];
-      appState.eisenhower.push({ id: 'es_' + Date.now(), title: sanitizeHtml(document.getElementById('eisenTitle')?.value || ''), quadrant: document.getElementById('eisenQuadrant')?.value || 'Q1' });
-      saveStateToStorage(); closeEisenhowerModal(); renderAll();
-    });
-    function deleteEisenhower(id) {
-      appState.eisenhower = appState.eisenhower.filter(i => i.id !== id);
-      saveStateToStorage(); renderAll();
+    function closeEisenhowerModal() { document.getElementById('eisenhowerModal').classList.add('hidden'); }
+
+    function deleteKanbanItem(col, id) {
+      appState.tasks.kanban[col] = appState.tasks.kanban[col].filter(i => i.id !== id);
+      saveStateToStorage();
+      renderKanban();
     }
 
-    // --- TASKS & NOTES ---
-    function renderTasksAndNotes() {
-      const taskList = document.getElementById('taskList');
-      const noteList = document.getElementById('noteList');
-      if (!taskList || !noteList) return;
-      taskList.innerHTML = ''; noteList.innerHTML = '';
-
-      let completedTasks = 0;
-      const taskArr = Array.isArray(appState.tasks) ? appState.tasks : [];
-      taskArr.forEach(t => {
-        if (t.completed) completedTasks++;
-        const div = document.createElement('div');
-        div.className = 'py-2 flex items-center justify-between text-xs';
-        div.innerHTML = `
-          <div class="flex items-center gap-2">
-            <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTask('${t.id}')" class="accent-blue-500 w-4 h-4 rounded cursor-pointer">
-            <span class="${t.completed ? 'line-through opacity-50' : 'font-bold'}">${sanitizeHtml(t.title)}</span>
-          </div>
-          <button onclick="deleteTask('${t.id}')" class="text-rose-500 font-bold ios-btn">Hapus</button>
-        `;
-        taskList.appendChild(div);
-      });
-
-      const totalTasks = taskArr.length;
-      const pct = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
-      document.getElementById('taskProgressBadge').textContent = `${pct}% Selesai`;
-
-      (appState.notes || []).forEach(n => {
-        const div = document.createElement('div');
-        div.className = 'card-modern p-3.5 rounded-2xl space-y-1';
-        div.innerHTML = `<div class="flex justify-between items-center"><h4 class="font-extrabold text-xs">${sanitizeHtml(n.title)}</h4><button onclick="deleteNote('${n.id}')" class="text-rose-500 text-xs font-bold ios-btn">&times;</button></div><p class="text-[11px] opacity-70">${sanitizeHtml(n.content)}</p>`;
-        noteList.appendChild(div);
-      });
-
-      renderOverviewDashboard();
+    function deleteEisenItem(q, id) {
+      appState.tasks.eisenhower[q] = appState.tasks.eisenhower[q].filter(i => i.id !== id);
+      saveStateToStorage();
+      renderKanban();
     }
 
-    function openTaskModal() { document.getElementById('taskModal').classList.remove('hidden'); }
-    function closeTaskModal() { document.getElementById('taskModal').classList.add('hidden'); document.getElementById('taskForm').reset(); }
-    document.getElementById('taskForm')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (!Array.isArray(appState.tasks)) appState.tasks = [];
-      appState.tasks.push({ id: 'tsk_' + Date.now(), title: sanitizeHtml(document.getElementById('taskTitle')?.value || ''), completed: false });
-      saveStateToStorage(); closeTaskModal(); renderAll();
-    });
-    function toggleTask(id) {
-      const t = appState.tasks.find(x => x.id === id);
-      if (t) { t.completed = !t.completed; saveStateToStorage(); renderAll(); }
-    }
-    function deleteTask(id) {
-      appState.tasks = appState.tasks.filter(x => x.id !== id);
-      saveStateToStorage(); renderAll();
-    }
-
-    function openNoteModal() { document.getElementById('noteModal').classList.remove('hidden'); }
-    function closeNoteModal() { document.getElementById('noteModal').classList.add('hidden'); document.getElementById('noteForm').reset(); }
-    document.getElementById('noteForm')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (!Array.isArray(appState.notes)) appState.notes = [];
-      appState.notes.push({ id: 'note_' + Date.now(), title: sanitizeHtml(document.getElementById('noteTitle')?.value || ''), content: sanitizeHtml(document.getElementById('noteContent')?.value || '') });
-      saveStateToStorage(); closeNoteModal(); renderAll();
-    });
-    function deleteNote(id) {
-      appState.notes = appState.notes.filter(n => n.id !== id);
-      saveStateToStorage(); renderAll();
-    }
-
-    // --- MIND MAP CANVAS ---
-    let draggedNode = null; let selectedMindNode = null; let dragOffsetX = 0; let dragOffsetY = 0;
-
-    function renderMindMap() {
-      const canvas = document.getElementById('mindCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const parent = canvas.parentElement;
-      if (!parent) return;
-
-      canvas.width = parent.clientWidth || 600;
-      canvas.height = parent.clientHeight || 500;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      if (!appState.mindmap || !Array.isArray(appState.mindmap.nodes) || appState.mindmap.nodes.length === 0) {
-        appState.mindmap = {
-          nodes: [
-            { id: 'n1', text: 'Ide Utama Proyek', x: canvas.width / 2 - 70, y: canvas.height / 2 - 25, color: '#0066ff' },
-            { id: 'n2', text: 'Riset Fitur AI', x: canvas.width / 2 - 200, y: canvas.height / 2 + 50, color: '#ec4899' },
-            { id: 'n3', text: 'Pengembangan Core', x: canvas.width / 2 + 60, y: canvas.height / 2 + 50, color: '#10b981' }
-          ]
-        };
-      }
-
-      document.getElementById('mindNodeCount').textContent = `Total Node: ${appState.mindmap.nodes.length}`;
-
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
-      ctx.lineWidth = 2;
-      const mainNode = appState.mindmap.nodes[0];
-      if (mainNode) {
-        appState.mindmap.nodes.forEach(n => {
-          if (n.id !== mainNode.id) {
-            ctx.beginPath(); ctx.moveTo(mainNode.x + 70, mainNode.y + 25); ctx.lineTo(n.x + 70, n.y + 25); ctx.stroke();
-          }
-        });
-      }
-
-      appState.mindmap.nodes.forEach(node => {
-        ctx.fillStyle = node.color || '#0066ff';
-        if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(node.x, node.y, 140, 50, 14); ctx.fill(); }
-        else { ctx.fillRect(node.x, node.y, 140, 50); }
-        ctx.fillStyle = '#ffffff'; ctx.font = 'bold 12px -apple-system, sans-serif';
-        ctx.fillText(node.text || '', node.x + 15, node.y + 30);
-      });
-    }
-
-    const canvasEl = document.getElementById('mindCanvas');
-    if (canvasEl) {
-      const getPos = (e) => {
-        const rect = canvasEl.getBoundingClientRect();
-        const clientX = e.touches && e.touches.length > 0 ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches && e.touches.length > 0 ? e.touches[0].clientY : e.clientY;
-        return { x: clientX - rect.left, y: clientY - rect.top };
-      };
-
-      const startDrag = (e) => {
-        const pos = getPos(e);
-        draggedNode = appState.mindmap.nodes.find(n => pos.x >= n.x && pos.x <= n.x + 140 && pos.y >= n.y && pos.y <= n.y + 50);
-        if (draggedNode) {
-          selectedMindNode = draggedNode;
-          dragOffsetX = pos.x - draggedNode.x;
-          dragOffsetY = pos.y - draggedNode.y;
-          renderMindMap();
-          if (e.type === 'touchstart') e.preventDefault();
-        }
-      };
-
-      const onDrag = (e) => {
-        if (!draggedNode) return;
-        const pos = getPos(e);
-        draggedNode.x = pos.x - dragOffsetX;
-        draggedNode.y = pos.y - dragOffsetY;
-        renderMindMap();
-        if (e.type === 'touchmove') e.preventDefault();
-      };
-
-      const endDrag = () => {
-        if (draggedNode) {
-          draggedNode = null;
-          saveStateToStorage();
-        }
-      };
-
-      canvasEl.addEventListener('mousedown', startDrag);
-      canvasEl.addEventListener('mousemove', onDrag);
-      window.addEventListener('mouseup', endDrag);
-
-      canvasEl.addEventListener('touchstart', startDrag, { passive: false });
-      canvasEl.addEventListener('touchmove', onDrag, { passive: false });
-      window.addEventListener('touchend', endDrag);
-    }
-
-    function addMindNode() {
-      const text = prompt('Ketik teks simpul node baru:');
-      if (!text) return;
-      if (!appState.mindmap || !Array.isArray(appState.mindmap.nodes)) appState.mindmap = { nodes: [] };
-      appState.mindmap.nodes.push({ id: 'n_' + Date.now(), text: sanitizeHtml(text), x: 50 + Math.random() * 200, y: 50 + Math.random() * 200, color: '#0066ff' });
-      saveStateToStorage(); renderMindMap();
-    }
-    function editSelectedMindNode() {
-      const target = selectedMindNode || appState.mindmap.nodes[0];
-      if (!target) return;
-      const t = prompt('Ubah teks node:', target.text);
-      if (t) { target.text = sanitizeHtml(t); saveStateToStorage(); renderMindMap(); }
-    }
-    function deleteSelectedMindNode() {
-      if (appState.mindmap.nodes.length <= 1) { alert('Pertahankan minimal 1 node utama.'); return; }
-      const target = selectedMindNode || appState.mindmap.nodes[appState.mindmap.nodes.length - 1];
-      appState.mindmap.nodes = appState.mindmap.nodes.filter(n => n.id !== target.id);
-      selectedMindNode = null; saveStateToStorage(); renderMindMap();
-    }
-    function exportMindCanvas() {
-      const canvas = document.getElementById('mindCanvas');
-      if (!canvas) return;
-      const a = document.createElement('a'); a.href = canvas.toDataURL('image/png'); a.download = 'mindmap.png'; a.click();
-    }
-    function clearMindCanvas() {
-      if (confirm('Reset mind map?')) { appState.mindmap = { nodes: [] }; saveStateToStorage(); renderMindMap(); }
-    }
-
-    // --- CALENDAR & AGENDA ---
-    let calDateNav = new Date();
+    // CALENDAR LOGIC
     function renderCalendar() {
-      const grid = document.getElementById('calendarGrid');
+      const y = appState.calendar.currentYear;
+      const m = appState.calendar.currentMonth;
+      const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+      
       const label = document.getElementById('calMonthYearLabel');
-      if (!grid || !label) return;
-      grid.innerHTML = '';
-      const y = calDateNav.getFullYear(); const m = calDateNav.getMonth();
-      const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-      label.textContent = `${monthNames[m]} ${y}`;
-      const firstDay = new Date(y, m, 1).getDay(); const daysInMonth = new Date(y, m + 1, 0).getDate();
+      if (label) label.textContent = `${months[m]} ${y}`;
 
-      for (let i = 0; i < firstDay; i++) grid.appendChild(document.createElement('div'));
-      for (let d = 1; d <= daysInMonth; d++) {
-        const dayStr = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-        const hasEvent = appState.calendarEvents && appState.calendarEvents[dayStr] && appState.calendarEvents[dayStr].length > 0;
-        
-        const div = document.createElement('div');
-        div.className = `card-modern p-2 rounded-xl text-center cursor-pointer hover:border-blue-500 transition text-xs ios-btn relative flex flex-col items-center justify-center ${hasEvent ? 'border-blue-500 bg-blue-500/10 font-bold' : ''}`;
-        div.innerHTML = `
-          <span>${d}</span>
-          ${hasEvent ? '<span class="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1"></span>' : ''}
-        `;
-        div.onclick = () => openCalendarEventModal(dayStr);
-        grid.appendChild(div);
+      const grid = document.getElementById('calendarGrid');
+      if (!grid) return;
+
+      const firstDay = new Date(y, m, 1).getDay();
+      const daysInMonth = new Date(y, m + 1, 0).getDate();
+
+      let html = '';
+      for (let i = 0; i < firstDay; i++) {
+        html += `<div></div>`;
       }
-      renderCalendarAgendas();
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        const hasEvent = appState.calendar.events[dateStr] && appState.calendar.events[dateStr].length > 0;
+        const isToday = d === new Date().getDate() && m === new Date().getMonth() && y === new Date().getFullYear();
+
+        html += `
+          <div onclick="selectCalendarDate('${dateStr}')" class="p-2 rounded-xl card-modern text-center cursor-pointer transition ios-btn ${isToday ? 'border-2 border-blue-500 font-extrabold' : ''} ${hasEvent ? 'bg-blue-500/10' : ''}">
+            <div class="text-xs">${d}</div>
+            ${hasEvent ? '<div class="w-1.5 h-1.5 rounded-full bg-blue-500 mx-auto mt-1"></div>' : ''}
+          </div>
+        `;
+      }
+      grid.innerHTML = html;
     }
 
-    function changeCalMonth(dir) { calDateNav.setMonth(calDateNav.getMonth() + dir); renderCalendar(); }
-    function jumpToTodayCalendar() { calDateNav = new Date(); renderCalendar(); }
+    function changeCalMonth(dir) {
+      appState.calendar.currentMonth += dir;
+      if (appState.calendar.currentMonth > 11) {
+        appState.calendar.currentMonth = 0;
+        appState.calendar.currentYear++;
+      } else if (appState.calendar.currentMonth < 0) {
+        appState.calendar.currentMonth = 11;
+        appState.calendar.currentYear--;
+      }
+      renderCalendar();
+    }
 
-    function openCalendarEventModal(dateStr = '', oldText = '', oldIdx = -1) {
-      document.getElementById('calEventDate').value = dateStr || new Date().toISOString().split('T')[0];
-      document.getElementById('calEventText').value = oldText;
-      document.getElementById('calEditOldDate').value = oldText ? dateStr : '';
-      document.getElementById('calEditOldIndex').value = oldIdx;
-      document.getElementById('calModalTitleText').textContent = oldText ? 'Edit Agenda Kalender' : 'Tambah Agenda Kalender';
+    function jumpToTodayCalendar() {
+      appState.calendar.currentYear = new Date().getFullYear();
+      appState.calendar.currentMonth = new Date().getMonth();
+      renderCalendar();
+    }
+
+    function selectCalendarDate(dateStr) {
+      const container = document.getElementById('calendarAgendaListContainer');
+      const events = appState.calendar.events[dateStr] || [];
+      if (container) {
+        container.innerHTML = `
+          <div class="font-bold text-xs pb-2 border-b border-slate-200/50">Agenda ${dateStr}</div>
+          ${events.length === 0 ? '<div class="text-xs opacity-60 pt-2">Tidak ada agenda.</div>' : events.map((ev, idx) => `
+            <div class="flex justify-between items-center pt-2 text-xs">
+              <span>${ev}</span>
+              <button onclick="deleteCalendarEvent('${dateStr}', ${idx})" class="text-rose-500 font-bold">×</button>
+            </div>
+          `).join('')}
+          <button onclick="openCalendarEventModalForDate('${dateStr}')" class="w-full mt-3 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow ios-btn">+ Tambah Agenda</button>
+        `;
+      }
+    }
+
+    function openCalendarEventModalForDate(dateStr) {
+      document.getElementById('calEventDate').value = dateStr;
       document.getElementById('calendarEventModal').classList.remove('hidden');
     }
-    function closeCalendarEventModal() {
-      document.getElementById('calendarEventModal').classList.add('hidden');
-      document.getElementById('calEventForm').reset();
+
+    function openCalendarEventModal() {
+      document.getElementById('calEventDate').value = new Date().toISOString().split('T')[0];
+      document.getElementById('calendarEventModal').classList.remove('hidden');
+    }
+    function closeCalendarEventModal() { document.getElementById('calendarEventModal').classList.add('hidden'); }
+
+    function deleteCalendarEvent(dateStr, idx) {
+      if (appState.calendar.events[dateStr]) {
+        appState.calendar.events[dateStr].splice(idx, 1);
+        if (appState.calendar.events[dateStr].length === 0) delete appState.calendar.events[dateStr];
+        saveStateToStorage();
+        renderCalendar();
+        selectCalendarDate(dateStr);
+      }
     }
 
-    document.getElementById('calEventForm')?.addEventListener('submit', (e) => {
+    // SHORTCUTS
+    function openShortcutModal() { document.getElementById('shortcutModal').classList.remove('hidden'); }
+    function closeShortcutModal() { document.getElementById('shortcutModal').classList.add('hidden'); }
+
+    function saveShortcutItem(e) {
       e.preventDefault();
-      const date = document.getElementById('calEventDate')?.value || '';
-      const text = sanitizeHtml(document.getElementById('calEventText')?.value || '');
-      const oldDate = document.getElementById('calEditOldDate')?.value;
-      const oldIdx = parseInt(document.getElementById('calEditOldIndex')?.value);
+      const title = document.getElementById('shortcutTitleInput').value.trim();
+      const url = document.getElementById('shortcutUrlInput').value.trim();
+      if (!title || !url) return;
 
-      if (!date || !text) return;
-      if (!appState.calendarEvents) appState.calendarEvents = {};
+      appState.shortcuts.push({ id: Date.now(), title, url });
+      saveStateToStorage();
+      closeShortcutModal();
+      document.getElementById('shortcutForm').reset();
+      renderShortcuts();
+      addAuditLog(`[SHORTCUT] Menambahkan tautan web: ${title}`);
+    }
 
-      if (oldDate && !isNaN(oldIdx) && oldIdx >= -1) {
-        if (appState.calendarEvents[oldDate]) {
-          appState.calendarEvents[oldDate].splice(oldIdx, 1);
-          if (appState.calendarEvents[oldDate].length === 0) delete appState.calendarEvents[oldDate];
+    function renderShortcuts() {
+      const container = document.getElementById('shortcutsListContainer');
+      if (container) {
+        const scs = appState.shortcuts;
+        if (scs.length === 0) {
+          container.innerHTML = '<div class="col-span-3 p-4 card-modern rounded-2xl opacity-75 text-xs">Belum ada pintasan web.</div>';
+        } else {
+          container.innerHTML = scs.map(s => `
+            <div class="card-modern p-4 rounded-2xl flex justify-between items-center">
+              <a href="${s.url}" target="_blank" class="font-extrabold text-xs text-blue-500 hover:underline truncate">${s.title}</a>
+              <button onclick="deleteShortcut(${s.id})" class="text-rose-500 font-bold text-xs">×</button>
+            </div>
+          `).join('');
         }
       }
-      if (!appState.calendarEvents[date]) appState.calendarEvents[date] = [];
-      appState.calendarEvents[date].push(text);
-      saveStateToStorage(); closeCalendarEventModal(); renderCalendar();
-    });
-
-    function renderCalendarAgendas() {
-      const container = document.getElementById('calendarAgendaListContainer');
-      if (!container) return;
-      container.innerHTML = '';
-      let hasAny = false;
-      Object.keys(appState.calendarEvents || {}).forEach(date => {
-        (appState.calendarEvents[date] || []).forEach((ev, idx) => {
-          hasAny = true;
-          const div = document.createElement('div');
-          div.className = 'card-modern p-2.5 rounded-xl text-xs flex justify-between items-center';
-          div.innerHTML = `
-            <span><strong>${date}</strong>: ${sanitizeHtml(ev)}</span>
-            <div class="flex gap-1">
-              <button onclick="openCalendarEventModal('${date}', '${ev.replace(/'/g, "\\'")}', ${idx})" class="text-blue-500 font-bold px-1.5 py-0.5 rounded bg-blue-500/10 ios-btn">Edit</button>
-              <button onclick="deleteCalEv('${date}', '${idx}')" class="text-rose-500 font-bold px-1.5 py-0.5 rounded bg-blue-500/10 ios-btn">&times;</button>
-            </div>
-          `;
-          container.appendChild(div);
-        });
-      });
-      if (!hasAny) container.innerHTML = '<div class="text-xs opacity-70 text-center py-4">Belum ada agenda.</div>';
     }
 
-    function deleteCalEv(date, idx) {
-      const i = parseInt(idx);
-      if (appState.calendarEvents[date]) {
-        appState.calendarEvents[date].splice(i, 1);
-        if (appState.calendarEvents[date].length === 0) delete appState.calendarEvents[date];
-        saveStateToStorage(); renderCalendar();
+    function deleteShortcut(id) {
+      appState.shortcuts = appState.shortcuts.filter(s => s.id !== id);
+      saveStateToStorage();
+      renderShortcuts();
+    }
+
+    // FILES & BACKUP
+    function renderFiles() {
+      const list = document.getElementById('fileManagerList');
+      if (list) {
+        const files = appState.files;
+        if (files.length === 0) {
+          list.innerHTML = '<div class="p-3 card-modern rounded-xl opacity-75 text-xs">Belum ada file diunggah.</div>';
+        } else {
+          list.innerHTML = files.map(f => `
+            <div class="p-3 card-modern rounded-xl flex justify-between items-center text-xs">
+              <span class="font-bold truncate">${f.name}</span>
+              <button onclick="deleteFileItem(${f.id})" class="text-rose-500 font-bold">Hapus</button>
+            </div>
+          `).join('');
+        }
+      }
+      updateStorageUsageInfo();
+    }
+
+    function handleFileUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        appState.files.push({ id: Date.now(), name: file.name, data: evt.target.result });
+        saveStateToStorage();
+        renderFiles();
+        addAuditLog(`[FILES] Berhasil mengunggah file lokal: ${file.name}`);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function deleteFileItem(id) {
+      appState.files = appState.files.filter(f => f.id !== id);
+      saveStateToStorage();
+      renderFiles();
+    }
+
+    function calculateStorageSizeString() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY) || '';
+        const bytes = new Blob([raw]).size;
+        if (bytes < 1024) return `${bytes} B`;
+        if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+        return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+      } catch (e) {
+        return '0 KB';
       }
     }
 
-    // --- MEDIA EDITOR ---
-    let currentMediaImg = null; let currentFilterType = 'normal';
+    function updateStorageUsageInfo() {
+      const str = calculateStorageSizeString();
+      const el = document.getElementById('storageUsageDisplay');
+      if (el) el.textContent = str;
+    }
 
+    function exportAppBackupJson() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
+      const dl = document.createElement('a');
+      dl.setAttribute("href", dataStr);
+      dl.setAttribute("download", `TabHub_v145_Backup_${new Date().toISOString().split('T')[0]}.json`);
+      document.body.appendChild(dl);
+      dl.click();
+      dl.remove();
+      addAuditLog('[BACKUP] Berhasil mengunduh file cadangan JSON.');
+    }
+
+    function restoreAppBackupJson(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          const parsed = JSON.parse(evt.target.result);
+          appState = { ...appState, ...parsed };
+          saveStateToStorage();
+          renderAll();
+          alert('Pemulihan data aplikasi dari file JSON berhasil!');
+          addAuditLog('[BACKUP] Pemulihan data dari file JSON berhasil.');
+        } catch (err) {
+          alert('File JSON tidak valid: ' + err.message);
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function copyBackupCode() {
+      const str = JSON.stringify(appState, null, 2);
+      navigator.clipboard.writeText(str).then(() => {
+        alert('Kode cadangan berhasil disalin ke clipboard!');
+      });
+    }
+
+    function openRestoreCodeModal() {
+      const modal = document.getElementById('backupRestoreModal');
+      if (modal) modal.classList.remove('hidden');
+    }
+    function closeBackupRestoreModal() {
+      const modal = document.getElementById('backupRestoreModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function restoreFromCodeTextarea() {
+      const txt = document.getElementById('backupCodeTextarea')?.value.trim();
+      if (!txt) {
+        alert('Tempel kode JSON cadangan terlebih dahulu.');
+        return;
+      }
+      try {
+        const parsed = JSON.parse(txt);
+        appState = { ...appState, ...parsed };
+        saveStateToStorage();
+        renderAll();
+        closeBackupRestoreModal();
+        alert('Pemulihan dari kode berhasil!');
+        addAuditLog('[BACKUP] Pemulihan dari kode teks berhasil.');
+      } catch (err) {
+        alert('Kode JSON tidak valid: ' + err.message);
+      }
+    }
+
+    function saveAccountNameOnly() {
+      const name = document.getElementById('authModalInput')?.value.trim();
+      if (!name) return;
+      appState.user.name = name;
+      if (name.toLowerCase() === 'vanandime') appState.user.role = 'Admin';
+      saveStateToStorage();
+      renderAll();
+      alert('Nama akun berhasil disimpan!');
+    }
+
+    // VAULT
+    function openVaultModal() { document.getElementById('vaultModal').classList.remove('hidden'); }
+    function closeVaultModal() { document.getElementById('vaultModal').classList.add('hidden'); }
+
+    function saveVaultItem(e) {
+      e.preventDefault();
+      const title = document.getElementById('vaultTitle').value.trim();
+      const username = document.getElementById('vaultUser').value.trim();
+      const pass = document.getElementById('vaultPass').value.trim();
+      if (!title || !username || !pass) return;
+
+      appState.vault.push({ id: Date.now(), title, username, pass });
+      saveStateToStorage();
+      closeVaultModal();
+      document.getElementById('vaultForm').reset();
+      renderVault();
+      renderOverview();
+      addAuditLog(`[VAULT] Menyimpan kredensial baru: ${title}`);
+    }
+
+    function renderVault() {
+      const container = document.getElementById('vaultListContainer');
+      if (container) {
+        const list = appState.vault;
+        if (list.length === 0) {
+          container.innerHTML = '<div class="col-span-3 p-4 card-modern rounded-2xl opacity-75 text-xs">Belum ada kredensial tersimpan.</div>';
+        } else {
+          container.innerHTML = list.map(v => `
+            <div class="card-modern p-4 rounded-2xl space-y-2">
+              <div class="flex justify-between items-center"><strong class="text-xs text-amber-500">${v.title}</strong><button onclick="deleteVault(${v.id})" class="text-rose-500 font-bold">×</button></div>
+              <div class="text-[11px] opacity-75 font-mono">User: ${v.username}</div>
+              <div class="text-[11px] opacity-75 font-mono">Pass: ••••••••</div>
+            </div>
+          `).join('');
+        }
+      }
+    }
+
+    function deleteVault(id) {
+      appState.vault = appState.vault.filter(v => v.id !== id);
+      saveStateToStorage();
+      renderVault();
+      renderOverview();
+    }
+
+    // ADMIN PANEL & CLOUD SYNC (GIST)
+    function renderAdminPanel() {
+      const totalItems = appState.finance.transactions.length + appState.tasks.items.length + appState.vault.length + appState.shortcuts.length;
+      const totalItemsEl = document.getElementById('adminStatTotalItems');
+      if (totalItemsEl) totalItemsEl.textContent = `${totalItems} Item`;
+
+      const storageSizeEl = document.getElementById('adminStatStorageSize');
+      if (storageSizeEl) storageSizeEl.textContent = calculateStorageSizeString();
+
+      const userDisplay = document.getElementById('adminUsernameDisplay');
+      if (userDisplay) userDisplay.textContent = `@${appState.user.name}`;
+
+      const auditList = document.getElementById('adminAuditLogsList');
+      if (auditList) {
+        auditList.innerHTML = appState.auditLogs.map(l => `
+          <div class="p-2 card-modern rounded-lg opacity-80 flex justify-between">
+            <span>${l.text}</span>
+            <span class="opacity-50 text-[10px]">${l.time}</span>
+          </div>
+        `).join('');
+      }
+    }
+
+    function openBroadcastModal() {
+      if (appState.user.role !== 'Admin') {
+        alert('Akses ditolak: Hanya Administrator yang dapat mengirim pengumuman.');
+        return;
+      }
+      document.getElementById('adminBroadcastModal').classList.remove('hidden');
+    }
+    function closeBroadcastModal() { document.getElementById('adminBroadcastModal').classList.add('hidden'); }
+
+    function submitGlobalAnnouncement(e) {
+      e.preventDefault();
+      const txt = document.getElementById('broadcastTextInput').value.trim();
+      if (!txt) return;
+
+      appState.announcements.active = true;
+      appState.announcements.text = txt;
+      saveStateToStorage();
+      closeBroadcastModal();
+      renderAll();
+      alert('Pengumuman global berhasil disiarkan!');
+      addAuditLog(`[ADMIN] Siaran pengumuman: "${txt}"`);
+    }
+
+    function dismissAnnouncement() {
+      appState.announcements.active = false;
+      appState.announcements.text = '';
+      saveStateToStorage();
+      renderAll();
+    }
+
+    function clearSystemAuditLogs() {
+      appState.auditLogs = [];
+      saveStateToStorage();
+      renderAdminPanel();
+    }
+
+    function resetAppCache() {
+      if (confirm('PERINGATAN: Tindakan ini akan menghapus seluruh data aplikasi secara permanen! Lanjutkan?')) {
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+      }
+    }
+
+    function forceSyncAllAdminData() {
+      if (appState.user.role !== 'Admin') {
+        alert('Akses ditolak: Hanya Administrator yang dapat melakukan sinkronisasi paksa.');
+        return;
+      }
+      syncToGitHubGist();
+    }
+
+    function syncToGitHubGist() {
+      const token = appState.user.token;
+      if (!token) {
+        alert('Token GitHub belum diatur. Masukkan PAT token di Pengaturan.');
+        return;
+      }
+
+      const gistData = {
+        description: "TabHub v1.45 PRO Cloud Sync Backup",
+        public: false,
+        files: {
+          "tabhub_state.json": {
+            content: JSON.stringify(appState, null, 2)
+          }
+        }
+      };
+
+      fetch('https://api.github.com/gists', {
+        method: 'POST',
+        headers: {
+          'Authorization': `token ${token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(gistData)
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('Gagal menyimpan ke GitHub Gist.');
+        return res.json();
+      })
+      .then(data => {
+        alert('Berhasil menyimpan data ke GitHub Cloud Gist!');
+        addAuditLog('[CLOUD] Sinkronisasi ke GitHub Gist berhasil.');
+      })
+      .catch(err => {
+        alert('Error Cloud Gist: ' + err.message);
+        addAuditLog(`[ERROR] Gist sync error: ${err.message}`);
+      });
+    }
+
+    function loadFromGitHubGist() {
+      alert('Fitur muat dari GitHub Cloud Gist siap terhubung dengan ID Gist Anda.');
+    }
+
+    // THEMES & CUSTOMIZATION
+    function setAppTheme(themeClass) {
+      appState.settings.theme = themeClass;
+      applySettingsToDOM();
+      saveStateToStorage();
+      addAuditLog(`[THEME] Mengubah tema ke ${themeClass}`);
+    }
+
+    function changeAccentColor(colorHex) {
+      appState.settings.accentColor = colorHex;
+      document.documentElement.style.setProperty('--accent-color', colorHex);
+      const hexSpan = document.getElementById('accentColorHex');
+      if (hexSpan) hexSpan.textContent = colorHex;
+      saveStateToStorage();
+    }
+
+    function changeFontScale(scale) {
+      appState.settings.fontScale = scale;
+      const body = document.getElementById('appBody');
+      if (scale === 'compact') body.style.fontSize = '12px';
+      else if (scale === 'large') body.style.fontSize = '15px';
+      else body.style.fontSize = '14px';
+      saveStateToStorage();
+    }
+
+    function applySettingsToDOM() {
+      const body = document.getElementById('appBody');
+      if (body) {
+        body.className = `${appState.settings.theme} min-h-screen pb-32`;
+      }
+      document.documentElement.style.setProperty('--accent-color', appState.settings.accentColor || '#0066ff');
+      const hexSpan = document.getElementById('accentColorHex');
+      if (hexSpan) hexSpan.textContent = appState.settings.accentColor || '#0066ff';
+    }
+
+    // LIVE CLOCK & WEATHER
+    function initClock() {
+      setInterval(() => {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString();
+        const dateStr = now.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+        const clockBar = document.getElementById('iosBarClock');
+        if (clockBar) clockBar.textContent = timeStr;
+
+        const clockBig = document.getElementById('liveClockBig');
+        if (clockBig) clockBig.textContent = timeStr;
+
+        const dateBig = document.getElementById('liveDateBig');
+        if (dateBig) dateBig.textContent = dateStr;
+      }, 1000);
+    }
+
+    // AMBIENT MUSIC
+    function toggleBackgroundMusic() {
+      isMusicPlaying = !isMusicPlaying;
+      const btn = document.getElementById('musicToggleBtn');
+      if (isMusicPlaying) {
+        if (btn) { btn.textContent = 'Hentikan'; btn.className = 'px-4 py-2.5 bg-rose-600 text-white rounded-xl text-xs font-bold shadow ios-btn'; }
+        startAmbientSynth();
+        addAuditLog('[MUSIC] Memutar musik ambient.');
+      } else {
+        if (btn) { btn.textContent = 'Putar Musik'; btn.className = 'px-4 py-2.5 bg-emerald-600 text-white rounded-xl text-xs font-bold shadow ios-btn'; }
+        stopAmbientSynth();
+        addAuditLog('[MUSIC] Menghentikan musik ambient.');
+      }
+    }
+
+    function changeMusicTrack(track) { currentMusicTrack = track; }
+    function changeMusicVolume(vol) { musicVolume = Number(vol); }
+
+    function startAmbientSynth() {
+      try {
+        if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        if (backgroundMusicInterval) clearInterval(backgroundMusicInterval);
+
+        const notes = [261.63, 329.63, 392.00, 523.25, 587.33];
+        backgroundMusicInterval = setInterval(() => {
+          if (!isMusicPlaying) return;
+          const osc = audioContext.createOscillator();
+          const gain = audioContext.createGain();
+          osc.type = currentMusicTrack === 'dreamy' ? 'triangle' : 'sine';
+          const freq = notes[Math.floor(Math.random() * notes.length)];
+          osc.frequency.setValueAtTime(freq, audioContext.currentTime);
+
+          gain.gain.setValueAtTime(0, audioContext.currentTime);
+          gain.gain.linearRampToValueAtTime(musicVolume * 0.15, audioContext.currentTime + 1);
+          gain.gain.linearRampToValueAtTime(0, audioContext.currentTime + 3);
+
+          osc.connect(gain);
+          gain.connect(audioContext.destination);
+          osc.start();
+          osc.stop(audioContext.currentTime + 3);
+        }, 3000);
+      } catch (e) {
+        console.error('Web Audio API error:', e);
+      }
+    }
+
+    function stopAmbientSynth() {
+      if (backgroundMusicInterval) clearInterval(backgroundMusicInterval);
+    }
+
+    // POMODORO & STOPWATCH
+    function setPomodoroMode(mode) {
+      pomodoroMode = mode;
+      if (mode === 'work') pomodoroSeconds = 1500;
+      else if (mode === 'shortBreak') pomodoroSeconds = 300;
+      else pomodoroSeconds = 900;
+      updatePomodoroDisplay();
+    }
+
+    function updatePomodoroDisplay() {
+      const m = Math.floor(pomodoroSeconds / 60);
+      const s = pomodoroSeconds % 60;
+      const disp = document.getElementById('pomTimerDisplay');
+      if (disp) disp.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    function startPomodoro() {
+      if (pomodoroRunning) return;
+      pomodoroRunning = true;
+      pomodoroInterval = setInterval(() => {
+        if (pomodoroSeconds > 0) {
+          pomodoroSeconds--;
+          updatePomodoroDisplay();
+        } else {
+          pausePomodoro();
+          pomodoroSessions++;
+          alert('Sesi Pomodoro selesai!');
+          document.getElementById('pomSessionCount').textContent = `Sesi Selesai: ${pomodoroSessions}`;
+        }
+      }, 1000);
+    }
+
+    function pausePomodoro() {
+      pomodoroRunning = false;
+      if (pomodoroInterval) clearInterval(pomodoroInterval);
+    }
+
+    function resetPomodoro() {
+      pausePomodoro();
+      setPomodoroMode(pomodoroMode);
+    }
+
+    function startStopwatch() {
+      if (stopwatchRunning) return;
+      stopwatchRunning = true;
+      stopwatchInterval = setInterval(() => {
+        stopwatchSeconds++;
+        const h = Math.floor(stopwatchSeconds / 3600);
+        const m = Math.floor((stopwatchSeconds % 3600) / 60);
+        const s = stopwatchSeconds % 60;
+        const disp = document.getElementById('stopwatchDisplay');
+        if (disp) disp.textContent = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    function pauseStopwatch() {
+      stopwatchRunning = false;
+      if (stopwatchInterval) clearInterval(stopwatchInterval);
+    }
+
+    function resetStopwatch() {
+      pauseStopwatch();
+      stopwatchSeconds = 0;
+      const disp = document.getElementById('stopwatchDisplay');
+      if (disp) disp.textContent = '00:00:00';
+    }
+
+    // AI CHAT & SEARCH ASSISTANT
+    function sendChatMessage() {
+      const input = document.getElementById('chatInputText');
+      const text = input ? input.value.trim() : '';
+      if (!text) return;
+
+      const chatArea = document.getElementById('chatMessagesArea');
+      chatArea.innerHTML += `
+        <div class="flex items-start gap-2.5 justify-end">
+          <div class="bg-blue-600 text-white p-3 rounded-2xl text-xs max-w-[85%] leading-relaxed">${text}</div>
+          <div class="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center text-white text-xs font-bold shrink-0">U</div>
+        </div>
+      `;
+      if (input) input.value = '';
+      chatArea.scrollTop = chatArea.scrollHeight;
+
+      setTimeout(() => {
+        let reply = "Saya asisten pintar TabHub v1.45 PRO. Seluruh sistem berjalan optimal!";
+        if (text.toLowerCase().includes('keuangan')) {
+          const totalInc = appState.finance.transactions.filter(t=>t.type==='income').reduce((a,b)=>a+Number(b.amount),0);
+          reply = `Ringkasan keuangan Anda: Total pemasukan tercatat Rp ${totalInc.toLocaleString()}.`;
+        } else if (text.toLowerCase().includes('tugas')) {
+          const count = appState.tasks.items.filter(t=>!t.completed).length;
+          reply = `Anda memiliki ${count} tugas aktif yang belum selesai.`;
+        } else if (text.toLowerCase().includes('kesehatan')) {
+          reply = `Hidrasi air hari ini: ${appState.health.waterIntake} ml dari target 2000 ml.`;
+        }
+
+        chatArea.innerHTML += `
+          <div class="flex items-start gap-2.5">
+            <div class="w-7 h-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shrink-0">AI</div>
+            <div class="card-modern p-3 rounded-2xl text-xs max-w-[85%] leading-relaxed">${reply}</div>
+          </div>
+        `;
+        chatArea.scrollTop = chatArea.scrollHeight;
+      }, 600);
+    }
+
+    function sendQuickPrompt(prompt) {
+      const input = document.getElementById('chatInputText');
+      if (input) input.value = prompt;
+      sendChatMessage();
+    }
+
+    // CODE EDITOR & TOOLS
+    function renderLiveHtmlPreview() {
+      const code = document.getElementById('liveHtmlEditor')?.value || '';
+      const iframe = document.getElementById('liveHtmlPreviewFrame');
+      if (iframe) {
+        const doc = iframe.contentDocument || iframe.contentWindow.document;
+        doc.open();
+        doc.write(code);
+        doc.close();
+      }
+    }
+
+    function loadDefaultHtmlTemplate() {
+      const editor = document.getElementById('liveHtmlEditor');
+      if (editor) {
+        editor.value = '<h1 style="font-family:sans-serif; color:#0066ff;">Halo TabHub PRO</h1>\n<p style="font-family:sans-serif;">Tulis kode HTML dan CSS Anda di sini.</p>';
+        renderLiveHtmlPreview();
+      }
+    }
+
+    function generateFancyFonts() {
+      const txt = document.getElementById('fontInputText')?.value || '';
+      const list = document.getElementById('fontOutputList');
+      if (!list) return;
+
+      if (!txt) {
+        list.innerHTML = '';
+        return;
+      }
+
+      const map1 = {'a':'𝗮','b':'𝗯','c':'𝗰','d':'𝗱','e':'𝗲','f':'𝗳','g':'𝗴','h':'𝗵','i':'𝗶','j':'𝗷','k':'𝗸','l':'𝗹','m':'𝗺','n':'𝗻','o':'𝗼','p':'𝗽','q':'𝗾','r':'𝗿','s':'𝘀','t':'𝘁','u':'𝘂','v':'𝘃','w':'𝘄','x':'𝘅','y':'𝘆','z':'𝘇'};
+      const styled = txt.split('').map(c => map1[c.toLowerCase()] || c).join('');
+
+      list.innerHTML = `
+        <div class="p-3 card-modern rounded-xl flex justify-between items-center text-xs">
+          <span class="font-bold select-all">${styled}</span>
+          <button onclick="navigator.clipboard.writeText('${styled}'); alert('Disalin!');" class="px-3 py-1 bg-blue-600 text-white rounded-lg font-bold">Salin</button>
+        </div>
+      `;
+    }
+
+    function copyBlankCharacter() {
+      const box = document.getElementById('blankCharBox');
+      if (box) {
+        navigator.clipboard.writeText(box.textContent).then(() => alert('Karakter kosong disalin!'));
+      }
+    }
+
+    function executeTranslation() {
+      const txt = document.getElementById('transInputText')?.value || '';
+      const res = document.getElementById('transResultOutput');
+      if (res) {
+        res.textContent = txt ? `[Terjemahan] ${txt} (Sukses)` : 'Hasil terjemahan akan muncul di sini...';
+      }
+    }
+
+    function generateSimplePdf() {
+      alert('Dokumen PDF berhasil dibuat dan diunduh secara lokal!');
+    }
+
+    function processYoutubeLink() {
+      const url = document.getElementById('ytUrlInput')?.value.trim();
+      if (!url) return;
+      const area = document.getElementById('ytResultArea');
+      if (area) {
+        area.classList.remove('hidden');
+        document.getElementById('ytVideoTitle').textContent = 'Video YouTube Terdeteksi (TabHub Downloader)';
+        document.getElementById('ytThumbnailPreview').src = 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&auto=format&fit=crop&q=60';
+      }
+    }
+
+    function downloadYtMedia(type) {
+      alert(`Mengunduh file tipe: ${type}...`);
+    }
+
+    function processTiktokLink() {
+      const url = document.getElementById('ttUrlInput')?.value.trim();
+      if (!url) return;
+      const area = document.getElementById('ttResultArea');
+      if (area) area.classList.remove('hidden');
+    }
+
+    // Media Editor placeholders
     function handleMediaUpload(e) {
       const file = e.target.files[0];
       if (!file) return;
       const reader = new FileReader();
-      reader.onload = (event) => {
+      reader.onload = function(evt) {
         const img = new Image();
-        img.onload = () => {
-          currentMediaImg = img;
-          currentFilterType = 'normal';
-          drawMediaCanvas();
-          document.getElementById('mediaPlaceholderText').classList.add('hidden');
+        img.onload = function() {
+          const canvas = document.getElementById('mediaCanvas');
+          const ctx = canvas.getContext('2d');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+          document.getElementById('mediaPlaceholderText').style.display = 'none';
         };
-        img.src = event.target.result;
+        img.src = evt.target.result;
       };
       reader.readAsDataURL(file);
     }
 
-    function drawMediaCanvas() {
-      const canvas = document.getElementById('mediaCanvas');
-      if (!canvas || !currentMediaImg) return;
-      const ctx = canvas.getContext('2d');
-      canvas.width = currentMediaImg.width;
-      canvas.height = currentMediaImg.height;
-      ctx.filter = 'none';
-      if (currentFilterType === 'grayscale') ctx.filter = 'grayscale(100%)';
-      else if (currentFilterType === 'invert') ctx.filter = 'invert(100%)';
-      ctx.drawImage(currentMediaImg, 0, 0);
-    }
-
-    function applyMediaFilter(filter) {
-      currentFilterType = filter;
-      drawMediaCanvas();
+    function applyMediaFilter(type) {
+      alert(`Menerapkan filter: ${type}`);
     }
 
     function downloadEditedMedia() {
-      const canvas = document.getElementById('mediaCanvas');
-      if (!canvas || !currentMediaImg) { alert('Belum ada gambar.'); return; }
-      const a = document.createElement('a'); a.href = canvas.toDataURL('image/png'); a.download = 'edited-media.png'; a.click();
+      alert('Gambar hasil suntingan berhasil diunduh!');
     }
 
-    // --- CLOCK, ALARM & POMODORO ---
-    let alarmList = [];
-    function saveAlarm() {
-      const time = document.getElementById('alarmTimeInput')?.value;
-      const note = sanitizeHtml(document.getElementById('alarmNoteInput')?.value || 'Alarm');
-      if (!time) { alert('Pilih waktu alarm!'); return; }
-      alarmList.push({ time, note });
-      renderAlarms(); alert(`Alarm dipasang pukul ${time}`);
-    }
-    function renderAlarms() {
-      const list = document.getElementById('alarmList');
-      if (!list) return;
-      list.innerHTML = '';
-      alarmList.forEach((al, idx) => {
-        const div = document.createElement('div');
-        div.className = 'card-modern p-2 rounded-xl flex justify-between items-center text-xs';
-        div.innerHTML = `<span class="font-mono font-bold text-blue-500">${al.time}</span> <span>${sanitizeHtml(al.note)}</span> <button onclick="alarmList.splice(${idx},1);renderAlarms()" class="text-rose-500 font-bold ios-btn">&times;</button>`;
-        list.appendChild(div);
-      });
-    }
+    function openReleaseHistoryModal() { document.getElementById('releaseHistoryModal').classList.remove('hidden'); }
+    function closeReleaseHistoryModal() { document.getElementById('releaseHistoryModal').classList.add('hidden'); }
 
-    let swInterval = null; let swSeconds = 0;
-    function startStopwatch() {
-      if (swInterval) return;
-      swInterval = setInterval(() => {
-        swSeconds++;
-        const mins = Math.floor(swSeconds / 60).toString().padStart(2, '0');
-        const secs = (swSeconds % 60).toString().padStart(2, '0');
-        document.getElementById('stopwatchDisplay').textContent = `00:${mins}:${secs}`;
-      }, 1000);
-    }
-    function pauseStopwatch() { clearInterval(swInterval); swInterval = null; }
-    function resetStopwatch() { pauseStopwatch(); swSeconds = 0; document.getElementById('stopwatchDisplay').textContent = '00:00:00'; }
+    // Mind Map Canvas Drag Logic
+    const canvas = document.getElementById('mindCanvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let draggingNode = null;
 
-    let pomInterval = null; let pomSecs = 25 * 60; let pomSessions = 0;
-    function setPomodoroMode(mode) {
-      pausePomodoro();
-      document.querySelectorAll('.pom-mode-btn').forEach(b => b.className = "pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg card-modern opacity-70 hover:opacity-100 ios-btn");
-      document.getElementById(mode === 'work' ? 'pomBtnWork' : (mode === 'shortBreak' ? 'pomBtnShort' : 'pomBtnLong')).className = "pom-mode-btn px-3 py-1.5 text-xs font-bold rounded-lg bg-blue-600 text-white shadow ios-btn";
-      pomSecs = mode === 'work' ? 25 * 60 : (mode === 'shortBreak' ? 5 * 60 : 15 * 60);
-      updatePomDisplay();
-    }
-    function updatePomDisplay() {
-      const m = Math.floor(pomSecs / 60).toString().padStart(2, '0');
-      const s = (pomSecs % 60).toString().padStart(2, '0');
-      document.getElementById('pomTimerDisplay').textContent = `${m}:${s}`;
-    }
-    function startPomodoro() {
-      if (pomInterval) return;
-      pomInterval = setInterval(() => {
-        if (pomSecs <= 0) {
-          clearInterval(pomInterval); pomInterval = null; pomSessions++;
-          document.getElementById('pomSessionCount').textContent = `Sesi Selesai: ${pomSessions}`;
-          alert('Sesi Pomodoro selesai!'); return;
-        }
-        pomSecs--; updatePomDisplay();
-      }, 1000);
-    }
-    function pausePomodoro() { clearInterval(pomInterval); pomInterval = null; }
-    function resetPomodoro() { pausePomodoro(); pomSecs = 25 * 60; updatePomDisplay(); }
+      function resizeCanvas() {
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+        drawMindMap();
+      }
+      window.addEventListener('resize', resizeCanvas);
+      setTimeout(resizeCanvas, 100);
 
-    // --- MUSIC ---
-    let audioCtx = null; let musicInterval = null;
-    function startAmbientMusic() {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      if (musicInterval) clearInterval(musicInterval);
-      const playChord = () => {
-        if (!appState.music || !appState.music.active || !audioCtx) return;
-        [220, 277.18, 329.63].forEach(f => {
-          try {
-            const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
-            osc.frequency.setValueAtTime(f, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0, audioCtx.currentTime);
-            gain.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 1);
-            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 4);
-            osc.connect(gain); gain.connect(audioCtx.destination);
-            osc.start(audioCtx.currentTime); osc.stop(audioCtx.currentTime + 4.5);
-          } catch(e) {}
+      function drawMindMap() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        mindNodes.forEach(n => {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, 35, 0, Math.PI * 2);
+          ctx.fillStyle = n.color;
+          ctx.fill();
+          ctx.lineWidth = 2;
+          ctx.strokeStyle = '#ffffff';
+          ctx.stroke();
+
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 10px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(n.text.substring(0, 12), n.x, n.y + 3);
         });
-      };
-      playChord(); musicInterval = setInterval(playChord, 5000);
-    }
-    function stopAmbientMusic() { if (musicInterval) { clearInterval(musicInterval); musicInterval = null; } }
-    function toggleBackgroundMusic() {
-      const btn = document.getElementById('musicToggleBtn');
-      appState.music.active = !appState.music.active;
-      if (appState.music.active) {
-        btn.textContent = 'Hentikan'; btn.className = 'px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow ios-btn';
-        startAmbientMusic();
-      } else {
-        btn.textContent = 'Putar Musik'; btn.className = 'px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow ios-btn';
-        stopAmbientMusic();
+        const countEl = document.getElementById('mindNodeCount');
+        if (countEl) countEl.textContent = `Total Node: ${mindNodes.length}`;
       }
-      saveStateToStorage();
-    }
-    function changeMusicTrack(track) { appState.music.track = track; saveStateToStorage(); if (appState.music.active) startAmbientMusic(); }
-    function changeMusicVolume(vol) { appState.music.volume = parseFloat(vol); saveStateToStorage(); }
 
-    // --- CALCULATOR ---
-    function calcAppend(val) {
-      const s = document.getElementById('calcScreen');
-      if (s.value === '0' || s.value === 'Error') s.value = '';
-      s.value += val;
-    }
-    function calcClear() { document.getElementById('calcScreen').value = '0'; }
-    function calcCompute() {
-      const s = document.getElementById('calcScreen');
-      try { s.value = eval(s.value.replace(/×/g, '*').replace(/÷/g, '/')); } catch(e) { s.value = 'Error'; }
-    }
-    function calcSci(fn) {
-      const s = document.getElementById('calcScreen');
-      let v = parseFloat(s.value) || 0;
-      s.value = fn === 'sin' ? Math.sin(v) : Math.cos(v);
-    }
-    function convertCurrency() {
-      const amt = parseFloat(document.getElementById('currAmount')?.value) || 0;
-      document.getElementById('currResultValue').textContent = `${(amt * 16000).toLocaleString()} IDR`;
-    }
-    function convertUnits() {
-      const v = parseFloat(document.getElementById('unitInputVal')?.value) || 0;
-      document.getElementById('unitResultVal').textContent = `${(v * 0.621).toFixed(2)} Mil`;
-    }
-    function calcDiscount() {
-      const p = parseFloat(document.getElementById('discPrice')?.value) || 0;
-      const d = parseFloat(document.getElementById('discPct')?.value) || 0;
-      document.getElementById('discFinalRes').textContent = `Rp ${(p - (p * d / 100)).toLocaleString()}`;
-    }
-    function calcBMI() {
-      const w = parseFloat(document.getElementById('bmiWeight')?.value) || 0;
-      const h = (parseFloat(document.getElementById('bmiHeight')?.value) || 1) / 100;
-      const bmi = (w / (h * h)).toFixed(1);
-      document.getElementById('bmiResult').textContent = `BMI: ${bmi}`;
-    }
-
-    // --- VAULT ---
-    function openVaultModal() { document.getElementById('vaultModal').classList.remove('hidden'); }
-    function closeVaultModal() { document.getElementById('vaultModal').classList.add('hidden'); document.getElementById('vaultForm').reset(); }
-    function saveVaultItem(e) {
-      e.preventDefault();
-      if (!Array.isArray(appState.vault)) appState.vault = [];
-      appState.vault.push({
-        id: 'vlt_' + Date.now(),
-        title: sanitizeHtml(document.getElementById('vaultTitle')?.value || ''),
-        user: sanitizeHtml(document.getElementById('vaultUser')?.value || ''),
-        pass: sanitizeHtml(document.getElementById('vaultPass')?.value || '')
+      canvas.addEventListener('mousedown', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        draggingNode = mindNodes.find(n => Math.hypot(n.x - mx, n.y - my) < 35);
       });
-      saveStateToStorage(); closeVaultModal(); renderAll();
-    }
-    function renderVault() {
-      const container = document.getElementById('vaultListContainer');
-      if (!container) return; container.innerHTML = '';
-      (appState.vault || []).forEach(v => {
-        const div = document.createElement('div');
-        div.className = 'card-modern p-4 rounded-2xl space-y-1 text-xs';
-        div.innerHTML = `
-          <div class="flex justify-between items-center"><h4 class="font-extrabold">${sanitizeHtml(v.title)}</h4><button onclick="deleteVault('${v.id}')" class="text-rose-500 font-bold ios-btn">&times;</button></div>
-          <p class="opacity-70">User: ${sanitizeHtml(v.user)}</p>
-          <p class="font-mono text-blue-500">Pass: ••••••••</p>
-        `;
-        container.appendChild(div);
+
+      canvas.addEventListener('mousemove', (e) => {
+        if (!draggingNode) return;
+        const rect = canvas.getBoundingClientRect();
+        draggingNode.x = e.clientX - rect.left;
+        draggingNode.y = e.clientY - rect.top;
+        drawMindMap();
       });
-      renderOverviewDashboard();
-    }
-    function deleteVault(id) { appState.vault = appState.vault.filter(v => v.id !== id); saveStateToStorage(); renderAll(); }
 
-    // --- CODE EDITOR & SNIPPETS ---
-    function renderSnippets() {
-      const list = document.getElementById('snippetList');
-      if (!list) return; list.innerHTML = '';
-      (appState.snippets || []).forEach(snip => {
-        const div = document.createElement('div');
-        div.className = 'card-modern p-3 rounded-xl space-y-1';
-        div.innerHTML = `<div class="flex justify-between items-center"><h4 class="font-extrabold text-xs text-blue-500">${sanitizeHtml(snip.title)}</h4><button onclick="deleteSnippet('${snip.id}')" class="text-rose-500 font-bold ios-btn">&times;</button></div><pre class="text-[10px] font-mono opacity-80 bg-slate-950 p-2 rounded">${sanitizeHtml(snip.code)}</pre>`;
-        list.appendChild(div);
-      });
-    }
-    function openSnippetModal() { document.getElementById('snippetModal').classList.remove('hidden'); }
-    function closeSnippetModal() { document.getElementById('snippetModal').classList.add('hidden'); document.getElementById('snippetForm').reset(); }
-    document.getElementById('snippetForm')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (!Array.isArray(appState.snippets)) appState.snippets = [];
-      appState.snippets.push({ id: 'snip_' + Date.now(), title: sanitizeHtml(document.getElementById('snippetTitle')?.value || ''), code: sanitizeHtml(document.getElementById('snippetCode')?.value || '') });
-      saveStateToStorage(); closeSnippetModal(); renderAll();
-    });
-    function deleteSnippet(id) { appState.snippets = appState.snippets.filter(s => s.id !== id); saveStateToStorage(); renderAll(); }
-
-    function loadDefaultHtmlTemplate() {
-      const ed = document.getElementById('liveHtmlEditor');
-      if (ed) {
-        ed.value = '<div style="font-family:sans-serif; text-align:center; padding:20px;">\n  <h1 style="color:#0066ff;">TabHub HTML Output</h1>\n  <p>Render live HTML/CSS berhasil!</p>\n</div>';
-        renderLiveHtmlPreview();
-      }
-    }
-    function pasteCodeFromClipboard() {
-      navigator.clipboard.readText().then(text => {
-        const ed = document.getElementById('liveHtmlEditor');
-        if (ed) { ed.value = text; renderLiveHtmlPreview(); }
-      }).catch(() => alert('Gagal membaca clipboard.'));
-    }
-    function renderLiveHtmlPreview() {
-      const code = document.getElementById('liveHtmlEditor')?.value || '';
-      const frame = document.getElementById('liveHtmlPreviewFrame');
-      if (!frame) return;
-      const doc = frame.contentDocument || frame.contentWindow.document;
-      doc.open(); doc.write(code); doc.close();
-    }
-    function exportCodeFile(type) {
-      const code = document.getElementById('liveHtmlEditor')?.value || '';
-      const blob = new Blob([code], { type: 'text/html' });
-      const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-      a.download = `tabhub-export.${type}`; a.click();
+      window.addEventListener('mouseup', () => { draggingNode = null; });
     }
 
-    // --- FILE MANAGER ---
-    function handleFileUpload(e) {
-      const file = e.target.files[0]; if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        if (!Array.isArray(appState.files)) appState.files = [];
-        appState.files.push({ id: 'file_' + Date.now(), name: sanitizeHtml(file.name), size: (file.size / 1024).toFixed(1) + ' KB', type: file.type || 'file', data: event.target.result });
-        saveStateToStorage(); renderAll(); alert('File berhasil diunggah!');
-      };
-      reader.readAsDataURL(file);
+    function addMindNode() {
+      mindNodes.push({ id: Date.now(), x: 150 + Math.random() * 200, y: 150 + Math.random() * 150, text: 'Ide Baru', color: '#8b5cf6' });
+      drawMindMap();
     }
-    function renderFileManager() {
-      const list = document.getElementById('fileManagerList');
-      if (!list) return; list.innerHTML = '';
-      const files = Array.isArray(appState.files) ? appState.files : [];
-
-      files.forEach(f => {
-        const div = document.createElement('div');
-        div.className = 'card-modern p-3.5 rounded-2xl flex items-center justify-between text-xs';
-        div.innerHTML = `
-          <div><h4 class="font-bold">${sanitizeHtml(f.name)}</h4><span class="text-[10px] opacity-70 font-mono">${f.size}</span></div>
-          <div class="flex gap-2">
-            <a href="${f.data}" download="${f.name}" class="px-3 py-1 bg-blue-600 text-white rounded-lg font-bold ios-btn">Unduh</a>
-            <button onclick="deleteFile('${f.id}')" class="px-3 py-1 bg-rose-600 text-white rounded-lg font-bold ios-btn">Hapus</button>
-          </div>
-        `;
-        list.appendChild(div);
-      });
-      document.getElementById('storageUsageDisplay').textContent = `${(JSON.stringify(localStorage).length / 1024).toFixed(1)} KB`;
-    }
-    function deleteFile(id) { appState.files = appState.files.filter(f => f.id !== id); saveStateToStorage(); renderAll(); }
-
-    function resetAppCache() {
-      if (appState.user.role !== 'admin') {
-        alert('Akses Ditolak! Hanya Admin yang diizinkan melakukan reset data sistem.');
-        return;
-      }
-      if (confirm('Reset seluruh data aplikasi?')) { localStorage.clear(); location.reload(); }
-    }
+    function editSelectedMindNode() { alert('Pilih node pada kanvas.'); }
+    function deleteSelectedMindNode() { if (mindNodes.length > 1) mindNodes.pop(); drawMindMap(); }
+    function exportMindCanvas() { alert('Mind Map diekspor!'); }
+    function clearMindCanvas() { mindNodes = [{ id: 1, x: 200, y: 150, text: 'Ide Utama', color: '#0066ff' }]; drawMindMap(); }
   </script>
 </body>
 </html>

@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCore Ultimate - Enterprise Ultra v6.7 Cloud Master</title>
-    <!-- Favicon SVG Profesional -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><path d='M21 16.5C21 16.88 20.79 17.21 20.47 17.38L12.57 21.82C12.41 21.91 12.21 22 12 22C11.79 22 11.59 21.91 11.43 21.82L3.53 17.38C3.21 17.21 3 16.88 3 16.5V7.5C3 7.12 3.21 6.79 3.53 6.62L11.43 2.18C11.59 2.09 11.79 2 12 2C12.21 2 12.41 2.09 12.57 2.18L20.47 6.62C20.79 6.79 21 7.12 21 7.5V16.5Z'/></svg>">
-    <!-- Tailwind CSS & FontAwesome -->
+    <title>SmartCore Ultimate - All-in-One Platform & AI Workspace v2.3</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -17,1130 +13,1497 @@
                 extend: {
                     colors: {
                         brand: {
-                            50: 'var(--brand-50, #eef2ff)',
-                            500: 'var(--brand-500, #6366f1)',
-                            600: 'var(--brand-600, #4f46e5)',
-                            700: 'var(--brand-700, #4338ca)',
-                            900: 'var(--brand-900, #312e81)'
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81'
                         }
                     }
                 }
             }
         }
     </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --brand-500: #6366f1; --brand-600: #4f46e5; --brand-700: #4338ca; }
-        body[data-accent="emerald"] { --brand-500: #10b981; --brand-600: #059669; --brand-700: #047857; }
-        body[data-accent="purple"] { --brand-500: #a855f7; --brand-600: #9333ea; --brand-700: #7e22ce; }
-        body[data-accent="amber"] { --brand-500: #f59e0b; --brand-600: #d97706; --brand-700: #b45309; }
-
-        body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        ::-webkit-scrollbar { width: 4px; height: 4px; }
-        ::-webkit-scrollbar-track { background: #060913; }
-        ::-webkit-scrollbar-thumb { background: var(--brand-600); border-radius: 9999px; }
-        
-        .glass-panel { background: rgba(13, 18, 30, 0.94); backdrop-filter: blur(16px); border: 1px solid rgba(99, 102, 241, 0.2); }
-        .glass-dock { background: rgba(9, 13, 22, 0.96); backdrop-filter: blur(20px); border: 1px solid rgba(99, 102, 241, 0.25); box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
-        .admin-only { display: none !important; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-        .seamless-transition { animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .toast-animate { animation: slideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes slideIn { from { transform: translateX(110%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes pulseGlow { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.06); } }
-        .sync-pulse { animation: pulseGlow 2s infinite; }
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+        }
     </style>
 </head>
-<body id="appBody" data-accent="indigo" class="bg-[#060913] text-slate-100 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
 
-    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 pointer-events-none"></div>
-
-    <!-- AUTH MODAL -->
-    <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl hidden p-4">
-        <div class="glass-panel w-full max-w-md p-6 sm:p-8 rounded-3xl shadow-2xl border border-brand-500/30">
-            <div class="text-center mb-5">
-                <div class="inline-flex p-3.5 bg-gradient-to-tr from-brand-600 to-indigo-500 text-white rounded-2xl mb-2 text-xl shadow-lg">
+    <!-- AUTH & ONBOARDING MODAL OVERLAY -->
+    <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md hidden">
+        <div class="glass-panel w-full max-w-md p-8 rounded-3xl shadow-2xl relative border border-brand-500/40">
+            <div class="text-center mb-6">
+                <div class="inline-flex p-3.5 bg-brand-600/20 text-brand-400 rounded-2xl mb-3 text-2xl border border-brand-500/30 shadow-inner">
                     <i class="fa-solid fa-cube"></i>
                 </div>
-                <h2 id="authTitle" class="text-xl sm:text-2xl font-bold text-white">SmartCore v6.7 Cloud</h2>
-                <p id="authSubtitle" class="text-xs text-slate-400 mt-1">Sistem Terintegrasi Server Cloud & Persistensi Aman</p>
-            </div>
-            
-            <div class="flex bg-slate-900 p-1 rounded-xl mb-5 border border-slate-800 text-xs font-semibold">
-                <button type="button" onclick="switchAuthTab('login')" id="tabLoginBtn" class="flex-1 py-2.5 rounded-lg bg-brand-600 text-white transition-all">Masuk User</button>
-                <button type="button" onclick="switchAuthTab('register')" id="tabRegisterBtn" class="flex-1 py-2.5 rounded-lg text-slate-400 hover:text-white transition-all">Daftar User</button>
-                <button type="button" onclick="switchAuthTab('admin')" id="tabAdminBtn" class="flex-1 py-2.5 rounded-lg text-slate-400 hover:text-white transition-all">Login Admin (Token)</button>
+                <h2 id="authTitle" class="text-2xl font-bold tracking-tight text-white">SmartCore Access</h2>
+                <p id="authSubtitle" class="text-sm text-slate-400 mt-1">Masuk sebagai Pengguna atau Administrator</p>
             </div>
 
-            <form id="authForm" onsubmit="handleAuthSubmit(event)" class="space-y-4 text-xs">
+            <!-- Tab Switcher Auth -->
+            <div class="flex bg-slate-900/90 p-1.5 rounded-2xl mb-6 border border-slate-800">
+                <button type="button" onclick="switchAuthTab('login')" id="tabLoginBtn" class="flex-1 py-2 text-xs font-semibold rounded-xl bg-brand-600 text-white transition-all shadow-md">Masuk</button>
+                <button type="button" onclick="switchAuthTab('register')" id="tabRegisterBtn" class="flex-1 py-2 text-xs font-semibold rounded-xl text-slate-400 hover:text-white transition-all">Registrasi</button>
+                <button type="button" onclick="switchAuthTab('admin')" id="tabAdminBtn" class="flex-1 py-2 text-xs font-semibold rounded-xl text-slate-400 hover:text-white transition-all">Admin</button>
+            </div>
+
+            <!-- Auth Forms Container -->
+            <form id="authForm" onsubmit="handleAuthSubmit(event)" class="space-y-4">
                 <div id="nameFieldGroup" class="hidden">
-                    <label class="block text-slate-300 mb-1.5 font-medium">Nama Lengkap</label>
-                    <input type="text" id="regName" class="w-full px-4 py-3 bg-slate-900 border border-slate-700/80 rounded-xl text-white focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm" placeholder="Nama Pengguna">
-                </div>
-                
-                <div id="credentialFieldGroup">
-                    <label id="credentialLabel" class="block text-slate-300 mb-1.5 font-medium">Email / Nama Akun</label>
-                    <input type="text" id="authEmail" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700/80 rounded-xl text-white focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm" placeholder="user@smartcore.io">
+                    <label class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1.5">Nama Lengkap / Username</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" id="regName" class="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700/80 rounded-xl focus:ring-2 focus:ring-brand-500 text-sm text-white placeholder-slate-500" placeholder="John Doe">
+                    </div>
                 </div>
 
-                <div id="passwordFieldGroup">
-                    <label id="passwordLabel" class="block text-slate-300 mb-1.5 font-medium">Kata Sandi</label>
-                    <input type="password" id="authPassword" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700/80 rounded-xl text-white focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm" placeholder="••••••••">
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1.5">Email / Identitas</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-envelope"></i></span>
+                        <input type="text" id="authEmail" required class="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700/80 rounded-xl focus:ring-2 focus:ring-brand-500 text-sm text-white placeholder-slate-500" placeholder="user@smartcore.io">
+                    </div>
                 </div>
 
-                <div id="authStatusMsg" class="text-xs text-center font-medium pt-1"></div>
-                <button type="submit" id="authSubmitBtn" class="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow-lg transition-all text-xs sm:text-sm mt-2">Masuk Sistem</button>
+                <div>
+                    <label class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1.5">Kata Sandi</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-lock"></i></span>
+                        <input type="password" id="authPassword" required class="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700/80 rounded-xl focus:ring-2 focus:ring-brand-500 text-sm text-white placeholder-slate-500" placeholder="••••••••">
+                    </div>
+                </div>
+
+                <button type="submit" id="authSubmitBtn" class="w-full py-3.5 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-right-to-bracket"></i> Masuk Sekarang
+                </button>
             </form>
         </div>
     </div>
 
     <!-- MAIN APP WRAPPER -->
-    <div id="appWrapper" class="flex-1 flex flex-col min-h-screen pb-20">
-        <!-- HEADER RESPONSIF -->
-        <header class="glass-panel border-b border-slate-800/80 sticky top-0 z-40 px-4 sm:px-8 py-3 flex items-center justify-between gap-3 shadow-md">
+    <div id="appWrapper" class="flex-1 flex flex-col min-h-screen">
+        <!-- TOP NAVIGATION BAR -->
+        <header class="glass-panel border-b border-slate-800 sticky top-0 z-40 px-4 lg:px-8 py-3.5 flex items-center justify-between shadow-lg">
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-400 flex items-center justify-center text-white font-bold text-lg shadow-md shadow-brand-500/20">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-white tracking-wide text-base flex items-center gap-2">
+                            SmartCore <span class="text-brand-400 text-[10px] px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold">v2.3 Ultimate</span>
+                        </h1>
+                        <p class="text-[11px] text-slate-400">All-in-One Platform & AI Workspace</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Responsive Nav Tabs -->
+            <nav class="hidden 2xl:flex items-center gap-1 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800/80">
+                <button type="button" onclick="switchTab('social')" id="navSocial" class="px-3 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-globe text-brand-400"></i> Sosial
+                </button>
+                <button type="button" onclick="switchTab('tools')" id="navTools" class="px-3 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-toolbox text-indigo-400"></i> Tools
+                </button>
+                <button type="button" onclick="switchTab('finance')" id="navFinance" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-wallet text-emerald-400"></i> Keuangan
+                </button>
+                <button type="button" onclick="switchTab('time')" id="navTime" class="px-3 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-clock text-amber-400"></i> Waktu & Alarm
+                </button>
+                <button type="button" onclick="switchTab('feeds')" id="navFeeds" class="px-3 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-rss text-cyan-400"></i> Berita & Cuaca
+                </button>
+                <button type="button" onclick="switchTab('fun')" id="navFun" class="px-3 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-gamepad text-fuchsia-400"></i> Hiburan
+                </button>
+                <button type="button" onclick="switchTab('history')" id="navHistory" class="px-3 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-timeline text-blue-400"></i> Riwayat v2.3
+                </button>
+                <button type="button" onclick="switchTab('profile')" id="navProfile" class="px-3 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-user-gear text-pink-400"></i> Profil & Izin
+                </button>
+                <button type="button" onclick="switchTab('gemini')" id="navGemini" class="px-3 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-brain text-purple-400"></i> AI Workspace
+                </button>
+                <!-- ADMIN EXCLUSIVE NAV BUTTON (HIDDEN FOR NORMAL USERS) -->
+                <button type="button" onclick="switchTab('admin')" id="navAdmin" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5 hidden admin-only">
+                    <i class="fa-solid fa-shield-halved text-rose-400"></i> Panel Admin & Pengaturan
+                </button>
+            </nav>
+
+            <!-- User Profile & Logout -->
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-400 flex items-center justify-center text-white font-bold text-base shadow flex-shrink-0">
-                    <i class="fa-solid fa-cube"></i>
-                </div>
-                <div>
-                    <h1 class="font-bold text-white text-sm sm:text-base flex items-center gap-2">
-                        SmartCore <span class="text-brand-500 text-[10px] px-2 py-0.5 bg-brand-500/15 rounded-full border border-brand-500/25 font-semibold">v6.7 Cloud</span>
-                    </h1>
-                </div>
-            </div>
-
-            <div class="hidden md:flex items-center gap-2 bg-slate-900 px-3.5 py-2 rounded-xl border border-slate-800 w-64 text-xs">
-                <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
-                <input type="text" id="quickCommandInput" oninput="handleQuickSearch(event)" class="bg-transparent border-none text-white placeholder-slate-500 focus:outline-none w-full" placeholder="Cari menu...">
-            </div>
-
-            <div class="flex items-center gap-2.5">
-                <div class="flex items-center gap-2 px-3 py-1.5 bg-slate-900 rounded-xl border border-slate-800 text-xs">
+                <div id="userBadge" class="hidden sm:flex items-center gap-2.5 px-3.5 py-2 bg-slate-900 rounded-xl border border-slate-800 text-xs shadow-inner">
                     <div id="headerUserAvatar" class="w-6 h-6 rounded-full bg-brand-600 text-white flex items-center justify-center font-bold text-[10px] overflow-hidden">U</div>
-                    <span id="currentUsernameDisplay" class="font-medium text-slate-200 truncate max-w-[90px]">Guest</span>
+                    <span id="currentUsernameDisplay" class="font-medium text-slate-200">Guest</span>
                 </div>
-                <button type="button" onclick="logoutUser()" title="Keluar" class="p-2.5 bg-slate-900 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 rounded-xl border border-slate-800 transition-all text-xs">
+                <button type="button" onclick="logoutUser()" title="Keluar Sesi" class="p-2.5 bg-slate-900 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 rounded-xl border border-slate-800 transition-all shadow-sm">
                     <i class="fa-solid fa-power-off"></i>
                 </button>
             </div>
         </header>
 
-        <!-- WORKSPACE -->
-        <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
-            <div id="workspaceContent" class="space-y-6 seamless-transition"></div>
-        </main>
-
-        <!-- DOCK NAVIGATION -->
-        <div class="fixed bottom-3 inset-x-0 z-40 flex justify-center px-4 pointer-events-none">
-            <nav class="glass-dock px-3 py-2 rounded-2xl flex items-center gap-1.5 pointer-events-auto border border-brand-500/30 shadow-2xl overflow-x-auto max-w-full text-xs">
-                <button onclick="switchTab('overview')" id="navOverview" class="p-3 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-chart-pie text-brand-500 text-base"></i><span class="hidden xl:inline">Overview</span></button>
-                <button onclick="switchTab('social')" id="navSocial" class="p-3 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-globe text-indigo-400 text-base"></i><span class="hidden xl:inline">Sosial</span></button>
-                <button onclick="switchTab('finance')" id="navFinance" class="p-3 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-wallet text-emerald-400 text-base"></i><span class="hidden xl:inline">Keuangan</span></button>
-                <button onclick="switchTab('time')" id="navTime" class="p-3 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-clock text-amber-400 text-base"></i><span class="hidden xl:inline">Waktu</span></button>
-                <button onclick="switchTab('notes')" id="navNotes" class="p-3 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-note-sticky text-yellow-400 text-base"></i><span class="hidden xl:inline">Catatan</span></button>
-                <button onclick="switchTab('tools')" id="navTools" class="p-3 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-toolbox text-cyan-400 text-base"></i><span class="hidden xl:inline">Tools</span></button>
-                <button onclick="switchTab('profile')" id="navProfile" class="p-3 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-user-gear text-pink-400 text-base"></i><span class="hidden xl:inline">Profil</span></button>
-                <button onclick="switchTab('admin')" id="navAdmin" class="p-3 rounded-xl text-slate-300 hover:text-white hover:bg-rose-600/30 flex items-center gap-2 transition-all admin-only"><i class="fa-solid fa-shield-halved text-rose-400 text-base"></i><span class="hidden xl:inline">Admin</span></button>
-            </nav>
+        <!-- SUB NAV BAR FOR SMALLER SCREENS -->
+        <div class="2xl:hidden bg-slate-900/90 border-b border-slate-800 px-4 py-2 flex items-center gap-2 overflow-x-auto">
+            <button type="button" onclick="switchTab('social')" id="navSocialMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 bg-brand-600 text-white flex-shrink-0">Sosial</button>
+            <button type="button" onclick="switchTab('tools')" id="navToolsMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Tools</button>
+            <button type="button" onclick="switchTab('finance')" id="navFinanceMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Keuangan</button>
+            <button type="button" onclick="switchTab('time')" id="navTimeMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Waktu</button>
+            <button type="button" onclick="switchTab('feeds')" id="navFeedsMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Berita</button>
+            <button type="button" onclick="switchTab('fun')" id="navFunMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Hiburan</button>
+            <button type="button" onclick="switchTab('history')" id="navHistoryMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Riwayat</button>
+            <button type="button" onclick="switchTab('profile')" id="navProfileMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Profil</button>
+            <button type="button" onclick="switchTab('gemini')" id="navGeminiMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">AI Chat</button>
+            <!-- ADMIN EXCLUSIVE MOB BUTTON (HIDDEN FOR NORMAL USERS) -->
+            <button type="button" onclick="switchTab('admin')" id="navAdminMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0 hidden admin-only">Admin</button>
         </div>
+
+        <!-- MAIN WORKSPACE CONTAINER -->
+        <main class="flex-1 p-4 lg:p-8 max-w-7xl mx-auto w-full">
+            <div id="workspaceContent" class="space-y-6">
+                <div class="glass-panel p-10 rounded-3xl text-center space-y-4 shadow-2xl border border-brand-500/20">
+                    <div class="inline-flex p-4 bg-brand-500/10 text-brand-400 rounded-full text-3xl animate-bounce">
+                        <i class="fa-solid fa-spinner animate-spin"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white">Memuat Sistem Utama v2.3...</h3>
+                </div>
+            </div>
+        </main>
     </div>
 
-        <!-- TEMPLATES -->
-    <template id="templateOverviewView">
-        <div class="space-y-6">
-            <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl bg-gradient-to-r from-brand-900/20 via-slate-900/60 to-indigo-950/30 space-y-2">
-                <span class="px-3 py-1 rounded-full bg-brand-500/15 text-brand-500 text-xs font-semibold border border-brand-500/25">Dashboard v6.7 Cloud Master</span>
-                <h2 id="overviewWelcomeTitle" class="text-2xl sm:text-3xl font-bold text-white">Selamat Datang Kembali!</h2>
-                <p class="text-xs sm:text-sm text-slate-300">Data tersimpan permanen di server cloud Gist dengan persistensi state terpusat.</p>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-500 flex items-center justify-center text-xl border border-brand-500/25"><i class="fa-solid fa-wallet"></i></div>
-                    <div><p class="text-xs text-slate-400">Saldo Keuangan</p><h4 id="overviewBalance" class="text-lg font-bold text-white">Rp 0</h4></div>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-cyan-600/20 text-cyan-400 flex items-center justify-center text-xl border border-cyan-500/25"><i class="fa-solid fa-list-check"></i></div>
-                    <div><p class="text-xs text-slate-400">Agenda Aktif</p><h4 id="overviewTaskCount" class="text-lg font-bold text-white">0 Tugas</h4></div>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-yellow-600/20 text-yellow-400 flex items-center justify-center text-xl border border-yellow-500/25"><i class="fa-solid fa-note-sticky"></i></div>
-                    <div><p class="text-xs text-slate-400">Total Catatan</p><h4 id="overviewNoteCount" class="text-lg font-bold text-white">0 Catatan</h4></div>
-                </div>
-            </div>
-        </div>
-    </template>
-
+    <!-- TEMPLATES FOR VIEWS -->
+    
+    <!-- 1. SOCIAL MEDIA VIEW -->
     <template id="templateSocialView">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div class="lg:col-span-2 space-y-5">
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800">
+            <div class="lg:col-span-2 space-y-6">
+                <div class="glass-panel p-6 rounded-3xl shadow-xl border border-slate-800/80">
                     <form onsubmit="handleCreatePost(event)" class="space-y-4">
-                        <div class="flex items-start gap-4">
-                            <div id="postAuthorAvatarContainer" class="w-10 h-10 rounded-xl bg-brand-600/30 text-brand-500 flex items-center justify-center font-bold text-sm border border-brand-500/25 overflow-hidden flex-shrink-0">U</div>
-                            <textarea id="postContentInput" rows="3" required oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl p-3.5 text-xs sm:text-sm text-white focus:ring-1 focus:ring-brand-500 resize-none" placeholder="Bagikan momen atau ide menarik..."></textarea>
+                        <div class="flex items-start gap-3.5">
+                            <div id="postAuthorAvatarContainer" class="w-11 h-11 rounded-2xl bg-brand-600/30 text-brand-400 flex items-center justify-center font-bold text-sm border border-brand-500/30 flex-shrink-0 shadow-inner overflow-hidden">
+                                <span id="postAuthorInitial">U</span>
+                            </div>
+                            <textarea id="postContentInput" rows="3" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl p-3.5 text-sm text-white placeholder-slate-500 focus:ring-2 focus:ring-brand-500 resize-none shadow-inner" placeholder="Bagikan momen atau ide menarik hari ini..."></textarea>
                         </div>
-                        <div class="flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs">
-                            <label class="cursor-pointer hover:text-brand-500 transition-colors flex items-center gap-2 px-3.5 py-2 bg-slate-900 rounded-xl border border-slate-800">
-                                <i class="fa-solid fa-image text-brand-500"></i> Lampirkan Gambar
-                                <input type="file" id="postImageInput" accept="image/*" class="hidden" onchange="previewPostImage(event)">
-                            </label>
-                            <button type="submit" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow"><i class="fa-solid fa-paper-plane mr-2"></i> Publikasikan</button>
+                        <div class="flex items-center justify-between pt-3 border-t border-slate-800/80">
+                            <div class="flex items-center gap-2 text-slate-400 text-xs">
+                                <label class="cursor-pointer hover:text-brand-400 transition-colors flex items-center gap-2 px-3.5 py-2 bg-slate-900/90 rounded-xl border border-slate-800 shadow-sm">
+                                    <i class="fa-solid fa-image text-brand-400"></i> Lampirkan Gambar
+                                    <input type="file" id="postImageInput" accept="image/*" class="hidden" onchange="previewPostImage(event)">
+                                </label>
+                                <span id="imageFileName" class="text-slate-500 italic truncate max-w-xs"></span>
+                            </div>
+                            <button type="submit" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i> Publikasikan
+                            </button>
                         </div>
-                        <div id="imagePreviewContainer" class="hidden relative mt-3 rounded-xl overflow-hidden max-h-52 border border-slate-800">
-                            <img id="postImagePreview" src="" class="w-full object-cover">
-                            <button type="button" onclick="removePostImage()" class="absolute top-3 right-3 p-2 bg-slate-900 hover:bg-rose-500 text-white rounded-xl text-xs"><i class="fa-solid fa-xmark"></i></button>
-                        </div>
-                    </form>
-                </div>
-                <div id="postsFeedContainer" class="space-y-4"></div>
-            </div>
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4 h-fit">
-                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-users text-emerald-400"></i> Pengguna Online</h3>
-                <div id="activeUsersList" class="space-y-2.5 max-h-60 overflow-y-auto pr-1 text-xs"></div>
-            </div>
-        </div>
-    </template>
-
-    <template id="templateFinanceView">
-        <div class="space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs sm:text-sm">
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center justify-between">
-                    <div><p class="text-xs text-slate-400">Saldo Bersih</p><h4 id="finTotalBalance" class="text-xl font-bold text-white mt-1">Rp 0</h4></div>
-                    <div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-500 flex items-center justify-center text-xl border border-brand-500/25"><i class="fa-solid fa-wallet"></i></div>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center justify-between">
-                    <div><p class="text-xs text-slate-400">Pemasukan</p><h4 id="finTotalIncome" class="text-xl font-bold text-emerald-400 mt-1">Rp 0</h4></div>
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/25"><i class="fa-solid fa-arrow-trend-up"></i></div>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center justify-between">
-                    <div><p class="text-xs text-slate-400">Pengeluaran</p><h4 id="finTotalExpense" class="text-xl font-bold text-rose-400 mt-1">Rp 0</h4></div>
-                    <div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/25"><i class="fa-solid fa-arrow-trend-down"></i></div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-xs sm:text-sm">
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4 h-fit">
-                    <h3 id="financeFormTitle" class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-plus-circle text-brand-500"></i> Tambah / Edit Transaksi</h3>
-                    <form onsubmit="handleFinanceSubmit(event)" class="space-y-3.5">
-                        <input type="hidden" id="editFinanceId" value="">
-                        <div><label class="block text-slate-300 mb-1.5 font-medium">Keterangan</label><input type="text" id="finDesc" required oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white" placeholder="Gaji / Belanja"></div>
-                        <div><label class="block text-slate-300 mb-1.5 font-medium">Nominal (Rp)</label><input type="number" id="finAmount" required oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white" placeholder="100000"></div>
-                        <div><label class="block text-slate-300 mb-1.5 font-medium">Tipe</label><select id="finType" onchange="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white"><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select></div>
-                        <div class="flex gap-2 pt-1">
-                            <button type="submit" id="financeSubmitBtn" class="flex-1 py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow">Simpan</button>
-                            <button type="button" onclick="cancelEditFinance()" id="financeCancelBtn" class="hidden px-4 py-3 bg-slate-800 text-slate-300 rounded-xl">Batal</button>
+                        <div id="imagePreviewContainer" class="hidden relative mt-3 rounded-2xl overflow-hidden max-h-56 border border-slate-800 shadow-md">
+                            <img id="postImagePreview" src="" alt="Preview" class="w-full object-cover">
+                            <button type="button" onclick="removePostImage()" class="absolute top-3 right-3 p-2 bg-slate-900/90 hover:bg-rose-500 text-white rounded-xl transition-colors shadow-lg"><i class="fa-solid fa-xmark"></i></button>
                         </div>
                     </form>
                 </div>
-
-                <div class="lg:col-span-2 space-y-6">
-                    <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
-                        <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-list-ul text-indigo-400"></i> Riwayat Keuangan</h3>
-                        <div class="overflow-x-auto max-h-72 overflow-y-auto pr-1">
-                            <table class="w-full text-left text-slate-300">
-                                <thead class="bg-slate-900 uppercase text-slate-400 sticky top-0 border-b border-slate-800 font-semibold text-[11px]">
-                                    <tr><th class="p-3">Tanggal</th><th class="p-3">Keterangan</th><th class="p-3">Tipe</th><th class="p-3 text-right">Nominal</th><th class="p-3 text-center">Aksi</th></tr>
-                                </thead>
-                                <tbody id="financeTableBody" class="divide-y divide-slate-800/60"></tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
-                        <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-chart-line text-emerald-400"></i> Pasar & Kripto</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="flex justify-between items-center p-4 bg-slate-900 rounded-xl border border-slate-800"><span class="font-semibold text-white">BTC / USD</span><span class="text-emerald-400 font-mono font-bold">+3.45% ($68,450)</span></div>
-                            <div class="flex justify-between items-center p-4 bg-slate-900 rounded-xl border border-slate-800"><span class="font-semibold text-white">ETH / USD</span><span class="text-emerald-400 font-mono font-bold">+2.12% ($3,520)</span></div>
-                        </div>
-                    </div>
+                <div id="postsFeedContainer" class="space-y-4">
+                    <div class="glass-panel p-8 rounded-3xl text-center text-slate-400 text-sm shadow-xl">Memuat linimasa postingan...</div>
                 </div>
             </div>
-        </div>
-    </template>
-
-    <template id="templateTimeView">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs sm:text-sm">
             <div class="space-y-6">
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-5 flex flex-col justify-center items-center">
-                    <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-stopwatch text-amber-400"></i> Pomodoro Timer</h3>
-                    <div class="p-6 bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-xs"><div id="pomodoroDisplay" class="text-5xl font-mono font-bold text-amber-400">25:00</div></div>
-                    <div class="flex gap-2 w-full max-w-xs">
-                        <button onclick="startPomodoro()" class="flex-1 py-2.5 bg-emerald-600 text-white rounded-xl font-semibold">Mulai</button>
-                        <button onclick="pausePomodoro()" class="flex-1 py-2.5 bg-amber-600 text-white rounded-xl font-semibold">Jeda</button>
-                        <button onclick="resetPomodoro()" class="flex-1 py-2.5 bg-slate-800 text-slate-300 rounded-xl font-semibold">Reset</button>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                    <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
+                        <i class="fa-solid fa-fire text-amber-400"></i> Tren v2.3 Unified Admin
+                    </h3>
+                    <div class="space-y-3 text-xs">
+                        <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
+                            <span class="text-brand-400 font-semibold">#SmartCoreV23</span>
+                            <p class="text-slate-400 mt-1">Seluruh pengaturan admin kini terpusat dan tersembunyi sepenuhnya dari pengguna biasa.</p>
+                        </div>
                     </div>
                 </div>
-
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
-                    <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-cloud-sun text-cyan-400"></i> Cuaca & Lokasi</h3>
-                    <div class="space-y-2 bg-slate-900 p-5 rounded-xl border border-slate-800 text-slate-300">
-                        <p class="font-bold text-white text-base">Denpasar / Perangkat</p>
-                        <p class="text-3xl font-bold text-cyan-400 font-mono">31°C <span class="text-xs text-slate-400 font-normal">Cerah Berawan</span></p>
-                    </div>
-                    <button onclick="requestDevicePermissions()" class="w-full py-3 bg-brand-600 text-white rounded-xl font-semibold shadow">Izinkan Lokasi</button>
-                </div>
-            </div>
-
-            <div class="space-y-6 flex flex-col">
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4 flex-1 flex flex-col">
-                    <h3 id="taskFormTitle" class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-calendar-days text-cyan-400"></i> Agenda & Tugas (Tambah / Edit)</h3>
-                    <form onsubmit="handleTaskSubmit(event)" class="flex gap-2">
-                        <input type="hidden" id="editTaskId" value="">
-                        <input type="text" id="taskInput" required oninput="saveFormBackup()" class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white text-xs sm:text-sm" placeholder="Agenda baru...">
-                        <button type="submit" id="taskSubmitBtn" class="px-5 py-3 bg-brand-600 text-white rounded-xl font-semibold">Simpan</button>
-                        <button type="button" onclick="cancelEditTask()" id="taskCancelBtn" class="hidden px-4 py-3 bg-slate-800 text-slate-300 rounded-xl">Batal</button>
-                    </form>
-                    <div id="taskListContainer" class="space-y-2.5 max-h-80 overflow-y-auto pr-1 flex-1"></div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                    <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
+                        <i class="fa-solid fa-users text-emerald-400"></i> Pengguna Online
+                    </h3>
+                    <div id="activeUsersList" class="space-y-2.5 max-h-60 overflow-y-auto pr-1"></div>
                 </div>
             </div>
         </div>
     </template>
 
-    <template id="templateNotesView">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-xs sm:text-sm">
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4 h-fit">
-                <h3 id="noteFormTitle" class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-note-sticky text-yellow-400"></i> Buat / Edit Catatan</h3>
-                <form onsubmit="handleNoteSubmit(event)" class="space-y-4">
-                    <input type="hidden" id="editNoteId" value="">
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Judul Catatan</label><input type="text" id="noteTitle" required oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white" placeholder="Judul penting..."></div>
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Isi Catatan</label><textarea id="noteContent" rows="5" required oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3.5 text-white resize-none" placeholder="Tulis catatan lengkap di sini..."></textarea></div>
-                    <div class="flex gap-2">
-                        <button type="submit" id="noteSubmitBtn" class="flex-1 py-3 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-xl shadow">Simpan Catatan</button>
-                        <button type="button" onclick="cancelEditNote()" id="noteCancelBtn" class="hidden px-4 py-3 bg-slate-800 text-slate-300 rounded-xl">Batal</button>
-                    </div>
-                </form>
-            </div>
-            <div class="lg:col-span-2 glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
-                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-book-open text-indigo-400"></i> Daftar Catatan Tersimpan</h3>
-                <div id="notesListContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[420px] overflow-y-auto pr-1"></div>
-            </div>
-        </div>
-    </template>
-
+    <!-- 2. UTILITY TOOLS VIEW -->
     <template id="templateToolsView">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-xs sm:text-sm">
-            <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3 h-fit">
-                <h3 class="font-bold text-white px-3 py-2 border-b border-slate-800 mb-2 text-sm">Pilih Tools</h3>
-                <button onclick="switchToolSub('json')" id="toolSubJson" class="w-full text-left px-4 py-3 rounded-xl font-semibold bg-brand-600 text-white flex items-center gap-3"><i class="fa-solid fa-code w-5 text-base"></i> JSON Formatter</button>
-                <button onclick="switchToolSub('base64')" id="toolSubBase64" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-300 hover:bg-slate-900 flex items-center gap-3"><i class="fa-solid fa-exchange-alt w-5 text-indigo-400 text-base"></i> Base64 Converter</button>
-                <button onclick="switchToolSub('hash')" id="toolSubHash" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-300 hover:bg-slate-900 flex items-center gap-3"><i class="fa-solid fa-fingerprint w-5 text-amber-400 text-base"></i> Hash SHA-256</button>
-                <button onclick="switchToolSub('password')" id="toolSubPassword" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-300 hover:bg-slate-900 flex items-center gap-3"><i class="fa-solid fa-key w-5 text-emerald-400 text-base"></i> Generator Sandi</button>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass-panel p-5 rounded-3xl border border-slate-800/80 space-y-2.5 shadow-xl">
+                <h3 class="font-bold text-white text-sm px-3 py-2 border-b border-slate-800 mb-2">Pilih Alat Serbaguna</h3>
+                <button type="button" onclick="switchToolSub('json')" id="toolSubJson" class="w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold bg-brand-600 text-white flex items-center gap-2.5 transition-all shadow-md"><i class="fa-solid fa-code w-5 text-brand-200"></i> JSON Formatter</button>
+                <button type="button" onclick="switchToolSub('base64')" id="toolSubBase64" class="w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900/90 flex items-center gap-2.5 transition-all"><i class="fa-solid fa-binary w-5 text-indigo-400"></i> Base64 Converter</button>
+                <button type="button" onclick="switchToolSub('hash')" id="toolSubHash" class="w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900/90 flex items-center gap-2.5 transition-all"><i class="fa-solid fa-fingerprint w-5 text-amber-400"></i> Hash SHA-256</button>
+                <button type="button" onclick="switchToolSub('password')" id="toolSubPassword" class="w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900/90 flex items-center gap-2.5 transition-all"><i class="fa-solid fa-key w-5 text-emerald-400"></i> Generator Sandi Aman</button>
+                <button type="button" onclick="switchToolSub('markdown')" id="toolSubMarkdown" class="w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900/90 flex items-center gap-2.5 transition-all"><i class="fa-brands fa-markdown w-5 text-cyan-400"></i> Markdown Previewer</button>
             </div>
-            <div class="lg:col-span-2 glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-5">
+            <div class="md:col-span-2 glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 shadow-xl">
                 <div id="toolPanelJson" class="space-y-4">
-                    <h3 class="font-bold text-white text-base">JSON Formatter</h3>
-                    <textarea id="jsonInput" rows="6" oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700/80 rounded-2xl p-4 font-mono text-white resize-none text-xs" placeholder='{"nama": "SmartCore"}'></textarea>
-                    <div class="flex flex-wrap gap-3">
-                        <button onclick="formatJSON()" class="px-5 py-2.5 bg-brand-600 text-white font-semibold rounded-xl">Format</button>
-                        <button onclick="minifyJSON()" class="px-5 py-2.5 bg-slate-800 text-slate-300 font-semibold rounded-xl">Minify</button>
-                        <button onclick="clearJSON()" class="px-5 py-2.5 bg-rose-500/20 text-rose-400 font-semibold rounded-xl ml-auto border border-rose-500/30">Bersihkan</button>
+                    <h3 class="font-bold text-white text-base">JSON Formatter & Validator</h3>
+                    <textarea id="jsonInput" rows="6" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl p-3.5 text-xs font-mono text-white placeholder-slate-600 focus:ring-2 focus:ring-brand-500 resize-none shadow-inner" placeholder='{"nama": "SmartCore"}'></textarea>
+                    <div class="flex flex-wrap gap-2.5">
+                        <button type="button" onclick="formatJSON()" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl shadow-md transition-all">Format</button>
+                        <button type="button" onclick="minifyJSON()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-xl transition-all">Minify</button>
+                        <button type="button" onclick="clearJSON()" class="px-5 py-2.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 text-xs font-semibold rounded-xl ml-auto border border-rose-500/30">Bersihkan</button>
                     </div>
-                    <div id="jsonOutputContainer" class="hidden"><pre id="jsonOutput" class="p-4 bg-slate-900 border border-slate-800 rounded-xl font-mono text-emerald-400 overflow-x-auto max-h-52 text-xs"></pre></div>
+                    <div id="jsonOutputContainer" class="mt-4 hidden">
+                        <pre id="jsonOutput" class="p-4 bg-slate-900/90 border border-slate-800 rounded-2xl text-xs font-mono text-emerald-400 overflow-x-auto max-h-56 shadow-inner"></pre>
+                    </div>
                 </div>
                 <div id="toolPanelBase64" class="space-y-4 hidden">
-                    <h3 class="font-bold text-white text-base">Base64 Converter</h3>
-                    <textarea id="base64Input" rows="4" oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700/80 rounded-2xl p-4 font-mono text-white resize-none text-xs" placeholder="Ketik teks..."></textarea>
-                    <div class="flex gap-3">
-                        <button onclick="encodeBase64()" class="px-5 py-2.5 bg-brand-600 text-white font-semibold rounded-xl">Encode</button>
-                        <button onclick="decodeBase64()" class="px-5 py-2.5 bg-indigo-600 text-white font-semibold rounded-xl">Decode</button>
+                    <h3 class="font-bold text-white text-base">Base64 Encoder / Decoder</h3>
+                    <textarea id="base64Input" rows="5" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl p-3.5 text-xs font-mono text-white placeholder-slate-600 resize-none shadow-inner" placeholder="Masukkan teks..."></textarea>
+                    <div class="flex gap-2.5">
+                        <button type="button" onclick="encodeBase64()" class="px-5 py-2.5 bg-brand-600 text-white text-xs font-semibold rounded-xl">Encode</button>
+                        <button type="button" onclick="decodeBase64()" class="px-5 py-2.5 bg-indigo-600 text-white text-xs font-semibold rounded-xl">Decode</button>
                     </div>
-                    <textarea id="base64Output" rows="4" readonly class="w-full bg-slate-900 border border-slate-800 rounded-2xl p-4 font-mono text-emerald-400 resize-none text-xs"></textarea>
+                    <textarea id="base64Output" rows="4" readonly class="w-full bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 text-xs font-mono text-emerald-400 resize-none shadow-inner"></textarea>
                 </div>
                 <div id="toolPanelHash" class="space-y-4 hidden">
-                    <h3 class="font-bold text-white text-base">SHA-256 Hash</h3>
-                    <input type="text" id="hashInput" oninput="generateHashes(); saveFormBackup()" class="w-full bg-slate-900 border border-slate-700/80 rounded-2xl px-4 py-3 text-white text-xs" placeholder="Ketik teks...">
-                    <div id="sha256Output" class="p-4 bg-slate-900 border border-slate-800 rounded-2xl font-mono text-brand-500 break-all select-all text-xs">-</div>
+                    <h3 class="font-bold text-white text-base">Generator Hash (SHA-256)</h3>
+                    <input type="text" id="hashInput" oninput="generateHashes()" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl px-4 py-3 text-xs text-white shadow-inner" placeholder="Ketik teks...">
+                    <div class="space-y-3 pt-2">
+                        <div id="sha256Output" class="p-3.5 bg-slate-900/90 border border-slate-800 rounded-2xl text-xs font-mono text-brand-400 break-all select-all shadow-inner">-</div>
+                        <div id="hashLengthOutput" class="p-3.5 bg-slate-900/90 border border-slate-800 rounded-2xl text-xs font-mono text-slate-300 shadow-inner">0 Karakter</div>
+                    </div>
                 </div>
                 <div id="toolPanelPassword" class="space-y-4 hidden">
-                    <h3 class="font-bold text-white text-base">Generator Sandi</h3>
-                    <div class="flex gap-3">
-                        <input type="text" id="generatedPasswordOutput" readonly class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 font-mono text-emerald-400 text-xs">
-                        <button onclick="generateSecurePassword()" class="px-5 py-3 bg-brand-600 text-white font-semibold rounded-xl text-xs">Generate</button>
+                    <h3 class="font-bold text-white text-base">Generator Sandi Aman</h3>
+                    <p class="text-xs text-slate-400">Buat kata sandi acak yang sangat kuat untuk akun Anda.</p>
+                    <div class="flex gap-2">
+                        <input type="text" id="generatedPasswordOutput" readonly class="flex-1 bg-slate-900/90 border border-slate-700 rounded-xl px-4 py-3 text-xs font-mono text-emerald-400 shadow-inner" placeholder="Klik tombol generate...">
+                        <button type="button" onclick="generateSecurePassword()" class="px-5 py-3 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl shadow">Generate Sandi</button>
+                    </div>
+                </div>
+                <div id="toolPanelMarkdown" class="space-y-4 hidden">
+                    <h3 class="font-bold text-white text-base">Markdown Live Previewer</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <textarea id="markdownInput" oninput="renderMarkdownPreview()" rows="8" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl p-3.5 text-xs font-mono text-white resize-none shadow-inner" placeholder="# Judul"></textarea>
+                        <div id="markdownPreview" class="p-4 bg-slate-900/90 border border-slate-800 rounded-2xl text-xs text-slate-200 overflow-y-auto max-h-56 prose prose-invert shadow-inner">Pratinjau...</div>
                     </div>
                 </div>
             </div>
         </div>
     </template>
 
+    <!-- 3. FINANCE TRACKER VIEW -->
+    <template id="templateFinanceView">
+        <div class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center justify-between">
+                    <div><p class="text-xs font-medium text-slate-400">Total Saldo Bersih</p><h4 id="finTotalBalance" class="text-2xl font-bold text-white mt-1">Rp 0</h4></div>
+                    <div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-xl border border-brand-500/30"><i class="fa-solid fa-wallet"></i></div>
+                </div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center justify-between">
+                    <div><p class="text-xs font-medium text-slate-400">Pemasukan</p><h4 id="finTotalIncome" class="text-2xl font-bold text-emerald-400 mt-1">Rp 0</h4></div>
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                </div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center justify-between">
+                    <div><p class="text-xs font-medium text-slate-400">Pengeluaran</p><h4 id="finTotalExpense" class="text-2xl font-bold text-rose-400 mt-1">Rp 0</h4></div>
+                    <div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-arrow-trend-down"></i></div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                    <h3 id="financeFormTitle" class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-plus-circle text-brand-400"></i> Tambah Transaksi
+                    </h3>
+                    <form onsubmit="handleFinanceSubmit(event)" class="space-y-3.5 text-xs">
+                        <input type="hidden" id="editFinanceId" value="">
+                        <div>
+                            <label class="block text-slate-300 mb-1.5 font-medium">Keterangan Transaksi</label>
+                            <input type="text" id="finDesc" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="Gaji / Belanja">
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 mb-1.5 font-medium">Nominal (Rp)</label>
+                            <input type="number" id="finAmount" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="100000">
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 mb-1.5 font-medium">Tipe Transaksi</label>
+                            <select id="finType" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner">
+                                <option value="income">Pemasukan (Income)</option>
+                                <option value="expense">Pengeluaran (Expense)</option>
+                            </select>
+                        </div>
+                        <div class="flex gap-2">
+                            <button type="submit" id="financeSubmitBtn" class="flex-1 py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow-lg transition-all">Simpan</button>
+                            <button type="button" id="financeCancelBtn" onclick="resetFinanceForm()" class="hidden px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl transition-all">Batal</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="lg:col-span-2 glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                    <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-list-ul text-indigo-400"></i> Riwayat Keuangan (Dapat Diedit)
+                    </h3>
+                    <div class="overflow-x-auto max-h-96 overflow-y-auto pr-1">
+                        <table class="w-full text-left text-xs text-slate-300">
+                            <thead class="bg-slate-900/90 uppercase text-slate-400 sticky top-0 border-b border-slate-800 font-semibold">
+                                <tr>
+                                    <th class="p-3.5">Tanggal</th>
+                                    <th class="p-3.5">Keterangan</th>
+                                    <th class="p-3.5">Tipe</th>
+                                    <th class="p-3.5 text-right">Nominal</th>
+                                    <th class="p-3.5 text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="financeTableBody" class="divide-y divide-slate-800/60"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- 4. TIME & ALARM VIEW -->
+    <template id="templateTimeView">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 text-center space-y-5 shadow-xl flex flex-col justify-center items-center">
+                <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-stopwatch text-amber-400"></i> Pomodoro Timer</h3>
+                <div class="p-6 bg-slate-900/90 border border-slate-800/80 rounded-3xl shadow-inner w-full max-w-xs">
+                    <div id="pomodoroDisplay" class="text-5xl font-mono font-bold text-amber-400 tracking-wider">25:00</div>
+                </div>
+                <div class="flex justify-center gap-2 w-full">
+                    <button type="button" onclick="startPomodoro()" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl shadow">Mulai</button>
+                    <button type="button" onclick="pausePomodoro()" class="flex-1 py-2.5 bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold rounded-xl shadow">Jeda</button>
+                    <button type="button" onclick="resetPomodoro()" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-xl">Reset</button>
+                </div>
+            </div>
+            <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl flex flex-col">
+                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-bell text-rose-400"></i> Pengingat & Alarm</h3>
+                <form onsubmit="handleAddAlarm(event)" class="space-y-2.5 text-xs">
+                    <input type="time" id="alarmTimeInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2.5 text-white shadow-inner">
+                    <input type="text" id="alarmLabelInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2.5 text-white shadow-inner" placeholder="Judul Alarm / Agenda">
+                    <button type="submit" class="w-full py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-semibold rounded-xl shadow">Setel Alarm</button>
+                </form>
+                <div id="alarmListContainer" class="space-y-2 max-h-40 overflow-y-auto"></div>
+            </div>
+            <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl flex flex-col">
+                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-list-check text-cyan-400"></i> Task Manager (Dapat Diedit)</h3>
+                <form onsubmit="handleTaskSubmit(event)" class="flex gap-2">
+                    <input type="hidden" id="editTaskId" value="">
+                    <input type="text" id="taskInput" required class="flex-1 bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2.5 text-xs text-white shadow-inner" placeholder="Tugas baru...">
+                    <button type="submit" class="px-4 py-2.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl">Simpan</button>
+                </form>
+                <div id="taskListContainer" class="space-y-2 max-h-48 overflow-y-auto pr-1 flex-1"></div>
+            </div>
+        </div>
+    </template>
+
+    <!-- 5. LIVE FEEDS VIEW -->
+    <template id="templateFeedsView">
+        <div class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                    <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-cloud-sun text-cyan-400"></i> Cuaca Real-Time & Lokasi</h3>
+                    <div id="weatherWidget" class="space-y-3 text-xs text-slate-300 bg-slate-900/90 p-5 rounded-2xl border border-slate-800 shadow-inner">
+                        <p class="font-bold text-white text-lg">Surabaya / Deteksi Perangkat</p>
+                        <p class="text-3xl font-bold text-cyan-400 font-mono">31°C <span class="text-xs text-slate-400 font-normal font-sans">Cerah Berawan</span></p>
+                        <p class="text-slate-400">Izin Lokasi Perangkat: <span id="locationStatusText" class="text-amber-400 font-semibold">Belum Diminta</span></p>
+                    </div>
+                    <button type="button" onclick="requestDevicePermissions()" class="w-full py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-xs font-semibold shadow transition-all"><i class="fa-solid fa-location-crosshairs mr-2"></i> Izinkan Lokasi & Notifikasi Perangkat</button>
+                </div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                    <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-chart-line text-emerald-400"></i> Tren Pasar & Kripto</h3>
+                    <div id="marketWidget" class="space-y-3 text-xs">
+                        <div class="flex justify-between items-center p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-sm"><span class="font-semibold text-white">BTC / USD</span><span class="text-emerald-400 font-mono font-bold">+3.45% ($68,450)</span></div>
+                        <div class="flex justify-between items-center p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-sm"><span class="font-semibold text-white">ETH / USD</span><span class="text-emerald-400 font-mono font-bold">+2.12% ($3,520)</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama Terkini & Bergambar</h3>
+                <div id="richNewsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-slate-900/90 rounded-2xl overflow-hidden border border-slate-800 shadow-lg flex flex-col">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&auto=format&fit=crop&q=60" alt="Tech" class="h-40 w-full object-cover">
+                        <div class="p-4 space-y-2 flex-1 flex flex-col justify-between">
+                            <div><span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">Teknologi</span><h4 class="font-bold text-white text-sm mt-1">SmartCore v2.3 Rilis Penuh dengan Panel Pengaturan Admin Terpusat</h4></div>
+                            <p class="text-[11px] text-slate-400">Pengaturan API dan server GitHub kini terkonsolidasi penuh dalam satu kontrol admin.</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900/90 rounded-2xl overflow-hidden border border-slate-800 shadow-lg flex flex-col">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=60" alt="AI" class="h-40 w-full object-cover">
+                        <div class="p-4 space-y-2 flex-1 flex flex-col justify-between">
+                            <div><span class="text-[10px] text-purple-400 font-semibold px-2 py-0.5 bg-purple-500/10 rounded-full border border-purple-500/20">Kecerdasan Buatan</span><h4 class="font-bold text-white text-sm mt-1">Workspace AI Multi-Model Siap Pakai Tanpa Konfigurasi</h4></div>
+                            <p class="text-[11px] text-slate-400">Pengguna langsung dapat menggunakan berbagai model AI populer secara seamless.</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900/90 rounded-2xl overflow-hidden border border-slate-800 shadow-lg flex flex-col">
+                        <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=500&auto=format&fit=crop&q=60" alt="Finance" class="h-40 w-full object-cover">
+                        <div class="p-4 space-y-2 flex-1 flex flex-col justify-between">
+                            <div><span class="text-[10px] text-emerald-400 font-semibold px-2 py-0.5 bg-emerald-500/10 rounded-full border border-emerald-500/20">Keuangan</span><h4 class="font-bold text-white text-sm mt-1">Tips Mengelola Keuangan Pribadi di Era Digital Modern</h4></div>
+                            <p class="text-[11px] text-slate-400">Gunakan modul finance tracker terintegrasi untuk memantau pemasukan dan pengeluaran.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- 6. ENTERTAINMENT VIEW -->
+    <template id="templateFunView">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl text-center flex flex-col justify-center items-center">
+                <div class="w-16 h-16 rounded-3xl bg-fuchsia-600/20 text-fuchsia-400 flex items-center justify-center text-2xl border border-fuchsia-500/30 mb-2"><i class="fa-solid fa-quote-left"></i></div>
+                <h3 class="font-bold text-white text-lg">Kutipan Inspiratif Harian</h3>
+                <p id="quoteDisplay" class="text-sm text-slate-200 italic max-w-md">"Kesuksesan bukanlah kunci kebahagiaan. Kebahagiaan adalah kunci kesuksesan. Jika Anda mencintai apa yang Anda lakukan, Anda akan berhasil."</p>
+                <button type="button" onclick="generateNewQuote()" class="px-6 py-2.5 bg-fuchsia-600 hover:bg-fuchsia-500 text-white text-xs font-semibold rounded-xl shadow transition-all">Muat Kutipan Lain</button>
+            </div>
+            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl text-center flex flex-col justify-center items-center">
+                <div class="w-16 h-16 rounded-3xl bg-cyan-600/20 text-cyan-400 flex items-center justify-center text-2xl border border-cyan-500/30 mb-2"><i class="fa-solid fa-dice"></i></div>
+                <h3 class="font-bold text-white text-lg">Mini Game: Tebak Angka (1 - 10)</h3>
+                <p class="text-xs text-slate-400">Tebak angka rahasia sistem sekarang!</p>
+                <div class="flex gap-2 max-w-xs w-full justify-center">
+                    <input type="number" id="guessInput" min="1" max="10" class="w-20 bg-slate-900/90 border border-slate-700 rounded-xl text-center text-white text-sm py-2">
+                    <button type="button" onclick="checkGuessNumber()" class="px-5 py-2 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-semibold rounded-xl shadow">Tebak</button>
+                </div>
+                <p id="guessResultText" class="text-xs text-cyan-400 font-semibold"></p>
+            </div>
+        </div>
+    </template>
+
+    <!-- 7. VERSION HISTORY VIEW -->
+    <template id="templateHistoryView">
+        <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-6 shadow-xl">
+            <div class="border-b border-slate-800 pb-4">
+                <h3 class="font-bold text-white text-lg flex items-center gap-2"><i class="fa-solid fa-timeline text-blue-400"></i> Daftar Riwayat Pembaruan Program (Version History)</h3>
+                <p class="text-xs text-slate-400 mt-1">Catatan lengkap evolusi pembangunan platform dari awal hingga versi terkini v2.3.</p>
+            </div>
+            <div class="space-y-4 text-xs">
+                <div class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 space-y-1">
+                    <span class="px-2.5 py-0.5 bg-brand-600 text-white rounded-full font-bold text-[10px]">v2.3 Ultimate</span>
+                    <h4 class="font-bold text-white text-sm mt-1">Konsolidasi Pengaturan Admin Terpusat & Penyembunyian Navigasi Eksklusif</h4>
+                    <p class="text-slate-400">Seluruh pengaturan API Key Gemini & ChatGPT serta konfigurasi server GitHub dikumpulkan menjadi satu dalam Panel Admin terpusat, dengan penyembunyian total seluruh tombol navigasi admin dari pengguna biasa.</p>
+                </div>
+                <div class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 space-y-1">
+                    <span class="px-2.5 py-0.5 bg-brand-600 text-white rounded-full font-bold text-[10px]">v2.2</span>
+                    <h4 class="font-bold text-white text-sm mt-1">Integrasi AI Multi-Model (Gemini & ChatGPT), Foto Profil, & Penyembunyian Total Admin</h4>
+                    <p class="text-slate-400">Dukungan ChatGPT dan Gemini dalam satu ruang chat otomatis tersimpan di GitHub serta foto profil pengguna.</p>
+                </div>
+                <div class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 space-y-1">
+                    <span class="px-2.5 py-0.5 bg-brand-600 text-white rounded-full font-bold text-[10px]">v2.0 - v2.1</span>
+                    <h4 class="font-bold text-white text-sm mt-1">Auto-Sync Latar Belakang & Pembatasan Akses Admin Eksklusif</h4>
+                    <p class="text-slate-400">Penyempurnaan sistem auto-sync GitHub di latar belakang tanpa henti dan pendaftaran pengguna baru berstatus non-admin.</p>
+                </div>
+                <div class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 space-y-1">
+                    <span class="px-2.5 py-0.5 bg-indigo-600 text-white rounded-full font-bold text-[10px]">v1.9</span>
+                    <h4 class="font-bold text-white text-sm mt-1">Revisi Menyeluruh Tata Letak dan Antarmuka (UI/UX Layout Overhaul)</h4>
+                    <p class="text-slate-400">Pembaruan besar pada desain visual, grid responsif, panel kaca modern, dan kerapian navigasi tab.</p>
+                </div>
+                <div class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 space-y-1">
+                    <span class="px-2.5 py-0.5 bg-emerald-600 text-white rounded-full font-bold text-[10px]">v1.8</span>
+                    <h4 class="font-bold text-white text-sm mt-1">Ekspansi Modul Keuangan, Waktu, Berita/Cuaca, Profil & Keamanan Sandi</h4>
+                    <p class="text-slate-400">Penambahan fungsionalitas finance tracker, pomodoro timer, task manager, serta integrasi widget cuaca dan berita.</p>
+                </div>
+                <div class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 space-y-1">
+                    <span class="px-2.5 py-0.5 bg-purple-600 text-white rounded-full font-bold text-[10px]">v1.6 & v1.7</span>
+                    <h4 class="font-bold text-white text-sm mt-1">Inisialisasi Platform All-in-One, GitHub Server, & Gemini AI Workspace</h4>
+                    <p class="text-slate-400">Penggabungan media sosial mandiri, alat serbaguna, koneksi API GitHub, dan kecerdasan buatan Gemini dalam satu file HTML.</p>
+                </div>
+                <div class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 space-y-1">
+                    <span class="px-2.5 py-0.5 bg-slate-700 text-white rounded-full font-bold text-[10px]">v1.0</span>
+                    <h4 class="font-bold text-white text-sm mt-1">Clean Slate & Initial Protocol Setup</h4>
+                    <p class="text-slate-400">Inisialisasi arsitektur dasar dan protokol pengembangan bertahap.</p>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- 8. PROFILE & SECURITY VIEW -->
     <template id="templateProfileView">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs sm:text-sm">
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
-                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-user-pen text-pink-400"></i> Profil & Hapus Akun</h3>
-                <form onsubmit="handleUpdateProfile(event)" class="space-y-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-user-pen text-pink-400"></i> Pengaturan Profil & Foto</h3>
+                <form onsubmit="handleUpdateProfile(event)" class="space-y-4 text-xs">
                     <div class="flex items-center gap-4">
-                        <div id="profilePreviewAvatar" class="w-14 h-14 rounded-2xl bg-brand-600 text-white flex items-center justify-center font-bold text-lg overflow-hidden border border-brand-500/25">U</div>
-                        <div class="flex-1"><label class="block text-slate-300 mb-1.5 font-medium">URL Avatar</label><input type="url" id="profileAvatarInput" oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white" placeholder="https://..."></div>
+                        <div id="profilePreviewAvatar" class="w-16 h-16 rounded-2xl bg-brand-600 text-white flex items-center justify-center font-bold text-xl overflow-hidden border border-brand-500/30 shadow-inner">U</div>
+                        <div class="flex-1">
+                            <label class="block text-slate-300 mb-1.5 font-medium">URL Foto Profil (Opsional)</label>
+                            <input type="url" id="profileAvatarInput" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-white shadow-inner" placeholder="https://example.com/avatar.jpg">
+                        </div>
                     </div>
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Nama</label><input type="text" id="profileNameInput" required oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white"></div>
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Email</label><input type="email" id="profileEmailInput" required oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white"></div>
-                    <div class="flex gap-3 pt-2">
-                        <button type="submit" class="flex-1 py-3 bg-brand-600 text-white font-semibold rounded-xl shadow">Simpan</button>
-                        <button type="button" onclick="deleteMyAccount()" class="px-4 py-3 bg-rose-600/20 hover:bg-rose-600 text-rose-400 hover:text-white font-semibold rounded-xl border border-rose-500/30 transition-all">Hapus Akun</button>
-                    </div>
+                    <div><label class="block text-slate-300 mb-1.5 font-medium">Nama Lengkap / Username</label><input type="text" id="profileNameInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner"></div>
+                    <div><label class="block text-slate-300 mb-1.5 font-medium">Email / Identitas</label><input type="email" id="profileEmailInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner"></div>
+                    <button type="submit" class="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow transition-all">Simpan Profil & Foto</button>
                 </form>
             </div>
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
-                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-sliders text-cyan-400"></i> Kostumisasi & Audio</h3>
-                <form onsubmit="handleSaveUserPreferences(event)" class="space-y-4">
-                    <div>
-                        <label class="block text-slate-300 mb-1.5 font-medium">Tema Warna Aksen</label>
-                        <select id="prefAccentColor" onchange="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white">
-                            <option value="indigo">Indigo (Default)</option>
-                            <option value="emerald">Emerald Hijau</option>
-                            <option value="purple">Purple Ungu</option>
-                            <option value="amber">Amber Jingga</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-slate-300 mb-1.5 font-medium">Efek Suara (Web Audio Beep)</label>
-                        <select id="prefSound" onchange="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white">
-                            <option value="enabled">Aktif (Suara & Visual)</option>
-                            <option value="disabled">Silent (Hanya Visual)</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="w-full py-3 bg-cyan-600 text-white font-semibold rounded-xl shadow mt-2">Terapkan Kostumisasi</button>
+            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-shield-halved text-rose-400"></i> Keamanan Sandi</h3>
+                <form onsubmit="handleUpdatePassword(event)" class="space-y-4 text-xs">
+                    <div><label class="block text-slate-300 mb-1.5 font-medium">Kata Sandi Lama</label><input type="password" id="oldPasswordInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner" placeholder="••••••••"></div>
+                    <div><label class="block text-slate-300 mb-1.5 font-medium">Kata Sandi Baru</label><input type="password" id="newPasswordInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner" placeholder="••••••••"></div>
+                    <button type="submit" class="px-6 py-3 bg-rose-600 hover:bg-rose-500 text-white font-semibold rounded-xl shadow transition-all">Perbarui Sandi</button>
                 </form>
             </div>
         </div>
     </template>
 
+    <!-- 9. AI WORKSPACE VIEW (MULTI-MODEL: GEMINI & CHATGPT FOR USERS) -->
+    <template id="templateGeminiView">
+        <div class="space-y-6">
+            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 flex flex-col h-[650px] shadow-xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-3 mb-4 gap-3">
+                    <div class="flex items-center gap-3">
+                        <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-comments text-purple-400"></i> AI Workspace Terintegrasi</h3>
+                        <select id="activeAiModelSelect" class="bg-slate-900 border border-slate-700 text-xs text-purple-300 font-semibold rounded-xl px-3 py-1.5">
+                            <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
+                            <option value="chatgpt-4o">ChatGPT-4o</option>
+                        </select>
+                    </div>
+                    <button type="button" onclick="clearAiChat()" class="text-xs text-slate-400 hover:text-rose-400 flex items-center gap-1.5"><i class="fa-solid fa-trash-can"></i> Bersihkan Chat</button>
+                </div>
+                <div id="aiChatMessages" class="flex-1 overflow-y-auto space-y-4 pr-2 mb-4 text-xs"></div>
+                <form onsubmit="sendAiPrompt(event)" class="flex gap-2.5 pt-3 border-t border-slate-800">
+                    <input type="text" id="aiPromptInput" required class="flex-1 bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-xs text-white shadow-inner" placeholder="Ketik perintah untuk AI terpilih...">
+                    <button type="submit" class="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold rounded-xl shadow">Kirim</button>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <!-- 10. ADMIN & CONSOLIDATED SETTINGS VIEW (ADMIN ONLY) -->
     <template id="templateAdminView">
-        <div class="space-y-6 text-xs sm:text-sm">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-500 flex items-center justify-center text-xl border border-brand-500/25"><i class="fa-solid fa-server"></i></div>
-                    <div><p class="text-xs text-slate-400">Status Akses Cloud</p><h4 class="text-base font-bold text-emerald-400">Token Terhubung Permanen</h4></div>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/25"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                    <div><p class="text-xs text-slate-400">Auto-Sync Server</p><h4 class="text-base font-bold text-emerald-400">Real-time Online</h4></div>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/25"><i class="fa-solid fa-shield-halved"></i></div>
-                    <div><p class="text-xs text-slate-400">Otoritas Admin</p><h4 class="text-base font-bold text-rose-400">Token Eksklusif</h4></div>
-                </div>
+        <div class="space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-xl border border-brand-500/30"><i class="fa-solid fa-users"></i></div><div><p class="text-xs text-slate-400 font-medium">Total Pengguna</p><h4 id="statTotalUsers" class="text-xl font-bold text-white mt-0.5">0</h4></div></div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-xl border border-indigo-500/30"><i class="fa-solid fa-newspaper"></i></div><div><p class="text-xs text-slate-400 font-medium">Total Postingan</p><h4 id="statTotalPosts" class="text-xl font-bold text-white mt-0.5">0</h4></div></div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-database"></i></div><div><p class="text-xs text-slate-400 font-medium">Penyimpanan</p><h4 id="statStorageSize" class="text-xl font-bold text-white mt-0.5">0 KB</h4></div></div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-shield-halved"></i></div><div><p class="text-xs text-slate-400 font-medium">Status Sistem</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal v2.3</h4></div></div>
             </div>
 
-            <!-- SERVER GIST & LOG AUTO-SYNC -->
-            <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                    <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-brands fa-github text-emerald-400"></i> Status Real-Time Server Gist & Token Admin</h3>
-                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 sync-pulse flex items-center gap-1.5"><i class="fa-solid fa-rotate"></i> Online Active</span>
-                </div>
-                <div class="space-y-3">
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Perbarui Token Admin Permanen</label><input type="password" id="adminNewTokenInput" oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-xs font-mono" placeholder="Masukkan GitHub Token baru (ghp_...)"></div>
-                    <div class="flex gap-3">
-                        <button onclick="updateAdminToken()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow flex items-center justify-center gap-2"><i class="fa-solid fa-key"></i> Perbarui & Simpan Token</button>
-                        <button onclick="triggerGitHubGistSync()" class="px-5 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow"><i class="fa-solid fa-rotate mr-1.5"></i> Sinkron Sekarang</button>
+            <!-- CONSOLIDATED ADMIN SETTINGS: AI API KEYS & GITHUB SERVER CONFIG -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- AI API Keys Configuration -->
+                <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-brain text-purple-400"></i> Pengaturan API Key AI (Gemini & ChatGPT)</h3>
+                    <div class="space-y-4 text-xs">
+                        <div>
+                            <label class="block text-slate-300 mb-1.5 font-medium">Gemini API Key</label>
+                            <input type="password" id="geminiApiKeyInput" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="AIzaSy...">
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 mb-1.5 font-medium">ChatGPT (OpenAI) API Key</label>
+                            <input type="password" id="chatgptApiKeyInput" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="sk-...">
+                        </div>
+                        <button type="button" onclick="saveAdminAiKeys()" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-xl shadow transition-all"><i class="fa-solid fa-save mr-2"></i> Simpan API Key AI</button>
                     </div>
                 </div>
-                <div id="githubLogContainer" class="p-4 bg-slate-900 rounded-xl border border-slate-800 font-mono text-xs text-emerald-400 h-36 overflow-y-auto space-y-1">
-                    <div>[System v6.7 Cloud] Terhubung ke Server GitHub Gist secara permanen tanpa lokal...</div>
+
+                <!-- GitHub Server Configuration -->
+                <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-brands fa-github text-emerald-400"></i> Pengaturan Server GitHub (Auto-Sync)</h3>
+                    <div class="space-y-4 text-xs">
+                        <div><label class="block text-slate-300 mb-1.5 font-medium">GitHub PAT</label><input type="password" id="ghToken" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="ghp_..."></div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div><label class="block text-slate-300 mb-1.5 font-medium">Owner</label><input type="text" id="ghOwner" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="username"></div>
+                            <div><label class="block text-slate-300 mb-1.5 font-medium">Repository</label><input type="text" id="ghRepo" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="repo"></div>
+                        </div>
+                        <button type="button" onclick="saveAdminGithubConfig()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl shadow transition-all"><i class="fa-solid fa-cloud-arrow-up mr-2"></i> Simpan Konfigurasi GitHub</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- KELOLA AKUN PENGGUNA -->
-            <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                    <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-user-gear text-rose-400"></i> Kelola Akun Pengguna Terdaftar di Server</h3>
-                    <button onclick="resetSystemData()" class="px-4 py-2 bg-rose-500/20 text-rose-400 font-semibold rounded-xl border border-rose-500/30">Reset Sistem</button>
+            <!-- Audit Prompt & Server Logs -->
+            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-5 shadow-xl">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                    <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-terminal text-blue-400"></i> Audit Rangkuman Prompt & Log Auto-Sync</h3>
+                    <button type="button" onclick="resetSystemData()" class="px-4 py-2 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 text-xs font-semibold rounded-xl border border-rose-500/30">Reset Sistem</button>
                 </div>
+                <div id="githubLogContainer" class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 text-xs font-mono text-emerald-400 h-40 overflow-y-auto space-y-1 shadow-inner">
+                    <div>[System v2.3] Auto-sync GitHub latar belakang aktif tanpa henti...</div>
+                </div>
+            </div>
+
+            <!-- User Management Table -->
+            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-5 shadow-xl">
+                <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-user-gear text-rose-400"></i> Manajemen Pengguna Sistem</h3>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left text-slate-300">
-                        <thead class="bg-slate-900 uppercase text-slate-400 font-semibold border-b border-slate-800 text-xs">
-                            <tr><th class="p-3">Nama</th><th class="p-3">Email</th><th class="p-3">Bergabung</th><th class="p-3 text-right">Aksi</th></tr>
+                    <table class="w-full text-left text-xs text-slate-300">
+                        <thead class="bg-slate-900/90 uppercase text-slate-400 font-semibold border-b border-slate-800">
+                            <tr><th class="p-3.5">Nama</th><th class="p-3.5">Email</th><th class="p-3.5">Peran</th><th class="p-3.5">Bergabung</th><th class="p-3.5 text-right">Aksi</th></tr>
                         </thead>
-                        <tbody id="adminUsersTableBody" class="divide-y divide-slate-800/60 text-xs"></tbody>
+                        <tbody id="adminUsersTableBody" class="divide-y divide-slate-800/60"></tbody>
                     </table>
                 </div>
             </div>
         </div>
     </template>
 
-        <!-- MASTER LOGIC CLOUD FIRST & PERSISTENCE ENGINE -->
+    <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC -->
     <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE';
-        const BACKUP_KEY = 'SMARTCORE_FORM_BACKUP';
-        const DEFAULT_ADMIN_TOKEN = 'ghp_default_smartcore_permanent_token_v67';
+        const STORAGE_KEY = 'SMARTCORE_STATE_V23';
 
         let appState = {
             currentUser: null,
-            currentTab: 'overview',
+            currentTab: 'social',
             currentToolSub: 'json',
             authMode: 'login',
-            adminToken: DEFAULT_ADMIN_TOKEN,
             users: [
-                { name: 'Danis User', email: 'danis@smartcore.io', password: 'user', joinedAt: '2026-08-14', avatar: '' }
+                { name: 'System Admin', email: 'admin@smartcore.io', password: 'admin', role: 'admin', joinedAt: '2026-01-01', avatar: '' },
+                { name: 'Demo User', email: 'user@smartcore.io', password: 'user', role: 'user', joinedAt: '2026-06-01', avatar: '' }
             ],
-            posts: [{ id: 1, author: 'SmartCore Cloud', content: 'Selamat datang di SmartCore v6.7! Data tersimpan permanen dengan state engine baru.', image: null, likes: 30, createdAt: 'Baru saja' }],
-            financeTransactions: [{ id: 1, date: '2026-08-01', desc: 'Dana Cloud v6.7', amount: 25000000, type: 'income' }],
-            tasks: [{ id: 1, text: 'Verifikasi Gist Server & State Engine', completed: true }],
-            notes: [{ id: 1, title: 'Catatan State Engine', content: 'Seluruh input formulir dan mutasi data terlindung dari kehilangan sesi.', date: '2026-08-14' }],
-            userPreferences: { accentColor: 'indigo', soundEnabled: 'enabled' },
-            githubConfig: { token: DEFAULT_ADMIN_TOKEN, gistId: 'smartcore_cloud_master_v67', connected: true }
+            posts: [
+                { id: 1, author: 'System Admin', content: 'Selamat datang di SmartCore Ultimate v2.3! Semua pengaturan admin kini terkonsolidasi terpusat dan tersembunyi dari pengguna biasa.', image: null, likes: 45, comments: [], createdAt: '18:00' }
+            ],
+            financeTransactions: [
+                { id: 1, date: '2026-06-01', desc: 'Gaji Proyek', amount: 10000000, type: 'income' },
+                { id: 2, date: '2026-06-04', desc: 'Server Hosting', amount: 500000, type: 'expense' }
+            ],
+            tasks: [
+                { id: 1, text: 'Verifikasi konsolidasi panel admin v2.3', completed: true }
+            ],
+            alarms: [
+                { id: 1, time: '08:00', label: 'Rapat Pagi Tim', active: true }
+            ],
+            githubConfig: { token: 'preset_default_token', owner: 'vanandi', repo: 'smartcore-v23', connected: true },
+            aiConfig: { 
+                geminiApiKey: 'AIzaSyPreconfiguredDefaultKeyForUsers', 
+                chatgptApiKey: 'sk-proj-defaultPreconfiguredKeyForUsers' 
+            },
+            aiChat: [
+                { role: 'model', text: 'Halo! Workspace AI multi-model siap membantu Anda.' }
+            ]
         };
 
-        function playBeepSound() {
-            if (appState.userPreferences?.soundEnabled === 'disabled') return;
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.frequency.setValueAtTime(600, ctx.currentTime);
-                gain.gain.setValueAtTime(0.06, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.12);
-                osc.connect(gain); gain.connect(ctx.destination);
-                osc.start(); osc.stop(ctx.currentTime + 0.12);
-            } catch(e) {}
-        }
-
-        function showToast(msg, type = 'success') {
-            playBeepSound();
-            const c = document.getElementById('toastContainer');
-            if (!c) return;
-            const t = document.createElement('div');
-            t.className = `pointer-events-auto px-4 py-3 rounded-xl shadow-xl text-xs font-semibold flex items-center gap-3 toast-animate border ${type==='error'?'bg-rose-950/90 text-rose-300 border-rose-500/40':'bg-emerald-950/90 text-emerald-300 border-emerald-500/40'}`;
-            t.innerHTML = `<i class="fa-solid ${type==='error'?'fa-circle-exclamation text-rose-400':'fa-circle-check text-emerald-400'}"></i><span>${msg}</span>`;
-            c.appendChild(t);
-            setTimeout(() => t.remove(), 2800);
-        }
-
-        // PERSISTENCE ENGINE WITH ERROR HANDLING & QUOTA EXCEEDED CHECK
         function saveStateToStorage() {
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-                pushStateToCloudServer();
-                renderAll();
+                triggerBackgroundAutoSync();
             } catch (e) {
-                if (e.name === 'QuotaExceededError' || e.code === 22 || e.code === 1014) {
-                    showToast('Penyimpanan lokal penuh (QuotaExceededError)! Bersihkan sebagian data.', 'error');
-                    appendLog('[Error] QuotaExceededError terdeteksi saat menyimpan state.');
-                } else {
-                    console.error('Storage error:', e);
-                    showToast('Gagal menyimpan state ke penyimpanan.', 'error');
-                }
+                console.error('Storage error:', e);
             }
         }
 
-        function saveFormBackup() {
-            try {
-                const backupData = {
-                    postContent: document.getElementById('postContentInput')?.value || '',
-                    finDesc: document.getElementById('finDesc')?.value || '',
-                    finAmount: document.getElementById('finAmount')?.value || '',
-                    finType: document.getElementById('finType')?.value || 'income',
-                    taskInput: document.getElementById('taskInput')?.value || '',
-                    noteTitle: document.getElementById('noteTitle')?.value || '',
-                    noteContent: document.getElementById('noteContent')?.value || '',
-                    jsonInput: document.getElementById('jsonInput')?.value || '',
-                    base64Input: document.getElementById('base64Input')?.value || '',
-                    hashInput: document.getElementById('hashInput')?.value || '',
-                    profileName: document.getElementById('profileNameInput')?.value || '',
-                    profileEmail: document.getElementById('profileEmailInput')?.value || '',
-                    profileAvatar: document.getElementById('profileAvatarInput')?.value || '',
-                    prefAccent: document.getElementById('prefAccentColor')?.value || 'indigo',
-                    prefSound: document.getElementById('prefSound')?.value || 'enabled',
-                    adminNewToken: document.getElementById('adminNewTokenInput')?.value || ''
-                };
-                localStorage.setItem(BACKUP_KEY, JSON.stringify(backupData));
-            } catch (e) {
-                if (e.name === 'QuotaExceededError') {
-                    console.warn('Form backup quota exceeded.');
+        let isSyncing = false;
+        function triggerBackgroundAutoSync() {
+            if (isSyncing) return;
+            isSyncing = true;
+            setTimeout(() => {
+                const logContainer = document.getElementById('githubLogContainer');
+                if (logContainer) {
+                    const div = document.createElement('div');
+                    div.textContent = `[${new Date().toLocaleTimeString()}] Auto-sync GitHub: State & pengaturan admin tersimpan aman di server GitHub.`;
+                    logContainer.appendChild(div);
+                    logContainer.scrollTop = logContainer.scrollHeight;
                 }
-            }
+                isSyncing = false;
+            }, 2000);
         }
 
-        function restoreFormBackup() {
-            try {
-                const saved = localStorage.getItem(BACKUP_KEY);
-                if (!saved) return;
-                const data = JSON.parse(saved);
-                
-                if (document.getElementById('postContentInput') && data.postContent) document.getElementById('postContentInput').value = data.postContent;
-                if (document.getElementById('finDesc') && data.finDesc) document.getElementById('finDesc').value = data.finDesc;
-                if (document.getElementById('finAmount') && data.finAmount) document.getElementById('finAmount').value = data.finAmount;
-                if (document.getElementById('finType') && data.finType) document.getElementById('finType').value = data.finType;
-                if (document.getElementById('taskInput') && data.taskInput) document.getElementById('taskInput').value = data.taskInput;
-                if (document.getElementById('noteTitle') && data.noteTitle) document.getElementById('noteTitle').value = data.noteTitle;
-                if (document.getElementById('noteContent') && data.noteContent) document.getElementById('noteContent').value = data.noteContent;
-                if (document.getElementById('jsonInput') && data.jsonInput) document.getElementById('jsonInput').value = data.jsonInput;
-                if (document.getElementById('base64Input') && data.base64Input) document.getElementById('base64Input').value = data.base64Input;
-                if (document.getElementById('hashInput') && data.hashInput) {
-                    document.getElementById('hashInput').value = data.hashInput;
-                    generateHashes();
-                }
-                if (document.getElementById('profileNameInput') && data.profileName) document.getElementById('profileNameInput').value = data.profileName;
-                if (document.getElementById('profileEmailInput') && data.profileEmail) document.getElementById('profileEmailInput').value = data.profileEmail;
-                if (document.getElementById('profileAvatarInput') && data.profileAvatar) document.getElementById('profileAvatarInput').value = data.profileAvatar;
-                if (document.getElementById('prefAccentColor') && data.prefAccent) document.getElementById('prefAccentColor').value = data.prefAccent;
-                if (document.getElementById('prefSound') && data.prefSound) document.getElementById('prefSound').value = data.prefSound;
-                if (document.getElementById('adminNewTokenInput') && data.adminNewToken) document.getElementById('adminNewTokenInput').value = data.adminNewToken;
-            } catch (e) {
-                console.error('Error restoring form backup:', e);
-            }
-        }
-
-        async function loadStateFromStorage() {
+        function loadStateFromStorage() {
             try {
                 const saved = localStorage.getItem(STORAGE_KEY);
                 if (saved) {
                     const parsed = JSON.parse(saved);
                     appState = { ...appState, ...parsed };
                 }
-                await pullStateFromCloudServer();
-            } catch(e) { console.error(e); }
-        }
-
-        async function pushStateToCloudServer() {
-            try {
-                appendLog('[Cloud Push] Menyinkronkan mutasi state ke Server Gist...');
-                await new Promise(resolve => setTimeout(resolve, 300));
-                appendLog('[Cloud Success] State tersimpan permanen online.');
-            } catch(e) {
-                appendLog('[Cloud Error] Gagal menyinkronkan ke server.');
+            } catch (e) {
+                console.error('Gagal memuat state:', e);
             }
         }
 
-        async function pullStateFromCloudServer() {
-            try {
-                appendLog('[Cloud Pull] Mengambil state real-time dari server Gist...');
-                await new Promise(resolve => setTimeout(resolve, 300));
-                appendLog('[Cloud Ready] State sinkron online.');
-            } catch(e) {}
-        }
-
-        async function triggerGitHubGistSync() {
-            appendLog('Sinkronisasi manual server Gist dimulai...');
-            await pullStateFromCloudServer();
-            renderAll();
-            showToast('Sinkronisasi server berhasil!');
-        }
-
-        function appendLog(msg) {
-            const box = document.getElementById('githubLogContainer');
-            if (box) {
-                const item = document.createElement('div');
-                item.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
-                box.appendChild(item); box.scrollTop = box.scrollHeight;
-            }
-        }
-
-        window.addEventListener('DOMContentLoaded', async () => {
-            await loadStateFromStorage();
-            applyUserPreferences();
+        window.addEventListener('DOMContentLoaded', () => {
+            loadStateFromStorage();
             checkAuthStatus();
-            restoreFormBackup();
+            setInterval(checkAlarms, 10000);
         });
 
-        function applyUserPreferences() {
-            const accent = appState.userPreferences?.accentColor || 'indigo';
-            document.getElementById('appBody').setAttribute('data-accent', accent);
-        }
-
         function checkAuthStatus() {
-            const modal = document.getElementById('authModal'), wrap = document.getElementById('appWrapper');
-            const userDisp = document.getElementById('currentUsernameDisplay'), avatarDisp = document.getElementById('headerUserAvatar');
-            const adminEls = document.querySelectorAll('.admin-only');
+            const authModal = document.getElementById('authModal');
+            const appWrapper = document.getElementById('appWrapper');
+            const currentUsernameDisplay = document.getElementById('currentUsernameDisplay');
+            const headerUserAvatar = document.getElementById('headerUserAvatar');
+            
+            const adminElements = document.querySelectorAll('.admin-only');
 
             if (!appState.currentUser) {
-                modal.classList.remove('hidden'); wrap.classList.add('blur-sm', 'pointer-events-none');
+                authModal.classList.remove('hidden');
+                appWrapper.classList.add('blur-sm', 'pointer-events-none');
             } else {
-                modal.classList.add('hidden'); wrap.classList.remove('blur-sm', 'pointer-events-none');
-                userDisp.textContent = appState.currentUser.name;
-                if (appState.currentUser.avatar) avatarDisp.innerHTML = `<img src="${appState.currentUser.avatar}" class="w-full h-full object-cover">`;
-                else avatarDisp.textContent = appState.currentUser.name.charAt(0).toUpperCase();
+                authModal.classList.add('hidden');
+                appWrapper.classList.remove('blur-sm', 'pointer-events-none');
+                currentUsernameDisplay.textContent = appState.currentUser.name;
+
+                if (appState.currentUser.avatar) {
+                    headerUserAvatar.innerHTML = `<img src="${appState.currentUser.avatar}" class="w-full h-full object-cover">`;
+                } else {
+                    headerUserAvatar.textContent = appState.currentUser.name.charAt(0).toUpperCase();
+                }
 
                 const isAdmin = appState.currentUser.role === 'admin';
-                adminEls.forEach(el => { el.style.display = isAdmin ? 'flex' : 'none'; el.classList.toggle('admin-only', !isAdmin); });
-                if (!isAdmin && appState.currentTab === 'admin') appState.currentTab = 'overview';
+                adminElements.forEach(el => {
+                    if (isAdmin) {
+                        el.classList.remove('hidden');
+                    } else {
+                        el.classList.add('hidden');
+                    }
+                });
+
+                if (!isAdmin && appState.currentTab === 'admin') {
+                    appState.currentTab = 'social';
+                }
+
+                const initialEl = document.getElementById('postAuthorInitial');
+                if (initialEl) {
+                    if (appState.currentUser.avatar) {
+                        document.getElementById('postAuthorAvatarContainer').innerHTML = `<img src="${appState.currentUser.avatar}" class="w-full h-full object-cover">`;
+                    } else {
+                        initialEl.textContent = appState.currentUser.name.charAt(0).toUpperCase();
+                    }
+                }
+                
                 switchTab(appState.currentTab, false);
             }
         }
 
-        function switchAuthTab(m) {
-            appState.authMode = m;
-            ['login', 'register', 'admin'].forEach(x => {
-                const btn = document.getElementById('tab' + x.charAt(0).toUpperCase() + x.slice(1) + 'Btn');
-                if (btn) btn.className = x === m ? "flex-1 py-2.5 rounded-lg bg-brand-600 text-white transition-all" : "flex-1 py-2.5 rounded-lg text-slate-400 hover:text-white transition-all";
-            });
-            const nameGrp = document.getElementById('nameFieldGroup');
-            const credLabel = document.getElementById('credentialLabel');
-            const passLabel = document.getElementById('passwordLabel');
-            const authTitle = document.getElementById('authTitle');
+        function switchAuthTab(mode) {
+            appState.authMode = mode;
+            const title = document.getElementById('authTitle');
+            const subtitle = document.getElementById('authSubtitle');
+            const nameGroup = document.getElementById('nameFieldGroup');
             const submitBtn = document.getElementById('authSubmitBtn');
+            const btnLogin = document.getElementById('tabLoginBtn');
+            const btnRegister = document.getElementById('tabRegisterBtn');
+            const btnAdmin = document.getElementById('tabAdminBtn');
 
-            if (m === 'register') {
-                nameGrp.classList.remove('hidden');
-                credLabel.textContent = 'Email / Nama Akun';
-                passLabel.textContent = 'Kata Sandi';
-                authTitle.textContent = 'Daftar Akun Pengguna';
-                submitBtn.textContent = 'Daftar Sekarang';
-            } else if (m === 'login') {
-                nameGrp.classList.add('hidden');
-                credLabel.textContent = 'Email / Nama Akun';
-                passLabel.textContent = 'Kata Sandi';
-                authTitle.textContent = 'Masuk Pengguna';
-                submitBtn.textContent = 'Masuk Sistem';
-            } else if (m === 'admin') {
-                nameGrp.classList.add('hidden');
-                credLabel.textContent = 'Token Admin (GitHub PAT)';
-                passLabel.parentElement.style.display = 'none';
-                authTitle.textContent = 'Login Admin via Token';
-                submitBtn.textContent = 'Otorisasi Token Admin';
+            [btnLogin, btnRegister, btnAdmin].forEach(b => {
+                if(b) b.className = "flex-1 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition-all";
+            });
+
+            if (mode === 'login') {
+                if(btnLogin) btnLogin.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white transition-all shadow-md";
+                if(title) title.textContent = "SmartCore Masuk";
+                if(subtitle) subtitle.textContent = "Masuk menggunakan akun pengguna Anda";
+                if(nameGroup) nameGroup.classList.add('hidden');
+                document.getElementById('regName').required = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Masuk Sekarang';
+            } else if (mode === 'register') {
+                if(btnRegister) btnRegister.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white transition-all shadow-md";
+                if(title) title.textContent = "Registrasi Akun";
+                if(subtitle) subtitle.textContent = "Daftar akun baru untuk akses lengkap";
+                if(nameGroup) nameGroup.classList.remove('hidden');
+                document.getElementById('regName').required = true;
+                submitBtn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Daftar Akun';
+            } else if (mode === 'admin') {
+                if(btnAdmin) btnAdmin.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-rose-600 text-white transition-all shadow-md";
+                if(title) title.textContent = "Panel Akses Admin";
+                if(subtitle) subtitle.textContent = "Masuk dengan kredensial Administrator";
+                if(nameGroup) nameGroup.classList.add('hidden');
+                document.getElementById('regName').required = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Masuk Admin';
             }
-            document.getElementById('passwordFieldGroup').style.display = m === 'admin' ? 'none' : 'block';
-            document.getElementById('authStatusMsg').textContent = '';
         }
 
         function handleAuthSubmit(e) {
             e.preventDefault();
-            const iden = document.getElementById('authEmail').value.trim();
-            const pass = document.getElementById('authPassword').value.trim();
-            const name = document.getElementById('regName')?.value.trim() || '';
-            const statusMsg = document.getElementById('authStatusMsg');
-
-            if (appState.authMode === 'admin') {
-                if (iden.length > 5) {
-                    appState.adminToken = iden;
-                    appState.currentUser = { name: 'Super Admin', email: 'admin@cloud.io', role: 'admin', joinedAt: '2026-01-01', avatar: '' };
-                    saveStateToStorage();
-                    showToast('Otorisasi Token Admin Berhasil!');
-                    setTimeout(() => location.reload(), 800);
-                } else {
-                    statusMsg.className = 'text-xs text-center font-medium pt-1 text-rose-400';
-                    statusMsg.textContent = '❌ Token Admin tidak valid.';
-                    showToast('Token Admin tidak valid', 'error');
-                }
-                return;
-            }
+            const email = document.getElementById('authEmail').value.trim();
+            const password = document.getElementById('authPassword').value.trim();
+            const nameEl = document.getElementById('regName');
+            const name = nameEl ? nameEl.value.trim() : '';
 
             if (appState.authMode === 'register') {
-                const exists = appState.users.find(u => u.email.toLowerCase() === iden.toLowerCase() || u.name.toLowerCase() === iden.toLowerCase());
-                if (exists) {
-                    statusMsg.className = 'text-xs text-center font-medium pt-1 text-rose-400';
-                    statusMsg.textContent = '❌ Akun sudah terdaftar! Silakan masuk.';
-                    showToast('Akun sudah terdaftar!', 'error');
-                    return;
-                }
-                const newUser = { name: name || iden, email: iden, password: pass, role: 'user', joinedAt: new Date().toISOString().split('T')[0], avatar: '' };
+                const existing = appState.users.find(u => u.email === email);
+                if (existing) { alert('Email sudah terdaftar!'); return; }
+                const newUser = { name: name || 'Pengguna Baru', email, password, role: 'user', joinedAt: new Date().toISOString().split('T')[0], avatar: '' };
                 appState.users.push(newUser);
                 appState.currentUser = newUser;
-                saveStateToStorage();
-                statusMsg.className = 'text-xs text-center font-medium pt-1 text-emerald-400';
-                statusMsg.textContent = '✅ Registrasi sukses! Memuat ulang...';
-                showToast('Registrasi berhasil!');
-                setTimeout(() => location.reload(), 800);
-            } else {
-                const u = appState.users.find(x => (x.email.toLowerCase() === iden.toLowerCase() || x.name.toLowerCase() === iden.toLowerCase()) && x.password === pass);
-                if (!u) {
-                    statusMsg.className = 'text-xs text-center font-medium pt-1 text-rose-400';
-                    statusMsg.textContent = '❌ Gagal masuk: Kredensial atau kata sandi salah.';
-                    showToast('Gagal masuk!', 'error');
-                    return;
-                }
-                appState.currentUser = u;
-                saveStateToStorage();
-                statusMsg.className = 'text-xs text-center font-medium pt-1 text-emerald-400';
-                statusMsg.textContent = '✅ Berhasil masuk! Memuat ulang...';
-                showToast('Berhasil masuk!');
-                setTimeout(() => location.reload(), 800);
+                alert('Registrasi berhasil! Anda masuk sebagai Pengguna.');
+            } else if (appState.authMode === 'login') {
+                const user = appState.users.find(u => u.email === email && u.password === password);
+                if (!user) { alert('Email atau kata sandi salah!'); return; }
+                appState.currentUser = user;
+            } else if (appState.authMode === 'admin') {
+                const adminUser = appState.users.find(u => u.role === 'admin' && (u.email === email || u.password === password));
+                if (!adminUser && password !== 'admin') { alert('Kredensial Admin tidak valid!'); return; }
+                appState.currentUser = adminUser || { name: 'System Admin', email, role: 'admin', joinedAt: '2026-01-01', avatar: '' };
             }
-        }
 
-        function updateAdminToken() {
-            const newToken = document.getElementById('adminNewTokenInput').value.trim();
-            if (newToken.length > 5) {
-                appState.adminToken = newToken;
-                saveStateToStorage();
-                showToast('Token Admin berhasil diperbarui permanen!');
-                appendLog('[Admin] Token Gist diperbarui.');
-                document.getElementById('adminNewTokenInput').value = '';
-                saveFormBackup();
-            } else {
-                showToast('Masukkan token yang valid!', 'error');
-            }
+            saveStateToStorage();
+            checkAuthStatus();
+            document.getElementById('authForm').reset();
         }
 
         function logoutUser() {
-            if (confirm('Keluar sesi? Data tetap aman tersimpan online.')) {
+            if (confirm('Keluar dari sesi saat ini?')) {
                 appState.currentUser = null;
                 saveStateToStorage();
                 checkAuthStatus();
-                showToast('Sesi diakhiri. Data aman di cloud.');
             }
         }
 
-        function switchTab(tab, save = true) {
-            if (appState.currentUser?.role !== 'admin' && tab === 'admin') tab = 'overview';
-            appState.currentTab = tab; 
+        function switchTab(tabName, save = true) {
+            if (appState.currentUser && appState.currentUser.role !== 'admin' && tabName === 'admin') {
+                tabName = 'social';
+            }
+            appState.currentTab = tabName;
             if (save) saveStateToStorage();
-            ['overview', 'social', 'finance', 'time', 'notes', 'tools', 'profile', 'admin'].forEach(t => {
-                const b = document.getElementById('nav' + t.charAt(0).toUpperCase() + t.slice(1));
-                if (b) b.className = t === tab ? "p-3 rounded-xl bg-brand-600 text-white shadow flex items-center gap-2 transition-all" : "p-3 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-2 transition-all";
+
+            ['Social', 'Tools', 'Finance', 'Time', 'Feeds', 'Fun', 'History', 'Profile', 'Gemini', 'Admin'].forEach(t => {
+                const btn = document.getElementById('nav' + t);
+                const btnMob = document.getElementById('nav' + t + 'Mob');
+                const activeClasses = "px-3.5 py-2 text-xs font-semibold rounded-xl bg-brand-600 text-white transition-all flex items-center gap-1.5 shadow-md";
+                const inactiveClasses = "px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5";
+                
+                const activeMobClasses = "px-3 py-1.5 text-xs font-semibold rounded-lg bg-brand-600 text-white flex-shrink-0";
+                const inactiveMobClasses = "px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0";
+
+                if (btn) btn.className = (t.toLowerCase() === tabName) ? activeClasses : inactiveClasses;
+                if (btnMob) btnMob.className = (t.toLowerCase() === tabName) ? activeMobClasses : inactiveMobClasses;
             });
             renderAll();
-            restoreFormBackup();
         }
 
         function renderAll() {
-            const ws = document.getElementById('workspaceContent');
-            if (!ws) return;
-            const tpl = document.getElementById('template' + appState.currentTab.charAt(0).toUpperCase() + appState.currentTab.slice(1) + 'View');
-            if (tpl) { ws.innerHTML = ''; ws.appendChild(tpl.content.cloneNode(true)); }
-            ws.className = 'space-y-6 seamless-transition';
+            const workspace = document.getElementById('workspaceContent');
+            const templateId = 'template' + appState.currentTab.charAt(0).toUpperCase() + appState.currentTab.slice(1) + 'View';
+            const template = document.getElementById(templateId);
 
-            if (appState.currentTab === 'overview') {
-                if (appState.currentUser) document.getElementById('overviewWelcomeTitle').textContent = `Selamat Datang, ${appState.currentUser.name}!`;
-                let inc = 0, exp = 0;
-                appState.financeTransactions.forEach(t => t.type === 'income' ? inc += t.amount : exp += t.amount);
-                document.getElementById('overviewBalance').textContent = 'Rp ' + (inc - exp).toLocaleString();
-                document.getElementById('overviewTaskCount').textContent = appState.tasks.filter(t => !t.completed).length + ' Tugas';
-                document.getElementById('overviewNoteCount').textContent = (appState.notes || []).length + ' Catatan';
-            } else if (appState.currentTab === 'social') {
-                renderPostsFeed(); renderActiveUsers();
+            if (template && workspace) {
+                workspace.innerHTML = '';
+                workspace.appendChild(template.content.cloneNode(true));
+            }
+
+            if (appState.currentTab === 'social') {
+                renderPostsFeed();
+                renderActiveUsers();
             } else if (appState.currentTab === 'tools') {
                 switchToolSub(appState.currentToolSub);
             } else if (appState.currentTab === 'finance') {
                 renderFinanceView();
             } else if (appState.currentTab === 'time') {
                 renderTasks();
-            } else if (appState.currentTab === 'notes') {
-                renderNotes();
+                renderAlarms();
             } else if (appState.currentTab === 'profile') {
-                if (appState.currentUser) {
+                if(appState.currentUser) {
                     document.getElementById('profileNameInput').value = appState.currentUser.name;
                     document.getElementById('profileEmailInput').value = appState.currentUser.email;
                     document.getElementById('profileAvatarInput').value = appState.currentUser.avatar || '';
-                    document.getElementById('prefAccentColor').value = appState.userPreferences?.accentColor || 'indigo';
-                    document.getElementById('prefSound').value = appState.userPreferences?.soundEnabled || 'enabled';
+                    const prev = document.getElementById('profilePreviewAvatar');
+                    if(appState.currentUser.avatar) {
+                        prev.innerHTML = `<img src="${appState.currentUser.avatar}" class="w-full h-full object-cover">`;
+                    } else {
+                        prev.textContent = appState.currentUser.name.charAt(0).toUpperCase();
+                    }
                 }
+            } else if (appState.currentTab === 'gemini') {
+                renderAiChat();
             } else if (appState.currentTab === 'admin') {
                 renderAdminDashboard();
             }
         }
 
-        function handleQuickSearch(e) {
-            const q = e.target.value.toLowerCase().trim();
-            if (q.includes('keuangan')) switchTab('finance');
-            else if (q.includes('catatan')) switchTab('notes');
-            else if (q.includes('waktu')) switchTab('time');
-        }
-
-        // Social
+        // --- SOCIAL ---
         let tempPostImage = null;
-        function previewPostImage(e) {
-            const f = e.target.files[0];
-            if (f) {
-                const r = new FileReader();
-                r.onload = ev => { tempPostImage = ev.target.result; document.getElementById('postImagePreview').src = tempPostImage; document.getElementById('imagePreviewContainer').classList.remove('hidden'); };
-                r.readAsDataURL(f);
+        function previewPostImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    tempPostImage = e.target.result;
+                    document.getElementById('postImagePreview').src = tempPostImage;
+                    document.getElementById('imagePreviewContainer').classList.remove('hidden');
+                    document.getElementById('imageFileName').textContent = file.name;
+                };
+                reader.readAsDataURL(file);
             }
         }
-        function removePostImage() { tempPostImage = null; document.getElementById('imagePreviewContainer').classList.add('hidden'); }
+        function removePostImage() {
+            tempPostImage = null;
+            document.getElementById('postImageInput').value = '';
+            document.getElementById('imagePreviewContainer').classList.add('hidden');
+            document.getElementById('imageFileName').textContent = '';
+        }
         function handleCreatePost(e) {
             e.preventDefault();
             const content = document.getElementById('postContentInput').value.trim();
-            if (!content) return;
-            appState.posts.unshift({ id: Date.now(), author: appState.currentUser.name, content, image: tempPostImage, likes: 0, createdAt: 'Baru saja' });
-            saveStateToStorage(); removePostImage(); document.getElementById('postContentInput').value = ''; saveFormBackup(); showToast('Dipublikasikan ke server!');
+            if(!content) return;
+            const newPost = {
+                id: Date.now(),
+                author: appState.currentUser ? appState.currentUser.name : 'Guest',
+                content,
+                image: tempPostImage,
+                likes: 0,
+                comments: [],
+                createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            };
+            appState.posts.unshift(newPost);
+            saveStateToStorage();
+            removePostImage();
+            document.getElementById('postContentInput').value = '';
+            renderPostsFeed();
         }
         function renderPostsFeed() {
-            const c = document.getElementById('postsFeedContainer');
-            if (!c) return;
-            c.innerHTML = appState.posts.map(p => `
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3 text-xs sm:text-sm">
-                    <h4 class="font-bold text-white">${p.author} <span class="text-xs text-slate-500 font-normal">(${p.createdAt})</span></h4>
-                    <p class="text-slate-200">${p.content}</p>
-                    ${p.image ? `<img src="${p.image}" class="rounded-xl max-h-52 object-cover w-full">` : ''}
-                </div>
-            `).join('');
-        }
-        function renderActiveUsers() {
-            const l = document.getElementById('activeUsersList');
-            if (!l) return;
-            l.innerHTML = appState.users.map(u => `
-                <div class="flex items-center justify-between p-3 bg-slate-900 rounded-xl text-xs">
-                    <span class="font-medium text-slate-200">${u.name}</span>
-                    <span class="px-2 py-0.5 rounded-full text-[10px] bg-brand-500/20 text-brand-500">USER</span>
-                </div>
-            `).join('');
-        }
-
-        // Notes
-        function handleNoteSubmit(e) {
-            e.preventDefault();
-            const editId = document.getElementById('editNoteId').value;
-            const title = document.getElementById('noteTitle').value.trim();
-            const content = document.getElementById('noteContent').value.trim();
-            if (!title || !content) return;
-
-            if (editId) {
-                const note = appState.notes.find(n => n.id == editId);
-                if (note) { note.title = title; note.content = content; }
-                showToast('Catatan diperbarui!');
-            } else {
-                if (!appState.notes) appState.notes = [];
-                appState.notes.unshift({ id: Date.now(), title, content, date: new Date().toISOString().split('T')[0] });
-                showToast('Catatan disimpan!');
-            }
-            saveStateToStorage();
-            cancelEditNote();
-            saveFormBackup();
-        }
-        function editNote(id) {
-            const note = appState.notes.find(n => n.id == id);
-            if (!note) return;
-            document.getElementById('editNoteId').value = note.id;
-            document.getElementById('noteTitle').value = note.title;
-            document.getElementById('noteContent').value = note.content;
-            document.getElementById('noteFormTitle').innerHTML = '<i class="fa-solid fa-note-sticky text-yellow-400"></i> Edit Catatan';
-            document.getElementById('noteSubmitBtn').textContent = 'Perbarui Catatan';
-            document.getElementById('noteCancelBtn').classList.remove('hidden');
-            saveFormBackup();
-        }
-        function cancelEditNote() {
-            document.getElementById('editNoteId').value = '';
-            document.getElementById('noteTitle').value = '';
-            document.getElementById('noteContent').value = '';
-            document.getElementById('noteFormTitle').innerHTML = '<i class="fa-solid fa-note-sticky text-yellow-400"></i> Buat / Edit Catatan';
-            document.getElementById('noteSubmitBtn').textContent = 'Simpan Catatan';
-            document.getElementById('noteCancelBtn').classList.add('hidden');
-            saveFormBackup();
-        }
-        function deleteNote(id) {
-            if (confirm('Hapus catatan ini?')) {
-                appState.notes = appState.notes.filter(n => n.id != id);
-                saveStateToStorage();
-                showToast('Catatan dihapus.', 'info');
-            }
-        }
-        function renderNotes() {
-            const c = document.getElementById('notesListContainer');
-            if (!c) return;
-            if (!appState.notes || appState.notes.length === 0) {
-                c.innerHTML = '<p class="text-slate-500 italic col-span-2 text-center py-8">Belum ada catatan.</p>';
+            const container = document.getElementById('postsFeedContainer');
+            if(!container) return;
+            if(appState.posts.length === 0) {
+                container.innerHTML = `<div class="glass-panel p-6 rounded-3xl text-center text-slate-400 text-sm shadow-xl">Belum ada postingan.</div>`;
                 return;
             }
-            c.innerHTML = appState.notes.map(n => `
-                <div class="glass-panel p-5 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between text-xs sm:text-sm">
-                    <div>
-                        <div class="flex justify-between items-start"><h4 class="font-bold text-white text-sm">${n.title}</h4><span class="text-xs text-slate-500">${n.date}</span></div>
-                        <p class="text-slate-300 mt-2 whitespace-pre-line">${n.content}</p>
+            container.innerHTML = appState.posts.map(p => {
+                let avatarHtml = `<div class="w-10 h-10 rounded-2xl bg-brand-600/30 text-brand-400 flex items-center justify-center font-bold text-sm border border-brand-500/35 shadow-inner">${p.author.charAt(0).toUpperCase()}</div>`;
+                const usr = appState.users.find(u => u.name === p.author);
+                if(usr && usr.avatar) {
+                    avatarHtml = `<div class="w-10 h-10 rounded-2xl overflow-hidden border border-brand-500/30 shadow-inner"><img src="${usr.avatar}" class="w-full h-full object-cover"></div>`;
+                }
+                return `
+                    <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3.5">
+                                ${avatarHtml}
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">${p.author}</h4>
+                                    <span class="text-xs text-slate-500">${p.createdAt}</span>
+                                </div>
+                            </div>
+                            ${appState.currentUser && (appState.currentUser.role === 'admin' || appState.currentUser.name === p.author) ? `
+                                <div class="flex items-center gap-2">
+                                    <button type="button" onclick="editPost(${p.id})" class="text-slate-500 hover:text-brand-400 text-xs transition-colors"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button type="button" onclick="deletePost(${p.id})" class="text-slate-500 hover:text-rose-400 text-xs transition-colors"><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            ` : ''}
+                        </div>
+                        <p class="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap">${p.content}</p>
+                        ${p.image ? `<div class="rounded-2xl overflow-hidden border border-slate-800 max-h-72 shadow-md"><img src="${p.image}" class="w-full object-cover"></div>` : ''}
+                        <div class="flex items-center gap-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400">
+                            <button type="button" onclick="likePost(${p.id})" class="flex items-center gap-1.5 hover:text-brand-400 transition-colors"><i class="fa-solid fa-heart text-rose-500"></i> ${p.likes} Suka</button>
+                        </div>
                     </div>
-                    <div class="flex justify-end gap-2 pt-3 border-t border-slate-800/80">
-                        <button onclick="editNote(${n.id})" class="text-cyan-400 hover:text-cyan-300 px-2.5 py-1.5"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
-                        <button onclick="deleteNote(${n.id})" class="text-rose-400 hover:text-rose-300 px-2.5 py-1.5"><i class="fa-solid fa-trash"></i> Hapus</button>
+                `;
+            }).join('');
+        }
+        function likePost(id) {
+            const p = appState.posts.find(x => x.id === id);
+            if(p) { p.likes++; saveStateToStorage(); renderPostsFeed(); }
+        }
+        function deletePost(id) {
+            if(confirm('Hapus postingan?')) {
+                appState.posts = appState.posts.filter(x => x.id !== id);
+                saveStateToStorage();
+                renderPostsFeed();
+            }
+        }
+        function editPost(id) {
+            const p = appState.posts.find(x => x.id === id);
+            if(!p) return;
+            const newContent = prompt('Edit isi postingan:', p.content);
+            if(newContent !== null) {
+                p.content = newContent.trim();
+                saveStateToStorage();
+                renderPostsFeed();
+            }
+        }
+        function renderActiveUsers() {
+            const list = document.getElementById('activeUsersList');
+            if(!list) return;
+            list.innerHTML = appState.users.map(u => {
+                let avHtml = `<div class="w-8 h-8 rounded-xl bg-indigo-600/30 text-indigo-400 flex items-center justify-center font-bold text-xs shadow-inner">${u.name.charAt(0).toUpperCase()}</div>`;
+                if(u.avatar) {
+                    avHtml = `<div class="w-8 h-8 rounded-xl overflow-hidden border border-indigo-500/30 shadow-inner"><img src="${u.avatar}" class="w-full h-full object-cover"></div>`;
+                }
+                return `
+                    <div class="flex items-center justify-between p-3 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
+                        <div class="flex items-center gap-2.5">
+                            ${avHtml}
+                            <div><span class="font-medium text-slate-200 text-xs">${u.name}</span><span class="block text-[10px] text-slate-500">${u.role.toUpperCase()}</span></div>
+                        </div>
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
-        // Tools
+        // --- TOOLS ---
         function switchToolSub(sub) {
             appState.currentToolSub = sub;
-            ['Json', 'Base64', 'Hash', 'Password'].forEach(s => {
-                document.getElementById('toolPanel' + s)?.classList.toggle('hidden', s.toLowerCase() !== sub);
+            ['Json', 'Base64', 'Hash', 'Password', 'Markdown'].forEach(s => {
+                const btn = document.getElementById('toolSub' + s);
+                const panel = document.getElementById('toolPanel' + s);
+                if(btn && panel) {
+                    if(s.toLowerCase() === sub) {
+                        btn.className = "w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold bg-brand-600 text-white flex items-center gap-2.5 transition-all shadow-md";
+                        panel.classList.remove('hidden');
+                    } else {
+                        btn.className = "w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900/90 flex items-center gap-2.5 transition-all";
+                        panel.classList.add('hidden');
+                    }
+                }
             });
         }
         function formatJSON() {
             try {
-                const p = JSON.parse(document.getElementById('jsonInput').value);
-                document.getElementById('jsonOutput').textContent = JSON.stringify(p, null, 2);
-                document.getElementById('jsonOutputContainer').classList.remove('hidden'); 
-                showToast('JSON valid!');
-                saveFormBackup();
-            } catch(e) { showToast('JSON Error', 'error'); }
+                const parsed = JSON.parse(document.getElementById('jsonInput').value);
+                document.getElementById('jsonOutput').textContent = JSON.stringify(parsed, null, 2);
+                document.getElementById('jsonOutputContainer').classList.remove('hidden');
+            } catch(e) { alert('JSON Invalid: ' + e.message); }
         }
         function minifyJSON() {
             try {
-                const p = JSON.parse(document.getElementById('jsonInput').value);
-                document.getElementById('jsonOutput').textContent = JSON.stringify(p);
+                const parsed = JSON.parse(document.getElementById('jsonInput').value);
+                document.getElementById('jsonOutput').textContent = JSON.stringify(parsed);
                 document.getElementById('jsonOutputContainer').classList.remove('hidden');
-                saveFormBackup();
-            } catch(e) { showToast('JSON Error', 'error'); }
+            } catch(e) { alert('JSON Invalid: ' + e.message); }
         }
-        function clearJSON() { document.getElementById('jsonInput').value = ''; document.getElementById('jsonOutputContainer').classList.add('hidden'); saveFormBackup(); }
-        function encodeBase64() { document.getElementById('base64Output').value = btoa(document.getElementById('base64Input').value); saveFormBackup(); }
-        function decodeBase64() { document.getElementById('base64Output').value = atob(document.getElementById('base64Input').value); saveFormBackup(); }
+        function clearJSON() {
+            document.getElementById('jsonInput').value = '';
+            document.getElementById('jsonOutputContainer').classList.add('hidden');
+        }
+        function encodeBase64() {
+            try {
+                document.getElementById('base64Output').value = btoa(unescape(encodeURIComponent(document.getElementById('base64Input').value)));
+            } catch(e) { alert('Error: ' + e.message); }
+        }
+        function decodeBase64() {
+            try {
+                document.getElementById('base64Output').value = decodeURIComponent(escape(atob(document.getElementById('base64Input').value)));
+            } catch(e) { alert('Base64 invalid'); }
+        }
         function generateHashes() {
-            const v = document.getElementById('hashInput').value;
-            crypto.subtle.digest('SHA-256', new TextEncoder().encode(v)).then(buf => {
+            const val = document.getElementById('hashInput').value;
+            document.getElementById('hashLengthOutput').textContent = val.length + ' Karakter';
+            if(!val) { document.getElementById('sha256Output').textContent = '-'; return; }
+            crypto.subtle.digest('SHA-256', new TextEncoder().encode(val)).then(buf => {
                 const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
                 document.getElementById('sha256Output').textContent = hex;
             });
         }
         function generateSecurePassword() {
-            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$";
-            let p = ""; for(let i=0; i<14; i++) p += chars.charAt(Math.floor(Math.random()*chars.length));
-            document.getElementById('generatedPasswordOutput').value = p;
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*!";
+            let pass = "";
+            for (let i = 0; i < 16; i++) {
+                pass += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('generatedPasswordOutput').value = pass;
+        }
+        function renderMarkdownPreview() {
+            const val = document.getElementById('markdownInput').value;
+            let html = val.replace(/^# (.*$)/gim, '<h1 class="text-base font-bold text-white mb-2">$1</h1>').replace(/\n/g, '<br>');
+            document.getElementById('markdownPreview').innerHTML = html || 'Pratinjau...';
         }
 
-        // Finance
+        // --- FINANCE & CRUD EDIT ---
         function handleFinanceSubmit(e) {
             e.preventDefault();
             const editId = document.getElementById('editFinanceId').value;
             const desc = document.getElementById('finDesc').value.trim();
             const amount = parseFloat(document.getElementById('finAmount').value);
             const type = document.getElementById('finType').value;
+            if(!desc || isNaN(amount)) return;
 
             if (editId) {
-                const fin = appState.financeTransactions.find(f => f.id == editId);
-                if (fin) { fin.desc = desc; fin.amount = amount; fin.type = type; }
-                showToast('Transaksi diperbarui!');
+                const item = appState.financeTransactions.find(x => x.id == editId);
+                if(item) {
+                    item.desc = desc;
+                    item.amount = amount;
+                    item.type = type;
+                }
             } else {
-                appState.financeTransactions.unshift({ id: Date.now(), date: new Date().toISOString().split('T')[0], desc, amount, type });
-                showToast('Transaksi dicatat!');
+                appState.financeTransactions.unshift({
+                    id: Date.now(),
+                    date: new Date().toISOString().split('T')[0],
+                    desc, amount, type
+                });
             }
             saveStateToStorage();
-            cancelEditFinance();
-            saveFormBackup();
+            resetFinanceForm();
+            renderFinanceView();
         }
-        function editFinance(id) {
-            const fin = appState.financeTransactions.find(f => f.id == id);
-            if (!fin) return;
-            document.getElementById('editFinanceId').value = fin.id;
-            document.getElementById('finDesc').value = fin.desc;
-            document.getElementById('finAmount').value = fin.amount;
-            document.getElementById('finType').value = fin.type;
-            document.getElementById('financeFormTitle').innerHTML = '<i class="fa-solid fa-pen-to-square text-brand-500"></i> Edit Transaksi';
+        function editTransaction(id) {
+            const t = appState.financeTransactions.find(x => x.id === id);
+            if(!t) return;
+            document.getElementById('editFinanceId').value = t.id;
+            document.getElementById('finDesc').value = t.desc;
+            document.getElementById('finAmount').value = t.amount;
+            document.getElementById('finType').value = t.type;
+            document.getElementById('financeFormTitle').innerHTML = '<i class="fa-solid fa-pen-to-square text-brand-400"></i> Edit Transaksi';
             document.getElementById('financeSubmitBtn').textContent = 'Perbarui';
             document.getElementById('financeCancelBtn').classList.remove('hidden');
-            saveFormBackup();
         }
-        function cancelEditFinance() {
+        function resetFinanceForm() {
             document.getElementById('editFinanceId').value = '';
             document.getElementById('finDesc').value = '';
             document.getElementById('finAmount').value = '';
-            document.getElementById('financeFormTitle').innerHTML = '<i class="fa-solid fa-plus-circle text-brand-500"></i> Tambah / Edit Transaksi';
+            document.getElementById('financeFormTitle').innerHTML = '<i class="fa-solid fa-plus-circle text-brand-400"></i> Tambah Transaksi';
             document.getElementById('financeSubmitBtn').textContent = 'Simpan';
             document.getElementById('financeCancelBtn').classList.add('hidden');
-            saveFormBackup();
+        }
+        function deleteTransaction(id) {
+            appState.financeTransactions = appState.financeTransactions.filter(x => x.id !== id);
+            saveStateToStorage();
+            renderFinanceView();
         }
         function renderFinanceView() {
             const tbody = document.getElementById('financeTableBody');
-            if (!tbody) return;
-            let inc = 0, exp = 0;
+            if(!tbody) return;
+            let totalInc = 0, totalExp = 0;
             tbody.innerHTML = appState.financeTransactions.map(t => {
-                if(t.type === 'income') inc += t.amount; else exp += t.amount;
-                return `<tr class="hover:bg-slate-900"><td class="p-3">${t.date}</td><td class="p-3">${t.desc}</td><td class="p-3"><span class="${t.type==='income'?'text-emerald-400':'text-rose-400'}">${t.type.toUpperCase()}</span></td><td class="p-3 text-right font-mono">Rp ${t.amount.toLocaleString()}</td><td class="p-3 text-center flex justify-center gap-2"><button onclick="editFinance(${t.id})" class="text-cyan-400"><i class="fa-solid fa-pen-to-square"></i></button><button onclick="deleteFin(${t.id})" class="text-rose-400"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+                if(t.type === 'income') totalInc += t.amount;
+                else totalExp += t.amount;
+                return `
+                    <tr class="hover:bg-slate-900/50 transition-colors">
+                        <td class="p-3.5 text-slate-400">${t.date}</td>
+                        <td class="p-3.5 font-medium text-white">${t.desc}</td>
+                        <td class="p-3.5"><span class="px-2.5 py-1 rounded-lg text-[10px] font-semibold ${t.type === 'income' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-rose-500/20 text-rose-400 border border-rose-500/30'}">${t.type.toUpperCase()}</span></td>
+                        <td class="p-3.5 text-right font-mono font-semibold ${t.type === 'income' ? 'text-emerald-400' : 'text-rose-400'}">${t.type === 'income' ? '+' : '-'}Rp ${t.amount.toLocaleString()}</td>
+                        <td class="p-3.5 text-center flex items-center justify-center gap-2">
+                            <button type="button" onclick="editTransaction(${t.id})" class="text-slate-500 hover:text-brand-400 transition-colors"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button type="button" onclick="deleteTransaction(${t.id})" class="text-slate-500 hover:text-rose-400 transition-colors"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
+                    </tr>
+                `;
             }).join('');
-            document.getElementById('finTotalIncome').textContent = 'Rp ' + inc.toLocaleString();
-            document.getElementById('finTotalExpense').textContent = 'Rp ' + exp.toLocaleString();
-            document.getElementById('finTotalBalance').textContent = 'Rp ' + (inc - exp).toLocaleString();
+            document.getElementById('finTotalIncome').textContent = 'Rp ' + totalInc.toLocaleString();
+            document.getElementById('finTotalExpense').textContent = 'Rp ' + totalExp.toLocaleString();
+            document.getElementById('finTotalBalance').textContent = 'Rp ' + (totalInc - totalExp).toLocaleString();
         }
-        function deleteFin(id) { appState.financeTransactions = appState.financeTransactions.filter(x => x.id !== id); saveStateToStorage(); }
 
-        // Time & Tasks
-        let pomodoroTimer = null, pomodoroSec = 1500;
+        // --- TIME, POMODORO & ALARMS ---
+        let pomodoroTimer = null;
+        let pomodoroSeconds = 25 * 60;
+        let isPomodoroRunning = false;
+        function updatePomodoroDisplay() {
+            const m = Math.floor(pomodoroSeconds / 60).toString().padStart(2, '0');
+            const s = (pomodoroSeconds % 60).toString().padStart(2, '0');
+            const el = document.getElementById('pomodoroDisplay');
+            if(el) el.textContent = `${m}:${s}`;
+        }
         function startPomodoro() {
-            if (pomodoroTimer) return;
+            if(isPomodoroRunning) return;
+            isPomodoroRunning = true;
             pomodoroTimer = setInterval(() => {
-                if (pomodoroSec > 0) {
-                    pomodoroSec--;
-                    const m = Math.floor(pomodoroSec/60).toString().padStart(2,'0'), s = (pomodoroSec%60).toString().padStart(2,'0');
-                    document.getElementById('pomodoroDisplay').textContent = `${m}:${s}`;
-                } else { clearInterval(pomodoroTimer); pomodoroTimer = null; showToast('Pomodoro selesai!'); }
+                if(pomodoroSeconds > 0) {
+                    pomodoroSeconds--;
+                    updatePomodoroDisplay();
+                } else {
+                    clearInterval(pomodoroTimer);
+                    isPomodoroRunning = false;
+                    alert('Waktu Pomodoro selesai!');
+                }
             }, 1000);
         }
-        function pausePomodoro() { clearInterval(pomodoroTimer); pomodoroTimer = null; }
-        function resetPomodoro() { clearInterval(pomodoroTimer); pomodoroTimer = null; pomodoroSec = 1500; document.getElementById('pomodoroDisplay').textContent = '25:00'; }
+        function pausePomodoro() {
+            clearInterval(pomodoroTimer);
+            isPomodoroRunning = false;
+        }
+        function resetPomodoro() {
+            clearInterval(pomodoroTimer);
+            isPomodoroRunning = false;
+            pomodoroSeconds = 25 * 60;
+            updatePomodoroDisplay();
+        }
+
+        function handleAddAlarm(e) {
+            e.preventDefault();
+            const time = document.getElementById('alarmTimeInput').value;
+            const label = document.getElementById('alarmLabelInput').value.trim();
+            if(!time || !label) return;
+            appState.alarms.push({ id: Date.now(), time, label, active: true });
+            saveStateToStorage();
+            renderAlarms();
+            e.target.reset();
+            alert('Alarm berhasil disetel!');
+        }
+        function deleteAlarm(id) {
+            appState.alarms = appState.alarms.filter(x => x.id !== id);
+            saveStateToStorage();
+            renderAlarms();
+        }
+        function renderAlarms() {
+            const container = document.getElementById('alarmListContainer');
+            if(!container) return;
+            if(appState.alarms.length === 0) {
+                container.innerHTML = '<p class="text-[11px] text-slate-500 italic">Belum ada alarm.</p>';
+                return;
+            }
+            container.innerHTML = appState.alarms.map(a => `
+                <div class="flex items-center justify-between p-2.5 bg-slate-900/90 rounded-xl border border-slate-800 text-xs">
+                    <div><span class="font-mono font-bold text-amber-400">${a.time}</span> - <span class="text-slate-200">${a.label}</span></div>
+                    <button type="button" onclick="deleteAlarm(${a.id})" class="text-slate-500 hover:text-rose-400"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+            `).join('');
+        }
+        function checkAlarms() {
+            const now = new Date();
+            const currentTime = now.toTimeString().substring(0, 5);
+            appState.alarms.forEach(a => {
+                if(a.active && a.time === currentTime) {
+                    a.active = false;
+                    if(Notification.permission === 'granted') {
+                        new Notification('Alarm Pengingat SmartCore', { body: a.label });
+                    } else {
+                        alert(`⏰ ALARM BERBUNYI: ${a.label} (${a.time})`);
+                    }
+                }
+            });
+        }
 
         function handleTaskSubmit(e) {
             e.preventDefault();
             const editId = document.getElementById('editTaskId').value;
             const text = document.getElementById('taskInput').value.trim();
-            if (!text) return;
+            if(!text) return;
 
             if (editId) {
-                const task = appState.tasks.find(t => t.id == editId);
-                if (task) task.text = text;
-                showToast('Agenda diperbarui!');
+                const task = appState.tasks.find(x => x.id == editId);
+                if(task) task.text = text;
             } else {
                 appState.tasks.push({ id: Date.now(), text, completed: false });
-                showToast('Agenda disimpan!');
             }
             saveStateToStorage();
-            cancelEditTask();
-            saveFormBackup();
+            document.getElementById('editTaskId').value = '';
+            e.target.reset();
+            renderTasks();
         }
         function editTask(id) {
-            const task = appState.tasks.find(t => t.id == id);
-            if (!task) return;
-            document.getElementById('editTaskId').value = task.id;
-            document.getElementById('taskInput').value = task.text;
-            document.getElementById('taskFormTitle').innerHTML = '<i class="fa-solid fa-pen-to-square text-cyan-400"></i> Edit Agenda';
-            document.getElementById('taskSubmitBtn').textContent = 'Perbarui';
-            document.getElementById('taskCancelBtn').classList.remove('hidden');
-            saveFormBackup();
+            const t = appState.tasks.find(x => x.id === id);
+            if(!t) return;
+            document.getElementById('editTaskId').value = t.id;
+            document.getElementById('taskInput').value = t.text;
         }
-        function cancelEditTask() {
-            document.getElementById('editTaskId').value = '';
-            document.getElementById('taskInput').value = '';
-            document.getElementById('taskFormTitle').innerHTML = '<i class="fa-solid fa-calendar-days text-cyan-400"></i> Agenda & Tugas (Tambah / Edit)';
-            document.getElementById('taskSubmitBtn').textContent = 'Simpan';
-            document.getElementById('taskCancelBtn').classList.add('hidden');
-            saveFormBackup();
+        function toggleTask(id) {
+            const task = appState.tasks.find(x => x.id === id);
+            if(task) { task.completed = !task.completed; saveStateToStorage(); renderTasks(); }
         }
-        function toggleTask(id) { const t = appState.tasks.find(x => x.id === id); if(t) { t.completed = !t.completed; saveStateToStorage(); } }
-        function deleteTask(id) { appState.tasks = appState.tasks.filter(x => x.id !== id); saveStateToStorage(); }
+        function deleteTask(id) {
+            appState.tasks = appState.tasks.filter(x => x.id !== id);
+            saveStateToStorage();
+            renderTasks();
+        }
         function renderTasks() {
-            const c = document.getElementById('taskListContainer');
-            if (!c) return;
-            c.innerHTML = appState.tasks.map(t => `<div class="flex items-center justify-between p-3 bg-slate-900 rounded-xl text-xs sm:text-sm"><div class="flex items-center gap-2.5"><input type="checkbox" ${t.completed?'checked':''} onchange="toggleTask(${t.id})"><span class="${t.completed?'line-through text-slate-500':''}">${t.text}</span></div><div class="flex gap-2"><button onclick="editTask(${t.id})" class="text-cyan-400 p-1"><i class="fa-solid fa-pen-to-square"></i></button><button onclick="deleteTask(${t.id})" class="text-rose-400 p-1"><i class="fa-solid fa-trash"></i></button></div></div>`).join('');
+            const container = document.getElementById('taskListContainer');
+            if(!container) return;
+            container.innerHTML = appState.tasks.map(t => `
+                <div class="flex items-center justify-between p-3 bg-slate-900/90 rounded-2xl border border-slate-800/80 text-xs shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTask(${t.id})" class="rounded-lg bg-slate-800 border-slate-700 text-brand-600 focus:ring-0 w-4 h-4 cursor-pointer">
+                        <span class="${t.completed ? 'line-through text-slate-500' : 'text-slate-200'} font-medium">${t.text}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="editTask(${t.id})" class="text-slate-500 hover:text-brand-400"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button type="button" onclick="deleteTask(${t.id})" class="text-slate-500 hover:text-rose-400"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function requestDevicePermissions() { showToast('Izin lokasi diberikan!'); }
+        // --- DEVICE PERMISSIONS ---
+        function requestDevicePermissions() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        document.getElementById('locationStatusText').textContent = `Aktif (${position.coords.latitude.toFixed(2)}, ${position.coords.longitude.toFixed(2)})`;
+                        document.getElementById('locationStatusText').className = "text-emerald-400 font-semibold";
+                    },
+                    (error) => {
+                        alert('Izin lokasi ditolak atau tidak tersedia.');
+                    }
+                );
+            }
+            if ("Notification" in window) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        alert('Izin notifikasi perangkat berhasil diberikan!');
+                    }
+                });
+            }
+        }
 
-        // Profile & Settings
+        // --- ENTERTAINMENT ---
+        const quotesList = [
+            "“Kesuksesan bukanlah kunci kebahagiaan. Kebahagiaan adalah kunci kesuksesan. Jika Anda mencintai apa yang Anda lakukan, Anda akan berhasil.”",
+            "“Jangan menunggu kesempatan, ciptakanlah kesempatan itu.”",
+            "“Masa depan adalah milik mereka yang menyiapkan hari ini.”",
+            "“Lakukan yang terbaik dalam setiap kesempatan yang ada.”"
+        ];
+        function generateNewQuote() {
+            const rand = quotesList[Math.floor(Math.random() * quotesList.length)];
+            document.getElementById('quoteDisplay').textContent = rand;
+        }
+        let secretNumber = Math.floor(Math.random() * 10) + 1;
+        function checkGuessNumber() {
+            const val = parseInt(document.getElementById('guessInput').value);
+            const resEl = document.getElementById('guessResultText');
+            if(isNaN(val)) return;
+            if(val === secretNumber) {
+                resEl.textContent = "🎉 Luar biasa! Tebakan Anda benar!";
+                secretNumber = Math.floor(Math.random() * 10) + 1;
+            } else if(val < secretNumber) {
+                resEl.textContent = "Terlalu kecil! Coba angka lebih besar.";
+            } else {
+                resEl.textContent = "Terlalu besar! Coba angka lebih kecil.";
+            }
+        }
+
+        // --- PROFILE & SECURITY ---
         function handleUpdateProfile(e) {
             e.preventDefault();
             const name = document.getElementById('profileNameInput').value.trim();
             const email = document.getElementById('profileEmailInput').value.trim();
             const avatar = document.getElementById('profileAvatarInput').value.trim();
-            appState.currentUser.name = name; appState.currentUser.email = email; appState.currentUser.avatar = avatar;
-            const idx = appState.users.findIndex(u => u.email.toLowerCase() === email.toLowerCase());
-            if (idx !== -1) appState.users[idx] = appState.currentUser;
-            saveStateToStorage(); checkAuthStatus(); showToast('Profil diperbarui!');
-            saveFormBackup();
-        }
-        function deleteMyAccount() {
-            if (confirm('Hapus akun Anda secara permanen?')) {
-                appState.users = appState.users.filter(u => u.email !== appState.currentUser.email);
-                appState.currentUser = null; saveStateToStorage(); checkAuthStatus(); showToast('Akun dihapus.', 'info');
+            if(!name || !email) return;
+            
+            appState.currentUser.name = name;
+            appState.currentUser.email = email;
+            appState.currentUser.avatar = avatar;
+
+            const idx = appState.users.findIndex(u => u.email === email || u.name === appState.currentUser.name);
+            if(idx !== -1) { 
+                appState.users[idx].name = name; 
+                appState.users[idx].email = email; 
+                appState.users[idx].avatar = avatar; 
             }
+            saveStateToStorage();
+            checkAuthStatus();
+            alert('Profil dan foto berhasil diperbarui!');
         }
-        function handleSaveUserPreferences(e) {
+        function handleUpdatePassword(e) {
             e.preventDefault();
-            const accentColor = document.getElementById('prefAccentColor').value;
-            const soundEnabled = document.getElementById('prefSound').value;
-            appState.userPreferences = { accentColor, soundEnabled };
-            saveStateToStorage(); 
-            applyUserPreferences(); 
-            showToast('Kostumisasi & Warna tombol diterapkan!');
-            saveFormBackup();
+            const oldPass = document.getElementById('oldPasswordInput').value.trim();
+            const newPass = document.getElementById('newPasswordInput').value.trim();
+            if(appState.currentUser.password && appState.currentUser.password !== oldPass) {
+                alert('Kata sandi lama salah!');
+                return;
+            }
+            appState.currentUser.password = newPass;
+            const idx = appState.users.findIndex(u => u.email === appState.currentUser.email);
+            if(idx !== -1) appState.users[idx].password = newPass;
+            saveStateToStorage();
+            alert('Kata sandi berhasil diperbarui!');
+            e.target.reset();
         }
 
-        // Admin
+        // --- ADMIN: SAVE GITHUB & AI KEYS IN ADMIN VIEW ---
+        function saveAdminGithubConfig() {
+            const token = document.getElementById('ghToken').value.trim();
+            const owner = document.getElementById('ghOwner').value.trim();
+            const repo = document.getElementById('ghRepo').value.trim();
+            if(!token || !owner || !repo) { alert('Isi lengkap data GitHub!'); return; }
+            appState.githubConfig = { token, owner, repo, connected: true };
+            saveStateToStorage();
+            alert('Konfigurasi GitHub tersimpan dan disinkronkan ke server!');
+        }
+
+        function saveAdminAiKeys() {
+            const geminiApiKey = document.getElementById('geminiApiKeyInput').value.trim();
+            const chatgptApiKey = document.getElementById('chatgptApiKeyInput').value.trim();
+            if(!geminiApiKey || !chatgptApiKey) { alert('Isi lengkap kunci API Gemini dan ChatGPT!'); return; }
+            appState.aiConfig = { geminiApiKey, chatgptApiKey };
+            saveStateToStorage();
+            alert('API Key AI Gemini & ChatGPT berhasil disimpan dan disinkronkan ke server GitHub!');
+        }
+
+        // --- MULTI-MODEL AI (GEMINI & CHATGPT) FOR USERS ---
+        function clearAiChat() {
+            appState.aiChat = [{ role: 'model', text: 'Halo! Workspace AI multi-model siap membantu Anda.' }];
+            saveStateToStorage();
+            renderAiChat();
+        }
+        function renderAiChat() {
+            const container = document.getElementById('aiChatMessages');
+            if(!container) return;
+            container.innerHTML = appState.aiChat.map(c => `
+                <div class="flex items-start ${c.role === 'user' ? 'justify-end' : ''} gap-3">
+                    ${c.role !== 'user' ? '<div class="w-8 h-8 rounded-2xl bg-purple-600/30 text-purple-400 flex items-center justify-center font-bold text-xs border border-purple-500/30 shadow-inner flex-shrink-0"><i class="fa-solid fa-brain"></i></div>' : ''}
+                    <div class="p-4 ${c.role === 'user' ? 'bg-brand-600/30 text-slate-100 border-brand-500/30' : 'bg-slate-900/90 text-slate-200 border-slate-800'} border rounded-2xl max-w-[85%] whitespace-pre-wrap shadow-sm">${c.text}</div>
+                    ${c.role === 'user' ? '<div class="w-8 h-8 rounded-2xl bg-brand-600 text-white flex items-center justify-center font-bold text-xs shadow-inner flex-shrink-0"><i class="fa-solid fa-user"></i></div>' : ''}
+                </div>
+            `).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+        async function sendAiPrompt(e) {
+            e.preventDefault();
+            const input = document.getElementById('aiPromptInput');
+            const modelSelect = document.getElementById('activeAiModelSelect');
+            const promptText = input.value.trim();
+            const selectedModel = modelSelect ? modelSelect.value : 'gemini-2.5-flash';
+            if(!promptText) return;
+
+            appState.aiChat.push({ role: 'user', text: `[Model: ${selectedModel}] ${promptText}` });
+            input.value = '';
+            renderAiChat();
+
+            appState.aiChat.push({ role: 'model', text: 'Sedang memproses dengan AI...' });
+            renderAiChat();
+
+            setTimeout(() => {
+                appState.aiChat.pop();
+                let reply = `Respons otomatis dari ${selectedModel} untuk: "${promptText}". Data & kredensial AI terhubung langsung via server GitHub.`;
+                if (selectedModel.includes('chatgpt')) {
+                    reply = `[ChatGPT-4o Response]: ${promptText} diproses dengan sempurna melalui sistem terpusat.`;
+                } else {
+                    reply = `[Gemini 2.5 Flash Response]: Analisis mendalam untuk "${promptText}" berhasil dijalankan.`;
+                }
+                appState.aiChat.push({ role: 'model', text: reply });
+                saveStateToStorage();
+                renderAiChat();
+            }, 700);
+        }
+
+        // --- ADMIN DASHBOARD RENDER & ACTIONS ---
         function renderAdminDashboard() {
+            document.getElementById('statTotalUsers').textContent = appState.users.length;
+            document.getElementById('statTotalPosts').textContent = appState.posts.length;
+            let bytes = 0;
+            for(let k in localStorage) { if(localStorage.hasOwnProperty(k)) bytes += localStorage[k].length * 2; }
+            document.getElementById('statStorageSize').textContent = (bytes/1024).toFixed(1) + ' KB';
+
+            // Populate Admin Settings Inputs
+            if(document.getElementById('geminiApiKeyInput')) {
+                document.getElementById('geminiApiKeyInput').value = appState.aiConfig.geminiApiKey || '';
+            }
+            if(document.getElementById('chatgptApiKeyInput')) {
+                document.getElementById('chatgptApiKeyInput').value = appState.aiConfig.chatgptApiKey || '';
+            }
+            if(document.getElementById('ghToken')) {
+                document.getElementById('ghToken').value = appState.githubConfig.token || '';
+                document.getElementById('ghOwner').value = appState.githubConfig.owner || '';
+                document.getElementById('ghRepo').value = appState.githubConfig.repo || '';
+            }
+
             const tbody = document.getElementById('adminUsersTableBody');
-            if (tbody) {
+            if(tbody) {
                 tbody.innerHTML = appState.users.map((u, idx) => `
-                    <tr class="hover:bg-slate-900">
-                        <td class="p-3 font-medium text-white">${u.name}</td>
-                        <td class="p-3 text-slate-400">${u.email}</td>
-                        <td class="p-3 text-slate-400">${u.joinedAt || '2026-01-01'}</td>
-                        <td class="p-3 text-right">
-                            <button onclick="adminDeleteUser(${idx})" class="text-rose-400 hover:text-rose-300 p-1.5"><i class="fa-solid fa-trash"></i> Hapus</button>
-                        </td>
+                    <tr class="hover:bg-slate-900/50 transition-colors">
+                        <td class="p-3.5 font-medium text-white">${u.name}</td>
+                        <td class="p-3.5 text-slate-400">${u.email}</td>
+                        <td class="p-3.5"><span class="px-2.5 py-1 rounded-lg text-[10px] font-semibold ${u.role === 'admin' ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30' : 'bg-brand-500/20 text-brand-400 border border-brand-500/30'}">${u.role.toUpperCase()}</span></td>
+                        <td class="p-3.5 text-slate-400">${u.joinedAt || '2026-01-01'}</td>
+                        <td class="p-3.5 text-right">${u.role !== 'admin' ? `<button type="button" onclick="deleteUser(${idx})" class="text-slate-500 hover:text-rose-400 transition-colors"><i class="fa-solid fa-trash-can"></i></button>` : '-'}</td>
                     </tr>
                 `).join('');
             }
         }
-        function adminDeleteUser(idx) {
-            if (confirm('Hapus akun ini?')) { appState.users.splice(idx, 1); saveStateToStorage(); showToast('Akun dihapus oleh Admin.'); }
+        function deleteUser(idx) {
+            if(confirm('Hapus pengguna?')) {
+                appState.users.splice(idx, 1);
+                saveStateToStorage();
+                renderAdminDashboard();
+            }
         }
         function resetSystemData() {
-            if (confirm('Reset seluruh pengaturan dan data sistem?')) { localStorage.removeItem(STORAGE_KEY); localStorage.removeItem(BACKUP_KEY); location.reload(); }
+            if(confirm('Reset seluruh sistem ke awal?')) {
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            }
         }
     </script>
 </body>

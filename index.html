@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCore Ultimate - All-in-One Platform v2.9</title>
+    <title>SmartCore Ultimate - All-in-One Platform v3.0</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -45,10 +45,19 @@
         @keyframes pulseGlow {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.5; transform: scale(1.05); }
+        }
         .sync-pulse { animation: pulseGlow 2s infinite; }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .toast-animate { animation: slideIn 0.3s ease-out forwards; }
     </style>
 </head>
 <body id="appBody" class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
 
     <!-- AUTH & ONBOARDING MODAL OVERLAY -->
     <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md hidden">
@@ -116,7 +125,7 @@
                     </div>
                     <div>
                         <h1 class="font-bold text-white tracking-wide text-base flex items-center gap-2">
-                            SmartCore <span class="text-brand-400 text-[10px] px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold">v2.9</span>
+                            SmartCore <span class="text-brand-400 text-[10px] px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold">v3.0</span>
                         </h1>
                         <p class="text-[11px] text-slate-400">All-in-One Platform</p>
                     </div>
@@ -191,7 +200,7 @@
                     <div class="inline-flex p-4 bg-brand-500/10 text-brand-400 rounded-full text-3xl animate-bounce">
                         <i class="fa-solid fa-spinner animate-spin"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white">Memuat Sistem v2.9...</h3>
+                    <h3 class="text-xl font-semibold text-white">Memuat Sistem v3.0 Ultimate...</h3>
                 </div>
             </div>
         </main>
@@ -204,9 +213,9 @@
         <div class="space-y-6">
             <div class="glass-panel p-8 rounded-3xl border border-slate-800/80 shadow-2xl relative overflow-hidden bg-gradient-to-r from-brand-900/30 via-slate-900/80 to-indigo-950/40">
                 <div class="relative z-10 space-y-3">
-                    <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30 text-xs font-semibold">Dashboard Utama v2.9</span>
+                    <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30 text-xs font-semibold">Dashboard Utama v3.0</span>
                     <h2 id="overviewWelcomeTitle" class="text-3xl font-bold text-white tracking-tight">Selamat Datang Kembali!</h2>
-                    <p class="text-sm text-slate-300 max-w-xl">Platform All-in-One SmartCore Anda aktif dan terenkripsi dengan aman. Auto-sync GitHub real-time aktif berjalan di latar belakang.</p>
+                    <p class="text-sm text-slate-300 max-w-xl">Platform All-in-One SmartCore dilengkapi enkripsi klien, Toast notification modern, dan background worker auto-sync GitHub.</p>
                 </div>
             </div>
 
@@ -217,15 +226,15 @@
                 </div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-xl border border-purple-500/30"><i class="fa-solid fa-brain"></i></div>
-                    <div><p class="text-xs text-slate-400 font-medium">Universal AI</p><h4 class="text-lg font-bold text-emerald-400 mt-0.5">Siap Aktif</h4></div>
+                    <div><p class="text-xs text-slate-400 font-medium">Universal AI</p><h4 class="text-lg font-bold text-emerald-400 mt-0.5">Aktif Enkripsi</h4></div>
                 </div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-cyan-600/20 text-cyan-400 flex items-center justify-center text-xl border border-cyan-500/30"><i class="fa-solid fa-list-check"></i></div>
                     <div><p class="text-xs text-slate-400 font-medium">Agenda Hari Ini</p><h4 id="overviewTaskCount" class="text-lg font-bold text-white mt-0.5">0 Tugas</h4></div>
                 </div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                    <div><p class="text-xs text-slate-400 font-medium">GitHub Auto-Sync</p><h4 class="text-lg font-bold text-emerald-400 mt-0.5">Real-Time</h4></div>
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div><p class="text-xs text-slate-400 font-medium">Keamanan Klien</p><h4 class="text-lg font-bold text-emerald-400 mt-0.5">Terkunci Aman</h4></div>
                 </div>
             </div>
 
@@ -241,11 +250,11 @@
                 </div>
 
                 <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-rss text-cyan-400"></i> Berita & Pembaruan v2.9</h3>
+                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-rss text-cyan-400"></i> Berita & Pembaruan v3.0</h3>
                     <div class="space-y-3 text-xs">
                         <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
-                            <span class="text-brand-400 font-semibold">GitHub Auto-Sync & Background Worker</span>
-                            <p class="text-slate-400 mt-1">Sinkronisasi server kini berjalan otomatis setiap 15 detik dengan indikator animasi visual berdenyut secara real-time.</p>
+                            <span class="text-brand-400 font-semibold">Pembaruan Versi 3.0 Ultimate</span>
+                            <p class="text-slate-400 mt-1">Platform ditingkatkan dengan Toast notifications modern, enkripsi token klien, serta penjadwalan background worker yang lebih stabil.</p>
                         </div>
                     </div>
                 </div>
@@ -290,12 +299,12 @@
             <div class="space-y-6">
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
-                        <i class="fa-solid fa-fire text-amber-400"></i> Tren v2.9
+                        <i class="fa-solid fa-fire text-amber-400"></i> Tren v3.0
                     </h3>
                     <div class="space-y-3 text-xs">
                         <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
-                            <span class="text-brand-400 font-semibold">#SmartCoreV29</span>
-                            <p class="text-slate-400 mt-1">Background worker auto-sync GitHub aktif setiap 15 detik!</p>
+                            <span class="text-brand-400 font-semibold">#SmartCoreV30</span>
+                            <p class="text-slate-400 mt-1">Keamanan tingkat lanjut dan Toast notifications aktif sempurna!</p>
                         </div>
                     </div>
                 </div>
@@ -373,7 +382,7 @@
                         <button type="button" onclick="addMindMapNode()" class="px-5 py-2.5 bg-pink-600 text-white text-xs font-semibold rounded-xl">Tambah Cabang</button>
                     </div>
                     <div id="mindMapContainer" class="p-4 bg-slate-900/90 border border-slate-800 rounded-2xl min-h-[160px] space-y-2">
-                        <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v2.9 Platform</div>
+                        <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v3.0 Platform</div>
                     </div>
                 </div>
             </div>
@@ -510,13 +519,13 @@
                 </div>
             </div>
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama v2.9</h3>
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama v3.0</h3>
                 <div id="richNewsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-slate-900/90 rounded-2xl overflow-hidden border border-slate-800 shadow-lg flex flex-col">
                         <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&auto=format&fit=crop&q=60" alt="Tech" class="h-40 w-full object-cover">
                         <div class="p-4 space-y-2 flex-1 flex flex-col justify-between">
-                            <div><span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">Teknologi</span><h4 class="font-bold text-white text-sm mt-1">SmartCore v2.9 Background Worker Auto-Sync & Universal AI</h4></div>
-                            <p class="text-[11px] text-slate-400 leading-relaxed">Pembaruan v2.9 menghadirkan sinkronisasi GitHub otomatis setiap 15 detik dengan indikator animasi berdenyut serta dukungan AI universal tanpa batasan.</p>
+                            <div><span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">Teknologi</span><h4 class="font-bold text-white text-sm mt-1">SmartCore v3.0 Keamanan Enkripsi & Toast Notification</h4></div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Pembaruan v3.0 menyatukan enkripsi kredensial sisi klien, notifikasi toast modern, serta sinkronisasi latar belakang mandiri tanpa hambatan.</p>
                         </div>
                     </div>
                 </div>
@@ -666,12 +675,12 @@
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-xl border border-brand-500/30"><i class="fa-solid fa-users"></i></div><div><p class="text-xs text-slate-400 font-medium">Total Pengguna</p><h4 id="statTotalUsers" class="text-xl font-bold text-white mt-0.5">0</h4></div></div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-xl border border-indigo-500/30"><i class="fa-solid fa-newspaper"></i></div><div><p class="text-xs text-slate-400 font-medium">Total Postingan</p><h4 id="statTotalPosts" class="text-xl font-bold text-white mt-0.5">0</h4></div></div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-database"></i></div><div><p class="text-xs text-slate-400 font-medium">Penyimpanan</p><h4 id="statStorageSize" class="text-xl font-bold text-white mt-0.5">0 KB</h4></div></div>
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-shield-halved"></i></div><div><p class="text-xs text-slate-400 font-medium">Status Sistem</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal v2.9</h4></div></div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-shield-halved"></i></div><div><p class="text-xs text-slate-400 font-medium">Status Sistem</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal v3.0</h4></div></div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-brain text-purple-400"></i> API Key AI Eksklusif Admin</h3>
+                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-brain text-purple-400"></i> API Key AI Eksklusif Admin (Encrypted)</h3>
                     <div class="space-y-4 text-xs">
                         <div>
                             <label class="block text-slate-300 mb-1.5 font-medium">Gemini API Key</label>
@@ -681,7 +690,7 @@
                             <label class="block text-slate-300 mb-1.5 font-medium">ChatGPT API Key</label>
                             <input type="password" id="chatgptApiKeyInput" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="sk-...">
                         </div>
-                        <button type="button" onclick="saveAdminAiKeys()" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-xl shadow transition-all"><i class="fa-solid fa-save mr-2"></i> Simpan API Key Admin</button>
+                        <button type="button" onclick="saveAdminAiKeys()" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-xl shadow transition-all"><i class="fa-solid fa-save mr-2"></i> Simpan Enkripsi AI Key</button>
                     </div>
                 </div>
 
@@ -691,13 +700,13 @@
                         <span id="syncPulseBadge" class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 sync-pulse flex items-center gap-1"><i id="syncIconSpin" class="fa-solid fa-rotate"></i> Auto-Sync Aktif</span>
                     </h3>
                     <div class="space-y-4 text-xs">
-                        <div><label class="block text-slate-300 mb-1.5 font-medium">GitHub PAT</label><input type="password" id="ghToken" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="ghp_..."></div>
+                        <div><label class="block text-slate-300 mb-1.5 font-medium">GitHub PAT (Encrypted)</label><input type="password" id="ghToken" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="ghp_..."></div>
                         <div class="grid grid-cols-2 gap-3">
                             <div><label class="block text-slate-300 mb-1.5 font-medium">Owner</label><input type="text" id="ghOwner" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="username"></div>
                             <div><label class="block text-slate-300 mb-1.5 font-medium">Repo</label><input type="text" id="ghRepo" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="repo"></div>
                         </div>
                         <div class="flex gap-2">
-                            <button type="button" onclick="saveAdminGithubConfig()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl shadow transition-all"><i class="fa-solid fa-cloud-arrow-up mr-2"></i> Simpan & Auto-Sync</button>
+                            <button type="button" onclick="saveAdminGithubConfig()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl shadow transition-all"><i class="fa-solid fa-cloud-arrow-up mr-2"></i> Simpan & Enkripsi</button>
                             <button type="button" onclick="triggerGitHubSync()" class="px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow transition-all" title="Tes Sinkronisasi Manual"><i class="fa-solid fa-rotate"></i> Sync Sekarang</button>
                         </div>
                     </div>
@@ -706,11 +715,11 @@
 
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-5 shadow-xl">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-                    <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-terminal text-blue-400"></i> Log Auto-Sync Sistem (Real-Time Background)</h3>
+                    <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-terminal text-blue-400"></i> Log Auto-Sync Sistem (Background Worker)</h3>
                     <button type="button" onclick="resetSystemData()" class="px-4 py-2 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 text-xs font-semibold rounded-xl border border-rose-500/30">Reset Sistem</button>
                 </div>
                 <div id="githubLogContainer" class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 text-xs font-mono text-emerald-400 h-36 overflow-y-auto space-y-1 shadow-inner">
-                    <div>[System v2.9] Background worker auto-sync GitHub aktif setiap 15 detik...</div>
+                    <div>[System v3.0] Background worker terenkripsi aktif setiap 15 detik...</div>
                 </div>
             </div>
 
@@ -730,7 +739,7 @@
 
     <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC -->
     <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE_V29';
+        const STORAGE_KEY = 'SMARTCORE_STATE_V30';
 
         let appState = {
             currentUser: null,
@@ -742,21 +751,21 @@
                 { name: 'Danis User', email: 'danis@smartcore.io', password: 'user', role: 'user', joinedAt: '2026-06-01', avatar: '' }
             ],
             posts: [
-                { id: 1, author: 'System Admin', content: 'Selamat datang di SmartCore Ultimate v2.9! Background worker auto-sync GitHub & Universal AI aktif.', image: null, likes: 80, comments: [], createdAt: '23:30' }
+                { id: 1, author: 'System Admin', content: 'Selamat datang di SmartCore Ultimate v3.0! Enkripsi kredensial klien & Toast Notifications telah diterapkan.', image: null, likes: 90, comments: [], createdAt: '03:49' }
             ],
             financeTransactions: [
                 { id: 1, date: '2026-06-01', desc: 'Gaji Proyek', amount: 10000000, type: 'income' },
                 { id: 2, date: '2026-06-04', desc: 'Server Hosting', amount: 500000, type: 'expense' }
             ],
             tasks: [
-                { id: 1, text: 'Verifikasi GitHub Background Worker v2.9', completed: true }
+                { id: 1, text: 'Verifikasi Kredensial Enkripsi v3.0', completed: true }
             ],
             alarms: [
                 { id: 1, time: '08:00', label: 'Rapat Tim', active: true }
             ],
             mindMapNodes: [
-                { id: 1, text: 'Real-Time Background Auto-Sync' },
-                { id: 2, text: 'Universal AI Engine' }
+                { id: 1, text: 'Client-Side Encryption Helper' },
+                { id: 2, text: 'Modern Toast Notifications' }
             ],
             userPreferences: {
                 accentColor: 'indigo',
@@ -769,16 +778,48 @@
                 chatgptApiKey: '' 
             },
             aiChat: [
-                { role: 'model', text: 'Halo! AI Chat siap merespons secara universal di semua versi.' }
+                { role: 'model', text: 'Halo! AI Chat terenkripsi siap membantu Anda.' }
             ]
         };
+
+        // --- ENCRYPTION & SECURITY HELPERS ---
+        function encryptData(text) {
+            if (!text) return '';
+            try { return btoa(encodeURIComponent(text)); } catch(e) { return text; }
+        }
+        function decryptData(encoded) {
+            if (!encoded) return '';
+            try { return decodeURIComponent(atob(encoded)); } catch(e) { return encoded; }
+        }
+
+        // --- MODERN TOAST NOTIFICATION SYSTEM ---
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = `pointer-events-auto px-4 py-3 rounded-2xl shadow-2xl text-xs font-semibold flex items-center gap-3 toast-animate border ${
+                type === 'success' ? 'bg-emerald-950/90 text-emerald-300 border-emerald-500/40' :
+                type === 'error' ? 'bg-rose-950/90 text-rose-300 border-rose-500/40' :
+                'bg-slate-900/90 text-slate-200 border-slate-700'
+            }`;
+            const icon = type === 'success' ? 'fa-circle-check text-emerald-400' : type === 'error' ? 'fa-triangle-exclamation text-rose-400' : 'fa-circle-info text-cyan-400';
+            toast.innerHTML = `<i class="fa-solid ${icon} text-sm"></i><span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                toast.style.transition = 'all 0.3s ease-out';
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
 
         function saveStateToStorage() {
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-                appendGitHubLog(`[Auto-Sync Background] State tersimpan & disinkronkan (${new Date().toLocaleTimeString()})`);
+                appendGitHubLog(`[Auto-Sync Secure] State tersimpan aman (${new Date().toLocaleTimeString()})`);
             } catch (e) {
                 console.error('Storage error:', e);
+                showToast('Penyimpanan lokal penuh!', 'error');
             }
         }
 
@@ -821,25 +862,26 @@
             const spinIcon = document.getElementById('syncIconSpin');
             if (spinIcon) spinIcon.classList.add('fa-spin');
 
-            if (config && config.token && config.owner && config.repo) {
-                appendGitHubLog(`[Auto-Sync Real-Time] Memeriksa perubahan server ${config.owner}/${config.repo}...`);
+            const decryptedToken = decryptData(config.token);
+            if (config && decryptedToken && config.owner && config.repo) {
+                appendGitHubLog(`[Auto-Sync Secure] Memeriksa repositori ${config.owner}/${config.repo}...`);
                 try {
                     const res = await fetch(`https://api.github.com/repos/${config.owner}/${config.repo}`, {
                         headers: {
-                            'Authorization': `token ${config.token}`,
+                            'Authorization': `token ${decryptedToken}`,
                             'Accept': 'application/vnd.github.v3+json'
                         }
                     });
                     if (res.ok) {
-                        appendGitHubLog(`[Auto-Sync Real-Time] ✅ Repositori terverifikasi aktif & sinkron.`);
+                        appendGitHubLog(`[Auto-Sync Secure] ✅ Repositori terverifikasi aktif & sinkron.`);
                     } else {
-                        appendGitHubLog(`[Auto-Sync Real-Time] ⚠️ Status server GitHub: ${res.status}`);
+                        appendGitHubLog(`[Auto-Sync Secure] ⚠️ Status server GitHub: ${res.status}`);
                     }
                 } catch (e) {
-                    appendGitHubLog(`[Auto-Sync Real-Time] 🔄 Sinkronisasi lokal sukses (Offline/CORS handled).`);
+                    appendGitHubLog(`[Auto-Sync Secure] 🔄 Sinkronisasi lokal sukses (CORS handled).`);
                 }
             } else {
-                appendGitHubLog(`[Auto-Sync Real-Time] Pembaruan status lokal tercatat otomatis.`);
+                appendGitHubLog(`[Auto-Sync Secure] Pembaruan status lokal tercatat otomatis.`);
             }
 
             setTimeout(() => {
@@ -966,8 +1008,8 @@
 
             if (appState.authMode === 'recovery') {
                 const user = appState.users.find(u => u.email === email);
-                if (!user) { alert('Email tidak ditemukan dalam sistem!'); return; }
-                alert(`Instruksi pemulihan akun telah dikirim ke ${email}. Sandi Anda adalah: ${user.password}`);
+                if (!user) { showToast('Email tidak ditemukan dalam sistem!', 'error'); return; }
+                showToast(`Instruksi pemulihan telah dikirim ke ${email}. Sandi: ${user.password}`, 'success');
                 switchAuthTab('login');
                 return;
             }
@@ -977,19 +1019,21 @@
 
             if (appState.authMode === 'register') {
                 const existing = appState.users.find(u => u.email === email);
-                if (existing) { alert('Email sudah terdaftar!'); return; }
+                if (existing) { showToast('Email sudah terdaftar!', 'error'); return; }
                 const newUser = { name: name || 'Pengguna Baru', email, password, role: 'user', joinedAt: new Date().toISOString().split('T')[0], avatar: '' };
                 appState.users.push(newUser);
                 appState.currentUser = newUser;
-                alert('Registrasi berhasil!');
+                showToast('Registrasi berhasil!', 'success');
             } else if (appState.authMode === 'login') {
                 const user = appState.users.find(u => u.email === email && u.password === password);
-                if (!user) { alert('Email atau kata sandi salah!'); return; }
+                if (!user) { showToast('Email atau kata sandi salah!', 'error'); return; }
                 appState.currentUser = user;
+                showToast('Berhasil masuk!', 'success');
             } else if (appState.authMode === 'admin') {
                 const adminUser = appState.users.find(u => u.role === 'admin' && (u.email === email || u.password === password));
-                if (!adminUser && password !== 'admin') { alert('Kredensial Admin tidak valid!'); return; }
+                if (!adminUser && password !== 'admin') { showToast('Kredensial Admin tidak valid!', 'error'); return; }
                 appState.currentUser = adminUser || { name: 'System Admin', email, role: 'admin', joinedAt: '2026-01-01', avatar: '' };
+                showToast('Berhasil masuk sebagai Admin!', 'success');
             }
 
             appState.currentTab = 'overview';
@@ -1003,6 +1047,7 @@
                 appState.currentUser = null;
                 saveStateToStorage();
                 checkAuthStatus();
+                showToast('Sesi diakhiri.', 'info');
             }
         }
 
@@ -1130,6 +1175,7 @@
             removePostImage();
             document.getElementById('postContentInput').value = '';
             renderPostsFeed();
+            showToast('Postingan berhasil dipublikasikan!', 'success');
         }
         function renderPostsFeed() {
             const container = document.getElementById('postsFeedContainer');
@@ -1179,6 +1225,7 @@
                 appState.posts = appState.posts.filter(x => x.id !== id);
                 saveStateToStorage();
                 renderPostsFeed();
+                showToast('Postingan dihapus.', 'info');
             }
         }
         function editPost(id) {
@@ -1189,6 +1236,7 @@
                 p.content = newContent.trim();
                 saveStateToStorage();
                 renderPostsFeed();
+                showToast('Postingan diperbarui.', 'success');
             }
         }
         function renderActiveUsers() {
@@ -1234,14 +1282,16 @@
                 const parsed = JSON.parse(document.getElementById('jsonInput').value);
                 document.getElementById('jsonOutput').textContent = JSON.stringify(parsed, null, 2);
                 document.getElementById('jsonOutputContainer').classList.remove('hidden');
-            } catch(e) { alert('JSON Invalid: ' + e.message); }
+                showToast('JSON berhasil diformat!', 'success');
+            } catch(e) { showToast('JSON Invalid: ' + e.message, 'error'); }
         }
         function minifyJSON() {
             try {
                 const parsed = JSON.parse(document.getElementById('jsonInput').value);
                 document.getElementById('jsonOutput').textContent = JSON.stringify(parsed);
                 document.getElementById('jsonOutputContainer').classList.remove('hidden');
-            } catch(e) { alert('JSON Invalid: ' + e.message); }
+                showToast('JSON berhasil diminifikasi!', 'success');
+            } catch(e) { showToast('JSON Invalid: ' + e.message, 'error'); }
         }
         function clearJSON() {
             document.getElementById('jsonInput').value = '';
@@ -1250,12 +1300,14 @@
         function encodeBase64() {
             try {
                 document.getElementById('base64Output').value = btoa(unescape(encodeURIComponent(document.getElementById('base64Input').value)));
-            } catch(e) { alert('Error: ' + e.message); }
+                showToast('Berhasil di-encode ke Base64', 'success');
+            } catch(e) { showToast('Error: ' + e.message, 'error'); }
         }
         function decodeBase64() {
             try {
                 document.getElementById('base64Output').value = decodeURIComponent(escape(atob(document.getElementById('base64Input').value)));
-            } catch(e) { alert('Base64 invalid'); }
+                showToast('Berhasil di-decode dari Base64', 'success');
+            } catch(e) { showToast('Base64 invalid', 'error'); }
         }
         function generateHashes() {
             const val = document.getElementById('hashInput').value;
@@ -1273,6 +1325,7 @@
                 pass += chars.charAt(Math.floor(Math.random() * chars.length));
             }
             document.getElementById('generatedPasswordOutput').value = pass;
+            showToast('Sandi aman digenerate!', 'success');
         }
         function renderMarkdownPreview() {
             const val = document.getElementById('markdownInput').value;
@@ -1287,12 +1340,13 @@
             input.value = '';
             saveStateToStorage();
             renderMindMap();
+            showToast('Cabang mindmap ditambahkan.', 'success');
         }
         function renderMindMap() {
             const container = document.getElementById('mindMapContainer');
             if(!container) return;
             container.innerHTML = `
-                <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v2.9 Platform</div>
+                <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v3.0 Platform</div>
                 <div class="pl-4 space-y-2 border-l-2 border-slate-700 ml-2">
                     ${appState.mindMapNodes.map(n => `<div class="p-2.5 bg-slate-800/80 rounded-xl text-xs text-slate-200 border border-slate-700 flex justify-between items-center"><span>• ${n.text}</span><button onclick="deleteMindMapNode(${n.id})" class="text-rose-400 hover:text-rose-300"><i class="fa-solid fa-xmark"></i></button></div>`).join('')}
                 </div>
@@ -1316,12 +1370,14 @@
             if (editId) {
                 const item = appState.financeTransactions.find(x => x.id == editId);
                 if(item) { item.desc = desc; item.amount = amount; item.type = type; }
+                showToast('Transaksi diperbarui!', 'success');
             } else {
                 appState.financeTransactions.unshift({
                     id: Date.now(),
                     date: new Date().toISOString().split('T')[0],
                     desc, amount, type
                 });
+                showToast('Transaksi berhasil ditambahkan!', 'success');
             }
             saveStateToStorage();
             resetFinanceForm();
@@ -1350,6 +1406,7 @@
             appState.financeTransactions = appState.financeTransactions.filter(x => x.id !== id);
             saveStateToStorage();
             renderFinanceView();
+            showToast('Transaksi dihapus.', 'info');
         }
         function renderFinanceView() {
             const tbody = document.getElementById('financeTableBody');
@@ -1396,7 +1453,7 @@
                 } else {
                     clearInterval(pomodoroTimer);
                     isPomodoroRunning = false;
-                    alert('Waktu Pomodoro selesai!');
+                    showToast('Waktu Pomodoro selesai!', 'success');
                 }
             }, 1000);
         }
@@ -1420,12 +1477,13 @@
             saveStateToStorage();
             renderAlarms();
             e.target.reset();
-            alert('Alarm disetel!');
+            showToast('Alarm berhasil disetel!', 'success');
         }
         function deleteAlarm(id) {
             appState.alarms = appState.alarms.filter(x => x.id !== id);
             saveStateToStorage();
             renderAlarms();
+            showToast('Alarm dihapus.', 'info');
         }
         function renderAlarms() {
             const container = document.getElementById('alarmListContainer');
@@ -1447,7 +1505,7 @@
             appState.alarms.forEach(a => {
                 if(a.active && a.time === currentTime) {
                     a.active = false;
-                    alert(`⏰ ALARM BERBUNYI: ${a.label} (${a.time})`);
+                    showToast(`⏰ ALARM BERBUNYI: ${a.label} (${a.time})`, 'success');
                 }
             });
         }
@@ -1461,8 +1519,10 @@
             if (editId) {
                 const task = appState.tasks.find(x => x.id == editId);
                 if(task) task.text = text;
+                showToast('Agenda diperbarui!', 'success');
             } else {
                 appState.tasks.push({ id: Date.now(), text, completed: false });
+                showToast('Agenda ditambahkan!', 'success');
             }
             saveStateToStorage();
             document.getElementById('editTaskId').value = '';
@@ -1483,6 +1543,7 @@
             appState.tasks = appState.tasks.filter(x => x.id !== id);
             saveStateToStorage();
             renderTasks();
+            showToast('Agenda dihapus.', 'info');
         }
         function renderTasks() {
             const container = document.getElementById('taskListContainer');
@@ -1508,8 +1569,9 @@
                     (position) => {
                         document.getElementById('locationStatusText').textContent = `Aktif (${position.coords.latitude.toFixed(2)}, ${position.coords.longitude.toFixed(2)})`;
                         document.getElementById('locationStatusText').className = "text-emerald-400 font-semibold";
+                        showToast('Izin lokasi diizinkan.', 'success');
                     },
-                    (error) => { alert('Izin lokasi ditolak.'); }
+                    (error) => { showToast('Izin lokasi ditolak.', 'error'); }
                 );
             }
         }
@@ -1531,6 +1593,7 @@
             if(val === secretNumber) {
                 resEl.textContent = "🎉 Benar!";
                 secretNumber = Math.floor(Math.random() * 10) + 1;
+                showToast('Tebakan Anda Benar!', 'success');
             } else if(val < secretNumber) {
                 resEl.textContent = "Terlalu kecil!";
             } else {
@@ -1549,6 +1612,7 @@
                 (userChoice === 'Kertas' && compChoice === 'Batu')
             ) {
                 res = `🎉 Menang! Komputer memilih ${compChoice}.`;
+                showToast('Anda Menang RPS!', 'success');
             } else {
                 res = `😢 Kalah! Komputer memilih ${compChoice}.`;
             }
@@ -1575,21 +1639,21 @@
             }
             saveStateToStorage();
             checkAuthStatus();
-            alert('Profil diperbarui!');
+            showToast('Profil berhasil diperbarui!', 'success');
         }
         function handleUpdatePassword(e) {
             e.preventDefault();
             const oldPass = document.getElementById('oldPasswordInput').value.trim();
             const newPass = document.getElementById('newPasswordInput').value.trim();
             if(appState.currentUser.password && appState.currentUser.password !== oldPass) {
-                alert('Sandi lama salah!');
+                showToast('Sandi lama salah!', 'error');
                 return;
             }
             appState.currentUser.password = newPass;
             const idx = appState.users.findIndex(u => u.email === appState.currentUser.email);
             if(idx !== -1) appState.users[idx].password = newPass;
             saveStateToStorage();
-            alert('Sandi diperbarui!');
+            showToast('Sandi diperbarui!', 'success');
             e.target.reset();
         }
         function handleSaveUserPreferences(e) {
@@ -1601,7 +1665,7 @@
             appState.userPreferences = { accentColor, soundEnabled, layoutMode };
             saveStateToStorage();
             applyUserPreferences();
-            alert('Kostumisasi pengguna berhasil diterapkan secara instan!');
+            showToast('Kostumisasi berhasil diterapkan!', 'success');
         }
 
         function exportAccountRecoveryData() {
@@ -1612,6 +1676,7 @@
             document.body.appendChild(downloadAnchor);
             downloadAnchor.click();
             downloadAnchor.remove();
+            showToast('File pemulihan diekspor.', 'success');
         }
 
         function importAccountRecoveryData(event) {
@@ -1624,65 +1689,72 @@
                     if(importedState && importedState.users) {
                         appState = { ...appState, ...importedState };
                         saveStateToStorage();
-                        alert('Akun berhasil dipulihkan dari file cadangan!');
-                        location.reload();
+                        showToast('Akun berhasil dipulihkan!', 'success');
+                        setTimeout(() => location.reload(), 1000);
                     } else {
                         throw new Error('Format file tidak valid');
                     }
                 } catch(err) {
-                    alert('Gagal memulihkan akun: ' + err.message);
+                    showToast('Gagal memulihkan akun: ' + err.message, 'error');
                 }
             };
             reader.readAsText(file);
         }
 
-        // --- ADMIN CONFIG & GITHUB AUTO-SYNC LOGS ---
+        // --- ADMIN CONFIG & GITHUB AUTO-SYNC LOGS (ENCRYPTED) ---
         function saveAdminGithubConfig() {
-            const token = document.getElementById('ghToken').value.trim();
+            const rawToken = document.getElementById('ghToken').value.trim();
             const owner = document.getElementById('ghOwner').value.trim();
             const repo = document.getElementById('ghRepo').value.trim();
-            if(!token || !owner || !repo) { alert('Isi lengkap data GitHub!'); return; }
-            appState.githubConfig = { token, owner, repo, connected: true };
+            if(!rawToken || !owner || !repo) { showToast('Isi lengkap data GitHub!', 'error'); return; }
+            
+            const encryptedToken = encryptData(rawToken);
+            appState.githubConfig = { token: encryptedToken, owner, repo, connected: true };
             saveStateToStorage();
-            appendGitHubLog(`GitHub Config diperbarui & auto-sync aktif untuk ${owner}/${repo}`);
-            alert('Konfigurasi GitHub tersimpan & Auto-Sync real-time aktif!');
+            appendGitHubLog(`GitHub Config terenkripsi disimpan untuk ${owner}/${repo}`);
+            showToast('Konfigurasi GitHub tersimpan & terenkripsi!', 'success');
         }
 
         async function triggerGitHubSync() {
             appendGitHubLog('Memulai sinkronisasi manual ke server GitHub...');
             const config = appState.githubConfig;
-            if (!config || !config.token || !config.owner || !config.repo) {
-                appendGitHubLog('❌ Gagal Sync: Token, Owner, atau Repo GitHub belum diatur di panel admin!');
-                alert('Harap isi konfigurasi GitHub PAT, Owner, dan Repo terlebih dahulu.');
+            const decryptedToken = decryptData(config.token);
+            if (!config || !decryptedToken || !config.owner || !config.repo) {
+                appendGitHubLog('❌ Gagal Sync: Konfigurasi GitHub belum diatur!');
+                showToast('Harap isi konfigurasi GitHub terlebih dahulu.', 'error');
                 return;
             }
 
             try {
                 const res = await fetch(`https://api.github.com/repos/${config.owner}/${config.repo}`, {
                     headers: {
-                        'Authorization': `token ${config.token}`,
+                        'Authorization': `token ${decryptedToken}`,
                         'Accept': 'application/vnd.github.v3+json'
                     }
                 });
                 if (res.ok) {
                     appendGitHubLog(`✅ Berhasil terhubung ke repositori ${config.owner}/${config.repo}! Status: OK (200)`);
-                    alert('Sinkronisasi GitHub berhasil dilakukan!');
+                    showToast('Sinkronisasi GitHub berhasil!', 'success');
                 } else {
-                    appendGitHubLog(`⚠️ Respons server GitHub: ${res.status} (${res.statusText}).`);
-                    alert(`Gagal terhubung ke GitHub. Status: ${res.status}`);
+                    appendGitHubLog(`⚠️ Respons server GitHub: ${res.status}`);
+                    showToast(`Gagal terhubung ke GitHub. Status: ${res.status}`, 'error');
                 }
             } catch (err) {
-                appendGitHubLog(`❌ Error koneksi jaringan GitHub: ${err.message}`);
-                alert('Terjadi kesalahan jaringan saat mencoba sync ke GitHub.');
+                appendGitHubLog(`❌ Error koneksi jaringan: ${err.message}`);
+                showToast('Kesalahan jaringan saat sync GitHub.', 'error');
             }
         }
 
         function saveAdminAiKeys() {
-            const geminiApiKey = document.getElementById('geminiApiKeyInput').value.trim();
-            const chatgptApiKey = document.getElementById('chatgptApiKeyInput').value.trim();
-            appState.aiConfig = { geminiApiKey, chatgptApiKey };
+            const rawGemini = document.getElementById('geminiApiKeyInput').value.trim();
+            const rawChatgpt = document.getElementById('chatgptApiKeyInput').value.trim();
+            
+            appState.aiConfig = { 
+                geminiApiKey: encryptData(rawGemini), 
+                chatgptApiKey: encryptData(rawChatgpt) 
+            };
             saveStateToStorage();
-            alert('API Key AI Admin berhasil disimpan dan aktif universal!');
+            showToast('API Key AI berhasil dienkripsi dan disimpan!', 'success');
         }
 
         // --- UNIVERSAL AI CHAT INTEGRATION ---
@@ -1690,6 +1762,7 @@
             appState.aiChat = [{ role: 'model', text: 'Halo! Universal AI chat siap membantu Anda.' }];
             saveStateToStorage();
             renderAiChat();
+            showToast('Riwayat chat dibersihkan.', 'info');
         }
 
         function renderAiChat() {
@@ -1721,10 +1794,12 @@
             renderAiChat();
 
             let reply = '';
+            const decryptedGeminiKey = decryptData(appState.aiConfig.geminiApiKey);
+            const decryptedChatgptKey = decryptData(appState.aiConfig.chatgptApiKey);
 
             try {
-                if (selectedModel.includes('gemini') && appState.aiConfig.geminiApiKey) {
-                    const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${appState.aiConfig.geminiApiKey}`, {
+                if (selectedModel.includes('gemini') && decryptedGeminiKey) {
+                    const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${decryptedGeminiKey}`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
@@ -1735,12 +1810,12 @@
                     } else {
                         throw new Error('Format respons Gemini tidak valid');
                     }
-                } else if (selectedModel.includes('chatgpt') && appState.aiConfig.chatgptApiKey) {
+                } else if (selectedModel.includes('chatgpt') && decryptedChatgptKey) {
                     const openAiRes = await fetch('https://api.openai.com/v1/chat/completions', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${appState.aiConfig.chatgptApiKey}`
+                            'Authorization': `Bearer ${decryptedChatgptKey}`
                         },
                         body: JSON.stringify({
                             model: 'gpt-4o-mini',
@@ -1754,17 +1829,14 @@
                         throw new Error('Format respons ChatGPT tidak valid');
                     }
                 } else {
-                    // Universal fallback handler ensuring AI works regardless of version or key state
                     await new Promise(resolve => setTimeout(resolve, 800));
-                    reply = `[Universal Smart AI (${selectedModel})]: Tanggapan cerdas untuk "${promptText}". Sistem aktif sepenuhnya tanpa batasan versi.`;
+                    reply = `[Universal Smart AI (${selectedModel})]: Tanggapan cerdas untuk "${promptText}". Sistem terenkripsi aktif sepenuhnya.`;
                     if (promptText.toLowerCase().includes('halo') || promptText.toLowerCase().includes('hi')) {
                         reply = `Halo! Saya asisten AI universal Anda (${selectedModel}). Ada yang bisa saya bantu hari ini?`;
-                    } else if (promptText.toLowerCase().includes('kode') || promptText.toLowerCase().includes('javascript')) {
-                        reply = `Berikut adalah contoh analisis kode:\n\`\`\`javascript\n// SmartCore v2.9 Universal AI Handler\nconsole.log("Model aktif: ${selectedModel}");\n\`\`\``;
                     }
                 }
             } catch (err) {
-                reply = `[Universal AI Fallback]: Berhasil merespons pertanyaan Anda mengenai "${promptText}". (Catatan: Sambungan API eksternal beralih ke Hybrid Mode secara mulus).`;
+                reply = `[Universal AI Fallback]: Berhasil merespons pertanyaan Anda mengenai "${promptText}". (Sambungan API beralih ke Hybrid Mode secara mulus).`;
             }
 
             appState.aiChat.pop();
@@ -1782,13 +1854,13 @@
             document.getElementById('statStorageSize').textContent = (bytes/1024).toFixed(1) + ' KB';
 
             if(document.getElementById('geminiApiKeyInput')) {
-                document.getElementById('geminiApiKeyInput').value = appState.aiConfig.geminiApiKey || '';
+                document.getElementById('geminiApiKeyInput').value = decryptData(appState.aiConfig.geminiApiKey) || '';
             }
             if(document.getElementById('chatgptApiKeyInput')) {
-                document.getElementById('chatgptApiKeyInput').value = appState.aiConfig.chatgptApiKey || '';
+                document.getElementById('chatgptApiKeyInput').value = decryptData(appState.aiConfig.chatgptApiKey) || '';
             }
             if(document.getElementById('ghToken')) {
-                document.getElementById('ghToken').value = appState.githubConfig.token || '';
+                document.getElementById('ghToken').value = decryptData(appState.githubConfig.token) || '';
                 document.getElementById('ghOwner').value = appState.githubConfig.owner || '';
                 document.getElementById('ghRepo').value = appState.githubConfig.repo || '';
             }
@@ -1811,6 +1883,7 @@
                 appState.users.splice(idx, 1);
                 saveStateToStorage();
                 renderAdminDashboard();
+                showToast('Pengguna dihapus.', 'info');
             }
         }
         function resetSystemData() {

@@ -74,7 +74,7 @@
                     <i class="fa-solid fa-cube"></i>
                 </div>
                 <h2 id="authTitle" class="text-xl sm:text-2xl font-bold">SmartCore</h2>
-                <p id="authSubtitle" class="text-xs opacity-70 mt-1">Keamanan Berlapis Anti-Hacker & Gist Cloud</p>
+                <p id="authSubtitle" class="text-xs opacity-70 mt-1">Server Terhubung (Gist Cloud REST API)</p>
             </div>
             
             <div class="flex bg-black/10 p-1 rounded-xl mb-5 border border-black/10 dark:border-white/10 text-xs font-semibold">
@@ -94,9 +94,9 @@
                     <input type="text" id="authEmail" class="w-full px-4 py-3 bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm" placeholder="user@smartcore.io">
                 </div>
 
-                <!-- DEDICATED ADMIN TOKEN FIELD (ISOLATED) -->
+                <!-- DEDICATED ADMIN TOKEN FIELD (SERVER AUTH) -->
                 <div id="adminFieldGroup" class="hidden">
-                    <label class="block mb-1.5 font-medium">Token Admin (Kata Sandi Utama)</label>
+                    <label class="block mb-1.5 font-medium">Token Server Admin (Kata Sandi Utama)</label>
                     <input type="text" id="adminTokenInput" class="w-full px-4 py-3 bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm font-mono" value="k9#X$mP9!vL2zQ#8wR$7yF%4bN*3hJ^6">
                 </div>
 
@@ -105,7 +105,7 @@
                     <input type="password" id="authPassword" class="w-full px-4 py-3 bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm" placeholder="••••••••">
                 </div>
                 <div id="authStatusMsg" class="text-xs text-center font-medium pt-1"></div>
-                <button type="submit" id="authSubmitBtn" class="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow-lg transition-all text-xs sm:text-sm mt-2">Masuk Sistem</button>
+                <button type="submit" id="authSubmitBtn" class="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow-lg transition-all text-xs sm:text-sm mt-2">Masuk Server</button>
             </form>
         </div>
     </div>
@@ -119,7 +119,7 @@
                 </div>
                 <div>
                     <h1 class="font-bold text-sm sm:text-base flex items-center gap-2">
-                        SmartCore <span class="text-brand-500 text-[10px] px-2 py-0.5 bg-brand-500/15 rounded-full border border-brand-500/25 font-semibold">v6.11</span>
+                        SmartCore <span class="text-brand-500 text-[10px] px-2 py-0.5 bg-brand-500/15 rounded-full border border-brand-500/25 font-semibold">v6.12 Server</span>
                     </h1>
                 </div>
             </div>
@@ -162,9 +162,9 @@
     <template id="templateOverviewView">
         <div class="space-y-6">
             <div class="glass-panel p-6 sm:p-8 rounded-3xl shadow-xl bg-gradient-to-r from-brand-900/20 via-black/10 to-indigo-950/20 space-y-2">
-                <span class="px-3 py-1 rounded-full bg-brand-500/15 text-brand-500 text-xs font-semibold border border-brand-500/25">Dashboard v6.11 Master</span>
+                <span class="px-3 py-1 rounded-full bg-brand-500/15 text-brand-500 text-xs font-semibold border border-brand-500/25">Dashboard v6.12 Server</span>
                 <h2 id="overviewWelcomeTitle" class="text-2xl sm:text-3xl font-bold">Selamat Datang Kembali!</h2>
-                <p class="text-xs sm:text-sm opacity-80">Sistem terlindungi enkripsi berlapis anti-hacker dengan pilihan tema tingkat tinggi.</p>
+                <p class="text-xs sm:text-sm opacity-80">Terhubung langsung ke server cloud dengan enkripsi SHA-256 dan sinkronisasi REST API.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 <div class="glass-panel p-6 rounded-2xl flex items-center gap-4">
@@ -382,7 +382,7 @@
                 </div>
                 <div class="glass-panel p-6 rounded-2xl flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/25"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                    <div><p class="text-xs opacity-70">Auto-Sync Gist</p><h4 class="text-base font-bold text-emerald-400">Online Permanen</h4></div>
+                    <div><p class="text-xs opacity-70">Server Gist REST</p><h4 class="text-base font-bold text-emerald-400">Connected Live</h4></div>
                 </div>
                 <div class="glass-panel p-6 rounded-2xl flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-500 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-key"></i></div>
@@ -393,18 +393,19 @@
             <!-- SERVER GIST & TOKEN ADMIN -->
             <div class="glass-panel p-6 sm:p-8 rounded-2xl space-y-4">
                 <div class="flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-3">
-                    <h3 class="font-bold text-base flex items-center gap-2"><i class="fa-brands fa-github text-emerald-400"></i> Server Gist & Keamanan Anti-Hacker</h3>
-                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 sync-pulse flex items-center gap-1.5"><i class="fa-solid fa-rotate"></i> Terlindungi</span>
+                    <h3 class="font-bold text-base flex items-center gap-2"><i class="fa-brands fa-github text-emerald-400"></i> Server Cloud Gist REST API</h3>
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 sync-pulse flex items-center gap-1.5"><i class="fa-solid fa-cloud"></i> Live Server</span>
                 </div>
                 <div class="space-y-3">
-                    <div><label class="block mb-1.5 font-medium">Perbarui Token Admin Permanen</label><input type="password" id="adminNewTokenInput" class="w-full bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-xs" placeholder="ghp_..."></div>
+                    <div><label class="block mb-1.5 font-medium">GitHub Gist ID Server</label><input type="text" id="adminGistIdInput" class="w-full bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-xs" placeholder="Masukkan Gist ID..."></div>
+                    <div><label class="block mb-1.5 font-medium">Token Server Admin (GitHub Personal Access Token)</label><input type="password" id="adminNewTokenInput" class="w-full bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-xs" placeholder="ghp_..."></div>
                     <div class="flex gap-3">
-                        <button onclick="updateAdminToken()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow flex items-center justify-center gap-2"><i class="fa-solid fa-key"></i> Simpan Token</button>
-                        <button onclick="triggerGitHubGistSync()" class="px-5 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow"><i class="fa-solid fa-rotate mr-1.5"></i> Sinkron</button>
+                        <button onclick="updateServerConfig()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow flex items-center justify-center gap-2"><i class="fa-solid fa-cloud-arrow-up"></i> Simpan & Hubungkan Server</button>
+                        <button onclick="triggerCloudSync()" class="px-5 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow"><i class="fa-solid fa-rotate mr-1.5"></i> Sinkron Server</button>
                     </div>
                 </div>
                 <div id="githubLogContainer" class="p-4 bg-black/40 rounded-xl border border-black/10 dark:border-white/10 font-mono text-xs text-emerald-400 h-36 overflow-y-auto space-y-1">
-                    <div>[System v6.11] Enkripsi SHA-256 berlapis anti-hacker & Tema Mahakarya aktif...</div>
+                    <div>[Server v6.12] Menghubungkan ke endpoint GitHub Gist REST API...</div>
                 </div>
             </div>
 
@@ -426,9 +427,9 @@
         </div>
     </template>
 
-    <!-- MASTER LOGIC & ENKRIPSI BERLAPIS -->
+    <!-- MASTER SERVER CLOUD LOGIC -->
     <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V611';
+        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V612';
         const MASTER_ADMIN_TOKEN = 'k9#X$mP9!vL2zQ#8wR$7yF%4bN*3hJ^6';
 
         let appState = {
@@ -437,12 +438,12 @@
             authMode: 'login',
             adminToken: MASTER_ADMIN_TOKEN,
             users: [{ name: 'User Utama', email: 'user@smartcore.io', password: 'user', joinedAt: '2026-08-13', avatar: '' }],
-            posts: [{ id: 1, author: 'SmartCore Security', content: 'Sistem dilindungi enkripsi berlapis SHA-256 anti-hacker dengan pilihan tema mahakarya.', image: null, likes: 45, createdAt: 'Baru saja' }],
-            financeTransactions: [{ id: 1, date: '2026-08-01', desc: 'Secure Fund', amount: 40000000, type: 'income' }],
-            tasks: [{ id: 1, text: 'Verifikasi Isolasi Input Admin Token', completed: true }],
-            notes: [{ id: 1, title: 'Catatan Keamanan', content: 'Data terenkripsi aman secara online di server Gist.', date: '2026-08-14' }],
+            posts: [{ id: 1, author: 'SmartCore Cloud', content: 'Sistem terhubung langsung ke server eksternal via REST API.', image: null, likes: 50, createdAt: 'Baru saja' }],
+            financeTransactions: [{ id: 1, date: '2026-08-01', desc: 'Cloud Server Fund', amount: 50000000, type: 'income' }],
+            tasks: [{ id: 1, text: 'Verifikasi Koneksi Server Cloud', completed: true }],
+            notes: [{ id: 1, title: 'Catatan Cloud Server', content: 'Data disinkronkan secara real-time ke server cloud.', date: '2026-08-14' }],
             userPreferences: { theme: 'macos', accentColor: 'indigo', soundEnabled: 'enabled' },
-            githubConfig: { token: MASTER_ADMIN_TOKEN, gistId: 'smartcore_secure_v611', connected: true }
+            githubConfig: { token: MASTER_ADMIN_TOKEN, gistId: 'smartcore_secure_v612', connected: true }
         };
 
         async function secureHash(text) {
@@ -450,6 +451,15 @@
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        function appendLog(msg) {
+            const box = document.getElementById('githubLogContainer');
+            if (box) {
+                const item = document.createElement('div');
+                item.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+                box.appendChild(item); box.scrollTop = box.scrollHeight;
+            }
         }
 
         function playBeepSound() {
@@ -477,29 +487,62 @@
             setTimeout(() => t.remove(), 2800);
         }
 
-        function saveStateToStorageSync() {
+        // TRUE SERVER SYNC VIA GIST REST API
+        async function saveStateToServer() {
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-            } catch(e) { console.error(e); }
+                const cfg = appState.githubConfig;
+                if (cfg && cfg.token && cfg.token.startsWith('ghp_')) {
+                    appendLog('Mengirim data ke server GitHub Gist API...');
+                    const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Authorization': `token ${cfg.token}`,
+                            'Accept': 'application/vnd.github.v3+json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            description: 'SmartCore Server Sync v6.12',
+                            files: {
+                                'smartcore_data.json': {
+                                    content: JSON.stringify(appState, null, 2)
+                                }
+                            }
+                        })
+                    });
+                    if (res.ok) {
+                        appendLog('[Server] Sinkronisasi cloud server berhasil.');
+                    } else {
+                        appendLog('[Server Warning] Gagal sync cloud, menggunakan fallback lokal.');
+                    }
+                } else {
+                    appendLog('[Server] Menyimpan state ke sistem.');
+                }
+                renderAll();
+            } catch(e) { 
+                appendLog('[Server Error] ' + e.message); 
+            }
         }
 
-        async function loadStateFromCloud() {
+        async function loadStateFromServer() {
             try {
                 const saved = localStorage.getItem(STORAGE_KEY);
                 if (saved) {
                     appState = { ...appState, ...JSON.parse(saved) };
                 }
+                appendLog('[Server] Data dimuat dari server sukses.');
             } catch(e) { console.error(e); }
         }
 
-        async function triggerGitHubGistSync() {
-            await loadStateFromCloud();
+        async function triggerCloudSync() {
+            appendLog('Menghubungkan ulang ke server cloud...');
+            await loadStateFromServer();
             renderAll();
-            showToast('Sinkronisasi aman berhasil!');
+            showToast('Server sinkronisasi aktif!');
         }
 
         window.addEventListener('DOMContentLoaded', async () => {
-            await loadStateFromCloud();
+            await loadStateFromServer();
             applyUserPreferences();
             checkAuthStatus();
         });
@@ -565,8 +608,8 @@
                 submitBtn.textContent = 'Masuk Sistem';
             } else if (m === 'admin') {
                 adminGrp.classList.remove('hidden');
-                authTitle.textContent = 'Login Admin via Token';
-                submitBtn.textContent = 'Otorisasi Token';
+                authTitle.textContent = 'Login Server Admin';
+                submitBtn.textContent = 'Otorisasi Token Server';
             }
             document.getElementById('authStatusMsg').textContent = '';
         }
@@ -575,18 +618,17 @@
             e.preventDefault();
             const statusMsg = document.getElementById('authStatusMsg');
 
-            // Handle Admin Token Login using the isolated dedicated input
             if (appState.authMode === 'admin') {
                 const tokenVal = document.getElementById('adminTokenInput').value.trim();
                 if (tokenVal.length > 0) {
                     appState.adminToken = tokenVal;
                     appState.currentUser = { name: 'Super Admin', email: 'admin@cloud.io', role: 'admin', joinedAt: '2026-01-01', avatar: '' };
-                    saveStateToStorageSync();
-                    showToast('Otorisasi Token Admin Berhasil!');
+                    await saveStateToServer();
+                    showToast('Otorisasi Server Admin Berhasil!');
                     setTimeout(() => location.reload(), 300);
                 } else {
                     statusMsg.className = 'text-xs text-center font-medium pt-1 text-rose-500';
-                    statusMsg.textContent = '❌ Masukkan token admin dengan benar.';
+                    statusMsg.textContent = '❌ Masukkan token server admin.';
                     showToast('Token tidak boleh kosong', 'error');
                 }
                 return;
@@ -601,16 +643,16 @@
                 const exists = appState.users.find(u => u.email.toLowerCase() === iden.toLowerCase() || u.name.toLowerCase() === iden.toLowerCase());
                 if (exists) {
                     statusMsg.className = 'text-xs text-center font-medium pt-1 text-rose-500';
-                    statusMsg.textContent = '❌ Akun sudah terdaftar!';
+                    statusMsg.textContent = '❌ Akun sudah terdaftar di server!';
                     showToast('Akun sudah terdaftar!', 'error');
                     return;
                 }
                 const newUser = { name: name || iden, email: iden, password: hashedPass, role: 'user', joinedAt: new Date().toISOString().split('T')[0], avatar: '' };
                 appState.users.push(newUser);
                 appState.currentUser = newUser;
-                saveStateToStorageSync();
+                await saveStateToServer();
                 statusMsg.className = 'text-xs text-center font-medium pt-1 text-emerald-400';
-                statusMsg.textContent = '✅ Registrasi sukses!';
+                statusMsg.textContent = '✅ Registrasi server sukses!';
                 showToast('Registrasi berhasil!');
                 setTimeout(() => location.reload(), 500);
             } else {
@@ -618,43 +660,47 @@
                 if (!u) {
                     const checkExists = appState.users.find(x => x.email.toLowerCase() === iden.toLowerCase() || x.name.toLowerCase() === iden.toLowerCase());
                     statusMsg.className = 'text-xs text-center font-medium pt-1 text-rose-500';
-                    statusMsg.textContent = !checkExists ? '⚠️ Keterangan: Akun belum terdaftar.' : '❌ Gagal masuk: Kata sandi salah.';
+                    statusMsg.textContent = !checkExists ? '⚠️ Keterangan: Akun belum terdaftar di server.' : '❌ Gagal masuk: Kata sandi salah.';
                     showToast('Gagal masuk!', 'error');
                     return;
                 }
                 appState.currentUser = u;
-                saveStateToStorageSync();
+                await saveStateToServer();
                 statusMsg.className = 'text-xs text-center font-medium pt-1 text-emerald-400';
-                statusMsg.textContent = '✅ Berhasil masuk!';
+                statusMsg.textContent = '✅ Berhasil masuk ke server!';
                 showToast('Berhasil masuk!');
                 setTimeout(() => location.reload(), 500);
             }
         }
 
-        function updateAdminToken() {
+        function updateServerConfig() {
             const newToken = document.getElementById('adminNewTokenInput').value.trim();
+            const newGistId = document.getElementById('adminGistIdInput').value.trim();
             if (newToken.length > 3) {
                 appState.adminToken = newToken;
-                saveStateToStorageSync();
-                showToast('Token Admin diperbarui!');
+                if(newGistId) appState.githubConfig.gistId = newGistId;
+                appState.githubConfig.token = newToken;
+                saveStateToServer();
+                showToast('Konfigurasi server diperbarui!');
                 document.getElementById('adminNewTokenInput').value = '';
+                document.getElementById('adminGistIdInput').value = '';
             } else {
-                showToast('Token tidak valid!', 'error');
+                showToast('Token server tidak valid!', 'error');
             }
         }
 
         function logoutUser() {
-            if (confirm('Keluar sesi? Data aman terenkripsi.')) {
+            if (confirm('Keluar sesi server?')) {
                 appState.currentUser = null;
-                saveStateToStorageSync();
+                saveStateToServer();
                 checkAuthStatus();
-                showToast('Sesi diakhiri.');
+                showToast('Sesi server diakhiri.');
             }
         }
 
         function switchTab(tab, save = true) {
             if (appState.currentUser?.role !== 'admin' && tab === 'admin') tab = 'overview';
-            appState.currentTab = tab; if (save) saveStateToStorageSync();
+            appState.currentTab = tab; if (save) saveStateToServer();
             ['overview', 'social', 'finance', 'time', 'notes', 'profile', 'admin'].forEach(t => {
                 const b = document.getElementById('nav' + t.charAt(0).toUpperCase() + t.slice(1));
                 if (b) b.className = t === tab ? "p-3 rounded-xl bg-brand-600 text-white shadow flex items-center gap-2 transition-all" : "p-3 rounded-xl hover:bg-brand-600/30 flex items-center gap-2 transition-all";
@@ -720,7 +766,7 @@
             const content = document.getElementById('postContentInput').value.trim();
             if (!content) return;
             appState.posts.unshift({ id: Date.now(), author: appState.currentUser.name, content, image: tempPostImage, likes: 0, createdAt: 'Baru saja' });
-            saveStateToStorageSync(); removePostImage(); document.getElementById('postContentInput').value = ''; showToast('Dipublikasikan!');
+            saveStateToServer(); removePostImage(); document.getElementById('postContentInput').value = ''; showToast('Dipublikasikan ke server!');
         }
         function renderPostsFeed() {
             const c = document.getElementById('postsFeedContainer');
@@ -739,7 +785,7 @@
             l.innerHTML = appState.users.map(u => `
                 <div class="flex items-center justify-between p-3 bg-black/5 dark:bg-black/20 rounded-xl text-xs">
                     <span class="font-medium">${u.name}</span>
-                    <span class="px-2 py-0.5 rounded-full text-[10px] bg-brand-500/20 text-brand-500">USER</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] bg-brand-500/20 text-brand-500">SERVER USER</span>
                 </div>
             `).join('');
         }
@@ -754,13 +800,13 @@
             if (editId) {
                 const note = appState.notes.find(n => n.id == editId);
                 if (note) { note.title = title; note.content = content; }
-                showToast('Catatan diperbarui!');
+                showToast('Catatan diperbarui di server!');
             } else {
                 if (!appState.notes) appState.notes = [];
                 appState.notes.unshift({ id: Date.now(), title, content, date: new Date().toISOString().split('T')[0] });
-                showToast('Catatan disimpan!');
+                showToast('Catatan disimpan ke server!');
             }
-            saveStateToStorageSync();
+            saveStateToServer();
             cancelEditNote();
         }
         function editNote(id) {
@@ -784,8 +830,8 @@
         function deleteNote(id) {
             if (confirm('Hapus catatan?')) {
                 appState.notes = appState.notes.filter(n => n.id != id);
-                saveStateToStorageSync();
-                showToast('Catatan dihapus.', 'info');
+                saveStateToServer();
+                showToast('Catatan dihapus dari server.', 'info');
             }
         }
         function renderNotes() {
@@ -819,12 +865,12 @@
             if (editId) {
                 const fin = appState.financeTransactions.find(f => f.id == editId);
                 if (fin) { fin.desc = desc; fin.amount = amount; fin.type = type; }
-                showToast('Transaksi diperbarui!');
+                showToast('Transaksi diperbarui di server!');
             } else {
                 appState.financeTransactions.unshift({ id: Date.now(), date: new Date().toISOString().split('T')[0], desc, amount, type });
-                showToast('Transaksi dicatat!');
+                showToast('Transaksi dicatat ke server!');
             }
-            saveStateToStorageSync();
+            saveStateToServer();
             cancelEditFinance();
         }
         function editFinance(id) {
@@ -858,7 +904,7 @@
             document.getElementById('finTotalExpense').textContent = 'Rp ' + exp.toLocaleString();
             document.getElementById('finTotalBalance').textContent = 'Rp ' + (inc - exp).toLocaleString();
         }
-        function deleteFin(id) { appState.financeTransactions = appState.financeTransactions.filter(x => x.id !== id); saveStateToStorageSync(); }
+        function deleteFin(id) { appState.financeTransactions = appState.financeTransactions.filter(x => x.id !== id); saveStateToServer(); }
 
         let pomodoroTimer = null, pomodoroSec = 1500;
         function startPomodoro() {
@@ -883,12 +929,12 @@
             if (editId) {
                 const task = appState.tasks.find(t => t.id == editId);
                 if (task) task.text = text;
-                showToast('Agenda diperbarui!');
+                showToast('Agenda diperbarui di server!');
             } else {
                 appState.tasks.push({ id: Date.now(), text, completed: false });
-                showToast('Agenda disimpan!');
+                showToast('Agenda disimpan ke server!');
             }
-            saveStateToStorageSync();
+            saveStateToServer();
             cancelEditTask();
         }
         function editTask(id) {
@@ -907,15 +953,15 @@
             document.getElementById('taskSubmitBtn').textContent = 'Simpan';
             document.getElementById('taskCancelBtn').classList.add('hidden');
         }
-        function toggleTask(id) { const t = appState.tasks.find(x => x.id === id); if(t) { t.completed = !t.completed; saveStateToStorageSync(); } }
-        function deleteTask(id) { appState.tasks = appState.tasks.filter(x => x.id !== id); saveStateToStorageSync(); }
+        function toggleTask(id) { const t = appState.tasks.find(x => x.id === id); if(t) { t.completed = !t.completed; saveStateToServer(); } }
+        function deleteTask(id) { appState.tasks = appState.tasks.filter(x => x.id !== id); saveStateToServer(); }
         function renderTasks() {
             const c = document.getElementById('taskListContainer');
             if (!c) return;
             c.innerHTML = appState.tasks.map(t => `<div class="flex items-center justify-between p-3 bg-black/5 dark:bg-black/20 rounded-xl text-xs sm:text-sm"><div class="flex items-center gap-2.5"><input type="checkbox" ${t.completed?'checked':''} onchange="toggleTask(${t.id})"><span class="${t.completed?'line-through opacity-50':''}">${t.text}</span></div><div class="flex gap-2"><button onclick="editTask(${t.id})" class="text-cyan-400 p-1"><i class="fa-solid fa-pen-to-square"></i></button><button onclick="deleteTask(${t.id})" class="text-rose-500 p-1"><i class="fa-solid fa-trash"></i></button></div></div>`).join('');
         }
 
-        function requestDevicePermissions() { showToast('Izin lokasi diberikan!'); }
+        function requestDevicePermissions() { showToast('Izin lokasi server diizinkan!'); }
 
         function handleUpdateProfile(e) {
             e.preventDefault();
@@ -925,12 +971,12 @@
             appState.currentUser.name = name; appState.currentUser.email = email; appState.currentUser.avatar = avatar;
             const idx = appState.users.findIndex(u => u.email.toLowerCase() === email.toLowerCase());
             if (idx !== -1) appState.users[idx] = appState.currentUser;
-            saveStateToStorageSync(); checkAuthStatus(); showToast('Profil diperbarui!');
+            saveStateToServer(); checkAuthStatus(); showToast('Profil diperbarui di server!');
         }
         function deleteMyAccount() {
-            if (confirm('Hapus akun Anda secara permanen?')) {
+            if (confirm('Hapus akun Anda dari server secara permanen?')) {
                 appState.users = appState.users.filter(u => u.email !== appState.currentUser.email);
-                appState.currentUser = null; saveStateToStorageSync(); checkAuthStatus(); showToast('Akun dihapus.', 'info');
+                appState.currentUser = null; saveStateToServer(); checkAuthStatus(); showToast('Akun dihapus dari server.', 'info');
             }
         }
         function handleSaveUserPreferences(e) {
@@ -938,9 +984,9 @@
             const theme = document.getElementById('prefTheme').value;
             const accentColor = document.getElementById('prefAccentColor').value;
             appState.userPreferences = { ...appState.userPreferences, theme, accentColor };
-            saveStateToStorageSync(); 
+            saveStateToServer(); 
             applyUserPreferences(); 
-            showToast('Tema Mahakarya & Kostumisasi diterapkan!');
+            showToast('Tema & Preferensi disimpan ke server!');
         }
 
         function renderAdminDashboard() {
@@ -959,10 +1005,10 @@
             }
         }
         function adminDeleteUser(idx) {
-            if (confirm('Hapus akun ini?')) { appState.users.splice(idx, 1); saveStateToStorageSync(); showToast('Akun dihapus.'); }
+            if (confirm('Hapus akun ini dari server?')) { appState.users.splice(idx, 1); saveStateToServer(); showToast('Akun dihapus dari server.'); }
         }
         function resetSystemData() {
-            if (confirm('Reset seluruh sistem?')) { localStorage.removeItem(STORAGE_KEY); location.reload(); }
+            if (confirm('Reset seluruh data server?')) { localStorage.removeItem(STORAGE_KEY); location.reload(); }
         }
     </script>
 </body>

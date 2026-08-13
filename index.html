@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCore Ultimate - All-in-One Platform v3.2 Cloud</title>
+    <title>SmartCore Ultimate - All-in-One Platform v3.3 Gist Cloud</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -66,8 +66,8 @@
                 <div class="inline-flex p-3.5 bg-brand-600/20 text-brand-400 rounded-2xl mb-3 text-2xl border border-brand-500/30 shadow-inner">
                     <i class="fa-solid fa-cloud-arrow-up"></i>
                 </div>
-                <h2 id="authTitle" class="text-2xl font-bold tracking-tight text-white">SmartCore Cloud</h2>
-                <p id="authSubtitle" class="text-sm text-slate-400 mt-1">Data tersimpan terpusat di Server GitHub Admin</p>
+                <h2 id="authTitle" class="text-2xl font-bold tracking-tight text-white">SmartCore Gist Cloud</h2>
+                <p id="authSubtitle" class="text-sm text-slate-400 mt-1">Data tersimpan otomatis di GitHub Gist</p>
             </div>
 
             <!-- Tab Switcher Auth -->
@@ -108,7 +108,7 @@
                 </button>
 
                 <div class="text-center pt-2">
-                    <button type="button" onclick="switchAuthTab('recovery')" class="text-xs text-brand-400 hover:underline">Lupa kata sandi / Sinkronisasi Manual?</button>
+                    <button type="button" onclick="switchAuthTab('recovery')" class="text-xs text-brand-400 hover:underline">Sinkronisasi & Tarik Data Gist</button>
                 </div>
             </form>
         </div>
@@ -125,9 +125,9 @@
                     </div>
                     <div>
                         <h1 class="font-bold text-white tracking-wide text-base flex items-center gap-2">
-                            SmartCore <span class="text-brand-400 text-[10px] px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold">v3.2 Cloud</span>
+                            SmartCore <span class="text-brand-400 text-[10px] px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold">v3.3 Gist</span>
                         </h1>
-                        <p class="text-[11px] text-slate-400">Server GitHub Admin Connected</p>
+                        <p class="text-[11px] text-slate-400">GitHub Gist Auto-Sync Connected</p>
                     </div>
                 </div>
             </div>
@@ -200,7 +200,7 @@
                     <div class="inline-flex p-4 bg-brand-500/10 text-brand-400 rounded-full text-3xl animate-bounce">
                         <i class="fa-solid fa-spinner animate-spin"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white">Menghubungkan ke Server GitHub Cloud v3.2...</h3>
+                    <h3 class="text-xl font-semibold text-white">Menghubungkan ke GitHub Gist Cloud v3.3...</h3>
                 </div>
             </div>
         </main>
@@ -213,9 +213,9 @@
         <div class="space-y-6">
             <div class="glass-panel p-8 rounded-3xl border border-slate-800/80 shadow-2xl relative overflow-hidden bg-gradient-to-r from-brand-900/30 via-slate-900/80 to-indigo-950/40">
                 <div class="relative z-10 space-y-3">
-                    <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30 text-xs font-semibold">Dashboard Cloud v3.2</span>
+                    <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30 text-xs font-semibold">Dashboard Gist Cloud v3.3</span>
                     <h2 id="overviewWelcomeTitle" class="text-3xl font-bold text-white tracking-tight">Selamat Datang Kembali!</h2>
-                    <p class="text-sm text-slate-300 max-w-xl">Platform tersinkronisasi penuh secara cloud ke server GitHub admin dengan penanganan konflik otomatis.</p>
+                    <p class="text-sm text-slate-300 max-w-xl">Platform tersinkronisasi otomatis via GitHub Gist. Tidak perlu buat repositori manual atau input nama repo.</p>
                 </div>
             </div>
 
@@ -226,7 +226,7 @@
                 </div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-xl border border-purple-500/30"><i class="fa-solid fa-brain"></i></div>
-                    <div><p class="text-xs text-slate-400 font-medium">Universal AI</p><h4 class="text-lg font-bold text-emerald-400 mt-0.5">Cloud Connected</h4></div>
+                    <div><p class="text-xs text-slate-400 font-medium">Universal AI</p><h4 class="text-lg font-bold text-emerald-400 mt-0.5">Gist Connected</h4></div>
                 </div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-cyan-600/20 text-cyan-400 flex items-center justify-center text-xl border border-cyan-500/30"><i class="fa-solid fa-list-check"></i></div>
@@ -234,7 +234,7 @@
                 </div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-cloud"></i></div>
-                    <div><p class="text-xs text-slate-400 font-medium">Server Status</p><h4 class="text-lg font-bold text-emerald-400 mt-0.5">GitHub Active</h4></div>
+                    <div><p class="text-xs text-slate-400 font-medium">Server Status</p><h4 class="text-lg font-bold text-emerald-400 mt-0.5">Gist Active</h4></div>
                 </div>
             </div>
 
@@ -250,11 +250,11 @@
                 </div>
 
                 <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-rss text-cyan-400"></i> Berita & Pembaruan v3.2</h3>
+                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-rss text-cyan-400"></i> Berita & Pembaruan v3.3</h3>
                     <div class="space-y-3 text-xs">
                         <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
-                            <span class="text-brand-400 font-semibold">Anti-Conflict GitHub Sync v3.2</span>
-                            <p class="text-slate-400 mt-1">Perbaikan error 409 Conflict dengan mekanisme auto-retry dan pembaharuan SHA real-time sebelum unggah data cloud.</p>
+                            <span class="text-brand-400 font-semibold">GitHub Gist Auto-Creation</span>
+                            <p class="text-slate-400 mt-1">Pembaruan v3.3 menghapus keharusan membuat repositori dan input nama repo. Cukup masukkan token PAT dan klik Auto-Setup!</p>
                         </div>
                     </div>
                 </div>
@@ -283,7 +283,7 @@
                                 <span id="imageFileName" class="text-slate-500 italic truncate max-w-xs"></span>
                             </div>
                             <button type="submit" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center gap-2">
-                                <i class="fa-solid fa-paper-plane"></i> Publikasikan Cloud
+                                <i class="fa-solid fa-paper-plane"></i> Publikasikan Gist
                             </button>
                         </div>
                         <div id="imagePreviewContainer" class="hidden relative mt-3 rounded-2xl overflow-hidden max-h-56 border border-slate-800 shadow-md">
@@ -293,24 +293,24 @@
                     </form>
                 </div>
                 <div id="postsFeedContainer" class="space-y-4">
-                    <div class="glass-panel p-8 rounded-3xl text-center text-slate-400 text-sm shadow-xl">Memuat linimasa cloud...</div>
+                    <div class="glass-panel p-8 rounded-3xl text-center text-slate-400 text-sm shadow-xl">Memuat linimasa Gist...</div>
                 </div>
             </div>
             <div class="space-y-6">
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
-                        <i class="fa-solid fa-fire text-amber-400"></i> Tren v3.2
+                        <i class="fa-solid fa-fire text-amber-400"></i> Tren v3.3
                     </h3>
                     <div class="space-y-3 text-xs">
                         <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
-                            <span class="text-brand-400 font-semibold">#NoMore409</span>
-                            <p class="text-slate-400 mt-1">Sinkronisasi GitHub stabil tanpa error konflik versi!</p>
+                            <span class="text-brand-400 font-semibold">#AutoGistCloud</span>
+                            <p class="text-slate-400 mt-1">Pembuatan Gist otomatis tanpa repot membuat repositori manual!</p>
                         </div>
                     </div>
                 </div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
-                        <i class="fa-solid fa-users text-emerald-400"></i> Online Cloud
+                        <i class="fa-solid fa-users text-emerald-400"></i> Online Gist
                     </h3>
                     <div id="activeUsersList" class="space-y-2.5 max-h-60 overflow-y-auto pr-1"></div>
                 </div>
@@ -382,7 +382,7 @@
                         <button type="button" onclick="addMindMapNode()" class="px-5 py-2.5 bg-pink-600 text-white text-xs font-semibold rounded-xl">Tambah Cabang</button>
                     </div>
                     <div id="mindMapContainer" class="p-4 bg-slate-900/90 border border-slate-800 rounded-2xl min-h-[160px] space-y-2">
-                        <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v3.2 Cloud</div>
+                        <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v3.3 Gist</div>
                     </div>
                 </div>
             </div>
@@ -429,14 +429,14 @@
                             </select>
                         </div>
                         <div class="flex gap-2">
-                            <button type="submit" id="financeSubmitBtn" class="flex-1 py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow-lg transition-all">Simpan Cloud</button>
+                            <button type="submit" id="financeSubmitBtn" class="flex-1 py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow-lg transition-all">Simpan Gist</button>
                             <button type="button" id="financeCancelBtn" onclick="resetFinanceForm()" class="hidden px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl transition-all">Batal</button>
                         </div>
                     </form>
                 </div>
                 <div class="lg:col-span-2 glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-list-ul text-indigo-400"></i> Riwayat Keuangan Cloud
+                        <i class="fa-solid fa-list-ul text-indigo-400"></i> Riwayat Keuangan Gist
                     </h3>
                     <div class="overflow-x-auto max-h-96 overflow-y-auto pr-1">
                         <table class="w-full text-left text-xs text-slate-300">
@@ -485,7 +485,7 @@
                 <div class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 text-center space-y-2">
                     <div id="calendarHeaderMonth" class="text-sm font-bold text-brand-400">Bulan Juni 2026</div>
                     <div id="calendarTodayDisplay" class="text-2xl font-mono font-bold text-white">Kamis, 04 Juni 2026</div>
-                    <p class="text-[11px] text-slate-400">Jadwal aktif tersinkronisasi cloud.</p>
+                    <p class="text-[11px] text-slate-400">Jadwal aktif tersinkronisasi Gist.</p>
                 </div>
                 <form onsubmit="handleTaskSubmit(event)" class="flex gap-2">
                     <input type="hidden" id="editTaskId" value="">
@@ -519,13 +519,13 @@
                 </div>
             </div>
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama v3.2</h3>
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama v3.3</h3>
                 <div id="richNewsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-slate-900/90 rounded-2xl overflow-hidden border border-slate-800 shadow-lg flex flex-col">
                         <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&auto=format&fit=crop&q=60" alt="Tech" class="h-40 w-full object-cover">
                         <div class="p-4 space-y-2 flex-1 flex flex-col justify-between">
-                            <div><span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">Teknologi</span><h4 class="font-bold text-white text-sm mt-1">SmartCore v3.2 Anti-Conflict GitHub Server</h4></div>
-                            <p class="text-[11px] text-slate-400 leading-relaxed">Pembaruan v3.2 menambahkan auto-retry pada konflik versi API GitHub sehingga sinkronisasi data cloud menjadi 100% stabil.</p>
+                            <div><span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">Teknologi</span><h4 class="font-bold text-white text-sm mt-1">SmartCore v3.3 Auto Gist Creation</h4></div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Pembaruan v3.3 menghadirkan fitur pembuatan Gist otomatis tanpa memerlukan pembuatan repositori manual.</p>
                         </div>
                     </div>
                 </div>
@@ -570,7 +570,7 @@
     <template id="templateProfileView">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-user-pen text-pink-400"></i> Profil & Foto Cloud</h3>
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-user-pen text-pink-400"></i> Profil & Foto Gist</h3>
                 <form onsubmit="handleUpdateProfile(event)" class="space-y-4 text-xs">
                     <div class="flex items-center gap-4">
                         <div id="profilePreviewAvatar" class="w-16 h-16 rounded-2xl bg-brand-600 text-white flex items-center justify-center font-bold text-xl overflow-hidden border border-brand-500/30 shadow-inner">U</div>
@@ -581,7 +581,7 @@
                     </div>
                     <div><label class="block text-slate-300 mb-1.5 font-medium">Nama</label><input type="text" id="profileNameInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner"></div>
                     <div><label class="block text-slate-300 mb-1.5 font-medium">Email</label><input type="email" id="profileEmailInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner"></div>
-                    <button type="submit" class="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow transition-all">Simpan ke Cloud</button>
+                    <button type="submit" class="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow transition-all">Simpan ke Gist</button>
                 </form>
             </div>
 
@@ -590,7 +590,7 @@
                 <form onsubmit="handleUpdatePassword(event)" class="space-y-4 text-xs">
                     <div><label class="block text-slate-300 mb-1.5 font-medium">Sandi Lama</label><input type="password" id="oldPasswordInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner" placeholder="••••••••"></div>
                     <div><label class="block text-slate-300 mb-1.5 font-medium">Sandi Baru</label><input type="password" id="newPasswordInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner" placeholder="••••••••"></div>
-                    <button type="submit" class="px-6 py-3 bg-rose-600 hover:bg-rose-500 text-white font-semibold rounded-xl shadow transition-all">Perbarui Sandi Cloud</button>
+                    <button type="submit" class="px-6 py-3 bg-rose-600 hover:bg-rose-500 text-white font-semibold rounded-xl shadow transition-all">Perbarui Sandi Gist</button>
                 </form>
             </div>
 
@@ -642,7 +642,7 @@
                         </select>
                     </div>
                     <div class="flex items-center gap-3">
-                        <span id="aiStatusBadge" class="px-3 py-1 rounded-xl text-[11px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Cloud AI Active</span>
+                        <span id="aiStatusBadge" class="px-3 py-1 rounded-xl text-[11px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Gist AI Active</span>
                         <button type="button" onclick="clearAiChat()" class="text-xs text-slate-400 hover:text-rose-400 flex items-center gap-1.5"><i class="fa-solid fa-trash-can"></i> Bersihkan</button>
                     </div>
                 </div>
@@ -659,10 +659,10 @@
     <template id="templateAdminView">
         <div class="space-y-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-xl border border-brand-500/30"><i class="fa-solid fa-users"></i></div><div><p class="text-xs text-slate-400 font-medium">Total Pengguna Cloud</p><h4 id="statTotalUsers" class="text-xl font-bold text-white mt-0.5">0</h4></div></div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-xl border border-brand-500/30"><i class="fa-solid fa-users"></i></div><div><p class="text-xs text-slate-400 font-medium">Total Pengguna Gist</p><h4 id="statTotalUsers" class="text-xl font-bold text-white mt-0.5">0</h4></div></div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-xl border border-indigo-500/30"><i class="fa-solid fa-newspaper"></i></div><div><p class="text-xs text-slate-400 font-medium">Total Postingan</p><h4 id="statTotalPosts" class="text-xl font-bold text-white mt-0.5">0</h4></div></div>
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-cloud"></i></div><div><p class="text-xs text-slate-400 font-medium">Server Status</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">GitHub Live</h4></div></div>
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-shield-halved"></i></div><div><p class="text-xs text-slate-400 font-medium">Keamanan</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal v3.2</h4></div></div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-cloud"></i></div><div><p class="text-xs text-slate-400 font-medium">Server Status</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">Gist Live</h4></div></div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-shield-halved"></i></div><div><p class="text-xs text-slate-400 font-medium">Keamanan</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal v3.3</h4></div></div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -681,20 +681,26 @@
                     </div>
                 </div>
 
+                <!-- AUTO-SETUP GIST CLOUD PANEL -->
                 <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center justify-between">
-                        <span class="flex items-center gap-2"><i class="fa-brands fa-github text-emerald-400"></i> Server GitHub Cloud & Gist</span>
-                        <span id="syncPulseBadge" class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 sync-pulse flex items-center gap-1"><i id="syncIconSpin" class="fa-solid fa-rotate"></i> Cloud Sync Aktif</span>
+                        <span class="flex items-center gap-2"><i class="fa-brands fa-github text-emerald-400"></i> GitHub Gist Cloud (Auto-Setup)</span>
+                        <span id="syncPulseBadge" class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 sync-pulse flex items-center gap-1"><i id="syncIconSpin" class="fa-solid fa-rotate"></i> Gist Sync Aktif</span>
                     </h3>
                     <div class="space-y-4 text-xs">
-                        <div><label class="block text-slate-300 mb-1.5 font-medium">GitHub PAT (Token Akses)</label><input type="password" id="ghToken" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="ghp_..."></div>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div><label class="block text-slate-300 mb-1.5 font-medium">Owner</label><input type="text" id="ghOwner" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="username"></div>
-                            <div><label class="block text-slate-300 mb-1.5 font-medium">Repo</label><input type="text" id="ghRepo" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="repo"></div>
+                        <div>
+                            <label class="block text-slate-300 mb-1.5 font-medium">GitHub Personal Access Token (PAT)</label>
+                            <input type="password" id="ghToken" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="ghp_... (Pastikan centang izin 'gist')">
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 mb-1.5 font-medium">GitHub Gist ID (Otomatis / Manual)</label>
+                            <input type="text" id="ghGistId" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white font-mono text-emerald-400 shadow-inner" placeholder="Akan terisi otomatis setelah klik Auto-Setup">
                         </div>
                         <div class="flex gap-2">
-                            <button type="button" onclick="saveAdminGithubConfig()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl shadow transition-all"><i class="fa-solid fa-cloud-arrow-up mr-2"></i> Simpan & Hubungkan Cloud</button>
-                            <button type="button" onclick="triggerGitHubSync()" class="px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow transition-all" title="Sinkronisasi Manual"><i class="fa-solid fa-rotate"></i> Tarik Data Cloud</button>
+                            <button type="button" onclick="autoSetupGitHubGist()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl shadow transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> 🤖 Auto-Setup Gist Cloud (Tanpa Repot Buat Repo)
+                            </button>
+                            <button type="button" onclick="triggerGitHubGistSync()" class="px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow transition-all" title="Tarik Data Gist"><i class="fa-solid fa-rotate"></i> Tarik Gist</button>
                         </div>
                     </div>
                 </div>
@@ -702,11 +708,11 @@
 
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-5 shadow-xl">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-                    <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-terminal text-blue-400"></i> Log Cloud Server GitHub</h3>
+                    <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-terminal text-blue-400"></i> Log GitHub Gist Cloud</h3>
                     <button type="button" onclick="resetSystemData()" class="px-4 py-2 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 text-xs font-semibold rounded-xl border border-rose-500/30">Reset Sistem Cloud</button>
                 </div>
                 <div id="githubLogContainer" class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 text-xs font-mono text-emerald-400 h-36 overflow-y-auto space-y-1 shadow-inner">
-                    <div>[System v3.2 Cloud] Menghubungkan penyimpanan terpusat ke server GitHub (Anti-Conflict)...</div>
+                    <div>[System v3.3 Gist Cloud] Siap melakukan auto-setup Gist cloud...</div>
                 </div>
             </div>
 
@@ -724,9 +730,9 @@
         </div>
     </template>
 
-    <!-- JAVASCRIPT STATE ENGINE & CLOUD GITHUB SYNC -->
+    <!-- JAVASCRIPT STATE ENGINE & GIST AUTO-SETUP -->
     <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE_V32';
+        const STORAGE_KEY = 'SMARTCORE_STATE_V33';
 
         let appState = {
             currentUser: null,
@@ -738,34 +744,34 @@
                 { name: 'Danis User', email: 'danis@smartcore.io', password: 'user', role: 'user', joinedAt: '2026-06-01', avatar: '' }
             ],
             posts: [
-                { id: 1, author: 'System Admin', content: 'Selamat datang di SmartCore Ultimate v3.2 Cloud! Error 409 Conflict diatasi secara otomatis.', image: null, likes: 98, comments: [], createdAt: '04:15' }
+                { id: 1, author: 'System Admin', content: 'Selamat datang di SmartCore Ultimate v3.3 Gist Cloud! Pembuatan Gist otomatis aktif.', image: null, likes: 102, comments: [], createdAt: '04:15' }
             ],
             financeTransactions: [
-                { id: 1, date: '2026-06-01', desc: 'Gaji Proyek Cloud', amount: 10000000, type: 'income' },
-                { id: 2, date: '2026-06-04', desc: 'Server GitHub Hosting', amount: 500000, type: 'expense' }
+                { id: 1, date: '2026-06-01', desc: 'Gaji Proyek Gist', amount: 10000000, type: 'income' },
+                { id: 2, date: '2026-06-04', desc: 'Gist Hosting API', amount: 500000, type: 'expense' }
             ],
             tasks: [
-                { id: 1, text: 'Verifikasi Server GitHub Cloud v3.2', completed: true }
+                { id: 1, text: 'Verifikasi GitHub Gist Cloud v3.3', completed: true }
             ],
             alarms: [
-                { id: 1, time: '08:00', label: 'Rapat Cloud Tim', active: true }
+                { id: 1, time: '08:00', label: 'Rapat Gist Tim', active: true }
             ],
             mindMapNodes: [
-                { id: 1, text: 'Centralized GitHub Server Storage' },
-                { id: 2, text: 'Auto-Retry Conflict Prevention (409)' }
+                { id: 1, text: 'Automatic GitHub Gist Creation' },
+                { id: 2, text: 'Zero Repository Setup Required' }
             ],
             userPreferences: {
                 accentColor: 'indigo',
                 soundEnabled: 'enabled',
                 layoutMode: 'normal'
             },
-            githubConfig: { token: '', owner: '', repo: '', connected: false },
+            githubConfig: { token: '', gistId: '', connected: false },
             aiConfig: { 
                 geminiApiKey: '', 
                 chatgptApiKey: '' 
             },
             aiChat: [
-                { role: 'model', text: 'Halo! Cloud AI Chat siap membantu Anda dengan sinkronisasi stabil.' }
+                { role: 'model', text: 'Halo! Gist Cloud AI Chat siap membantu Anda.' }
             ]
         };
 
@@ -800,91 +806,161 @@
             }, 3500);
         }
 
-        // --- CLOUD GITHUB SERVER STORAGE SYNC (ANTI-CONFLICT v3.2) ---
+        // --- GIST AUTO-SYNC CLOUD ENGINE ---
         async function saveStateToStorage() {
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-                await pushStateToGitHubServer();
+                await pushStateToGistServer();
             } catch (e) {
-                console.error('Cloud sync error:', e);
+                console.error('Gist sync error:', e);
             }
         }
 
-        async function pushStateToGitHubServer(retryCount = 2) {
+        async function autoSetupGitHubGist() {
+            const rawToken = document.getElementById('ghToken').value.trim();
+            if(!rawToken) { showToast('Masukkan GitHub Token (PAT) terlebih dahulu!', 'error'); return; }
+
+            const decryptedToken = rawToken;
+            appendGitHubLog('[Gist Setup] Memverifikasi token & membuat Gist otomatis...');
+
+            try {
+                // 1. Cek User Valid
+                const userRes = await fetch('https://api.github.com/user', {
+                    headers: { 'Authorization': `token ${decryptedToken}`, 'Accept': 'application/vnd.github.v3+json' }
+                });
+                if (!userRes.ok) throw new Error('Token GitHub tidak valid atau tidak memiliki izin.');
+                const userData = await userRes.json();
+                appendGitHubLog(`[Gist Setup] Berhasil terautentikasi sebagai: ${userData.login}`);
+
+                // 2. Cek apakah sudah ada Gist ID di config atau buat Gist baru
+                let gistId = decryptData(appState.githubConfig.gistId);
+                
+                if (!gistId) {
+                    // Cari apakah sudah ada Gist dengan nama file 'smartcore_database.json'
+                    const listGistsRes = await fetch('https://api.github.com/gists', {
+                        headers: { 'Authorization': `token ${decryptedToken}`, 'Accept': 'application/vnd.github.v3+json' }
+                    });
+                    if (listGistsRes.ok) {
+                        const gists = await listGistsRes.json();
+                        const existingGist = gists.find(g => g.files && g.files['smartcore_database.json']);
+                        if (existingGist) {
+                            gistId = existingGist.id;
+                            appendGitHubLog(`[Gist Setup] Gist yang ada ditemukan secara otomatis: ${gistId}`);
+                        }
+                    }
+                }
+
+                if (!gistId) {
+                    // Buat Gist baru otomatis
+                    appendGitHubLog('[Gist Setup] Membuat Gist privat baru untuk database cloud...');
+                    const createRes = await fetch('https://api.github.com/gists', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `token ${decryptedToken}`,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/vnd.github.v3+json'
+                        },
+                        body: JSON.stringify({
+                            description: 'SmartCore Ultimate Cloud Database v3.3',
+                            public: false,
+                            files: {
+                                'smartcore_database.json': {
+                                    content: JSON.stringify(appState, null, 2)
+                                }
+                            }
+                        })
+                    });
+                    if (!createRes.ok) throw new Error('Gagal membuat Gist otomatis. Pastikan token memiliki centang "gist".');
+                    const createData = await createRes.json();
+                    gistId = createData.id;
+                    appendGitHubLog(`[Gist Setup] ✅ Gist baru berhasil dibuat otomatis! ID: ${gistId}`);
+                }
+
+                appState.githubConfig = {
+                    token: encryptData(decryptedToken),
+                    gistId: encryptData(gistId),
+                    connected: true
+                };
+
+                await saveStateToStorage();
+                renderAdminDashboard();
+                showToast('Auto-Setup Gist Cloud Berhasil!', 'success');
+            } catch (err) {
+                appendGitHubLog(`[Gist Setup Error] ❌ ${err.message}`);
+                showToast(err.message, 'error');
+            }
+        }
+
+        async function pushStateToGistServer() {
             const config = appState.githubConfig;
             const decryptedToken = decryptData(config.token);
-            if (!config || !decryptedToken || !config.owner || !config.repo) {
-                appendGitHubLog('[Cloud Sync] Menunggu konfigurasi GitHub Admin diatur...');
-                return;
+            const decryptedGistId = decryptData(config.gistId);
+
+            if (!config || !decryptedToken || !decryptedGistId) {
+                return; // Belum di-setup
             }
 
             try {
-                const path = 'smartcore_cloud_database.json';
-                
-                // Ambil SHA terbaru tepat sebelum melakukan PUT untuk menghindari 409 Conflict
-                let sha = '';
-                const getRes = await fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/contents/${path}`, {
-                    headers: { 'Authorization': `token ${decryptedToken}`, 'Accept': 'application/vnd.github.v3+json' },
-                    cache: 'no-cache'
-                });
-                if (getRes.ok) {
-                    const fileData = await getRes.json();
-                    sha = fileData.sha;
-                }
-
-                const contentEncoded = btoa(unescape(encodeURIComponent(JSON.stringify(appState, null, 2))));
-                const putRes = await fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/contents/${path}`, {
-                    method: 'PUT',
+                const res = await fetch(`https://api.github.com/gists/${decryptedGistId}`, {
+                    method: 'PATCH',
                     headers: {
                         'Authorization': `token ${decryptedToken}`,
                         'Content-Type': 'application/json',
                         'Accept': 'application/vnd.github.v3+json'
                     },
                     body: JSON.stringify({
-                        message: `[SmartCore Cloud Auto-Sync] Update database state (${new Date().toLocaleTimeString()})`,
-                        content: contentEncoded,
-                        sha: sha ? sha : undefined
+                        description: `SmartCore Cloud Sync (${new Date().toLocaleTimeString()})`,
+                        files: {
+                            'smartcore_database.json': {
+                                content: JSON.stringify(appState, null, 2)
+                            }
+                        }
                     })
                 });
 
-                if (putRes.ok) {
-                    appendGitHubLog(`[Cloud Sync] ✅ Data berhasil diunggah & diamankan ke server GitHub.`);
-                } else if (putRes.status === 409 && retryCount > 0) {
-                    appendGitHubLog(`[Cloud Sync] ⚠️ Terdeteksi conflict (409), mengambil SHA terbaru & mencoba ulang...`);
-                    await new Promise(resolve => setTimeout(resolve, 1000));
-                    await pushStateToGitHubServer(retryCount - 1);
+                if (res.ok) {
+                    appendGitHubLog(`[Gist Sync] ✅ Data berhasil disinkronkan ke Gist.`);
                 } else {
-                    appendGitHubLog(`[Cloud Sync] ⚠️ Respon server GitHub: ${putRes.status}`);
+                    appendGitHubLog(`[Gist Sync] ⚠️ Gagal sinkronisasi Gist (Status: ${res.status})`);
                 }
             } catch (err) {
-                appendGitHubLog(`[Cloud Sync] 🔄 Menggunakan cache lokal (Koneksi server cloud tertunda)`);
+                appendGitHubLog(`[Gist Sync] 🔄 Menggunakan cache lokal (Koneksi tertunda)`);
             }
         }
 
-        async function pullStateFromGitHubServer() {
+        async function pullStateFromGistServer() {
             const config = appState.githubConfig;
             const decryptedToken = decryptData(config.token);
-            if (!config || !decryptedToken || !config.owner || !config.repo) return;
+            const decryptedGistId = decryptData(config.gistId);
 
-            appendGitHubLog(`[Cloud Pull] Mengambil data terbaru dari server GitHub (${config.owner}/${config.repo})...`);
+            if (!config || !decryptedToken || !decryptedGistId) return;
+
+            appendGitHubLog(`[Gist Pull] Menarik data terbaru dari Gist (${decryptedGistId})...`);
             try {
-                const res = await fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/contents/smartcore_cloud_database.json`, {
+                const res = await fetch(`https://api.github.com/gists/${decryptedGistId}`, {
                     headers: { 'Authorization': `token ${decryptedToken}`, 'Accept': 'application/vnd.github.v3+json' },
                     cache: 'no-cache'
                 });
                 if (res.ok) {
                     const data = await res.json();
-                    const decodedJson = decodeURIComponent(escape(atob(data.content)));
-                    const cloudState = JSON.parse(decodedJson);
-                    if (cloudState && cloudState.users) {
-                        appState = { ...appState, ...cloudState };
-                        appendGitHubLog(`[Cloud Pull] ✅ Berhasil menyinkronkan data pengguna dari server cloud.`);
-                        renderAll();
+                    if (data.files && data.files['smartcore_database.json']) {
+                        const cloudState = JSON.parse(data.files['smartcore_database.json'].content);
+                        if (cloudState && cloudState.users) {
+                            appState = { ...appState, ...cloudState };
+                            appendGitHubLog(`[Gist Pull] ✅ Berhasil memuat data pengguna dari Gist.`);
+                            renderAll();
+                        }
                     }
                 }
             } catch (err) {
-                appendGitHubLog(`[Cloud Pull] Menggunakan state lokal/cache saat ini.`);
+                appendGitHubLog(`[Gist Pull] Menggunakan state lokal saat ini.`);
             }
+        }
+
+        async function triggerGitHubGistSync() {
+            appendGitHubLog('Menarik data terbaru dari Gist...');
+            await pullStateFromGistServer();
+            showToast('Data Gist berhasil ditarik!', 'success');
         }
 
         function appendGitHubLog(message) {
@@ -911,14 +987,14 @@
 
         window.addEventListener('DOMContentLoaded', async () => {
             loadStateFromStorage();
-            await pullStateFromGitHubServer();
+            await pullStateFromGistServer();
             applyUserPreferences();
             checkAuthStatus();
             setInterval(checkAlarms, 10000);
             
-            // Background worker cloud sync otomatis setiap 30 detik untuk menghindari frekuensi berlebih
+            // Background worker Gist sync otomatis setiap 30 detik
             setInterval(() => {
-                pushStateToGitHubServer();
+                pushStateToGistServer();
             }, 30000);
         });
 
@@ -999,11 +1075,11 @@
 
             if (mode === 'recovery') {
                 if(tabSwitcher) tabSwitcher.classList.add('hidden');
-                if(title) title.textContent = "Sinkronisasi Cloud";
-                if(subtitle) subtitle.textContent = "Masukkan email untuk menarik data cloud server";
+                if(title) title.textContent = "Sinkronisasi Gist";
+                if(subtitle) subtitle.textContent = "Masukkan email untuk menarik data cloud Gist";
                 if(nameGroup) nameGroup.classList.add('hidden');
                 if(passGroup) passGroup.classList.add('hidden');
-                submitBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-down"></i> Tarik Data Cloud';
+                submitBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-down"></i> Tarik Data Gist';
                 return;
             } else {
                 if(tabSwitcher) tabSwitcher.classList.remove('hidden');
@@ -1012,18 +1088,18 @@
 
             if (mode === 'login') {
                 if(btnLogin) btnLogin.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white transition-all shadow-md";
-                if(title) title.textContent = "SmartCore Cloud Masuk";
-                if(subtitle) subtitle.textContent = "Data terhubung langsung ke server GitHub";
+                if(title) title.textContent = "SmartCore Gist Masuk";
+                if(subtitle) subtitle.textContent = "Data terhubung langsung ke Gist Cloud";
                 if(nameGroup) nameGroup.classList.add('hidden');
                 document.getElementById('regName').required = false;
                 submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Masuk Cloud';
             } else if (mode === 'register') {
                 if(btnRegister) btnRegister.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white transition-all shadow-md";
-                if(title) title.textContent = "Registrasi Akun Cloud";
-                if(subtitle) subtitle.textContent = "Akun langsung tersimpan permanen di server admin";
+                if(title) title.textContent = "Registrasi Akun Gist";
+                if(subtitle) subtitle.textContent = "Akun langsung tersimpan permanen di Gist admin";
                 if(nameGroup) nameGroup.classList.remove('hidden');
                 document.getElementById('regName').required = true;
-                submitBtn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Daftar ke Cloud';
+                submitBtn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Daftar ke Gist';
             } else if (mode === 'admin') {
                 if(btnAdmin) btnAdmin.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-rose-600 text-white transition-all shadow-md";
                 if(title) title.textContent = "Panel Akses Admin";
@@ -1039,12 +1115,12 @@
             const email = document.getElementById('authEmail').value.trim();
             const password = document.getElementById('authPassword').value.trim();
 
-            await pullStateFromGitHubServer();
+            await pullStateFromGistServer();
 
             if (appState.authMode === 'recovery') {
                 const user = appState.users.find(u => u.email === email);
-                if (!user) { showToast('Email tidak ditemukan di cloud server!', 'error'); return; }
-                showToast(`Data cloud ditemukan untuk ${email}. Sandi: ${user.password}`, 'success');
+                if (!user) { showToast('Email tidak ditemukan di Gist cloud!', 'error'); return; }
+                showToast(`Data Gist ditemukan untuk ${email}. Sandi: ${user.password}`, 'success');
                 switchAuthTab('login');
                 return;
             }
@@ -1054,17 +1130,17 @@
 
             if (appState.authMode === 'register') {
                 const existing = appState.users.find(u => u.email === email);
-                if (existing) { showToast('Email sudah terdaftar di cloud server!', 'error'); return; }
+                if (existing) { showToast('Email sudah terdaftar di Gist cloud!', 'error'); return; }
                 const newUser = { name: name || 'Pengguna Baru', email, password, role: 'user', joinedAt: new Date().toISOString().split('T')[0], avatar: '' };
                 appState.users.push(newUser);
                 appState.currentUser = newUser;
                 await saveStateToStorage();
-                showToast('Registrasi berhasil tersimpan di server GitHub!', 'success');
+                showToast('Registrasi berhasil tersimpan di Gist GitHub!', 'success');
             } else if (appState.authMode === 'login') {
                 const user = appState.users.find(u => u.email === email && u.password === password);
                 if (!user) { showToast('Email atau kata sandi salah!', 'error'); return; }
                 appState.currentUser = user;
-                showToast('Berhasil masuk dari cloud server!', 'success');
+                showToast('Berhasil masuk dari Gist cloud!', 'success');
             } else if (appState.authMode === 'admin') {
                 const adminUser = appState.users.find(u => u.role === 'admin' && (u.email === email || u.password === password));
                 if (!adminUser && password !== 'admin') { showToast('Kredensial Admin tidak valid!', 'error'); return; }
@@ -1210,7 +1286,7 @@
             removePostImage();
             document.getElementById('postContentInput').value = '';
             renderPostsFeed();
-            showToast('Postingan berhasil dipublikasikan ke server cloud!', 'success');
+            showToast('Postingan berhasil dipublikasikan ke Gist cloud!', 'success');
         }
         function renderPostsFeed() {
             const container = document.getElementById('postsFeedContainer');
@@ -1260,7 +1336,7 @@
                 appState.posts = appState.posts.filter(x => x.id !== id);
                 saveStateToStorage();
                 renderPostsFeed();
-                showToast('Postingan dihapus dari server.', 'info');
+                showToast('Postingan dihapus dari Gist.', 'info');
             }
         }
         function editPost(id) {
@@ -1271,7 +1347,7 @@
                 p.content = newContent.trim();
                 saveStateToStorage();
                 renderPostsFeed();
-                showToast('Postingan diperbarui di cloud.', 'success');
+                showToast('Postingan diperbarui di Gist.', 'success');
             }
         }
         function renderActiveUsers() {
@@ -1375,13 +1451,13 @@
             input.value = '';
             saveStateToStorage();
             renderMindMap();
-            showToast('Cabang mindmap disimpan ke cloud.', 'success');
+            showToast('Cabang mindmap disimpan ke Gist.', 'success');
         }
         function renderMindMap() {
             const container = document.getElementById('mindMapContainer');
             if(!container) return;
             container.innerHTML = `
-                <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v3.2 Cloud</div>
+                <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v3.3 Gist</div>
                 <div class="pl-4 space-y-2 border-l-2 border-slate-700 ml-2">
                     ${appState.mindMapNodes.map(n => `<div class="p-2.5 bg-slate-800/80 rounded-xl text-xs text-slate-200 border border-slate-700 flex justify-between items-center"><span>• ${n.text}</span><button onclick="deleteMindMapNode(${n.id})" class="text-rose-400 hover:text-rose-300"><i class="fa-solid fa-xmark"></i></button></div>`).join('')}
                 </div>
@@ -1412,7 +1488,7 @@
                     date: new Date().toISOString().split('T')[0],
                     desc, amount, type
                 });
-                showToast('Transaksi disimpan ke server GitHub!', 'success');
+                showToast('Transaksi disimpan ke Gist GitHub!', 'success');
             }
             saveStateToStorage();
             resetFinanceForm();
@@ -1434,14 +1510,14 @@
             document.getElementById('finDesc').value = '';
             document.getElementById('finAmount').value = '';
             document.getElementById('financeFormTitle').innerHTML = '<i class="fa-solid fa-plus-circle text-brand-400"></i> Tambah Transaksi';
-            document.getElementById('financeSubmitBtn').textContent = 'Simpan Cloud';
+            document.getElementById('financeSubmitBtn').textContent = 'Simpan Gist';
             document.getElementById('financeCancelBtn').classList.add('hidden');
         }
         function deleteTransaction(id) {
             appState.financeTransactions = appState.financeTransactions.filter(x => x.id !== id);
             saveStateToStorage();
             renderFinanceView();
-            showToast('Transaksi dihapus dari cloud.', 'info');
+            showToast('Transaksi dihapus dari Gist.', 'info');
         }
         function renderFinanceView() {
             const tbody = document.getElementById('financeTableBody');
@@ -1512,7 +1588,7 @@
             saveStateToStorage();
             renderAlarms();
             e.target.reset();
-            showToast('Alarm disimpan ke server!', 'success');
+            showToast('Alarm disimpan ke Gist!', 'success');
         }
         function deleteAlarm(id) {
             appState.alarms = appState.alarms.filter(x => x.id !== id);
@@ -1554,10 +1630,10 @@
             if (editId) {
                 const task = appState.tasks.find(x => x.id == editId);
                 if(task) task.text = text;
-                showToast('Agenda diperbarui di cloud!', 'success');
+                showToast('Agenda diperbarui di Gist!', 'success');
             } else {
                 appState.tasks.push({ id: Date.now(), text, completed: false });
-                showToast('Agenda disimpan ke server GitHub!', 'success');
+                showToast('Agenda disimpan ke Gist GitHub!', 'success');
             }
             saveStateToStorage();
             document.getElementById('editTaskId').value = '';
@@ -1674,7 +1750,7 @@
             }
             saveStateToStorage();
             checkAuthStatus();
-            showToast('Profil berhasil diperbarui ke server cloud!', 'success');
+            showToast('Profil berhasil diperbarui ke Gist cloud!', 'success');
         }
         function handleUpdatePassword(e) {
             e.preventDefault();
@@ -1688,7 +1764,7 @@
             const idx = appState.users.findIndex(u => u.email === appState.currentUser.email);
             if(idx !== -1) appState.users[idx].password = newPass;
             saveStateToStorage();
-            showToast('Sandi diperbarui ke cloud!', 'success');
+            showToast('Sandi diperbarui ke Gist!', 'success');
             e.target.reset();
         }
         function handleSaveUserPreferences(e) {
@@ -1700,30 +1776,10 @@
             appState.userPreferences = { accentColor, soundEnabled, layoutMode };
             saveStateToStorage();
             applyUserPreferences();
-            showToast('Kostumisasi berhasil diterapkan ke cloud!', 'success');
+            showToast('Kostumisasi berhasil diterapkan ke Gist!', 'success');
         }
 
-        // --- ADMIN CONFIG & GITHUB CLOUD SYNC ---
-        async function saveAdminGithubConfig() {
-            const rawToken = document.getElementById('ghToken').value.trim();
-            const owner = document.getElementById('ghOwner').value.trim();
-            const repo = document.getElementById('ghRepo').value.trim();
-            if(!rawToken || !owner || !repo) { showToast('Isi lengkap data GitHub!', 'error'); return; }
-            
-            const encryptedToken = encryptData(rawToken);
-            appState.githubConfig = { token: encryptedToken, owner, repo, connected: true };
-            saveStateToStorage();
-            appendGitHubLog(`Konfigurasi GitHub Cloud aktif untuk ${owner}/${repo}`);
-            showToast('Server GitHub terhubung & data berhasil disinkronkan!', 'success');
-            await pullStateFromGitHubServer();
-        }
-
-        async function triggerGitHubSync() {
-            appendGitHubLog('Menarik data terbaru dari server GitHub...');
-            await pullStateFromGitHubServer();
-            showToast('Sinkronisasi data cloud berhasil ditarik!', 'success');
-        }
-
+        // --- ADMIN DASHBOARD & AI KEYS ---
         function saveAdminAiKeys() {
             const rawGemini = document.getElementById('geminiApiKeyInput').value.trim();
             const rawChatgpt = document.getElementById('chatgptApiKeyInput').value.trim();
@@ -1733,12 +1789,12 @@
                 chatgptApiKey: encryptData(rawChatgpt) 
             };
             saveStateToStorage();
-            showToast('API Key AI berhasil dienkripsi dan disimpan ke cloud!', 'success');
+            showToast('API Key AI berhasil dienkripsi dan disimpan ke Gist!', 'success');
         }
 
         // --- UNIVERSAL AI CHAT INTEGRATION ---
         function clearAiChat() {
-            appState.aiChat = [{ role: 'model', text: 'Halo! Cloud AI chat siap membantu Anda.' }];
+            appState.aiChat = [{ role: 'model', text: 'Halo! Gist Cloud AI chat siap membantu Anda.' }];
             saveStateToStorage();
             renderAiChat();
             showToast('Riwayat chat dibersihkan.', 'info');
@@ -1769,7 +1825,7 @@
             input.value = '';
             renderAiChat();
 
-            appState.aiChat.push({ role: 'model', text: 'Menghubungkan ke Universal AI Cloud...' });
+            appState.aiChat.push({ role: 'model', text: 'Menghubungkan ke Universal AI Gist Cloud...' });
             renderAiChat();
 
             let reply = '';
@@ -1809,9 +1865,9 @@
                     }
                 } else {
                     await new Promise(resolve => setTimeout(resolve, 800));
-                    reply = `[Universal Smart AI Cloud (${selectedModel})]: Tanggapan untuk "${promptText}". Tersinkronisasi server GitHub admin.`;
+                    reply = `[Universal Smart AI Gist Cloud (${selectedModel})]: Tanggapan untuk "${promptText}". Tersinkronisasi Gist GitHub.`;
                     if (promptText.toLowerCase().includes('halo') || promptText.toLowerCase().includes('hi')) {
-                        reply = `Halo! Saya asisten AI cloud Anda (${selectedModel}). Data Anda aman di server admin.`;
+                        reply = `Halo! Saya asisten AI Gist cloud Anda (${selectedModel}). Data Anda aman di server admin.`;
                     }
                 }
             } catch (err) {
@@ -1840,8 +1896,7 @@
             }
             if(document.getElementById('ghToken')) {
                 document.getElementById('ghToken').value = decryptData(appState.githubConfig.token) || '';
-                document.getElementById('ghOwner').value = appState.githubConfig.owner || '';
-                document.getElementById('ghRepo').value = appState.githubConfig.repo || '';
+                document.getElementById('ghGistId').value = decryptData(appState.githubConfig.gistId) || '';
             }
 
             const tbody = document.getElementById('adminUsersTableBody');
@@ -1858,15 +1913,15 @@
             }
         }
         function deleteUser(idx) {
-            if(confirm('Hapus pengguna dari server cloud?')) {
+            if(confirm('Hapus pengguna dari Gist cloud?')) {
                 appState.users.splice(idx, 1);
                 saveStateToStorage();
                 renderAdminDashboard();
-                showToast('Pengguna dihapus dari cloud.', 'info');
+                showToast('Pengguna dihapus dari Gist.', 'info');
             }
         }
         function resetSystemData() {
-            if(confirm('Reset seluruh sistem cloud ke awal?')) {
+            if(confirm('Reset seluruh sistem Gist cloud ke awal?')) {
                 localStorage.removeItem(STORAGE_KEY);
                 location.reload();
             }

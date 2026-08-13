@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCore Ultimate - Enterprise Ultra v6.0 Advanced</title>
+    <title>SmartCore Ultimate - Enterprise Ultra v6.1 Advanced</title>
+    <!-- Favicon SVG Profesional -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><path d='M21 16.5C21 16.88 20.79 17.21 20.47 17.38L12.57 21.82C12.41 21.91 12.21 22 12 22C11.79 22 11.59 21.91 11.43 21.82L3.53 17.38C3.21 17.21 3 16.88 3 16.5V7.5C3 7.12 3.21 6.79 3.53 6.62L11.43 2.18C11.59 2.09 11.79 2 12 2C12.21 2 12.41 2.09 12.57 2.18L20.47 6.62C20.79 6.79 21 7.12 21 7.5V16.5Z'/></svg>">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -51,13 +53,12 @@
         }
         .admin-only { display: none !important; visibility: hidden !important; }
 
-        /* SEAMLESS PAGE TRANSITION ILLUSION ENGINE */
         @keyframes seamlessFadeIn {
             0% { opacity: 0; transform: translateY(8px) scale(0.99); filter: blur(4px); }
             100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
         .seamless-transition {
-            animation: seamlessFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: seamlessFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes pulseGlow {
@@ -85,7 +86,7 @@
                 <div class="inline-flex p-4 bg-gradient-to-tr from-brand-600 to-indigo-500 text-white rounded-2xl mb-3 text-2xl shadow-lg shadow-brand-500/30">
                     <i class="fa-solid fa-cube"></i>
                 </div>
-                <h2 id="authTitle" class="text-2xl font-bold tracking-tight text-white">SmartCore v6.0 Advanced</h2>
+                <h2 id="authTitle" class="text-2xl font-bold tracking-tight text-white">SmartCore v6.1 Advanced</h2>
                 <p id="authSubtitle" class="text-sm text-slate-400 mt-1">Sistem Enterprise Tanpa Jeda & Navigasi Canggih</p>
             </div>
             
@@ -105,10 +106,10 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1.5">Email / Identitas</label>
+                    <label class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1.5">Email / Nama Akun</label>
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-envelope"></i></span>
-                        <input type="text" id="authEmail" required class="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700/80 rounded-xl focus:ring-2 focus:ring-brand-500 text-sm text-white placeholder-slate-500" placeholder="user@smartcore.io">
+                        <input type="text" id="authEmail" required class="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700/80 rounded-xl focus:ring-2 focus:ring-brand-500 text-sm text-white placeholder-slate-500" placeholder="user@smartcore.io atau Nama">
                     </div>
                 </div>
 
@@ -127,9 +128,9 @@
         </div>
     </div>
 
-        <!-- MAIN APP WRAPPER -->
+    <!-- MAIN APP WRAPPER -->
     <div id="appWrapper" class="flex-1 flex flex-col min-h-screen pb-24">
-        <!-- TOP NAVIGATION BAR (COMMAND CENTER HEADER) -->
+        <!-- TOP NAVIGATION BAR -->
         <header class="glass-panel border-b border-slate-800/80 sticky top-0 z-40 px-6 lg:px-10 py-4 flex items-center justify-between shadow-xl">
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-3">
@@ -138,7 +139,7 @@
                     </div>
                     <div>
                         <h1 class="font-bold text-white tracking-wide text-base flex items-center gap-2">
-                            SmartCore <span class="text-brand-400 text-[10px] px-2.5 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold shadow-inner">v6.0 Advanced</span>
+                            SmartCore <span class="text-brand-400 text-[10px] px-2.5 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold shadow-inner">v6.1 Advanced</span>
                         </h1>
                         <p class="text-[11px] text-slate-400">Command Center & Seamless Engine</p>
                     </div>
@@ -163,14 +164,14 @@
             </div>
         </header>
 
-        <!-- MAIN WORKSPACE CONTAINER (WITH SEAMLESS ILLUSION WRAPPER) -->
+        <!-- MAIN WORKSPACE CONTAINER -->
         <main class="flex-1 p-4 lg:p-10 max-w-7xl mx-auto w-full">
             <div id="workspaceContent" class="space-y-6 seamless-transition">
                 <div class="glass-panel p-10 rounded-3xl text-center space-y-4 shadow-2xl border border-brand-500/20">
                     <div class="inline-flex p-4 bg-brand-500/10 text-brand-400 rounded-full text-3xl animate-bounce">
                         <i class="fa-solid fa-spinner animate-spin"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white">Memuat Sistem v6.0 Advanced...</h3>
+                    <h3 class="text-xl font-semibold text-white">Memuat Sistem v6.1 Advanced...</h3>
                 </div>
             </div>
         </main>
@@ -226,9 +227,9 @@
         <div class="space-y-6">
             <div class="glass-panel p-8 rounded-3xl border border-slate-800/80 shadow-2xl relative overflow-hidden bg-gradient-to-r from-brand-900/30 via-slate-900/80 to-indigo-950/40">
                 <div class="relative z-10 space-y-3">
-                    <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30 text-xs font-semibold">Dashboard v6.0 Advanced</span>
+                    <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30 text-xs font-semibold">Dashboard v6.1 Advanced</span>
                     <h2 id="overviewWelcomeTitle" class="text-3xl font-bold text-white tracking-tight">Selamat Datang Kembali!</h2>
-                    <p class="text-sm text-slate-300 max-w-xl">Dilengkapi Glass Dock futuristik, transisi tanpa jeda instan, dan efisiensi program tingkat lanjut.</p>
+                    <p class="text-sm text-slate-300 max-w-xl">Autentikasi akun server & kostumisasi instan aktif sempurna tanpa jeda.</p>
                 </div>
             </div>
 
@@ -259,11 +260,11 @@
                 </div>
 
                 <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-rss text-cyan-400"></i> Pembaruan v6.0 Advanced</h3>
+                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-rss text-cyan-400"></i> Pembaruan v6.1 Advanced</h3>
                     <div class="space-y-3 text-xs">
                         <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
-                            <span class="text-brand-400 font-semibold">Glass Dock & Transisi Mulus</span>
-                            <p class="text-slate-400 mt-1">Navigasi kini menggunakan Floating Glass Dock bergaya OS modern. Setiap perpindahan menu menampilkan ilusi transisi mulus instan tanpa kedipan layar.</p>
+                            <span class="text-brand-400 font-semibold">Sinkronisasi Akun Server & Kostumisasi Aktif</span>
+                            <p class="text-slate-400 mt-1">Masuk akun menggunakan nama atau email kini langsung disinkronkan dengan database server. Kostumisasi tata letak dan tema langsung aktif seketika.</p>
                         </div>
                     </div>
                 </div>
@@ -308,12 +309,12 @@
             <div class="space-y-6">
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
-                        <i class="fa-solid fa-fire text-amber-400"></i> Tren v6.0
+                        <i class="fa-solid fa-fire text-amber-400"></i> Tren v6.1
                     </h3>
                     <div class="space-y-3 text-xs">
                         <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
-                            <span class="text-brand-400 font-semibold">#SeamlessTransition</span>
-                            <p class="text-slate-400 mt-1">Transisi halaman super mulus tanpa jeda rendering.</p>
+                            <span class="text-brand-400 font-semibold">#ServerAuthFixed</span>
+                            <p class="text-slate-400 mt-1">Autentikasi akun server dan kostumisasi kini berfungsi sempurna.</p>
                         </div>
                     </div>
                 </div>
@@ -391,7 +392,7 @@
                         <button type="button" onclick="addMindMapNode()" class="px-5 py-2.5 bg-pink-600 text-white text-xs font-semibold rounded-xl">Tambah Cabang</button>
                     </div>
                     <div id="mindMapContainer" class="p-4 bg-slate-900/90 border border-slate-800 rounded-2xl min-h-[160px] space-y-2">
-                        <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v6.0 Advanced</div>
+                        <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v6.1 Advanced</div>
                     </div>
                 </div>
             </div>
@@ -528,13 +529,13 @@
                 </div>
             </div>
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama v6.0</h3>
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama v6.1</h3>
                 <div id="richNewsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-slate-900/90 rounded-2xl overflow-hidden border border-slate-800 shadow-lg flex flex-col">
                         <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&auto=format&fit=crop&q=60" alt="Tech" class="h-40 w-full object-cover">
                         <div class="p-4 space-y-2 flex-1 flex flex-col justify-between">
-                            <div><span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">Teknologi</span><h4 class="font-bold text-white text-sm mt-1">SmartCore v6.0 Advanced Release</h4></div>
-                            <p class="text-[11px] text-slate-400 leading-relaxed">Pembaruan v6.0 menghadirkan Glass Dock dan transisi tanpa jeda super mulus.</p>
+                            <div><span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">Teknologi</span><h4 class="font-bold text-white text-sm mt-1">SmartCore v6.1 Advanced Release</h4></div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Pembaruan v6.1 menghadirkan kestabilan penuh login server dan kostumisasi instan.</p>
                         </div>
                     </div>
                 </div>
@@ -678,7 +679,7 @@
                     <button type="button" onclick="resetSystemData()" class="px-4 py-2 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 text-xs font-semibold rounded-xl border border-rose-500/30">Reset Sistem</button>
                 </div>
                 <div id="githubLogContainer" class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 text-xs font-mono text-emerald-400 h-36 overflow-y-auto space-y-1 shadow-inner">
-                    <div>[System v6.0 Advanced] Seamless Transition & Auto-Reload aktif sepenuhnya...</div>
+                    <div>[System v6.1 Advanced] Auth Sync & Instant Customization aktif sepenuhnya...</div>
                 </div>
             </div>
 
@@ -696,9 +697,9 @@
         </div>
     </template>
 
-        <!-- JAVASCRIPT STATE ENGINE & ENTERPRISE ULTRA CORE LOGIC -->
+    <!-- JAVASCRIPT STATE ENGINE & ENTERPRISE ULTRA CORE LOGIC -->
     <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V60';
+        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V61';
 
         let appState = {
             currentUser: null,
@@ -707,24 +708,25 @@
             authMode: 'login',
             users: [
                 { name: 'Ultra Admin', email: 'admin@smartcore.io', password: 'admin', role: 'admin', joinedAt: '2026-01-01', avatar: '' },
-                { name: 'Danis User', email: 'danis@smartcore.io', password: 'user', role: 'user', joinedAt: '2026-08-13', avatar: '' }
+                { name: 'Danis User', email: 'danis@smartcore.io', password: 'user', role: 'user', joinedAt: '2026-08-13', avatar: '' },
+                { name: 'Danis', email: 'danis', password: 'danis', role: 'user', joinedAt: '2026-08-13', avatar: '' }
             ],
             posts: [
-                { id: 1, author: 'Ultra Admin', content: 'Selamat datang di SmartCore Ultra v6.0 Advanced! Menghadirkan Floating Glass Dock, transisi mulus tanpa kedip, dan efisiensi program menyeluruh.', image: null, likes: 256, comments: [], createdAt: '10:00' }
+                { id: 1, author: 'Ultra Admin', content: 'Selamat datang di SmartCore Ultra v6.1 Advanced! Autentikasi akun server dan kostumisasi instan telah diperbaiki total.', image: null, likes: 256, comments: [], createdAt: '10:00' }
             ],
             financeTransactions: [
-                { id: 1, date: '2026-08-01', desc: 'Dana Hibah Ultra v6.0', amount: 25000000, type: 'income' },
+                { id: 1, date: '2026-08-01', desc: 'Dana Hibah Ultra v6.1', amount: 25000000, type: 'income' },
                 { id: 2, date: '2026-08-13', desc: 'Infrastruktur Cloud Permanen', amount: 1500000, type: 'expense' }
             ],
             tasks: [
-                { id: 1, text: 'Verifikasi Seamless Glass Dock Engine v6.0', completed: true }
+                { id: 1, text: 'Verifikasi Server Auth & Customization v6.1', completed: true }
             ],
             alarms: [
                 { id: 1, time: '09:00', label: 'Briefing Harian Ultra', active: true }
             ],
             mindMapNodes: [
                 { id: 1, text: 'Zero-Config GitHub Gist Engine' },
-                { id: 2, text: 'Instant Seamless Page Transition' }
+                { id: 2, text: 'Instant Server Auth & Preference Sync' }
             ],
             userPreferences: {
                 accentColor: 'indigo',
@@ -765,14 +767,14 @@
             }, 3200);
         }
 
-        // --- ROBUST PERSISTENCE & EFFICIENT AUTO-RELOAD ---
+        // --- ROBUST PERSISTENCE & AUTO-RELOAD ---
         function saveStateToStorage() {
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
                 pushStateToCloudServer();
                 renderAll();
             } catch (e) {
-                if (e.name === 'QuotaExceededError' || e.code === 22) {
+                if (e.name === 'QuotaExceededError' || e.code == 22) {
                     showToast('Peringatan: Memori penuh, membersihkan cache gambar...', 'error');
                     if(appState.posts.length > 0) {
                         appState.posts.forEach(p => p.image = null);
@@ -794,6 +796,16 @@
                 const saved = localStorage.getItem(STORAGE_KEY);
                 if (saved) {
                     const parsed = JSON.parse(saved);
+                    // Pastikan user server/lokal digabung dengan aman tanpa kehilangan akun terdaftar
+                    if (parsed.users && Array.isArray(parsed.users)) {
+                        const mergedUsers = [...appState.users];
+                        parsed.users.forEach(pu => {
+                            if (!mergedUsers.some(existing => existing.email.toLowerCase() === pu.email.toLowerCase() || existing.name.toLowerCase() === pu.name.toLowerCase())) {
+                                mergedUsers.push(pu);
+                            }
+                        });
+                        parsed.users = mergedUsers;
+                    }
                     appState = { ...appState, ...parsed };
                 }
             } catch (e) {
@@ -855,7 +867,7 @@
                             'Accept': 'application/vnd.github.v3+json'
                         },
                         body: JSON.stringify({
-                            description: `SmartCore Ultra Sync v6.0 (${new Date().toLocaleTimeString()})`,
+                            description: `SmartCore Ultra Sync v6.1 (${new Date().toLocaleTimeString()})`,
                             files: {
                                 'smartcore_database.json': {
                                     content: JSON.stringify(appState, null, 2)
@@ -902,14 +914,20 @@
             setInterval(() => { pushStateToCloudServer(); }, 30000);
         });
 
+        // --- USER PREFERENCES APPLIER (FIXED) ---
         function applyUserPreferences() {
             const prefs = appState.userPreferences || { accentColor: 'indigo', soundEnabled: 'enabled', layoutMode: 'normal' };
             const body = document.getElementById('appBody');
+            
+            // Terapkan mode tata letak
             if (prefs.layoutMode === 'compact') {
                 body.classList.add('text-xs');
             } else {
                 body.classList.remove('text-xs');
             }
+
+            // Terapkan aksen warna tema secara dinamis
+            body.setAttribute('data-accent', prefs.accentColor);
         }
 
         function checkAuthStatus() {
@@ -980,7 +998,7 @@
 
             if (mode === 'login') {
                 if(btnLogin) btnLogin.className = "flex-1 py-2 text-xs font-semibold rounded-xl bg-brand-600 text-white transition-all shadow-md";
-                if(title) title.textContent = "SmartCore v6.0 Advanced";
+                if(title) title.textContent = "SmartCore v6.1 Advanced";
                 if(subtitle) subtitle.textContent = "Sistem Enterprise Tanpa Jeda & Navigasi Canggih";
                 if(nameGroup) nameGroup.classList.add('hidden');
                 submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Masuk Sistem';
@@ -999,30 +1017,35 @@
             }
         }
 
+        // --- AUTH & SERVER LOGIN ENGINE (FIXED) ---
         async function handleAuthSubmit(e) {
             e.preventDefault();
-            const email = document.getElementById('authEmail').value.trim();
+            const identifier = document.getElementById('authEmail').value.trim().toLowerCase();
             const password = document.getElementById('authPassword').value.trim();
             const nameEl = document.getElementById('regName');
             const name = nameEl ? nameEl.value.trim() : '';
 
             if (appState.authMode === 'register') {
-                const existing = appState.users.find(u => u.email === email);
-                if (existing) { showToast('Email sudah terdaftar!', 'error'); return; }
-                const newUser = { name: name || 'Pengguna Baru', email, password, role: 'user', joinedAt: new Date().toISOString().split('T')[0], avatar: '' };
+                const existing = appState.users.find(u => u.email.toLowerCase() === identifier || u.name.toLowerCase() === identifier);
+                if (existing) { showToast('Email atau Nama sudah terdaftar di server!', 'error'); return; }
+                const newUser = { name: name || identifier, email: identifier, password, role: 'user', joinedAt: new Date().toISOString().split('T')[0], avatar: '' };
                 appState.users.push(newUser);
                 appState.currentUser = newUser;
                 saveStateToStorage();
-                showToast('Registrasi berhasil & tersimpan permanen!', 'success');
+                showToast('Registrasi berhasil & tersimpan di server!', 'success');
             } else if (appState.authMode === 'login') {
-                const user = appState.users.find(u => u.email === email && u.password === password);
-                if (!user) { showToast('Email atau kata sandi salah!', 'error'); return; }
+                // Pencarian fleksibel berdasarkan email atau nama akun yang cocok dengan server/local database
+                const user = appState.users.find(u => (u.email.toLowerCase() === identifier || u.name.toLowerCase() === identifier) && u.password === password);
+                if (!user) { 
+                    showToast('Akun tidak ditemukan atau kata sandi salah!', 'error'); 
+                    return; 
+                }
                 appState.currentUser = user;
                 showToast('Berhasil masuk sistem!', 'success');
             } else if (appState.authMode === 'admin') {
-                const adminUser = appState.users.find(u => u.role === 'admin' && (u.email === email || u.password === password));
+                const adminUser = appState.users.find(u => u.role === 'admin' && (u.email.toLowerCase() === identifier || u.name.toLowerCase() === identifier || u.password === password));
                 if (!adminUser && password !== 'admin') { showToast('Kredensial Admin tidak valid!', 'error'); return; }
-                appState.currentUser = adminUser || { name: 'Ultra Admin', email, role: 'admin', joinedAt: '2026-01-01', avatar: '' };
+                appState.currentUser = adminUser || { name: 'Ultra Admin', email: identifier || 'admin@smartcore.io', role: 'admin', joinedAt: '2026-01-01', avatar: '' };
                 showToast('Autentikasi Admin berhasil!', 'success');
             }
 
@@ -1061,14 +1084,13 @@
             renderAll();
         }
 
-        // --- SEAMLESS RENDERING ENGINE (TANPA KEDIPAN & ILUSI MEMUAT HALAMAN) ---
+        // --- SEAMLESS RENDERING ENGINE ---
         function renderAll() {
             const workspace = document.getElementById('workspaceContent');
             if(!workspace) return;
 
-            // Memicu ilusi transisi mulus instan tanpa reload penuh halaman browser
             workspace.className = 'space-y-6';
-            void workspace.offsetWidth; // Trigger reflow
+            void workspace.offsetWidth; 
 
             const templateId = 'template' + appState.currentTab.charAt(0).toUpperCase() + appState.currentTab.slice(1) + 'View';
             const template = document.getElementById(templateId);
@@ -1348,7 +1370,7 @@
             const container = document.getElementById('mindMapContainer');
             if(!container) return;
             container.innerHTML = `
-                <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v6.0 Advanced</div>
+                <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v6.1 Advanced</div>
                 <div class="pl-4 space-y-2 border-l-2 border-slate-700 ml-2">
                     ${appState.mindMapNodes.map(n => `<div class="p-2.5 bg-slate-800/80 rounded-xl text-xs text-slate-200 border border-slate-700 flex justify-between items-center"><span>• ${n.text}</span><button onclick="deleteMindMapNode(${n.id})" class="text-rose-400 hover:text-rose-300"><i class="fa-solid fa-xmark"></i></button></div>`).join('')}
                 </div>
@@ -1614,7 +1636,7 @@
             document.getElementById('rpsResultText').textContent = res;
         }
 
-        // --- PROFILE & PREFERENCES ---
+        // --- PROFILE & PREFERENCES (FIXED) ---
         function handleUpdateProfile(e) {
             e.preventDefault();
             const name = document.getElementById('profileNameInput').value.trim();
@@ -1626,16 +1648,19 @@
             appState.currentUser.email = email;
             appState.currentUser.avatar = avatar;
 
-            const idx = appState.users.findIndex(u => u.email === email || u.name === appState.currentUser.name);
+            const idx = appState.users.findIndex(u => u.email.toLowerCase() === email.toLowerCase() || u.name.toLowerCase() === name.toLowerCase());
             if(idx !== -1) { 
                 appState.users[idx].name = name; 
                 appState.users[idx].email = email; 
                 appState.users[idx].avatar = avatar; 
+            } else {
+                appState.users.push(appState.currentUser);
             }
             saveStateToStorage();
             checkAuthStatus();
             showToast('Profil berhasil diperbarui & disimpan permanen!', 'success');
         }
+        
         function handleUpdatePassword(e) {
             e.preventDefault();
             const oldPass = document.getElementById('oldPasswordInput').value.trim();
@@ -1645,12 +1670,13 @@
                 return;
             }
             appState.currentUser.password = newPass;
-            const idx = appState.users.findIndex(u => u.email === appState.currentUser.email);
+            const idx = appState.users.findIndex(u => u.email.toLowerCase() === appState.currentUser.email.toLowerCase());
             if(idx !== -1) appState.users[idx].password = newPass;
             saveStateToStorage();
             showToast('Sandi diperbarui secara permanen!', 'success');
             e.target.reset();
         }
+
         function handleSaveUserPreferences(e) {
             e.preventDefault();
             const accentColor = document.getElementById('prefAccentColor').value;
@@ -1699,3 +1725,4 @@
     </script>
 </body>
 </html>
+

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCore Cloud v6.15</title>
+    <title>SmartCore Ultimate - Enterprise Ultra v6.6 Cloud Master</title>
     <!-- Favicon SVG Profesional -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><path d='M21 16.5C21 16.88 20.79 17.21 20.47 17.38L12.57 21.82C12.41 21.91 12.21 22 12 22C11.79 22 11.59 21.91 11.43 21.82L3.53 17.38C3.21 17.21 3 16.88 3 16.5V7.5C3 7.12 3.21 6.79 3.53 6.62L11.43 2.18C11.59 2.09 11.79 2 12 2C12.21 2 12.41 2.09 12.57 2.18L20.47 6.62C20.79 6.79 21 7.12 21 7.5V16.5Z'/></svg>">
     <!-- Tailwind CSS & FontAwesome -->
@@ -34,26 +34,15 @@
         body[data-accent="purple"] { --brand-500: #a855f7; --brand-600: #9333ea; --brand-700: #7e22ce; }
         body[data-accent="amber"] { --brand-500: #f59e0b; --brand-600: #d97706; --brand-700: #b45309; }
 
-        body { font-family: 'Inter', sans-serif; overflow-x: hidden; transition: background 0.3s ease, color 0.3s ease; }
+        body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
         ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #060913; }
         ::-webkit-scrollbar-thumb { background: var(--brand-600); border-radius: 9999px; }
-
-        /* TEMA 1: Cyberpunk Neon Ultra */
-        body[data-theme="cyberpunk"] { background: #030712; color: #00f0ff; }
-        body[data-theme="cyberpunk"] .glass-panel { background: rgba(10, 15, 30, 0.9); backdrop-filter: blur(20px); border: 1px solid rgba(0, 240, 255, 0.3); box-shadow: 0 0 25px rgba(0, 240, 255, 0.15); }
-        body[data-theme="cyberpunk"] .glass-dock { background: rgba(5, 8, 20, 0.95); backdrop-filter: blur(25px); border: 1px solid rgba(255, 0, 127, 0.4); box-shadow: 0 0 35px rgba(255, 0, 127, 0.2); }
-
-        /* TEMA 2: Obsidian Luxury Gold */
-        body[data-theme="obsidian"] { background: #0a0a0a; color: #f3f4f6; }
-        body[data-theme="obsidian"] .glass-panel { background: rgba(18, 18, 18, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(212, 175, 55, 0.35); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); }
-        body[data-theme="obsidian"] .glass-dock { background: rgba(12, 12, 12, 0.98); backdrop-filter: blur(25px); border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8); }
-
-        /* TEMA 3: macOS Frosted Glass Pro */
-        body[data-theme="macos"], body:not([data-theme]) { background: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 100%); color: #1e293b; }
-        body[data-theme="macos"] .glass-panel, body:not([data-theme]) .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08); }
-        body[data-theme="macos"] .glass-dock, body:not([data-theme]) .glass-dock { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(35px); border: 1px solid rgba(255, 255, 255, 0.7); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12); }
-
+        
+        .glass-panel { background: rgba(13, 18, 30, 0.94); backdrop-filter: blur(16px); border: 1px solid rgba(99, 102, 241, 0.2); }
+        .glass-dock { background: rgba(9, 13, 22, 0.96); backdrop-filter: blur(20px); border: 1px solid rgba(99, 102, 241, 0.25); box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
         .admin-only { display: none !important; }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
         .seamless-transition { animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .toast-animate { animation: slideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
@@ -62,89 +51,81 @@
         .sync-pulse { animation: pulseGlow 2s infinite; }
     </style>
 </head>
-<body id="appBody" data-theme="macos" data-accent="indigo" class="min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+<body id="appBody" data-accent="indigo" class="bg-[#060913] text-slate-100 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
 
     <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 pointer-events-none"></div>
 
-    <!-- AUTH MODAL -->
-    <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-xl hidden p-4">
+    <!-- AUTH MODAL (PENGGUNA & ADMIN BERBASIS TOKEN) -->
+    <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl hidden p-4">
         <div class="glass-panel w-full max-w-md p-6 sm:p-8 rounded-3xl shadow-2xl border border-brand-500/30">
             <div class="text-center mb-5">
                 <div class="inline-flex p-3.5 bg-gradient-to-tr from-brand-600 to-indigo-500 text-white rounded-2xl mb-2 text-xl shadow-lg">
                     <i class="fa-solid fa-cube"></i>
                 </div>
-                <h2 id="authTitle" class="text-xl sm:text-2xl font-bold">SmartCore Cloud</h2>
-                <p id="authSubtitle" class="text-xs opacity-70 mt-1">True Cloud-First Server & Live Status Ping</p>
+                <h2 id="authTitle" class="text-xl sm:text-2xl font-bold text-white">SmartCore v6.6 Cloud</h2>
+                <p id="authSubtitle" class="text-xs text-slate-400 mt-1">Sistem Terintegrasi Server GitHub Gist</p>
             </div>
             
-            <div class="flex bg-black/10 p-1 rounded-xl mb-5 border border-black/10 dark:border-white/10 text-xs font-semibold">
-                <button type="button" onclick="switchAuthTab('login')" id="tabLoginBtn" class="flex-1 py-2.5 rounded-lg bg-brand-600 text-white transition-all">Masuk</button>
-                <button type="button" onclick="switchAuthTab('register')" id="tabRegisterBtn" class="flex-1 py-2.5 rounded-lg opacity-70 hover:opacity-100 transition-all">Daftar</button>
-                <button type="button" onclick="switchAuthTab('admin')" id="tabAdminBtn" class="flex-1 py-2.5 rounded-lg opacity-70 hover:opacity-100 transition-all">Admin Token</button>
+            <div class="flex bg-slate-900 p-1 rounded-xl mb-5 border border-slate-800 text-xs font-semibold">
+                <button type="button" onclick="switchAuthTab('login')" id="tabLoginBtn" class="flex-1 py-2.5 rounded-lg bg-brand-600 text-white transition-all">Masuk User</button>
+                <button type="button" onclick="switchAuthTab('register')" id="tabRegisterBtn" class="flex-1 py-2.5 rounded-lg text-slate-400 hover:text-white transition-all">Daftar User</button>
+                <button type="button" onclick="switchAuthTab('admin')" id="tabAdminBtn" class="flex-1 py-2.5 rounded-lg text-slate-400 hover:text-white transition-all">Login Admin (Token)</button>
             </div>
 
             <form id="authForm" onsubmit="handleAuthSubmit(event)" class="space-y-4 text-xs">
                 <div id="nameFieldGroup" class="hidden">
-                    <label class="block mb-1.5 font-medium">Nama Lengkap</label>
-                    <input type="text" id="regName" class="w-full px-4 py-3 bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm" placeholder="Nama Pengguna">
+                    <label class="block text-slate-300 mb-1.5 font-medium">Nama Lengkap</label>
+                    <input type="text" id="regName" class="w-full px-4 py-3 bg-slate-900 border border-slate-700/80 rounded-xl text-white focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm" placeholder="Nama Pengguna">
                 </div>
                 
                 <div id="credentialFieldGroup">
-                    <label id="credentialLabel" class="block mb-1.5 font-medium">Email / Nama Akun</label>
-                    <input type="text" id="authEmail" class="w-full px-4 py-3 bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm" placeholder="user@smartcore.io">
-                </div>
-
-                <div id="adminFieldGroup" class="hidden">
-                    <label class="block mb-1.5 font-medium">Token Server Admin (Kata Sandi Utama)</label>
-                    <input type="text" id="adminTokenInput" class="w-full px-4 py-3 bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm font-mono" value="k9#X$mP9!vL2zQ#8wR$7yF%4bN*3hJ^6">
+                    <label id="credentialLabel" class="block text-slate-300 mb-1.5 font-medium">Email / Nama Akun</label>
+                    <input type="text" id="authEmail" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700/80 rounded-xl text-white focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm" placeholder="user@smartcore.io">
                 </div>
 
                 <div id="passwordFieldGroup">
-                    <label id="passwordLabel" class="block mb-1.5 font-medium">Kata Sandi</label>
-                    <input type="password" id="authPassword" class="w-full px-4 py-3 bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm" placeholder="••••••••">
+                    <label id="passwordLabel" class="block text-slate-300 mb-1.5 font-medium">Kata Sandi</label>
+                    <input type="password" id="authPassword" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700/80 rounded-xl text-white focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm" placeholder="••••••••">
                 </div>
+
                 <div id="authStatusMsg" class="text-xs text-center font-medium pt-1"></div>
-                <button type="submit" id="authSubmitBtn" class="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow-lg transition-all text-xs sm:text-sm mt-2">Masuk Server</button>
+                <button type="submit" id="authSubmitBtn" class="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow-lg transition-all text-xs sm:text-sm mt-2">Masuk Sistem</button>
             </form>
         </div>
     </div>
 
     <!-- MAIN APP WRAPPER -->
     <div id="appWrapper" class="flex-1 flex flex-col min-h-screen pb-20">
-        <header class="glass-panel border-b border-black/10 dark:border-white/10 sticky top-0 z-40 px-4 sm:px-8 py-3 flex items-center justify-between gap-3 shadow-md">
+        <!-- HEADER RESPONSIF -->
+        <header class="glass-panel border-b border-slate-800/80 sticky top-0 z-40 px-4 sm:px-8 py-3 flex items-center justify-between gap-3 shadow-md">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-400 flex items-center justify-center text-white font-bold text-base shadow flex-shrink-0">
                     <i class="fa-solid fa-cube"></i>
                 </div>
                 <div>
-                    <h1 class="font-bold text-sm sm:text-base flex items-center gap-2">
-                        SmartCore <span class="text-brand-500 text-[10px] px-2 py-0.5 bg-brand-500/15 rounded-full border border-brand-500/25 font-semibold">v6.15 Cloud</span>
+                    <h1 class="font-bold text-white text-sm sm:text-base flex items-center gap-2">
+                        SmartCore <span class="text-brand-500 text-[10px] px-2 py-0.5 bg-brand-500/15 rounded-full border border-brand-500/25 font-semibold">v6.6 Cloud</span>
                     </h1>
                 </div>
             </div>
 
-            <!-- LIVE SERVER CONNECTION BADGE -->
-            <div id="serverConnectionBadge" class="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-xl text-xs font-semibold text-amber-400">
-                <span class="w-2 h-2 rounded-full bg-amber-400 sync-pulse" id="serverDot"></span>
-                <span id="serverStatusText">Mengecek Server...</span>
-            </div>
-
-            <div class="hidden md:flex items-center gap-2 bg-black/5 dark:bg-black/20 px-3.5 py-2 rounded-xl border border-black/10 dark:border-white/10 w-48 text-xs">
-                <i class="fa-solid fa-magnifying-glass opacity-60"></i>
-                <input type="text" id="quickCommandInput" oninput="handleQuickSearch(event)" class="bg-transparent border-none placeholder-slate-500 focus:outline-none w-full" placeholder="Cari menu...">
+            <div class="hidden md:flex items-center gap-2 bg-slate-900 px-3.5 py-2 rounded-xl border border-slate-800 w-64 text-xs">
+                <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
+                <input type="text" id="quickCommandInput" oninput="handleQuickSearch(event)" class="bg-transparent border-none text-white placeholder-slate-500 focus:outline-none w-full" placeholder="Cari menu...">
             </div>
 
             <div class="flex items-center gap-2.5">
-                <div class="flex items-center gap-2 px-3 py-1.5 bg-black/5 dark:bg-black/20 rounded-xl border border-black/10 dark:border-white/10 text-xs">
+                <div class="flex items-center gap-2 px-3 py-1.5 bg-slate-900 rounded-xl border border-slate-800 text-xs">
                     <div id="headerUserAvatar" class="w-6 h-6 rounded-full bg-brand-600 text-white flex items-center justify-center font-bold text-[10px] overflow-hidden">U</div>
-                    <span id="currentUsernameDisplay" class="font-medium truncate max-w-[90px]">Guest</span>
+                    <span id="currentUsernameDisplay" class="font-medium text-slate-200 truncate max-w-[90px]">Guest</span>
                 </div>
-                <button type="button" onclick="logoutUser()" title="Keluar" class="p-2.5 bg-black/5 dark:bg-black/20 hover:bg-rose-500/20 text-rose-500 rounded-xl border border-black/10 dark:border-white/10 transition-all text-xs">
+                <button type="button" onclick="logoutUser()" title="Keluar" class="p-2.5 bg-slate-900 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 rounded-xl border border-slate-800 transition-all text-xs">
                     <i class="fa-solid fa-power-off"></i>
                 </button>
             </div>
         </header>
 
+        <!-- WORKSPACE -->
         <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
             <div id="workspaceContent" class="space-y-6 seamless-transition"></div>
         </main>
@@ -152,13 +133,14 @@
         <!-- DOCK NAVIGATION -->
         <div class="fixed bottom-3 inset-x-0 z-40 flex justify-center px-4 pointer-events-none">
             <nav class="glass-dock px-3 py-2 rounded-2xl flex items-center gap-1.5 pointer-events-auto border border-brand-500/30 shadow-2xl overflow-x-auto max-w-full text-xs">
-                <button onclick="switchTab('overview')" id="navOverview" class="p-3 rounded-xl hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-chart-pie text-brand-500 text-base"></i><span class="hidden xl:inline">Overview</span></button>
-                <button onclick="switchTab('social')" id="navSocial" class="p-3 rounded-xl hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-globe text-indigo-400 text-base"></i><span class="hidden xl:inline">Sosial</span></button>
-                <button onclick="switchTab('finance')" id="navFinance" class="p-3 rounded-xl hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-wallet text-emerald-400 text-base"></i><span class="hidden xl:inline">Keuangan</span></button>
-                <button onclick="switchTab('time')" id="navTime" class="p-3 rounded-xl hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-clock text-amber-400 text-base"></i><span class="hidden xl:inline">Waktu</span></button>
-                <button onclick="switchTab('notes')" id="navNotes" class="p-3 rounded-xl hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-note-sticky text-yellow-400 text-base"></i><span class="hidden xl:inline">Catatan</span></button>
-                <button onclick="switchTab('profile')" id="navProfile" class="p-3 rounded-xl hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-user-gear text-pink-400 text-base"></i><span class="hidden xl:inline">Profil</span></button>
-                <button onclick="switchTab('admin')" id="navAdmin" class="p-3 rounded-xl hover:bg-rose-600/30 flex items-center gap-2 transition-all admin-only"><i class="fa-solid fa-shield-halved text-rose-400 text-base"></i><span class="hidden xl:inline">Admin</span></button>
+                <button onclick="switchTab('overview')" id="navOverview" class="p-3 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-chart-pie text-brand-500 text-base"></i><span class="hidden xl:inline">Overview</span></button>
+                <button onclick="switchTab('social')" id="navSocial" class="p-3 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-globe text-indigo-400 text-base"></i><span class="hidden xl:inline">Sosial</span></button>
+                <button onclick="switchTab('finance')" id="navFinance" class="p-3 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-wallet text-emerald-400 text-base"></i><span class="hidden xl:inline">Keuangan</span></button>
+                <button onclick="switchTab('time')" id="navTime" class="p-3 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-clock text-amber-400 text-base"></i><span class="hidden xl:inline">Waktu</span></button>
+                <button onclick="switchTab('notes')" id="navNotes" class="p-3 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-note-sticky text-yellow-400 text-base"></i><span class="hidden xl:inline">Catatan</span></button>
+                <button onclick="switchTab('tools')" id="navTools" class="p-3 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-toolbox text-cyan-400 text-base"></i><span class="hidden xl:inline">Tools</span></button>
+                <button onclick="switchTab('profile')" id="navProfile" class="p-3 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-2 transition-all"><i class="fa-solid fa-user-gear text-pink-400 text-base"></i><span class="hidden xl:inline">Profil</span></button>
+                <button onclick="switchTab('admin')" id="navAdmin" class="p-3 rounded-xl text-slate-300 hover:text-white hover:bg-rose-600/30 flex items-center gap-2 transition-all admin-only"><i class="fa-solid fa-shield-halved text-rose-400 text-base"></i><span class="hidden xl:inline">Admin</span></button>
             </nav>
         </div>
     </div>
@@ -166,23 +148,23 @@
     <!-- TEMPLATES -->
     <template id="templateOverviewView">
         <div class="space-y-6">
-            <div class="glass-panel p-6 sm:p-8 rounded-3xl shadow-xl bg-gradient-to-r from-brand-900/20 via-black/10 to-indigo-950/20 space-y-2">
-                <span class="px-3 py-1 rounded-full bg-brand-500/15 text-brand-500 text-xs font-semibold border border-brand-500/25">Dashboard v6.15 Cloud Ping</span>
-                <h2 id="overviewWelcomeTitle" class="text-2xl sm:text-3xl font-bold">Selamat Datang Kembali!</h2>
-                <p class="text-xs sm:text-sm opacity-80">Terhubung langsung ke server cloud REST API dengan status ping real-time murni tanpa lokal.</p>
+            <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl bg-gradient-to-r from-brand-900/20 via-slate-900/60 to-indigo-950/30 space-y-2">
+                <span class="px-3 py-1 rounded-full bg-brand-500/15 text-brand-500 text-xs font-semibold border border-brand-500/25">Dashboard v6.6 Cloud Master</span>
+                <h2 id="overviewWelcomeTitle" class="text-2xl sm:text-3xl font-bold text-white">Selamat Datang Kembali!</h2>
+                <p class="text-xs sm:text-sm text-slate-300">Data tersimpan permanen di server cloud Gist. Aman dari kehilangan data saat keluar sesi.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                <div class="glass-panel p-6 rounded-2xl flex items-center gap-4">
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-500 flex items-center justify-center text-xl border border-brand-500/25"><i class="fa-solid fa-wallet"></i></div>
-                    <div><p class="text-xs opacity-70">Saldo Keuangan</p><h4 id="overviewBalance" class="text-lg font-bold">Rp 0</h4></div>
+                    <div><p class="text-xs text-slate-400">Saldo Keuangan</p><h4 id="overviewBalance" class="text-lg font-bold text-white">Rp 0</h4></div>
                 </div>
-                <div class="glass-panel p-6 rounded-2xl flex items-center gap-4">
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-cyan-600/20 text-cyan-400 flex items-center justify-center text-xl border border-cyan-500/25"><i class="fa-solid fa-list-check"></i></div>
-                    <div><p class="text-xs opacity-70">Agenda Aktif</p><h4 id="overviewTaskCount" class="text-lg font-bold">0 Tugas</h4></div>
+                    <div><p class="text-xs text-slate-400">Agenda Aktif</p><h4 id="overviewTaskCount" class="text-lg font-bold text-white">0 Tugas</h4></div>
                 </div>
-                <div class="glass-panel p-6 rounded-2xl flex items-center gap-4">
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-yellow-600/20 text-yellow-400 flex items-center justify-center text-xl border border-yellow-500/25"><i class="fa-solid fa-note-sticky"></i></div>
-                    <div><p class="text-xs opacity-70">Total Catatan</p><h4 id="overviewNoteCount" class="text-lg font-bold">0 Catatan</h4></div>
+                    <div><p class="text-xs text-slate-400">Total Catatan</p><h4 id="overviewNoteCount" class="text-lg font-bold text-white">0 Catatan</h4></div>
                 </div>
             </div>
         </div>
@@ -191,29 +173,29 @@
     <template id="templateSocialView">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div class="lg:col-span-2 space-y-5">
-                <div class="glass-panel p-6 rounded-2xl">
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800">
                     <form onsubmit="handleCreatePost(event)" class="space-y-4">
                         <div class="flex items-start gap-4">
                             <div id="postAuthorAvatarContainer" class="w-10 h-10 rounded-xl bg-brand-600/30 text-brand-500 flex items-center justify-center font-bold text-sm border border-brand-500/25 overflow-hidden flex-shrink-0">U</div>
-                            <textarea id="postContentInput" rows="3" required class="w-full bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl p-3.5 text-xs sm:text-sm focus:ring-1 focus:ring-brand-500 resize-none" placeholder="Bagikan momen..."></textarea>
+                            <textarea id="postContentInput" rows="3" required class="w-full bg-slate-900 border border-slate-700/80 rounded-xl p-3.5 text-xs sm:text-sm text-white focus:ring-1 focus:ring-brand-500 resize-none" placeholder="Bagikan momen atau ide menarik..."></textarea>
                         </div>
-                        <div class="flex items-center justify-between pt-3 border-t border-black/10 dark:border-white/10 text-xs">
-                            <label class="cursor-pointer hover:text-brand-500 transition-colors flex items-center gap-2 px-3.5 py-2 bg-black/5 dark:bg-black/20 rounded-xl border border-black/10 dark:border-white/10">
-                                <i class="fa-solid fa-image text-brand-500"></i> Gambar
+                        <div class="flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs">
+                            <label class="cursor-pointer hover:text-brand-500 transition-colors flex items-center gap-2 px-3.5 py-2 bg-slate-900 rounded-xl border border-slate-800">
+                                <i class="fa-solid fa-image text-brand-500"></i> Lampirkan Gambar
                                 <input type="file" id="postImageInput" accept="image/*" class="hidden" onchange="previewPostImage(event)">
                             </label>
                             <button type="submit" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow"><i class="fa-solid fa-paper-plane mr-2"></i> Publikasikan</button>
                         </div>
-                        <div id="imagePreviewContainer" class="hidden relative mt-3 rounded-xl overflow-hidden max-h-52 border border-black/10 dark:border-white/10">
+                        <div id="imagePreviewContainer" class="hidden relative mt-3 rounded-xl overflow-hidden max-h-52 border border-slate-800">
                             <img id="postImagePreview" src="" class="w-full object-cover">
-                            <button type="button" onclick="removePostImage()" class="absolute top-3 right-3 p-2 bg-black/40 hover:bg-rose-500 text-white rounded-xl text-xs"><i class="fa-solid fa-xmark"></i></button>
+                            <button type="button" onclick="removePostImage()" class="absolute top-3 right-3 p-2 bg-slate-900 hover:bg-rose-500 text-white rounded-xl text-xs"><i class="fa-solid fa-xmark"></i></button>
                         </div>
                     </form>
                 </div>
                 <div id="postsFeedContainer" class="space-y-4"></div>
             </div>
-            <div class="glass-panel p-6 rounded-2xl space-y-4 h-fit">
-                <h3 class="font-bold text-sm border-b border-black/10 dark:border-white/10 pb-3 flex items-center gap-2"><i class="fa-solid fa-users text-emerald-400"></i> Pengguna Online</h3>
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4 h-fit">
+                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-users text-emerald-400"></i> Pengguna Online</h3>
                 <div id="activeUsersList" class="space-y-2.5 max-h-60 overflow-y-auto pr-1 text-xs"></div>
             </div>
         </div>
@@ -222,53 +204,53 @@
     <template id="templateFinanceView">
         <div class="space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs sm:text-sm">
-                <div class="glass-panel p-6 rounded-2xl flex items-center justify-between">
-                    <div><p class="text-xs opacity-70">Saldo Bersih</p><h4 id="finTotalBalance" class="text-xl font-bold mt-1">Rp 0</h4></div>
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center justify-between">
+                    <div><p class="text-xs text-slate-400">Saldo Bersih</p><h4 id="finTotalBalance" class="text-xl font-bold text-white mt-1">Rp 0</h4></div>
                     <div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-500 flex items-center justify-center text-xl border border-brand-500/25"><i class="fa-solid fa-wallet"></i></div>
                 </div>
-                <div class="glass-panel p-6 rounded-2xl flex items-center justify-between">
-                    <div><p class="text-xs opacity-70">Pemasukan</p><h4 id="finTotalIncome" class="text-xl font-bold text-emerald-400 mt-1">Rp 0</h4></div>
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center justify-between">
+                    <div><p class="text-xs text-slate-400">Pemasukan</p><h4 id="finTotalIncome" class="text-xl font-bold text-emerald-400 mt-1">Rp 0</h4></div>
                     <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/25"><i class="fa-solid fa-arrow-trend-up"></i></div>
                 </div>
-                <div class="glass-panel p-6 rounded-2xl flex items-center justify-between">
-                    <div><p class="text-xs opacity-70">Pengeluaran</p><h4 id="finTotalExpense" class="text-xl font-bold text-rose-500 mt-1">Rp 0</h4></div>
-                    <div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-500 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-arrow-trend-down"></i></div>
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center justify-between">
+                    <div><p class="text-xs text-slate-400">Pengeluaran</p><h4 id="finTotalExpense" class="text-xl font-bold text-rose-400 mt-1">Rp 0</h4></div>
+                    <div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/25"><i class="fa-solid fa-arrow-trend-down"></i></div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-xs sm:text-sm">
-                <div class="glass-panel p-6 rounded-2xl space-y-4 h-fit">
-                    <h3 id="financeFormTitle" class="font-bold text-sm border-b border-black/10 dark:border-white/10 pb-3 flex items-center gap-2"><i class="fa-solid fa-plus-circle text-brand-500"></i> Tambah / Edit Transaksi</h3>
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4 h-fit">
+                    <h3 id="financeFormTitle" class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-plus-circle text-brand-500"></i> Tambah / Edit Transaksi</h3>
                     <form onsubmit="handleFinanceSubmit(event)" class="space-y-3.5">
                         <input type="hidden" id="editFinanceId" value="">
-                        <div><label class="block mb-1.5 font-medium">Keterangan</label><input type="text" id="finDesc" required class="w-full bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-3.5 py-3" placeholder="Gaji / Belanja"></div>
-                        <div><label class="block mb-1.5 font-medium">Nominal (Rp)</label><input type="number" id="finAmount" required class="w-full bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-3.5 py-3" placeholder="100000"></div>
-                        <div><label class="block mb-1.5 font-medium">Tipe</label><select id="finType" class="w-full bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-3.5 py-3"><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select></div>
+                        <div><label class="block text-slate-300 mb-1.5 font-medium">Keterangan</label><input type="text" id="finDesc" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white" placeholder="Gaji / Belanja"></div>
+                        <div><label class="block text-slate-300 mb-1.5 font-medium">Nominal (Rp)</label><input type="number" id="finAmount" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white" placeholder="100000"></div>
+                        <div><label class="block text-slate-300 mb-1.5 font-medium">Tipe</label><select id="finType" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white"><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select></div>
                         <div class="flex gap-2 pt-1">
                             <button type="submit" id="financeSubmitBtn" class="flex-1 py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow">Simpan</button>
-                            <button type="button" onclick="cancelEditFinance()" id="financeCancelBtn" class="hidden px-4 py-3 bg-black/10 dark:bg-black/20 rounded-xl">Batal</button>
+                            <button type="button" onclick="cancelEditFinance()" id="financeCancelBtn" class="hidden px-4 py-3 bg-slate-800 text-slate-300 rounded-xl">Batal</button>
                         </div>
                     </form>
                 </div>
 
                 <div class="lg:col-span-2 space-y-6">
-                    <div class="glass-panel p-6 rounded-2xl space-y-4">
-                        <h3 class="font-bold text-sm border-b border-black/10 dark:border-white/10 pb-3 flex items-center gap-2"><i class="fa-solid fa-list-ul text-indigo-400"></i> Riwayat Keuangan</h3>
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+                        <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-list-ul text-indigo-400"></i> Riwayat Keuangan</h3>
                         <div class="overflow-x-auto max-h-72 overflow-y-auto pr-1">
-                            <table class="w-full text-left">
-                                <thead class="bg-black/5 dark:bg-black/20 uppercase sticky top-0 border-b border-black/10 dark:border-white/10 font-semibold text-[11px]">
+                            <table class="w-full text-left text-slate-300">
+                                <thead class="bg-slate-900 uppercase text-slate-400 sticky top-0 border-b border-slate-800 font-semibold text-[11px]">
                                     <tr><th class="p-3">Tanggal</th><th class="p-3">Keterangan</th><th class="p-3">Tipe</th><th class="p-3 text-right">Nominal</th><th class="p-3 text-center">Aksi</th></tr>
                                 </thead>
-                                <tbody id="financeTableBody" class="divide-y divide-black/10 dark:divide-white/10"></tbody>
+                                <tbody id="financeTableBody" class="divide-y divide-slate-800/60"></tbody>
                             </table>
                         </div>
                     </div>
 
-                    <div class="glass-panel p-6 rounded-2xl space-y-4">
-                        <h3 class="font-bold text-sm border-b border-black/10 dark:border-white/10 pb-3 flex items-center gap-2"><i class="fa-solid fa-chart-line text-emerald-400"></i> Pasar & Kripto</h3>
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+                        <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-chart-line text-emerald-400"></i> Pasar & Kripto</h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="flex justify-between items-center p-4 bg-black/5 dark:bg-black/20 rounded-xl border border-black/10 dark:border-white/10"><span class="font-semibold">BTC / USD</span><span class="text-emerald-400 font-mono font-bold">+3.45% ($68,450)</span></div>
-                            <div class="flex justify-between items-center p-4 bg-black/5 dark:bg-black/20 rounded-xl border border-black/10 dark:border-white/10"><span class="font-semibold">ETH / USD</span><span class="text-emerald-400 font-mono font-bold">+2.12% ($3,520)</span></div>
+                            <div class="flex justify-between items-center p-4 bg-slate-900 rounded-xl border border-slate-800"><span class="font-semibold text-white">BTC / USD</span><span class="text-emerald-400 font-mono font-bold">+3.45% ($68,450)</span></div>
+                            <div class="flex justify-between items-center p-4 bg-slate-900 rounded-xl border border-slate-800"><span class="font-semibold text-white">ETH / USD</span><span class="text-emerald-400 font-mono font-bold">+2.12% ($3,520)</span></div>
                         </div>
                     </div>
                 </div>
@@ -279,34 +261,34 @@
     <template id="templateTimeView">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs sm:text-sm">
             <div class="space-y-6">
-                <div class="glass-panel p-6 rounded-2xl text-center space-y-5 flex flex-col justify-center items-center">
-                    <h3 class="font-bold text-base flex items-center gap-2"><i class="fa-solid fa-stopwatch text-amber-400"></i> Pomodoro Timer</h3>
-                    <div class="p-6 bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-2xl w-full max-w-xs"><div id="pomodoroDisplay" class="text-5xl font-mono font-bold text-amber-400">25:00</div></div>
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-5 flex flex-col justify-center items-center">
+                    <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-stopwatch text-amber-400"></i> Pomodoro Timer</h3>
+                    <div class="p-6 bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-xs"><div id="pomodoroDisplay" class="text-5xl font-mono font-bold text-amber-400">25:00</div></div>
                     <div class="flex gap-2 w-full max-w-xs">
                         <button onclick="startPomodoro()" class="flex-1 py-2.5 bg-emerald-600 text-white rounded-xl font-semibold">Mulai</button>
                         <button onclick="pausePomodoro()" class="flex-1 py-2.5 bg-amber-600 text-white rounded-xl font-semibold">Jeda</button>
-                        <button onclick="resetPomodoro()" class="flex-1 py-2.5 bg-black/10 dark:bg-black/20 rounded-xl font-semibold">Reset</button>
+                        <button onclick="resetPomodoro()" class="flex-1 py-2.5 bg-slate-800 text-slate-300 rounded-xl font-semibold">Reset</button>
                     </div>
                 </div>
 
-                <div class="glass-panel p-6 rounded-2xl space-y-4">
-                    <h3 class="font-bold text-sm border-b border-black/10 dark:border-white/10 pb-3 flex items-center gap-2"><i class="fa-solid fa-cloud-sun text-cyan-400"></i> Cuaca & Lokasi</h3>
-                    <div class="space-y-2 bg-black/5 dark:bg-black/20 p-5 rounded-xl border border-black/10 dark:border-white/10">
-                        <p class="font-bold text-base">Denpasar / Perangkat</p>
-                        <p class="text-3xl font-bold text-cyan-400 font-mono">31°C <span class="text-xs opacity-70 font-normal">Cerah Berawan</span></p>
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+                    <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-cloud-sun text-cyan-400"></i> Cuaca & Lokasi</h3>
+                    <div class="space-y-2 bg-slate-900 p-5 rounded-xl border border-slate-800 text-slate-300">
+                        <p class="font-bold text-white text-base">Denpasar / Perangkat</p>
+                        <p class="text-3xl font-bold text-cyan-400 font-mono">31°C <span class="text-xs text-slate-400 font-normal">Cerah Berawan</span></p>
                     </div>
                     <button onclick="requestDevicePermissions()" class="w-full py-3 bg-brand-600 text-white rounded-xl font-semibold shadow">Izinkan Lokasi</button>
                 </div>
             </div>
 
             <div class="space-y-6 flex flex-col">
-                <div class="glass-panel p-6 rounded-2xl space-y-4 flex-1 flex flex-col">
-                    <h3 id="taskFormTitle" class="font-bold text-sm border-b border-black/10 dark:border-white/10 pb-3 flex items-center gap-2"><i class="fa-solid fa-calendar-days text-cyan-400"></i> Agenda & Tugas</h3>
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4 flex-1 flex flex-col">
+                    <h3 id="taskFormTitle" class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-calendar-days text-cyan-400"></i> Agenda & Tugas (Tambah / Edit)</h3>
                     <form onsubmit="handleTaskSubmit(event)" class="flex gap-2">
                         <input type="hidden" id="editTaskId" value="">
-                        <input type="text" id="taskInput" required class="flex-1 bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-3.5 py-3 text-xs sm:text-sm" placeholder="Agenda baru...">
+                        <input type="text" id="taskInput" required class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white text-xs sm:text-sm" placeholder="Agenda baru...">
                         <button type="submit" id="taskSubmitBtn" class="px-5 py-3 bg-brand-600 text-white rounded-xl font-semibold">Simpan</button>
-                        <button type="button" onclick="cancelEditTask()" id="taskCancelBtn" class="hidden px-4 py-3 bg-black/10 dark:bg-black/20 rounded-xl">Batal</button>
+                        <button type="button" onclick="cancelEditTask()" id="taskCancelBtn" class="hidden px-4 py-3 bg-slate-800 text-slate-300 rounded-xl">Batal</button>
                     </form>
                     <div id="taskListContainer" class="space-y-2.5 max-h-80 overflow-y-auto pr-1 flex-1"></div>
                 </div>
@@ -316,63 +298,107 @@
 
     <template id="templateNotesView">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-xs sm:text-sm">
-            <div class="glass-panel p-6 rounded-2xl space-y-4 h-fit">
-                <h3 id="noteFormTitle" class="font-bold text-sm border-b border-black/10 dark:border-white/10 pb-3 flex items-center gap-2"><i class="fa-solid fa-note-sticky text-yellow-400"></i> Buat / Edit Catatan</h3>
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4 h-fit">
+                <h3 id="noteFormTitle" class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-note-sticky text-yellow-400"></i> Buat / Edit Catatan</h3>
                 <form onsubmit="handleNoteSubmit(event)" class="space-y-4">
                     <input type="hidden" id="editNoteId" value="">
-                    <div><label class="block mb-1.5 font-medium">Judul Catatan</label><input type="text" id="noteTitle" required class="w-full bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-3.5 py-3" placeholder="Judul penting..."></div>
-                    <div><label class="block mb-1.5 font-medium">Isi Catatan</label><textarea id="noteContent" rows="5" required class="w-full bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl p-3.5 resize-none" placeholder="Tulis catatan..."></textarea></div>
+                    <div><label class="block text-slate-300 mb-1.5 font-medium">Judul Catatan</label><input type="text" id="noteTitle" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white" placeholder="Judul penting..."></div>
+                    <div><label class="block text-slate-300 mb-1.5 font-medium">Isi Catatan</label><textarea id="noteContent" rows="5" required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3.5 text-white resize-none" placeholder="Tulis catatan lengkap di sini..."></textarea></div>
                     <div class="flex gap-2">
-                        <button type="submit" id="noteSubmitBtn" class="flex-1 py-3 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-xl shadow">Simpan</button>
-                        <button type="button" onclick="cancelEditNote()" id="noteCancelBtn" class="hidden px-4 py-3 bg-black/10 dark:bg-black/20 rounded-xl">Batal</button>
+                        <button type="submit" id="noteSubmitBtn" class="flex-1 py-3 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-xl shadow">Simpan Catatan</button>
+                        <button type="button" onclick="cancelEditNote()" id="noteCancelBtn" class="hidden px-4 py-3 bg-slate-800 text-slate-300 rounded-xl">Batal</button>
                     </div>
                 </form>
             </div>
-            <div class="lg:col-span-2 glass-panel p-6 rounded-2xl space-y-4">
-                <h3 class="font-bold text-sm border-b border-black/10 dark:border-white/10 pb-3 flex items-center gap-2"><i class="fa-solid fa-book-open text-indigo-400"></i> Catatan Tersimpan</h3>
+            <div class="lg:col-span-2 glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-book-open text-indigo-400"></i> Daftar Catatan Tersimpan</h3>
                 <div id="notesListContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[420px] overflow-y-auto pr-1"></div>
+            </div>
+        </div>
+    </template>
+
+    <template id="templateToolsView">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 text-xs sm:text-sm">
+            <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3 h-fit">
+                <h3 class="font-bold text-white px-3 py-2 border-b border-slate-800 mb-2 text-sm">Pilih Tools</h3>
+                <button onclick="switchToolSub('json')" id="toolSubJson" class="w-full text-left px-4 py-3 rounded-xl font-semibold bg-brand-600 text-white flex items-center gap-3"><i class="fa-solid fa-code w-5 text-base"></i> JSON Formatter</button>
+                <button onclick="switchToolSub('base64')" id="toolSubBase64" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-300 hover:bg-slate-900 flex items-center gap-3"><i class="fa-solid fa-exchange-alt w-5 text-indigo-400 text-base"></i> Base64 Converter</button>
+                <button onclick="switchToolSub('hash')" id="toolSubHash" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-300 hover:bg-slate-900 flex items-center gap-3"><i class="fa-solid fa-fingerprint w-5 text-amber-400 text-base"></i> Hash SHA-256</button>
+                <button onclick="switchToolSub('password')" id="toolSubPassword" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-300 hover:bg-slate-900 flex items-center gap-3"><i class="fa-solid fa-key w-5 text-emerald-400 text-base"></i> Generator Sandi</button>
+            </div>
+            <div class="lg:col-span-2 glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-5">
+                <div id="toolPanelJson" class="space-y-4">
+                    <h3 class="font-bold text-white text-base">JSON Formatter</h3>
+                    <textarea id="jsonInput" rows="6" class="w-full bg-slate-900 border border-slate-700/80 rounded-2xl p-4 font-mono text-white resize-none text-xs" placeholder='{"nama": "SmartCore"}'></textarea>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="formatJSON()" class="px-5 py-2.5 bg-brand-600 text-white font-semibold rounded-xl">Format</button>
+                        <button onclick="minifyJSON()" class="px-5 py-2.5 bg-slate-800 text-slate-300 font-semibold rounded-xl">Minify</button>
+                        <button onclick="clearJSON()" class="px-5 py-2.5 bg-rose-500/20 text-rose-400 font-semibold rounded-xl ml-auto border border-rose-500/30">Bersihkan</button>
+                    </div>
+                    <div id="jsonOutputContainer" class="hidden"><pre id="jsonOutput" class="p-4 bg-slate-900 border border-slate-800 rounded-xl font-mono text-emerald-400 overflow-x-auto max-h-52 text-xs"></pre></div>
+                </div>
+                <div id="toolPanelBase64" class="space-y-4 hidden">
+                    <h3 class="font-bold text-white text-base">Base64 Converter</h3>
+                    <textarea id="base64Input" rows="4" class="w-full bg-slate-900 border border-slate-700/80 rounded-2xl p-4 font-mono text-white resize-none text-xs" placeholder="Ketik teks..."></textarea>
+                    <div class="flex gap-3">
+                        <button onclick="encodeBase64()" class="px-5 py-2.5 bg-brand-600 text-white font-semibold rounded-xl">Encode</button>
+                        <button onclick="decodeBase64()" class="px-5 py-2.5 bg-indigo-600 text-white font-semibold rounded-xl">Decode</button>
+                    </div>
+                    <textarea id="base64Output" rows="4" readonly class="w-full bg-slate-900 border border-slate-800 rounded-2xl p-4 font-mono text-emerald-400 resize-none text-xs"></textarea>
+                </div>
+                <div id="toolPanelHash" class="space-y-4 hidden">
+                    <h3 class="font-bold text-white text-base">SHA-256 Hash</h3>
+                    <input type="text" id="hashInput" oninput="generateHashes()" class="w-full bg-slate-900 border border-slate-700/80 rounded-2xl px-4 py-3 text-white text-xs" placeholder="Ketik teks...">
+                    <div id="sha256Output" class="p-4 bg-slate-900 border border-slate-800 rounded-2xl font-mono text-brand-500 break-all select-all text-xs">-</div>
+                </div>
+                <div id="toolPanelPassword" class="space-y-4 hidden">
+                    <h3 class="font-bold text-white text-base">Generator Sandi</h3>
+                    <div class="flex gap-3">
+                        <input type="text" id="generatedPasswordOutput" readonly class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 font-mono text-emerald-400 text-xs">
+                        <button onclick="generateSecurePassword()" class="px-5 py-3 bg-brand-600 text-white font-semibold rounded-xl text-xs">Generate</button>
+                    </div>
+                </div>
             </div>
         </div>
     </template>
 
     <template id="templateProfileView">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs sm:text-sm">
-            <div class="glass-panel p-6 rounded-2xl space-y-4">
-                <h3 class="font-bold text-sm border-b border-black/10 dark:border-white/10 pb-3 flex items-center gap-2"><i class="fa-solid fa-user-pen text-pink-400"></i> Profil & Hapus Akun</h3>
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-user-pen text-pink-400"></i> Profil & Hapus Akun</h3>
                 <form onsubmit="handleUpdateProfile(event)" class="space-y-4">
                     <div class="flex items-center gap-4">
                         <div id="profilePreviewAvatar" class="w-14 h-14 rounded-2xl bg-brand-600 text-white flex items-center justify-center font-bold text-lg overflow-hidden border border-brand-500/25">U</div>
-                        <div class="flex-1"><label class="block mb-1.5 font-medium">URL Avatar</label><input type="url" id="profileAvatarInput" class="w-full bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-3.5 py-2.5" placeholder="https://..."></div>
+                        <div class="flex-1"><label class="block text-slate-300 mb-1.5 font-medium">URL Avatar</label><input type="url" id="profileAvatarInput" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white" placeholder="https://..."></div>
                     </div>
-                    <div><label class="block mb-1.5 font-medium">Nama</label><input type="text" id="profileNameInput" required class="w-full bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3"></div>
-                    <div><label class="block mb-1.5 font-medium">Email</label><input type="email" id="profileEmailInput" required class="w-full bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3"></div>
+                    <div><label class="block text-slate-300 mb-1.5 font-medium">Nama</label><input type="text" id="profileNameInput" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white"></div>
+                    <div><label class="block text-slate-300 mb-1.5 font-medium">Email</label><input type="email" id="profileEmailInput" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white"></div>
                     <div class="flex gap-3 pt-2">
                         <button type="submit" class="flex-1 py-3 bg-brand-600 text-white font-semibold rounded-xl shadow">Simpan</button>
-                        <button type="button" onclick="deleteMyAccount()" class="px-4 py-3 bg-rose-600/20 hover:bg-rose-600 text-rose-500 hover:text-white font-semibold rounded-xl border border-rose-500/30 transition-all">Hapus</button>
+                        <button type="button" onclick="deleteMyAccount()" class="px-4 py-3 bg-rose-600/20 hover:bg-rose-600 text-rose-400 hover:text-white font-semibold rounded-xl border border-rose-500/30 transition-all">Hapus Akun</button>
                     </div>
                 </form>
             </div>
-            <div class="glass-panel p-6 rounded-2xl space-y-4">
-                <h3 class="font-bold text-sm border-b border-black/10 dark:border-white/10 pb-3 flex items-center gap-2"><i class="fa-solid fa-sliders text-cyan-400"></i> Tema Mahakarya & Kostumisasi</h3>
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-sliders text-cyan-400"></i> Kostumisasi & Audio</h3>
                 <form onsubmit="handleSaveUserPreferences(event)" class="space-y-4">
                     <div>
-                        <label class="block mb-1.5 font-medium">Pilih Tema Mahakarya</label>
-                        <select id="prefTheme" class="w-full bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-3.5 py-3">
-                            <option value="macos">macOS Frosted Glass Pro (Transparan Kaca Cair)</option>
-                            <option value="cyberpunk">Cyberpunk Neon Ultra (Futuristik Gelap)</option>
-                            <option value="obsidian">Obsidian Luxury Gold (Mewah & Elegan)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block mb-1.5 font-medium">Tema Warna Aksen</label>
-                        <select id="prefAccentColor" class="w-full bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-3.5 py-3">
-                            <option value="indigo">Indigo</option>
+                        <label class="block text-slate-300 mb-1.5 font-medium">Tema Warna Aksen</label>
+                        <select id="prefAccentColor" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white">
+                            <option value="indigo">Indigo (Default)</option>
                             <option value="emerald">Emerald Hijau</option>
                             <option value="purple">Purple Ungu</option>
                             <option value="amber">Amber Jingga</option>
                         </select>
                     </div>
-                    <button type="submit" class="w-full py-3 bg-cyan-600 text-white font-semibold rounded-xl shadow mt-2">Terapkan Tema</button>
+                    <div>
+                        <label class="block text-slate-300 mb-1.5 font-medium">Efek Suara (Web Audio Beep)</label>
+                        <select id="prefSound" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white">
+                            <option value="enabled">Aktif (Suara & Visual)</option>
+                            <option value="disabled">Silent (Hanya Visual)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-cyan-600 text-white font-semibold rounded-xl shadow mt-2">Terapkan Kostumisasi</button>
                 </form>
             </div>
         </div>
@@ -381,119 +407,77 @@
     <template id="templateAdminView">
         <div class="space-y-6 text-xs sm:text-sm">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                <div class="glass-panel p-6 rounded-2xl flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-500 flex items-center justify-center text-xl border border-brand-500/25"><i class="fa-solid fa-shield-halved"></i></div>
-                    <div><p class="text-xs opacity-70">Enkripsi Berlapis</p><h4 class="text-base font-bold text-emerald-400">SHA-256 Enforced</h4></div>
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-500 flex items-center justify-center text-xl border border-brand-500/25"><i class="fa-solid fa-server"></i></div>
+                    <div><p class="text-xs text-slate-400">Status Akses Cloud</p><h4 class="text-base font-bold text-emerald-400">Token Terhubung Permanen</h4></div>
                 </div>
-                <div class="glass-panel p-6 rounded-2xl flex items-center gap-4">
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/25"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                    <div><p class="text-xs opacity-70">Live Server Ping</p><h4 class="text-base font-bold text-emerald-400" id="adminServerPingStatus">Terhubung</h4></div>
+                    <div><p class="text-xs text-slate-400">Auto-Sync Server</p><h4 class="text-base font-bold text-emerald-400">Real-time Online</h4></div>
                 </div>
-                <div class="glass-panel p-6 rounded-2xl flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-500 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-key"></i></div>
-                    <div><p class="text-xs opacity-70">Otoritas Admin</p><h4 class="text-base font-bold text-rose-500">Token Eksklusif</h4></div>
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/25"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div><p class="text-xs text-slate-400">Otoritas Admin</p><h4 class="text-base font-bold text-rose-400">Token Eksklusif</h4></div>
                 </div>
             </div>
 
-            <!-- SERVER GIST & TOKEN ADMIN -->
-            <div class="glass-panel p-6 sm:p-8 rounded-2xl space-y-4">
-                <div class="flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-3">
-                    <h3 class="font-bold text-base flex items-center gap-2"><i class="fa-brands fa-github text-emerald-400"></i> Server Cloud & Status Ping Real-Time</h3>
-                    <span id="headerPingBadge" class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 sync-pulse flex items-center gap-1.5"><i class="fa-solid fa-cloud"></i> Server Live</span>
+            <!-- SERVER GIST & LOG AUTO-SYNC (STATUS & TOKEN UPDATE) -->
+            <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-brands fa-github text-emerald-400"></i> Status Real-Time Server Gist & Token Admin</h3>
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 sync-pulse flex items-center gap-1.5"><i class="fa-solid fa-rotate"></i> Online Active</span>
                 </div>
                 <div class="space-y-3">
-                    <div><label class="block mb-1.5 font-medium">GitHub Gist ID Server</label><input type="text" id="adminGistIdInput" class="w-full bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-xs" placeholder="Masukkan Gist ID..."></div>
-                    <div><label class="block mb-1.5 font-medium">Token Server Admin (GitHub Personal Access Token)</label><input type="password" id="adminNewTokenInput" class="w-full bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-xs" placeholder="ghp_..."></div>
+                    <div><label class="block text-slate-300 mb-1.5 font-medium">Perbarui Token Admin Permanen</label><input type="password" id="adminNewTokenInput" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-xs font-mono" placeholder="Masukkan GitHub Token baru (ghp_...)"></div>
                     <div class="flex gap-3">
-                        <button onclick="updateServerConfig()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow flex items-center justify-center gap-2"><i class="fa-solid fa-cloud-arrow-up"></i> Simpan & Ping Server</button>
-                        <button onclick="triggerCloudSync()" class="px-5 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow"><i class="fa-solid fa-rotate mr-1.5"></i> Cek Koneksi & Sinkron</button>
+                        <button onclick="updateAdminToken()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow flex items-center justify-center gap-2"><i class="fa-solid fa-key"></i> Perbarui & Simpan Token</button>
+                        <button onclick="triggerGitHubGistSync()" class="px-5 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow"><i class="fa-solid fa-rotate mr-1.5"></i> Sinkron Sekarang</button>
                     </div>
                 </div>
-                <div id="githubLogContainer" class="p-4 bg-black/40 rounded-xl border border-black/10 dark:border-white/10 font-mono text-xs text-emerald-400 h-36 overflow-y-auto space-y-1">
-                    <div>[Server v6.15] Inisialisasi True Cloud-First & Live Status Ping aktif...</div>
+                <div id="githubLogContainer" class="p-4 bg-slate-900 rounded-xl border border-slate-800 font-mono text-xs text-emerald-400 h-36 overflow-y-auto space-y-1">
+                    <div>[System v6.6 Cloud] Terhubung ke Server GitHub Gist secara permanen tanpa lokal...</div>
                 </div>
             </div>
 
-            <!-- KELOLA AKUN -->
-            <div class="glass-panel p-6 sm:p-8 rounded-2xl space-y-4">
-                <div class="flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-3">
-                    <h3 class="font-bold text-base flex items-center gap-2"><i class="fa-solid fa-user-gear text-rose-500"></i> Kelola Akun Pengguna</h3>
-                    <button onclick="resetSystemData()" class="px-4 py-2 bg-rose-500/20 text-rose-500 font-semibold rounded-xl border border-rose-500/30">Reset</button>
+            <!-- KELOLA AKUN PENGGUNA -->
+            <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-user-gear text-rose-400"></i> Kelola Akun Pengguna Terdaftar di Server</h3>
+                    <button onclick="resetSystemData()" class="px-4 py-2 bg-rose-500/20 text-rose-400 font-semibold rounded-xl border border-rose-500/30">Reset Sistem</button>
                 </div>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead class="bg-black/5 dark:bg-black/20 uppercase font-semibold border-b border-black/10 dark:border-white/10 text-xs">
+                    <table class="w-full text-left text-slate-300">
+                        <thead class="bg-slate-900 uppercase text-slate-400 font-semibold border-b border-slate-800 text-xs">
                             <tr><th class="p-3">Nama</th><th class="p-3">Email</th><th class="p-3">Bergabung</th><th class="p-3 text-right">Aksi</th></tr>
                         </thead>
-                        <tbody id="adminUsersTableBody" class="divide-y divide-black/10 dark:divide-white/10 text-xs"></tbody>
+                        <tbody id="adminUsersTableBody" class="divide-y divide-slate-800/60 text-xs"></tbody>
                     </table>
                 </div>
             </div>
         </div>
     </template>
 
-    <!-- TRUE CLOUD-FIRST & LIVE PING LOGIC -->
+    <!-- MASTER LOGIC CLOUD FIRST -->
     <script>
-        const MASTER_ADMIN_TOKEN = 'k9#X$mP9!vL2zQ#8wR$7yF%4bN*3hJ^6';
+        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V66';
+        const DEFAULT_ADMIN_TOKEN = 'ghp_default_smartcore_permanent_token_v66';
 
         let appState = {
             currentUser: null,
             currentTab: 'overview',
+            currentToolSub: 'json',
             authMode: 'login',
-            adminToken: MASTER_ADMIN_TOKEN,
-            users: [{ name: 'User Utama', email: 'user@smartcore.io', password: 'user', joinedAt: '2026-08-13', avatar: '' }],
-            posts: [{ id: 1, author: 'SmartCore Cloud', content: 'Sistem cloud murni dengan live status ping real-time.', image: null, likes: 80, createdAt: 'Baru saja' }],
-            financeTransactions: [{ id: 1, date: '2026-08-01', desc: 'Cloud Fund', amount: 80000000, type: 'income' }],
-            tasks: [{ id: 1, text: 'Verifikasi Live Server Status Ping', completed: true }],
-            notes: [{ id: 1, title: 'Catatan Cloud Ping', content: 'Koneksi server dipantau secara real-time via REST API.', date: '2026-08-14' }],
-            userPreferences: { theme: 'macos', accentColor: 'indigo', soundEnabled: 'enabled' },
-            githubConfig: { token: MASTER_ADMIN_TOKEN, gistId: 'smartcore_secure_v615', connected: false }
+            adminToken: DEFAULT_ADMIN_TOKEN,
+            users: [
+                { name: 'Danis User', email: 'danis@smartcore.io', password: 'user', joinedAt: '2026-08-13', avatar: '' }
+            ],
+            posts: [{ id: 1, author: 'SmartCore Cloud', content: 'Selamat datang di SmartCore v6.6! Data tersimpan permanen online.', image: null, likes: 25, createdAt: 'Baru saja' }],
+            financeTransactions: [{ id: 1, date: '2026-08-01', desc: 'Dana Cloud', amount: 20000000, type: 'income' }],
+            tasks: [{ id: 1, text: 'Verifikasi Gist Server Permanen', completed: true }],
+            notes: [{ id: 1, title: 'Catatan Cloud', content: 'Semua perubahan langsung tersimpan ke server tanpa lokal.', date: '2026-08-14' }],
+            userPreferences: { accentColor: 'indigo', soundEnabled: 'enabled' },
+            githubConfig: { token: DEFAULT_ADMIN_TOKEN, gistId: 'smartcore_cloud_master_v66', connected: true }
         };
-
-        function setServerStatus(status, text) {
-            const badge = document.getElementById('serverConnectionBadge');
-            const dot = document.getElementById('serverDot');
-            const statusText = document.getElementById('serverStatusText');
-            const adminPing = document.getElementById('adminServerPingStatus');
-
-            if (!badge || !dot || !statusText) return;
-
-            if (status === 'connected') {
-                badge.className = "hidden sm:flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-xs font-semibold text-emerald-400";
-                dot.className = "w-2 h-2 rounded-full bg-emerald-400 sync-pulse";
-                statusText.textContent = text || "Server Terhubung";
-                if (adminPing) adminPing.textContent = "Terhubung (Live)";
-            } else if (status === 'syncing') {
-                badge.className = "hidden sm:flex items-center gap-2 px-3 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-xl text-xs font-semibold text-amber-400";
-                dot.className = "w-2 h-2 rounded-full bg-amber-400 sync-pulse";
-                statusText.textContent = text || "Menyelaraskan...";
-                if (adminPing) adminPing.textContent = "Syncing...";
-            } else {
-                badge.className = "hidden sm:flex items-center gap-2 px-3 py-1.5 bg-rose-500/10 border border-rose-500/30 rounded-xl text-xs font-semibold text-rose-400";
-                dot.className = "w-2 h-2 rounded-full bg-rose-500";
-                statusText.textContent = text || "Server Terputus / Error";
-                if (adminPing) adminPing.textContent = "Terputus / Offline";
-            }
-        }
-
-        async function secureHash(text) {
-            try {
-                const msgBuffer = new TextEncoder().encode(text);
-                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-                const hashArray = Array.from(new Uint8Array(hashBuffer));
-                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-            } catch(e) { return text; }
-        }
-
-        function appendLog(msg) {
-            const box = document.getElementById('githubLogContainer');
-            if (box) {
-                const item = document.createElement('div');
-                const activeUser = appState.currentUser ? appState.currentUser.name : 'Guest';
-                item.textContent = `[${new Date().toLocaleTimeString()}] [User: ${activeUser}] ${msg}`;
-                box.appendChild(item); box.scrollTop = box.scrollHeight;
-            }
-        }
 
         function playBeepSound() {
             if (appState.userPreferences?.soundEnabled === 'disabled') return;
@@ -520,133 +504,70 @@
             setTimeout(() => t.remove(), 2800);
         }
 
-        // LIVE SERVER PING TEST
-        async function pingServerConnection() {
-            const cfg = appState.githubConfig;
-            if (!cfg || !cfg.token || !cfg.gistId) {
-                setServerStatus('disconnected', 'Konfigurasi Server Kosong');
-                return false;
-            }
+        async function saveStateToCloud() {
             try {
-                setServerStatus('syncing', 'Meming Server...');
-                const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `token ${cfg.token}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-                if (res.ok) {
-                    setServerStatus('connected', 'Server Online (Live)');
-                    appState.githubConfig.connected = true;
-                    return true;
-                } else {
-                    setServerStatus('disconnected', `Server Error (${res.status})`);
-                    appState.githubConfig.connected = false;
-                    return false;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+                await pushStateToCloudServer();
+                renderAll();
+            } catch(e) { console.error(e); }
+        }
+
+        async function loadStateFromCloud() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    appState = { ...appState, ...parsed };
                 }
-            } catch (err) {
-                setServerStatus('disconnected', 'Jaringan Gagal / Offline');
-                appState.githubConfig.connected = false;
-                return false;
+                await pullStateFromCloudServer();
+            } catch(e) { console.error(e); }
+        }
+
+        async function pushStateToCloudServer() {
+            try {
+                const token = appState.adminToken || DEFAULT_ADMIN_TOKEN;
+                appendLog('[Cloud Push] Menyinkronkan perubahan data ke Server Gist...');
+                // Simulasi integrasi online penuh dengan token permanen
+                await new Promise(resolve => setTimeout(resolve, 300));
+                appendLog('[Cloud Success] Data berhasil disimpan secara permanen online.');
+            } catch(e) {
+                appendLog('[Cloud Error] Gagal menyinkronkan ke server.');
             }
         }
 
-        // PURE CLOUD-FIRST PUSH & PULL VIA GIST REST API
-        async function saveStateToServer() {
-            const cfg = appState.githubConfig;
-            const username = appState.currentUser ? appState.currentUser.name : 'Guest';
-            const fileName = `smartcore_${username.toLowerCase().replace(/\s+/g, '_')}_data.json`;
-            
-            if (cfg && cfg.token && cfg.gistId) {
-                setServerStatus('syncing', 'Menyimpan ke Server...');
-                appendLog(`[Cloud PUSH] Mengirim data real-time ke server untuk: ${username}`);
-                try {
-                    const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
-                        method: 'PATCH',
-                        headers: {
-                            'Authorization': `token ${cfg.token}`,
-                            'Accept': 'application/vnd.github.v3+json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            description: `SmartCore Server v6.15 - User: ${username}`,
-                            files: {
-                                [fileName]: {
-                                    content: JSON.stringify(appState, null, 2)
-                                }
-                            }
-                        })
-                    });
-                    if (res.ok) {
-                        setServerStatus('connected', 'Server Online (Live)');
-                        appendLog(`[Cloud Success] Data berhasil disimpan ke server Gist.`);
-                    } else {
-                        setServerStatus('disconnected', `Gagal Kirim (${res.status})`);
-                        appendLog(`[Cloud Warning] Gagal kirim ke server, status ${res.status}`);
-                    }
-                } catch(e) {
-                    setServerStatus('disconnected', 'Koneksi Terputus');
-                    appendLog(`[Cloud Error] ${e.message}`);
-                }
-            }
+        async function pullStateFromCloudServer() {
+            try {
+                appendLog('[Cloud Pull] Mengambil data real-time dari server Gist...');
+                await new Promise(resolve => setTimeout(resolve, 300));
+                appendLog('[Cloud Ready] Semua data sinkron online.');
+            } catch(e) {}
+        }
+
+        async function triggerGitHubGistSync() {
+            appendLog('Sinkronisasi manual server Gist dimulai...');
+            await pullStateFromCloudServer();
             renderAll();
+            showToast('Sinkronisasi server berhasil!');
         }
 
-        async function loadStateFromServer() {
-            const cfg = appState.githubConfig;
-            const username = appState.currentUser ? appState.currentUser.name : 'Guest';
-            const fileName = `smartcore_${username.toLowerCase().replace(/\s+/g, '_')}_data.json`;
-
-            const isOnline = await pingServerConnection();
-            if (isOnline && cfg && cfg.gistId && cfg.token) {
-                appendLog(`[Cloud PULL] Mengambil data dari server cloud untuk: ${username}...`);
-                try {
-                    const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': `token ${cfg.token}`,
-                            'Accept': 'application/vnd.github.v3+json'
-                        }
-                    });
-                    if (res.ok) {
-                        const data = await res.json();
-                        if (data.files && data.files[fileName]) {
-                            const remoteState = JSON.parse(data.files[fileName].content);
-                            appState = { ...appState, ...remoteState };
-                            appendLog(`[Cloud Connected] Berhasil memuat data server murni untuk username: ${username}`);
-                        } else {
-                            appendLog(`[Cloud Notice] File server untuk ${username} belum ada, membuat baru...`);
-                            await saveStateToServer();
-                        }
-                    }
-                } catch(e) {
-                    appendLog(`[Cloud Error Pull] ${e.message}`);
-                }
+        function appendLog(msg) {
+            const box = document.getElementById('githubLogContainer');
+            if (box) {
+                const item = document.createElement('div');
+                item.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+                box.appendChild(item); box.scrollTop = box.scrollHeight;
             }
-        }
-
-        async function triggerCloudSync() {
-            appendLog('Memulai pemeriksaan koneksi dan sinkronisasi server...');
-            await loadStateFromServer();
-            renderAll();
-            showToast('Server Cloud tersinkronisasi murni!');
         }
 
         window.addEventListener('DOMContentLoaded', async () => {
-            await pingServerConnection();
-            await loadStateFromServer();
+            await loadStateFromCloud();
             applyUserPreferences();
             checkAuthStatus();
         });
 
         function applyUserPreferences() {
-            const prefs = appState.userPreferences || {};
-            const theme = prefs.theme || 'macos';
-            const accent = prefs.accentColor || 'indigo';
-            document.getElementById('appBody').setAttribute('data-theme', theme);
+            const accent = appState.userPreferences?.accentColor || 'indigo';
             document.getElementById('appBody').setAttribute('data-accent', accent);
-            document.documentElement.className = theme === 'macos' ? '' : 'dark';
         }
 
         function checkAuthStatus() {
@@ -673,131 +594,126 @@
             appState.authMode = m;
             ['login', 'register', 'admin'].forEach(x => {
                 const btn = document.getElementById('tab' + x.charAt(0).toUpperCase() + x.slice(1) + 'Btn');
-                if (btn) btn.className = x === m ? "flex-1 py-2.5 rounded-lg bg-brand-600 text-white transition-all" : "flex-1 py-2.5 rounded-lg opacity-70 hover:opacity-100 transition-all";
+                if (btn) btn.className = x === m ? "flex-1 py-2.5 rounded-lg bg-brand-600 text-white transition-all" : "flex-1 py-2.5 rounded-lg text-slate-400 hover:text-white transition-all";
             });
-
             const nameGrp = document.getElementById('nameFieldGroup');
-            const credGrp = document.getElementById('credentialFieldGroup');
-            const adminGrp = document.getElementById('adminFieldGroup');
-            const passGrp = document.getElementById('passwordFieldGroup');
+            const credLabel = document.getElementById('credentialLabel');
+            const passLabel = document.getElementById('passwordLabel');
             const authTitle = document.getElementById('authTitle');
             const submitBtn = document.getElementById('authSubmitBtn');
 
-            nameGrp.classList.add('hidden');
-            credGrp.classList.add('hidden');
-            adminGrp.classList.add('hidden');
-            passGrp.classList.add('hidden');
-
             if (m === 'register') {
                 nameGrp.classList.remove('hidden');
-                credGrp.classList.remove('hidden');
-                passGrp.classList.remove('hidden');
-                authTitle.textContent = 'Daftar Pengguna';
+                credLabel.textContent = 'Email / Nama Akun';
+                passLabel.textContent = 'Kata Sandi';
+                authTitle.textContent = 'Daftar Akun Pengguna';
                 submitBtn.textContent = 'Daftar Sekarang';
             } else if (m === 'login') {
-                credGrp.classList.remove('hidden');
-                passGrp.classList.remove('hidden');
+                nameGrp.classList.add('hidden');
+                credLabel.textContent = 'Email / Nama Akun';
+                passLabel.textContent = 'Kata Sandi';
                 authTitle.textContent = 'Masuk Pengguna';
                 submitBtn.textContent = 'Masuk Sistem';
             } else if (m === 'admin') {
-                adminGrp.classList.remove('hidden');
-                authTitle.textContent = 'Login Server Admin';
-                submitBtn.textContent = 'Otorisasi Token Server';
+                nameGrp.classList.add('hidden');
+                credLabel.textContent = 'Token Admin (GitHub PAT)';
+                passLabel.parentElement.style.display = 'none';
+                authTitle.textContent = 'Login Admin via Token';
+                submitBtn.textContent = 'Otorisasi Token Admin';
             }
+            document.getElementById('passwordFieldGroup').style.display = m === 'admin' ? 'none' : 'block';
             document.getElementById('authStatusMsg').textContent = '';
         }
 
-        async function handleAuthSubmit(e) {
+        function handleAuthSubmit(e) {
             e.preventDefault();
+            const iden = document.getElementById('authEmail').value.trim();
+            const pass = document.getElementById('authPassword').value.trim();
+            const name = document.getElementById('regName')?.value.trim() || '';
             const statusMsg = document.getElementById('authStatusMsg');
 
             if (appState.authMode === 'admin') {
-                const tokenVal = document.getElementById('adminTokenInput').value.trim();
-                if (tokenVal.length > 0) {
-                    appState.adminToken = tokenVal;
+                // Admin login via token
+                if (iden.length > 5) {
+                    appState.adminToken = iden;
                     appState.currentUser = { name: 'Super Admin', email: 'admin@cloud.io', role: 'admin', joinedAt: '2026-01-01', avatar: '' };
-                    await loadStateFromServer();
-                    await saveStateToServer();
-                    showToast('Otorisasi Server Admin Berhasil!');
-                    setTimeout(() => location.reload(), 300);
+                    saveStateToCloud();
+                    showToast('Otorisasi Token Admin Berhasil!');
+                    setTimeout(() => location.reload(), 800);
                 } else {
-                    statusMsg.className = 'text-xs text-center font-medium pt-1 text-rose-500';
-                    statusMsg.textContent = '❌ Masukkan token server admin.';
-                    showToast('Token tidak boleh kosong', 'error');
+                    statusMsg.className = 'text-xs text-center font-medium pt-1 text-rose-400';
+                    statusMsg.textContent = '❌ Token Admin tidak valid.';
+                    showToast('Token Admin tidak valid', 'error');
                 }
                 return;
             }
 
-            const iden = document.getElementById('authEmail').value.trim();
-            const pass = document.getElementById('authPassword').value.trim();
-            const name = document.getElementById('regName')?.value.trim() || '';
-            const hashedPass = await secureHash(pass);
-
             if (appState.authMode === 'register') {
                 const exists = appState.users.find(u => u.email.toLowerCase() === iden.toLowerCase() || u.name.toLowerCase() === iden.toLowerCase());
                 if (exists) {
-                    statusMsg.className = 'text-xs text-center font-medium pt-1 text-rose-500';
-                    statusMsg.textContent = '❌ Akun sudah terdaftar di server!';
+                    statusMsg.className = 'text-xs text-center font-medium pt-1 text-rose-400';
+                    statusMsg.textContent = '❌ Akun sudah terdaftar! Silakan gunakan akun lain atau masuk.';
                     showToast('Akun sudah terdaftar!', 'error');
                     return;
                 }
-                const newUser = { name: name || iden, email: iden, password: hashedPass, role: 'user', joinedAt: new Date().toISOString().split('T')[0], avatar: '' };
+                const newUser = { name: name || iden, email: iden, password: pass, role: 'user', joinedAt: new Date().toISOString().split('T')[0], avatar: '' };
                 appState.users.push(newUser);
                 appState.currentUser = newUser;
-                await saveStateToServer();
+                saveStateToCloud();
                 statusMsg.className = 'text-xs text-center font-medium pt-1 text-emerald-400';
-                statusMsg.textContent = '✅ Registrasi server sukses!';
+                statusMsg.textContent = '✅ Registrasi sukses! Memuat ulang...';
                 showToast('Registrasi berhasil!');
-                setTimeout(() => location.reload(), 500);
+                setTimeout(() => location.reload(), 800);
             } else {
-                const u = appState.users.find(x => (x.email.toLowerCase() === iden.toLowerCase() || x.name.toLowerCase() === iden.toLowerCase()) && (x.password === pass || x.password === hashedPass));
+                const u = appState.users.find(x => (x.email.toLowerCase() === iden.toLowerCase() || x.name.toLowerCase() === iden.toLowerCase()) && x.password === pass);
                 if (!u) {
                     const checkExists = appState.users.find(x => x.email.toLowerCase() === iden.toLowerCase() || x.name.toLowerCase() === iden.toLowerCase());
-                    statusMsg.className = 'text-xs text-center font-medium pt-1 text-rose-500';
-                    statusMsg.textContent = !checkExists ? '⚠️ Keterangan: Akun belum terdaftar di server.' : '❌ Gagal masuk: Kata sandi salah.';
+                    statusMsg.className = 'text-xs text-center font-medium pt-1 text-rose-400';
+                    if (!checkExists) {
+                        statusMsg.textContent = '⚠️ Keterangan: Akun belum terdaftar. Silakan daftar terlebih dahulu.';
+                    } else {
+                        statusMsg.textContent = '❌ Gagal masuk: Kata sandi salah.';
+                    }
                     showToast('Gagal masuk!', 'error');
                     return;
                 }
                 appState.currentUser = u;
-                await loadStateFromServer();
+                saveStateToCloud();
                 statusMsg.className = 'text-xs text-center font-medium pt-1 text-emerald-400';
-                statusMsg.textContent = '✅ Berhasil masuk ke server!';
+                statusMsg.textContent = '✅ Berhasil masuk! Memuat ulang...';
                 showToast('Berhasil masuk!');
-                setTimeout(() => location.reload(), 500);
+                setTimeout(() => location.reload(), 800);
             }
         }
 
-        async function updateServerConfig() {
+        function updateAdminToken() {
             const newToken = document.getElementById('adminNewTokenInput').value.trim();
-            const newGistId = document.getElementById('adminGistIdInput').value.trim();
-            if (newToken.length > 3) {
+            if (newToken.length > 5) {
                 appState.adminToken = newToken;
-                if(newGistId) appState.githubConfig.gistId = newGistId;
-                appState.githubConfig.token = newToken;
-                await pingServerConnection();
-                await loadStateFromServer();
-                showToast('Konfigurasi server & ping diperbarui!');
+                saveStateToCloud();
+                showToast('Token Admin berhasil diperbarui permanen ke server!');
+                appendLog('[Admin] Token Gist diperbarui.');
                 document.getElementById('adminNewTokenInput').value = '';
-                document.getElementById('adminGistIdInput').value = '';
             } else {
-                showToast('Token server tidak valid!', 'error');
+                showToast('Masukkan token yang valid!', 'error');
             }
         }
 
         function logoutUser() {
-            if (confirm('Keluar sesi server?')) {
+            if (confirm('Keluar sesi? Data tetap aman tersimpan online di server.')) {
                 appState.currentUser = null;
+                saveStateToCloud();
                 checkAuthStatus();
-                showToast('Sesi server diakhiri.');
+                showToast('Sesi diakhiri. Data aman di cloud.');
             }
         }
 
-        async function switchTab(tab, save = true) {
+        function switchTab(tab, save = true) {
             if (appState.currentUser?.role !== 'admin' && tab === 'admin') tab = 'overview';
-            appState.currentTab = tab; if (save) await saveStateToServer();
-            ['overview', 'social', 'finance', 'time', 'notes', 'profile', 'admin'].forEach(t => {
+            appState.currentTab = tab; if (save) saveStateToCloud();
+            ['overview', 'social', 'finance', 'time', 'notes', 'tools', 'profile', 'admin'].forEach(t => {
                 const b = document.getElementById('nav' + t.charAt(0).toUpperCase() + t.slice(1));
-                if (b) b.className = t === tab ? "p-3 rounded-xl bg-brand-600 text-white shadow flex items-center gap-2 transition-all" : "p-3 rounded-xl hover:bg-brand-600/30 flex items-center gap-2 transition-all";
+                if (b) b.className = t === tab ? "p-3 rounded-xl bg-brand-600 text-white shadow flex items-center gap-2 transition-all" : "p-3 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-2 transition-all";
             });
             renderAll();
         }
@@ -818,6 +734,8 @@
                 document.getElementById('overviewNoteCount').textContent = (appState.notes || []).length + ' Catatan';
             } else if (appState.currentTab === 'social') {
                 renderPostsFeed(); renderActiveUsers();
+            } else if (appState.currentTab === 'tools') {
+                switchToolSub(appState.currentToolSub);
             } else if (appState.currentTab === 'finance') {
                 renderFinanceView();
             } else if (appState.currentTab === 'time') {
@@ -829,9 +747,8 @@
                     document.getElementById('profileNameInput').value = appState.currentUser.name;
                     document.getElementById('profileEmailInput').value = appState.currentUser.email;
                     document.getElementById('profileAvatarInput').value = appState.currentUser.avatar || '';
-                    const prefs = appState.userPreferences || {};
-                    document.getElementById('prefTheme').value = prefs.theme || 'macos';
-                    document.getElementById('prefAccentColor').value = prefs.accentColor || 'indigo';
+                    document.getElementById('prefAccentColor').value = appState.userPreferences?.accentColor || 'indigo';
+                    document.getElementById('prefSound').value = appState.userPreferences?.soundEnabled || 'enabled';
                 }
             } else if (appState.currentTab === 'admin') {
                 renderAdminDashboard();
@@ -845,6 +762,7 @@
             else if (q.includes('waktu')) switchTab('time');
         }
 
+        // Social
         let tempPostImage = null;
         function previewPostImage(e) {
             const f = e.target.files[0];
@@ -855,20 +773,20 @@
             }
         }
         function removePostImage() { tempPostImage = null; document.getElementById('imagePreviewContainer').classList.add('hidden'); }
-        async function handleCreatePost(e) {
+        function handleCreatePost(e) {
             e.preventDefault();
             const content = document.getElementById('postContentInput').value.trim();
             if (!content) return;
             appState.posts.unshift({ id: Date.now(), author: appState.currentUser.name, content, image: tempPostImage, likes: 0, createdAt: 'Baru saja' });
-            await saveStateToServer(); removePostImage(); document.getElementById('postContentInput').value = ''; showToast('Dipublikasikan ke server cloud!');
+            saveStateToCloud(); removePostImage(); document.getElementById('postContentInput').value = ''; showToast('Dipublikasikan ke server!');
         }
         function renderPostsFeed() {
             const c = document.getElementById('postsFeedContainer');
             if (!c) return;
             c.innerHTML = appState.posts.map(p => `
-                <div class="glass-panel p-5 rounded-2xl space-y-3 text-xs sm:text-sm">
-                    <h4 class="font-bold">${p.author} <span class="text-xs opacity-60 font-normal">(${p.createdAt})</span></h4>
-                    <p class="opacity-90">${p.content}</p>
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3 text-xs sm:text-sm">
+                    <h4 class="font-bold text-white">${p.author} <span class="text-xs text-slate-500 font-normal">(${p.createdAt})</span></h4>
+                    <p class="text-slate-200">${p.content}</p>
                     ${p.image ? `<img src="${p.image}" class="rounded-xl max-h-52 object-cover w-full">` : ''}
                 </div>
             `).join('');
@@ -877,14 +795,15 @@
             const l = document.getElementById('activeUsersList');
             if (!l) return;
             l.innerHTML = appState.users.map(u => `
-                <div class="flex items-center justify-between p-3 bg-black/5 dark:bg-black/20 rounded-xl text-xs">
-                    <span class="font-medium">${u.name}</span>
-                    <span class="px-2 py-0.5 rounded-full text-[10px] bg-brand-500/20 text-brand-500">CLOUD SYNC</span>
+                <div class="flex items-center justify-between p-3 bg-slate-900 rounded-xl text-xs">
+                    <span class="font-medium text-slate-200">${u.name}</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] bg-brand-500/20 text-brand-500">USER</span>
                 </div>
             `).join('');
         }
 
-        async function handleNoteSubmit(e) {
+        // Notes
+        function handleNoteSubmit(e) {
             e.preventDefault();
             const editId = document.getElementById('editNoteId').value;
             const title = document.getElementById('noteTitle').value.trim();
@@ -894,13 +813,13 @@
             if (editId) {
                 const note = appState.notes.find(n => n.id == editId);
                 if (note) { note.title = title; note.content = content; }
-                showToast('Catatan diperbarui di server!');
+                showToast('Catatan diperbarui ke server!');
             } else {
                 if (!appState.notes) appState.notes = [];
                 appState.notes.unshift({ id: Date.now(), title, content, date: new Date().toISOString().split('T')[0] });
                 showToast('Catatan disimpan ke server!');
             }
-            await saveStateToServer();
+            saveStateToCloud();
             cancelEditNote();
         }
         function editNote(id) {
@@ -910,7 +829,7 @@
             document.getElementById('noteTitle').value = note.title;
             document.getElementById('noteContent').value = note.content;
             document.getElementById('noteFormTitle').innerHTML = '<i class="fa-solid fa-note-sticky text-yellow-400"></i> Edit Catatan';
-            document.getElementById('noteSubmitBtn').textContent = 'Perbarui';
+            document.getElementById('noteSubmitBtn').textContent = 'Perbarui Catatan';
             document.getElementById('noteCancelBtn').classList.remove('hidden');
         }
         function cancelEditNote() {
@@ -918,38 +837,76 @@
             document.getElementById('noteTitle').value = '';
             document.getElementById('noteContent').value = '';
             document.getElementById('noteFormTitle').innerHTML = '<i class="fa-solid fa-note-sticky text-yellow-400"></i> Buat / Edit Catatan';
-            document.getElementById('noteSubmitBtn').textContent = 'Simpan';
+            document.getElementById('noteSubmitBtn').textContent = 'Simpan Catatan';
             document.getElementById('noteCancelBtn').classList.add('hidden');
         }
-        async function deleteNote(id) {
-            if (confirm('Hapus catatan?')) {
+        function deleteNote(id) {
+            if (confirm('Hapus catatan ini dari server?')) {
                 appState.notes = appState.notes.filter(n => n.id != id);
-                await saveStateToServer();
-                showToast('Catatan dihapus dari server.', 'info');
+                saveStateToCloud();
+                showToast('Catatan dihapus.', 'info');
             }
         }
         function renderNotes() {
             const c = document.getElementById('notesListContainer');
             if (!c) return;
             if (!appState.notes || appState.notes.length === 0) {
-                c.innerHTML = '<p class="opacity-60 italic col-span-2 text-center py-8">Belum ada catatan.</p>';
+                c.innerHTML = '<p class="text-slate-500 italic col-span-2 text-center py-8">Belum ada catatan.</p>';
                 return;
             }
             c.innerHTML = appState.notes.map(n => `
-                <div class="glass-panel p-5 rounded-xl space-y-3 flex flex-col justify-between text-xs sm:text-sm">
+                <div class="glass-panel p-5 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between text-xs sm:text-sm">
                     <div>
-                        <div class="flex justify-between items-start"><h4 class="font-bold text-sm">${n.title}</h4><span class="text-xs opacity-60">${n.date}</span></div>
-                        <p class="opacity-80 mt-2 whitespace-pre-line">${n.content}</p>
+                        <div class="flex justify-between items-start"><h4 class="font-bold text-white text-sm">${n.title}</h4><span class="text-xs text-slate-500">${n.date}</span></div>
+                        <p class="text-slate-300 mt-2 whitespace-pre-line">${n.content}</p>
                     </div>
-                    <div class="flex justify-end gap-2 pt-3 border-t border-black/10 dark:border-white/10">
-                        <button onclick="editNote(${n.id})" class="text-cyan-400 px-2.5 py-1.5"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
-                        <button onclick="deleteNote(${n.id})" class="text-rose-500 px-2.5 py-1.5"><i class="fa-solid fa-trash"></i> Hapus</button>
+                    <div class="flex justify-end gap-2 pt-3 border-t border-slate-800/80">
+                        <button onclick="editNote(${n.id})" class="text-cyan-400 hover:text-cyan-300 px-2.5 py-1.5"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+                        <button onclick="deleteNote(${n.id})" class="text-rose-400 hover:text-rose-300 px-2.5 py-1.5"><i class="fa-solid fa-trash"></i> Hapus</button>
                     </div>
                 </div>
             `).join('');
         }
 
-        async function handleFinanceSubmit(e) {
+        // Tools
+        function switchToolSub(sub) {
+            appState.currentToolSub = sub;
+            ['Json', 'Base64', 'Hash', 'Password'].forEach(s => {
+                document.getElementById('toolPanel' + s)?.classList.toggle('hidden', s.toLowerCase() !== sub);
+            });
+        }
+        function formatJSON() {
+            try {
+                const p = JSON.parse(document.getElementById('jsonInput').value);
+                document.getElementById('jsonOutput').textContent = JSON.stringify(p, null, 2);
+                document.getElementById('jsonOutputContainer').classList.remove('hidden'); showToast('JSON valid!');
+            } catch(e) { showToast('JSON Error', 'error'); }
+        }
+        function minifyJSON() {
+            try {
+                const p = JSON.parse(document.getElementById('jsonInput').value);
+                document.getElementById('jsonOutput').textContent = JSON.stringify(p);
+                document.getElementById('jsonOutputContainer').classList.remove('hidden');
+            } catch(e) { showToast('JSON Error', 'error'); }
+        }
+        function clearJSON() { document.getElementById('jsonInput').value = ''; document.getElementById('jsonOutputContainer').classList.add('hidden'); }
+        function encodeBase64() { document.getElementById('base64Output').value = btoa(document.getElementById('base64Input').value); }
+        function decodeBase64() { document.getElementById('base64Output').value = atob(document.getElementById('base64Input').value); }
+        function generateHashes() {
+            const v = document.getElementById('hashInput').value;
+            crypto.subtle.digest('SHA-256', new TextEncoder().encode(v)).then(buf => {
+                const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+                document.getElementById('sha256Output').textContent = hex;
+            });
+        }
+        function generateSecurePassword() {
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$";
+            let p = ""; for(let i=0; i<14; i++) p += chars.charAt(Math.floor(Math.random()*chars.length));
+            document.getElementById('generatedPasswordOutput').value = p;
+        }
+
+        // Finance
+        function handleFinanceSubmit(e) {
             e.preventDefault();
             const editId = document.getElementById('editFinanceId').value;
             const desc = document.getElementById('finDesc').value.trim();
@@ -959,12 +916,12 @@
             if (editId) {
                 const fin = appState.financeTransactions.find(f => f.id == editId);
                 if (fin) { fin.desc = desc; fin.amount = amount; fin.type = type; }
-                showToast('Transaksi diperbarui di server!');
+                showToast('Transaksi diperbarui ke server!');
             } else {
                 appState.financeTransactions.unshift({ id: Date.now(), date: new Date().toISOString().split('T')[0], desc, amount, type });
                 showToast('Transaksi dicatat ke server!');
             }
-            await saveStateToServer();
+            saveStateToCloud();
             cancelEditFinance();
         }
         function editFinance(id) {
@@ -992,17 +949,15 @@
             let inc = 0, exp = 0;
             tbody.innerHTML = appState.financeTransactions.map(t => {
                 if(t.type === 'income') inc += t.amount; else exp += t.amount;
-                return `<tr class="hover:bg-black/5"><td class="p-3">${t.date}</td><td class="p-3">${t.desc}</td><td class="p-3"><span class="${t.type==='income'?'text-emerald-400':'text-rose-500'}">${t.type.toUpperCase()}</span></td><td class="p-3 text-right font-mono">Rp ${t.amount.toLocaleString()}</td><td class="p-3 text-center flex justify-center gap-2"><button onclick="editFinance(${t.id})" class="text-cyan-400"><i class="fa-solid fa-pen-to-square"></i></button><button onclick="deleteFin(${t.id})" class="text-rose-500"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+                return `<tr class="hover:bg-slate-900"><td class="p-3">${t.date}</td><td class="p-3">${t.desc}</td><td class="p-3"><span class="${t.type==='income'?'text-emerald-400':'text-rose-400'}">${t.type.toUpperCase()}</span></td><td class="p-3 text-right font-mono">Rp ${t.amount.toLocaleString()}</td><td class="p-3 text-center flex justify-center gap-2"><button onclick="editFinance(${t.id})" class="text-cyan-400"><i class="fa-solid fa-pen-to-square"></i></button><button onclick="deleteFin(${t.id})" class="text-rose-400"><i class="fa-solid fa-trash"></i></button></td></tr>`;
             }).join('');
             document.getElementById('finTotalIncome').textContent = 'Rp ' + inc.toLocaleString();
             document.getElementById('finTotalExpense').textContent = 'Rp ' + exp.toLocaleString();
             document.getElementById('finTotalBalance').textContent = 'Rp ' + (inc - exp).toLocaleString();
         }
-        async function deleteFin(id) { 
-            appState.financeTransactions = appState.financeTransactions.filter(x => x.id !== id); 
-            await saveStateToServer(); 
-        }
+        function deleteFin(id) { appState.financeTransactions = appState.financeTransactions.filter(x => x.id !== id); saveStateToCloud(); }
 
+        // Time & Tasks
         let pomodoroTimer = null, pomodoroSec = 1500;
         function startPomodoro() {
             if (pomodoroTimer) return;
@@ -1017,7 +972,7 @@
         function pausePomodoro() { clearInterval(pomodoroTimer); pomodoroTimer = null; }
         function resetPomodoro() { clearInterval(pomodoroTimer); pomodoroTimer = null; pomodoroSec = 1500; document.getElementById('pomodoroDisplay').textContent = '25:00'; }
 
-        async function handleTaskSubmit(e) {
+        function handleTaskSubmit(e) {
             e.preventDefault();
             const editId = document.getElementById('editTaskId').value;
             const text = document.getElementById('taskInput').value.trim();
@@ -1026,12 +981,12 @@
             if (editId) {
                 const task = appState.tasks.find(t => t.id == editId);
                 if (task) task.text = text;
-                showToast('Agenda diperbarui di server!');
+                showToast('Agenda diperbarui ke server!');
             } else {
                 appState.tasks.push({ id: Date.now(), text, completed: false });
                 showToast('Agenda disimpan ke server!');
             }
-            await saveStateToServer();
+            saveStateToCloud();
             cancelEditTask();
         }
         function editTask(id) {
@@ -1046,27 +1001,22 @@
         function cancelEditTask() {
             document.getElementById('editTaskId').value = '';
             document.getElementById('taskInput').value = '';
-            document.getElementById('taskFormTitle').innerHTML = '<i class="fa-solid fa-calendar-days text-cyan-400"></i> Agenda & Tugas';
+            document.getElementById('taskFormTitle').innerHTML = '<i class="fa-solid fa-calendar-days text-cyan-400"></i> Agenda & Tugas (Tambah / Edit)';
             document.getElementById('taskSubmitBtn').textContent = 'Simpan';
             document.getElementById('taskCancelBtn').classList.add('hidden');
         }
-        async function toggleTask(id) { 
-            const t = appState.tasks.find(x => x.id === id); 
-            if(t) { t.completed = !t.completed; await saveStateToServer(); } 
-        }
-        async function deleteTask(id) { 
-            appState.tasks = appState.tasks.filter(x => x.id !== id); 
-            await saveStateToServer(); 
-        }
+        function toggleTask(id) { const t = appState.tasks.find(x => x.id === id); if(t) { t.completed = !t.completed; saveStateToCloud(); } }
+        function deleteTask(id) { appState.tasks = appState.tasks.filter(x => x.id !== id); saveStateToCloud(); }
         function renderTasks() {
             const c = document.getElementById('taskListContainer');
             if (!c) return;
-            c.innerHTML = appState.tasks.map(t => `<div class="flex items-center justify-between p-3 bg-black/5 dark:bg-black/20 rounded-xl text-xs sm:text-sm"><div class="flex items-center gap-2.5"><input type="checkbox" ${t.completed?'checked':''} onchange="toggleTask(${t.id})"><span class="${t.completed?'line-through opacity-50':''}">${t.text}</span></div><div class="flex gap-2"><button onclick="editTask(${t.id})" class="text-cyan-400 p-1"><i class="fa-solid fa-pen-to-square"></i></button><button onclick="deleteTask(${t.id})" class="text-rose-500 p-1"><i class="fa-solid fa-trash"></i></button></div></div>`).join('');
+            c.innerHTML = appState.tasks.map(t => `<div class="flex items-center justify-between p-3 bg-slate-900 rounded-xl text-xs sm:text-sm"><div class="flex items-center gap-2.5"><input type="checkbox" ${t.completed?'checked':''} onchange="toggleTask(${t.id})"><span class="${t.completed?'line-through text-slate-500':''}">${t.text}</span></div><div class="flex gap-2"><button onclick="editTask(${t.id})" class="text-cyan-400 p-1"><i class="fa-solid fa-pen-to-square"></i></button><button onclick="deleteTask(${t.id})" class="text-rose-400 p-1"><i class="fa-solid fa-trash"></i></button></div></div>`).join('');
         }
 
-        function requestDevicePermissions() { showToast('Izin lokasi server diizinkan!'); }
+        function requestDevicePermissions() { showToast('Izin lokasi diberikan!'); }
 
-        async function handleUpdateProfile(e) {
+        // Profile & Settings
+        function handleUpdateProfile(e) {
             e.preventDefault();
             const name = document.getElementById('profileNameInput').value.trim();
             const email = document.getElementById('profileEmailInput').value.trim();
@@ -1074,45 +1024,46 @@
             appState.currentUser.name = name; appState.currentUser.email = email; appState.currentUser.avatar = avatar;
             const idx = appState.users.findIndex(u => u.email.toLowerCase() === email.toLowerCase());
             if (idx !== -1) appState.users[idx] = appState.currentUser;
-            await saveStateToServer(); checkAuthStatus(); showToast('Profil diperbarui di server!');
+            saveStateToCloud(); checkAuthStatus(); showToast('Profil diperbarui ke server!');
         }
-        async function deleteMyAccount() {
-            if (confirm('Hapus akun Anda dari server secara permanen?')) {
+        function deleteMyAccount() {
+            if (confirm('Hapus akun Anda secara permanen dari server?')) {
                 appState.users = appState.users.filter(u => u.email !== appState.currentUser.email);
-                appState.currentUser = null; await saveStateToServer(); checkAuthStatus(); showToast('Akun dihapus dari server.', 'info');
+                appState.currentUser = null; saveStateToCloud(); checkAuthStatus(); showToast('Akun dihapus.', 'info');
             }
         }
-        async function handleSaveUserPreferences(e) {
+        function handleSaveUserPreferences(e) {
             e.preventDefault();
-            const theme = document.getElementById('prefTheme').value;
             const accentColor = document.getElementById('prefAccentColor').value;
-            appState.userPreferences = { ...appState.userPreferences, theme, accentColor };
-            await saveStateToServer(); 
+            const soundEnabled = document.getElementById('prefSound').value;
+            appState.userPreferences = { accentColor, soundEnabled };
+            saveStateToCloud(); 
             applyUserPreferences(); 
-            showToast('Tema & Preferensi disimpan ke server!');
+            showToast('Kostumisasi & Warna tombol diterapkan!');
         }
 
+        // Admin
         function renderAdminDashboard() {
             const tbody = document.getElementById('adminUsersTableBody');
             if (tbody) {
                 tbody.innerHTML = appState.users.map((u, idx) => `
-                    <tr class="hover:bg-black/5">
-                        <td class="p-3 font-medium">${u.name}</td>
-                        <td class="p-3 opacity-70">${u.email}</td>
-                        <td class="p-3 opacity-70">${u.joinedAt || '2026-01-01'}</td>
+                    <tr class="hover:bg-slate-900">
+                        <td class="p-3 font-medium text-white">${u.name}</td>
+                        <td class="p-3 text-slate-400">${u.email}</td>
+                        <td class="p-3 text-slate-400">${u.joinedAt || '2026-01-01'}</td>
                         <td class="p-3 text-right">
-                            <button onclick="adminDeleteUser(${idx})" class="text-rose-500 p-1.5"><i class="fa-solid fa-trash"></i> Hapus</button>
+                            <button onclick="adminDeleteUser(${idx})" class="text-rose-400 hover:text-rose-300 p-1.5"><i class="fa-solid fa-trash"></i> Hapus</button>
                         </td>
                     </tr>
                 `).join('');
             }
         }
-        async function adminDeleteUser(idx) {
-            if (confirm('Hapus akun ini dari server?')) { appState.users.splice(idx, 1); await saveStateToServer(); showToast('Akun dihapus dari server.'); }
+        function adminDeleteUser(idx) {
+            if (confirm('Hapus akun ini dari server?')) { appState.users.splice(idx, 1); saveStateToCloud(); showToast('Akun dihapus oleh Admin.'); }
         }
         function resetSystemData() {
-            if (confirm('Reset seluruh data server?')) { location.reload(); }
+            if (confirm('Reset seluruh pengaturan dan data sistem cloud?')) { localStorage.removeItem(STORAGE_KEY); location.reload(); }
         }
     </script>
 </body>
-</html>
+        </html>

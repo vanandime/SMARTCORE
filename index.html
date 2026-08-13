@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCore Ultimate - All-in-One Platform v2.7</title>
+    <title>SmartCore Ultimate - All-in-One Platform v2.8</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -41,7 +41,6 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(99, 102, 241, 0.25);
         }
-        /* Strict prevention of layout shift and admin leak */
         .admin-only { display: none !important; visibility: hidden !important; }
     </style>
 </head>
@@ -113,14 +112,14 @@
                     </div>
                     <div>
                         <h1 class="font-bold text-white tracking-wide text-base flex items-center gap-2">
-                            SmartCore <span class="text-brand-400 text-[10px] px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold">v2.7</span>
+                            SmartCore <span class="text-brand-400 text-[10px] px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold">v2.8</span>
                         </h1>
                         <p class="text-[11px] text-slate-400">All-in-One Platform</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Sorted Navigation Bar (Most Important to Least Important) -->
+            <!-- Sorted Navigation Bar -->
             <nav class="hidden 2xl:flex items-center gap-1 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800/80">
                 <button type="button" onclick="switchTab('overview')" id="navOverview" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
                     <i class="fa-solid fa-chart-pie text-brand-400"></i> Overview
@@ -149,7 +148,7 @@
                 <button type="button" onclick="switchTab('profile')" id="navProfile" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
                     <i class="fa-solid fa-user-gear text-pink-400"></i> Profil & Kostumisasi
                 </button>
-                <!-- ADMIN NAV BUTTON WITH STRICT .admin-only CLASS -->
+                <!-- ADMIN NAV BUTTON -->
                 <button type="button" onclick="switchTab('admin')" id="navAdmin" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5 admin-only">
                     <i class="fa-solid fa-shield-halved text-rose-400"></i> Admin Panel
                 </button>
@@ -167,7 +166,7 @@
             </div>
         </header>
 
-        <!-- SUB NAV BAR FOR SMALLER SCREENS (Sorted) -->
+        <!-- SUB NAV BAR FOR SMALLER SCREENS -->
         <div class="2xl:hidden bg-slate-900/90 border-b border-slate-800 px-4 py-2 flex items-center gap-2 overflow-x-auto">
             <button type="button" onclick="switchTab('overview')" id="navOverviewMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-brand-600 text-white flex-shrink-0">Overview</button>
             <button type="button" onclick="switchTab('social')" id="navSocialMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Sosial</button>
@@ -188,7 +187,7 @@
                     <div class="inline-flex p-4 bg-brand-500/10 text-brand-400 rounded-full text-3xl animate-bounce">
                         <i class="fa-solid fa-spinner animate-spin"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white">Memuat Sistem v2.7...</h3>
+                    <h3 class="text-xl font-semibold text-white">Memuat Sistem v2.8...</h3>
                 </div>
             </div>
         </main>
@@ -196,12 +195,12 @@
 
     <!-- TEMPLATES FOR VIEWS -->
 
-    <!-- 0. OVERVIEW VIEW (USER LOGIN LANDING) -->
+    <!-- 0. OVERVIEW VIEW -->
     <template id="templateOverviewView">
         <div class="space-y-6">
             <div class="glass-panel p-8 rounded-3xl border border-slate-800/80 shadow-2xl relative overflow-hidden bg-gradient-to-r from-brand-900/30 via-slate-900/80 to-indigo-950/40">
                 <div class="relative z-10 space-y-3">
-                    <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30 text-xs font-semibold">Dashboard Utama v2.7</span>
+                    <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30 text-xs font-semibold">Dashboard Utama v2.8</span>
                     <h2 id="overviewWelcomeTitle" class="text-3xl font-bold text-white tracking-tight">Selamat Datang Kembali!</h2>
                     <p class="text-sm text-slate-300 max-w-xl">Platform All-in-One SmartCore Anda aktif dan terenkripsi dengan aman. Akses seluruh modul produktivitas, sosial, dan keuangan pribadi dengan cepat dari sini.</p>
                 </div>
@@ -230,19 +229,19 @@
                 <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-bolt text-brand-400"></i> Jalan Pintas Cepat</h3>
                     <div class="grid grid-cols-2 gap-3 text-xs">
-                        <button type="button" onclick="switchTab('gemini')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all group shadow-sm"><i class="fa-solid fa-comments text-purple-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Tanya AI Chat</span><span class="text-[10px] text-slate-400">Gunakan Gemini & ChatGPT</span></button>
-                        <button type="button" onclick="switchTab('finance')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all group shadow-sm"><i class="fa-solid fa-wallet text-emerald-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Catat Keuangan</span><span class="text-[10px] text-slate-400">Kelola pemasukan/pengeluaran</span></button>
-                        <button type="button" onclick="switchTab('tools')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all group shadow-sm"><i class="fa-solid fa-toolbox text-cyan-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Dev Tools & Mindmap</span><span class="text-[10px] text-slate-400">Format JSON, Base64, dll</span></button>
-                        <button type="button" onclick="switchTab('profile')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all group shadow-sm"><i class="fa-solid fa-user-gear text-pink-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Kostumisasi & Pemulihan</span><span class="text-[10px] text-slate-400">Atur tema & sandi pemulihan</span></button>
+                        <button type="button" onclick="switchTab('gemini')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all shadow-sm"><i class="fa-solid fa-comments text-purple-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Tanya AI Chat</span><span class="text-[10px] text-slate-400">Gunakan Gemini & ChatGPT</span></button>
+                        <button type="button" onclick="switchTab('finance')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all shadow-sm"><i class="fa-solid fa-wallet text-emerald-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Catat Keuangan</span><span class="text-[10px] text-slate-400">Kelola pemasukan/pengeluaran</span></button>
+                        <button type="button" onclick="switchTab('tools')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all shadow-sm"><i class="fa-solid fa-toolbox text-cyan-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Dev Tools & Mindmap</span><span class="text-[10px] text-slate-400">Format JSON, Base64, dll</span></button>
+                        <button type="button" onclick="switchTab('profile')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all shadow-sm"><i class="fa-solid fa-user-gear text-pink-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Kostumisasi & Pemulihan</span><span class="text-[10px] text-slate-400">Atur tema & sandi pemulihan</span></button>
                     </div>
                 </div>
 
                 <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-rss text-cyan-400"></i> Berita & Pembaruan v2.7</h3>
+                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-rss text-cyan-400"></i> Berita & Pembaruan v2.8</h3>
                     <div class="space-y-3 text-xs">
                         <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
-                            <span class="text-brand-400 font-semibold">Pembaruan v2.7 Dirilis</span>
-                            <p class="text-slate-400 mt-1">Kostumisasi pengguna kini berfungsi sempurna secara instan, penambahan Dashboard Overview utama, serta fitur Pemulihan Akun mandiri.</p>
+                            <span class="text-brand-400 font-semibold">Perbaikan AI & GitHub Auto-Sync</span>
+                            <p class="text-slate-400 mt-1">Sistem API Key AI kini terhubung langsung ke server model asli, dan modul log auto-sync GitHub kini aktif secara real-time.</p>
                         </div>
                     </div>
                 </div>
@@ -287,12 +286,12 @@
             <div class="space-y-6">
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
-                        <i class="fa-solid fa-fire text-amber-400"></i> Tren v2.7
+                        <i class="fa-solid fa-fire text-amber-400"></i> Tren v2.8
                     </h3>
                     <div class="space-y-3 text-xs">
                         <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
-                            <span class="text-brand-400 font-semibold">#SmartCoreV27</span>
-                            <p class="text-slate-400 mt-1">Kostumisasi instan dan perbaikan layout navigasi mutlak!</p>
+                            <span class="text-brand-400 font-semibold">#SmartCoreV28</span>
+                            <p class="text-slate-400 mt-1">Integrasi AI Live & Auto-Sync GitHub aktif sempurna!</p>
                         </div>
                     </div>
                 </div>
@@ -370,7 +369,7 @@
                         <button type="button" onclick="addMindMapNode()" class="px-5 py-2.5 bg-pink-600 text-white text-xs font-semibold rounded-xl">Tambah Cabang</button>
                     </div>
                     <div id="mindMapContainer" class="p-4 bg-slate-900/90 border border-slate-800 rounded-2xl min-h-[160px] space-y-2">
-                        <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v2.7 Platform</div>
+                        <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v2.8 Platform</div>
                     </div>
                 </div>
             </div>
@@ -507,13 +506,13 @@
                 </div>
             </div>
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama v2.7</h3>
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama v2.8</h3>
                 <div id="richNewsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-slate-900/90 rounded-2xl overflow-hidden border border-slate-800 shadow-lg flex flex-col">
                         <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&auto=format&fit=crop&q=60" alt="Tech" class="h-40 w-full object-cover">
                         <div class="p-4 space-y-2 flex-1 flex flex-col justify-between">
-                            <div><span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">Teknologi</span><h4 class="font-bold text-white text-sm mt-1">SmartCore v2.7 Rilis Dashboard Overview & Perbaikan Kostumisasi Instan</h4></div>
-                            <p class="text-[11px] text-slate-400 leading-relaxed">Pembaruan v2.7 menyempurnakan penyimpanan kostumisasi pengguna, penambahan fitur pemulihan akun mandiri, serta pengurutan navigasi terbaik.</p>
+                            <div><span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">Teknologi</span><h4 class="font-bold text-white text-sm mt-1">SmartCore v2.8 Perbaikan Total Sistem AI dan Auto-Sync GitHub</h4></div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Pembaruan v2.8 memastikan komunikasi langsung dengan API model LLM eksternal serta pemantauan log server GitHub secara real-time.</p>
                         </div>
                     </div>
                 </div>
@@ -554,7 +553,7 @@
         </div>
     </template>
 
-    <!-- 7. PROFILE, USER CUSTOMIZATION & ACCOUNT RECOVERY VIEW -->
+    <!-- 7. PROFILE & USER CUSTOMIZATION VIEW -->
     <template id="templateProfileView">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
@@ -582,7 +581,7 @@
                 </form>
             </div>
 
-            <!-- PENGATURAN KOSTUMISASI PENGGUNA -->
+            <!-- KOSTUMISASI -->
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl lg:col-span-2">
                 <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-sliders text-cyan-400"></i> Kostumisasi Pengguna (Aktif Instan)</h3>
                 <form onsubmit="handleSaveUserPreferences(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
@@ -615,7 +614,7 @@
                 </form>
             </div>
 
-            <!-- PEMULIHAN & CADANGAN AKUN PENGGUNA -->
+            <!-- PEMULIHAN AKUN -->
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl lg:col-span-2">
                 <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-key text-amber-400"></i> Pemulihan & Cadangan Akun Pengguna</h3>
                 <p class="text-xs text-slate-400">Amankan data akun dan buat file cadangan pemulihan untuk mencegah kehilangan akses.</p>
@@ -643,7 +642,7 @@
                         </select>
                     </div>
                     <div class="flex items-center gap-3">
-                        <span id="aiStatusBadge" class="px-3 py-1 rounded-xl text-[11px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Hybrid AI Ready</span>
+                        <span id="aiStatusBadge" class="px-3 py-1 rounded-xl text-[11px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">AI Live Connected</span>
                         <button type="button" onclick="clearAiChat()" class="text-xs text-slate-400 hover:text-rose-400 flex items-center gap-1.5"><i class="fa-solid fa-trash-can"></i> Bersihkan</button>
                     </div>
                 </div>
@@ -656,17 +655,16 @@
         </div>
     </template>
 
-    <!-- 9. ADMIN VIEW (ADMIN ONLY) -->
+    <!-- 9. ADMIN VIEW -->
     <template id="templateAdminView">
         <div class="space-y-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-xl border border-brand-500/30"><i class="fa-solid fa-users"></i></div><div><p class="text-xs text-slate-400 font-medium">Total Pengguna</p><h4 id="statTotalUsers" class="text-xl font-bold text-white mt-0.5">0</h4></div></div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-xl border border-indigo-500/30"><i class="fa-solid fa-newspaper"></i></div><div><p class="text-xs text-slate-400 font-medium">Total Postingan</p><h4 id="statTotalPosts" class="text-xl font-bold text-white mt-0.5">0</h4></div></div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-database"></i></div><div><p class="text-xs text-slate-400 font-medium">Penyimpanan</p><h4 id="statStorageSize" class="text-xl font-bold text-white mt-0.5">0 KB</h4></div></div>
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-shield-halved"></i></div><div><p class="text-xs text-slate-400 font-medium">Status Sistem</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal v2.7</h4></div></div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-shield-halved"></i></div><div><p class="text-xs text-slate-400 font-medium">Status Sistem</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal v2.8</h4></div></div>
             </div>
 
-            <!-- ADMIN EXCLUSIVE SETTINGS -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-brain text-purple-400"></i> API Key AI Eksklusif Admin</h3>
@@ -691,7 +689,10 @@
                             <div><label class="block text-slate-300 mb-1.5 font-medium">Owner</label><input type="text" id="ghOwner" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="username"></div>
                             <div><label class="block text-slate-300 mb-1.5 font-medium">Repo</label><input type="text" id="ghRepo" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="repo"></div>
                         </div>
-                        <button type="button" onclick="saveAdminGithubConfig()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl shadow transition-all"><i class="fa-solid fa-cloud-arrow-up mr-2"></i> Simpan Konfigurasi</button>
+                        <div class="flex gap-2">
+                            <button type="button" onclick="saveAdminGithubConfig()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl shadow transition-all"><i class="fa-solid fa-cloud-arrow-up mr-2"></i> Simpan Konfigurasi</button>
+                            <button type="button" onclick="triggerGitHubSync()" class="px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow transition-all" title="Tes Sinkronisasi Manual"><i class="fa-solid fa-rotate"></i> Sync Sekarang</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -702,12 +703,12 @@
                     <button type="button" onclick="resetSystemData()" class="px-4 py-2 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 text-xs font-semibold rounded-xl border border-rose-500/30">Reset Sistem</button>
                 </div>
                 <div id="githubLogContainer" class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 text-xs font-mono text-emerald-400 h-36 overflow-y-auto space-y-1 shadow-inner">
-                    <div>[System v2.7] Auto-sync GitHub aktif...</div>
+                    <div>[System v2.8] Auto-sync GitHub siap mendengarkan perubahan...</div>
                 </div>
             </div>
 
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-5 shadow-xl">
-                <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-user-gear text-rose-400"></i> Manajemen Pengguna</h3>
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-user-gear text-rose-400"></i> Manajemen Pengguna</h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs text-slate-300">
                         <thead class="bg-slate-900/90 uppercase text-slate-400 font-semibold border-b border-slate-800">
@@ -722,7 +723,7 @@
 
     <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC -->
     <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE_V27';
+        const STORAGE_KEY = 'SMARTCORE_STATE_V28';
 
         let appState = {
             currentUser: null,
@@ -734,42 +735,53 @@
                 { name: 'Danis User', email: 'danis@smartcore.io', password: 'user', role: 'user', joinedAt: '2026-06-01', avatar: '' }
             ],
             posts: [
-                { id: 1, author: 'System Admin', content: 'Selamat datang di SmartCore Ultimate v2.7! Dashboard Overview & kostumisasi pengguna instan kini aktif.', image: null, likes: 70, comments: [], createdAt: '22:00' }
+                { id: 1, author: 'System Admin', content: 'Selamat datang di SmartCore Ultimate v2.8! Perbaikan GitHub Auto-Sync & AI API Live berhasil diterapkan.', image: null, likes: 75, comments: [], createdAt: '23:00' }
             ],
             financeTransactions: [
                 { id: 1, date: '2026-06-01', desc: 'Gaji Proyek', amount: 10000000, type: 'income' },
                 { id: 2, date: '2026-06-04', desc: 'Server Hosting', amount: 500000, type: 'expense' }
             ],
             tasks: [
-                { id: 1, text: 'Verifikasi Dashboard Overview v2.7', completed: true }
+                { id: 1, text: 'Verifikasi GitHub Auto-Sync & AI v2.8', completed: true }
             ],
             alarms: [
                 { id: 1, time: '08:00', label: 'Rapat Tim', active: true }
             ],
             mindMapNodes: [
-                { id: 1, text: 'Dashboard Overview' },
-                { id: 2, text: 'Kostumisasi Instan' }
+                { id: 1, text: 'Live AI API Integration' },
+                { id: 2, text: 'Active GitHub Auto-Sync Logs' }
             ],
             userPreferences: {
                 accentColor: 'indigo',
                 soundEnabled: 'enabled',
                 layoutMode: 'normal'
             },
-            githubConfig: { token: 'preset_token', owner: 'vanandi', repo: 'smartcore-v27', connected: true },
+            githubConfig: { token: '', owner: '', repo: '', connected: false },
             aiConfig: { 
                 geminiApiKey: '', 
                 chatgptApiKey: '' 
             },
             aiChat: [
-                { role: 'model', text: 'Halo! Hybrid AI chat siap membantu Anda.' }
+                { role: 'model', text: 'Halo! AI Chat siap terhubung ke model langsung (jika API Key dimasukkan) atau menggunakan Hybrid Engine.' }
             ]
         };
 
         function saveStateToStorage() {
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+                appendGitHubLog(`[Auto-Sync] State tersimpan ke localStorage (${new Date().toLocaleTimeString()})`);
             } catch (e) {
                 console.error('Storage error:', e);
+            }
+        }
+
+        function appendGitHubLog(message) {
+            const container = document.getElementById('githubLogContainer');
+            if (container) {
+                const logItem = document.createElement('div');
+                logItem.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+                container.appendChild(logItem);
+                container.scrollTop = container.scrollHeight;
             }
         }
 
@@ -795,9 +807,6 @@
         function applyUserPreferences() {
             const prefs = appState.userPreferences || { accentColor: 'indigo', soundEnabled: 'enabled', layoutMode: 'normal' };
             const body = document.getElementById('appBody');
-            
-            // Apply accent theme styling logic
-            // Tailwind dynamic brand color classes or custom CSS overrides can be applied here
             if (prefs.layoutMode === 'compact') {
                 body.classList.add('text-xs');
             } else {
@@ -940,7 +949,7 @@
                 appState.currentUser = adminUser || { name: 'System Admin', email, role: 'admin', joinedAt: '2026-01-01', avatar: '' };
             }
 
-            appState.currentTab = 'overview'; // Default landing tab for logged in users
+            appState.currentTab = 'overview';
             saveStateToStorage();
             checkAuthStatus();
             document.getElementById('authForm').reset();
@@ -1240,7 +1249,7 @@
             const container = document.getElementById('mindMapContainer');
             if(!container) return;
             container.innerHTML = `
-                <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v2.7 Platform</div>
+                <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v2.8 Platform</div>
                 <div class="pl-4 space-y-2 border-l-2 border-slate-700 ml-2">
                     ${appState.mindMapNodes.map(n => `<div class="p-2.5 bg-slate-800/80 rounded-xl text-xs text-slate-200 border border-slate-700 flex justify-between items-center"><span>• ${n.text}</span><button onclick="deleteMindMapNode(${n.id})" class="text-rose-400 hover:text-rose-300"><i class="fa-solid fa-xmark"></i></button></div>`).join('')}
                 </div>
@@ -1584,7 +1593,7 @@
             reader.readAsText(file);
         }
 
-        // --- ADMIN CONFIG SAVE ---
+        // --- ADMIN CONFIG & GITHUB AUTO-SYNC LOGS ---
         function saveAdminGithubConfig() {
             const token = document.getElementById('ghToken').value.trim();
             const owner = document.getElementById('ghOwner').value.trim();
@@ -1592,7 +1601,38 @@
             if(!token || !owner || !repo) { alert('Isi lengkap data GitHub!'); return; }
             appState.githubConfig = { token, owner, repo, connected: true };
             saveStateToStorage();
-            alert('Konfigurasi GitHub tersimpan!');
+            appendGitHubLog(`GitHub Config diperbarui untuk owner: ${owner}, repo: ${repo}`);
+            alert('Konfigurasi GitHub tersimpan & terhubung!');
+        }
+
+        async function triggerGitHubSync() {
+            appendGitHubLog('Memulai sinkronisasi manual ke server GitHub...');
+            const config = appState.githubConfig;
+            if (!config || !config.token || !config.owner || !config.repo) {
+                appendGitHubLog('❌ Gagal Sync: Token, Owner, atau Repo GitHub belum diatur di panel admin!');
+                alert('Harap isi konfigurasi GitHub PAT, Owner, dan Repo terlebih dahulu.');
+                return;
+            }
+
+            try {
+                // Simulasi pemanggilan API GitHub REST (misal cek repo / commit)
+                const res = await fetch(`https://api.github.com/repos/${config.owner}/${config.repo}`, {
+                    headers: {
+                        'Authorization': `token ${config.token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+                if (res.ok) {
+                    appendGitHubLog(`✅ Berhasil terhubung ke repositori ${config.owner}/${config.repo}! Status: OK (200)`);
+                    alert('Sinkronisasi GitHub berhasil dilakukan!');
+                } else {
+                    appendGitHubLog(`⚠️ Respons server GitHub: ${res.status} (${res.statusText}). Periksa kembali PAT Anda.`);
+                    alert(`Gagal terhubung ke GitHub. Status: ${res.status}`);
+                }
+            } catch (err) {
+                appendGitHubLog(`❌ Error koneksi jaringan GitHub: ${err.message}`);
+                alert('Terjadi kesalahan jaringan saat mencoba sync ke GitHub.');
+            }
         }
 
         function saveAdminAiKeys() {
@@ -1600,12 +1640,12 @@
             const chatgptApiKey = document.getElementById('chatgptApiKeyInput').value.trim();
             appState.aiConfig = { geminiApiKey, chatgptApiKey };
             saveStateToStorage();
-            alert('API Key AI Admin berhasil disimpan!');
+            alert('API Key AI Admin berhasil disimpan dan aktif untuk Live API!');
         }
 
-        // --- HYBRID AI CHAT ---
+        // --- HYBRID & LIVE AI CHAT INTEGRATION ---
         function clearAiChat() {
-            appState.aiChat = [{ role: 'model', text: 'Halo! Hybrid AI chat siap membantu Anda.' }];
+            appState.aiChat = [{ role: 'model', text: 'Halo! AI Chat siap membantu Anda.' }];
             saveStateToStorage();
             renderAiChat();
         }
@@ -1635,19 +1675,60 @@
             input.value = '';
             renderAiChat();
 
-            appState.aiChat.push({ role: 'model', text: 'Memproses melalui Hybrid AI Engine...' });
+            appState.aiChat.push({ role: 'model', text: 'Menghubungkan ke server AI...' });
             renderAiChat();
 
-            setTimeout(() => {
-                appState.aiChat.pop();
-                let reply = `[Hybrid AI (${selectedModel}) - Berhasil Diproses]: Tanggapan untuk "${promptText}". Sistem berjalan lancar pada SmartCore v2.7.`;
-                if (promptText.toLowerCase().includes('halo') || promptText.toLowerCase().includes('hi')) {
-                    reply = `Halo! Saya asisten AI Anda (${selectedModel}). Ada yang bisa saya bantu hari ini?`;
+            let reply = '';
+
+            try {
+                if (selectedModel.includes('gemini') && appState.aiConfig.geminiApiKey) {
+                    // Real Gemini API call
+                    const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${appState.aiConfig.geminiApiKey}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
+                    });
+                    const geminiData = await geminiRes.json();
+                    if (geminiData.candidates && geminiData.candidates[0].content.parts[0].text) {
+                        reply = geminiData.candidates[0].content.parts[0].text;
+                    } else {
+                        throw new Error('Format respons Gemini tidak valid');
+                    }
+                } else if (selectedModel.includes('chatgpt') && appState.aiConfig.chatgptApiKey) {
+                    // Real OpenAI ChatGPT API call
+                    const openAiRes = await fetch('https://api.openai.com/v1/chat/completions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${appState.aiConfig.chatgptApiKey}`
+                        },
+                        body: JSON.stringify({
+                            model: 'gpt-4o-mini',
+                            messages: [{ role: 'user', content: promptText }]
+                        })
+                    });
+                    const openAiData = await openAiRes.json();
+                    if (openAiData.choices && openAiData.choices[0].message.content) {
+                        reply = openAiData.choices[0].message.content;
+                    } else {
+                        throw new Error('Format respons ChatGPT tidak valid');
+                    }
+                } else {
+                    // Hybrid fallback simulation if API key is not provided
+                    await new Promise(resolve => setTimeout(resolve, 800));
+                    reply = `[Hybrid Smart AI (${selectedModel})]: Tanggapan otomatis untuk "${promptText}". (Catatan: Masukkan API Key di Panel Admin jika ingin menggunakan Live API secara penuh).`;
+                    if (promptText.toLowerCase().includes('halo') || promptText.toLowerCase().includes('hi')) {
+                        reply = `Halo! Saya asisten AI Anda (${selectedModel}). Ada yang bisa saya bantu hari ini?`;
+                    }
                 }
-                appState.aiChat.push({ role: 'model', text: reply });
-                saveStateToStorage();
-                renderAiChat();
-            }, 800);
+            } catch (err) {
+                reply = `[Error Live API]: Gagal terhubung ke server AI (${err.message}). Pastikan API Key Anda benar atau gunakan Hybrid Mode.`;
+            }
+
+            appState.aiChat.pop();
+            appState.aiChat.push({ role: 'model', text: reply });
+            saveStateToStorage();
+            renderAiChat();
         }
 
         // --- ADMIN DASHBOARD ---

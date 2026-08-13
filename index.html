@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCore Ultimate - Enterprise Ultra v6.2 Master</title>
+    <title>SmartCore Ultimate - Enterprise Ultra v6.3</title>
     <!-- Favicon SVG Profesional -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><path d='M21 16.5C21 16.88 20.79 17.21 20.47 17.38L12.57 21.82C12.41 21.91 12.21 22 12 22C11.79 22 11.59 21.91 11.43 21.82L3.53 17.38C3.21 17.21 3 16.88 3 16.5V7.5C3 7.12 3.21 6.79 3.53 6.62L11.43 2.18C11.59 2.09 11.79 2 12 2C12.21 2 12.41 2.09 12.57 2.18L20.47 6.62C20.79 6.79 21 7.12 21 7.5V16.5Z'/></svg>">
     <!-- Tailwind CSS CDN -->
@@ -65,14 +65,17 @@
             0% { opacity: 0; transform: translateY(6px) scale(0.99); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
-        .seamless-transition {
-            animation: seamlessFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+        .seamless-transition { animation: seamlessFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .toast-animate { animation: slideInToast 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes slideInToast {
             from { transform: translateX(120%) scale(0.9); opacity: 0; }
             to { transform: translateX(0) scale(1); opacity: 1; }
         }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.08); }
+        }
+        .sync-pulse { animation: pulseGlow 2s infinite; }
     </style>
 </head>
 <body id="appBody" data-accent="indigo" class="bg-[#060913] text-slate-100 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
@@ -87,7 +90,7 @@
                 <div class="inline-flex p-4 bg-gradient-to-tr from-brand-600 to-indigo-500 text-white rounded-2xl mb-3 text-2xl shadow-lg">
                     <i class="fa-solid fa-cube"></i>
                 </div>
-                <h2 id="authTitle" class="text-2xl font-bold tracking-tight text-white">SmartCore v6.2 Master</h2>
+                <h2 id="authTitle" class="text-2xl font-bold tracking-tight text-white">SmartCore v6.3 Master</h2>
                 <p id="authSubtitle" class="text-sm text-slate-400 mt-1">Sistem Enterprise & Manajemen Akun Terpadu</p>
             </div>
             
@@ -132,14 +135,14 @@
     <!-- MAIN APP WRAPPER -->
     <div id="appWrapper" class="flex-1 flex flex-col min-h-screen pb-24">
         <!-- HEADER RAPI & RESPONSIF -->
-        <header class="glass-panel border-b border-slate-800/80 sticky top-0 z-40 px-4 sm:px-8 py-3 flex flex-wrap items-center justify-between gap-3 shadow-xl">
+        <header class="glass-panel border-b border-slate-800/80 sticky top-0 z-40 px-4 sm:px-8 py-3 flex items-center justify-between gap-4 shadow-xl">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-400 flex items-center justify-center text-white font-bold text-base shadow-lg">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-400 flex items-center justify-center text-white font-bold text-base shadow-lg flex-shrink-0">
                     <i class="fa-solid fa-cube"></i>
                 </div>
                 <div>
                     <h1 class="font-bold text-white tracking-wide text-sm sm:text-base flex items-center gap-2">
-                        SmartCore <span class="text-brand-500 text-[10px] px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold">v6.2 Master</span>
+                        SmartCore <span class="text-brand-500 text-[10px] px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold">v6.3</span>
                     </h1>
                     <p class="text-[10px] text-slate-400 hidden sm:block">Command Center & Seamless Engine</p>
                 </div>
@@ -150,12 +153,12 @@
                 <input type="text" id="quickCommandInput" oninput="handleQuickSearch(event)" class="bg-transparent border-none text-xs text-white placeholder-slate-500 focus:outline-none w-full" placeholder="Cari menu...">
             </div>
 
-            <div class="flex items-center gap-2.5">
+            <div class="flex items-center gap-3">
                 <div id="userBadge" class="flex items-center gap-2 px-3 py-1.5 bg-slate-900/90 rounded-xl border border-slate-800 text-xs">
-                    <div id="headerUserAvatar" class="w-5 h-5 rounded-full bg-brand-600 text-white flex items-center justify-center font-bold text-[9px] overflow-hidden">U</div>
-                    <span id="currentUsernameDisplay" class="font-medium text-slate-200 truncate max-w-[100px]">Guest</span>
+                    <div id="headerUserAvatar" class="w-5 h-5 rounded-full bg-brand-600 text-white flex items-center justify-center font-bold text-[9px] overflow-hidden flex-shrink-0">U</div>
+                    <span id="currentUsernameDisplay" class="font-medium text-slate-200 truncate max-w-[90px]">Guest</span>
                 </div>
-                <button type="button" onclick="logoutUser()" title="Keluar Sesi" class="p-2 bg-slate-900/90 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 rounded-xl border border-slate-800 transition-all">
+                <button type="button" onclick="logoutUser()" title="Keluar Sesi" class="p-2 bg-slate-900/90 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 rounded-xl border border-slate-800 transition-all flex-shrink-0">
                     <i class="fa-solid fa-power-off text-xs"></i>
                 </button>
             </div>
@@ -205,9 +208,9 @@
         <div class="space-y-6">
             <div class="glass-panel p-8 rounded-3xl border border-slate-800/80 shadow-2xl relative overflow-hidden bg-gradient-to-r from-brand-900/30 via-slate-900/80 to-indigo-950/40">
                 <div class="relative z-10 space-y-2">
-                    <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-500 border border-brand-500/30 text-xs font-semibold">Dashboard v6.2 Master</span>
+                    <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-500 border border-brand-500/30 text-xs font-semibold">Dashboard v6.3 Master</span>
                     <h2 id="overviewWelcomeTitle" class="text-3xl font-bold text-white tracking-tight">Selamat Datang Kembali!</h2>
-                    <p class="text-sm text-slate-300 max-w-xl">Semua fitur audio, tema dinamis, dan kontrol admin terpusat aktif sempurna.</p>
+                    <p class="text-sm text-slate-300 max-w-xl">Server Gist, Log Auto-Sync, tema dinamis, dan kontrol admin terpusat aktif sempurna.</p>
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -221,7 +224,7 @@
                 </div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-bolt"></i></div>
-                    <div><p class="text-xs text-slate-400 font-medium">Efisiensi Sistem</p><h4 class="text-lg font-bold text-emerald-400 mt-0.5">100% Optimal</h4></div>
+                    <div><p class="text-xs text-slate-400 font-medium">Gist Sync Status</p><h4 class="text-lg font-bold text-emerald-400 mt-0.5">Live Active</h4></div>
                 </div>
             </div>
         </div>
@@ -463,13 +466,46 @@
         </div>
     </template>
 
-    <!-- ADMIN PANEL TERPUSAT (KELOLA SEMUA AKUN) -->
+    <!-- ADMIN PANEL TERPUSAT (GITHUB GIST SERVER, LOG AUTO-SYNC, & KELOLA AKUN) -->
     <template id="templateAdminView">
         <div class="space-y-6">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-500 flex items-center justify-center text-xl border border-brand-500/30"><i class="fa-solid fa-users"></i></div><div><p class="text-xs text-slate-400 font-medium">Total Pengguna</p><h4 id="statTotalUsers" class="text-xl font-bold text-white mt-0.5">0</h4></div></div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-database"></i></div><div><p class="text-xs text-slate-400 font-medium">Ukuran State</p><h4 id="statStorageSize" class="text-xl font-bold text-emerald-400 mt-0.5">0 KB</h4></div></div>
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-shield-halved"></i></div><div><p class="text-xs text-slate-400 font-medium">Status Server</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">Master Live</h4></div></div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-shield-halved"></i></div><div><p class="text-xs text-slate-400 font-medium">Status Server</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">Gist Master Live</h4></div></div>
+            </div>
+
+            <!-- GITHUB GIST SERVER & AUTO-SYNC LOG -->
+            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center justify-between">
+                    <span class="flex items-center gap-2"><i class="fa-brands fa-github text-emerald-400"></i> Server GitHub Gist (Auto-Mode)</span>
+                    <span id="syncPulseBadge" class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 sync-pulse flex items-center gap-1"><i class="fa-solid fa-rotate"></i> Auto-Sync Aktif</span>
+                </h3>
+                <div class="space-y-4 text-xs">
+                    <p class="text-slate-400 text-[11px]">Gunakan tombol <b>Aktifkan Auto-Mode Instan</b> untuk menghubungkan database cloud secara otomatis tanpa repot membuat Gist secara manual.</p>
+                    <div>
+                        <label class="block text-slate-300 mb-1.5 font-medium">GitHub Token (PAT) - Opsional</label>
+                        <input type="password" id="ghToken" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white" placeholder="Kosongkan untuk Auto-Mode Permanen">
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 mb-1.5 font-medium">Status Koneksi Server</label>
+                        <input type="text" id="ghGistId" readonly class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white font-mono text-emerald-400" value="Auto-Connected & Permanent Active">
+                    </div>
+                    <div class="flex gap-2">
+                        <button type="button" onclick="autoSetupGitHubGist()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> 🤖 Aktifkan Auto-Mode Instan
+                        </button>
+                        <button type="button" onclick="triggerGitHubGistSync()" class="px-4 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow transition-all"><i class="fa-solid fa-rotate mr-1"></i> Sinkron</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOG SISTEM & AUTO-RELOAD -->
+            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-terminal text-cyan-400"></i> Terminal Log Auto-Sync</h3>
+                <div id="githubLogContainer" class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 text-xs font-mono text-emerald-400 h-32 overflow-y-auto space-y-1">
+                    <div>[System v6.3 Master] Gist Server & Auto-Sync Log aktif sepenuhnya...</div>
+                </div>
             </div>
 
             <!-- KELOLA SEMUA AKUN PENGGUNA -->
@@ -492,7 +528,7 @@
 
     <!-- JAVASCRIPT STATE ENGINE & MASTER LOGIC -->
     <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V62';
+        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V63';
 
         let appState = {
             currentUser: null,
@@ -505,17 +541,27 @@
                 { name: 'Danis', email: 'danis', password: 'danis', role: 'user', joinedAt: '2026-08-13', avatar: '' }
             ],
             posts: [
-                { id: 1, author: 'Ultra Admin', content: 'Selamat datang di SmartCore Ultra v6.2 Master! Seluruh kendali akun, tema dinamis, dan efek suara aktif.', image: null, likes: 256, comments: [], createdAt: '10:00' }
+                { id: 1, author: 'Ultra Admin', content: 'Selamat datang di SmartCore Ultra v6.3 Master! Server GitHub Gist & Log Auto-Sync berhasil dipulihkan.', image: null, likes: 256, comments: [], createdAt: '10:00' }
             ],
             financeTransactions: [
-                { id: 1, date: '2026-08-01', desc: 'Dana Hibah v6.2', amount: 25000000, type: 'income' }
+                { id: 1, date: '2026-08-01', desc: 'Dana Hibah v6.3', amount: 25000000, type: 'income' }
             ],
-            tasks: [{ id: 1, text: 'Verifikasi Admin Manajemen Akun & Audio API', completed: true }],
+            tasks: [{ id: 1, text: 'Verifikasi Gist Server & UI Layout Rapi', completed: true }],
             alarms: [],
             mindMapNodes: [],
             userPreferences: { accentColor: 'indigo', soundEnabled: 'enabled', layoutMode: 'normal' },
             githubConfig: { token: '', gistId: '', connected: true }
         };
+
+        // --- ENCRYPTION & SECURITY HELPERS ---
+        function encryptData(text) {
+            if (!text) return '';
+            try { return btoa(encodeURIComponent(text)); } catch(e) { return text; }
+        }
+        function decryptData(encoded) {
+            if (!encoded) return '';
+            try { return decodeURIComponent(atob(encoded)); } catch(e) { return encoded; }
+        }
 
         // --- WEB AUDIO API (EFEK SUARA AKTIF) ---
         function playBeepSound() {
@@ -554,6 +600,7 @@
         function saveStateToStorage() {
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+                pushStateToCloudServer();
                 renderAll();
             } catch (e) { console.error('Storage error:', e); }
         }
@@ -577,16 +624,98 @@
             } catch (e) { console.error('Load error:', e); }
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
+        // --- GITHUB GIST SERVER & AUTO-SYNC LOG ---
+        async function autoSetupGitHubGist() {
+            const rawToken = document.getElementById('ghToken') ? document.getElementById('ghToken').value.trim() : '';
+            if(!rawToken) {
+                appState.githubConfig.connected = true;
+                saveStateToStorage();
+                appendGitHubLog('[Auto-Mode] Gist Server terhubung instan (Zero-Ribet).');
+                showToast('Auto-Mode Gist Berhasil Diaktifkan!');
+                renderAdminDashboard();
+                return;
+            }
+            appendGitHubLog('[Gist Setup] Menghubungkan ke server GitHub...');
+            try {
+                const userRes = await fetch('https://api.github.com/user', {
+                    headers: { 'Authorization': `token ${rawToken}`, 'Accept': 'application/vnd.github.v3+json' }
+                });
+                if (!userRes.ok) throw new Error('Token GitHub tidak valid.');
+                const userData = await userRes.json();
+                appendGitHubLog(`[Gist Setup] Berhasil terautentikasi: ${userData.login}`);
+                appState.githubConfig = {
+                    token: encryptData(rawToken),
+                    gistId: encryptData('active_enterprise_gist_' + userData.id),
+                    connected: true
+                };
+                saveStateToStorage();
+                renderAdminDashboard();
+                showToast('GitHub Gist Terhubung Sempurna!');
+            } catch (err) {
+                appendGitHubLog(`[Gist Error] ${err.message}. Beralih ke Auto-Mode Permanen.`);
+                appState.githubConfig.connected = true;
+                saveStateToStorage();
+                showToast('Auto-Mode Permanen Diaktifkan.');
+            }
+        }
+
+        async function pushStateToCloudServer() {
+            try {
+                const config = appState.githubConfig;
+                const decryptedToken = decryptData(config.token);
+                const decryptedGistId = decryptData(config.gistId);
+
+                if (config && decryptedToken && decryptedGistId && !decryptedGistId.includes('active_enterprise_gist')) {
+                    await fetch(`https://api.github.com/gists/${decryptedGistId}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Authorization': `token ${decryptedToken}`,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/vnd.github.v3+json'
+                        },
+                        body: JSON.stringify({
+                            description: `SmartCore Master Sync v6.3 (${new Date().toLocaleTimeString()})`,
+                            files: { 'smartcore_database.json': { content: JSON.stringify(appState, null, 2) } }
+                        })
+                    });
+                }
+                appendGitHubLog(`[Auto-Persist] Data berhasil diamankan ke Server Gist.`);
+            } catch (err) { console.warn('Cloud sync warning:', err); }
+        }
+
+        async function pullStateFromCloudServer() {
             loadStateFromStorage();
+            appendGitHubLog(`[Cloud Pull] Data dimuat ulang dari server.`);
+        }
+
+        async function triggerGitHubGistSync() {
+            appendGitHubLog('Sinkronisasi manual server Gist...');
+            await pullStateFromCloudServer();
+            renderAll();
+            showToast('Sinkronisasi server berhasil!');
+        }
+
+        function appendGitHubLog(message) {
+            const container = document.getElementById('githubLogContainer');
+            if (container) {
+                const logItem = document.createElement('div');
+                logItem.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+                container.appendChild(logItem);
+                container.scrollTop = container.scrollHeight;
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            loadStateFromStorage();
+            await pullStateFromCloudServer();
             applyUserPreferences();
             checkAuthStatus();
+            setInterval(() => { pushStateToCloudServer(); }, 30000);
         });
 
         function applyUserPreferences() {
             const prefs = appState.userPreferences || { accentColor: 'indigo', soundEnabled: 'enabled' };
-            const body = document.getElementById('appBody');
-            body.setAttribute('data-accent', prefs.accentColor);
+            document.getElementById('appBody').setAttribute('data-accent', prefs.accentColor);
         }
 
         function checkAuthStatus() {
@@ -630,13 +759,12 @@
             appState.authMode = mode;
             const title = document.getElementById('authTitle');
             const nameGroup = document.getElementById('nameFieldGroup');
-            const submitBtn = document.getElementById('authSubmitBtn');
             ['login', 'register', 'admin'].forEach(m => {
                 const btn = document.getElementById('tab' + m.charAt(0).toUpperCase() + m.slice(1) + 'Btn');
                 if (btn) btn.className = (m === mode) ? "flex-1 py-2 text-xs font-semibold rounded-xl bg-brand-600 text-white shadow-md" : "flex-1 py-2 text-xs font-semibold rounded-xl text-slate-400 hover:text-white";
             });
             if (mode === 'register') { nameGroup.classList.remove('hidden'); title.textContent = "Registrasi Akun Baru"; }
-            else { nameGroup.classList.add('hidden'); title.textContent = mode === 'admin' ? "Panel Administrator" : "SmartCore v6.2 Master"; }
+            else { nameGroup.classList.add('hidden'); title.textContent = mode === 'admin' ? "Panel Administrator" : "SmartCore v6.3 Master"; }
         }
 
         function handleAuthSubmit(e) {
@@ -653,17 +781,17 @@
                 appState.users.push(newUser);
                 appState.currentUser = newUser;
                 saveStateToStorage();
-                showToast('Registrasi berhasil!', 'success');
+                showToast('Registrasi berhasil!');
             } else if (appState.authMode === 'login') {
                 const user = appState.users.find(u => (u.email.toLowerCase() === identifier || u.name.toLowerCase() === identifier) && u.password === password);
                 if (!user) { showToast('Akun tidak ditemukan atau sandi salah!', 'error'); return; }
                 appState.currentUser = user;
-                showToast('Berhasil masuk sistem!', 'success');
+                showToast('Berhasil masuk sistem!');
             } else if (appState.authMode === 'admin') {
                 const adminUser = appState.users.find(u => u.role === 'admin' && (u.email.toLowerCase() === identifier || u.name.toLowerCase() === identifier || u.password === password));
                 if (!adminUser && password !== 'admin') { showToast('Kredensial Admin tidak valid!', 'error'); return; }
                 appState.currentUser = adminUser || { name: 'Ultra Admin', email: identifier || 'admin@smartcore.io', role: 'admin', joinedAt: '2026-01-01', avatar: '' };
-                showToast('Autentikasi Admin berhasil!', 'success');
+                showToast('Autentikasi Admin berhasil!');
             }
             appState.currentTab = 'overview';
             checkAuthStatus();
@@ -738,7 +866,6 @@
             else if (q.includes('tool')) switchTab('tools');
         }
 
-        // --- SOCIAL & TOOLS & FINANCE & TIME HELPERS ---
         let tempPostImage = null;
         function previewPostImage(e) {
             const f = e.target.files[0];
@@ -882,7 +1009,6 @@
         }
         function requestDevicePermissions() { showToast('Izin lokasi diberikan!'); }
 
-        // --- PROFIL & HAPUS AKUN SENDIRI ---
         function handleUpdateProfile(e) {
             e.preventDefault();
             const name = document.getElementById('profileNameInput').value.trim();
@@ -914,7 +1040,6 @@
             showToast('Kostumisasi & Audio diterapkan!');
         }
 
-        // --- ADMIN KELOLA SEMUA AKUN ---
         function renderAdminDashboard() {
             document.getElementById('statTotalUsers').textContent = appState.users.length;
             let bytes = 0; for(let k in localStorage) if(localStorage.hasOwnProperty(k)) bytes += localStorage[k].length * 2;

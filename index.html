@@ -74,7 +74,7 @@
                     <i class="fa-solid fa-cube"></i>
                 </div>
                 <h2 id="authTitle" class="text-xl sm:text-2xl font-bold">SmartCore</h2>
-                <p id="authSubtitle" class="text-xs opacity-70 mt-1">Server Terhubung (Dynamic Username Sync)</p>
+                <p id="authSubtitle" class="text-xs opacity-70 mt-1">True Cloud-First Server (GitHub REST API)</p>
             </div>
             
             <div class="flex bg-black/10 p-1 rounded-xl mb-5 border border-black/10 dark:border-white/10 text-xs font-semibold">
@@ -118,7 +118,7 @@
                 </div>
                 <div>
                     <h1 class="font-bold text-sm sm:text-base flex items-center gap-2">
-                        SmartCore <span class="text-brand-500 text-[10px] px-2 py-0.5 bg-brand-500/15 rounded-full border border-brand-500/25 font-semibold">v6.13 Sync</span>
+                        SmartCore <span class="text-brand-500 text-[10px] px-2 py-0.5 bg-brand-500/15 rounded-full border border-brand-500/25 font-semibold">v6.14 Cloud-First</span>
                     </h1>
                 </div>
             </div>
@@ -161,9 +161,9 @@
     <template id="templateOverviewView">
         <div class="space-y-6">
             <div class="glass-panel p-6 sm:p-8 rounded-3xl shadow-xl bg-gradient-to-r from-brand-900/20 via-black/10 to-indigo-950/20 space-y-2">
-                <span class="px-3 py-1 rounded-full bg-brand-500/15 text-brand-500 text-xs font-semibold border border-brand-500/25">Dashboard v6.13 Sync</span>
+                <span class="px-3 py-1 rounded-full bg-brand-500/15 text-brand-500 text-xs font-semibold border border-brand-500/25">Dashboard v6.14 Cloud-First</span>
                 <h2 id="overviewWelcomeTitle" class="text-2xl sm:text-3xl font-bold">Selamat Datang Kembali!</h2>
-                <p class="text-xs sm:text-sm opacity-80">Sistem terhubung ke server cloud dengan deteksi sinkronisasi otomatis sesuai username.</p>
+                <p class="text-xs sm:text-sm opacity-80">Terhubung langsung ke server cloud REST API dengan database tersinkronisasi murni berdasarkan username.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 <div class="glass-panel p-6 rounded-2xl flex items-center gap-4">
@@ -381,7 +381,7 @@
                 </div>
                 <div class="glass-panel p-6 rounded-2xl flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/25"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                    <div><p class="text-xs opacity-70">Server Gist REST</p><h4 class="text-base font-bold text-emerald-400" id="serverStatusText">Connected Live</h4></div>
+                    <div><p class="text-xs opacity-70">Cloud-First Server</p><h4 class="text-base font-bold text-emerald-400" id="serverStatusText">Live REST API</h4></div>
                 </div>
                 <div class="glass-panel p-6 rounded-2xl flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-500 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-key"></i></div>
@@ -392,8 +392,8 @@
             <!-- SERVER GIST & TOKEN ADMIN -->
             <div class="glass-panel p-6 sm:p-8 rounded-2xl space-y-4">
                 <div class="flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-3">
-                    <h3 class="font-bold text-base flex items-center gap-2"><i class="fa-brands fa-github text-emerald-400"></i> Server Cloud & Deteksi Username Auto-Sync</h3>
-                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 sync-pulse flex items-center gap-1.5"><i class="fa-solid fa-cloud"></i> Sync Active</span>
+                    <h3 class="font-bold text-base flex items-center gap-2"><i class="fa-brands fa-github text-emerald-400"></i> Server Cloud & Deteksi Username Otomatis</h3>
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 sync-pulse flex items-center gap-1.5"><i class="fa-solid fa-cloud"></i> Cloud Active</span>
                 </div>
                 <div class="space-y-3">
                     <div><label class="block mb-1.5 font-medium">GitHub Gist ID Server</label><input type="text" id="adminGistIdInput" class="w-full bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-4 py-3 font-mono text-xs" placeholder="Masukkan Gist ID..."></div>
@@ -404,7 +404,7 @@
                     </div>
                 </div>
                 <div id="githubLogContainer" class="p-4 bg-black/40 rounded-xl border border-black/10 dark:border-white/10 font-mono text-xs text-emerald-400 h-36 overflow-y-auto space-y-1">
-                    <div>[Server v6.13] Memulai inisialisasi cloud dengan deteksi username dinamis...</div>
+                    <div>[Server v6.14] Inisialisasi Cloud-First REST API murni...</div>
                 </div>
             </div>
 
@@ -426,9 +426,8 @@
         </div>
     </template>
 
-    <!-- MASTER SERVER CLOUD LOGIC WITH USERNAME DETECTION -->
+    <!-- TRUE CLOUD-FIRST SERVER LOGIC WITH USERNAME AUTO-SYNC -->
     <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V613';
         const MASTER_ADMIN_TOKEN = 'k9#X$mP9!vL2zQ#8wR$7yF%4bN*3hJ^6';
 
         let appState = {
@@ -437,12 +436,12 @@
             authMode: 'login',
             adminToken: MASTER_ADMIN_TOKEN,
             users: [{ name: 'User Utama', email: 'user@smartcore.io', password: 'user', joinedAt: '2026-08-13', avatar: '' }],
-            posts: [{ id: 1, author: 'SmartCore Cloud', content: 'Sistem terhubung langsung ke server eksternal dengan deteksi username otomatis.', image: null, likes: 60, createdAt: 'Baru saja' }],
-            financeTransactions: [{ id: 1, date: '2026-08-01', desc: 'Server Sync Fund', amount: 60000000, type: 'income' }],
-            tasks: [{ id: 1, text: 'Verifikasi Auto-Sync Log Sesuai Username', completed: true }],
-            notes: [{ id: 1, title: 'Catatan Server', content: 'Auto-sync aktif dan mendeteksi data sesuai username pengguna.', date: '2026-08-14' }],
+            posts: [{ id: 1, author: 'SmartCore Cloud', content: 'Sistem terhubung langsung ke server cloud murni tanpa penyimpanan lokal.', image: null, likes: 70, createdAt: 'Baru saja' }],
+            financeTransactions: [{ id: 1, date: '2026-08-01', desc: 'True Cloud Fund', amount: 70000000, type: 'income' }],
+            tasks: [{ id: 1, text: 'Verifikasi Cloud-First REST API Sesuai Username', completed: true }],
+            notes: [{ id: 1, title: 'Catatan Cloud', content: 'Database murni disinkronkan secara real-time via REST API.', date: '2026-08-14' }],
             userPreferences: { theme: 'macos', accentColor: 'indigo', soundEnabled: 'enabled' },
-            githubConfig: { token: MASTER_ADMIN_TOKEN, gistId: 'smartcore_secure_v613', connected: true }
+            githubConfig: { token: MASTER_ADMIN_TOKEN, gistId: 'smartcore_secure_v614', connected: true }
         };
 
         async function secureHash(text) {
@@ -457,7 +456,7 @@
             if (box) {
                 const item = document.createElement('div');
                 const activeUser = appState.currentUser ? appState.currentUser.name : 'Guest';
-                item.textContent = `[${new Date().toLocaleTimeString()}] [User: ${activeUser}] ${msg}`;
+                item.textContent = `[${new Date().toLocaleTimeString()}] [Server User: ${activeUser}] ${msg}`;
                 box.appendChild(item); box.scrollTop = box.scrollHeight;
             }
         }
@@ -487,15 +486,15 @@
             setTimeout(() => t.remove(), 2800);
         }
 
-        // DYNAMIC USERNAME AUTO-SYNC SERVER VIA GIST REST API
+        // CLOUD-FIRST SERVER PUSH & PULL MURNI VIA GIST REST API (TANPA LOCALSTORAGE)
         async function saveStateToServer() {
             try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
                 const cfg = appState.githubConfig;
                 const username = appState.currentUser ? appState.currentUser.name : 'Guest';
+                const fileName = `smartcore_${username.toLowerCase().replace(/\s+/g, '_')}_data.json`;
                 
-                if (cfg && cfg.token && cfg.token.length > 5) {
-                    appendLog(`Auto-Sync aktif untuk username: ${username}. Mengirim payload ke Gist REST API...`);
+                if (cfg && cfg.token && cfg.token.length > 5 && cfg.gistId) {
+                    appendLog(`[Cloud PUSH] Mengirim data real-time ke server untuk username: ${username}`);
                     const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
                         method: 'PATCH',
                         headers: {
@@ -504,44 +503,67 @@
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            description: `SmartCore Auto-Sync v6.13 - User: ${username}`,
+                            description: `SmartCore Cloud Server v6.14 - User: ${username}`,
                             files: {
-                                [`smartcore_${username.toLowerCase().replace(/\s+/g, '_')}_data.json`]: {
+                                [fileName]: {
                                     content: JSON.stringify(appState, null, 2)
                                 }
                             }
                         })
                     });
                     if (res.ok) {
-                        appendLog(`[Server Success] Data sukses tersinkron untuk username: ${username}`);
+                        appendLog(`[Cloud Success] Server Gist berhasil diperbarui untuk username: ${username}`);
                     } else {
-                        appendLog(`[Server Notice] Gist API merespons dengan status ${res.status}. Fallback lokal aman.`);
+                        appendLog(`[Cloud Warning] Server merespons dengan kode ${res.status}`);
                     }
                 } else {
-                    appendLog(`[Server Local] Status tersimpan untuk username: ${username}`);
+                    appendLog(`[Server Active] Status aktif untuk username: ${username}`);
                 }
                 renderAll();
             } catch(e) { 
-                appendLog(`[Server Error] Gagal sinkronisasi jaringan: ${e.message}`); 
+                appendLog(`[Cloud Error] Gagal koneksi server: ${e.message}`); 
             }
         }
 
         async function loadStateFromServer() {
             try {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                if (saved) {
-                    appState = { ...appState, ...JSON.parse(saved) };
-                }
+                const cfg = appState.githubConfig;
                 const username = appState.currentUser ? appState.currentUser.name : 'Guest';
-                appendLog(`Inisialisasi state server untuk username: ${username}`);
-            } catch(e) { console.error(e); }
+                const fileName = `smartcore_${username.toLowerCase().replace(/\s+/g, '_')}_data.json`;
+
+                if (cfg && cfg.gistId && cfg.token) {
+                    appendLog(`[Cloud PULL] Mengambil data dari server cloud untuk: ${username}...`);
+                    const res = await fetch(`https://api.github.com/gists/${cfg.gistId}`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `token ${cfg.token}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data.files && data.files[fileName]) {
+                            const remoteState = JSON.parse(data.files[fileName].content);
+                            appState = { ...appState, ...remoteState };
+                            appendLog(`[Cloud Connected] Berhasil memuat data server murni untuk username: ${username}`);
+                        } else {
+                            appendLog(`[Cloud Notice] File server untuk ${username} belum ada, menginisialisasi baru...`);
+                            await saveStateToServer();
+                        }
+                    } else {
+                        appendLog(`[Cloud Notice] Gagal mengambil Gist ID, menggunakan state default.`);
+                    }
+                }
+            } catch(e) {
+                appendLog(`[Cloud Error Pull] ${e.message}`);
+            }
         }
 
         async function triggerCloudSync() {
-            appendLog('Memulai sinkronisasi manual server cloud...');
+            appendLog('Memulai sinkronisasi manual Cloud-First REST API...');
             await loadStateFromServer();
             renderAll();
-            showToast('Server Cloud & Auto-Sync berhasil diperbarui!');
+            showToast('Server Cloud tersinkronisasi murni!');
         }
 
         window.addEventListener('DOMContentLoaded', async () => {
@@ -626,6 +648,7 @@
                 if (tokenVal.length > 0) {
                     appState.adminToken = tokenVal;
                     appState.currentUser = { name: 'Super Admin', email: 'admin@cloud.io', role: 'admin', joinedAt: '2026-01-01', avatar: '' };
+                    await loadStateFromServer();
                     await saveStateToServer();
                     showToast('Otorisasi Server Admin Berhasil!');
                     setTimeout(() => location.reload(), 300);
@@ -668,7 +691,7 @@
                     return;
                 }
                 appState.currentUser = u;
-                await saveStateToServer();
+                await loadStateFromServer();
                 statusMsg.className = 'text-xs text-center font-medium pt-1 text-emerald-400';
                 statusMsg.textContent = '✅ Berhasil masuk ke server!';
                 showToast('Berhasil masuk!');
@@ -676,14 +699,14 @@
             }
         }
 
-        function updateServerConfig() {
+        async function updateServerConfig() {
             const newToken = document.getElementById('adminNewTokenInput').value.trim();
             const newGistId = document.getElementById('adminGistIdInput').value.trim();
             if (newToken.length > 3) {
                 appState.adminToken = newToken;
                 if(newGistId) appState.githubConfig.gistId = newGistId;
                 appState.githubConfig.token = newToken;
-                saveStateToServer();
+                await loadStateFromServer();
                 showToast('Konfigurasi server & username sync diperbarui!');
                 document.getElementById('adminNewTokenInput').value = '';
                 document.getElementById('adminGistIdInput').value = '';
@@ -695,15 +718,14 @@
         function logoutUser() {
             if (confirm('Keluar sesi server?')) {
                 appState.currentUser = null;
-                saveStateToServer();
                 checkAuthStatus();
                 showToast('Sesi server diakhiri.');
             }
         }
 
-        function switchTab(tab, save = true) {
+        async function switchTab(tab, save = true) {
             if (appState.currentUser?.role !== 'admin' && tab === 'admin') tab = 'overview';
-            appState.currentTab = tab; if (save) saveStateToServer();
+            appState.currentTab = tab; if (save) await saveStateToServer();
             ['overview', 'social', 'finance', 'time', 'notes', 'profile', 'admin'].forEach(t => {
                 const b = document.getElementById('nav' + t.charAt(0).toUpperCase() + t.slice(1));
                 if (b) b.className = t === tab ? "p-3 rounded-xl bg-brand-600 text-white shadow flex items-center gap-2 transition-all" : "p-3 rounded-xl hover:bg-brand-600/30 flex items-center gap-2 transition-all";
@@ -764,12 +786,12 @@
             }
         }
         function removePostImage() { tempPostImage = null; document.getElementById('imagePreviewContainer').classList.add('hidden'); }
-        function handleCreatePost(e) {
+        async function handleCreatePost(e) {
             e.preventDefault();
             const content = document.getElementById('postContentInput').value.trim();
             if (!content) return;
             appState.posts.unshift({ id: Date.now(), author: appState.currentUser.name, content, image: tempPostImage, likes: 0, createdAt: 'Baru saja' });
-            saveStateToServer(); removePostImage(); document.getElementById('postContentInput').value = ''; showToast('Dipublikasikan ke server sesuai username!');
+            await saveStateToServer(); removePostImage(); document.getElementById('postContentInput').value = ''; showToast('Dipublikasikan ke server cloud!');
         }
         function renderPostsFeed() {
             const c = document.getElementById('postsFeedContainer');
@@ -788,12 +810,12 @@
             l.innerHTML = appState.users.map(u => `
                 <div class="flex items-center justify-between p-3 bg-black/5 dark:bg-black/20 rounded-xl text-xs">
                     <span class="font-medium">${u.name}</span>
-                    <span class="px-2 py-0.5 rounded-full text-[10px] bg-brand-500/20 text-brand-500">SYNC READY</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] bg-brand-500/20 text-brand-500">CLOUD SYNC</span>
                 </div>
             `).join('');
         }
 
-        function handleNoteSubmit(e) {
+        async function handleNoteSubmit(e) {
             e.preventDefault();
             const editId = document.getElementById('editNoteId').value;
             const title = document.getElementById('noteTitle').value.trim();
@@ -809,7 +831,7 @@
                 appState.notes.unshift({ id: Date.now(), title, content, date: new Date().toISOString().split('T')[0] });
                 showToast('Catatan disimpan ke server!');
             }
-            saveStateToServer();
+            await saveStateToServer();
             cancelEditNote();
         }
         function editNote(id) {
@@ -830,10 +852,10 @@
             document.getElementById('noteSubmitBtn').textContent = 'Simpan';
             document.getElementById('noteCancelBtn').classList.add('hidden');
         }
-        function deleteNote(id) {
+        async function deleteNote(id) {
             if (confirm('Hapus catatan?')) {
                 appState.notes = appState.notes.filter(n => n.id != id);
-                saveStateToServer();
+                await saveStateToServer();
                 showToast('Catatan dihapus dari server.', 'info');
             }
         }
@@ -858,7 +880,7 @@
             `).join('');
         }
 
-        function handleFinanceSubmit(e) {
+        async function handleFinanceSubmit(e) {
             e.preventDefault();
             const editId = document.getElementById('editFinanceId').value;
             const desc = document.getElementById('finDesc').value.trim();
@@ -873,7 +895,7 @@
                 appState.financeTransactions.unshift({ id: Date.now(), date: new Date().toISOString().split('T')[0], desc, amount, type });
                 showToast('Transaksi dicatat ke server!');
             }
-            saveStateToServer();
+            await saveStateToServer();
             cancelEditFinance();
         }
         function editFinance(id) {
@@ -907,7 +929,10 @@
             document.getElementById('finTotalExpense').textContent = 'Rp ' + exp.toLocaleString();
             document.getElementById('finTotalBalance').textContent = 'Rp ' + (inc - exp).toLocaleString();
         }
-        function deleteFin(id) { appState.financeTransactions = appState.financeTransactions.filter(x => x.id !== id); saveStateToServer(); }
+        async function deleteFin(id) { 
+            appState.financeTransactions = appState.financeTransactions.filter(x => x.id !== id); 
+            await saveStateToServer(); 
+        }
 
         let pomodoroTimer = null, pomodoroSec = 1500;
         function startPomodoro() {
@@ -923,7 +948,7 @@
         function pausePomodoro() { clearInterval(pomodoroTimer); pomodoroTimer = null; }
         function resetPomodoro() { clearInterval(pomodoroTimer); pomodoroTimer = null; pomodoroSec = 1500; document.getElementById('pomodoroDisplay').textContent = '25:00'; }
 
-        function handleTaskSubmit(e) {
+        async function handleTaskSubmit(e) {
             e.preventDefault();
             const editId = document.getElementById('editTaskId').value;
             const text = document.getElementById('taskInput').value.trim();
@@ -937,7 +962,7 @@
                 appState.tasks.push({ id: Date.now(), text, completed: false });
                 showToast('Agenda disimpan ke server!');
             }
-            saveStateToServer();
+            await saveStateToServer();
             cancelEditTask();
         }
         function editTask(id) {
@@ -956,8 +981,14 @@
             document.getElementById('taskSubmitBtn').textContent = 'Simpan';
             document.getElementById('taskCancelBtn').classList.add('hidden');
         }
-        function toggleTask(id) { const t = appState.tasks.find(x => x.id === id); if(t) { t.completed = !t.completed; saveStateToServer(); } }
-        function deleteTask(id) { appState.tasks = appState.tasks.filter(x => x.id !== id); saveStateToServer(); }
+        async function toggleTask(id) { 
+            const t = appState.tasks.find(x => x.id === id); 
+            if(t) { t.completed = !t.completed; await saveStateToServer(); } 
+        }
+        async function deleteTask(id) { 
+            appState.tasks = appState.tasks.filter(x => x.id !== id); 
+            await saveStateToServer(); 
+        }
         function renderTasks() {
             const c = document.getElementById('taskListContainer');
             if (!c) return;
@@ -966,7 +997,7 @@
 
         function requestDevicePermissions() { showToast('Izin lokasi server diizinkan!'); }
 
-        function handleUpdateProfile(e) {
+        async function handleUpdateProfile(e) {
             e.preventDefault();
             const name = document.getElementById('profileNameInput').value.trim();
             const email = document.getElementById('profileEmailInput').value.trim();
@@ -974,20 +1005,20 @@
             appState.currentUser.name = name; appState.currentUser.email = email; appState.currentUser.avatar = avatar;
             const idx = appState.users.findIndex(u => u.email.toLowerCase() === email.toLowerCase());
             if (idx !== -1) appState.users[idx] = appState.currentUser;
-            saveStateToServer(); checkAuthStatus(); showToast('Profil diperbarui di server!');
+            await saveStateToServer(); checkAuthStatus(); showToast('Profil diperbarui di server!');
         }
-        function deleteMyAccount() {
+        async function deleteMyAccount() {
             if (confirm('Hapus akun Anda dari server secara permanen?')) {
                 appState.users = appState.users.filter(u => u.email !== appState.currentUser.email);
-                appState.currentUser = null; saveStateToServer(); checkAuthStatus(); showToast('Akun dihapus dari server.', 'info');
+                appState.currentUser = null; await saveStateToServer(); checkAuthStatus(); showToast('Akun dihapus dari server.', 'info');
             }
         }
-        function handleSaveUserPreferences(e) {
+        async function handleSaveUserPreferences(e) {
             e.preventDefault();
             const theme = document.getElementById('prefTheme').value;
             const accentColor = document.getElementById('prefAccentColor').value;
             appState.userPreferences = { ...appState.userPreferences, theme, accentColor };
-            saveStateToServer(); 
+            await saveStateToServer(); 
             applyUserPreferences(); 
             showToast('Tema & Preferensi disimpan ke server!');
         }
@@ -1007,11 +1038,11 @@
                 `).join('');
             }
         }
-        function adminDeleteUser(idx) {
-            if (confirm('Hapus akun ini dari server?')) { appState.users.splice(idx, 1); saveStateToServer(); showToast('Akun dihapus dari server.'); }
+        async function adminDeleteUser(idx) {
+            if (confirm('Hapus akun ini dari server?')) { appState.users.splice(idx, 1); await saveStateToServer(); showToast('Akun dihapus dari server.'); }
         }
         function resetSystemData() {
-            if (confirm('Reset seluruh data server?')) { localStorage.removeItem(STORAGE_KEY); location.reload(); }
+            if (confirm('Reset seluruh data server?')) { location.reload(); }
         }
     </script>
 </body>

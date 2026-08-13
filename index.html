@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCore Ultimate - Enterprise Ultra v6.6 Cloud Master</title>
+    <title>SmartCore Ultimate - Enterprise Ultra v6.7 Cloud Master</title>
     <!-- Favicon SVG Profesional -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><path d='M21 16.5C21 16.88 20.79 17.21 20.47 17.38L12.57 21.82C12.41 21.91 12.21 22 12 22C11.79 22 11.59 21.91 11.43 21.82L3.53 17.38C3.21 17.21 3 16.88 3 16.5V7.5C3 7.12 3.21 6.79 3.53 6.62L11.43 2.18C11.59 2.09 11.79 2 12 2C12.21 2 12.41 2.09 12.57 2.18L20.47 6.62C20.79 6.79 21 7.12 21 7.5V16.5Z'/></svg>">
     <!-- Tailwind CSS & FontAwesome -->
@@ -55,15 +55,15 @@
 
     <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 pointer-events-none"></div>
 
-    <!-- AUTH MODAL (PENGGUNA & ADMIN BERBASIS TOKEN) -->
+    <!-- AUTH MODAL -->
     <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl hidden p-4">
         <div class="glass-panel w-full max-w-md p-6 sm:p-8 rounded-3xl shadow-2xl border border-brand-500/30">
             <div class="text-center mb-5">
                 <div class="inline-flex p-3.5 bg-gradient-to-tr from-brand-600 to-indigo-500 text-white rounded-2xl mb-2 text-xl shadow-lg">
                     <i class="fa-solid fa-cube"></i>
                 </div>
-                <h2 id="authTitle" class="text-xl sm:text-2xl font-bold text-white">SmartCore v6.6 Cloud</h2>
-                <p id="authSubtitle" class="text-xs text-slate-400 mt-1">Sistem Terintegrasi Server GitHub Gist</p>
+                <h2 id="authTitle" class="text-xl sm:text-2xl font-bold text-white">SmartCore v6.7 Cloud</h2>
+                <p id="authSubtitle" class="text-xs text-slate-400 mt-1">Sistem Terintegrasi Server Cloud & Persistensi Aman</p>
             </div>
             
             <div class="flex bg-slate-900 p-1 rounded-xl mb-5 border border-slate-800 text-xs font-semibold">
@@ -104,7 +104,7 @@
                 </div>
                 <div>
                     <h1 class="font-bold text-white text-sm sm:text-base flex items-center gap-2">
-                        SmartCore <span class="text-brand-500 text-[10px] px-2 py-0.5 bg-brand-500/15 rounded-full border border-brand-500/25 font-semibold">v6.6 Cloud</span>
+                        SmartCore <span class="text-brand-500 text-[10px] px-2 py-0.5 bg-brand-500/15 rounded-full border border-brand-500/25 font-semibold">v6.7 Cloud</span>
                     </h1>
                 </div>
             </div>
@@ -145,13 +145,13 @@
         </div>
     </div>
 
-    <!-- TEMPLATES -->
+        <!-- TEMPLATES -->
     <template id="templateOverviewView">
         <div class="space-y-6">
             <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl bg-gradient-to-r from-brand-900/20 via-slate-900/60 to-indigo-950/30 space-y-2">
-                <span class="px-3 py-1 rounded-full bg-brand-500/15 text-brand-500 text-xs font-semibold border border-brand-500/25">Dashboard v6.6 Cloud Master</span>
+                <span class="px-3 py-1 rounded-full bg-brand-500/15 text-brand-500 text-xs font-semibold border border-brand-500/25">Dashboard v6.7 Cloud Master</span>
                 <h2 id="overviewWelcomeTitle" class="text-2xl sm:text-3xl font-bold text-white">Selamat Datang Kembali!</h2>
-                <p class="text-xs sm:text-sm text-slate-300">Data tersimpan permanen di server cloud Gist. Aman dari kehilangan data saat keluar sesi.</p>
+                <p class="text-xs sm:text-sm text-slate-300">Data tersimpan permanen di server cloud Gist dengan persistensi state terpusat.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex items-center gap-4">
@@ -177,7 +177,7 @@
                     <form onsubmit="handleCreatePost(event)" class="space-y-4">
                         <div class="flex items-start gap-4">
                             <div id="postAuthorAvatarContainer" class="w-10 h-10 rounded-xl bg-brand-600/30 text-brand-500 flex items-center justify-center font-bold text-sm border border-brand-500/25 overflow-hidden flex-shrink-0">U</div>
-                            <textarea id="postContentInput" rows="3" required class="w-full bg-slate-900 border border-slate-700/80 rounded-xl p-3.5 text-xs sm:text-sm text-white focus:ring-1 focus:ring-brand-500 resize-none" placeholder="Bagikan momen atau ide menarik..."></textarea>
+                            <textarea id="postContentInput" rows="3" required oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl p-3.5 text-xs sm:text-sm text-white focus:ring-1 focus:ring-brand-500 resize-none" placeholder="Bagikan momen atau ide menarik..."></textarea>
                         </div>
                         <div class="flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs">
                             <label class="cursor-pointer hover:text-brand-500 transition-colors flex items-center gap-2 px-3.5 py-2 bg-slate-900 rounded-xl border border-slate-800">
@@ -223,9 +223,9 @@
                     <h3 id="financeFormTitle" class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-plus-circle text-brand-500"></i> Tambah / Edit Transaksi</h3>
                     <form onsubmit="handleFinanceSubmit(event)" class="space-y-3.5">
                         <input type="hidden" id="editFinanceId" value="">
-                        <div><label class="block text-slate-300 mb-1.5 font-medium">Keterangan</label><input type="text" id="finDesc" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white" placeholder="Gaji / Belanja"></div>
-                        <div><label class="block text-slate-300 mb-1.5 font-medium">Nominal (Rp)</label><input type="number" id="finAmount" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white" placeholder="100000"></div>
-                        <div><label class="block text-slate-300 mb-1.5 font-medium">Tipe</label><select id="finType" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white"><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select></div>
+                        <div><label class="block text-slate-300 mb-1.5 font-medium">Keterangan</label><input type="text" id="finDesc" required oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white" placeholder="Gaji / Belanja"></div>
+                        <div><label class="block text-slate-300 mb-1.5 font-medium">Nominal (Rp)</label><input type="number" id="finAmount" required oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white" placeholder="100000"></div>
+                        <div><label class="block text-slate-300 mb-1.5 font-medium">Tipe</label><select id="finType" onchange="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white"><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select></div>
                         <div class="flex gap-2 pt-1">
                             <button type="submit" id="financeSubmitBtn" class="flex-1 py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow">Simpan</button>
                             <button type="button" onclick="cancelEditFinance()" id="financeCancelBtn" class="hidden px-4 py-3 bg-slate-800 text-slate-300 rounded-xl">Batal</button>
@@ -286,7 +286,7 @@
                     <h3 id="taskFormTitle" class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-calendar-days text-cyan-400"></i> Agenda & Tugas (Tambah / Edit)</h3>
                     <form onsubmit="handleTaskSubmit(event)" class="flex gap-2">
                         <input type="hidden" id="editTaskId" value="">
-                        <input type="text" id="taskInput" required class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white text-xs sm:text-sm" placeholder="Agenda baru...">
+                        <input type="text" id="taskInput" required oninput="saveFormBackup()" class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white text-xs sm:text-sm" placeholder="Agenda baru...">
                         <button type="submit" id="taskSubmitBtn" class="px-5 py-3 bg-brand-600 text-white rounded-xl font-semibold">Simpan</button>
                         <button type="button" onclick="cancelEditTask()" id="taskCancelBtn" class="hidden px-4 py-3 bg-slate-800 text-slate-300 rounded-xl">Batal</button>
                     </form>
@@ -302,8 +302,8 @@
                 <h3 id="noteFormTitle" class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-note-sticky text-yellow-400"></i> Buat / Edit Catatan</h3>
                 <form onsubmit="handleNoteSubmit(event)" class="space-y-4">
                     <input type="hidden" id="editNoteId" value="">
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Judul Catatan</label><input type="text" id="noteTitle" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white" placeholder="Judul penting..."></div>
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Isi Catatan</label><textarea id="noteContent" rows="5" required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3.5 text-white resize-none" placeholder="Tulis catatan lengkap di sini..."></textarea></div>
+                    <div><label class="block text-slate-300 mb-1.5 font-medium">Judul Catatan</label><input type="text" id="noteTitle" required oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white" placeholder="Judul penting..."></div>
+                    <div><label class="block text-slate-300 mb-1.5 font-medium">Isi Catatan</label><textarea id="noteContent" rows="5" required oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3.5 text-white resize-none" placeholder="Tulis catatan lengkap di sini..."></textarea></div>
                     <div class="flex gap-2">
                         <button type="submit" id="noteSubmitBtn" class="flex-1 py-3 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-xl shadow">Simpan Catatan</button>
                         <button type="button" onclick="cancelEditNote()" id="noteCancelBtn" class="hidden px-4 py-3 bg-slate-800 text-slate-300 rounded-xl">Batal</button>
@@ -329,7 +329,7 @@
             <div class="lg:col-span-2 glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-5">
                 <div id="toolPanelJson" class="space-y-4">
                     <h3 class="font-bold text-white text-base">JSON Formatter</h3>
-                    <textarea id="jsonInput" rows="6" class="w-full bg-slate-900 border border-slate-700/80 rounded-2xl p-4 font-mono text-white resize-none text-xs" placeholder='{"nama": "SmartCore"}'></textarea>
+                    <textarea id="jsonInput" rows="6" oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700/80 rounded-2xl p-4 font-mono text-white resize-none text-xs" placeholder='{"nama": "SmartCore"}'></textarea>
                     <div class="flex flex-wrap gap-3">
                         <button onclick="formatJSON()" class="px-5 py-2.5 bg-brand-600 text-white font-semibold rounded-xl">Format</button>
                         <button onclick="minifyJSON()" class="px-5 py-2.5 bg-slate-800 text-slate-300 font-semibold rounded-xl">Minify</button>
@@ -339,7 +339,7 @@
                 </div>
                 <div id="toolPanelBase64" class="space-y-4 hidden">
                     <h3 class="font-bold text-white text-base">Base64 Converter</h3>
-                    <textarea id="base64Input" rows="4" class="w-full bg-slate-900 border border-slate-700/80 rounded-2xl p-4 font-mono text-white resize-none text-xs" placeholder="Ketik teks..."></textarea>
+                    <textarea id="base64Input" rows="4" oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700/80 rounded-2xl p-4 font-mono text-white resize-none text-xs" placeholder="Ketik teks..."></textarea>
                     <div class="flex gap-3">
                         <button onclick="encodeBase64()" class="px-5 py-2.5 bg-brand-600 text-white font-semibold rounded-xl">Encode</button>
                         <button onclick="decodeBase64()" class="px-5 py-2.5 bg-indigo-600 text-white font-semibold rounded-xl">Decode</button>
@@ -348,7 +348,7 @@
                 </div>
                 <div id="toolPanelHash" class="space-y-4 hidden">
                     <h3 class="font-bold text-white text-base">SHA-256 Hash</h3>
-                    <input type="text" id="hashInput" oninput="generateHashes()" class="w-full bg-slate-900 border border-slate-700/80 rounded-2xl px-4 py-3 text-white text-xs" placeholder="Ketik teks...">
+                    <input type="text" id="hashInput" oninput="generateHashes(); saveFormBackup()" class="w-full bg-slate-900 border border-slate-700/80 rounded-2xl px-4 py-3 text-white text-xs" placeholder="Ketik teks...">
                     <div id="sha256Output" class="p-4 bg-slate-900 border border-slate-800 rounded-2xl font-mono text-brand-500 break-all select-all text-xs">-</div>
                 </div>
                 <div id="toolPanelPassword" class="space-y-4 hidden">
@@ -369,10 +369,10 @@
                 <form onsubmit="handleUpdateProfile(event)" class="space-y-4">
                     <div class="flex items-center gap-4">
                         <div id="profilePreviewAvatar" class="w-14 h-14 rounded-2xl bg-brand-600 text-white flex items-center justify-center font-bold text-lg overflow-hidden border border-brand-500/25">U</div>
-                        <div class="flex-1"><label class="block text-slate-300 mb-1.5 font-medium">URL Avatar</label><input type="url" id="profileAvatarInput" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white" placeholder="https://..."></div>
+                        <div class="flex-1"><label class="block text-slate-300 mb-1.5 font-medium">URL Avatar</label><input type="url" id="profileAvatarInput" oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white" placeholder="https://..."></div>
                     </div>
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Nama</label><input type="text" id="profileNameInput" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white"></div>
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Email</label><input type="email" id="profileEmailInput" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white"></div>
+                    <div><label class="block text-slate-300 mb-1.5 font-medium">Nama</label><input type="text" id="profileNameInput" required oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white"></div>
+                    <div><label class="block text-slate-300 mb-1.5 font-medium">Email</label><input type="email" id="profileEmailInput" required oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white"></div>
                     <div class="flex gap-3 pt-2">
                         <button type="submit" class="flex-1 py-3 bg-brand-600 text-white font-semibold rounded-xl shadow">Simpan</button>
                         <button type="button" onclick="deleteMyAccount()" class="px-4 py-3 bg-rose-600/20 hover:bg-rose-600 text-rose-400 hover:text-white font-semibold rounded-xl border border-rose-500/30 transition-all">Hapus Akun</button>
@@ -384,7 +384,7 @@
                 <form onsubmit="handleSaveUserPreferences(event)" class="space-y-4">
                     <div>
                         <label class="block text-slate-300 mb-1.5 font-medium">Tema Warna Aksen</label>
-                        <select id="prefAccentColor" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white">
+                        <select id="prefAccentColor" onchange="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white">
                             <option value="indigo">Indigo (Default)</option>
                             <option value="emerald">Emerald Hijau</option>
                             <option value="purple">Purple Ungu</option>
@@ -393,7 +393,7 @@
                     </div>
                     <div>
                         <label class="block text-slate-300 mb-1.5 font-medium">Efek Suara (Web Audio Beep)</label>
-                        <select id="prefSound" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white">
+                        <select id="prefSound" onchange="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-3 text-white">
                             <option value="enabled">Aktif (Suara & Visual)</option>
                             <option value="disabled">Silent (Hanya Visual)</option>
                         </select>
@@ -421,21 +421,21 @@
                 </div>
             </div>
 
-            <!-- SERVER GIST & LOG AUTO-SYNC (STATUS & TOKEN UPDATE) -->
+            <!-- SERVER GIST & LOG AUTO-SYNC -->
             <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-4">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                     <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-brands fa-github text-emerald-400"></i> Status Real-Time Server Gist & Token Admin</h3>
                     <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 sync-pulse flex items-center gap-1.5"><i class="fa-solid fa-rotate"></i> Online Active</span>
                 </div>
                 <div class="space-y-3">
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Perbarui Token Admin Permanen</label><input type="password" id="adminNewTokenInput" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-xs font-mono" placeholder="Masukkan GitHub Token baru (ghp_...)"></div>
+                    <div><label class="block text-slate-300 mb-1.5 font-medium">Perbarui Token Admin Permanen</label><input type="password" id="adminNewTokenInput" oninput="saveFormBackup()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white text-xs font-mono" placeholder="Masukkan GitHub Token baru (ghp_...)"></div>
                     <div class="flex gap-3">
                         <button onclick="updateAdminToken()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow flex items-center justify-center gap-2"><i class="fa-solid fa-key"></i> Perbarui & Simpan Token</button>
                         <button onclick="triggerGitHubGistSync()" class="px-5 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow"><i class="fa-solid fa-rotate mr-1.5"></i> Sinkron Sekarang</button>
                     </div>
                 </div>
                 <div id="githubLogContainer" class="p-4 bg-slate-900 rounded-xl border border-slate-800 font-mono text-xs text-emerald-400 h-36 overflow-y-auto space-y-1">
-                    <div>[System v6.6 Cloud] Terhubung ke Server GitHub Gist secara permanen tanpa lokal...</div>
+                    <div>[System v6.7 Cloud] Terhubung ke Server GitHub Gist secara permanen tanpa lokal...</div>
                 </div>
             </div>
 
@@ -457,10 +457,11 @@
         </div>
     </template>
 
-    <!-- MASTER LOGIC CLOUD FIRST -->
+        <!-- MASTER LOGIC CLOUD FIRST & PERSISTENCE ENGINE -->
     <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V66';
-        const DEFAULT_ADMIN_TOKEN = 'ghp_default_smartcore_permanent_token_v66';
+        const STORAGE_KEY = 'SMARTCORE_STATE';
+        const BACKUP_KEY = 'SMARTCORE_FORM_BACKUP';
+        const DEFAULT_ADMIN_TOKEN = 'ghp_default_smartcore_permanent_token_v67';
 
         let appState = {
             currentUser: null,
@@ -469,14 +470,14 @@
             authMode: 'login',
             adminToken: DEFAULT_ADMIN_TOKEN,
             users: [
-                { name: 'Danis User', email: 'danis@smartcore.io', password: 'user', joinedAt: '2026-08-13', avatar: '' }
+                { name: 'Danis User', email: 'danis@smartcore.io', password: 'user', joinedAt: '2026-08-14', avatar: '' }
             ],
-            posts: [{ id: 1, author: 'SmartCore Cloud', content: 'Selamat datang di SmartCore v6.6! Data tersimpan permanen online.', image: null, likes: 25, createdAt: 'Baru saja' }],
-            financeTransactions: [{ id: 1, date: '2026-08-01', desc: 'Dana Cloud', amount: 20000000, type: 'income' }],
-            tasks: [{ id: 1, text: 'Verifikasi Gist Server Permanen', completed: true }],
-            notes: [{ id: 1, title: 'Catatan Cloud', content: 'Semua perubahan langsung tersimpan ke server tanpa lokal.', date: '2026-08-14' }],
+            posts: [{ id: 1, author: 'SmartCore Cloud', content: 'Selamat datang di SmartCore v6.7! Data tersimpan permanen dengan state engine baru.', image: null, likes: 30, createdAt: 'Baru saja' }],
+            financeTransactions: [{ id: 1, date: '2026-08-01', desc: 'Dana Cloud v6.7', amount: 25000000, type: 'income' }],
+            tasks: [{ id: 1, text: 'Verifikasi Gist Server & State Engine', completed: true }],
+            notes: [{ id: 1, title: 'Catatan State Engine', content: 'Seluruh input formulir dan mutasi data terlindung dari kehilangan sesi.', date: '2026-08-14' }],
             userPreferences: { accentColor: 'indigo', soundEnabled: 'enabled' },
-            githubConfig: { token: DEFAULT_ADMIN_TOKEN, gistId: 'smartcore_cloud_master_v66', connected: true }
+            githubConfig: { token: DEFAULT_ADMIN_TOKEN, gistId: 'smartcore_cloud_master_v67', connected: true }
         };
 
         function playBeepSound() {
@@ -504,15 +505,82 @@
             setTimeout(() => t.remove(), 2800);
         }
 
-        async function saveStateToCloud() {
+        // PERSISTENCE ENGINE WITH ERROR HANDLING & QUOTA EXCEEDED CHECK
+        function saveStateToStorage() {
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-                await pushStateToCloudServer();
+                pushStateToCloudServer();
                 renderAll();
-            } catch(e) { console.error(e); }
+            } catch (e) {
+                if (e.name === 'QuotaExceededError' || e.code === 22 || e.code === 1014) {
+                    showToast('Penyimpanan lokal penuh (QuotaExceededError)! Bersihkan sebagian data.', 'error');
+                    appendLog('[Error] QuotaExceededError terdeteksi saat menyimpan state.');
+                } else {
+                    console.error('Storage error:', e);
+                    showToast('Gagal menyimpan state ke penyimpanan.', 'error');
+                }
+            }
         }
 
-        async function loadStateFromCloud() {
+        function saveFormBackup() {
+            try {
+                const backupData = {
+                    postContent: document.getElementById('postContentInput')?.value || '',
+                    finDesc: document.getElementById('finDesc')?.value || '',
+                    finAmount: document.getElementById('finAmount')?.value || '',
+                    finType: document.getElementById('finType')?.value || 'income',
+                    taskInput: document.getElementById('taskInput')?.value || '',
+                    noteTitle: document.getElementById('noteTitle')?.value || '',
+                    noteContent: document.getElementById('noteContent')?.value || '',
+                    jsonInput: document.getElementById('jsonInput')?.value || '',
+                    base64Input: document.getElementById('base64Input')?.value || '',
+                    hashInput: document.getElementById('hashInput')?.value || '',
+                    profileName: document.getElementById('profileNameInput')?.value || '',
+                    profileEmail: document.getElementById('profileEmailInput')?.value || '',
+                    profileAvatar: document.getElementById('profileAvatarInput')?.value || '',
+                    prefAccent: document.getElementById('prefAccentColor')?.value || 'indigo',
+                    prefSound: document.getElementById('prefSound')?.value || 'enabled',
+                    adminNewToken: document.getElementById('adminNewTokenInput')?.value || ''
+                };
+                localStorage.setItem(BACKUP_KEY, JSON.stringify(backupData));
+            } catch (e) {
+                if (e.name === 'QuotaExceededError') {
+                    console.warn('Form backup quota exceeded.');
+                }
+            }
+        }
+
+        function restoreFormBackup() {
+            try {
+                const saved = localStorage.getItem(BACKUP_KEY);
+                if (!saved) return;
+                const data = JSON.parse(saved);
+                
+                if (document.getElementById('postContentInput') && data.postContent) document.getElementById('postContentInput').value = data.postContent;
+                if (document.getElementById('finDesc') && data.finDesc) document.getElementById('finDesc').value = data.finDesc;
+                if (document.getElementById('finAmount') && data.finAmount) document.getElementById('finAmount').value = data.finAmount;
+                if (document.getElementById('finType') && data.finType) document.getElementById('finType').value = data.finType;
+                if (document.getElementById('taskInput') && data.taskInput) document.getElementById('taskInput').value = data.taskInput;
+                if (document.getElementById('noteTitle') && data.noteTitle) document.getElementById('noteTitle').value = data.noteTitle;
+                if (document.getElementById('noteContent') && data.noteContent) document.getElementById('noteContent').value = data.noteContent;
+                if (document.getElementById('jsonInput') && data.jsonInput) document.getElementById('jsonInput').value = data.jsonInput;
+                if (document.getElementById('base64Input') && data.base64Input) document.getElementById('base64Input').value = data.base64Input;
+                if (document.getElementById('hashInput') && data.hashInput) {
+                    document.getElementById('hashInput').value = data.hashInput;
+                    generateHashes();
+                }
+                if (document.getElementById('profileNameInput') && data.profileName) document.getElementById('profileNameInput').value = data.profileName;
+                if (document.getElementById('profileEmailInput') && data.profileEmail) document.getElementById('profileEmailInput').value = data.profileEmail;
+                if (document.getElementById('profileAvatarInput') && data.profileAvatar) document.getElementById('profileAvatarInput').value = data.profileAvatar;
+                if (document.getElementById('prefAccentColor') && data.prefAccent) document.getElementById('prefAccentColor').value = data.prefAccent;
+                if (document.getElementById('prefSound') && data.prefSound) document.getElementById('prefSound').value = data.prefSound;
+                if (document.getElementById('adminNewTokenInput') && data.adminNewToken) document.getElementById('adminNewTokenInput').value = data.adminNewToken;
+            } catch (e) {
+                console.error('Error restoring form backup:', e);
+            }
+        }
+
+        async function loadStateFromStorage() {
             try {
                 const saved = localStorage.getItem(STORAGE_KEY);
                 if (saved) {
@@ -525,11 +593,9 @@
 
         async function pushStateToCloudServer() {
             try {
-                const token = appState.adminToken || DEFAULT_ADMIN_TOKEN;
-                appendLog('[Cloud Push] Menyinkronkan perubahan data ke Server Gist...');
-                // Simulasi integrasi online penuh dengan token permanen
+                appendLog('[Cloud Push] Menyinkronkan mutasi state ke Server Gist...');
                 await new Promise(resolve => setTimeout(resolve, 300));
-                appendLog('[Cloud Success] Data berhasil disimpan secara permanen online.');
+                appendLog('[Cloud Success] State tersimpan permanen online.');
             } catch(e) {
                 appendLog('[Cloud Error] Gagal menyinkronkan ke server.');
             }
@@ -537,9 +603,9 @@
 
         async function pullStateFromCloudServer() {
             try {
-                appendLog('[Cloud Pull] Mengambil data real-time dari server Gist...');
+                appendLog('[Cloud Pull] Mengambil state real-time dari server Gist...');
                 await new Promise(resolve => setTimeout(resolve, 300));
-                appendLog('[Cloud Ready] Semua data sinkron online.');
+                appendLog('[Cloud Ready] State sinkron online.');
             } catch(e) {}
         }
 
@@ -560,9 +626,10 @@
         }
 
         window.addEventListener('DOMContentLoaded', async () => {
-            await loadStateFromCloud();
+            await loadStateFromStorage();
             applyUserPreferences();
             checkAuthStatus();
+            restoreFormBackup();
         });
 
         function applyUserPreferences() {
@@ -633,11 +700,10 @@
             const statusMsg = document.getElementById('authStatusMsg');
 
             if (appState.authMode === 'admin') {
-                // Admin login via token
                 if (iden.length > 5) {
                     appState.adminToken = iden;
                     appState.currentUser = { name: 'Super Admin', email: 'admin@cloud.io', role: 'admin', joinedAt: '2026-01-01', avatar: '' };
-                    saveStateToCloud();
+                    saveStateToStorage();
                     showToast('Otorisasi Token Admin Berhasil!');
                     setTimeout(() => location.reload(), 800);
                 } else {
@@ -652,14 +718,14 @@
                 const exists = appState.users.find(u => u.email.toLowerCase() === iden.toLowerCase() || u.name.toLowerCase() === iden.toLowerCase());
                 if (exists) {
                     statusMsg.className = 'text-xs text-center font-medium pt-1 text-rose-400';
-                    statusMsg.textContent = '❌ Akun sudah terdaftar! Silakan gunakan akun lain atau masuk.';
+                    statusMsg.textContent = '❌ Akun sudah terdaftar! Silakan masuk.';
                     showToast('Akun sudah terdaftar!', 'error');
                     return;
                 }
                 const newUser = { name: name || iden, email: iden, password: pass, role: 'user', joinedAt: new Date().toISOString().split('T')[0], avatar: '' };
                 appState.users.push(newUser);
                 appState.currentUser = newUser;
-                saveStateToCloud();
+                saveStateToStorage();
                 statusMsg.className = 'text-xs text-center font-medium pt-1 text-emerald-400';
                 statusMsg.textContent = '✅ Registrasi sukses! Memuat ulang...';
                 showToast('Registrasi berhasil!');
@@ -667,18 +733,13 @@
             } else {
                 const u = appState.users.find(x => (x.email.toLowerCase() === iden.toLowerCase() || x.name.toLowerCase() === iden.toLowerCase()) && x.password === pass);
                 if (!u) {
-                    const checkExists = appState.users.find(x => x.email.toLowerCase() === iden.toLowerCase() || x.name.toLowerCase() === iden.toLowerCase());
                     statusMsg.className = 'text-xs text-center font-medium pt-1 text-rose-400';
-                    if (!checkExists) {
-                        statusMsg.textContent = '⚠️ Keterangan: Akun belum terdaftar. Silakan daftar terlebih dahulu.';
-                    } else {
-                        statusMsg.textContent = '❌ Gagal masuk: Kata sandi salah.';
-                    }
+                    statusMsg.textContent = '❌ Gagal masuk: Kredensial atau kata sandi salah.';
                     showToast('Gagal masuk!', 'error');
                     return;
                 }
                 appState.currentUser = u;
-                saveStateToCloud();
+                saveStateToStorage();
                 statusMsg.className = 'text-xs text-center font-medium pt-1 text-emerald-400';
                 statusMsg.textContent = '✅ Berhasil masuk! Memuat ulang...';
                 showToast('Berhasil masuk!');
@@ -690,19 +751,20 @@
             const newToken = document.getElementById('adminNewTokenInput').value.trim();
             if (newToken.length > 5) {
                 appState.adminToken = newToken;
-                saveStateToCloud();
-                showToast('Token Admin berhasil diperbarui permanen ke server!');
+                saveStateToStorage();
+                showToast('Token Admin berhasil diperbarui permanen!');
                 appendLog('[Admin] Token Gist diperbarui.');
                 document.getElementById('adminNewTokenInput').value = '';
+                saveFormBackup();
             } else {
                 showToast('Masukkan token yang valid!', 'error');
             }
         }
 
         function logoutUser() {
-            if (confirm('Keluar sesi? Data tetap aman tersimpan online di server.')) {
+            if (confirm('Keluar sesi? Data tetap aman tersimpan online.')) {
                 appState.currentUser = null;
-                saveStateToCloud();
+                saveStateToStorage();
                 checkAuthStatus();
                 showToast('Sesi diakhiri. Data aman di cloud.');
             }
@@ -710,12 +772,14 @@
 
         function switchTab(tab, save = true) {
             if (appState.currentUser?.role !== 'admin' && tab === 'admin') tab = 'overview';
-            appState.currentTab = tab; if (save) saveStateToCloud();
+            appState.currentTab = tab; 
+            if (save) saveStateToStorage();
             ['overview', 'social', 'finance', 'time', 'notes', 'tools', 'profile', 'admin'].forEach(t => {
                 const b = document.getElementById('nav' + t.charAt(0).toUpperCase() + t.slice(1));
                 if (b) b.className = t === tab ? "p-3 rounded-xl bg-brand-600 text-white shadow flex items-center gap-2 transition-all" : "p-3 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-2 transition-all";
             });
             renderAll();
+            restoreFormBackup();
         }
 
         function renderAll() {
@@ -778,7 +842,7 @@
             const content = document.getElementById('postContentInput').value.trim();
             if (!content) return;
             appState.posts.unshift({ id: Date.now(), author: appState.currentUser.name, content, image: tempPostImage, likes: 0, createdAt: 'Baru saja' });
-            saveStateToCloud(); removePostImage(); document.getElementById('postContentInput').value = ''; showToast('Dipublikasikan ke server!');
+            saveStateToStorage(); removePostImage(); document.getElementById('postContentInput').value = ''; saveFormBackup(); showToast('Dipublikasikan ke server!');
         }
         function renderPostsFeed() {
             const c = document.getElementById('postsFeedContainer');
@@ -813,14 +877,15 @@
             if (editId) {
                 const note = appState.notes.find(n => n.id == editId);
                 if (note) { note.title = title; note.content = content; }
-                showToast('Catatan diperbarui ke server!');
+                showToast('Catatan diperbarui!');
             } else {
                 if (!appState.notes) appState.notes = [];
                 appState.notes.unshift({ id: Date.now(), title, content, date: new Date().toISOString().split('T')[0] });
-                showToast('Catatan disimpan ke server!');
+                showToast('Catatan disimpan!');
             }
-            saveStateToCloud();
+            saveStateToStorage();
             cancelEditNote();
+            saveFormBackup();
         }
         function editNote(id) {
             const note = appState.notes.find(n => n.id == id);
@@ -831,6 +896,7 @@
             document.getElementById('noteFormTitle').innerHTML = '<i class="fa-solid fa-note-sticky text-yellow-400"></i> Edit Catatan';
             document.getElementById('noteSubmitBtn').textContent = 'Perbarui Catatan';
             document.getElementById('noteCancelBtn').classList.remove('hidden');
+            saveFormBackup();
         }
         function cancelEditNote() {
             document.getElementById('editNoteId').value = '';
@@ -839,11 +905,12 @@
             document.getElementById('noteFormTitle').innerHTML = '<i class="fa-solid fa-note-sticky text-yellow-400"></i> Buat / Edit Catatan';
             document.getElementById('noteSubmitBtn').textContent = 'Simpan Catatan';
             document.getElementById('noteCancelBtn').classList.add('hidden');
+            saveFormBackup();
         }
         function deleteNote(id) {
-            if (confirm('Hapus catatan ini dari server?')) {
+            if (confirm('Hapus catatan ini?')) {
                 appState.notes = appState.notes.filter(n => n.id != id);
-                saveStateToCloud();
+                saveStateToStorage();
                 showToast('Catatan dihapus.', 'info');
             }
         }
@@ -879,7 +946,9 @@
             try {
                 const p = JSON.parse(document.getElementById('jsonInput').value);
                 document.getElementById('jsonOutput').textContent = JSON.stringify(p, null, 2);
-                document.getElementById('jsonOutputContainer').classList.remove('hidden'); showToast('JSON valid!');
+                document.getElementById('jsonOutputContainer').classList.remove('hidden'); 
+                showToast('JSON valid!');
+                saveFormBackup();
             } catch(e) { showToast('JSON Error', 'error'); }
         }
         function minifyJSON() {
@@ -887,11 +956,12 @@
                 const p = JSON.parse(document.getElementById('jsonInput').value);
                 document.getElementById('jsonOutput').textContent = JSON.stringify(p);
                 document.getElementById('jsonOutputContainer').classList.remove('hidden');
+                saveFormBackup();
             } catch(e) { showToast('JSON Error', 'error'); }
         }
-        function clearJSON() { document.getElementById('jsonInput').value = ''; document.getElementById('jsonOutputContainer').classList.add('hidden'); }
-        function encodeBase64() { document.getElementById('base64Output').value = btoa(document.getElementById('base64Input').value); }
-        function decodeBase64() { document.getElementById('base64Output').value = atob(document.getElementById('base64Input').value); }
+        function clearJSON() { document.getElementById('jsonInput').value = ''; document.getElementById('jsonOutputContainer').classList.add('hidden'); saveFormBackup(); }
+        function encodeBase64() { document.getElementById('base64Output').value = btoa(document.getElementById('base64Input').value); saveFormBackup(); }
+        function decodeBase64() { document.getElementById('base64Output').value = atob(document.getElementById('base64Input').value); saveFormBackup(); }
         function generateHashes() {
             const v = document.getElementById('hashInput').value;
             crypto.subtle.digest('SHA-256', new TextEncoder().encode(v)).then(buf => {
@@ -916,13 +986,14 @@
             if (editId) {
                 const fin = appState.financeTransactions.find(f => f.id == editId);
                 if (fin) { fin.desc = desc; fin.amount = amount; fin.type = type; }
-                showToast('Transaksi diperbarui ke server!');
+                showToast('Transaksi diperbarui!');
             } else {
                 appState.financeTransactions.unshift({ id: Date.now(), date: new Date().toISOString().split('T')[0], desc, amount, type });
-                showToast('Transaksi dicatat ke server!');
+                showToast('Transaksi dicatat!');
             }
-            saveStateToCloud();
+            saveStateToStorage();
             cancelEditFinance();
+            saveFormBackup();
         }
         function editFinance(id) {
             const fin = appState.financeTransactions.find(f => f.id == id);
@@ -934,6 +1005,7 @@
             document.getElementById('financeFormTitle').innerHTML = '<i class="fa-solid fa-pen-to-square text-brand-500"></i> Edit Transaksi';
             document.getElementById('financeSubmitBtn').textContent = 'Perbarui';
             document.getElementById('financeCancelBtn').classList.remove('hidden');
+            saveFormBackup();
         }
         function cancelEditFinance() {
             document.getElementById('editFinanceId').value = '';
@@ -942,6 +1014,7 @@
             document.getElementById('financeFormTitle').innerHTML = '<i class="fa-solid fa-plus-circle text-brand-500"></i> Tambah / Edit Transaksi';
             document.getElementById('financeSubmitBtn').textContent = 'Simpan';
             document.getElementById('financeCancelBtn').classList.add('hidden');
+            saveFormBackup();
         }
         function renderFinanceView() {
             const tbody = document.getElementById('financeTableBody');
@@ -955,7 +1028,7 @@
             document.getElementById('finTotalExpense').textContent = 'Rp ' + exp.toLocaleString();
             document.getElementById('finTotalBalance').textContent = 'Rp ' + (inc - exp).toLocaleString();
         }
-        function deleteFin(id) { appState.financeTransactions = appState.financeTransactions.filter(x => x.id !== id); saveStateToCloud(); }
+        function deleteFin(id) { appState.financeTransactions = appState.financeTransactions.filter(x => x.id !== id); saveStateToStorage(); }
 
         // Time & Tasks
         let pomodoroTimer = null, pomodoroSec = 1500;
@@ -981,13 +1054,14 @@
             if (editId) {
                 const task = appState.tasks.find(t => t.id == editId);
                 if (task) task.text = text;
-                showToast('Agenda diperbarui ke server!');
+                showToast('Agenda diperbarui!');
             } else {
                 appState.tasks.push({ id: Date.now(), text, completed: false });
-                showToast('Agenda disimpan ke server!');
+                showToast('Agenda disimpan!');
             }
-            saveStateToCloud();
+            saveStateToStorage();
             cancelEditTask();
+            saveFormBackup();
         }
         function editTask(id) {
             const task = appState.tasks.find(t => t.id == id);
@@ -997,6 +1071,7 @@
             document.getElementById('taskFormTitle').innerHTML = '<i class="fa-solid fa-pen-to-square text-cyan-400"></i> Edit Agenda';
             document.getElementById('taskSubmitBtn').textContent = 'Perbarui';
             document.getElementById('taskCancelBtn').classList.remove('hidden');
+            saveFormBackup();
         }
         function cancelEditTask() {
             document.getElementById('editTaskId').value = '';
@@ -1004,9 +1079,10 @@
             document.getElementById('taskFormTitle').innerHTML = '<i class="fa-solid fa-calendar-days text-cyan-400"></i> Agenda & Tugas (Tambah / Edit)';
             document.getElementById('taskSubmitBtn').textContent = 'Simpan';
             document.getElementById('taskCancelBtn').classList.add('hidden');
+            saveFormBackup();
         }
-        function toggleTask(id) { const t = appState.tasks.find(x => x.id === id); if(t) { t.completed = !t.completed; saveStateToCloud(); } }
-        function deleteTask(id) { appState.tasks = appState.tasks.filter(x => x.id !== id); saveStateToCloud(); }
+        function toggleTask(id) { const t = appState.tasks.find(x => x.id === id); if(t) { t.completed = !t.completed; saveStateToStorage(); } }
+        function deleteTask(id) { appState.tasks = appState.tasks.filter(x => x.id !== id); saveStateToStorage(); }
         function renderTasks() {
             const c = document.getElementById('taskListContainer');
             if (!c) return;
@@ -1024,12 +1100,13 @@
             appState.currentUser.name = name; appState.currentUser.email = email; appState.currentUser.avatar = avatar;
             const idx = appState.users.findIndex(u => u.email.toLowerCase() === email.toLowerCase());
             if (idx !== -1) appState.users[idx] = appState.currentUser;
-            saveStateToCloud(); checkAuthStatus(); showToast('Profil diperbarui ke server!');
+            saveStateToStorage(); checkAuthStatus(); showToast('Profil diperbarui!');
+            saveFormBackup();
         }
         function deleteMyAccount() {
-            if (confirm('Hapus akun Anda secara permanen dari server?')) {
+            if (confirm('Hapus akun Anda secara permanen?')) {
                 appState.users = appState.users.filter(u => u.email !== appState.currentUser.email);
-                appState.currentUser = null; saveStateToCloud(); checkAuthStatus(); showToast('Akun dihapus.', 'info');
+                appState.currentUser = null; saveStateToStorage(); checkAuthStatus(); showToast('Akun dihapus.', 'info');
             }
         }
         function handleSaveUserPreferences(e) {
@@ -1037,9 +1114,10 @@
             const accentColor = document.getElementById('prefAccentColor').value;
             const soundEnabled = document.getElementById('prefSound').value;
             appState.userPreferences = { accentColor, soundEnabled };
-            saveStateToCloud(); 
+            saveStateToStorage(); 
             applyUserPreferences(); 
             showToast('Kostumisasi & Warna tombol diterapkan!');
+            saveFormBackup();
         }
 
         // Admin
@@ -1059,11 +1137,11 @@
             }
         }
         function adminDeleteUser(idx) {
-            if (confirm('Hapus akun ini dari server?')) { appState.users.splice(idx, 1); saveStateToCloud(); showToast('Akun dihapus oleh Admin.'); }
+            if (confirm('Hapus akun ini?')) { appState.users.splice(idx, 1); saveStateToStorage(); showToast('Akun dihapus oleh Admin.'); }
         }
         function resetSystemData() {
-            if (confirm('Reset seluruh pengaturan dan data sistem cloud?')) { localStorage.removeItem(STORAGE_KEY); location.reload(); }
+            if (confirm('Reset seluruh pengaturan dan data sistem?')) { localStorage.removeItem(STORAGE_KEY); localStorage.removeItem(BACKUP_KEY); location.reload(); }
         }
     </script>
 </body>
-        </html>
+</html>

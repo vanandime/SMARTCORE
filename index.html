@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCore Ultimate - Enterprise Ultra v5.0</title>
+    <title>SmartCore Ultimate - Enterprise Ultra v5.1</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -66,8 +66,8 @@
                 <div class="inline-flex p-3.5 bg-brand-600/20 text-brand-400 rounded-2xl mb-3 text-2xl border border-brand-500/30 shadow-inner">
                     <i class="fa-solid fa-cloud-arrow-up"></i>
                 </div>
-                <h2 id="authTitle" class="text-2xl font-bold tracking-tight text-white">SmartCore Ultra v5.0</h2>
-                <p id="authSubtitle" class="text-sm text-slate-400 mt-1">Sistem Pintar Tanpa Ribet & Auto-Persisten</p>
+                <h2 id="authTitle" class="text-2xl font-bold tracking-tight text-white">SmartCore Ultra v5.1</h2>
+                <p id="authSubtitle" class="text-sm text-slate-400 mt-1">Sistem Pintar Tanpa AI Chat & Auto-Persisten</p>
             </div>
             
             <div id="authTabSwitcher" class="flex bg-slate-900/90 p-1.5 rounded-2xl mb-6 border border-slate-800">
@@ -119,23 +119,20 @@
                     </div>
                     <div>
                         <h1 class="font-bold text-white tracking-wide text-base flex items-center gap-2">
-                            SmartCore <span class="text-brand-400 text-[10px] px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold">v5.0 Ultra</span>
+                            SmartCore <span class="text-brand-400 text-[10px] px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold">v5.1 Ultra</span>
                         </h1>
                         <p class="text-[11px] text-slate-400">Zero-Config Cloud Connected</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Sorted Navigation Bar -->
+            <!-- Sorted Navigation Bar (Tanpa Tombol AI Chat) -->
             <nav class="hidden 2xl:flex items-center gap-1 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800/80">
                 <button type="button" onclick="switchTab('overview')" id="navOverview" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
                     <i class="fa-solid fa-chart-pie text-brand-400"></i> Overview
                 </button>
                 <button type="button" onclick="switchTab('social')" id="navSocial" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
                     <i class="fa-solid fa-globe text-indigo-400"></i> Sosial
-                </button>
-                <button type="button" onclick="switchTab('gemini')" id="navGemini" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-brain text-purple-400"></i> AI Chat
                 </button>
                 <button type="button" onclick="switchTab('finance')" id="navFinance" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
                     <i class="fa-solid fa-wallet text-emerald-400"></i> Keuangan
@@ -177,7 +174,6 @@
         <div class="2xl:hidden bg-slate-900/90 border-b border-slate-800 px-4 py-2 flex items-center gap-2 overflow-x-auto">
             <button type="button" onclick="switchTab('overview')" id="navOverviewMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-brand-600 text-white flex-shrink-0">Overview</button>
             <button type="button" onclick="switchTab('social')" id="navSocialMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Sosial</button>
-            <button type="button" onclick="switchTab('gemini')" id="navGeminiMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">AI Chat</button>
             <button type="button" onclick="switchTab('finance')" id="navFinanceMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Keuangan</button>
             <button type="button" onclick="switchTab('time')" id="navTimeMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Waktu</button>
             <button type="button" onclick="switchTab('tools')" id="navToolsMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Tools</button>
@@ -194,7 +190,7 @@
                     <div class="inline-flex p-4 bg-brand-500/10 text-brand-400 rounded-full text-3xl animate-bounce">
                         <i class="fa-solid fa-spinner animate-spin"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white">Memuat Sistem Ultra v5.0...</h3>
+                    <h3 class="text-xl font-semibold text-white">Memuat Sistem Ultra v5.1...</h3>
                 </div>
             </div>
         </main>
@@ -207,20 +203,16 @@
         <div class="space-y-6">
             <div class="glass-panel p-8 rounded-3xl border border-slate-800/80 shadow-2xl relative overflow-hidden bg-gradient-to-r from-brand-900/30 via-slate-900/80 to-indigo-950/40">
                 <div class="relative z-10 space-y-3">
-                    <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30 text-xs font-semibold">Dashboard Ultra v5.0</span>
+                    <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30 text-xs font-semibold">Dashboard Ultra v5.1</span>
                     <h2 id="overviewWelcomeTitle" class="text-3xl font-bold text-white tracking-tight">Selamat Datang Kembali!</h2>
-                    <p class="text-sm text-slate-300 max-w-xl">Sistem pintar terintegrasi instan dengan auto-reload otomatis pada setiap mutasi dan penyimpanan server penuh.</p>
+                    <p class="text-sm text-slate-300 max-w-xl">Platform bersih tanpa modul AI Chat. Auto-reload instan dan penyimpanan server permanen aktif sepenuhnya.</p>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-xl border border-brand-500/30"><i class="fa-solid fa-wallet"></i></div>
                     <div><p class="text-xs text-slate-400 font-medium">Saldo Keuangan</p><h4 id="overviewBalance" class="text-lg font-bold text-white mt-0.5">Rp 0</h4></div>
-                </div>
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-xl border border-purple-500/30"><i class="fa-solid fa-brain"></i></div>
-                    <div><p class="text-xs text-slate-400 font-medium">Universal AI</p><h4 class="text-lg font-bold text-emerald-400 mt-0.5">Zero-Config Ready</h4></div>
                 </div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-cyan-600/20 text-cyan-400 flex items-center justify-center text-xl border border-cyan-500/30"><i class="fa-solid fa-list-check"></i></div>
@@ -236,19 +228,19 @@
                 <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-bolt text-brand-400"></i> Jalan Pintas Cepat</h3>
                     <div class="grid grid-cols-2 gap-3 text-xs">
-                        <button type="button" onclick="switchTab('gemini')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all shadow-sm"><i class="fa-solid fa-comments text-purple-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Tanya AI Chat</span><span class="text-[10px] text-slate-400">Tanpa repot API key wajib</span></button>
                         <button type="button" onclick="switchTab('finance')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all shadow-sm"><i class="fa-solid fa-wallet text-emerald-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Catat Keuangan</span><span class="text-[10px] text-slate-400">Kelola pemasukan & pengeluaran</span></button>
                         <button type="button" onclick="switchTab('tools')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all shadow-sm"><i class="fa-solid fa-toolbox text-cyan-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Dev Tools & Mindmap</span><span class="text-[10px] text-slate-400">Format JSON, Base64, dll</span></button>
+                        <button type="button" onclick="switchTab('social')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all shadow-sm"><i class="fa-solid fa-globe text-indigo-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Sosial Feed</span><span class="text-[10px] text-slate-400">Bagikan postingan & momen</span></button>
                         <button type="button" onclick="switchTab('profile')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all shadow-sm"><i class="fa-solid fa-user-gear text-pink-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Kostumisasi & Profil</span><span class="text-[10px] text-slate-400">Atur tema & foto akun</span></button>
                     </div>
                 </div>
 
                 <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-rss text-cyan-400"></i> Pembaruan v5.0 Ultra</h3>
+                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-rss text-cyan-400"></i> Pembaruan v5.1 Ultra</h3>
                     <div class="space-y-3 text-xs">
                         <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
-                            <span class="text-brand-400 font-semibold">Zero-Ribet Configuration</span>
-                            <p class="text-slate-400 mt-1">GitHub Gist kini memiliki opsi *Auto-Mode* bawaan yang langsung berfungsi tanpa kebingungan token. AI juga dibekali *Built-in Smart Fallback* sehingga langsung bisa diajak ngobrol tanpa input kunci API yang rumit.</p>
+                            <span class="text-brand-400 font-semibold">Modul AI Chat Dihapus Total</span>
+                            <p class="text-slate-400 mt-1">Sesuai permintaan Anda, seluruh fitur dan antarmuka AI Chat telah dibersihkan sepenuhnya agar aplikasi semakin ringan, terfokus, dan efisien.</p>
                         </div>
                     </div>
                 </div>
@@ -293,7 +285,7 @@
             <div class="space-y-6">
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
-                        <i class="fa-solid fa-fire text-amber-400"></i> Tren v5.0
+                        <i class="fa-solid fa-fire text-amber-400"></i> Tren v5.1
                     </h3>
                     <div class="space-y-3 text-xs">
                         <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
@@ -376,7 +368,7 @@
                         <button type="button" onclick="addMindMapNode()" class="px-5 py-2.5 bg-pink-600 text-white text-xs font-semibold rounded-xl">Tambah Cabang</button>
                     </div>
                     <div id="mindMapContainer" class="p-4 bg-slate-900/90 border border-slate-800 rounded-2xl min-h-[160px] space-y-2">
-                        <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v5.0 Ultra</div>
+                        <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v5.1 Ultra</div>
                     </div>
                 </div>
             </div>
@@ -513,13 +505,13 @@
                 </div>
             </div>
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama v5.0</h3>
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama v5.1</h3>
                 <div id="richNewsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-slate-900/90 rounded-2xl overflow-hidden border border-slate-800 shadow-lg flex flex-col">
                         <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&auto=format&fit=crop&q=60" alt="Tech" class="h-40 w-full object-cover">
                         <div class="p-4 space-y-2 flex-1 flex flex-col justify-between">
-                            <div><span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">Teknologi</span><h4 class="font-bold text-white text-sm mt-1">SmartCore Ultra v5.0 Zero-Ribet Release</h4></div>
-                            <p class="text-[11px] text-slate-400 leading-relaxed">Pembaruan v5.0 menghadirkan pengalaman tanpa konfigurasi rumit dengan auto-reload instan.</p>
+                            <div><span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">Teknologi</span><h4 class="font-bold text-white text-sm mt-1">SmartCore Ultra v5.1 Release</h4></div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Pembaruan v5.1 menghadirkan efisiensi maksimal dengan menghapus modul AI Chat dan fokus pada auto-reload instan.</p>
                         </div>
                     </div>
                 </div>
@@ -623,34 +615,7 @@
         </div>
     </template>
 
-    <!-- 8. AI CHAT VIEW -->
-    <template id="templateGeminiView">
-        <div class="space-y-6">
-            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 flex flex-col h-[650px] shadow-xl">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-3 mb-4 gap-3">
-                    <div class="flex items-center gap-3">
-                        <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-comments text-purple-400"></i> AI Workspace (Zero-Ribet)</h3>
-                        <select id="activeAiModelSelect" class="bg-slate-900 border border-slate-700 text-xs text-purple-300 font-semibold rounded-xl px-3 py-1.5">
-                            <option value="smartcore-smart-ai">SmartCore Smart AI (Auto-Fallback Aktif)</option>
-                            <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
-                            <option value="chatgpt-4o">ChatGPT-4o</option>
-                        </select>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <span id="aiStatusBadge" class="px-3 py-1 rounded-xl text-[11px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">AI Siap Pakai</span>
-                        <button type="button" onclick="clearAiChat()" class="text-xs text-slate-400 hover:text-rose-400 flex items-center gap-1.5"><i class="fa-solid fa-trash-can"></i> Bersihkan</button>
-                    </div>
-                </div>
-                <div id="aiChatMessages" class="flex-1 overflow-y-auto space-y-4 pr-2 mb-4 text-xs"></div>
-                <form onsubmit="sendAiPrompt(event)" class="flex gap-2.5 pt-3 border-t border-slate-800">
-                    <input type="text" id="aiPromptInput" required class="flex-1 bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-xs text-white shadow-inner" placeholder="Ketik perintah atau pertanyaan untuk AI (tanpa wajib isi kunci API)...">
-                    <button type="submit" class="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold rounded-xl shadow">Kirim</button>
-                </form>
-            </div>
-        </div>
-    </template>
-
-    <!-- 9. ADMIN VIEW -->
+    <!-- 8. ADMIN VIEW (Tanpa Konfigurasi AI Key) -->
     <template id="templateAdminView">
         <div class="space-y-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -660,27 +625,7 @@
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-shield-halved"></i></div><div><p class="text-xs text-slate-400 font-medium">Server Status</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">Auto-Persisten Live</h4></div></div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- ZERO-RIBET AI KEYS PANEL -->
-                <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center justify-between">
-                        <span class="flex items-center gap-2"><i class="fa-solid fa-brain text-purple-400"></i> Pengaturan AI (Opsional / Zero-Ribet)</span>
-                        <span class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Auto-Fallback Aktif</span>
-                    </h3>
-                    <div class="space-y-4 text-xs">
-                        <p class="text-slate-400 text-[11px]">Anda tidak wajib memasukkan API key. AI sudah memiliki sistem pintar bawaan agar langsung bisa digunakan tanpa konfig.</p>
-                        <div>
-                            <label class="block text-slate-300 mb-1.5 font-medium">Gemini API Key (Opsional)</label>
-                            <input type="password" id="geminiApiKeyInput" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="Kosongkan jika ingin langsung pakai AI bawaan...">
-                        </div>
-                        <div>
-                            <label class="block text-slate-300 mb-1.5 font-medium">ChatGPT API Key (Opsional)</label>
-                            <input type="password" id="chatgptApiKeyInput" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="Kosongkan jika ingin langsung pakai AI bawaan...">
-                        </div>
-                        <button type="button" onclick="saveAdminAiKeys()" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-xl shadow transition-all"><i class="fa-solid fa-save mr-2"></i> Simpan Pengaturan AI</button>
-                    </div>
-                </div>
-
+            <div class="grid grid-cols-1 lg:grid-cols-1 gap-6">
                 <!-- ZERO-RIBET GITHUB GIST CLOUD PANEL -->
                 <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center justify-between">
@@ -713,7 +658,7 @@
                     <button type="button" onclick="resetSystemData()" class="px-4 py-2 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 text-xs font-semibold rounded-xl border border-rose-500/30">Reset Sistem</button>
                 </div>
                 <div id="githubLogContainer" class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 text-xs font-mono text-emerald-400 h-36 overflow-y-auto space-y-1 shadow-inner">
-                    <div>[System v5.0 Ultra] Auto-Reload & Auto-Persisten aktif sepenuhnya...</div>
+                    <div>[System v5.1 Ultra] Auto-Reload & Auto-Persisten aktif sepenuhnya...</div>
                 </div>
             </div>
 
@@ -733,7 +678,7 @@
 
         <!-- JAVASCRIPT STATE ENGINE & ENTERPRISE ULTRA CORE LOGIC -->
     <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V50';
+        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V51';
 
         let appState = {
             currentUser: null,
@@ -745,14 +690,14 @@
                 { name: 'Danis User', email: 'danis@smartcore.io', password: 'user', role: 'user', joinedAt: '2026-08-13', avatar: '' }
             ],
             posts: [
-                { id: 1, author: 'Ultra Admin', content: 'Selamat datang di SmartCore Ultra v5.0! Sistem kini berjalan tanpa konfigurasi ribet dan otomatis memuat ulang setiap perubahan.', image: null, likes: 256, comments: [], createdAt: '10:00' }
+                { id: 1, author: 'Ultra Admin', content: 'Selamat datang di SmartCore Ultra v5.1! Modul AI Chat telah dihapus total. Sistem kini semakin ringan, cepat, dan otomatis memuat ulang setiap perubahan.', image: null, likes: 256, comments: [], createdAt: '10:00' }
             ],
             financeTransactions: [
-                { id: 1, date: '2026-08-01', desc: 'Dana Hibah Ultra v5.0', amount: 25000000, type: 'income' },
+                { id: 1, date: '2026-08-01', desc: 'Dana Hibah Ultra v5.1', amount: 25000000, type: 'income' },
                 { id: 2, date: '2026-08-13', desc: 'Infrastruktur Cloud Permanen', amount: 1500000, type: 'expense' }
             ],
             tasks: [
-                { id: 1, text: 'Verifikasi Zero-Ribet Auto-Reload v5.0', completed: true }
+                { id: 1, text: 'Verifikasi Zero-Ribet Auto-Reload v5.1', completed: true }
             ],
             alarms: [
                 { id: 1, time: '09:00', label: 'Briefing Harian Ultra', active: true }
@@ -766,14 +711,7 @@
                 soundEnabled: 'enabled',
                 layoutMode: 'normal'
             },
-            githubConfig: { token: '', gistId: '', connected: true },
-            aiConfig: { 
-                geminiApiKey: '', 
-                chatgptApiKey: '' 
-            },
-            aiChat: [
-                { role: 'model', text: 'Halo! Smart AI Assistant siap membantu Anda secara instan tanpa konfigurasi API key yang rumit.' }
-            ]
+            githubConfig: { token: '', gistId: '', connected: true }
         };
 
         // --- ENCRYPTION & SECURITY HELPERS ---
@@ -810,13 +748,8 @@
         // --- ROBUST PERSISTENCE & AUTO-RELOAD ENGINE ---
         function saveStateToStorage() {
             try {
-                // Simpan ke localStorage dengan fallback kuota otomatis
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-                
-                // Sinkronisasi latar belakang ke server cloud/Gist tanpa jeda
                 pushStateToCloudServer();
-                
-                // Auto-Reload Tampilan Instan agar UI selalu mutakhir
                 renderAll();
             } catch (e) {
                 if (e.name === 'QuotaExceededError' || e.code === 22) {
@@ -853,7 +786,6 @@
             const rawToken = document.getElementById('ghToken') ? document.getElementById('ghToken').value.trim() : '';
             
             if(!rawToken) {
-                // Mode Zero-Ribet: Jika token kosong, langsung aktifkan auto-mode permanen lokal & cloud simulasi
                 appState.githubConfig.connected = true;
                 saveStateToStorage();
                 appendGitHubLog('[Auto-Mode] Diaktifkan secara instan (Zero-Ribet). Data tersimpan permanen!');
@@ -890,7 +822,6 @@
 
         async function pushStateToCloudServer() {
             try {
-                // Operasi sinkronisasi cloud instan
                 const config = appState.githubConfig;
                 const decryptedToken = decryptData(config.token);
                 const decryptedGistId = decryptData(config.gistId);
@@ -904,7 +835,7 @@
                             'Accept': 'application/vnd.github.v3+json'
                         },
                         body: JSON.stringify({
-                            description: `SmartCore Ultra Sync v5.0 (${new Date().toLocaleTimeString()})`,
+                            description: `SmartCore Ultra Sync v5.1 (${new Date().toLocaleTimeString()})`,
                             files: {
                                 'smartcore_database.json': {
                                     content: JSON.stringify(appState, null, 2)
@@ -915,7 +846,6 @@
                 }
                 appendGitHubLog(`[Auto-Persist] Data berhasil diamankan secara permanen.`);
             } catch (err) {
-                // Fallback aman tanpa mengganggu pengguna
                 console.warn('Cloud persist status:', err);
             }
         }
@@ -1030,8 +960,8 @@
 
             if (mode === 'login') {
                 if(btnLogin) btnLogin.className = "flex-1 py-2 text-xs font-semibold rounded-xl bg-brand-600 text-white transition-all shadow-md";
-                if(title) title.textContent = "SmartCore Ultra v5.0";
-                if(subtitle) subtitle.textContent = "Sistem Pintar Tanpa Ribet & Auto-Persisten";
+                if(title) title.textContent = "SmartCore Ultra v5.1";
+                if(subtitle) subtitle.textContent = "Sistem Pintar Tanpa AI Chat & Auto-Persisten";
                 if(nameGroup) nameGroup.classList.add('hidden');
                 submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Masuk Sistem';
             } else if (mode === 'register') {
@@ -1098,7 +1028,7 @@
             appState.currentTab = tabName;
             if (save) saveStateToStorage();
 
-            ['Overview', 'Social', 'Gemini', 'Finance', 'Time', 'Tools', 'Feeds', 'Fun', 'Profile', 'Admin'].forEach(t => {
+            ['Overview', 'Social', 'Finance', 'Time', 'Tools', 'Feeds', 'Fun', 'Profile', 'Admin'].forEach(t => {
                 const btn = document.getElementById('nav' + t);
                 const btnMob = document.getElementById('nav' + t + 'Mob');
                 const activeClasses = "px-3.5 py-2 text-xs font-semibold rounded-xl bg-brand-600 text-white transition-all flex items-center gap-1.5 shadow-md";
@@ -1152,8 +1082,6 @@
                         document.getElementById('prefLayout').value = appState.userPreferences.layoutMode || 'normal';
                     }
                 }
-            } else if (appState.currentTab === 'gemini') {
-                renderAiChat();
             } else if (appState.currentTab === 'admin') {
                 renderAdminDashboard();
             }
@@ -1382,7 +1310,7 @@
             const container = document.getElementById('mindMapContainer');
             if(!container) return;
             container.innerHTML = `
-                <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v5.0 Ultra</div>
+                <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v5.1 Ultra</div>
                 <div class="pl-4 space-y-2 border-l-2 border-slate-700 ml-2">
                     ${appState.mindMapNodes.map(n => `<div class="p-2.5 bg-slate-800/80 rounded-xl text-xs text-slate-200 border border-slate-700 flex justify-between items-center"><span>• ${n.text}</span><button onclick="deleteMindMapNode(${n.id})" class="text-rose-400 hover:text-rose-300"><i class="fa-solid fa-xmark"></i></button></div>`).join('')}
                 </div>
@@ -1697,124 +1625,12 @@
             showToast('Kostumisasi diterapkan secara instan!', 'success');
         }
 
-        // --- ZERO-RIBET AI CHAT INTEGRATION ---
-        function saveAdminAiKeys() {
-            const rawGemini = document.getElementById('geminiApiKeyInput').value.trim();
-            const rawChatgpt = document.getElementById('chatgptApiKeyInput').value.trim();
-            
-            appState.aiConfig = { 
-                geminiApiKey: encryptData(rawGemini), 
-                chatgptApiKey: encryptData(rawChatgpt) 
-            };
-            saveStateToStorage();
-            showToast('Pengaturan AI tersimpan!', 'success');
-        }
-
-        function clearAiChat() {
-            appState.aiChat = [{ role: 'model', text: 'Halo! AI Assistant siap membantu Anda.' }];
-            saveStateToStorage();
-            showToast('Riwayat chat dibersihkan.', 'info');
-        }
-
-        function renderAiChat() {
-            const container = document.getElementById('aiChatMessages');
-            if(!container) return;
-            container.innerHTML = appState.aiChat.map(c => `
-                <div class="flex items-start ${c.role === 'user' ? 'justify-end' : ''} gap-3">
-                    ${c.role !== 'user' ? '<div class="w-8 h-8 rounded-2xl bg-purple-600/30 text-purple-400 flex items-center justify-center font-bold text-xs border border-purple-500/30 shadow-inner flex-shrink-0"><i class="fa-solid fa-brain"></i></div>' : ''}
-                    <div class="p-4 ${c.role === 'user' ? 'bg-brand-600/30 text-slate-100 border-brand-500/30' : 'bg-slate-900/90 text-slate-200 border-slate-800'} border rounded-2xl max-w-[85%] whitespace-pre-wrap shadow-sm">${c.text}</div>
-                    ${c.role === 'user' ? '<div class="w-8 h-8 rounded-2xl bg-brand-600 text-white flex items-center justify-center font-bold text-xs shadow-inner flex-shrink-0"><i class="fa-solid fa-user"></i></div>' : ''}
-                </div>
-            `).join('');
-            container.scrollTop = container.scrollHeight;
-        }
-
-        async function sendAiPrompt(e) {
-            e.preventDefault();
-            const input = document.getElementById('aiPromptInput');
-            const modelSelect = document.getElementById('activeAiModelSelect');
-            const promptText = input.value.trim();
-            const selectedModel = modelSelect ? modelSelect.value : 'smartcore-smart-ai';
-            if(!promptText) return;
-
-            appState.aiChat.push({ role: 'user', text: `[${selectedModel}] ${promptText}` });
-            input.value = '';
-            renderAiChat();
-
-            appState.aiChat.push({ role: 'model', text: 'Memproses pertanyaan...' });
-            renderAiChat();
-
-            let reply = '';
-            const decryptedGeminiKey = decryptData(appState.aiConfig.geminiApiKey);
-            const decryptedChatgptKey = decryptData(appState.aiConfig.chatgptApiKey);
-
-            try {
-                if (selectedModel.includes('gemini') && decryptedGeminiKey) {
-                    const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${decryptedGeminiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
-                    });
-                    const geminiData = await geminiRes.json();
-                    if (geminiData.candidates && geminiData.candidates[0].content.parts[0].text) {
-                        reply = geminiData.candidates[0].content.parts[0].text;
-                    } else {
-                        throw new Error('Format respons Gemini tidak valid');
-                    }
-                } else if (selectedModel.includes('chatgpt') && decryptedChatgptKey) {
-                    const openAiRes = await fetch('https://api.openai.com/v1/chat/completions', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${decryptedChatgptKey}`
-                        },
-                        body: JSON.stringify({
-                            model: 'gpt-4o-mini',
-                            messages: [{ role: 'user', content: promptText }]
-                        })
-                    });
-                    const openAiData = await openAiRes.json();
-                    if (openAiData.choices && openAiData.choices[0].message.content) {
-                        reply = openAiData.choices[0].message.content;
-                    } else {
-                        throw new Error('Format respons ChatGPT tidak valid');
-                    }
-                } else {
-                    // Built-in Smart Fallback (Zero-Ribet AI Engine) yang sangat responsif & cerdas
-                    await new Promise(resolve => setTimeout(resolve, 600));
-                    const lower = promptText.toLowerCase();
-                    if (lower.includes('halo') || lower.includes('hi')) {
-                        reply = `Halo! Saya SmartCore AI Assistant v5.0. Sistem Zero-Ribet aktif, Anda bisa langsung bertanya apa saja tanpa perlu konfigurasi API key yang rumit!`;
-                    } else if (lower.includes('keuangan') || lower.includes('saldo')) {
-                        reply = `Berdasarkan data keuangan platform Anda saat ini, seluruh catatan pemasukan dan pengeluaran tersimpan aman secara permanen dengan fitur auto-reload instan.`;
-                    } else if (lower.includes('github') || lower.includes('gist')) {
-                        reply = `Pengaturan GitHub kini sangat mudah! Anda cukup klik tombol 'Aktifkan Auto-Mode Instan' di Panel Admin tanpa perlu repot membuat repositori atau Gist secara manual.`;
-                    } else {
-                        reply = `[SmartCore Smart AI]: Menanggapi pertanyaan Anda tentang "${promptText}". Sistem kami memastikan setiap perubahan data langsung tersimpan permanen dan termuat ulang secara instan ke layar Anda.`;
-                    }
-                }
-            } catch (err) {
-                reply = `[Smart AI Engine]: Berhasil memproses permintaan Anda mengenai "${promptText}".`;
-            }
-
-            appState.aiChat.pop();
-            appState.aiChat.push({ role: 'model', text: reply });
-            saveStateToStorage();
-        }
-
         function renderAdminDashboard() {
             document.getElementById('statTotalUsers').textContent = appState.users.length;
             document.getElementById('statTotalPosts').textContent = appState.posts.length;
             let bytes = 0;
             for(let k in localStorage) { if(localStorage.hasOwnProperty(k)) bytes += localStorage[k].length * 2; }
             document.getElementById('statStorageSize').textContent = (bytes/1024).toFixed(1) + ' KB';
-
-            if(document.getElementById('geminiApiKeyInput')) {
-                document.getElementById('geminiApiKeyInput').value = decryptData(appState.aiConfig.geminiApiKey) || '';
-            }
-            if(document.getElementById('chatgptApiKeyInput')) {
-                document.getElementById('chatgptApiKeyInput').value = decryptData(appState.aiConfig.chatgptApiKey) || '';
-            }
 
             const tbody = document.getElementById('adminUsersTableBody');
             if(tbody) {

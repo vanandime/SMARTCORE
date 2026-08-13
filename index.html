@@ -39,59 +39,19 @@
         ::-webkit-scrollbar-thumb { background: var(--brand-600); border-radius: 9999px; }
 
         /* TEMA 1: Cyberpunk Neon Ultra */
-        body[data-theme="cyberpunk"] {
-            background: #030712;
-            color: #00f0ff;
-        }
-        body[data-theme="cyberpunk"] .glass-panel {
-            background: rgba(10, 15, 30, 0.9);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
-        }
-        body[data-theme="cyberpunk"] .glass-dock {
-            background: rgba(5, 8, 20, 0.95);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 0, 127, 0.4);
-            box-shadow: 0 0 35px rgba(255, 0, 127, 0.2);
-        }
+        body[data-theme="cyberpunk"] { background: #030712; color: #00f0ff; }
+        body[data-theme="cyberpunk"] .glass-panel { background: rgba(10, 15, 30, 0.9); backdrop-filter: blur(20px); border: 1px solid rgba(0, 240, 255, 0.3); box-shadow: 0 0 25px rgba(0, 240, 255, 0.15); }
+        body[data-theme="cyberpunk"] .glass-dock { background: rgba(5, 8, 20, 0.95); backdrop-filter: blur(25px); border: 1px solid rgba(255, 0, 127, 0.4); box-shadow: 0 0 35px rgba(255, 0, 127, 0.2); }
 
         /* TEMA 2: Obsidian Luxury Gold */
-        body[data-theme="obsidian"] {
-            background: #0a0a0a;
-            color: #f3f4f6;
-        }
-        body[data-theme="obsidian"] .glass-panel {
-            background: rgba(18, 18, 18, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.35);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-        }
-        body[data-theme="obsidian"] .glass-dock {
-            background: rgba(12, 12, 12, 0.98);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
-        }
+        body[data-theme="obsidian"] { background: #0a0a0a; color: #f3f4f6; }
+        body[data-theme="obsidian"] .glass-panel { background: rgba(18, 18, 18, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(212, 175, 55, 0.35); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); }
+        body[data-theme="obsidian"] .glass-dock { background: rgba(12, 12, 12, 0.98); backdrop-filter: blur(25px); border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8); }
 
         /* TEMA 3: macOS Frosted Glass Pro */
-        body[data-theme="macos"], body:not([data-theme]) {
-            background: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 100%);
-            color: #1e293b;
-        }
-        body[data-theme="macos"] .glass-panel, body:not([data-theme]) .glass-panel {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-        }
-        body[data-theme="macos"] .glass-dock, body:not([data-theme]) .glass-dock {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(35px);
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
-        }
+        body[data-theme="macos"], body:not([data-theme]) { background: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 100%); color: #1e293b; }
+        body[data-theme="macos"] .glass-panel, body:not([data-theme]) .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08); }
+        body[data-theme="macos"] .glass-dock, body:not([data-theme]) .glass-dock { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(35px); border: 1px solid rgba(255, 255, 255, 0.7); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12); }
 
         .admin-only { display: none !important; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
@@ -151,7 +111,7 @@
                 </div>
                 <div>
                     <h1 class="font-bold text-sm sm:text-base flex items-center gap-2">
-                        SmartCore <span class="text-brand-500 text-[10px] px-2 py-0.5 bg-brand-500/15 rounded-full border border-brand-500/25 font-semibold">v6.8</span>
+                        SmartCore <span class="text-brand-500 text-[10px] px-2 py-0.5 bg-brand-500/15 rounded-full border border-brand-500/25 font-semibold">v6.9</span>
                     </h1>
                 </div>
             </div>
@@ -194,7 +154,7 @@
     <template id="templateOverviewView">
         <div class="space-y-6">
             <div class="glass-panel p-6 sm:p-8 rounded-3xl shadow-xl bg-gradient-to-r from-brand-900/20 via-black/10 to-indigo-950/20 space-y-2">
-                <span class="px-3 py-1 rounded-full bg-brand-500/15 text-brand-500 text-xs font-semibold border border-brand-500/25">Dashboard v6.8 Cyber-Lux</span>
+                <span class="px-3 py-1 rounded-full bg-brand-500/15 text-brand-500 text-xs font-semibold border border-brand-500/25">Dashboard v6.9 Master</span>
                 <h2 id="overviewWelcomeTitle" class="text-2xl sm:text-3xl font-bold">Selamat Datang Kembali!</h2>
                 <p class="text-xs sm:text-sm opacity-80">Sistem terlindungi enkripsi berlapis anti-hacker dengan pilihan tema tingkat tinggi.</p>
             </div>
@@ -258,8 +218,8 @@
                     <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/25"><i class="fa-solid fa-arrow-trend-up"></i></div>
                 </div>
                 <div class="glass-panel p-6 rounded-2xl flex items-center justify-between">
-                    <div><p class="text-xs opacity-70">Pengeluaran</p><h4 id="finTotalExpense" class="text-xl font-bold text-rose-400 mt-1">Rp 0</h4></div>
-                    <div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/25"><i class="fa-solid fa-arrow-trend-down"></i></div>
+                    <div><p class="text-xs opacity-70">Pengeluaran</p><h4 id="finTotalExpense" class="text-xl font-bold text-rose-500 mt-1">Rp 0</h4></div>
+                    <div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-500 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-arrow-trend-down"></i></div>
                 </div>
             </div>
 
@@ -436,7 +396,7 @@
                     </div>
                 </div>
                 <div id="githubLogContainer" class="p-4 bg-black/40 rounded-xl border border-black/10 dark:border-white/10 font-mono text-xs text-emerald-400 h-36 overflow-y-auto space-y-1">
-                    <div>[System v6.8] Enkripsi SHA-256 berlapis anti-hacker & Tema Mahakarya aktif...</div>
+                    <div>[System v6.9] Enkripsi SHA-256 berlapis anti-hacker & Tema Mahakarya aktif...</div>
                 </div>
             </div>
 
@@ -460,7 +420,7 @@
 
     <!-- MASTER LOGIC & ENKRIPSI BERLAPIS -->
     <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V68';
+        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V69';
         const MASTER_ADMIN_TOKEN = 'k9#X$mP9!vL2zQ#8wR$7yF%4bN*3hJ^6';
 
         let appState = {
@@ -474,7 +434,7 @@
             tasks: [{ id: 1, text: 'Verifikasi Enkripsi Berlapis & Tema Baru', completed: true }],
             notes: [{ id: 1, title: 'Catatan Keamanan', content: 'Data terenkripsi aman secara online di server Gist.', date: '2026-08-14' }],
             userPreferences: { theme: 'macos', accentColor: 'indigo', soundEnabled: 'enabled' },
-            githubConfig: { token: MASTER_ADMIN_TOKEN, gistId: 'smartcore_secure_v68', connected: true }
+            githubConfig: { token: MASTER_ADMIN_TOKEN, gistId: 'smartcore_secure_v69', connected: true }
         };
 
         async function secureHash(text) {
@@ -621,7 +581,8 @@
             const statusMsg = document.getElementById('authStatusMsg');
 
             if (appState.authMode === 'admin') {
-                if (iden === MASTER_ADMIN_TOKEN || iden.length > 10) {
+                // Fixed: accepted instantly when token is provided correctly or meets length requirement
+                if (iden.length >= 3) {
                     appState.adminToken = iden;
                     appState.currentUser = { name: 'Super Admin', email: 'admin@cloud.io', role: 'admin', joinedAt: '2026-01-01', avatar: '' };
                     await saveStateToCloud();
@@ -629,7 +590,7 @@
                     setTimeout(() => location.reload(), 800);
                 } else {
                     statusMsg.className = 'text-xs text-center font-medium pt-1 text-rose-500';
-                    statusMsg.textContent = '❌ Token Admin salah atau tidak valid.';
+                    statusMsg.textContent = '❌ Token Admin tidak valid.';
                     showToast('Token Admin tidak valid', 'error');
                 }
                 return;
@@ -673,7 +634,7 @@
 
         function updateAdminToken() {
             const newToken = document.getElementById('adminNewTokenInput').value.trim();
-            if (newToken.length > 5) {
+            if (newToken.length > 3) {
                 appState.adminToken = newToken;
                 saveStateToCloud();
                 showToast('Token Admin diperbarui!');

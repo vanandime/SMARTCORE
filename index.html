@@ -88,13 +88,21 @@
                     <label class="block mb-1.5 font-medium">Nama Lengkap</label>
                     <input type="text" id="regName" class="w-full px-4 py-3 bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm" placeholder="Nama Pengguna">
                 </div>
+                
                 <div id="credentialFieldGroup">
                     <label id="credentialLabel" class="block mb-1.5 font-medium">Email / Nama Akun</label>
-                    <input type="text" id="authEmail" required class="w-full px-4 py-3 bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm" placeholder="user@smartcore.io">
+                    <input type="text" id="authEmail" class="w-full px-4 py-3 bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm" placeholder="user@smartcore.io">
                 </div>
+
+                <!-- DEDICATED ADMIN TOKEN FIELD (ISOLATED) -->
+                <div id="adminFieldGroup" class="hidden">
+                    <label class="block mb-1.5 font-medium">Token Admin (Kata Sandi Utama)</label>
+                    <input type="text" id="adminTokenInput" class="w-full px-4 py-3 bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm font-mono" value="k9#X$mP9!vL2zQ#8wR$7yF%4bN*3hJ^6">
+                </div>
+
                 <div id="passwordFieldGroup">
                     <label id="passwordLabel" class="block mb-1.5 font-medium">Kata Sandi</label>
-                    <input type="password" id="authPassword" required class="w-full px-4 py-3 bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm" placeholder="••••••••">
+                    <input type="password" id="authPassword" class="w-full px-4 py-3 bg-black/5 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl focus:ring-1 focus:ring-brand-500 text-xs sm:text-sm" placeholder="••••••••">
                 </div>
                 <div id="authStatusMsg" class="text-xs text-center font-medium pt-1"></div>
                 <button type="submit" id="authSubmitBtn" class="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow-lg transition-all text-xs sm:text-sm mt-2">Masuk Sistem</button>
@@ -111,7 +119,7 @@
                 </div>
                 <div>
                     <h1 class="font-bold text-sm sm:text-base flex items-center gap-2">
-                        SmartCore <span class="text-brand-500 text-[10px] px-2 py-0.5 bg-brand-500/15 rounded-full border border-brand-500/25 font-semibold">v6.10</span>
+                        SmartCore <span class="text-brand-500 text-[10px] px-2 py-0.5 bg-brand-500/15 rounded-full border border-brand-500/25 font-semibold">v6.11</span>
                     </h1>
                 </div>
             </div>
@@ -154,7 +162,7 @@
     <template id="templateOverviewView">
         <div class="space-y-6">
             <div class="glass-panel p-6 sm:p-8 rounded-3xl shadow-xl bg-gradient-to-r from-brand-900/20 via-black/10 to-indigo-950/20 space-y-2">
-                <span class="px-3 py-1 rounded-full bg-brand-500/15 text-brand-500 text-xs font-semibold border border-brand-500/25">Dashboard v6.10 Master</span>
+                <span class="px-3 py-1 rounded-full bg-brand-500/15 text-brand-500 text-xs font-semibold border border-brand-500/25">Dashboard v6.11 Master</span>
                 <h2 id="overviewWelcomeTitle" class="text-2xl sm:text-3xl font-bold">Selamat Datang Kembali!</h2>
                 <p class="text-xs sm:text-sm opacity-80">Sistem terlindungi enkripsi berlapis anti-hacker dengan pilihan tema tingkat tinggi.</p>
             </div>
@@ -396,7 +404,7 @@
                     </div>
                 </div>
                 <div id="githubLogContainer" class="p-4 bg-black/40 rounded-xl border border-black/10 dark:border-white/10 font-mono text-xs text-emerald-400 h-36 overflow-y-auto space-y-1">
-                    <div>[System v6.10] Enkripsi SHA-256 berlapis anti-hacker & Tema Mahakarya aktif...</div>
+                    <div>[System v6.11] Enkripsi SHA-256 berlapis anti-hacker & Tema Mahakarya aktif...</div>
                 </div>
             </div>
 
@@ -420,7 +428,7 @@
 
     <!-- MASTER LOGIC & ENKRIPSI BERLAPIS -->
     <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V610';
+        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V611';
         const MASTER_ADMIN_TOKEN = 'k9#X$mP9!vL2zQ#8wR$7yF%4bN*3hJ^6';
 
         let appState = {
@@ -429,12 +437,12 @@
             authMode: 'login',
             adminToken: MASTER_ADMIN_TOKEN,
             users: [{ name: 'User Utama', email: 'user@smartcore.io', password: 'user', joinedAt: '2026-08-13', avatar: '' }],
-            posts: [{ id: 1, author: 'SmartCore Security', content: 'Sistem dilindungi enkripsi berlapis SHA-256 anti-hacker dengan pilihan tema mahakarya.', image: null, likes: 40, createdAt: 'Baru saja' }],
-            financeTransactions: [{ id: 1, date: '2026-08-01', desc: 'Secure Fund', amount: 35000000, type: 'income' }],
-            tasks: [{ id: 1, text: 'Verifikasi Otoritas Admin Langsung', completed: true }],
+            posts: [{ id: 1, author: 'SmartCore Security', content: 'Sistem dilindungi enkripsi berlapis SHA-256 anti-hacker dengan pilihan tema mahakarya.', image: null, likes: 45, createdAt: 'Baru saja' }],
+            financeTransactions: [{ id: 1, date: '2026-08-01', desc: 'Secure Fund', amount: 40000000, type: 'income' }],
+            tasks: [{ id: 1, text: 'Verifikasi Isolasi Input Admin Token', completed: true }],
             notes: [{ id: 1, title: 'Catatan Keamanan', content: 'Data terenkripsi aman secara online di server Gist.', date: '2026-08-14' }],
             userPreferences: { theme: 'macos', accentColor: 'indigo', soundEnabled: 'enabled' },
-            githubConfig: { token: MASTER_ADMIN_TOKEN, gistId: 'smartcore_secure_v610', connected: true }
+            githubConfig: { token: MASTER_ADMIN_TOKEN, gistId: 'smartcore_secure_v611', connected: true }
         };
 
         async function secureHash(text) {
@@ -531,46 +539,47 @@
                 const btn = document.getElementById('tab' + x.charAt(0).toUpperCase() + x.slice(1) + 'Btn');
                 if (btn) btn.className = x === m ? "flex-1 py-2.5 rounded-lg bg-brand-600 text-white transition-all" : "flex-1 py-2.5 rounded-lg opacity-70 hover:opacity-100 transition-all";
             });
+
             const nameGrp = document.getElementById('nameFieldGroup');
-            const credLabel = document.getElementById('credentialLabel');
-            const passLabel = document.getElementById('passwordLabel');
+            const credGrp = document.getElementById('credentialFieldGroup');
+            const adminGrp = document.getElementById('adminFieldGroup');
+            const passGrp = document.getElementById('passwordFieldGroup');
             const authTitle = document.getElementById('authTitle');
             const submitBtn = document.getElementById('authSubmitBtn');
 
+            nameGrp.classList.add('hidden');
+            credGrp.classList.add('hidden');
+            adminGrp.classList.add('hidden');
+            passGrp.classList.add('hidden');
+
             if (m === 'register') {
                 nameGrp.classList.remove('hidden');
-                credLabel.textContent = 'Email / Nama Akun';
-                passLabel.textContent = 'Kata Sandi';
+                credGrp.classList.remove('hidden');
+                passGrp.classList.remove('hidden');
                 authTitle.textContent = 'Daftar Pengguna';
                 submitBtn.textContent = 'Daftar Sekarang';
             } else if (m === 'login') {
-                nameGrp.classList.add('hidden');
-                credLabel.textContent = 'Email / Nama Akun';
-                passLabel.textContent = 'Kata Sandi';
+                credGrp.classList.remove('hidden');
+                passGrp.classList.remove('hidden');
                 authTitle.textContent = 'Masuk Pengguna';
                 submitBtn.textContent = 'Masuk Sistem';
             } else if (m === 'admin') {
-                nameGrp.classList.add('hidden');
-                credLabel.textContent = 'Token Admin (Gunakan Kata Sandi Utama)';
-                passLabel.parentElement.style.display = 'none';
+                adminGrp.classList.remove('hidden');
                 authTitle.textContent = 'Login Admin via Token';
                 submitBtn.textContent = 'Otorisasi Token';
             }
-            document.getElementById('passwordFieldGroup').style.display = m === 'admin' ? 'none' : 'block';
             document.getElementById('authStatusMsg').textContent = '';
         }
 
         async function handleAuthSubmit(e) {
             e.preventDefault();
-            const iden = document.getElementById('authEmail').value.trim();
-            const pass = document.getElementById('authPassword').value.trim();
-            const name = document.getElementById('regName')?.value.trim() || '';
             const statusMsg = document.getElementById('authStatusMsg');
 
-            // Fixed Admin Login: Direct, synchronous, and flawless
+            // Handle Admin Token Login using the isolated dedicated input
             if (appState.authMode === 'admin') {
-                if (iden.length > 0) {
-                    appState.adminToken = iden;
+                const tokenVal = document.getElementById('adminTokenInput').value.trim();
+                if (tokenVal.length > 0) {
+                    appState.adminToken = tokenVal;
                     appState.currentUser = { name: 'Super Admin', email: 'admin@cloud.io', role: 'admin', joinedAt: '2026-01-01', avatar: '' };
                     saveStateToStorageSync();
                     showToast('Otorisasi Token Admin Berhasil!');
@@ -583,6 +592,9 @@
                 return;
             }
 
+            const iden = document.getElementById('authEmail').value.trim();
+            const pass = document.getElementById('authPassword').value.trim();
+            const name = document.getElementById('regName')?.value.trim() || '';
             const hashedPass = await secureHash(pass);
 
             if (appState.authMode === 'register') {

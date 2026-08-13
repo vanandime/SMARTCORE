@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCore Ultimate - Enterprise Ultra v6.4 Optimized</title>
+    <title>SmartCore Ultimate - Enterprise Ultra v6.5 Master</title>
     <!-- Favicon SVG Profesional -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><path d='M21 16.5C21 16.88 20.79 17.21 20.47 17.38L12.57 21.82C12.41 21.91 12.21 22 12 22C11.79 22 11.59 21.91 11.43 21.82L3.53 17.38C3.21 17.21 3 16.88 3 16.5V7.5C3 7.12 3.21 6.79 3.53 6.62L11.43 2.18C11.59 2.09 11.79 2 12 2C12.21 2 12.41 2.09 12.57 2.18L20.47 6.62C20.79 6.79 21 7.12 21 7.5V16.5Z'/></svg>">
     <!-- Tailwind CSS & FontAwesome -->
@@ -55,21 +55,20 @@
 
     <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 pointer-events-none"></div>
 
-    <!-- AUTH MODAL -->
+    <!-- AUTH MODAL (TERPADU: MASUK, REGISTRASI, & ADMIN) -->
     <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl hidden">
         <div class="glass-panel w-full max-w-sm p-7 rounded-3xl shadow-2xl border border-brand-500/30">
             <div class="text-center mb-5">
                 <div class="inline-flex p-3 bg-gradient-to-tr from-brand-600 to-indigo-500 text-white rounded-2xl mb-2 text-xl shadow-lg">
                     <i class="fa-solid fa-cube"></i>
                 </div>
-                <h2 id="authTitle" class="text-xl font-bold text-white">SmartCore v6.4</h2>
-                <p id="authSubtitle" class="text-xs text-slate-400 mt-0.5">Enterprise Optimized & Secure</p>
+                <h2 id="authTitle" class="text-xl font-bold text-white">SmartCore v6.5</h2>
+                <p id="authSubtitle" class="text-xs text-slate-400 mt-0.5">Sistem Autentikasi Terpadu</p>
             </div>
             
             <div class="flex bg-slate-900 p-1 rounded-xl mb-5 border border-slate-800 text-xs font-semibold">
                 <button type="button" onclick="switchAuthTab('login')" id="tabLoginBtn" class="flex-1 py-2 rounded-lg bg-brand-600 text-white transition-all">Masuk</button>
                 <button type="button" onclick="switchAuthTab('register')" id="tabRegisterBtn" class="flex-1 py-2 rounded-lg text-slate-400 hover:text-white transition-all">Daftar</button>
-                <button type="button" onclick="switchAuthTab('admin')" id="tabAdminBtn" class="flex-1 py-2 rounded-lg text-slate-400 hover:text-white transition-all">Admin</button>
             </div>
 
             <form id="authForm" onsubmit="handleAuthSubmit(event)" class="space-y-3.5 text-xs">
@@ -79,12 +78,13 @@
                 </div>
                 <div>
                     <label class="block text-slate-300 mb-1 font-medium">Email / Nama Akun</label>
-                    <input type="text" id="authEmail" required class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700/80 rounded-xl text-white focus:ring-1 focus:ring-brand-500" placeholder="user@smartcore.io">
+                    <input type="text" id="authEmail" required class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700/80 rounded-xl text-white focus:ring-1 focus:ring-brand-500" placeholder="user@smartcore.io atau admin">
                 </div>
                 <div>
                     <label class="block text-slate-300 mb-1 font-medium">Kata Sandi</label>
                     <input type="password" id="authPassword" required class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700/80 rounded-xl text-white focus:ring-1 focus:ring-brand-500" placeholder="••••••••">
                 </div>
+                <div id="authStatusMsg" class="text-[11px] text-center font-medium pt-1"></div>
                 <button type="submit" id="authSubmitBtn" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow transition-all mt-2">Masuk Sistem</button>
             </form>
         </div>
@@ -100,14 +100,14 @@
                 </div>
                 <div>
                     <h1 class="font-bold text-white text-xs sm:text-sm flex items-center gap-1.5">
-                        SmartCore <span class="text-brand-500 text-[9px] px-2 py-0.5 bg-brand-500/15 rounded-full border border-brand-500/25">v6.4</span>
+                        SmartCore <span class="text-brand-500 text-[9px] px-2 py-0.5 bg-brand-500/15 rounded-full border border-brand-500/25">v6.5 Master</span>
                     </h1>
                 </div>
             </div>
 
             <div class="hidden md:flex items-center gap-2 bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-800 w-52 text-xs">
                 <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
-                <input type="text" id="quickCommandInput" oninput="handleQuickSearch(event)" class="bg-transparent border-none text-white placeholder-slate-500 focus:outline-none w-full" placeholder="Cepat cari menu...">
+                <input type="text" id="quickCommandInput" oninput="handleQuickSearch(event)" class="bg-transparent border-none text-white placeholder-slate-500 focus:outline-none w-full" placeholder="Cari menu...">
             </div>
 
             <div class="flex items-center gap-2">
@@ -133,9 +133,8 @@
                 <button onclick="switchTab('social')" id="navSocial" class="p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-1.5 transition-all"><i class="fa-solid fa-globe text-indigo-400"></i><span class="hidden xl:inline">Sosial</span></button>
                 <button onclick="switchTab('finance')" id="navFinance" class="p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-1.5 transition-all"><i class="fa-solid fa-wallet text-emerald-400"></i><span class="hidden xl:inline">Keuangan</span></button>
                 <button onclick="switchTab('time')" id="navTime" class="p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-1.5 transition-all"><i class="fa-solid fa-clock text-amber-400"></i><span class="hidden xl:inline">Waktu</span></button>
+                <button onclick="switchTab('notes')" id="navNotes" class="p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-1.5 transition-all"><i class="fa-solid fa-note-sticky text-yellow-400"></i><span class="hidden xl:inline">Catatan</span></button>
                 <button onclick="switchTab('tools')" id="navTools" class="p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-1.5 transition-all"><i class="fa-solid fa-toolbox text-cyan-400"></i><span class="hidden xl:inline">Tools</span></button>
-                <button onclick="switchTab('feeds')" id="navFeeds" class="p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-1.5 transition-all"><i class="fa-solid fa-rss text-blue-400"></i><span class="hidden xl:inline">Berita</span></button>
-                <button onclick="switchTab('fun')" id="navFun" class="p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-1.5 transition-all"><i class="fa-solid fa-gamepad text-fuchsia-400"></i><span class="hidden xl:inline">Hiburan</span></button>
                 <button onclick="switchTab('profile')" id="navProfile" class="p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-1.5 transition-all"><i class="fa-solid fa-user-gear text-pink-400"></i><span class="hidden xl:inline">Profil</span></button>
                 <button onclick="switchTab('admin')" id="navAdmin" class="p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-rose-600/30 flex items-center gap-1.5 transition-all admin-only"><i class="fa-solid fa-shield-halved text-rose-400"></i><span class="hidden xl:inline">Admin</span></button>
             </nav>
@@ -146,9 +145,9 @@
     <template id="templateOverviewView">
         <div class="space-y-5">
             <div class="glass-panel p-6 rounded-3xl border border-slate-800 shadow-xl bg-gradient-to-r from-brand-900/20 via-slate-900/60 to-indigo-950/30 space-y-2">
-                <span class="px-2.5 py-0.5 rounded-full bg-brand-500/15 text-brand-500 text-[10px] font-semibold border border-brand-500/25">Dashboard v6.4 Optimized</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-brand-500/15 text-brand-500 text-[10px] font-semibold border border-brand-500/25">Dashboard v6.5 Master</span>
                 <h2 id="overviewWelcomeTitle" class="text-2xl font-bold text-white">Selamat Datang Kembali!</h2>
-                <p class="text-xs text-slate-300">Sistem teroptimasi penuh dengan sinkronisasi Gist otomatis dan efisiensi maksimal.</p>
+                <p class="text-xs text-slate-300">Sistem terpusat dengan fitur catatan, edit tugas/keuangan, dan Gist auto-sync.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center gap-3.5">
@@ -160,8 +159,8 @@
                     <div><p class="text-[11px] text-slate-400">Agenda Aktif</p><h4 id="overviewTaskCount" class="text-base font-bold text-white">0 Tugas</h4></div>
                 </div>
                 <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center gap-3.5">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-lg border border-emerald-500/25"><i class="fa-solid fa-bolt"></i></div>
-                    <div><p class="text-[11px] text-slate-400">Performa Gist</p><h4 class="text-base font-bold text-emerald-400">100% Sinkron</h4></div>
+                    <div class="w-10 h-10 rounded-xl bg-yellow-600/20 text-yellow-400 flex items-center justify-center text-lg border border-yellow-500/25"><i class="fa-solid fa-note-sticky"></i></div>
+                    <div><p class="text-[11px] text-slate-400">Total Catatan</p><h4 id="overviewNoteCount" class="text-base font-bold text-white">0 Catatan</h4></div>
                 </div>
             </div>
         </div>
@@ -194,6 +193,127 @@
             <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3 h-fit">
                 <h3 class="font-bold text-white text-xs border-b border-slate-800 pb-2 flex items-center gap-2"><i class="fa-solid fa-users text-emerald-400"></i> Pengguna Online</h3>
                 <div id="activeUsersList" class="space-y-2 max-h-52 overflow-y-auto pr-1 text-xs"></div>
+            </div>
+        </div>
+    </template>
+
+    <!-- KEUANGAN (DENGAN MARKET & KRIPTO PINDAHAN) -->
+    <template id="templateFinanceView">
+        <div class="space-y-5">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center justify-between">
+                    <div><p class="text-slate-400">Saldo Bersih</p><h4 id="finTotalBalance" class="text-xl font-bold text-white mt-0.5">Rp 0</h4></div>
+                    <div class="w-10 h-10 rounded-xl bg-brand-600/20 text-brand-500 flex items-center justify-center text-lg border border-brand-500/25"><i class="fa-solid fa-wallet"></i></div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center justify-between">
+                    <div><p class="text-slate-400">Pemasukan</p><h4 id="finTotalIncome" class="text-xl font-bold text-emerald-400 mt-0.5">Rp 0</h4></div>
+                    <div class="w-10 h-10 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-lg border border-emerald-500/25"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center justify-between">
+                    <div><p class="text-slate-400">Pengeluaran</p><h4 id="finTotalExpense" class="text-xl font-bold text-rose-400 mt-0.5">Rp 0</h4></div>
+                    <div class="w-10 h-10 rounded-xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-lg border border-rose-500/25"><i class="fa-solid fa-arrow-trend-down"></i></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 text-xs">
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3 h-fit">
+                    <h3 id="financeFormTitle" class="font-bold text-white text-xs border-b border-slate-800 pb-2 flex items-center gap-1.5"><i class="fa-solid fa-plus-circle text-brand-500"></i> Tambah / Edit Transaksi</h3>
+                    <form onsubmit="handleFinanceSubmit(event)" class="space-y-3">
+                        <input type="hidden" id="editFinanceId" value="">
+                        <div><label class="block text-slate-300 mb-1">Keterangan</label><input type="text" id="finDesc" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white" placeholder="Gaji / Belanja"></div>
+                        <div><label class="block text-slate-300 mb-1">Nominal (Rp)</label><input type="number" id="finAmount" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white" placeholder="100000"></div>
+                        <div><label class="block text-slate-300 mb-1">Tipe</label><select id="finType" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white"><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select></div>
+                        <div class="flex gap-2">
+                            <button type="submit" id="financeSubmitBtn" class="flex-1 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow">Simpan</button>
+                            <button type="button" onclick="cancelEditFinance()" id="financeCancelBtn" class="hidden px-3 py-2.5 bg-slate-800 text-slate-300 rounded-xl">Batal</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="lg:col-span-2 space-y-5">
+                    <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3">
+                        <h3 class="font-bold text-white text-xs border-b border-slate-800 pb-2 flex items-center gap-1.5"><i class="fa-solid fa-list-ul text-indigo-400"></i> Riwayat Keuangan</h3>
+                        <div class="overflow-x-auto max-h-60 overflow-y-auto pr-1">
+                            <table class="w-full text-left text-slate-300">
+                                <thead class="bg-slate-900 uppercase text-slate-400 sticky top-0 border-b border-slate-800 font-semibold text-[10px]">
+                                    <tr><th class="p-2.5">Tanggal</th><th class="p-2.5">Keterangan</th><th class="p-2.5">Tipe</th><th class="p-2.5 text-right">Nominal</th><th class="p-2.5 text-center">Aksi</th></tr>
+                                </thead>
+                                <tbody id="financeTableBody" class="divide-y divide-slate-800/60"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Market & Kripto Pindahan ke Keuangan -->
+                    <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3">
+                        <h3 class="font-bold text-white text-xs border-b border-slate-800 pb-2 flex items-center gap-1.5"><i class="fa-solid fa-chart-line text-emerald-400"></i> Pasar & Kripto (Financial Feeds)</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="flex justify-between items-center p-3 bg-slate-900 rounded-xl border border-slate-800"><span class="font-semibold text-white">BTC / USD</span><span class="text-emerald-400 font-mono font-bold">+3.45% ($68,450)</span></div>
+                            <div class="flex justify-between items-center p-3 bg-slate-900 rounded-xl border border-slate-800"><span class="font-semibold text-white">ETH / USD</span><span class="text-emerald-400 font-mono font-bold">+2.12% ($3,520)</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- WAKTU (DENGAN CUACA, JAM, & KALENDER PINDAHAN) -->
+    <template id="templateTimeView">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 text-xs">
+            <div class="space-y-5">
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800 text-center space-y-4 flex flex-col justify-center items-center">
+                    <h3 class="font-bold text-white text-sm flex items-center gap-1.5"><i class="fa-solid fa-stopwatch text-amber-400"></i> Pomodoro Timer</h3>
+                    <div class="p-5 bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-xs"><div id="pomodoroDisplay" class="text-4xl font-mono font-bold text-amber-400">25:00</div></div>
+                    <div class="flex gap-2 w-full max-w-xs">
+                        <button onclick="startPomodoro()" class="flex-1 py-2 bg-emerald-600 text-white rounded-xl">Mulai</button>
+                        <button onclick="pausePomodoro()" class="flex-1 py-2 bg-amber-600 text-white rounded-xl">Jeda</button>
+                        <button onclick="resetPomodoro()" class="flex-1 py-2 bg-slate-800 text-slate-300 rounded-xl">Reset</button>
+                    </div>
+                </div>
+
+                <!-- Cuaca Pindahan ke Waktu -->
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3">
+                    <h3 class="font-bold text-white text-xs border-b border-slate-800 pb-2 flex items-center gap-1.5"><i class="fa-solid fa-cloud-sun text-cyan-400"></i> Cuaca & Lokasi</h3>
+                    <div class="space-y-2 bg-slate-900 p-4 rounded-xl border border-slate-800 text-slate-300">
+                        <p class="font-bold text-white text-sm">Denpasar / Perangkat</p>
+                        <p class="text-2xl font-bold text-cyan-400 font-mono">31°C <span class="text-xs text-slate-400 font-normal">Cerah Berawan</span></p>
+                    </div>
+                    <button onclick="requestDevicePermissions()" class="w-full py-2.5 bg-brand-600 text-white rounded-xl font-semibold shadow">Izinkan Lokasi</button>
+                </div>
+            </div>
+
+            <div class="space-y-5 flex flex-col">
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3 flex-1 flex flex-col">
+                    <h3 id="taskFormTitle" class="font-bold text-white text-xs border-b border-slate-800 pb-2 flex items-center gap-1.5"><i class="fa-solid fa-calendar-days text-cyan-400"></i> Agenda & Tugas (Tambah / Edit)</h3>
+                    <form onsubmit="handleTaskSubmit(event)" class="flex gap-2">
+                        <input type="hidden" id="editTaskId" value="">
+                        <input type="text" id="taskInput" required class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white" placeholder="Agenda baru...">
+                        <button type="submit" id="taskSubmitBtn" class="px-3.5 py-2 bg-brand-600 text-white rounded-xl">Simpan</button>
+                        <button type="button" onclick="cancelEditTask()" id="taskCancelBtn" class="hidden px-3 py-2 bg-slate-800 text-slate-300 rounded-xl">Batal</button>
+                    </form>
+                    <div id="taskListContainer" class="space-y-2 max-h-72 overflow-y-auto pr-1 flex-1"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- MENU CATATAN BARU DENGAN FITUR EDIT -->
+    <template id="templateNotesView">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 text-xs">
+            <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3 h-fit">
+                <h3 id="noteFormTitle" class="font-bold text-white text-xs border-b border-slate-800 pb-2 flex items-center gap-1.5"><i class="fa-solid fa-note-sticky text-yellow-400"></i> Buat / Edit Catatan</h3>
+                <form onsubmit="handleNoteSubmit(event)" class="space-y-3">
+                    <input type="hidden" id="editNoteId" value="">
+                    <div><label class="block text-slate-300 mb-1">Judul Catatan</label><input type="text" id="noteTitle" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white" placeholder="Judul penting..."></div>
+                    <div><label class="block text-slate-300 mb-1">Isi Catatan</label><textarea id="noteContent" rows="4" required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white resize-none" placeholder="Tulis catatan lengkap di sini..."></textarea></div>
+                    <div class="flex gap-2">
+                        <button type="submit" id="noteSubmitBtn" class="flex-1 py-2.5 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold rounded-xl shadow">Simpan Catatan</button>
+                        <button type="button" onclick="cancelEditNote()" id="noteCancelBtn" class="hidden px-3 py-2.5 bg-slate-800 text-slate-300 rounded-xl">Batal</button>
+                    </div>
+                </form>
+            </div>
+            <div class="lg:col-span-2 glass-panel p-5 rounded-2xl border border-slate-800 space-y-3">
+                <h3 class="font-bold text-white text-xs border-b border-slate-800 pb-2 flex items-center gap-1.5"><i class="fa-solid fa-book-open text-indigo-400"></i> Daftar Catatan Tersimpan</h3>
+                <div id="notesListContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-96 overflow-y-auto pr-1"></div>
             </div>
         </div>
     </template>
@@ -239,109 +359,6 @@
                         <button onclick="generateSecurePassword()" class="px-4 py-2 bg-brand-600 text-white rounded-lg">Generate</button>
                     </div>
                 </div>
-            </div>
-        </div>
-    </template>
-
-    <template id="templateFinanceView">
-        <div class="space-y-5">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center justify-between">
-                    <div><p class="text-slate-400">Saldo Bersih</p><h4 id="finTotalBalance" class="text-xl font-bold text-white mt-0.5">Rp 0</h4></div>
-                    <div class="w-10 h-10 rounded-xl bg-brand-600/20 text-brand-500 flex items-center justify-center text-lg border border-brand-500/25"><i class="fa-solid fa-wallet"></i></div>
-                </div>
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center justify-between">
-                    <div><p class="text-slate-400">Pemasukan</p><h4 id="finTotalIncome" class="text-xl font-bold text-emerald-400 mt-0.5">Rp 0</h4></div>
-                    <div class="w-10 h-10 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-lg border border-emerald-500/25"><i class="fa-solid fa-arrow-trend-up"></i></div>
-                </div>
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center justify-between">
-                    <div><p class="text-slate-400">Pengeluaran</p><h4 id="finTotalExpense" class="text-xl font-bold text-rose-400 mt-0.5">Rp 0</h4></div>
-                    <div class="w-10 h-10 rounded-xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-lg border border-rose-500/25"><i class="fa-solid fa-arrow-trend-down"></i></div>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 text-xs">
-                <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3 h-fit">
-                    <h3 class="font-bold text-white text-xs border-b border-slate-800 pb-2 flex items-center gap-1.5"><i class="fa-solid fa-plus-circle text-brand-500"></i> Tambah Transaksi</h3>
-                    <form onsubmit="handleFinanceSubmit(event)" class="space-y-3">
-                        <div><label class="block text-slate-300 mb-1">Keterangan</label><input type="text" id="finDesc" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white" placeholder="Gaji / Belanja"></div>
-                        <div><label class="block text-slate-300 mb-1">Nominal (Rp)</label><input type="number" id="finAmount" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white" placeholder="100000"></div>
-                        <div><label class="block text-slate-300 mb-1">Tipe</label><select id="finType" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white"><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select></div>
-                        <button type="submit" class="w-full py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow">Simpan</button>
-                    </form>
-                </div>
-                <div class="lg:col-span-2 glass-panel p-5 rounded-2xl border border-slate-800 space-y-3">
-                    <h3 class="font-bold text-white text-xs border-b border-slate-800 pb-2 flex items-center gap-1.5"><i class="fa-solid fa-list-ul text-indigo-400"></i> Riwayat Keuangan</h3>
-                    <div class="overflow-x-auto max-h-80 overflow-y-auto pr-1">
-                        <table class="w-full text-left text-slate-300">
-                            <thead class="bg-slate-900 uppercase text-slate-400 sticky top-0 border-b border-slate-800 font-semibold text-[10px]">
-                                <tr><th class="p-2.5">Tanggal</th><th class="p-2.5">Keterangan</th><th class="p-2.5">Tipe</th><th class="p-2.5 text-right">Nominal</th><th class="p-2.5 text-center">Aksi</th></tr>
-                            </thead>
-                            <tbody id="financeTableBody" class="divide-y divide-slate-800/60"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </template>
-
-    <template id="templateTimeView">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 text-xs">
-            <div class="glass-panel p-5 rounded-2xl border border-slate-800 text-center space-y-4 flex flex-col justify-center items-center">
-                <h3 class="font-bold text-white text-sm flex items-center gap-1.5"><i class="fa-solid fa-stopwatch text-amber-400"></i> Pomodoro Timer</h3>
-                <div class="p-5 bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-xs"><div id="pomodoroDisplay" class="text-4xl font-mono font-bold text-amber-400">25:00</div></div>
-                <div class="flex gap-2 w-full max-w-xs">
-                    <button onclick="startPomodoro()" class="flex-1 py-2 bg-emerald-600 text-white rounded-xl">Mulai</button>
-                    <button onclick="pausePomodoro()" class="flex-1 py-2 bg-amber-600 text-white rounded-xl">Jeda</button>
-                    <button onclick="resetPomodoro()" class="flex-1 py-2 bg-slate-800 text-slate-300 rounded-xl">Reset</button>
-                </div>
-            </div>
-            <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3 flex flex-col">
-                <h3 class="font-bold text-white text-xs border-b border-slate-800 pb-2 flex items-center gap-1.5"><i class="fa-solid fa-calendar-days text-cyan-400"></i> Agenda & Tugas</h3>
-                <form onsubmit="handleTaskSubmit(event)" class="flex gap-2">
-                    <input type="text" id="taskInput" required class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white" placeholder="Agenda baru...">
-                    <button type="submit" class="px-3.5 py-2 bg-brand-600 text-white rounded-xl">Simpan</button>
-                </form>
-                <div id="taskListContainer" class="space-y-2 max-h-48 overflow-y-auto pr-1 flex-1"></div>
-            </div>
-        </div>
-    </template>
-
-    <template id="templateFeedsView">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
-            <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3">
-                <h3 class="font-bold text-white text-xs border-b border-slate-800 pb-2 flex items-center gap-1.5"><i class="fa-solid fa-cloud-sun text-cyan-400"></i> Cuaca & Lokasi</h3>
-                <div class="space-y-2 bg-slate-900 p-4 rounded-xl border border-slate-800 text-slate-300">
-                    <p class="font-bold text-white text-sm">Denpasar / Perangkat</p>
-                    <p class="text-2xl font-bold text-cyan-400 font-mono">31°C <span class="text-xs text-slate-400 font-normal">Cerah Berawan</span></p>
-                </div>
-                <button onclick="requestDevicePermissions()" class="w-full py-2.5 bg-brand-600 text-white rounded-xl font-semibold shadow">Izinkan Lokasi</button>
-            </div>
-            <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3">
-                <h3 class="font-bold text-white text-xs border-b border-slate-800 pb-2 flex items-center gap-1.5"><i class="fa-solid fa-chart-line text-emerald-400"></i> Pasar & Kripto</h3>
-                <div class="space-y-2.5">
-                    <div class="flex justify-between items-center p-3 bg-slate-900 rounded-xl border border-slate-800"><span class="font-semibold text-white">BTC / USD</span><span class="text-emerald-400 font-mono font-bold">+3.45% ($68,450)</span></div>
-                    <div class="flex justify-between items-center p-3 bg-slate-900 rounded-xl border border-slate-800"><span class="font-semibold text-white">ETH / USD</span><span class="text-emerald-400 font-mono font-bold">+2.12% ($3,520)</span></div>
-                </div>
-            </div>
-        </div>
-    </template>
-
-    <template id="templateFunView">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-3 flex flex-col justify-center items-center">
-                <div class="w-12 h-12 rounded-2xl bg-fuchsia-600/20 text-fuchsia-400 flex items-center justify-center text-xl border border-fuchsia-500/25 mb-1"><i class="fa-solid fa-quote-left"></i></div>
-                <h3 class="font-bold text-white text-sm">Kutipan Inspiratif</h3>
-                <p id="quoteDisplay" class="text-xs text-slate-200 italic max-w-sm">"Kesuksesan berawal dari disiplin dan konsistensi."</p>
-                <button onclick="generateNewQuote()" class="px-4 py-2 bg-fuchsia-600 text-white rounded-xl">Muat Lainnya</button>
-            </div>
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-3 flex flex-col justify-center items-center">
-                <div class="w-12 h-12 rounded-2xl bg-cyan-600/20 text-cyan-400 flex items-center justify-center text-xl border border-cyan-500/25 mb-1"><i class="fa-solid fa-dice"></i></div>
-                <h3 class="font-bold text-white text-sm">Mini Game: Tebak Angka (1-10)</h3>
-                <div class="flex gap-2 w-full max-w-xs justify-center">
-                    <input type="number" id="guessInput" min="1" max="10" class="w-16 bg-slate-900 border border-slate-700 rounded-xl text-center text-white py-1.5">
-                    <button onclick="checkGuessNumber()" class="px-4 py-1.5 bg-cyan-600 text-white rounded-xl">Tebak</button>
-                </div>
-                <p id="guessResultText" class="text-xs text-cyan-400 font-semibold"></p>
             </div>
         </div>
     </template>
@@ -419,7 +436,7 @@
                     </div>
                 </div>
                 <div id="githubLogContainer" class="p-3 bg-slate-900 rounded-xl border border-slate-800 font-mono text-[10px] text-emerald-400 h-28 overflow-y-auto space-y-1">
-                    <div>[System v6.4] Gist Server & Auto-Sync Log aktif sepenuhnya...</div>
+                    <div>[System v6.5] Gist Server & Auto-Sync Log aktif sepenuhnya...</div>
                 </div>
             </div>
 
@@ -443,7 +460,7 @@
 
     <!-- MASTER LOGIC -->
     <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V64';
+        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V65';
 
         let appState = {
             currentUser: null,
@@ -452,12 +469,12 @@
             authMode: 'login',
             users: [
                 { name: 'Ultra Admin', email: 'admin@smartcore.io', password: 'admin', role: 'admin', joinedAt: '2026-01-01', avatar: '' },
-                { name: 'Danis User', email: 'danis@smartcore.io', password: 'user', role: 'user', joinedAt: '2026-08-13', avatar: '' },
-                { name: 'Danis', email: 'danis', password: 'danis', role: 'user', joinedAt: '2026-08-13', avatar: '' }
+                { name: 'Danis User', email: 'danis@smartcore.io', password: 'user', role: 'user', joinedAt: '2026-08-13', avatar: '' }
             ],
-            posts: [{ id: 1, author: 'Ultra Admin', content: 'SmartCore v6.4 Optimized aktif sempurna!', image: null, likes: 12, createdAt: 'Baru saja' }],
+            posts: [{ id: 1, author: 'Ultra Admin', content: 'SmartCore v6.5 Master aktif sempurna dengan catatan & edit data!', image: null, likes: 15, createdAt: 'Baru saja' }],
             financeTransactions: [{ id: 1, date: '2026-08-01', desc: 'Dana Hibah', amount: 15000000, type: 'income' }],
-            tasks: [{ id: 1, text: 'Verifikasi sistem teroptimasi', completed: true }],
+            tasks: [{ id: 1, text: 'Verifikasi Gist Server & Fitur Edit', completed: true }],
+            notes: [{ id: 1, title: 'Catatan Utama', content: 'Sistem SmartCore v6.5 berhasil diperbarui sesuai instruksi.', date: '2026-08-14' }],
             userPreferences: { accentColor: 'indigo', soundEnabled: 'enabled' },
             githubConfig: { token: '', gistId: '', connected: true }
         };
@@ -549,7 +566,7 @@
                     await fetch(`https://api.github.com/gists/${id}`, {
                         method: 'PATCH',
                         headers: { 'Authorization': `token ${t}`, 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ description: 'SmartCore v6.4 Sync', files: { 'db.json': { content: JSON.stringify(appState) } } })
+                        body: JSON.stringify({ description: 'SmartCore v6.5 Sync', files: { 'db.json': { content: JSON.stringify(appState) } } })
                     });
                 }
                 appendLog('[Auto-Persist] Data tersimpan di server.');
@@ -572,7 +589,8 @@
         });
 
         function applyUserPreferences() {
-            document.getElementById('appBody').setAttribute('data-accent', appState.userPreferences?.accentColor || 'indigo');
+            const accent = appState.userPreferences?.accentColor || 'indigo';
+            document.getElementById('appBody').setAttribute('data-accent', accent);
         }
 
         function checkAuthStatus() {
@@ -597,12 +615,14 @@
 
         function switchAuthTab(m) {
             appState.authMode = m;
-            ['login', 'register', 'admin'].forEach(x => {
+            ['login', 'register'].forEach(x => {
                 const btn = document.getElementById('tab' + x.charAt(0).toUpperCase() + x.slice(1) + 'Btn');
                 if (btn) btn.className = x === m ? "flex-1 py-2 rounded-lg bg-brand-600 text-white transition-all" : "flex-1 py-2 rounded-lg text-slate-400 hover:text-white transition-all";
             });
             document.getElementById('nameFieldGroup').classList.toggle('hidden', m !== 'register');
-            document.getElementById('authTitle').textContent = m === 'register' ? 'Daftar Akun Baru' : m === 'admin' ? 'Panel Admin' : 'SmartCore v6.4';
+            document.getElementById('authTitle').textContent = m === 'register' ? 'Daftar Akun Baru' : 'SmartCore v6.5 Masuk';
+            document.getElementById('authSubmitBtn').textContent = m === 'register' ? 'Daftar Akun' : 'Masuk Sistem';
+            document.getElementById('authStatusMsg').textContent = '';
         }
 
         function handleAuthSubmit(e) {
@@ -610,23 +630,52 @@
             const iden = document.getElementById('authEmail').value.trim().toLowerCase();
             const pass = document.getElementById('authPassword').value.trim();
             const name = document.getElementById('regName')?.value.trim() || '';
+            const statusMsg = document.getElementById('authStatusMsg');
 
             if (appState.authMode === 'register') {
-                if (appState.users.some(u => u.email.toLowerCase() === iden)) { showToast('Email sudah terdaftar!', 'error'); return; }
-                const newUser = { name: name || iden, email: iden, password: pass, role: 'user', joinedAt: new Date().toISOString().split('T')[0], avatar: '' };
-                appState.users.push(newUser); appState.currentUser = newUser;
-                saveStateToStorage(); showToast('Registrasi berhasil!');
-            } else if (appState.authMode === 'login') {
-                const u = appState.users.find(x => (x.email.toLowerCase() === iden || x.name.toLowerCase() === iden) && x.password === pass);
-                if (!u) { showToast('Kredensial salah!', 'error'); return; }
-                appState.currentUser = u; showToast('Berhasil masuk!');
-            } else if (appState.authMode === 'admin') {
-                const adm = appState.users.find(x => x.role === 'admin' && (x.email.toLowerCase() === iden || x.name.toLowerCase() === iden || pass === 'admin'));
-                if (!adm && pass !== 'admin') { showToast('Admin salah!', 'error'); return; }
-                appState.currentUser = adm || { name: 'Ultra Admin', email: iden || 'admin@smartcore.io', role: 'admin', joinedAt: '2026-01-01', avatar: '' };
-                showToast('Admin masuk!');
+                const exists = appState.users.find(u => u.email.toLowerCase() === iden || u.name.toLowerCase() === iden);
+                if (exists) {
+                    statusMsg.className = 'text-[11px] text-center font-medium pt-1 text-rose-400';
+                    statusMsg.textContent = '❌ Akun sudah terdaftar! Silakan gunakan email lain atau masuk.';
+                    showToast('Akun sudah terdaftar!', 'error');
+                    return;
+                }
+                const role = iden === 'admin' ? 'admin' : 'user';
+                const newUser = { name: name || iden, email: iden, password: pass, role: role, joinedAt: new Date().toISOString().split('T')[0], avatar: '' };
+                appState.users.push(newUser);
+                appState.currentUser = newUser;
+                saveStateToStorage();
+                statusMsg.className = 'text-[11px] text-center font-medium pt-1 text-emerald-400';
+                statusMsg.textContent = '✅ Berhasil terdaftar! Memuat ulang...';
+                showToast('Registrasi berhasil! Memuat ulang...');
+                setTimeout(() => { location.reload(); }, 1000);
+            } else {
+                // Check if admin special login or user
+                let u = appState.users.find(x => (x.email.toLowerCase() === iden || x.name.toLowerCase() === iden) && x.password === pass);
+                if (!u && iden === 'admin' && pass === 'admin') {
+                    u = { name: 'Ultra Admin', email: 'admin@smartcore.io', role: 'admin', joinedAt: '2026-01-01', password: 'admin' };
+                    appState.users.push(u);
+                }
+
+                if (!u) {
+                    const checkExists = appState.users.find(x => x.email.toLowerCase() === iden || x.name.toLowerCase() === iden);
+                    statusMsg.className = 'text-[11px] text-center font-medium pt-1 text-rose-400';
+                    if (!checkExists) {
+                        statusMsg.textContent = '⚠️ Keterangan: Akun belum terdaftar. Silakan daftar terlebih dahulu.';
+                    } else {
+                        statusMsg.textContent = '❌ Gagal masuk: Kata sandi salah.';
+                    }
+                    showToast('Gagal masuk!', 'error');
+                    return;
+                }
+
+                appState.currentUser = u;
+                saveStateToStorage();
+                statusMsg.className = 'text-[11px] text-center font-medium pt-1 text-emerald-400';
+                statusMsg.textContent = '✅ Berhasil masuk! Memuat ulang halaman...';
+                showToast('Berhasil masuk! Memuat ulang...');
+                setTimeout(() => { location.reload(); }, 1000);
             }
-            appState.currentTab = 'overview'; checkAuthStatus(); document.getElementById('authForm').reset();
         }
 
         function logoutUser() {
@@ -636,7 +685,7 @@
         function switchTab(tab, save = true) {
             if (appState.currentUser?.role !== 'admin' && tab === 'admin') tab = 'overview';
             appState.currentTab = tab; if (save) saveStateToStorage();
-            ['overview', 'social', 'finance', 'time', 'tools', 'feeds', 'fun', 'profile', 'admin'].forEach(t => {
+            ['overview', 'social', 'finance', 'time', 'notes', 'tools', 'profile', 'admin'].forEach(t => {
                 const b = document.getElementById('nav' + t.charAt(0).toUpperCase() + t.slice(1));
                 if (b) b.className = t === tab ? "p-2.5 rounded-xl bg-brand-600 text-white shadow flex items-center gap-1.5 transition-all" : "p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-brand-600/30 flex items-center gap-1.5 transition-all";
             });
@@ -656,6 +705,7 @@
                 appState.financeTransactions.forEach(t => t.type === 'income' ? inc += t.amount : exp += t.amount);
                 document.getElementById('overviewBalance').textContent = 'Rp ' + (inc - exp).toLocaleString();
                 document.getElementById('overviewTaskCount').textContent = appState.tasks.filter(t => !t.completed).length + ' Tugas';
+                document.getElementById('overviewNoteCount').textContent = (appState.notes || []).length + ' Catatan';
             } else if (appState.currentTab === 'social') {
                 renderPostsFeed(); renderActiveUsers();
             } else if (appState.currentTab === 'tools') {
@@ -664,6 +714,8 @@
                 renderFinanceView();
             } else if (appState.currentTab === 'time') {
                 renderTasks();
+            } else if (appState.currentTab === 'notes') {
+                renderNotes();
             } else if (appState.currentTab === 'profile') {
                 if (appState.currentUser) {
                     document.getElementById('profileNameInput').value = appState.currentUser.name;
@@ -680,8 +732,8 @@
         function handleQuickSearch(e) {
             const q = e.target.value.toLowerCase().trim();
             if (q.includes('keuangan')) switchTab('finance');
-            else if (q.includes('sosial')) switchTab('social');
-            else if (q.includes('tool')) switchTab('tools');
+            else if (q.includes('catatan')) switchTab('notes');
+            else if (q.includes('waktu') || q.includes('agenda')) switchTab('time');
         }
 
         // Social
@@ -724,6 +776,72 @@
             `).join('');
         }
 
+        // Notes (Fitur Tambah & Edit)
+        function handleNoteSubmit(e) {
+            e.preventDefault();
+            const editId = document.getElementById('editNoteId').value;
+            const title = document.getElementById('noteTitle').value.trim();
+            const content = document.getElementById('noteContent').value.trim();
+            if (!title || !content) return;
+
+            if (editId) {
+                const note = appState.notes.find(n => n.id == editId);
+                if (note) { note.title = title; note.content = content; }
+                showToast('Catatan berhasil diperbarui!');
+            } else {
+                if (!appState.notes) appState.notes = [];
+                appState.notes.unshift({ id: Date.now(), title, content, date: new Date().toISOString().split('T')[0] });
+                showToast('Catatan berhasil disimpan!');
+            }
+            saveStateToStorage();
+            cancelEditNote();
+        }
+        function editNote(id) {
+            const note = appState.notes.find(n => n.id == id);
+            if (!note) return;
+            document.getElementById('editNoteId').value = note.id;
+            document.getElementById('noteTitle').value = note.title;
+            document.getElementById('noteContent').value = note.content;
+            document.getElementById('noteFormTitle').innerHTML = '<i class="fa-solid fa-note-sticky text-yellow-400"></i> Edit Catatan';
+            document.getElementById('noteSubmitBtn').textContent = 'Perbarui Catatan';
+            document.getElementById('noteCancelBtn').classList.remove('hidden');
+        }
+        function cancelEditNote() {
+            document.getElementById('editNoteId').value = '';
+            document.getElementById('noteTitle').value = '';
+            document.getElementById('noteContent').value = '';
+            document.getElementById('noteFormTitle').innerHTML = '<i class="fa-solid fa-note-sticky text-yellow-400"></i> Buat / Edit Catatan';
+            document.getElementById('noteSubmitBtn').textContent = 'Simpan Catatan';
+            document.getElementById('noteCancelBtn').classList.add('hidden');
+        }
+        function deleteNote(id) {
+            if (confirm('Hapus catatan ini?')) {
+                appState.notes = appState.notes.filter(n => n.id != id);
+                saveStateToStorage();
+                showToast('Catatan dihapus.', 'info');
+            }
+        }
+        function renderNotes() {
+            const c = document.getElementById('notesListContainer');
+            if (!c) return;
+            if (!appState.notes || appState.notes.length === 0) {
+                c.innerHTML = '<p class="text-slate-500 italic col-span-2 text-center py-6">Belum ada catatan.</p>';
+                return;
+            }
+            c.innerHTML = appState.notes.map(n => `
+                <div class="glass-panel p-4 rounded-xl border border-slate-800 space-y-2 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start"><h4 class="font-bold text-white">${n.title}</h4><span class="text-[10px] text-slate-500">${n.date}</span></div>
+                        <p class="text-slate-300 mt-1 whitespace-pre-line text-xs">${n.content}</p>
+                    </div>
+                    <div class="flex justify-end gap-2 pt-2 border-t border-slate-800/80">
+                        <button onclick="editNote(${n.id})" class="text-cyan-400 hover:text-cyan-300 px-2 py-1"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+                        <button onclick="deleteNote(${n.id})" class="text-rose-400 hover:text-rose-300 px-2 py-1"><i class="fa-solid fa-trash"></i> Hapus</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
         // Tools
         function switchToolSub(sub) {
             appState.currentToolSub = sub;
@@ -761,14 +879,43 @@
             document.getElementById('generatedPasswordOutput').value = p;
         }
 
-        // Finance
+        // Finance (Dengan Edit Transaksi)
         function handleFinanceSubmit(e) {
             e.preventDefault();
+            const editId = document.getElementById('editFinanceId').value;
             const desc = document.getElementById('finDesc').value.trim();
             const amount = parseFloat(document.getElementById('finAmount').value);
             const type = document.getElementById('finType').value;
-            appState.financeTransactions.unshift({ id: Date.now(), date: new Date().toISOString().split('T')[0], desc, amount, type });
-            saveStateToStorage(); e.target.reset(); showToast('Transaksi dicatat!');
+
+            if (editId) {
+                const fin = appState.financeTransactions.find(f => f.id == editId);
+                if (fin) { fin.desc = desc; fin.amount = amount; fin.type = type; }
+                showToast('Transaksi diperbarui!');
+            } else {
+                appState.financeTransactions.unshift({ id: Date.now(), date: new Date().toISOString().split('T')[0], desc, amount, type });
+                showToast('Transaksi dicatat!');
+            }
+            saveStateToStorage();
+            cancelEditFinance();
+        }
+        function editFinance(id) {
+            const fin = appState.financeTransactions.find(f => f.id == id);
+            if (!fin) return;
+            document.getElementById('editFinanceId').value = fin.id;
+            document.getElementById('finDesc').value = fin.desc;
+            document.getElementById('finAmount').value = fin.amount;
+            document.getElementById('finType').value = fin.type;
+            document.getElementById('financeFormTitle').innerHTML = '<i class="fa-solid fa-pen-to-square text-brand-500"></i> Edit Transaksi';
+            document.getElementById('financeSubmitBtn').textContent = 'Perbarui';
+            document.getElementById('financeCancelBtn').classList.remove('hidden');
+        }
+        function cancelEditFinance() {
+            document.getElementById('editFinanceId').value = '';
+            document.getElementById('finDesc').value = '';
+            document.getElementById('finAmount').value = '';
+            document.getElementById('financeFormTitle').innerHTML = '<i class="fa-solid fa-plus-circle text-brand-500"></i> Tambah / Edit Transaksi';
+            document.getElementById('financeSubmitBtn').textContent = 'Simpan';
+            document.getElementById('financeCancelBtn').classList.add('hidden');
         }
         function renderFinanceView() {
             const tbody = document.getElementById('financeTableBody');
@@ -776,7 +923,7 @@
             let inc = 0, exp = 0;
             tbody.innerHTML = appState.financeTransactions.map(t => {
                 if(t.type === 'income') inc += t.amount; else exp += t.amount;
-                return `<tr class="hover:bg-slate-900"><td class="p-2.5">${t.date}</td><td class="p-2.5">${t.desc}</td><td class="p-2.5"><span class="${t.type==='income'?'text-emerald-400':'text-rose-400'}">${t.type.toUpperCase()}</span></td><td class="p-2.5 text-right font-mono">Rp ${t.amount.toLocaleString()}</td><td class="p-2.5 text-center"><button onclick="deleteFin(${t.id})" class="text-rose-400"><i class="fa-solid fa-trash"></i></button></td></tr>`;
+                return `<tr class="hover:bg-slate-900"><td class="p-2.5">${t.date}</td><td class="p-2.5">${t.desc}</td><td class="p-2.5"><span class="${t.type==='income'?'text-emerald-400':'text-rose-400'}">${t.type.toUpperCase()}</span></td><td class="p-2.5 text-right font-mono">Rp ${t.amount.toLocaleString()}</td><td class="p-2.5 text-center flex justify-center gap-2"><button onclick="editFinance(${t.id})" class="text-cyan-400"><i class="fa-solid fa-pen-to-square"></i></button><button onclick="deleteFin(${t.id})" class="text-rose-400"><i class="fa-solid fa-trash"></i></button></td></tr>`;
             }).join('');
             document.getElementById('finTotalIncome').textContent = 'Rp ' + inc.toLocaleString();
             document.getElementById('finTotalExpense').textContent = 'Rp ' + exp.toLocaleString();
@@ -784,7 +931,7 @@
         }
         function deleteFin(id) { appState.financeTransactions = appState.financeTransactions.filter(x => x.id !== id); saveStateToStorage(); }
 
-        // Time
+        // Time & Tasks (Dengan Edit Tugas)
         let pomodoroTimer = null, pomodoroSec = 1500;
         function startPomodoro() {
             if (pomodoroTimer) return;
@@ -801,26 +948,45 @@
 
         function handleTaskSubmit(e) {
             e.preventDefault();
+            const editId = document.getElementById('editTaskId').value;
             const text = document.getElementById('taskInput').value.trim();
             if (!text) return;
-            appState.tasks.push({ id: Date.now(), text, completed: false });
-            saveStateToStorage(); e.target.reset();
+
+            if (editId) {
+                const task = appState.tasks.find(t => t.id == editId);
+                if (task) task.text = text;
+                showToast('Agenda diperbarui!');
+            } else {
+                appState.tasks.push({ id: Date.now(), text, completed: false });
+                showToast('Agenda disimpan!');
+            }
+            saveStateToStorage();
+            cancelEditTask();
+        }
+        function editTask(id) {
+            const task = appState.tasks.find(t => t.id == id);
+            if (!task) return;
+            document.getElementById('editTaskId').value = task.id;
+            document.getElementById('taskInput').value = task.text;
+            document.getElementById('taskFormTitle').innerHTML = '<i class="fa-solid fa-pen-to-square text-cyan-400"></i> Edit Agenda';
+            document.getElementById('taskSubmitBtn').textContent = 'Perbarui';
+            document.getElementById('taskCancelBtn').classList.remove('hidden');
+        }
+        function cancelEditTask() {
+            document.getElementById('editTaskId').value = '';
+            document.getElementById('taskInput').value = '';
+            document.getElementById('taskFormTitle').innerHTML = '<i class="fa-solid fa-calendar-days text-cyan-400"></i> Agenda & Tugas (Tambah / Edit)';
+            document.getElementById('taskSubmitBtn').textContent = 'Simpan';
+            document.getElementById('taskCancelBtn').classList.add('hidden');
         }
         function toggleTask(id) { const t = appState.tasks.find(x => x.id === id); if(t) { t.completed = !t.completed; saveStateToStorage(); } }
         function deleteTask(id) { appState.tasks = appState.tasks.filter(x => x.id !== id); saveStateToStorage(); }
         function renderTasks() {
             const c = document.getElementById('taskListContainer');
             if (!c) return;
-            c.innerHTML = appState.tasks.map(t => `<div class="flex items-center justify-between p-2.5 bg-slate-900 rounded-xl text-xs"><div class="flex items-center gap-2"><input type="checkbox" ${t.completed?'checked':''} onchange="toggleTask(${t.id})"><span class="${t.completed?'line-through text-slate-500':''}">${t.text}</span></div><button onclick="deleteTask(${t.id})" class="text-rose-400"><i class="fa-solid fa-trash"></i></button></div>`).join('');
+            c.innerHTML = appState.tasks.map(t => `<div class="flex items-center justify-between p-2.5 bg-slate-900 rounded-xl text-xs"><div class="flex items-center gap-2"><input type="checkbox" ${t.completed?'checked':''} onchange="toggleTask(${t.id})"><span class="${t.completed?'line-through text-slate-500':''}">${t.text}</span></div><div class="flex gap-2"><button onclick="editTask(${t.id})" class="text-cyan-400"><i class="fa-solid fa-pen-to-square"></i></button><button onclick="deleteTask(${t.id})" class="text-rose-400"><i class="fa-solid fa-trash"></i></button></div></div>`).join('');
         }
 
-        // Fun & Feeds
-        const quotes = ["“Kesuksesan berawal dari disiplin dan konsistensi.”", "“Teruslah mencoba dan jangan pernah menyerah.”"];
-        function generateNewQuote() { document.getElementById('quoteDisplay').textContent = quotes[Math.floor(Math.random()*quotes.length)]; }
-        function checkGuessNumber() {
-            const v = parseInt(document.getElementById('guessInput').value);
-            document.getElementById('guessResultText').textContent = v === 7 ? "🎉 Benar!" : "Coba lagi!";
-        }
         function requestDevicePermissions() { showToast('Izin lokasi diberikan!'); }
 
         // Profile & Settings
@@ -842,8 +1008,12 @@
         }
         function handleSaveUserPreferences(e) {
             e.preventDefault();
-            appState.userPreferences = { accentColor: document.getElementById('prefAccentColor').value, soundEnabled: document.getElementById('prefSound').value };
-            saveStateToStorage(); applyUserPreferences(); showToast('Kostumisasi diterapkan!');
+            const accentColor = document.getElementById('prefAccentColor').value;
+            const soundEnabled = document.getElementById('prefSound').value;
+            appState.userPreferences = { accentColor, soundEnabled };
+            saveStateToStorage(); 
+            applyUserPreferences(); 
+            showToast('Kostumisasi & Warna tombol diterapkan!');
         }
 
         // Admin

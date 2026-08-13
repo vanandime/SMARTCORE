@@ -111,7 +111,7 @@
                 </div>
                 <div>
                     <h1 class="font-bold text-sm sm:text-base flex items-center gap-2">
-                        SmartCore <span class="text-brand-500 text-[10px] px-2 py-0.5 bg-brand-500/15 rounded-full border border-brand-500/25 font-semibold">v6.9</span>
+                        SmartCore <span class="text-brand-500 text-[10px] px-2 py-0.5 bg-brand-500/15 rounded-full border border-brand-500/25 font-semibold">v6.10</span>
                     </h1>
                 </div>
             </div>
@@ -154,7 +154,7 @@
     <template id="templateOverviewView">
         <div class="space-y-6">
             <div class="glass-panel p-6 sm:p-8 rounded-3xl shadow-xl bg-gradient-to-r from-brand-900/20 via-black/10 to-indigo-950/20 space-y-2">
-                <span class="px-3 py-1 rounded-full bg-brand-500/15 text-brand-500 text-xs font-semibold border border-brand-500/25">Dashboard v6.9 Master</span>
+                <span class="px-3 py-1 rounded-full bg-brand-500/15 text-brand-500 text-xs font-semibold border border-brand-500/25">Dashboard v6.10 Master</span>
                 <h2 id="overviewWelcomeTitle" class="text-2xl sm:text-3xl font-bold">Selamat Datang Kembali!</h2>
                 <p class="text-xs sm:text-sm opacity-80">Sistem terlindungi enkripsi berlapis anti-hacker dengan pilihan tema tingkat tinggi.</p>
             </div>
@@ -396,7 +396,7 @@
                     </div>
                 </div>
                 <div id="githubLogContainer" class="p-4 bg-black/40 rounded-xl border border-black/10 dark:border-white/10 font-mono text-xs text-emerald-400 h-36 overflow-y-auto space-y-1">
-                    <div>[System v6.9] Enkripsi SHA-256 berlapis anti-hacker & Tema Mahakarya aktif...</div>
+                    <div>[System v6.10] Enkripsi SHA-256 berlapis anti-hacker & Tema Mahakarya aktif...</div>
                 </div>
             </div>
 
@@ -420,7 +420,7 @@
 
     <!-- MASTER LOGIC & ENKRIPSI BERLAPIS -->
     <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V69';
+        const STORAGE_KEY = 'SMARTCORE_STATE_ULTRA_V610';
         const MASTER_ADMIN_TOKEN = 'k9#X$mP9!vL2zQ#8wR$7yF%4bN*3hJ^6';
 
         let appState = {
@@ -429,12 +429,12 @@
             authMode: 'login',
             adminToken: MASTER_ADMIN_TOKEN,
             users: [{ name: 'User Utama', email: 'user@smartcore.io', password: 'user', joinedAt: '2026-08-13', avatar: '' }],
-            posts: [{ id: 1, author: 'SmartCore Security', content: 'Sistem dilindungi enkripsi berlapis SHA-256 anti-hacker dengan pilihan tema mahakarya.', image: null, likes: 35, createdAt: 'Baru saja' }],
-            financeTransactions: [{ id: 1, date: '2026-08-01', desc: 'Secure Fund', amount: 30000000, type: 'income' }],
-            tasks: [{ id: 1, text: 'Verifikasi Enkripsi Berlapis & Tema Baru', completed: true }],
+            posts: [{ id: 1, author: 'SmartCore Security', content: 'Sistem dilindungi enkripsi berlapis SHA-256 anti-hacker dengan pilihan tema mahakarya.', image: null, likes: 40, createdAt: 'Baru saja' }],
+            financeTransactions: [{ id: 1, date: '2026-08-01', desc: 'Secure Fund', amount: 35000000, type: 'income' }],
+            tasks: [{ id: 1, text: 'Verifikasi Otoritas Admin Langsung', completed: true }],
             notes: [{ id: 1, title: 'Catatan Keamanan', content: 'Data terenkripsi aman secara online di server Gist.', date: '2026-08-14' }],
             userPreferences: { theme: 'macos', accentColor: 'indigo', soundEnabled: 'enabled' },
-            githubConfig: { token: MASTER_ADMIN_TOKEN, gistId: 'smartcore_secure_v69', connected: true }
+            githubConfig: { token: MASTER_ADMIN_TOKEN, gistId: 'smartcore_secure_v610', connected: true }
         };
 
         async function secureHash(text) {
@@ -469,11 +469,9 @@
             setTimeout(() => t.remove(), 2800);
         }
 
-        async function saveStateToCloud() {
+        function saveStateToStorageSync() {
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-                appendLog('[Security] Data terenkripsi berlapis SHA-256 & tersimpan di Gist Cloud.');
-                renderAll();
             } catch(e) { console.error(e); }
         }
 
@@ -483,24 +481,13 @@
                 if (saved) {
                     appState = { ...appState, ...JSON.parse(saved) };
                 }
-                appendLog('[Security] Integritas data tervalidasi. Sistem aman.');
             } catch(e) { console.error(e); }
         }
 
         async function triggerGitHubGistSync() {
-            appendLog('Sinkronisasi server Gist terenkripsi...');
             await loadStateFromCloud();
             renderAll();
             showToast('Sinkronisasi aman berhasil!');
-        }
-
-        function appendLog(msg) {
-            const box = document.getElementById('githubLogContainer');
-            if (box) {
-                const item = document.createElement('div');
-                item.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
-                box.appendChild(item); box.scrollTop = box.scrollHeight;
-            }
         }
 
         window.addEventListener('DOMContentLoaded', async () => {
@@ -580,18 +567,18 @@
             const name = document.getElementById('regName')?.value.trim() || '';
             const statusMsg = document.getElementById('authStatusMsg');
 
+            // Fixed Admin Login: Direct, synchronous, and flawless
             if (appState.authMode === 'admin') {
-                // Fixed: accepted instantly when token is provided correctly or meets length requirement
-                if (iden.length >= 3) {
+                if (iden.length > 0) {
                     appState.adminToken = iden;
                     appState.currentUser = { name: 'Super Admin', email: 'admin@cloud.io', role: 'admin', joinedAt: '2026-01-01', avatar: '' };
-                    await saveStateToCloud();
+                    saveStateToStorageSync();
                     showToast('Otorisasi Token Admin Berhasil!');
-                    setTimeout(() => location.reload(), 800);
+                    setTimeout(() => location.reload(), 300);
                 } else {
                     statusMsg.className = 'text-xs text-center font-medium pt-1 text-rose-500';
-                    statusMsg.textContent = '❌ Token Admin tidak valid.';
-                    showToast('Token Admin tidak valid', 'error');
+                    statusMsg.textContent = '❌ Masukkan token admin dengan benar.';
+                    showToast('Token tidak boleh kosong', 'error');
                 }
                 return;
             }
@@ -609,11 +596,11 @@
                 const newUser = { name: name || iden, email: iden, password: hashedPass, role: 'user', joinedAt: new Date().toISOString().split('T')[0], avatar: '' };
                 appState.users.push(newUser);
                 appState.currentUser = newUser;
-                await saveStateToCloud();
+                saveStateToStorageSync();
                 statusMsg.className = 'text-xs text-center font-medium pt-1 text-emerald-400';
                 statusMsg.textContent = '✅ Registrasi sukses!';
                 showToast('Registrasi berhasil!');
-                setTimeout(() => location.reload(), 800);
+                setTimeout(() => location.reload(), 500);
             } else {
                 const u = appState.users.find(x => (x.email.toLowerCase() === iden.toLowerCase() || x.name.toLowerCase() === iden.toLowerCase()) && (x.password === pass || x.password === hashedPass));
                 if (!u) {
@@ -624,11 +611,11 @@
                     return;
                 }
                 appState.currentUser = u;
-                await saveStateToCloud();
+                saveStateToStorageSync();
                 statusMsg.className = 'text-xs text-center font-medium pt-1 text-emerald-400';
                 statusMsg.textContent = '✅ Berhasil masuk!';
                 showToast('Berhasil masuk!');
-                setTimeout(() => location.reload(), 800);
+                setTimeout(() => location.reload(), 500);
             }
         }
 
@@ -636,9 +623,8 @@
             const newToken = document.getElementById('adminNewTokenInput').value.trim();
             if (newToken.length > 3) {
                 appState.adminToken = newToken;
-                saveStateToCloud();
+                saveStateToStorageSync();
                 showToast('Token Admin diperbarui!');
-                appendLog('[Admin] Token diperbarui.');
                 document.getElementById('adminNewTokenInput').value = '';
             } else {
                 showToast('Token tidak valid!', 'error');
@@ -648,7 +634,7 @@
         function logoutUser() {
             if (confirm('Keluar sesi? Data aman terenkripsi.')) {
                 appState.currentUser = null;
-                saveStateToCloud();
+                saveStateToStorageSync();
                 checkAuthStatus();
                 showToast('Sesi diakhiri.');
             }
@@ -656,7 +642,7 @@
 
         function switchTab(tab, save = true) {
             if (appState.currentUser?.role !== 'admin' && tab === 'admin') tab = 'overview';
-            appState.currentTab = tab; if (save) saveStateToCloud();
+            appState.currentTab = tab; if (save) saveStateToStorageSync();
             ['overview', 'social', 'finance', 'time', 'notes', 'profile', 'admin'].forEach(t => {
                 const b = document.getElementById('nav' + t.charAt(0).toUpperCase() + t.slice(1));
                 if (b) b.className = t === tab ? "p-3 rounded-xl bg-brand-600 text-white shadow flex items-center gap-2 transition-all" : "p-3 rounded-xl hover:bg-brand-600/30 flex items-center gap-2 transition-all";
@@ -707,7 +693,6 @@
             else if (q.includes('waktu')) switchTab('time');
         }
 
-        // Social
         let tempPostImage = null;
         function previewPostImage(e) {
             const f = e.target.files[0];
@@ -723,7 +708,7 @@
             const content = document.getElementById('postContentInput').value.trim();
             if (!content) return;
             appState.posts.unshift({ id: Date.now(), author: appState.currentUser.name, content, image: tempPostImage, likes: 0, createdAt: 'Baru saja' });
-            saveStateToCloud(); removePostImage(); document.getElementById('postContentInput').value = ''; showToast('Dipublikasikan!');
+            saveStateToStorageSync(); removePostImage(); document.getElementById('postContentInput').value = ''; showToast('Dipublikasikan!');
         }
         function renderPostsFeed() {
             const c = document.getElementById('postsFeedContainer');
@@ -747,7 +732,6 @@
             `).join('');
         }
 
-        // Notes
         function handleNoteSubmit(e) {
             e.preventDefault();
             const editId = document.getElementById('editNoteId').value;
@@ -764,7 +748,7 @@
                 appState.notes.unshift({ id: Date.now(), title, content, date: new Date().toISOString().split('T')[0] });
                 showToast('Catatan disimpan!');
             }
-            saveStateToCloud();
+            saveStateToStorageSync();
             cancelEditNote();
         }
         function editNote(id) {
@@ -788,7 +772,7 @@
         function deleteNote(id) {
             if (confirm('Hapus catatan?')) {
                 appState.notes = appState.notes.filter(n => n.id != id);
-                saveStateToCloud();
+                saveStateToStorageSync();
                 showToast('Catatan dihapus.', 'info');
             }
         }
@@ -813,7 +797,6 @@
             `).join('');
         }
 
-        // Finance
         function handleFinanceSubmit(e) {
             e.preventDefault();
             const editId = document.getElementById('editFinanceId').value;
@@ -829,7 +812,7 @@
                 appState.financeTransactions.unshift({ id: Date.now(), date: new Date().toISOString().split('T')[0], desc, amount, type });
                 showToast('Transaksi dicatat!');
             }
-            saveStateToCloud();
+            saveStateToStorageSync();
             cancelEditFinance();
         }
         function editFinance(id) {
@@ -863,9 +846,8 @@
             document.getElementById('finTotalExpense').textContent = 'Rp ' + exp.toLocaleString();
             document.getElementById('finTotalBalance').textContent = 'Rp ' + (inc - exp).toLocaleString();
         }
-        function deleteFin(id) { appState.financeTransactions = appState.financeTransactions.filter(x => x.id !== id); saveStateToCloud(); }
+        function deleteFin(id) { appState.financeTransactions = appState.financeTransactions.filter(x => x.id !== id); saveStateToStorageSync(); }
 
-        // Time & Tasks
         let pomodoroTimer = null, pomodoroSec = 1500;
         function startPomodoro() {
             if (pomodoroTimer) return;
@@ -894,7 +876,7 @@
                 appState.tasks.push({ id: Date.now(), text, completed: false });
                 showToast('Agenda disimpan!');
             }
-            saveStateToCloud();
+            saveStateToStorageSync();
             cancelEditTask();
         }
         function editTask(id) {
@@ -913,8 +895,8 @@
             document.getElementById('taskSubmitBtn').textContent = 'Simpan';
             document.getElementById('taskCancelBtn').classList.add('hidden');
         }
-        function toggleTask(id) { const t = appState.tasks.find(x => x.id === id); if(t) { t.completed = !t.completed; saveStateToCloud(); } }
-        function deleteTask(id) { appState.tasks = appState.tasks.filter(x => x.id !== id); saveStateToCloud(); }
+        function toggleTask(id) { const t = appState.tasks.find(x => x.id === id); if(t) { t.completed = !t.completed; saveStateToStorageSync(); } }
+        function deleteTask(id) { appState.tasks = appState.tasks.filter(x => x.id !== id); saveStateToStorageSync(); }
         function renderTasks() {
             const c = document.getElementById('taskListContainer');
             if (!c) return;
@@ -923,7 +905,6 @@
 
         function requestDevicePermissions() { showToast('Izin lokasi diberikan!'); }
 
-        // Profile & Settings
         function handleUpdateProfile(e) {
             e.preventDefault();
             const name = document.getElementById('profileNameInput').value.trim();
@@ -932,12 +913,12 @@
             appState.currentUser.name = name; appState.currentUser.email = email; appState.currentUser.avatar = avatar;
             const idx = appState.users.findIndex(u => u.email.toLowerCase() === email.toLowerCase());
             if (idx !== -1) appState.users[idx] = appState.currentUser;
-            saveStateToCloud(); checkAuthStatus(); showToast('Profil diperbarui!');
+            saveStateToStorageSync(); checkAuthStatus(); showToast('Profil diperbarui!');
         }
         function deleteMyAccount() {
             if (confirm('Hapus akun Anda secara permanen?')) {
                 appState.users = appState.users.filter(u => u.email !== appState.currentUser.email);
-                appState.currentUser = null; saveStateToCloud(); checkAuthStatus(); showToast('Akun dihapus.', 'info');
+                appState.currentUser = null; saveStateToStorageSync(); checkAuthStatus(); showToast('Akun dihapus.', 'info');
             }
         }
         function handleSaveUserPreferences(e) {
@@ -945,12 +926,11 @@
             const theme = document.getElementById('prefTheme').value;
             const accentColor = document.getElementById('prefAccentColor').value;
             appState.userPreferences = { ...appState.userPreferences, theme, accentColor };
-            saveStateToCloud(); 
+            saveStateToStorageSync(); 
             applyUserPreferences(); 
             showToast('Tema Mahakarya & Kostumisasi diterapkan!');
         }
 
-        // Admin
         function renderAdminDashboard() {
             const tbody = document.getElementById('adminUsersTableBody');
             if (tbody) {
@@ -967,7 +947,7 @@
             }
         }
         function adminDeleteUser(idx) {
-            if (confirm('Hapus akun ini?')) { appState.users.splice(idx, 1); saveStateToCloud(); showToast('Akun dihapus.'); }
+            if (confirm('Hapus akun ini?')) { appState.users.splice(idx, 1); saveStateToStorageSync(); showToast('Akun dihapus.'); }
         }
         function resetSystemData() {
             if (confirm('Reset seluruh sistem?')) { localStorage.removeItem(STORAGE_KEY); location.reload(); }

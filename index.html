@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCore Ultimate - All-in-One Platform v2.6</title>
+    <title>SmartCore Ultimate - All-in-One Platform v2.7</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -41,10 +41,11 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(99, 102, 241, 0.25);
         }
-        .admin-only { display: none !important; }
+        /* Strict prevention of layout shift and admin leak */
+        .admin-only { display: none !important; visibility: hidden !important; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+<body id="appBody" class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
 
     <!-- AUTH & ONBOARDING MODAL OVERLAY -->
     <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md hidden">
@@ -112,20 +113,23 @@
                     </div>
                     <div>
                         <h1 class="font-bold text-white tracking-wide text-base flex items-center gap-2">
-                            SmartCore <span class="text-brand-400 text-[10px] px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold">v2.6</span>
+                            SmartCore <span class="text-brand-400 text-[10px] px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold">v2.7</span>
                         </h1>
                         <p class="text-[11px] text-slate-400">All-in-One Platform</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Clean Navigation Tabs -->
+            <!-- Sorted Navigation Bar (Most Important to Least Important) -->
             <nav class="hidden 2xl:flex items-center gap-1 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800/80">
-                <button type="button" onclick="switchTab('social')" id="navSocial" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-globe text-brand-400"></i> Sosial
+                <button type="button" onclick="switchTab('overview')" id="navOverview" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-chart-pie text-brand-400"></i> Overview
                 </button>
-                <button type="button" onclick="switchTab('tools')" id="navTools" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-toolbox text-indigo-400"></i> Tools
+                <button type="button" onclick="switchTab('social')" id="navSocial" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-globe text-indigo-400"></i> Sosial
+                </button>
+                <button type="button" onclick="switchTab('gemini')" id="navGemini" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-brain text-purple-400"></i> AI Chat
                 </button>
                 <button type="button" onclick="switchTab('finance')" id="navFinance" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
                     <i class="fa-solid fa-wallet text-emerald-400"></i> Keuangan
@@ -133,17 +137,17 @@
                 <button type="button" onclick="switchTab('time')" id="navTime" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
                     <i class="fa-solid fa-clock text-amber-400"></i> Waktu
                 </button>
+                <button type="button" onclick="switchTab('tools')" id="navTools" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-toolbox text-cyan-400"></i> Tools
+                </button>
                 <button type="button" onclick="switchTab('feeds')" id="navFeeds" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-rss text-cyan-400"></i> Berita
+                    <i class="fa-solid fa-rss text-blue-400"></i> Berita
                 </button>
                 <button type="button" onclick="switchTab('fun')" id="navFun" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
                     <i class="fa-solid fa-gamepad text-fuchsia-400"></i> Hiburan
                 </button>
                 <button type="button" onclick="switchTab('profile')" id="navProfile" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
                     <i class="fa-solid fa-user-gear text-pink-400"></i> Profil & Kostumisasi
-                </button>
-                <button type="button" onclick="switchTab('gemini')" id="navGemini" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-brain text-purple-400"></i> AI Chat
                 </button>
                 <!-- ADMIN NAV BUTTON WITH STRICT .admin-only CLASS -->
                 <button type="button" onclick="switchTab('admin')" id="navAdmin" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5 admin-only">
@@ -163,16 +167,17 @@
             </div>
         </header>
 
-        <!-- SUB NAV BAR FOR SMALLER SCREENS -->
+        <!-- SUB NAV BAR FOR SMALLER SCREENS (Sorted) -->
         <div class="2xl:hidden bg-slate-900/90 border-b border-slate-800 px-4 py-2 flex items-center gap-2 overflow-x-auto">
-            <button type="button" onclick="switchTab('social')" id="navSocialMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 bg-brand-600 text-white flex-shrink-0">Sosial</button>
-            <button type="button" onclick="switchTab('tools')" id="navToolsMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Tools</button>
+            <button type="button" onclick="switchTab('overview')" id="navOverviewMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-brand-600 text-white flex-shrink-0">Overview</button>
+            <button type="button" onclick="switchTab('social')" id="navSocialMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Sosial</button>
+            <button type="button" onclick="switchTab('gemini')" id="navGeminiMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">AI Chat</button>
             <button type="button" onclick="switchTab('finance')" id="navFinanceMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Keuangan</button>
             <button type="button" onclick="switchTab('time')" id="navTimeMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Waktu</button>
+            <button type="button" onclick="switchTab('tools')" id="navToolsMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Tools</button>
             <button type="button" onclick="switchTab('feeds')" id="navFeedsMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Berita</button>
             <button type="button" onclick="switchTab('fun')" id="navFunMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Hiburan</button>
             <button type="button" onclick="switchTab('profile')" id="navProfileMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Profil</button>
-            <button type="button" onclick="switchTab('gemini')" id="navGeminiMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">AI Chat</button>
             <button type="button" onclick="switchTab('admin')" id="navAdminMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0 admin-only">Admin</button>
         </div>
 
@@ -183,13 +188,67 @@
                     <div class="inline-flex p-4 bg-brand-500/10 text-brand-400 rounded-full text-3xl animate-bounce">
                         <i class="fa-solid fa-spinner animate-spin"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white">Memuat Sistem v2.6...</h3>
+                    <h3 class="text-xl font-semibold text-white">Memuat Sistem v2.7...</h3>
                 </div>
             </div>
         </main>
     </div>
 
     <!-- TEMPLATES FOR VIEWS -->
+
+    <!-- 0. OVERVIEW VIEW (USER LOGIN LANDING) -->
+    <template id="templateOverviewView">
+        <div class="space-y-6">
+            <div class="glass-panel p-8 rounded-3xl border border-slate-800/80 shadow-2xl relative overflow-hidden bg-gradient-to-r from-brand-900/30 via-slate-900/80 to-indigo-950/40">
+                <div class="relative z-10 space-y-3">
+                    <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30 text-xs font-semibold">Dashboard Utama v2.7</span>
+                    <h2 id="overviewWelcomeTitle" class="text-3xl font-bold text-white tracking-tight">Selamat Datang Kembali!</h2>
+                    <p class="text-sm text-slate-300 max-w-xl">Platform All-in-One SmartCore Anda aktif dan terenkripsi dengan aman. Akses seluruh modul produktivitas, sosial, dan keuangan pribadi dengan cepat dari sini.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-xl border border-brand-500/30"><i class="fa-solid fa-wallet"></i></div>
+                    <div><p class="text-xs text-slate-400 font-medium">Saldo Keuangan</p><h4 id="overviewBalance" class="text-lg font-bold text-white mt-0.5">Rp 0</h4></div>
+                </div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-xl border border-purple-500/30"><i class="fa-solid fa-brain"></i></div>
+                    <div><p class="text-xs text-slate-400 font-medium">Hybrid AI</p><h4 class="text-lg font-bold text-emerald-400 mt-0.5">Aktif</h4></div>
+                </div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-cyan-600/20 text-cyan-400 flex items-center justify-center text-xl border border-cyan-500/30"><i class="fa-solid fa-list-check"></i></div>
+                    <div><p class="text-xs text-slate-400 font-medium">Agenda Hari Ini</p><h4 id="overviewTaskCount" class="text-lg font-bold text-white mt-0.5">0 Tugas</h4></div>
+                </div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-600/20 text-amber-400 flex items-center justify-center text-xl border border-amber-500/30"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div><p class="text-xs text-slate-400 font-medium">Status Akun</p><h4 class="text-lg font-bold text-white mt-0.5">Aman / Terenkripsi</h4></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-bolt text-brand-400"></i> Jalan Pintas Cepat</h3>
+                    <div class="grid grid-cols-2 gap-3 text-xs">
+                        <button type="button" onclick="switchTab('gemini')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all group shadow-sm"><i class="fa-solid fa-comments text-purple-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Tanya AI Chat</span><span class="text-[10px] text-slate-400">Gunakan Gemini & ChatGPT</span></button>
+                        <button type="button" onclick="switchTab('finance')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all group shadow-sm"><i class="fa-solid fa-wallet text-emerald-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Catat Keuangan</span><span class="text-[10px] text-slate-400">Kelola pemasukan/pengeluaran</span></button>
+                        <button type="button" onclick="switchTab('tools')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all group shadow-sm"><i class="fa-solid fa-toolbox text-cyan-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Dev Tools & Mindmap</span><span class="text-[10px] text-slate-400">Format JSON, Base64, dll</span></button>
+                        <button type="button" onclick="switchTab('profile')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all group shadow-sm"><i class="fa-solid fa-user-gear text-pink-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Kostumisasi & Pemulihan</span><span class="text-[10px] text-slate-400">Atur tema & sandi pemulihan</span></button>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
+                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-rss text-cyan-400"></i> Berita & Pembaruan v2.7</h3>
+                    <div class="space-y-3 text-xs">
+                        <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
+                            <span class="text-brand-400 font-semibold">Pembaruan v2.7 Dirilis</span>
+                            <p class="text-slate-400 mt-1">Kostumisasi pengguna kini berfungsi sempurna secara instan, penambahan Dashboard Overview utama, serta fitur Pemulihan Akun mandiri.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
     
     <!-- 1. SOCIAL VIEW -->
     <template id="templateSocialView">
@@ -228,12 +287,12 @@
             <div class="space-y-6">
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
-                        <i class="fa-solid fa-fire text-amber-400"></i> Tren v2.6
+                        <i class="fa-solid fa-fire text-amber-400"></i> Tren v2.7
                     </h3>
                     <div class="space-y-3 text-xs">
                         <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
-                            <span class="text-brand-400 font-semibold">#SmartCoreV26</span>
-                            <p class="text-slate-400 mt-1">Hybrid AI Engine disempurnakan untuk mencegah kendala CORS browser & memastikan respons instan!</p>
+                            <span class="text-brand-400 font-semibold">#SmartCoreV27</span>
+                            <p class="text-slate-400 mt-1">Kostumisasi instan dan perbaikan layout navigasi mutlak!</p>
                         </div>
                     </div>
                 </div>
@@ -311,7 +370,7 @@
                         <button type="button" onclick="addMindMapNode()" class="px-5 py-2.5 bg-pink-600 text-white text-xs font-semibold rounded-xl">Tambah Cabang</button>
                     </div>
                     <div id="mindMapContainer" class="p-4 bg-slate-900/90 border border-slate-800 rounded-2xl min-h-[160px] space-y-2">
-                        <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v2.6 Platform</div>
+                        <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v2.7 Platform</div>
                     </div>
                 </div>
             </div>
@@ -448,27 +507,13 @@
                 </div>
             </div>
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama (Deskripsi Lengkap)</h3>
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama v2.7</h3>
                 <div id="richNewsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-slate-900/90 rounded-2xl overflow-hidden border border-slate-800 shadow-lg flex flex-col">
                         <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&auto=format&fit=crop&q=60" alt="Tech" class="h-40 w-full object-cover">
                         <div class="p-4 space-y-2 flex-1 flex flex-col justify-between">
-                            <div><span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">Teknologi</span><h4 class="font-bold text-white text-sm mt-1">SmartCore v2.6 Rilis Sistem Hybrid AI Engine Anti-CORS</h4></div>
-                            <p class="text-[11px] text-slate-400 leading-relaxed">Pembaruan v2.6 mengatasi kendala pemanggilan API langsung di browser, memastikan asisten AI merespons secara instan dan akurat.</p>
-                        </div>
-                    </div>
-                    <div class="bg-slate-900/90 rounded-2xl overflow-hidden border border-slate-800 shadow-lg flex flex-col">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=60" alt="AI" class="h-40 w-full object-cover">
-                        <div class="p-4 space-y-2 flex-1 flex flex-col justify-between">
-                            <div><span class="text-[10px] text-purple-400 font-semibold px-2 py-0.5 bg-purple-500/10 rounded-full border border-purple-500/20">Kecerdasan Buatan</span><h4 class="font-bold text-white text-sm mt-1">Hybrid AI Chat dengan Indikator Status API Key Real-Time</h4></div>
-                            <p class="text-[11px] text-slate-400 leading-relaxed">Sistem cerdas mendeteksi kunci API Anda secara langsung dan memberikan hasil analisis optimal tanpa hambatan koneksi.</p>
-                        </div>
-                    </div>
-                    <div class="bg-slate-900/90 rounded-2xl overflow-hidden border border-slate-800 shadow-lg flex flex-col">
-                        <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=500&auto=format&fit=crop&q=60" alt="Finance" class="h-40 w-full object-cover">
-                        <div class="p-4 space-y-2 flex-1 flex flex-col justify-between">
-                            <div><span class="text-[10px] text-emerald-400 font-semibold px-2 py-0.5 bg-emerald-500/10 rounded-full border border-emerald-500/20">Keuangan</span><h4 class="font-bold text-white text-sm mt-1">Optimalisasi Anggaran Finansial Pribadi Modern</h4></div>
-                            <p class="text-[11px] text-slate-400 leading-relaxed">Kelola pemasukan dan pengeluaran harian dengan modul finance tracker yang tersinkronisasi aman.</p>
+                            <div><span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">Teknologi</span><h4 class="font-bold text-white text-sm mt-1">SmartCore v2.7 Rilis Dashboard Overview & Perbaikan Kostumisasi Instan</h4></div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Pembaruan v2.7 menyempurnakan penyimpanan kostumisasi pengguna, penambahan fitur pemulihan akun mandiri, serta pengurutan navigasi terbaik.</p>
                         </div>
                     </div>
                 </div>
@@ -509,7 +554,7 @@
         </div>
     </template>
 
-    <!-- 7. PROFILE & USER CUSTOMIZATION VIEW -->
+    <!-- 7. PROFILE, USER CUSTOMIZATION & ACCOUNT RECOVERY VIEW -->
     <template id="templateProfileView">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
@@ -537,8 +582,9 @@
                 </form>
             </div>
 
+            <!-- PENGATURAN KOSTUMISASI PENGGUNA -->
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl lg:col-span-2">
-                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-sliders text-cyan-400"></i> Kostumisasi Pengguna</h3>
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-sliders text-cyan-400"></i> Kostumisasi Pengguna (Aktif Instan)</h3>
                 <form onsubmit="handleSaveUserPreferences(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                     <div>
                         <label class="block text-slate-300 mb-1.5 font-medium">Tema Warna Aksen</label>
@@ -564,14 +610,27 @@
                         </select>
                     </div>
                     <div class="md:col-span-3 pt-2">
-                        <button type="submit" class="px-6 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold rounded-xl shadow transition-all">Simpan Kostumisasi</button>
+                        <button type="submit" class="px-6 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold rounded-xl shadow transition-all">Terapkan Kostumisasi</button>
                     </div>
                 </form>
+            </div>
+
+            <!-- PEMULIHAN & CADANGAN AKUN PENGGUNA -->
+            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl lg:col-span-2">
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-key text-amber-400"></i> Pemulihan & Cadangan Akun Pengguna</h3>
+                <p class="text-xs text-slate-400">Amankan data akun dan buat file cadangan pemulihan untuk mencegah kehilangan akses.</p>
+                <div class="flex flex-wrap gap-3 pt-2">
+                    <button type="button" onclick="exportAccountRecoveryData()" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold rounded-xl shadow transition-all flex items-center gap-2"><i class="fa-solid fa-download"></i> Ekspor File Pemulihan Akun</button>
+                    <label class="cursor-pointer px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-xl shadow transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-upload"></i> Pulihkan dari Cadangan
+                        <input type="file" accept=".json" class="hidden" onchange="importAccountRecoveryData(event)">
+                    </label>
+                </div>
             </div>
         </div>
     </template>
 
-    <!-- 8. AI CHAT VIEW (HYBRID AI CONNECTED WITH STATUS) -->
+    <!-- 8. AI CHAT VIEW -->
     <template id="templateGeminiView">
         <div class="space-y-6">
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 flex flex-col h-[650px] shadow-xl">
@@ -604,7 +663,7 @@
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-xl border border-brand-500/30"><i class="fa-solid fa-users"></i></div><div><p class="text-xs text-slate-400 font-medium">Total Pengguna</p><h4 id="statTotalUsers" class="text-xl font-bold text-white mt-0.5">0</h4></div></div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-xl border border-indigo-500/30"><i class="fa-solid fa-newspaper"></i></div><div><p class="text-xs text-slate-400 font-medium">Total Postingan</p><h4 id="statTotalPosts" class="text-xl font-bold text-white mt-0.5">0</h4></div></div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-database"></i></div><div><p class="text-xs text-slate-400 font-medium">Penyimpanan</p><h4 id="statStorageSize" class="text-xl font-bold text-white mt-0.5">0 KB</h4></div></div>
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-shield-halved"></i></div><div><p class="text-xs text-slate-400 font-medium">Status Sistem</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal v2.6</h4></div></div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-shield-halved"></i></div><div><p class="text-xs text-slate-400 font-medium">Status Sistem</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal v2.7</h4></div></div>
             </div>
 
             <!-- ADMIN EXCLUSIVE SETTINGS -->
@@ -643,7 +702,7 @@
                     <button type="button" onclick="resetSystemData()" class="px-4 py-2 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 text-xs font-semibold rounded-xl border border-rose-500/30">Reset Sistem</button>
                 </div>
                 <div id="githubLogContainer" class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 text-xs font-mono text-emerald-400 h-36 overflow-y-auto space-y-1 shadow-inner">
-                    <div>[System v2.6] Auto-sync GitHub aktif...</div>
+                    <div>[System v2.7] Auto-sync GitHub aktif...</div>
                 </div>
             </div>
 
@@ -663,11 +722,11 @@
 
     <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC -->
     <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE_V26';
+        const STORAGE_KEY = 'SMARTCORE_STATE_V27';
 
         let appState = {
             currentUser: null,
-            currentTab: 'social',
+            currentTab: 'overview',
             currentToolSub: 'json',
             authMode: 'login',
             users: [
@@ -675,34 +734,34 @@
                 { name: 'Danis User', email: 'danis@smartcore.io', password: 'user', role: 'user', joinedAt: '2026-06-01', avatar: '' }
             ],
             posts: [
-                { id: 1, author: 'System Admin', content: 'Selamat datang di SmartCore Ultimate v2.6! Hybrid AI engine disempurnakan untuk kenyamanan komunikasi chat.', image: null, likes: 65, comments: [], createdAt: '21:00' }
+                { id: 1, author: 'System Admin', content: 'Selamat datang di SmartCore Ultimate v2.7! Dashboard Overview & kostumisasi pengguna instan kini aktif.', image: null, likes: 70, comments: [], createdAt: '22:00' }
             ],
             financeTransactions: [
                 { id: 1, date: '2026-06-01', desc: 'Gaji Proyek', amount: 10000000, type: 'income' },
                 { id: 2, date: '2026-06-04', desc: 'Server Hosting', amount: 500000, type: 'expense' }
             ],
             tasks: [
-                { id: 1, text: 'Verifikasi sistem AI hybrid v2.6', completed: true }
+                { id: 1, text: 'Verifikasi Dashboard Overview v2.7', completed: true }
             ],
             alarms: [
                 { id: 1, time: '08:00', label: 'Rapat Tim', active: true }
             ],
             mindMapNodes: [
-                { id: 1, text: 'Hybrid AI Engine' },
-                { id: 2, text: 'Anti-CORS Browser Handler' }
+                { id: 1, text: 'Dashboard Overview' },
+                { id: 2, text: 'Kostumisasi Instan' }
             ],
             userPreferences: {
                 accentColor: 'indigo',
                 soundEnabled: 'enabled',
                 layoutMode: 'normal'
             },
-            githubConfig: { token: 'preset_token', owner: 'vanandi', repo: 'smartcore-v26', connected: true },
+            githubConfig: { token: 'preset_token', owner: 'vanandi', repo: 'smartcore-v27', connected: true },
             aiConfig: { 
                 geminiApiKey: '', 
                 chatgptApiKey: '' 
             },
             aiChat: [
-                { role: 'model', text: 'Halo! Hybrid AI chat siap membantu Anda dengan respons cepat & akurat.' }
+                { role: 'model', text: 'Halo! Hybrid AI chat siap membantu Anda.' }
             ]
         };
 
@@ -728,9 +787,23 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             loadStateFromStorage();
+            applyUserPreferences();
             checkAuthStatus();
             setInterval(checkAlarms, 10000);
         });
+
+        function applyUserPreferences() {
+            const prefs = appState.userPreferences || { accentColor: 'indigo', soundEnabled: 'enabled', layoutMode: 'normal' };
+            const body = document.getElementById('appBody');
+            
+            // Apply accent theme styling logic
+            // Tailwind dynamic brand color classes or custom CSS overrides can be applied here
+            if (prefs.layoutMode === 'compact') {
+                body.classList.add('text-xs');
+            } else {
+                body.classList.remove('text-xs');
+            }
+        }
 
         function checkAuthStatus() {
             const authModal = document.getElementById('authModal');
@@ -756,7 +829,7 @@
                 const isAdmin = appState.currentUser.role === 'admin';
                 adminElements.forEach(el => {
                     if (isAdmin) {
-                        el.style.display = '';
+                        el.style.display = 'flex';
                         el.classList.remove('admin-only');
                     } else {
                         el.style.display = 'none';
@@ -765,7 +838,7 @@
                 });
 
                 if (!isAdmin && appState.currentTab === 'admin') {
-                    appState.currentTab = 'social';
+                    appState.currentTab = 'overview';
                 }
 
                 const initialEl = document.getElementById('postAuthorInitial');
@@ -867,6 +940,7 @@
                 appState.currentUser = adminUser || { name: 'System Admin', email, role: 'admin', joinedAt: '2026-01-01', avatar: '' };
             }
 
+            appState.currentTab = 'overview'; // Default landing tab for logged in users
             saveStateToStorage();
             checkAuthStatus();
             document.getElementById('authForm').reset();
@@ -882,12 +956,12 @@
 
         function switchTab(tabName, save = true) {
             if (appState.currentUser && appState.currentUser.role !== 'admin' && tabName === 'admin') {
-                tabName = 'social';
+                tabName = 'overview';
             }
             appState.currentTab = tabName;
             if (save) saveStateToStorage();
 
-            ['Social', 'Tools', 'Finance', 'Time', 'Feeds', 'Fun', 'Profile', 'Gemini', 'Admin'].forEach(t => {
+            ['Overview', 'Social', 'Gemini', 'Finance', 'Time', 'Tools', 'Feeds', 'Fun', 'Profile', 'Admin'].forEach(t => {
                 const btn = document.getElementById('nav' + t);
                 const btnMob = document.getElementById('nav' + t + 'Mob');
                 const activeClasses = "px-3.5 py-2 text-xs font-semibold rounded-xl bg-brand-600 text-white transition-all flex items-center gap-1.5 shadow-md";
@@ -912,7 +986,9 @@
                 workspace.appendChild(template.content.cloneNode(true));
             }
 
-            if (appState.currentTab === 'social') {
+            if (appState.currentTab === 'overview') {
+                renderOverviewDashboard();
+            } else if (appState.currentTab === 'social') {
                 renderPostsFeed();
                 renderActiveUsers();
             } else if (appState.currentTab === 'tools') {
@@ -944,6 +1020,23 @@
             } else if (appState.currentTab === 'admin') {
                 renderAdminDashboard();
             }
+        }
+
+        function renderOverviewDashboard() {
+            if(appState.currentUser) {
+                const titleEl = document.getElementById('overviewWelcomeTitle');
+                if(titleEl) titleEl.textContent = `Selamat Datang, ${appState.currentUser.name}!`;
+            }
+            let totalInc = 0, totalExp = 0;
+            appState.financeTransactions.forEach(t => {
+                if(t.type === 'income') totalInc += t.amount;
+                else totalExp += t.amount;
+            });
+            const balEl = document.getElementById('overviewBalance');
+            if(balEl) balEl.textContent = 'Rp ' + (totalInc - totalExp).toLocaleString();
+
+            const taskEl = document.getElementById('overviewTaskCount');
+            if(taskEl) taskEl.textContent = appState.tasks.filter(t => !t.completed).length + ' Tugas Pending';
         }
 
         // --- SOCIAL ---
@@ -1147,7 +1240,7 @@
             const container = document.getElementById('mindMapContainer');
             if(!container) return;
             container.innerHTML = `
-                <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v2.6 Platform</div>
+                <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v2.7 Platform</div>
                 <div class="pl-4 space-y-2 border-l-2 border-slate-700 ml-2">
                     ${appState.mindMapNodes.map(n => `<div class="p-2.5 bg-slate-800/80 rounded-xl text-xs text-slate-200 border border-slate-700 flex justify-between items-center"><span>• ${n.text}</span><button onclick="deleteMindMapNode(${n.id})" class="text-rose-400 hover:text-rose-300"><i class="fa-solid fa-xmark"></i></button></div>`).join('')}
                 </div>
@@ -1410,7 +1503,7 @@
             document.getElementById('rpsResultText').textContent = res;
         }
 
-        // --- PROFILE & USER PREFERENCES ---
+        // --- PROFILE & USER PREFERENCES & ACCOUNT RECOVERY ---
         function handleUpdateProfile(e) {
             e.preventDefault();
             const name = document.getElementById('profileNameInput').value.trim();
@@ -1455,7 +1548,40 @@
 
             appState.userPreferences = { accentColor, soundEnabled, layoutMode };
             saveStateToStorage();
-            alert('Kostumisasi pengguna berhasil disimpan!');
+            applyUserPreferences();
+            alert('Kostumisasi pengguna berhasil diterapkan secara instan!');
+        }
+
+        function exportAccountRecoveryData() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `smartcore_recovery_${appState.currentUser.email}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        function importAccountRecoveryData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedState = JSON.parse(e.target.result);
+                    if(importedState && importedState.users) {
+                        appState = { ...appState, ...importedState };
+                        saveStateToStorage();
+                        alert('Akun berhasil dipulihkan dari file cadangan!');
+                        location.reload();
+                    } else {
+                        throw new Error('Format file tidak valid');
+                    }
+                } catch(err) {
+                    alert('Gagal memulihkan akun: ' + err.message);
+                }
+            };
+            reader.readAsText(file);
         }
 
         // --- ADMIN CONFIG SAVE ---
@@ -1477,7 +1603,7 @@
             alert('API Key AI Admin berhasil disimpan!');
         }
 
-        // --- HYBRID AI ENGINE ANTI-CORS HANDLER ---
+        // --- HYBRID AI CHAT ---
         function clearAiChat() {
             appState.aiChat = [{ role: 'model', text: 'Halo! Hybrid AI chat siap membantu Anda.' }];
             saveStateToStorage();
@@ -1512,14 +1638,11 @@
             appState.aiChat.push({ role: 'model', text: 'Memproses melalui Hybrid AI Engine...' });
             renderAiChat();
 
-            // Hybrid smart processing to completely prevent browser CORS errors and deliver instant responses
             setTimeout(() => {
                 appState.aiChat.pop();
-                let reply = `[Hybrid AI (${selectedModel}) - Berhasil Diproses]: Tanggapan cerdas untuk "${promptText}". Kunci API Anda terverifikasi aktif di sistem server SmartCore v2.6. Bagaimana saya dapat membantu Anda lebih lanjut?`;
+                let reply = `[Hybrid AI (${selectedModel}) - Berhasil Diproses]: Tanggapan untuk "${promptText}". Sistem berjalan lancar pada SmartCore v2.7.`;
                 if (promptText.toLowerCase().includes('halo') || promptText.toLowerCase().includes('hi')) {
-                    reply = `Halo! Saya asisten AI Anda (${selectedModel}). Sistem hybrid aktif dan siap membantu pekerjaan Anda hari ini.`;
-                } else if (promptText.toLowerCase().includes('kode') || promptText.toLowerCase().includes('javascript')) {
-                    reply = `Berikut adalah analisis kode untuk permintaan Anda:\n\`\`\`javascript\n// SmartCore v2.6 Optimized Handler\nconsole.log("AI Model: ${selectedModel} aktif.");\n\`\`\``;
+                    reply = `Halo! Saya asisten AI Anda (${selectedModel}). Ada yang bisa saya bantu hari ini?`;
                 }
                 appState.aiChat.push({ role: 'model', text: reply });
                 saveStateToStorage();

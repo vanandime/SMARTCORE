@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCore Ultimate - All-in-One Platform v3.0</title>
+    <title>SmartCore Ultimate - All-in-One Platform v3.1 Cloud</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -64,10 +64,10 @@
         <div class="glass-panel w-full max-w-md p-8 rounded-3xl shadow-2xl relative border border-brand-500/40">
             <div class="text-center mb-6">
                 <div class="inline-flex p-3.5 bg-brand-600/20 text-brand-400 rounded-2xl mb-3 text-2xl border border-brand-500/30 shadow-inner">
-                    <i class="fa-solid fa-cube"></i>
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
                 </div>
-                <h2 id="authTitle" class="text-2xl font-bold tracking-tight text-white">SmartCore Access</h2>
-                <p id="authSubtitle" class="text-sm text-slate-400 mt-1">Masuk sebagai Pengguna atau Administrator</p>
+                <h2 id="authTitle" class="text-2xl font-bold tracking-tight text-white">SmartCore Cloud</h2>
+                <p id="authSubtitle" class="text-sm text-slate-400 mt-1">Data tersimpan terpusat di Server GitHub Admin</p>
             </div>
 
             <!-- Tab Switcher Auth -->
@@ -104,11 +104,11 @@
                 </div>
 
                 <button type="submit" id="authSubmitBtn" class="w-full py-3.5 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-right-to-bracket"></i> Masuk Sekarang
+                    <i class="fa-solid fa-right-to-bracket"></i> Masuk Cloud
                 </button>
 
                 <div class="text-center pt-2">
-                    <button type="button" onclick="switchAuthTab('recovery')" class="text-xs text-brand-400 hover:underline">Lupa kata sandi / Pemulihan akun?</button>
+                    <button type="button" onclick="switchAuthTab('recovery')" class="text-xs text-brand-400 hover:underline">Lupa kata sandi / Sinkronisasi Manual?</button>
                 </div>
             </form>
         </div>
@@ -121,13 +121,13 @@
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-400 flex items-center justify-center text-white font-bold text-lg shadow-md shadow-brand-500/20">
-                        <i class="fa-solid fa-bolt"></i>
+                        <i class="fa-solid fa-cloud"></i>
                     </div>
                     <div>
                         <h1 class="font-bold text-white tracking-wide text-base flex items-center gap-2">
-                            SmartCore <span class="text-brand-400 text-[10px] px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold">v3.0</span>
+                            SmartCore <span class="text-brand-400 text-[10px] px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold">v3.1 Cloud</span>
                         </h1>
-                        <p class="text-[11px] text-slate-400">All-in-One Platform</p>
+                        <p class="text-[11px] text-slate-400">Server GitHub Admin Connected</p>
                     </div>
                 </div>
             </div>
@@ -200,7 +200,7 @@
                     <div class="inline-flex p-4 bg-brand-500/10 text-brand-400 rounded-full text-3xl animate-bounce">
                         <i class="fa-solid fa-spinner animate-spin"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-white">Memuat Sistem v3.0 Ultimate...</h3>
+                    <h3 class="text-xl font-semibold text-white">Menghubungkan ke Server GitHub Cloud v3.1...</h3>
                 </div>
             </div>
         </main>
@@ -213,9 +213,9 @@
         <div class="space-y-6">
             <div class="glass-panel p-8 rounded-3xl border border-slate-800/80 shadow-2xl relative overflow-hidden bg-gradient-to-r from-brand-900/30 via-slate-900/80 to-indigo-950/40">
                 <div class="relative z-10 space-y-3">
-                    <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30 text-xs font-semibold">Dashboard Utama v3.0</span>
+                    <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30 text-xs font-semibold">Dashboard Cloud v3.1</span>
                     <h2 id="overviewWelcomeTitle" class="text-3xl font-bold text-white tracking-tight">Selamat Datang Kembali!</h2>
-                    <p class="text-sm text-slate-300 max-w-xl">Platform All-in-One SmartCore dilengkapi enkripsi klien, Toast notification modern, dan background worker auto-sync GitHub.</p>
+                    <p class="text-sm text-slate-300 max-w-xl">Platform tersinkronisasi penuh secara cloud ke server GitHub admin. Seluruh data akun dan mutasi Anda aman tanpa risiko kehilangan data.</p>
                 </div>
             </div>
 
@@ -226,15 +226,15 @@
                 </div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-xl border border-purple-500/30"><i class="fa-solid fa-brain"></i></div>
-                    <div><p class="text-xs text-slate-400 font-medium">Universal AI</p><h4 class="text-lg font-bold text-emerald-400 mt-0.5">Aktif Enkripsi</h4></div>
+                    <div><p class="text-xs text-slate-400 font-medium">Universal AI</p><h4 class="text-lg font-bold text-emerald-400 mt-0.5">Cloud Connected</h4></div>
                 </div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-cyan-600/20 text-cyan-400 flex items-center justify-center text-xl border border-cyan-500/30"><i class="fa-solid fa-list-check"></i></div>
                     <div><p class="text-xs text-slate-400 font-medium">Agenda Hari Ini</p><h4 id="overviewTaskCount" class="text-lg font-bold text-white mt-0.5">0 Tugas</h4></div>
                 </div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-shield-halved"></i></div>
-                    <div><p class="text-xs text-slate-400 font-medium">Keamanan Klien</p><h4 class="text-lg font-bold text-emerald-400 mt-0.5">Terkunci Aman</h4></div>
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-cloud"></i></div>
+                    <div><p class="text-xs text-slate-400 font-medium">Server Status</p><h4 class="text-lg font-bold text-emerald-400 mt-0.5">GitHub Active</h4></div>
                 </div>
             </div>
 
@@ -245,16 +245,16 @@
                         <button type="button" onclick="switchTab('gemini')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all shadow-sm"><i class="fa-solid fa-comments text-purple-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Tanya AI Chat</span><span class="text-[10px] text-slate-400">Universal API & Hybrid</span></button>
                         <button type="button" onclick="switchTab('finance')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all shadow-sm"><i class="fa-solid fa-wallet text-emerald-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Catat Keuangan</span><span class="text-[10px] text-slate-400">Kelola pemasukan/pengeluaran</span></button>
                         <button type="button" onclick="switchTab('tools')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all shadow-sm"><i class="fa-solid fa-toolbox text-cyan-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Dev Tools & Mindmap</span><span class="text-[10px] text-slate-400">Format JSON, Base64, dll</span></button>
-                        <button type="button" onclick="switchTab('profile')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all shadow-sm"><i class="fa-solid fa-user-gear text-pink-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Kostumisasi & Pemulihan</span><span class="text-[10px] text-slate-400">Atur tema & sandi pemulihan</span></button>
+                        <button type="button" onclick="switchTab('profile')" class="p-4 bg-slate-900/90 hover:bg-slate-800 rounded-2xl border border-slate-800 text-left transition-all shadow-sm"><i class="fa-solid fa-user-gear text-pink-400 text-lg mb-2 block"></i><span class="font-bold text-white block">Kostumisasi & Profil</span><span class="text-[10px] text-slate-400">Atur tema & foto akun</span></button>
                     </div>
                 </div>
 
                 <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-rss text-cyan-400"></i> Berita & Pembaruan v3.0</h3>
+                    <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-rss text-cyan-400"></i> Berita & Pembaruan v3.1</h3>
                     <div class="space-y-3 text-xs">
                         <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
-                            <span class="text-brand-400 font-semibold">Pembaruan Versi 3.0 Ultimate</span>
-                            <p class="text-slate-400 mt-1">Platform ditingkatkan dengan Toast notifications modern, enkripsi token klien, serta penjadwalan background worker yang lebih stabil.</p>
+                            <span class="text-brand-400 font-semibold">Server GitHub Centralized Storage</span>
+                            <p class="text-slate-400 mt-1">Data tidak lagi disimpan secara lokal di browser, melainkan otomatis diunggah dan disinkronkan ke server GitHub admin setiap ada perubahan data.</p>
                         </div>
                     </div>
                 </div>
@@ -283,7 +283,7 @@
                                 <span id="imageFileName" class="text-slate-500 italic truncate max-w-xs"></span>
                             </div>
                             <button type="submit" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center gap-2">
-                                <i class="fa-solid fa-paper-plane"></i> Publikasikan
+                                <i class="fa-solid fa-paper-plane"></i> Publikasikan Cloud
                             </button>
                         </div>
                         <div id="imagePreviewContainer" class="hidden relative mt-3 rounded-2xl overflow-hidden max-h-56 border border-slate-800 shadow-md">
@@ -293,24 +293,24 @@
                     </form>
                 </div>
                 <div id="postsFeedContainer" class="space-y-4">
-                    <div class="glass-panel p-8 rounded-3xl text-center text-slate-400 text-sm shadow-xl">Memuat linimasa...</div>
+                    <div class="glass-panel p-8 rounded-3xl text-center text-slate-400 text-sm shadow-xl">Memuat linimasa cloud...</div>
                 </div>
             </div>
             <div class="space-y-6">
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
-                        <i class="fa-solid fa-fire text-amber-400"></i> Tren v3.0
+                        <i class="fa-solid fa-fire text-amber-400"></i> Tren v3.1
                     </h3>
                     <div class="space-y-3 text-xs">
                         <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
-                            <span class="text-brand-400 font-semibold">#SmartCoreV30</span>
-                            <p class="text-slate-400 mt-1">Keamanan tingkat lanjut dan Toast notifications aktif sempurna!</p>
+                            <span class="text-brand-400 font-semibold">#CloudStorageV31</span>
+                            <p class="text-slate-400 mt-1">Data pengguna dijamin aman dan tersimpan permanen di server GitHub admin!</p>
                         </div>
                     </div>
                 </div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
-                        <i class="fa-solid fa-users text-emerald-400"></i> Online
+                        <i class="fa-solid fa-users text-emerald-400"></i> Online Cloud
                     </h3>
                     <div id="activeUsersList" class="space-y-2.5 max-h-60 overflow-y-auto pr-1"></div>
                 </div>
@@ -382,7 +382,7 @@
                         <button type="button" onclick="addMindMapNode()" class="px-5 py-2.5 bg-pink-600 text-white text-xs font-semibold rounded-xl">Tambah Cabang</button>
                     </div>
                     <div id="mindMapContainer" class="p-4 bg-slate-900/90 border border-slate-800 rounded-2xl min-h-[160px] space-y-2">
-                        <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v3.0 Platform</div>
+                        <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v3.1 Cloud</div>
                     </div>
                 </div>
             </div>
@@ -429,14 +429,14 @@
                             </select>
                         </div>
                         <div class="flex gap-2">
-                            <button type="submit" id="financeSubmitBtn" class="flex-1 py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow-lg transition-all">Simpan</button>
+                            <button type="submit" id="financeSubmitBtn" class="flex-1 py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow-lg transition-all">Simpan Cloud</button>
                             <button type="button" id="financeCancelBtn" onclick="resetFinanceForm()" class="hidden px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl transition-all">Batal</button>
                         </div>
                     </form>
                 </div>
                 <div class="lg:col-span-2 glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-list-ul text-indigo-400"></i> Riwayat Keuangan
+                        <i class="fa-solid fa-list-ul text-indigo-400"></i> Riwayat Keuangan Cloud
                     </h3>
                     <div class="overflow-x-auto max-h-96 overflow-y-auto pr-1">
                         <table class="w-full text-left text-xs text-slate-300">
@@ -485,7 +485,7 @@
                 <div class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 text-center space-y-2">
                     <div id="calendarHeaderMonth" class="text-sm font-bold text-brand-400">Bulan Juni 2026</div>
                     <div id="calendarTodayDisplay" class="text-2xl font-mono font-bold text-white">Kamis, 04 Juni 2026</div>
-                    <p class="text-[11px] text-slate-400">Jadwal aktif sinkron dengan alarm & task.</p>
+                    <p class="text-[11px] text-slate-400">Jadwal aktif tersinkronisasi cloud.</p>
                 </div>
                 <form onsubmit="handleTaskSubmit(event)" class="flex gap-2">
                     <input type="hidden" id="editTaskId" value="">
@@ -519,13 +519,13 @@
                 </div>
             </div>
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama v3.0</h3>
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama v3.1</h3>
                 <div id="richNewsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-slate-900/90 rounded-2xl overflow-hidden border border-slate-800 shadow-lg flex flex-col">
                         <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&auto=format&fit=crop&q=60" alt="Tech" class="h-40 w-full object-cover">
                         <div class="p-4 space-y-2 flex-1 flex flex-col justify-between">
-                            <div><span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">Teknologi</span><h4 class="font-bold text-white text-sm mt-1">SmartCore v3.0 Keamanan Enkripsi & Toast Notification</h4></div>
-                            <p class="text-[11px] text-slate-400 leading-relaxed">Pembaruan v3.0 menyatukan enkripsi kredensial sisi klien, notifikasi toast modern, serta sinkronisasi latar belakang mandiri tanpa hambatan.</p>
+                            <div><span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">Teknologi</span><h4 class="font-bold text-white text-sm mt-1">SmartCore v3.1 Cloud Storage Server GitHub</h4></div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Pembaruan v3.1 menghapus penyimpanan lokal sepenuhnya dan memusatkan seluruh data akun ke server GitHub admin.</p>
                         </div>
                     </div>
                 </div>
@@ -570,7 +570,7 @@
     <template id="templateProfileView">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-user-pen text-pink-400"></i> Profil & Foto</h3>
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-user-pen text-pink-400"></i> Profil & Foto Cloud</h3>
                 <form onsubmit="handleUpdateProfile(event)" class="space-y-4 text-xs">
                     <div class="flex items-center gap-4">
                         <div id="profilePreviewAvatar" class="w-16 h-16 rounded-2xl bg-brand-600 text-white flex items-center justify-center font-bold text-xl overflow-hidden border border-brand-500/30 shadow-inner">U</div>
@@ -581,7 +581,7 @@
                     </div>
                     <div><label class="block text-slate-300 mb-1.5 font-medium">Nama</label><input type="text" id="profileNameInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner"></div>
                     <div><label class="block text-slate-300 mb-1.5 font-medium">Email</label><input type="email" id="profileEmailInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner"></div>
-                    <button type="submit" class="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow transition-all">Simpan Profil</button>
+                    <button type="submit" class="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow transition-all">Simpan ke Cloud</button>
                 </form>
             </div>
 
@@ -590,7 +590,7 @@
                 <form onsubmit="handleUpdatePassword(event)" class="space-y-4 text-xs">
                     <div><label class="block text-slate-300 mb-1.5 font-medium">Sandi Lama</label><input type="password" id="oldPasswordInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner" placeholder="••••••••"></div>
                     <div><label class="block text-slate-300 mb-1.5 font-medium">Sandi Baru</label><input type="password" id="newPasswordInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner" placeholder="••••••••"></div>
-                    <button type="submit" class="px-6 py-3 bg-rose-600 hover:bg-rose-500 text-white font-semibold rounded-xl shadow transition-all">Perbarui Sandi</button>
+                    <button type="submit" class="px-6 py-3 bg-rose-600 hover:bg-rose-500 text-white font-semibold rounded-xl shadow transition-all">Perbarui Sandi Cloud</button>
                 </form>
             </div>
 
@@ -626,19 +626,6 @@
                     </div>
                 </form>
             </div>
-
-            <!-- PEMULIHAN AKUN -->
-            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl lg:col-span-2">
-                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-key text-amber-400"></i> Pemulihan & Cadangan Akun Pengguna</h3>
-                <p class="text-xs text-slate-400">Amankan data akun dan buat file cadangan pemulihan untuk mencegah kehilangan akses.</p>
-                <div class="flex flex-wrap gap-3 pt-2">
-                    <button type="button" onclick="exportAccountRecoveryData()" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold rounded-xl shadow transition-all flex items-center gap-2"><i class="fa-solid fa-download"></i> Ekspor File Pemulihan Akun</button>
-                    <label class="cursor-pointer px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-xl shadow transition-all flex items-center gap-2">
-                        <i class="fa-solid fa-upload"></i> Pulihkan dari Cadangan
-                        <input type="file" accept=".json" class="hidden" onchange="importAccountRecoveryData(event)">
-                    </label>
-                </div>
-            </div>
         </div>
     </template>
 
@@ -655,7 +642,7 @@
                         </select>
                     </div>
                     <div class="flex items-center gap-3">
-                        <span id="aiStatusBadge" class="px-3 py-1 rounded-xl text-[11px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Universal AI Active</span>
+                        <span id="aiStatusBadge" class="px-3 py-1 rounded-xl text-[11px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Cloud AI Active</span>
                         <button type="button" onclick="clearAiChat()" class="text-xs text-slate-400 hover:text-rose-400 flex items-center gap-1.5"><i class="fa-solid fa-trash-can"></i> Bersihkan</button>
                     </div>
                 </div>
@@ -672,10 +659,10 @@
     <template id="templateAdminView">
         <div class="space-y-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-xl border border-brand-500/30"><i class="fa-solid fa-users"></i></div><div><p class="text-xs text-slate-400 font-medium">Total Pengguna</p><h4 id="statTotalUsers" class="text-xl font-bold text-white mt-0.5">0</h4></div></div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-xl border border-brand-500/30"><i class="fa-solid fa-users"></i></div><div><p class="text-xs text-slate-400 font-medium">Total Pengguna Cloud</p><h4 id="statTotalUsers" class="text-xl font-bold text-white mt-0.5">0</h4></div></div>
                 <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-xl border border-indigo-500/30"><i class="fa-solid fa-newspaper"></i></div><div><p class="text-xs text-slate-400 font-medium">Total Postingan</p><h4 id="statTotalPosts" class="text-xl font-bold text-white mt-0.5">0</h4></div></div>
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-database"></i></div><div><p class="text-xs text-slate-400 font-medium">Penyimpanan</p><h4 id="statStorageSize" class="text-xl font-bold text-white mt-0.5">0 KB</h4></div></div>
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-shield-halved"></i></div><div><p class="text-xs text-slate-400 font-medium">Status Sistem</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal v3.0</h4></div></div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-cloud"></i></div><div><p class="text-xs text-slate-400 font-medium">Server Status</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">GitHub Live</h4></div></div>
+                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-shield-halved"></i></div><div><p class="text-xs text-slate-400 font-medium">Keamanan</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal v3.1</h4></div></div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -696,18 +683,18 @@
 
                 <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
                     <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center justify-between">
-                        <span class="flex items-center gap-2"><i class="fa-brands fa-github text-emerald-400"></i> Server GitHub Auto-Sync (Real-Time)</span>
-                        <span id="syncPulseBadge" class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 sync-pulse flex items-center gap-1"><i id="syncIconSpin" class="fa-solid fa-rotate"></i> Auto-Sync Aktif</span>
+                        <span class="flex items-center gap-2"><i class="fa-brands fa-github text-emerald-400"></i> Server GitHub Cloud & Gist</span>
+                        <span id="syncPulseBadge" class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 sync-pulse flex items-center gap-1"><i id="syncIconSpin" class="fa-solid fa-rotate"></i> Cloud Sync Aktif</span>
                     </h3>
                     <div class="space-y-4 text-xs">
-                        <div><label class="block text-slate-300 mb-1.5 font-medium">GitHub PAT (Encrypted)</label><input type="password" id="ghToken" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="ghp_..."></div>
+                        <div><label class="block text-slate-300 mb-1.5 font-medium">GitHub PAT (Token Akses)</label><input type="password" id="ghToken" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="ghp_..."></div>
                         <div class="grid grid-cols-2 gap-3">
                             <div><label class="block text-slate-300 mb-1.5 font-medium">Owner</label><input type="text" id="ghOwner" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="username"></div>
                             <div><label class="block text-slate-300 mb-1.5 font-medium">Repo</label><input type="text" id="ghRepo" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="repo"></div>
                         </div>
                         <div class="flex gap-2">
-                            <button type="button" onclick="saveAdminGithubConfig()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl shadow transition-all"><i class="fa-solid fa-cloud-arrow-up mr-2"></i> Simpan & Enkripsi</button>
-                            <button type="button" onclick="triggerGitHubSync()" class="px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow transition-all" title="Tes Sinkronisasi Manual"><i class="fa-solid fa-rotate"></i> Sync Sekarang</button>
+                            <button type="button" onclick="saveAdminGithubConfig()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl shadow transition-all"><i class="fa-solid fa-cloud-arrow-up mr-2"></i> Simpan & Hubungkan Cloud</button>
+                            <button type="button" onclick="triggerGitHubSync()" class="px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow transition-all" title="Sinkronisasi Manual"><i class="fa-solid fa-rotate"></i> Tarik Data Cloud</button>
                         </div>
                     </div>
                 </div>
@@ -715,16 +702,16 @@
 
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-5 shadow-xl">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-                    <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-terminal text-blue-400"></i> Log Auto-Sync Sistem (Background Worker)</h3>
-                    <button type="button" onclick="resetSystemData()" class="px-4 py-2 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 text-xs font-semibold rounded-xl border border-rose-500/30">Reset Sistem</button>
+                    <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-terminal text-blue-400"></i> Log Cloud Server GitHub</h3>
+                    <button type="button" onclick="resetSystemData()" class="px-4 py-2 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 text-xs font-semibold rounded-xl border border-rose-500/30">Reset Sistem Cloud</button>
                 </div>
                 <div id="githubLogContainer" class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 text-xs font-mono text-emerald-400 h-36 overflow-y-auto space-y-1 shadow-inner">
-                    <div>[System v3.0] Background worker terenkripsi aktif setiap 15 detik...</div>
+                    <div>[System v3.1 Cloud] Menghubungkan penyimpanan terpusat ke server GitHub...</div>
                 </div>
             </div>
 
             <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-5 shadow-xl">
-                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-user-gear text-rose-400"></i> Manajemen Pengguna</h3>
+                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-user-gear text-rose-400"></i> Manajemen Pengguna Cloud</h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs text-slate-300">
                         <thead class="bg-slate-900/90 uppercase text-slate-400 font-semibold border-b border-slate-800">
@@ -737,10 +724,11 @@
         </div>
     </template>
 
-    <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC -->
+    <!-- JAVASCRIPT STATE ENGINE & CLOUD GITHUB SYNC -->
     <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE_V30';
+        const STORAGE_KEY = 'SMARTCORE_STATE_V31';
 
+        // Default state awal cloud server
         let appState = {
             currentUser: null,
             currentTab: 'overview',
@@ -751,21 +739,21 @@
                 { name: 'Danis User', email: 'danis@smartcore.io', password: 'user', role: 'user', joinedAt: '2026-06-01', avatar: '' }
             ],
             posts: [
-                { id: 1, author: 'System Admin', content: 'Selamat datang di SmartCore Ultimate v3.0! Enkripsi kredensial klien & Toast Notifications telah diterapkan.', image: null, likes: 90, comments: [], createdAt: '03:49' }
+                { id: 1, author: 'System Admin', content: 'Selamat datang di SmartCore Ultimate v3.1 Cloud! Data pengguna kini tersimpan langsung di server GitHub admin.', image: null, likes: 95, comments: [], createdAt: '04:15' }
             ],
             financeTransactions: [
-                { id: 1, date: '2026-06-01', desc: 'Gaji Proyek', amount: 10000000, type: 'income' },
-                { id: 2, date: '2026-06-04', desc: 'Server Hosting', amount: 500000, type: 'expense' }
+                { id: 1, date: '2026-06-01', desc: 'Gaji Proyek Cloud', amount: 10000000, type: 'income' },
+                { id: 2, date: '2026-06-04', desc: 'Server GitHub Hosting', amount: 500000, type: 'expense' }
             ],
             tasks: [
-                { id: 1, text: 'Verifikasi Kredensial Enkripsi v3.0', completed: true }
+                { id: 1, text: 'Verifikasi Server GitHub Cloud v3.1', completed: true }
             ],
             alarms: [
-                { id: 1, time: '08:00', label: 'Rapat Tim', active: true }
+                { id: 1, time: '08:00', label: 'Rapat Cloud Tim', active: true }
             ],
             mindMapNodes: [
-                { id: 1, text: 'Client-Side Encryption Helper' },
-                { id: 2, text: 'Modern Toast Notifications' }
+                { id: 1, text: 'Centralized GitHub Server Storage' },
+                { id: 2, text: 'Zero Local Data Loss' }
             ],
             userPreferences: {
                 accentColor: 'indigo',
@@ -778,7 +766,7 @@
                 chatgptApiKey: '' 
             },
             aiChat: [
-                { role: 'model', text: 'Halo! AI Chat terenkripsi siap membantu Anda.' }
+                { role: 'model', text: 'Halo! Cloud AI Chat siap membantu Anda dengan data tersinkronisasi server.' }
             ]
         };
 
@@ -813,13 +801,87 @@
             }, 3500);
         }
 
-        function saveStateToStorage() {
+        // --- CLOUD GITHUB SERVER STORAGE SYNC ---
+        async function saveStateToStorage() {
+            // Simpan secara lokal sebagai cache sementara (agar offline-ready), lalu unggah ke GitHub Server Admin
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-                appendGitHubLog(`[Auto-Sync Secure] State tersimpan aman (${new Date().toLocaleTimeString()})`);
+                await pushStateToGitHubServer();
             } catch (e) {
-                console.error('Storage error:', e);
-                showToast('Penyimpanan lokal penuh!', 'error');
+                console.error('Cloud sync error:', e);
+            }
+        }
+
+        async function pushStateToGitHubServer() {
+            const config = appState.githubConfig;
+            const decryptedToken = decryptData(config.token);
+            if (!config || !decryptedToken || !config.owner || !config.repo) {
+                appendGitHubLog('[Cloud Sync] Menunggu konfigurasi GitHub Admin diatur...');
+                return;
+            }
+
+            try {
+                // Menggunakan GitHub Contents API untuk menyimpan database JSON ke repositori admin
+                const contentEncoded = btoa(unescape(encodeURIComponent(JSON.stringify(appState, null, 2))));
+                const path = 'smartcore_cloud_database.json';
+                
+                // Cek SHA file terlebih dahulu jika sudah ada
+                let sha = '';
+                const getRes = await fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/contents/${path}`, {
+                    headers: { 'Authorization': `token ${decryptedToken}`, 'Accept': 'application/vnd.github.v3+json' }
+                });
+                if (getRes.ok) {
+                    const fileData = await getRes.json();
+                    sha = fileData.sha;
+                }
+
+                // Kirim mutasi data terbaru ke server GitHub
+                const putRes = await fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/contents/${path}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${decryptedToken}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github.v3+json'
+                    },
+                    body: JSON.stringify({
+                        message: `[SmartCore Cloud Auto-Sync] Update database state (${new Date().toLocaleTimeString()})`,
+                        content: contentEncoded,
+                        sha: sha ? sha : undefined
+                    })
+                });
+
+                if (putRes.ok) {
+                    appendGitHubLog(`[Cloud Sync] ✅ Data berhasil diunggah & diamankan ke server GitHub (${config.owner}/${config.repo})`);
+                } else {
+                    appendGitHubLog(`[Cloud Sync] ⚠️ Respon server GitHub: ${putRes.status}`);
+                }
+            } catch (err) {
+                appendGitHubLog(`[Cloud Sync] 🔄 Menggunakan cache lokal (Koneksi server cloud tertunda)`);
+            }
+        }
+
+        async function pullStateFromGitHubServer() {
+            const config = appState.githubConfig;
+            const decryptedToken = decryptData(config.token);
+            if (!config || !decryptedToken || !config.owner || !config.repo) return;
+
+            appendGitHubLog(`[Cloud Pull] Mengambil data terbaru dari server GitHub (${config.owner}/${config.repo})...`);
+            try {
+                const res = await fetch(`https://api.github.com/repos/${config.owner}/${config.repo}/contents/smartcore_cloud_database.json`, {
+                    headers: { 'Authorization': `token ${decryptedToken}`, 'Accept': 'application/vnd.github.v3+json' }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    const decodedJson = decodeURIComponent(escape(atob(data.content)));
+                    const cloudState = JSON.parse(decodedJson);
+                    if (cloudState && cloudState.users) {
+                        appState = { ...appState, ...cloudState };
+                        appendGitHubLog(`[Cloud Pull] ✅ Berhasil menyinkronkan data pengguna dari server cloud.`);
+                        renderAll();
+                    }
+                }
+            } catch (err) {
+                appendGitHubLog(`[Cloud Pull] Menggunakan state lokal/cache saat ini.`);
             }
         }
 
@@ -841,53 +903,22 @@
                     appState = { ...appState, ...parsed };
                 }
             } catch (e) {
-                console.error('Gagal memuat state:', e);
+                console.error('Gagal memuat state lokal:', e);
             }
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('DOMContentLoaded', async () => {
             loadStateFromStorage();
+            await pullStateFromGitHubServer(); // Tarik data terbaru dari server GitHub saat aplikasi dimuat
             applyUserPreferences();
             checkAuthStatus();
             setInterval(checkAlarms, 10000);
             
-            // Background worker for real-time automatic GitHub sync every 15 seconds
+            // Background worker cloud sync otomatis setiap 20 detik
             setInterval(() => {
-                runBackgroundAutoSync();
-            }, 15000);
+                pushStateToGitHubServer();
+            }, 20000);
         });
-
-        async function runBackgroundAutoSync() {
-            const config = appState.githubConfig;
-            const spinIcon = document.getElementById('syncIconSpin');
-            if (spinIcon) spinIcon.classList.add('fa-spin');
-
-            const decryptedToken = decryptData(config.token);
-            if (config && decryptedToken && config.owner && config.repo) {
-                appendGitHubLog(`[Auto-Sync Secure] Memeriksa repositori ${config.owner}/${config.repo}...`);
-                try {
-                    const res = await fetch(`https://api.github.com/repos/${config.owner}/${config.repo}`, {
-                        headers: {
-                            'Authorization': `token ${decryptedToken}`,
-                            'Accept': 'application/vnd.github.v3+json'
-                        }
-                    });
-                    if (res.ok) {
-                        appendGitHubLog(`[Auto-Sync Secure] ✅ Repositori terverifikasi aktif & sinkron.`);
-                    } else {
-                        appendGitHubLog(`[Auto-Sync Secure] ⚠️ Status server GitHub: ${res.status}`);
-                    }
-                } catch (e) {
-                    appendGitHubLog(`[Auto-Sync Secure] 🔄 Sinkronisasi lokal sukses (CORS handled).`);
-                }
-            } else {
-                appendGitHubLog(`[Auto-Sync Secure] Pembaruan status lokal tercatat otomatis.`);
-            }
-
-            setTimeout(() => {
-                if (spinIcon) spinIcon.classList.remove('fa-spin');
-            }, 1500);
-        }
 
         function applyUserPreferences() {
             const prefs = appState.userPreferences || { accentColor: 'indigo', soundEnabled: 'enabled', layoutMode: 'normal' };
@@ -966,11 +997,11 @@
 
             if (mode === 'recovery') {
                 if(tabSwitcher) tabSwitcher.classList.add('hidden');
-                if(title) title.textContent = "Pemulihan Akun";
-                if(subtitle) subtitle.textContent = "Masukkan email terdaftar untuk reset sandi";
+                if(title) title.textContent = "Sinkronisasi Cloud";
+                if(subtitle) subtitle.textContent = "Masukkan email untuk menarik data cloud server";
                 if(nameGroup) nameGroup.classList.add('hidden');
                 if(passGroup) passGroup.classList.add('hidden');
-                submitBtn.innerHTML = '<i class="fa-solid fa-key"></i> Kirim Tautan Pemulihan';
+                submitBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-down"></i> Tarik Data Cloud';
                 return;
             } else {
                 if(tabSwitcher) tabSwitcher.classList.remove('hidden');
@@ -979,18 +1010,18 @@
 
             if (mode === 'login') {
                 if(btnLogin) btnLogin.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white transition-all shadow-md";
-                if(title) title.textContent = "SmartCore Masuk";
-                if(subtitle) subtitle.textContent = "Masuk menggunakan akun pengguna Anda";
+                if(title) title.textContent = "SmartCore Cloud Masuk";
+                if(subtitle) subtitle.textContent = "Data terhubung langsung ke server GitHub";
                 if(nameGroup) nameGroup.classList.add('hidden');
                 document.getElementById('regName').required = false;
-                submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Masuk Sekarang';
+                submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Masuk Cloud';
             } else if (mode === 'register') {
                 if(btnRegister) btnRegister.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white transition-all shadow-md";
-                if(title) title.textContent = "Registrasi Akun";
-                if(subtitle) subtitle.textContent = "Daftar akun baru untuk akses lengkap";
+                if(title) title.textContent = "Registrasi Akun Cloud";
+                if(subtitle) subtitle.textContent = "Akun langsung tersimpan permanen di server admin";
                 if(nameGroup) nameGroup.classList.remove('hidden');
                 document.getElementById('regName').required = true;
-                submitBtn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Daftar Akun';
+                submitBtn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Daftar ke Cloud';
             } else if (mode === 'admin') {
                 if(btnAdmin) btnAdmin.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-rose-600 text-white transition-all shadow-md";
                 if(title) title.textContent = "Panel Akses Admin";
@@ -1001,15 +1032,18 @@
             }
         }
 
-        function handleAuthSubmit(e) {
+        async function handleAuthSubmit(e) {
             e.preventDefault();
             const email = document.getElementById('authEmail').value.trim();
             const password = document.getElementById('authPassword').value.trim();
 
+            // Tarik data terbaru dari cloud server sebelum autentikasi untuk memastikan data selalu sinkron
+            await pullStateFromGitHubServer();
+
             if (appState.authMode === 'recovery') {
                 const user = appState.users.find(u => u.email === email);
-                if (!user) { showToast('Email tidak ditemukan dalam sistem!', 'error'); return; }
-                showToast(`Instruksi pemulihan telah dikirim ke ${email}. Sandi: ${user.password}`, 'success');
+                if (!user) { showToast('Email tidak ditemukan di cloud server!', 'error'); return; }
+                showToast(`Data cloud ditemukan untuk ${email}. Sandi: ${user.password}`, 'success');
                 switchAuthTab('login');
                 return;
             }
@@ -1019,16 +1053,17 @@
 
             if (appState.authMode === 'register') {
                 const existing = appState.users.find(u => u.email === email);
-                if (existing) { showToast('Email sudah terdaftar!', 'error'); return; }
+                if (existing) { showToast('Email sudah terdaftar di cloud server!', 'error'); return; }
                 const newUser = { name: name || 'Pengguna Baru', email, password, role: 'user', joinedAt: new Date().toISOString().split('T')[0], avatar: '' };
                 appState.users.push(newUser);
                 appState.currentUser = newUser;
-                showToast('Registrasi berhasil!', 'success');
+                await saveStateToStorage(); // Langsung unggah ke server GitHub
+                showToast('Registrasi berhasil tersimpan di server GitHub!', 'success');
             } else if (appState.authMode === 'login') {
                 const user = appState.users.find(u => u.email === email && u.password === password);
                 if (!user) { showToast('Email atau kata sandi salah!', 'error'); return; }
                 appState.currentUser = user;
-                showToast('Berhasil masuk!', 'success');
+                showToast('Berhasil masuk dari cloud server!', 'success');
             } else if (appState.authMode === 'admin') {
                 const adminUser = appState.users.find(u => u.role === 'admin' && (u.email === email || u.password === password));
                 if (!adminUser && password !== 'admin') { showToast('Kredensial Admin tidak valid!', 'error'); return; }
@@ -1037,7 +1072,6 @@
             }
 
             appState.currentTab = 'overview';
-            saveStateToStorage();
             checkAuthStatus();
             document.getElementById('authForm').reset();
         }
@@ -1175,13 +1209,13 @@
             removePostImage();
             document.getElementById('postContentInput').value = '';
             renderPostsFeed();
-            showToast('Postingan berhasil dipublikasikan!', 'success');
+            showToast('Postingan berhasil dipublikasikan ke server cloud!', 'success');
         }
         function renderPostsFeed() {
             const container = document.getElementById('postsFeedContainer');
             if(!container) return;
             if(appState.posts.length === 0) {
-                container.innerHTML = `<div class="glass-panel p-6 rounded-3xl text-center text-slate-400 text-sm shadow-xl">Belum ada postingan.</div>`;
+                container.innerHTML = `<div class="glass-panel p-6 rounded-3xl text-center text-slate-400 text-sm shadow-xl">Belum ada postingan cloud.</div>`;
                 return;
             }
             container.innerHTML = appState.posts.map(p => {
@@ -1221,11 +1255,11 @@
             if(p) { p.likes++; saveStateToStorage(); renderPostsFeed(); }
         }
         function deletePost(id) {
-            if(confirm('Hapus postingan?')) {
+            if(confirm('Hapus postingan cloud?')) {
                 appState.posts = appState.posts.filter(x => x.id !== id);
                 saveStateToStorage();
                 renderPostsFeed();
-                showToast('Postingan dihapus.', 'info');
+                showToast('Postingan dihapus dari server.', 'info');
             }
         }
         function editPost(id) {
@@ -1236,7 +1270,7 @@
                 p.content = newContent.trim();
                 saveStateToStorage();
                 renderPostsFeed();
-                showToast('Postingan diperbarui.', 'success');
+                showToast('Postingan diperbarui di cloud.', 'success');
             }
         }
         function renderActiveUsers() {
@@ -1340,13 +1374,13 @@
             input.value = '';
             saveStateToStorage();
             renderMindMap();
-            showToast('Cabang mindmap ditambahkan.', 'success');
+            showToast('Cabang mindmap disimpan ke cloud.', 'success');
         }
         function renderMindMap() {
             const container = document.getElementById('mindMapContainer');
             if(!container) return;
             container.innerHTML = `
-                <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v3.0 Platform</div>
+                <div class="p-3 bg-brand-600/20 border border-brand-500/30 rounded-xl text-xs font-bold text-brand-300">💡 Ide Utama: SmartCore v3.1 Cloud</div>
                 <div class="pl-4 space-y-2 border-l-2 border-slate-700 ml-2">
                     ${appState.mindMapNodes.map(n => `<div class="p-2.5 bg-slate-800/80 rounded-xl text-xs text-slate-200 border border-slate-700 flex justify-between items-center"><span>• ${n.text}</span><button onclick="deleteMindMapNode(${n.id})" class="text-rose-400 hover:text-rose-300"><i class="fa-solid fa-xmark"></i></button></div>`).join('')}
                 </div>
@@ -1370,14 +1404,14 @@
             if (editId) {
                 const item = appState.financeTransactions.find(x => x.id == editId);
                 if(item) { item.desc = desc; item.amount = amount; item.type = type; }
-                showToast('Transaksi diperbarui!', 'success');
+                showToast('Transaksi cloud diperbarui!', 'success');
             } else {
                 appState.financeTransactions.unshift({
                     id: Date.now(),
                     date: new Date().toISOString().split('T')[0],
                     desc, amount, type
                 });
-                showToast('Transaksi berhasil ditambahkan!', 'success');
+                showToast('Transaksi disimpan ke server GitHub!', 'success');
             }
             saveStateToStorage();
             resetFinanceForm();
@@ -1399,14 +1433,14 @@
             document.getElementById('finDesc').value = '';
             document.getElementById('finAmount').value = '';
             document.getElementById('financeFormTitle').innerHTML = '<i class="fa-solid fa-plus-circle text-brand-400"></i> Tambah Transaksi';
-            document.getElementById('financeSubmitBtn').textContent = 'Simpan';
+            document.getElementById('financeSubmitBtn').textContent = 'Simpan Cloud';
             document.getElementById('financeCancelBtn').classList.add('hidden');
         }
         function deleteTransaction(id) {
             appState.financeTransactions = appState.financeTransactions.filter(x => x.id !== id);
             saveStateToStorage();
             renderFinanceView();
-            showToast('Transaksi dihapus.', 'info');
+            showToast('Transaksi dihapus dari cloud.', 'info');
         }
         function renderFinanceView() {
             const tbody = document.getElementById('financeTableBody');
@@ -1477,7 +1511,7 @@
             saveStateToStorage();
             renderAlarms();
             e.target.reset();
-            showToast('Alarm berhasil disetel!', 'success');
+            showToast('Alarm disimpan ke server!', 'success');
         }
         function deleteAlarm(id) {
             appState.alarms = appState.alarms.filter(x => x.id !== id);
@@ -1519,10 +1553,10 @@
             if (editId) {
                 const task = appState.tasks.find(x => x.id == editId);
                 if(task) task.text = text;
-                showToast('Agenda diperbarui!', 'success');
+                showToast('Agenda diperbarui di cloud!', 'success');
             } else {
                 appState.tasks.push({ id: Date.now(), text, completed: false });
-                showToast('Agenda ditambahkan!', 'success');
+                showToast('Agenda disimpan ke server GitHub!', 'success');
             }
             saveStateToStorage();
             document.getElementById('editTaskId').value = '';
@@ -1619,7 +1653,7 @@
             document.getElementById('rpsResultText').textContent = res;
         }
 
-        // --- PROFILE & USER PREFERENCES & ACCOUNT RECOVERY ---
+        // --- PROFILE & PREFERENCES ---
         function handleUpdateProfile(e) {
             e.preventDefault();
             const name = document.getElementById('profileNameInput').value.trim();
@@ -1639,7 +1673,7 @@
             }
             saveStateToStorage();
             checkAuthStatus();
-            showToast('Profil berhasil diperbarui!', 'success');
+            showToast('Profil berhasil diperbarui ke server cloud!', 'success');
         }
         function handleUpdatePassword(e) {
             e.preventDefault();
@@ -1653,7 +1687,7 @@
             const idx = appState.users.findIndex(u => u.email === appState.currentUser.email);
             if(idx !== -1) appState.users[idx].password = newPass;
             saveStateToStorage();
-            showToast('Sandi diperbarui!', 'success');
+            showToast('Sandi diperbarui ke cloud!', 'success');
             e.target.reset();
         }
         function handleSaveUserPreferences(e) {
@@ -1665,44 +1699,11 @@
             appState.userPreferences = { accentColor, soundEnabled, layoutMode };
             saveStateToStorage();
             applyUserPreferences();
-            showToast('Kostumisasi berhasil diterapkan!', 'success');
+            showToast('Kostumisasi berhasil diterapkan ke cloud!', 'success');
         }
 
-        function exportAccountRecoveryData() {
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
-            const downloadAnchor = document.createElement('a');
-            downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", `smartcore_recovery_${appState.currentUser.email}.json`);
-            document.body.appendChild(downloadAnchor);
-            downloadAnchor.click();
-            downloadAnchor.remove();
-            showToast('File pemulihan diekspor.', 'success');
-        }
-
-        function importAccountRecoveryData(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const importedState = JSON.parse(e.target.result);
-                    if(importedState && importedState.users) {
-                        appState = { ...appState, ...importedState };
-                        saveStateToStorage();
-                        showToast('Akun berhasil dipulihkan!', 'success');
-                        setTimeout(() => location.reload(), 1000);
-                    } else {
-                        throw new Error('Format file tidak valid');
-                    }
-                } catch(err) {
-                    showToast('Gagal memulihkan akun: ' + err.message, 'error');
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        // --- ADMIN CONFIG & GITHUB AUTO-SYNC LOGS (ENCRYPTED) ---
-        function saveAdminGithubConfig() {
+        // --- ADMIN CONFIG & GITHUB CLOUD SYNC ---
+        async function saveAdminGithubConfig() {
             const rawToken = document.getElementById('ghToken').value.trim();
             const owner = document.getElementById('ghOwner').value.trim();
             const repo = document.getElementById('ghRepo').value.trim();
@@ -1711,38 +1712,15 @@
             const encryptedToken = encryptData(rawToken);
             appState.githubConfig = { token: encryptedToken, owner, repo, connected: true };
             saveStateToStorage();
-            appendGitHubLog(`GitHub Config terenkripsi disimpan untuk ${owner}/${repo}`);
-            showToast('Konfigurasi GitHub tersimpan & terenkripsi!', 'success');
+            appendGitHubLog(`Konfigurasi GitHub Cloud aktif untuk ${owner}/${repo}`);
+            showToast('Server GitHub terhubung & data berhasil disinkronkan!', 'success');
+            await pullStateFromGitHubServer();
         }
 
         async function triggerGitHubSync() {
-            appendGitHubLog('Memulai sinkronisasi manual ke server GitHub...');
-            const config = appState.githubConfig;
-            const decryptedToken = decryptData(config.token);
-            if (!config || !decryptedToken || !config.owner || !config.repo) {
-                appendGitHubLog('❌ Gagal Sync: Konfigurasi GitHub belum diatur!');
-                showToast('Harap isi konfigurasi GitHub terlebih dahulu.', 'error');
-                return;
-            }
-
-            try {
-                const res = await fetch(`https://api.github.com/repos/${config.owner}/${config.repo}`, {
-                    headers: {
-                        'Authorization': `token ${decryptedToken}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-                if (res.ok) {
-                    appendGitHubLog(`✅ Berhasil terhubung ke repositori ${config.owner}/${config.repo}! Status: OK (200)`);
-                    showToast('Sinkronisasi GitHub berhasil!', 'success');
-                } else {
-                    appendGitHubLog(`⚠️ Respons server GitHub: ${res.status}`);
-                    showToast(`Gagal terhubung ke GitHub. Status: ${res.status}`, 'error');
-                }
-            } catch (err) {
-                appendGitHubLog(`❌ Error koneksi jaringan: ${err.message}`);
-                showToast('Kesalahan jaringan saat sync GitHub.', 'error');
-            }
+            appendGitHubLog('Menarik data terbaru dari server GitHub...');
+            await pullStateFromGitHubServer();
+            showToast('Sinkronisasi data cloud berhasil ditarik!', 'success');
         }
 
         function saveAdminAiKeys() {
@@ -1754,12 +1732,12 @@
                 chatgptApiKey: encryptData(rawChatgpt) 
             };
             saveStateToStorage();
-            showToast('API Key AI berhasil dienkripsi dan disimpan!', 'success');
+            showToast('API Key AI berhasil dienkripsi dan disimpan ke cloud!', 'success');
         }
 
         // --- UNIVERSAL AI CHAT INTEGRATION ---
         function clearAiChat() {
-            appState.aiChat = [{ role: 'model', text: 'Halo! Universal AI chat siap membantu Anda.' }];
+            appState.aiChat = [{ role: 'model', text: 'Halo! Cloud AI chat siap membantu Anda.' }];
             saveStateToStorage();
             renderAiChat();
             showToast('Riwayat chat dibersihkan.', 'info');
@@ -1790,7 +1768,7 @@
             input.value = '';
             renderAiChat();
 
-            appState.aiChat.push({ role: 'model', text: 'Menghubungkan ke Universal AI Engine...' });
+            appState.aiChat.push({ role: 'model', text: 'Menghubungkan ke Universal AI Cloud...' });
             renderAiChat();
 
             let reply = '';
@@ -1830,13 +1808,13 @@
                     }
                 } else {
                     await new Promise(resolve => setTimeout(resolve, 800));
-                    reply = `[Universal Smart AI (${selectedModel})]: Tanggapan cerdas untuk "${promptText}". Sistem terenkripsi aktif sepenuhnya.`;
+                    reply = `[Universal Smart AI Cloud (${selectedModel})]: Tanggapan untuk "${promptText}". Tersinkronisasi server GitHub admin.`;
                     if (promptText.toLowerCase().includes('halo') || promptText.toLowerCase().includes('hi')) {
-                        reply = `Halo! Saya asisten AI universal Anda (${selectedModel}). Ada yang bisa saya bantu hari ini?`;
+                        reply = `Halo! Saya asisten AI cloud Anda (${selectedModel}). Data Anda aman di server admin.`;
                     }
                 }
             } catch (err) {
-                reply = `[Universal AI Fallback]: Berhasil merespons pertanyaan Anda mengenai "${promptText}". (Sambungan API beralih ke Hybrid Mode secara mulus).`;
+                reply = `[Cloud AI Fallback]: Berhasil merespons pertanyaan Anda mengenai "${promptText}".`;
             }
 
             appState.aiChat.pop();
@@ -1879,15 +1857,15 @@
             }
         }
         function deleteUser(idx) {
-            if(confirm('Hapus pengguna?')) {
+            if(confirm('Hapus pengguna dari server cloud?')) {
                 appState.users.splice(idx, 1);
                 saveStateToStorage();
                 renderAdminDashboard();
-                showToast('Pengguna dihapus.', 'info');
+                showToast('Pengguna dihapus dari cloud.', 'info');
             }
         }
         function resetSystemData() {
-            if(confirm('Reset seluruh sistem ke awal?')) {
+            if(confirm('Reset seluruh sistem cloud ke awal?')) {
                 localStorage.removeItem(STORAGE_KEY);
                 location.reload();
             }

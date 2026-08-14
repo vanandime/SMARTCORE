@@ -61,16 +61,16 @@
     </audio>
 
     <!-- Top Instagram Header -->
-    <header class="h-11 border-b backdrop-blur-md flex items-center justify-between px-4 sticky top-0 z-30 flex-shrink-0">
+    <header class="h-12 border-b backdrop-blur-md flex items-center justify-between px-4 sticky top-0 z-30 flex-shrink-0">
         <div class="flex items-center space-x-1.5 cursor-pointer">
             <span class="font-bold text-sm tracking-tight">vanandii</span>
-            <i class="fa-solid fa-circle-check text-sky-500 text-[10px]"></i>
-            <i class="fa-solid fa-angle-down text-[10px] opacity-70 ml-0.5"></i>
+            <i class="fa-solid fa-circle-check text-sky-500 text-[11px]"></i>
         </div>
-        <div class="flex items-center space-x-4">
-            <button class="text-lg hover:opacity-70 transition cursor-pointer"><i class="fa-regular fa-square-plus"></i></button>
-            <button class="text-lg hover:opacity-70 transition cursor-pointer"><i class="fa-regular fa-heart"></i></button>
-            <button id="open-sidebar-btn" class="text-lg hover:text-sky-500 transition cursor-pointer" aria-label="Settings">
+        <div class="flex items-center space-x-3.5">
+            <button id="open-stats-btn" class="text-base hover:text-sky-500 transition cursor-pointer" title="Quick Analytics">
+                <i class="fa-solid fa-chart-line"></i>
+            </button>
+            <button id="open-sidebar-btn" class="text-base hover:text-sky-500 transition cursor-pointer" aria-label="Settings">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
@@ -79,7 +79,7 @@
     <!-- Sidebar Settings Panel -->
     <div id="sidebar-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-xs z-40 hidden transition-opacity"></div>
     <aside id="settings-sidebar" class="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] theme-card border-l z-50 transform translate-x-full p-4 flex flex-col justify-between shadow-2xl overflow-y-auto">
-        <div class="space-y-5">
+        <div class="space-y-4">
             <div class="flex items-center justify-between pb-3 border-b border-neutral-300 dark:border-neutral-800">
                 <h3 class="font-bold text-xs flex items-center gap-2"><i class="fa-solid fa-sliders text-sky-500"></i> System Settings</h3>
                 <button id="close-sidebar-btn" class="hover:text-sky-500 text-sm p-1 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
@@ -102,11 +102,11 @@
             </div>
 
             <!-- Background Music Controls -->
-            <div class="space-y-2">
+            <div class="space-y-1.5">
                 <h4 class="text-[11px] font-bold uppercase tracking-wider opacity-70">Background Atmosphere</h4>
                 <div class="flex items-center justify-between bg-neutral-100 dark:bg-neutral-900 p-2 rounded-xl border">
                     <span class="text-[11px] font-semibold" id="sidebar-music-label">Status: Muted</span>
-                    <button id="sidebar-music-toggle" class="px-3 py-1 rounded-lg text-xs font-bold bg-sky-500 hover:bg-sky-600 text-white transition cursor-pointer">Play Music</button>
+                    <button id="sidebar-music-toggle" class="px-3 py-1 rounded-lg text-xs font-bold bg-sky-500 hover:bg-sky-600 text-white transition cursor-pointer">Play</button>
                 </div>
                 <div class="flex items-center gap-2 pt-0.5">
                     <span class="text-[10px] opacity-70">Vol</span>
@@ -141,7 +141,7 @@
         </div>
     </aside>
 
-    <!-- Main Content Container (Instagram Mobile-First Width) -->
+    <!-- Main Content Container -->
     <main class="flex-1 max-w-md w-full mx-auto px-3 py-3 mb-20">
         
         <!-- SECTION 1: Profile & Professional Feed -->
@@ -153,18 +153,19 @@
                             <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Mohammad Danis Muria Vanandi" class="w-full h-full object-cover">
                         </div>
                     </div>
+                    <!-- Professional Info Stats instead of followers -->
                     <div class="flex-1 flex justify-around text-center ml-2">
-                        <div>
-                            <span class="font-bold text-sm block">4</span>
-                            <span class="text-[10px] font-semibold opacity-70">Posts</span>
+                        <div class="theme-card border px-2 py-1.5 rounded-xl shadow-xs flex-1 mx-1">
+                            <span class="font-bold text-xs block text-sky-500">4</span>
+                            <span class="text-[9px] font-semibold opacity-70">Projects</span>
                         </div>
-                        <div>
-                            <span class="font-bold text-sm block">3,693</span>
-                            <span class="text-[10px] font-semibold opacity-70">Followers</span>
+                        <div class="theme-card border px-2 py-1.5 rounded-xl shadow-xs flex-1 mx-1">
+                            <span class="font-bold text-xs block text-emerald-500">4+ Yrs</span>
+                            <span class="text-[9px] font-semibold opacity-70">Experience</span>
                         </div>
-                        <div>
-                            <span class="font-bold text-sm block">431</span>
-                            <span class="text-[10px] font-semibold opacity-70">Following</span>
+                        <div class="theme-card border px-2 py-1.5 rounded-xl shadow-xs flex-1 mx-1">
+                            <span class="font-bold text-xs block text-purple-500">AI/NLP</span>
+                            <span class="text-[9px] font-semibold opacity-70">Focus</span>
                         </div>
                     </div>
                 </div>
@@ -214,14 +215,14 @@
                 </div>
             </div>
 
-            <!-- Feed Grid Tabs Header -->
+            <!-- Profile Interactive Sub-Panels (Posts vs Tagged) -->
             <div class="border-t border-neutral-300 dark:border-neutral-800 flex justify-around text-center pt-2">
-                <button class="flex-1 pb-2 border-b-2 border-sky-500 font-bold text-xs"><i class="fa-solid fa-table-cells mr-1"></i> Posts</button>
-                <button class="flex-1 pb-2 opacity-60 font-semibold text-xs"><i class="fa-solid fa-user-tag mr-1"></i> Tagged</button>
+                <button id="subtab-posts" class="flex-1 pb-2 border-b-2 border-sky-500 font-bold text-xs transition cursor-pointer"><i class="fa-solid fa-table-cells mr-1"></i> Posts</button>
+                <button id="subtab-tagged" class="flex-1 pb-2 opacity-60 hover:opacity-100 font-semibold text-xs transition cursor-pointer"><i class="fa-solid fa-user-tag mr-1"></i> Tagged</button>
             </div>
 
-            <!-- Feed Grid Content -->
-            <div class="grid grid-cols-2 gap-2.5">
+            <!-- Sub-Panel 1: Posts (Portfolio / Career Projects) -->
+            <div id="subview-posts" class="grid grid-cols-2 gap-2.5 animate-smooth">
                 <div class="theme-card border p-3.5 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-sky-500 transition space-y-1.5" data-caption="PTSL Juridical Aspect at National Land Agency / BPN (2021-2022). Handled legal land certification administration with 'Good' performance rating.">
                     <div class="w-9 h-9 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500 text-base">
                         <i class="fa-solid fa-landmark"></i>
@@ -259,6 +260,28 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Sub-Panel 2: Tagged (Certifications & Institutional Collaborations) -->
+            <div id="subview-tagged" class="grid grid-cols-2 gap-2.5 hidden animate-smooth">
+                <div class="theme-card border p-3.5 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-purple-500 transition space-y-1.5" data-caption="Certified Civil Engineering Professional Accreditation - State Polytechnic of Malang (2021).">
+                    <div class="w-9 h-9 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-500 text-base">
+                        <i class="fa-solid fa-certificate"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xs">Civil Engineering Degree</h4>
+                        <p class="text-[10px] opacity-70 font-semibold">Politeknik Negeri Malang</p>
+                    </div>
+                </div>
+                <div class="theme-card border p-3.5 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-purple-500 transition space-y-1.5" data-caption="Advanced LLM Annotation & NLP Evaluation Certification (2023).">
+                    <div class="w-9 h-9 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-500 text-base">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xs">AI & NLP Evaluation</h4>
+                        <p class="text-[10px] opacity-70 font-semibold">Independent Research</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- SECTION 2: AI Chat Assistant (DM) -->
@@ -275,9 +298,7 @@
                 </div>
             </div>
 
-            <div id="chat-container" class="space-y-3 min-h-[50vh] max-h-[58vh] overflow-y-auto pr-1 flex flex-col-reverse">
-                <!-- Chat messages appended dynamically (newest on top) -->
-            </div>
+            <div id="chat-container" class="space-y-3 min-h-[50vh] max-h-[58vh] overflow-y-auto pr-1 flex flex-col-reverse"></div>
 
             <div class="pt-2">
                 <form id="chat-form" class="theme-card border rounded-full px-4 py-2 flex items-center gap-2 shadow-xs">
@@ -310,7 +331,7 @@
             <div id="task-list" class="space-y-2 max-h-[55vh] overflow-y-auto pr-1"></div>
         </div>
 
-        <!-- SECTION 5: Financial Manager -->
+        <!-- SECTION 5: Financial Manager (With Payment Method Support) -->
         <div id="view-finance" class="hidden space-y-3 animate-smooth">
             <div class="flex items-center justify-between pb-2 border-b border-neutral-300 dark:border-neutral-800">
                 <h3 class="font-bold text-xs uppercase tracking-wider text-purple-500"><i class="fa-solid fa-wallet mr-1"></i> Financial Manager</h3>
@@ -328,21 +349,28 @@
                 </div>
             </div>
 
-            <form id="finance-form" class="theme-card border p-3.5 rounded-2xl space-y-2.5 shadow-xs">
+            <form id="finance-form" class="theme-card border p-3 rounded-2xl space-y-2 shadow-xs">
                 <div class="grid grid-cols-2 gap-2">
-                    <input type="text" id="fin-desc" placeholder="Title..." required class="border rounded-xl px-3 py-2 text-xs focus:outline-none font-medium">
-                    <input type="number" id="fin-amount" placeholder="Amount..." required class="border rounded-xl px-3 py-2 text-xs focus:outline-none font-medium">
+                    <input type="text" id="fin-desc" placeholder="Title..." required class="border rounded-xl px-2.5 py-1.5 text-xs focus:outline-none font-medium">
+                    <input type="number" id="fin-amount" placeholder="Amount..." required class="border rounded-xl px-2.5 py-1.5 text-xs focus:outline-none font-medium">
                 </div>
-                <div class="flex gap-2">
-                    <select id="fin-type" class="flex-1 border rounded-xl px-3 py-2 text-xs focus:outline-none font-medium cursor-pointer">
+                <div class="grid grid-cols-2 gap-2">
+                    <select id="fin-type" class="border rounded-xl px-2.5 py-1.5 text-xs focus:outline-none font-medium cursor-pointer">
                         <option value="income">Income (+)</option>
                         <option value="expense">Expense (-)</option>
                     </select>
-                    <button type="submit" class="bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer">Add</button>
+                    <select id="fin-method" class="border rounded-xl px-2.5 py-1.5 text-xs focus:outline-none font-medium cursor-pointer">
+                        <option value="Cash / Tunai">Cash / Tunai</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="E-Wallet">E-Wallet</option>
+                        <option value="QRIS">QRIS</option>
+                        <option value="Credit Card">Credit Card</option>
+                    </select>
                 </div>
+                <button type="submit" class="w-full bg-sky-500 hover:bg-sky-600 text-white py-2 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer">Add Transaction</button>
             </form>
 
-            <div id="finance-list" class="space-y-2 max-h-[38vh] overflow-y-auto pr-1"></div>
+            <div id="finance-list" class="space-y-2 max-h-[35vh] overflow-y-auto pr-1"></div>
         </div>
     </main>
 
@@ -370,7 +398,7 @@
         </button>
     </nav>
 
-    <!-- Modal CV & Detail -->
+    <!-- Modal CV & Detail / Quick Stats -->
     <div id="modal-container" class="fixed inset-0 bg-black/60 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
         <div class="theme-card border rounded-3xl max-w-md w-full p-5 shadow-2xl space-y-3 max-h-[85vh] overflow-y-auto animate-smooth">
             <div class="flex items-center justify-between border-b border-neutral-300 dark:border-neutral-800 pb-2.5">
@@ -395,13 +423,13 @@
                     audio.pause();
                     musicPlaying = false;
                     document.getElementById('sidebar-music-label').textContent = 'Status: Muted';
-                    document.getElementById('sidebar-music-toggle').textContent = 'Play Music';
+                    document.getElementById('sidebar-music-toggle').textContent = 'Play';
                     document.getElementById('sidebar-music-toggle').className = 'px-3 py-1 rounded-lg text-xs font-bold bg-sky-500 hover:bg-sky-600 text-white transition cursor-pointer';
                 } else {
                     audio.play().then(() => {
                         musicPlaying = true;
                         document.getElementById('sidebar-music-label').textContent = 'Status: Playing';
-                        document.getElementById('sidebar-music-toggle').textContent = 'Stop Music';
+                        document.getElementById('sidebar-music-toggle').textContent = 'Stop';
                         document.getElementById('sidebar-music-toggle').className = 'px-3 py-1 rounded-lg text-xs font-bold bg-rose-500 hover:bg-rose-600 text-white transition cursor-pointer';
                     }).catch(e => console.log("Autoplay blocked"));
                 }
@@ -414,7 +442,7 @@
                     audio.play().then(() => {
                         musicPlaying = true;
                         document.getElementById('sidebar-music-label').textContent = 'Status: Playing';
-                        document.getElementById('sidebar-music-toggle').textContent = 'Stop Music';
+                        document.getElementById('sidebar-music-toggle').textContent = 'Stop';
                         document.getElementById('sidebar-music-toggle').className = 'px-3 py-1 rounded-lg text-xs font-bold bg-rose-500 hover:bg-rose-600 text-white transition cursor-pointer';
                     }).catch(e => {});
                 }
@@ -448,6 +476,28 @@
             closeSidebar.addEventListener('click', () => toggleSidebar(false));
             overlay.addEventListener('click', () => toggleSidebar(false));
 
+            // Quick Stats & Analytics Modal Button (Next to Hamburger)
+            const modalContainer = document.getElementById('modal-container');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            const closeModal = document.getElementById('close-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+
+            document.getElementById('open-stats-btn').addEventListener('click', () => {
+                modalTitle.textContent = "Executive Quick Analytics & Stats";
+                const totalTasks = JSON.parse(localStorage.getItem('exec_suite_tasks') || '[]').length;
+                const totalFin = JSON.parse(localStorage.getItem('exec_suite_finance') || '[]').length;
+                modalContent.innerHTML = `
+                    <p><strong>System Status:</strong> Fully Operational (Max Encrypted)</p>
+                    <p><strong>Active Profile:</strong> Mohammad Danis Muria Vanandi (@vanandii)</p>
+                    <p><strong>Saved Tasks:</strong> ${totalTasks} items managed.</p>
+                    <p><strong>Financial Transactions:</strong> ${totalFin} records logged.</p>
+                    <p><strong>Storage Status:</strong> Secure local browser session active.</p>
+                `;
+                modalContainer.classList.remove('hidden');
+                modalContainer.classList.add('flex');
+            });
+
             // Theme Customization
             const savedTheme = localStorage.getItem('executive_theme') || 'theme-clean';
             document.body.className = `${savedTheme} font-['Plus_Jakarta_Sans',sans-serif] min-h-screen flex flex-col selection:bg-pink-500 selection:text-white transition-colors duration-300`;
@@ -461,7 +511,27 @@
                 });
             });
 
-            // Data Backup & Recovery (Export / Import JSON)
+            // Profile Sub-tabs Switcher (Posts vs Tagged)
+            const subtabPosts = document.getElementById('subtab-posts');
+            const subtabTagged = document.getElementById('subtab-tagged');
+            const subviewPosts = document.getElementById('subview-posts');
+            const subviewTagged = document.getElementById('subview-tagged');
+
+            subtabPosts.addEventListener('click', () => {
+                subviewPosts.classList.remove('hidden');
+                subviewTagged.classList.add('hidden');
+                subtabPosts.className = "flex-1 pb-2 border-b-2 border-sky-500 font-bold text-xs transition cursor-pointer";
+                subtabTagged.className = "flex-1 pb-2 opacity-60 hover:opacity-100 font-semibold text-xs transition cursor-pointer";
+            });
+
+            subtabTagged.addEventListener('click', () => {
+                subviewTagged.classList.remove('hidden');
+                subviewPosts.classList.add('hidden');
+                subtabTagged.className = "flex-1 pb-2 border-b-2 border-purple-500 font-bold text-xs transition cursor-pointer";
+                subtabPosts.className = "flex-1 pb-2 opacity-60 hover:opacity-100 font-semibold text-xs transition cursor-pointer";
+            });
+
+            // Data Backup & Recovery
             document.getElementById('export-data-btn').addEventListener('click', () => {
                 const backupData = {
                     notes: localStorage.getItem('exec_suite_notes') || '',
@@ -497,7 +567,7 @@
                 reader.readAsText(file);
             });
 
-            // Persistent Tabs Management (Fixed Refresh Jump Issue)
+            // Persistent Tabs Management
             const views = {
                 profile: document.getElementById('view-profile'),
                 chat: document.getElementById('view-chat'),
@@ -542,7 +612,7 @@
             const initialTab = localStorage.getItem('exec_active_tab') || 'profile';
             switchTab(initialTab, false);
 
-            // AI Chat Assistant Engine (Hybrid Stable with Top Auto-Scroll)
+            // AI Chat Assistant Engine
             const chatContainer = document.getElementById('chat-container');
             const chatForm = document.getElementById('chat-form');
             const userInput = document.getElementById('user-input');
@@ -554,7 +624,6 @@
             if (chatHistory.length > 0) {
                 chatHistory.forEach(msg => appendMessage(msg.role, msg.text, false));
             } else {
-                // Default greeting
                 appendMessage('model', "Hello! Welcome to my virtual assistant direct message. Feel free to ask anything about my civil engineering background, project management, or AI research!", false);
             }
 
@@ -640,7 +709,7 @@
                     </div>
                 `;
 
-                chatContainer.prepend(div); // Newest messages appear at the top/latest
+                chatContainer.prepend(div);
                 chatContainer.scrollTop = 0;
             }
 
@@ -786,11 +855,12 @@
                 });
             }
 
-            // Financial Manager Logic
+            // Financial Manager Logic with Payment Method Support
             const financeForm = document.getElementById('finance-form');
             const finDesc = document.getElementById('fin-desc');
             const finAmount = document.getElementById('fin-amount');
             const finType = document.getElementById('fin-type');
+            const finMethod = document.getElementById('fin-method');
             const financeList = document.getElementById('finance-list');
             const incomeTotal = document.getElementById('income-total');
             const expenseTotal = document.getElementById('expense-total');
@@ -804,9 +874,10 @@
                 const desc = finDesc.value.trim();
                 const amount = parseFloat(finAmount.value);
                 const type = finType.value;
+                const method = finMethod.value;
                 if (!desc || isNaN(amount)) return;
 
-                finances.push({ id: Date.now(), desc, amount, type });
+                finances.push({ id: Date.now(), desc, amount, type, method });
                 finDesc.value = '';
                 finAmount.value = '';
                 saveAndRenderFinance();
@@ -831,7 +902,10 @@
                     div.innerHTML = `
                         <div class="flex items-center space-x-2">
                             <span class="${item.type === 'income' ? 'text-emerald-500 font-bold' : 'text-rose-500 font-bold'}">${item.type === 'income' ? '+' : '-'}$${item.amount.toLocaleString()}</span>
-                            <span class="font-semibold">${item.desc}</span>
+                            <div>
+                                <span class="font-semibold block">${item.desc}</span>
+                                <span class="text-[9px] opacity-70 font-mono">${item.method || 'Cash / Tunai'}</span>
+                            </div>
                         </div>
                         <button data-index="${idx}" class="delete-fin opacity-60 hover:text-rose-500 transition cursor-pointer p-1"><i class="fa-solid fa-trash-can"></i></button>
                     `;
@@ -853,12 +927,6 @@
             }
 
             // Modal Handlers & CV Content
-            const modalContainer = document.getElementById('modal-container');
-            const modalTitle = document.getElementById('modal-title');
-            const modalContent = document.getElementById('modal-content');
-            const closeModal = document.getElementById('close-modal');
-            const closeModalBtn = document.getElementById('close-modal-btn');
-
             document.querySelectorAll('.highlight-item').forEach(item => {
                 item.addEventListener('click', () => {
                     const topic = item.getAttribute('data-topic');

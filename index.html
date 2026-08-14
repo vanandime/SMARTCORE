@@ -1,1474 +1,683 @@
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartCore Ultimate - All-in-One Platform & AI Workspace v2.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Danis Vanandi (@vanandi) • Executive Suite</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#eef2ff',
-                            100: '#e0e7ff',
-                            500: '#6366f1',
-                            600: '#4f46e5',
-                            700: '#4338ca',
-                            900: '#312e81'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts (Plus Jakarta Sans) -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.88);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(99, 102, 241, 0.25);
+        ::-webkit-scrollbar { width: 3px; height: 3px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(150,150,150,0.3); border-radius: 9999px; }
+        
+        @keyframes smoothFade {
+            from { opacity: 0; transform: scale(0.98) translateY(6px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .animate-smooth { animation: smoothFade 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .ig-gradient { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        
+        /* Tema Terang Estetik Instagram */
+        body.theme-clean { background-color: #fafafa; color: #262626; }
+        body.theme-clean .theme-card { background-color: #ffffff; border-color: #dbdbdb; color: #262626; }
+        body.theme-clean header, body.theme-clean nav { background-color: rgba(255, 255, 255, 0.98) !important; border-color: #dbdbdb !important; color: #262626 !important; }
+        body.theme-clean input, body.theme-clean textarea { background-color: #efefef !important; color: #262626 !important; border-color: #dbdbdb !important; }
+
+        /* Tema Alternatif */
+        body.theme-midnight { background-color: #0b0f19; color: #f3f4f6; }
+        body.theme-midnight .theme-card { background-color: #111827; border-color: #1f2937; color: #f3f4f6; }
+        body.theme-midnight header, body.theme-midnight nav { background-color: rgba(11, 15, 25, 0.98) !important; border-color: #1f2937 !important; color: #f3f4f6 !important; }
+
+        body.theme-oled { background-color: #000000; color: #ffffff; }
+        body.theme-oled .theme-card { background-color: #121212; border-color: #262626; color: #ffffff; }
+        body.theme-oled header, body.theme-oled nav { background-color: rgba(0, 0, 0, 0.98) !important; border-color: #262626 !important; color: #ffffff !important; }
+
+        #settings-sidebar {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: auto;
         }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+<body class="theme-clean font-['Plus_Jakarta_Sans',sans-serif] min-h-screen flex flex-col selection:bg-pink-500 selection:text-white transition-colors duration-300">
 
-    <!-- AUTH & ONBOARDING MODAL OVERLAY -->
-    <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md hidden">
-        <div class="glass-panel w-full max-w-md p-8 rounded-3xl shadow-2xl relative border border-brand-500/40">
-            <div class="text-center mb-6">
-                <div class="inline-flex p-3.5 bg-brand-600/20 text-brand-400 rounded-2xl mb-3 text-2xl border border-brand-500/30 shadow-inner">
-                    <i class="fa-solid fa-cube"></i>
-                </div>
-                <h2 id="authTitle" class="text-2xl font-bold tracking-tight text-white">SmartCore Access</h2>
-                <p id="authSubtitle" class="text-sm text-slate-400 mt-1">Masuk sebagai Pengguna atau Administrator</p>
-            </div>
+    <!-- Background Audio Ambient -->
+    <audio id="bg-audio" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+    </audio>
 
-            <!-- Tab Switcher Auth -->
-            <div class="flex bg-slate-900/90 p-1.5 rounded-2xl mb-6 border border-slate-800">
-                <button type="button" onclick="switchAuthTab('login')" id="tabLoginBtn" class="flex-1 py-2 text-xs font-semibold rounded-xl bg-brand-600 text-white transition-all shadow-md">Masuk</button>
-                <button type="button" onclick="switchAuthTab('register')" id="tabRegisterBtn" class="flex-1 py-2 text-xs font-semibold rounded-xl text-slate-400 hover:text-white transition-all">Registrasi</button>
-                <button type="button" onclick="switchAuthTab('admin')" id="tabAdminBtn" class="flex-1 py-2 text-xs font-semibold rounded-xl text-slate-400 hover:text-white transition-all">Admin</button>
-            </div>
-
-            <!-- Auth Forms Container -->
-            <form id="authForm" onsubmit="handleAuthSubmit(event)" class="space-y-4">
-                <div id="nameFieldGroup" class="hidden">
-                    <label class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1.5">Nama Lengkap / Username</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-user"></i></span>
-                        <input type="text" id="regName" class="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700/80 rounded-xl focus:ring-2 focus:ring-brand-500 text-sm text-white placeholder-slate-500" placeholder="John Doe">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1.5">Email / Identitas</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-envelope"></i></span>
-                        <input type="text" id="authEmail" required class="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700/80 rounded-xl focus:ring-2 focus:ring-brand-500 text-sm text-white placeholder-slate-500" placeholder="user@smartcore.io">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1.5">Kata Sandi</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400"><i class="fa-solid fa-lock"></i></span>
-                        <input type="password" id="authPassword" required class="w-full pl-10 pr-4 py-3 bg-slate-900/90 border border-slate-700/80 rounded-xl focus:ring-2 focus:ring-brand-500 text-sm text-white placeholder-slate-500" placeholder="••••••••">
-                    </div>
-                </div>
-
-                <button type="submit" id="authSubmitBtn" class="w-full py-3.5 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-right-to-bracket"></i> Masuk Sekarang
-                </button>
-            </form>
+    <!-- Top IG Executive Header -->
+    <header class="h-12 border-b backdrop-blur-md flex items-center justify-between px-4 sticky top-0 z-30 flex-shrink-0 transition-colors">
+        <div class="flex items-center space-x-2">
+            <span class="font-bold text-sm tracking-tight">vanandi</span>
+            <i class="fa-solid fa-circle-check text-sky-500 text-[10px]"></i>
         </div>
-    </div>
-
-    <!-- MAIN APP WRAPPER -->
-    <div id="appWrapper" class="flex-1 flex flex-col min-h-screen">
-        <!-- TOP NAVIGATION BAR -->
-        <header class="glass-panel border-b border-slate-800 sticky top-0 z-40 px-4 lg:px-8 py-3.5 flex items-center justify-between shadow-lg">
-            <div class="flex items-center gap-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-400 flex items-center justify-center text-white font-bold text-lg shadow-md shadow-brand-500/20">
-                        <i class="fa-solid fa-bolt"></i>
-                    </div>
-                    <div>
-                        <h1 class="font-bold text-white tracking-wide text-base flex items-center gap-2">
-                            SmartCore <span class="text-brand-400 text-[10px] px-2 py-0.5 bg-brand-500/20 rounded-full border border-brand-500/30 font-semibold">v2.0 Ultimate</span>
-                        </h1>
-                        <p class="text-[11px] text-slate-400">All-in-One Platform & AI Workspace</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Responsive Nav Tabs -->
-            <nav class="hidden 2xl:flex items-center gap-1 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800/80">
-                <button type="button" onclick="switchTab('social')" id="navSocial" class="px-3 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-globe text-brand-400"></i> Sosial
-                </button>
-                <button type="button" onclick="switchTab('tools')" id="navTools" class="px-3 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-toolbox text-indigo-400"></i> Tools
-                </button>
-                <button type="button" onclick="switchTab('finance')" id="navFinance" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-wallet text-emerald-400"></i> Keuangan
-                </button>
-                <button type="button" onclick="switchTab('time')" id="navTime" class="px-3 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-clock text-amber-400"></i> Waktu & Alarm
-                </button>
-                <button type="button" onclick="switchTab('feeds')" id="navFeeds" class="px-3 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-rss text-cyan-400"></i> Berita & Cuaca
-                </button>
-                <button type="button" onclick="switchTab('fun')" id="navFun" class="px-3 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-gamepad text-fuchsia-400"></i> Hiburan
-                </button>
-                <button type="button" onclick="switchTab('history')" id="navHistory" class="px-3 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-timeline text-blue-400"></i> Riwayat v2.0
-                </button>
-                <button type="button" onclick="switchTab('profile')" id="navProfile" class="px-3 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-user-gear text-pink-400"></i> Profil & Izin
-                </button>
-                <button type="button" onclick="switchTab('github')" id="navGithub" class="px-3 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5 hidden admin-only">
-                    <i class="fa-brands fa-github text-emerald-400"></i> GitHub Admin
-                </button>
-                <button type="button" onclick="switchTab('gemini')" id="navGemini" class="px-3 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-brain text-purple-400"></i> Gemini AI
-                </button>
-                <button type="button" onclick="switchTab('admin')" id="navAdmin" class="px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5 hidden">
-                    <i class="fa-solid fa-shield-halved text-rose-400"></i> Admin & Prompt Log
-                </button>
-            </nav>
-
-            <!-- User Profile & Logout -->
-            <div class="flex items-center gap-3">
-                <div id="userBadge" class="hidden sm:flex items-center gap-2.5 px-3.5 py-2 bg-slate-900 rounded-xl border border-slate-800 text-xs shadow-inner">
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span id="currentUsernameDisplay" class="font-medium text-slate-200">Guest</span>
-                </div>
-                <button type="button" onclick="logoutUser()" title="Keluar Sesi" class="p-2.5 bg-slate-900 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 rounded-xl border border-slate-800 transition-all shadow-sm">
-                    <i class="fa-solid fa-power-off"></i>
-                </button>
-            </div>
-        </header>
-
-        <!-- SUB NAV BAR FOR SMALLER SCREENS -->
-        <div class="2xl:hidden bg-slate-900/90 border-b border-slate-800 px-4 py-2 flex items-center gap-2 overflow-x-auto">
-            <button type="button" onclick="switchTab('social')" id="navSocialMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 bg-brand-600 text-white flex-shrink-0">Sosial</button>
-            <button type="button" onclick="switchTab('tools')" id="navToolsMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Tools</button>
-            <button type="button" onclick="switchTab('finance')" id="navFinanceMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Keuangan</button>
-            <button type="button" onclick="switchTab('time')" id="navTimeMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Waktu & Alarm</button>
-            <button type="button" onclick="switchTab('feeds')" id="navFeedsMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Berita & Cuaca</button>
-            <button type="button" onclick="switchTab('fun')" id="navFunMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Hiburan</button>
-            <button type="button" onclick="switchTab('history')" id="navHistoryMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Riwayat</button>
-            <button type="button" onclick="switchTab('profile')" id="navProfileMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Profil</button>
-            <button type="button" onclick="switchTab('github')" id="navGithubMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0 hidden admin-only">GitHub</button>
-            <button type="button" onclick="switchTab('gemini')" id="navGeminiMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0">Gemini AI</button>
-            <button type="button" onclick="switchTab('admin')" id="navAdminMob" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0 hidden">Admin</button>
+        <div class="flex items-center space-x-3">
+            <button id="music-toggle-btn" class="cursor-pointer text-[11px] font-medium transition flex items-center gap-1.5 px-2.5 py-1 rounded-full border shadow-xs">
+                <i class="fa-solid fa-music text-pink-500 animate-pulse" id="music-icon"></i>
+                <span id="music-status">Lofi On</span>
+            </button>
+            <button id="open-sidebar-btn" class="text-base text-neutral-600 dark:text-neutral-300 hover:text-sky-500 transition p-1 cursor-pointer">
+                <i class="fa-solid fa-bars"></i>
+            </button>
         </div>
+    </header>
 
-        <!-- MAIN WORKSPACE CONTAINER -->
-        <main class="flex-1 p-4 lg:p-8 max-w-7xl mx-auto w-full">
-            <div id="workspaceContent" class="space-y-6">
-                <div class="glass-panel p-10 rounded-3xl text-center space-y-4 shadow-2xl border border-brand-500/20">
-                    <div class="inline-flex p-4 bg-brand-500/10 text-brand-400 rounded-full text-3xl animate-bounce">
-                        <i class="fa-solid fa-spinner animate-spin"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white">Memuat Sistem Utama v2.0...</h3>
-                    <p class="text-sm text-slate-400 max-w-md mx-auto">Silakan balas dengan huruf **"v"** untuk melanjutkan ke **Bagian 2 (Main Workspace & UI Components)**.</p>
-                </div>
-            </div>
-        </main>
-    </div>
-
-        <!-- TEMPLATES FOR VIEWS (DI-RENDER DINAMIS OLEH JAVASCRIPT) -->
-    
-    <!-- 1. SOCIAL MEDIA VIEW -->
-    <template id="templateSocialView">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div class="lg:col-span-2 space-y-6">
-                <div class="glass-panel p-6 rounded-3xl shadow-xl border border-slate-800/80">
-                    <form onsubmit="handleCreatePost(event)" class="space-y-4">
-                        <div class="flex items-start gap-3.5">
-                            <div class="w-11 h-11 rounded-2xl bg-brand-600/30 text-brand-400 flex items-center justify-center font-bold text-sm border border-brand-500/30 flex-shrink-0 shadow-inner">
-                                <span id="postAuthorInitial">U</span>
-                            </div>
-                            <textarea id="postContentInput" rows="3" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl p-3.5 text-sm text-white placeholder-slate-500 focus:ring-2 focus:ring-brand-500 resize-none shadow-inner" placeholder="Bagikan momen atau ide menarik hari ini..."></textarea>
-                        </div>
-                        <div class="flex items-center justify-between pt-3 border-t border-slate-800/80">
-                            <div class="flex items-center gap-2 text-slate-400 text-xs">
-                                <label class="cursor-pointer hover:text-brand-400 transition-colors flex items-center gap-2 px-3.5 py-2 bg-slate-900/90 rounded-xl border border-slate-800 shadow-sm">
-                                    <i class="fa-solid fa-image text-brand-400"></i> Lampirkan Gambar
-                                    <input type="file" id="postImageInput" accept="image/*" class="hidden" onchange="previewPostImage(event)">
-                                </label>
-                                <span id="imageFileName" class="text-slate-500 italic truncate max-w-xs"></span>
-                            </div>
-                            <button type="submit" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center gap-2">
-                                <i class="fa-solid fa-paper-plane"></i> Publikasikan
-                            </button>
-                        </div>
-                        <div id="imagePreviewContainer" class="hidden relative mt-3 rounded-2xl overflow-hidden max-h-56 border border-slate-800 shadow-md">
-                            <img id="postImagePreview" src="" alt="Preview" class="w-full object-cover">
-                            <button type="button" onclick="removePostImage()" class="absolute top-3 right-3 p-2 bg-slate-900/90 hover:bg-rose-500 text-white rounded-xl transition-colors shadow-lg"><i class="fa-solid fa-xmark"></i></button>
-                        </div>
-                    </form>
-                </div>
-                <div id="postsFeedContainer" class="space-y-4">
-                    <div class="glass-panel p-8 rounded-3xl text-center text-slate-400 text-sm shadow-xl">Memuat linimasa postingan...</div>
-                </div>
-            </div>
-            <div class="space-y-6">
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                    <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
-                        <i class="fa-solid fa-fire text-amber-400"></i> Tren v2.0 Real-Time
-                    </h3>
-                    <div class="space-y-3 text-xs">
-                        <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
-                            <span class="text-brand-400 font-semibold">#SmartCoreV2</span>
-                            <p class="text-slate-400 mt-1">Sistem auto-sync server GitHub & fitur edit penuh kini aktif otomatis!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                    <h3 class="font-bold text-white text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
-                        <i class="fa-solid fa-users text-emerald-400"></i> Pengguna Online
-                    </h3>
-                    <div id="activeUsersList" class="space-y-2.5 max-h-60 overflow-y-auto pr-1"></div>
-                </div>
-            </div>
-        </div>
-    </template>
-
-    <!-- 2. UTILITY TOOLS VIEW -->
-    <template id="templateToolsView">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="glass-panel p-5 rounded-3xl border border-slate-800/80 space-y-2.5 shadow-xl">
-                <h3 class="font-bold text-white text-sm px-3 py-2 border-b border-slate-800 mb-2">Pilih Alat Serbaguna</h3>
-                <button type="button" onclick="switchToolSub('json')" id="toolSubJson" class="w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold bg-brand-600 text-white flex items-center gap-2.5 transition-all shadow-md"><i class="fa-solid fa-code w-5 text-brand-200"></i> JSON Formatter</button>
-                <button type="button" onclick="switchToolSub('base64')" id="toolSubBase64" class="w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900/90 flex items-center gap-2.5 transition-all"><i class="fa-solid fa-binary w-5 text-indigo-400"></i> Base64 Converter</button>
-                <button type="button" onclick="switchToolSub('hash')" id="toolSubHash" class="w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900/90 flex items-center gap-2.5 transition-all"><i class="fa-solid fa-fingerprint w-5 text-amber-400"></i> Hash SHA-256</button>
-                <button type="button" onclick="switchToolSub('password')" id="toolSubPassword" class="w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900/90 flex items-center gap-2.5 transition-all"><i class="fa-solid fa-key w-5 text-emerald-400"></i> Generator Sandi Aman</button>
-                <button type="button" onclick="switchToolSub('markdown')" id="toolSubMarkdown" class="w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900/90 flex items-center gap-2.5 transition-all"><i class="fa-brands fa-markdown w-5 text-cyan-400"></i> Markdown Previewer</button>
-            </div>
-            <div class="md:col-span-2 glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 shadow-xl">
-                <div id="toolPanelJson" class="space-y-4">
-                    <h3 class="font-bold text-white text-base">JSON Formatter & Validator</h3>
-                    <textarea id="jsonInput" rows="6" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl p-3.5 text-xs font-mono text-white placeholder-slate-600 focus:ring-2 focus:ring-brand-500 resize-none shadow-inner" placeholder='{"nama": "SmartCore"}'></textarea>
-                    <div class="flex flex-wrap gap-2.5">
-                        <button type="button" onclick="formatJSON()" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl shadow-md transition-all">Format</button>
-                        <button type="button" onclick="minifyJSON()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-xl transition-all">Minify</button>
-                        <button type="button" onclick="clearJSON()" class="px-5 py-2.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 text-xs font-semibold rounded-xl ml-auto border border-rose-500/30">Bersihkan</button>
-                    </div>
-                    <div id="jsonOutputContainer" class="mt-4 hidden">
-                        <pre id="jsonOutput" class="p-4 bg-slate-900/90 border border-slate-800 rounded-2xl text-xs font-mono text-emerald-400 overflow-x-auto max-h-56 shadow-inner"></pre>
-                    </div>
-                </div>
-                <div id="toolPanelBase64" class="space-y-4 hidden">
-                    <h3 class="font-bold text-white text-base">Base64 Encoder / Decoder</h3>
-                    <textarea id="base64Input" rows="5" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl p-3.5 text-xs font-mono text-white placeholder-slate-600 resize-none shadow-inner" placeholder="Masukkan teks..."></textarea>
-                    <div class="flex gap-2.5">
-                        <button type="button" onclick="encodeBase64()" class="px-5 py-2.5 bg-brand-600 text-white text-xs font-semibold rounded-xl">Encode</button>
-                        <button type="button" onclick="decodeBase64()" class="px-5 py-2.5 bg-indigo-600 text-white text-xs font-semibold rounded-xl">Decode</button>
-                    </div>
-                    <textarea id="base64Output" rows="4" readonly class="w-full bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 text-xs font-mono text-emerald-400 resize-none shadow-inner"></textarea>
-                </div>
-                <div id="toolPanelHash" class="space-y-4 hidden">
-                    <h3 class="font-bold text-white text-base">Generator Hash (SHA-256)</h3>
-                    <input type="text" id="hashInput" oninput="generateHashes()" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl px-4 py-3 text-xs text-white shadow-inner" placeholder="Ketik teks...">
-                    <div class="space-y-3 pt-2">
-                        <div id="sha256Output" class="p-3.5 bg-slate-900/90 border border-slate-800 rounded-2xl text-xs font-mono text-brand-400 break-all select-all shadow-inner">-</div>
-                        <div id="hashLengthOutput" class="p-3.5 bg-slate-900/90 border border-slate-800 rounded-2xl text-xs font-mono text-slate-300 shadow-inner">0 Karakter</div>
-                    </div>
-                </div>
-                <div id="toolPanelPassword" class="space-y-4 hidden">
-                    <h3 class="font-bold text-white text-base">Generator Sandi Aman</h3>
-                    <p class="text-xs text-slate-400">Buat kata sandi acak yang sangat kuat untuk akun Anda.</p>
-                    <div class="flex gap-2">
-                        <input type="text" id="generatedPasswordOutput" readonly class="flex-1 bg-slate-900/90 border border-slate-700 rounded-xl px-4 py-3 text-xs font-mono text-emerald-400 shadow-inner" placeholder="Klik tombol generate...">
-                        <button type="button" onclick="generateSecurePassword()" class="px-5 py-3 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl shadow">Generate Sandi</button>
-                    </div>
-                </div>
-                <div id="toolPanelMarkdown" class="space-y-4 hidden">
-                    <h3 class="font-bold text-white text-base">Markdown Live Previewer</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <textarea id="markdownInput" oninput="renderMarkdownPreview()" rows="8" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl p-3.5 text-xs font-mono text-white resize-none shadow-inner" placeholder="# Judul"></textarea>
-                        <div id="markdownPreview" class="p-4 bg-slate-900/90 border border-slate-800 rounded-2xl text-xs text-slate-200 overflow-y-auto max-h-56 prose prose-invert shadow-inner">Pratinjau...</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </template>
-
-    <!-- 3. FINANCE TRACKER VIEW -->
-    <template id="templateFinanceView">
+    <!-- Sidebar Settings Panel -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-xs z-40 hidden transition-opacity"></div>
+    <aside id="settings-sidebar" class="fixed top-0 right-0 bottom-0 w-80 theme-card border-l z-50 transform translate-x-full p-5 flex flex-col justify-between shadow-2xl overflow-y-auto">
         <div class="space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center justify-between">
-                    <div><p class="text-xs font-medium text-slate-400">Total Saldo Bersih</p><h4 id="finTotalBalance" class="text-2xl font-bold text-white mt-1">Rp 0</h4></div>
-                    <div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-xl border border-brand-500/30"><i class="fa-solid fa-wallet"></i></div>
-                </div>
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center justify-between">
-                    <div><p class="text-xs font-medium text-slate-400">Pemasukan</p><h4 id="finTotalIncome" class="text-2xl font-bold text-emerald-400 mt-1">Rp 0</h4></div>
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-arrow-trend-up"></i></div>
-                </div>
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 shadow-xl flex items-center justify-between">
-                    <div><p class="text-xs font-medium text-slate-400">Pengeluaran</p><h4 id="finTotalExpense" class="text-2xl font-bold text-rose-400 mt-1">Rp 0</h4></div>
-                    <div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-arrow-trend-down"></i></div>
-                </div>
+            <div class="flex items-center justify-between pb-3 border-b border-neutral-200 dark:border-neutral-800">
+                <h3 class="font-bold text-sm flex items-center gap-2"><i class="fa-solid fa-sliders text-sky-500"></i> Pengaturan & Fitur</h3>
+                <button id="close-sidebar-btn" class="text-neutral-400 hover:text-neutral-700 dark:hover:text-white text-base p-1 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                    <h3 id="financeFormTitle" class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-plus-circle text-brand-400"></i> Tambah Transaksi
-                    </h3>
-                    <form onsubmit="handleFinanceSubmit(event)" class="space-y-3.5 text-xs">
-                        <input type="hidden" id="editFinanceId" value="">
-                        <div>
-                            <label class="block text-slate-300 mb-1.5 font-medium">Keterangan Transaksi</label>
-                            <input type="text" id="finDesc" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="Gaji / Belanja">
-                        </div>
-                        <div>
-                            <label class="block text-slate-300 mb-1.5 font-medium">Nominal (Rp)</label>
-                            <input type="number" id="finAmount" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="100000">
-                        </div>
-                        <div>
-                            <label class="block text-slate-300 mb-1.5 font-medium">Tipe Transaksi</label>
-                            <select id="finType" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner">
-                                <option value="income">Pemasukan (Income)</option>
-                                <option value="expense">Pengeluaran (Expense)</option>
-                            </select>
-                        </div>
-                        <div class="flex gap-2">
-                            <button type="submit" id="financeSubmitBtn" class="flex-1 py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow-lg transition-all">Simpan</button>
-                            <button type="button" id="financeCancelBtn" onclick="resetFinanceForm()" class="hidden px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl transition-all">Batal</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="lg:col-span-2 glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                    <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-list-ul text-indigo-400"></i> Riwayat Keuangan (Dapat Diedit)
-                    </h3>
-                    <div class="overflow-x-auto max-h-96 overflow-y-auto pr-1">
-                        <table class="w-full text-left text-xs text-slate-300">
-                            <thead class="bg-slate-900/90 uppercase text-slate-400 sticky top-0 border-b border-slate-800 font-semibold">
-                                <tr>
-                                    <th class="p-3.5">Tanggal</th>
-                                    <th class="p-3.5">Keterangan</th>
-                                    <th class="p-3.5">Tipe</th>
-                                    <th class="p-3.5 text-right">Nominal</th>
-                                    <th class="p-3.5 text-center">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="financeTableBody" class="divide-y divide-slate-800/60"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </template>
-
-    <!-- 4. TIME & ALARM VIEW -->
-    <template id="templateTimeView">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 text-center space-y-5 shadow-xl flex flex-col justify-center items-center">
-                <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-stopwatch text-amber-400"></i> Pomodoro Timer</h3>
-                <div class="p-6 bg-slate-900/90 border border-slate-800/80 rounded-3xl shadow-inner w-full max-w-xs">
-                    <div id="pomodoroDisplay" class="text-5xl font-mono font-bold text-amber-400 tracking-wider">25:00</div>
-                </div>
-                <div class="flex justify-center gap-2 w-full">
-                    <button type="button" onclick="startPomodoro()" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl shadow">Mulai</button>
-                    <button type="button" onclick="pausePomodoro()" class="flex-1 py-2.5 bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold rounded-xl shadow">Jeda</button>
-                    <button type="button" onclick="resetPomodoro()" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-xl">Reset</button>
-                </div>
-            </div>
-            <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl flex flex-col">
-                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-bell text-rose-400"></i> Pengingat & Alarm</h3>
-                <form onsubmit="handleAddAlarm(event)" class="space-y-2.5 text-xs">
-                    <input type="time" id="alarmTimeInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2.5 text-white shadow-inner">
-                    <input type="text" id="alarmLabelInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2.5 text-white shadow-inner" placeholder="Judul Alarm / Agenda">
-                    <button type="submit" class="w-full py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-semibold rounded-xl shadow">Setel Alarm</button>
-                </form>
-                <div id="alarmListContainer" class="space-y-2 max-h-40 overflow-y-auto"></div>
-            </div>
-            <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl flex flex-col">
-                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-list-check text-cyan-400"></i> Task Manager (Dapat Diedit)</h3>
-                <form onsubmit="handleTaskSubmit(event)" class="flex gap-2">
-                    <input type="hidden" id="editTaskId" value="">
-                    <input type="text" id="taskInput" required class="flex-1 bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2.5 text-xs text-white shadow-inner" placeholder="Tugas baru...">
-                    <button type="submit" class="px-4 py-2.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl">Simpan</button>
-                </form>
-                <div id="taskListContainer" class="space-y-2 max-h-48 overflow-y-auto pr-1 flex-1"></div>
-            </div>
-        </div>
-    </template>
-
-    <!-- 5. LIVE FEEDS VIEW (BERITA BERGAMBAR & CUACA) -->
-    <template id="templateFeedsView">
-        <div class="space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                    <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-cloud-sun text-cyan-400"></i> Cuaca Real-Time & Lokasi</h3>
-                    <div id="weatherWidget" class="space-y-3 text-xs text-slate-300 bg-slate-900/90 p-5 rounded-2xl border border-slate-800 shadow-inner">
-                        <p class="font-bold text-white text-lg">Surabaya / Deteksi Perangkat</p>
-                        <p class="text-3xl font-bold text-cyan-400 font-mono">31°C <span class="text-xs text-slate-400 font-normal font-sans">Cerah Berawan</span></p>
-                        <p class="text-slate-400">Izin Lokasi Perangkat: <span id="locationStatusText" class="text-amber-400 font-semibold">Belum Diminta</span></p>
-                    </div>
-                    <button type="button" onclick="requestDevicePermissions()" class="w-full py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-xs font-semibold shadow transition-all"><i class="fa-solid fa-location-crosshairs mr-2"></i> Izinkan Lokasi & Notifikasi Perangkat</button>
-                </div>
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                    <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-chart-line text-emerald-400"></i> Tren Pasar & Kripto</h3>
-                    <div id="marketWidget" class="space-y-3 text-xs">
-                        <div class="flex justify-between items-center p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-sm"><span class="font-semibold text-white">BTC / USD</span><span class="text-emerald-400 font-mono font-bold">+3.45% ($68,450)</span></div>
-                        <div class="flex justify-between items-center p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-sm"><span class="font-semibold text-white">ETH / USD</span><span class="text-emerald-400 font-mono font-bold">+2.12% ($3,520)</span></div>
-                    </div>
-                </div>
-            </div>
-            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-newspaper text-brand-400"></i> Berita Utama Terkini & Bergambar</h3>
-                <div id="richNewsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-slate-900/90 rounded-2xl overflow-hidden border border-slate-800 shadow-lg flex flex-col">
-                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&auto=format&fit=crop&q=60" alt="Tech" class="h-40 w-full object-cover">
-                        <div class="p-4 space-y-2 flex-1 flex flex-col justify-between">
-                            <div><span class="text-[10px] text-brand-400 font-semibold px-2 py-0.5 bg-brand-500/10 rounded-full border border-brand-500/20">Teknologi</span><h4 class="font-bold text-white text-sm mt-1">SmartCore v2.0 Rilis Penuh dengan Sinkronisasi Otomatis Server GitHub</h4></div>
-                            <p class="text-[11px] text-slate-400">Pembaruan besar menghadirkan pengalaman lintas perangkat tanpa jeda manual.</p>
-                        </div>
-                    </div>
-                    <div class="bg-slate-900/90 rounded-2xl overflow-hidden border border-slate-800 shadow-lg flex flex-col">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=60" alt="AI" class="h-40 w-full object-cover">
-                        <div class="p-4 space-y-2 flex-1 flex flex-col justify-between">
-                            <div><span class="text-[10px] text-purple-400 font-semibold px-2 py-0.5 bg-purple-500/10 rounded-full border border-purple-500/20">Kecerdasan Buatan</span><h4 class="font-bold text-white text-sm mt-1">Integrasi Gemini AI 2.5 Flash Bekerja Secara Seamless</h4></div>
-                            <p class="text-[11px] text-slate-400">Asisten cerdas terpusat siap membantu analisis data Anda secara real-time.</p>
-                        </div>
-                    </div>
-                    <div class="bg-slate-900/90 rounded-2xl overflow-hidden border border-slate-800 shadow-lg flex flex-col">
-                        <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=500&auto=format&fit=crop&q=60" alt="Finance" class="h-40 w-full object-cover">
-                        <div class="p-4 space-y-2 flex-1 flex flex-col justify-between">
-                            <div><span class="text-[10px] text-emerald-400 font-semibold px-2 py-0.5 bg-emerald-500/10 rounded-full border border-emerald-500/20">Keuangan</span><h4 class="font-bold text-white text-sm mt-1">Tips Mengelola Keuangan Pribadi di Era Digital Modern</h4></div>
-                            <p class="text-[11px] text-slate-400">Gunakan modul finance tracker terintegrasi untuk memantau pemasukan dan pengeluaran.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </template>
-
-    <!-- 6. ENTERTAINMENT VIEW (HIBURAN) -->
-    <template id="templateFunView">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl text-center flex flex-col justify-center items-center">
-                <div class="w-16 h-16 rounded-3xl bg-fuchsia-600/20 text-fuchsia-400 flex items-center justify-center text-2xl border border-fuchsia-500/30 mb-2"><i class="fa-solid fa-quote-left"></i></div>
-                <h3 class="font-bold text-white text-lg">Kutipan Inspiratif Harian</h3>
-                <p id="quoteDisplay" class="text-sm text-slate-200 italic max-w-md">"Kesuksesan bukanlah kunci kebahagiaan. Kebahagiaan adalah kunci kesuksesan. Jika Anda mencintai apa yang Anda lakukan, Anda akan berhasil."</p>
-                <button type="button" onclick="generateNewQuote()" class="px-6 py-2.5 bg-fuchsia-600 hover:bg-fuchsia-500 text-white text-xs font-semibold rounded-xl shadow transition-all">Muat Kutipan Lain</button>
-            </div>
-            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl text-center flex flex-col justify-center items-center">
-                <div class="w-16 h-16 rounded-3xl bg-cyan-600/20 text-cyan-400 flex items-center justify-center text-2xl border border-cyan-500/30 mb-2"><i class="fa-solid fa-dice"></i></div>
-                <h3 class="font-bold text-white text-lg">Mini Game: Tebak Angka (1 - 10)</h3>
-                <p class="text-xs text-slate-400">Tebak angka rahasia sistem sekarang!</p>
-                <div class="flex gap-2 max-w-xs w-full justify-center">
-                    <input type="number" id="guessInput" min="1" max="10" class="w-20 bg-slate-900/90 border border-slate-700 rounded-xl text-center text-white text-sm py-2">
-                    <button type="button" onclick="checkGuessNumber()" class="px-5 py-2 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-semibold rounded-xl shadow">Tebak</button>
-                </div>
-                <p id="guessResultText" class="text-xs text-cyan-400 font-semibold"></p>
-            </div>
-        </div>
-    </template>
-
-    <!-- 7. VERSION HISTORY VIEW (DAFTAR SEMUA RIWAYAT PEMBARUAN) -->
-    <template id="templateHistoryView">
-        <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-6 shadow-xl">
-            <div class="border-b border-slate-800 pb-4">
-                <h3 class="font-bold text-white text-lg flex items-center gap-2"><i class="fa-solid fa-timeline text-blue-400"></i> Daftar Riwayat Pembaruan Program (Version History)</h3>
-                <p class="text-xs text-slate-400 mt-1">Catatan lengkap evolusi pembangunan platform dari awal hingga versi terkini v2.0.</p>
-            </div>
-            <div class="space-y-4 text-xs">
-                <div class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 space-y-1">
-                    <span class="px-2.5 py-0.5 bg-brand-600 text-white rounded-full font-bold text-[10px]">v2.0 Ultimate</span>
-                    <h4 class="font-bold text-white text-sm mt-1">Auto-Sync GitHub, CRUD Edit Penuh, Perangkat Izin, Alarm, Berita Bergambar, & Hiburan</h4>
-                    <p class="text-slate-400">Menghilangkan kebutuhan konfigurasi manual bagi pengguna umum dengan pengelolaan kredensial terpusat oleh Admin, fitur edit untuk semua entitas data, serta penambahan modul alarm, berita bergambar, riwayat lengkap, dan audit prompt.</p>
-                </div>
-                <div class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 space-y-1">
-                    <span class="px-2.5 py-0.5 bg-indigo-600 text-white rounded-full font-bold text-[10px]">v1.9</span>
-                    <h4 class="font-bold text-white text-sm mt-1">Revisi Menyeluruh Tata Letak dan Antarmuka (UI/UX Layout Overhaul)</h4>
-                    <p class="text-slate-400">Pembaruan besar pada desain visual, grid responsif, panel kaca modern, dan kerapian navigasi tab seluruh modul.</p>
-                </div>
-                <div class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 space-y-1">
-                    <span class="px-2.5 py-0.5 bg-emerald-600 text-white rounded-full font-bold text-[10px]">v1.8</span>
-                    <h4 class="font-bold text-white text-sm mt-1">Ekspansi Modul Keuangan, Waktu, Berita/Cuaca, Profil & Keamanan Sandi</h4>
-                    <p class="text-slate-400">Penambahan fungsionalitas finance tracker, pomodoro timer, task manager, serta integrasi widget cuaca dan berita.</p>
-                </div>
-                <div class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 space-y-1">
-                    <span class="px-2.5 py-0.5 bg-purple-600 text-white rounded-full font-bold text-[10px]">v1.6 & v1.7</span>
-                    <h4 class="font-bold text-white text-sm mt-1">Inisialisasi Platform All-in-One, GitHub Server, & Gemini AI Workspace</h4>
-                    <p class="text-slate-400">Penggabungan media sosial mandiri, alat serbaguna, koneksi API GitHub, dan kecerdasan buatan Gemini dalam satu file HTML.</p>
-                </div>
-                <div class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 space-y-1">
-                    <span class="px-2.5 py-0.5 bg-slate-700 text-white rounded-full font-bold text-[10px]">v1.0</span>
-                    <h4 class="font-bold text-white text-sm mt-1">Clean Slate & Initial Protocol Setup</h4>
-                    <p class="text-slate-400">Inisialisasi arsitektur dasar dan protokol pengembangan bertahap.</p>
-                </div>
-            </div>
-        </div>
-    </template>
-
-    <!-- 8. PROFILE & SECURITY VIEW -->
-    <template id="templateProfileView">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-user-pen text-pink-400"></i> Pengaturan Profil & Akun</h3>
-                <form onsubmit="handleUpdateProfile(event)" class="space-y-4 text-xs">
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Nama Lengkap / Username</label><input type="text" id="profileNameInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner"></div>
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Email / Identitas</label><input type="email" id="profileEmailInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner"></div>
-                    <button type="submit" class="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow transition-all">Simpan Profil</button>
-                </form>
-            </div>
-            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                <h3 class="font-bold text-white text-base border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-shield-halved text-rose-400"></i> Keamanan Sandi</h3>
-                <form onsubmit="handleUpdatePassword(event)" class="space-y-4 text-xs">
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Kata Sandi Lama</label><input type="password" id="oldPasswordInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner" placeholder="••••••••"></div>
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Kata Sandi Baru</label><input type="password" id="newPasswordInput" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-white shadow-inner" placeholder="••••••••"></div>
-                    <button type="submit" class="px-6 py-3 bg-rose-600 hover:bg-rose-500 text-white font-semibold rounded-xl shadow transition-all">Perbarui Sandi</button>
-                </form>
-            </div>
-        </div>
-    </template>
-
-    <!-- 9. GITHUB ADMIN VIEW -->
-    <template id="templateGithubView">
-        <div class="space-y-6">
-            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-5 shadow-xl">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-4 gap-3">
-                    <div>
-                        <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-brands fa-github text-emerald-400"></i> Pengaturan Server GitHub (Administrator Only)</h3>
-                        <p class="text-xs text-slate-400 mt-1">Atur token server di sini agar seluruh pengguna dapat menikmati sinkronisasi otomatis tanpa konfigurasi manual.</p>
-                    </div>
-                    <span id="githubStatusBadge" class="px-3 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-full text-xs font-semibold">Belum Terhubung</span>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">GitHub PAT</label><input type="password" id="ghToken" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="ghp_..."></div>
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Owner</label><input type="text" id="ghOwner" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="username"></div>
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Repository</label><input type="text" id="ghRepo" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="repo"></div>
-                </div>
-                <div class="flex flex-wrap items-center gap-3 pt-2">
-                    <button type="button" onclick="saveAdminGithubConfig()" class="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl shadow"><i class="fa-solid fa-save mr-2"></i> Simpan & Auto-Connect Server</button>
-                    <button type="button" onclick="syncToGitHub()" class="px-5 py-3 bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold rounded-xl shadow"><i class="fa-solid fa-cloud-arrow-up mr-2"></i> Push State Real-Time</button>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-3 shadow-xl">
-                    <h4 class="font-bold text-white text-sm border-b border-slate-800 pb-3">Berkas Repositori</h4>
-                    <div id="githubFileList" class="space-y-2 text-xs text-slate-400"><p class="italic">Hubungkan repositori terlebih dahulu.</p></div>
-                </div>
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-3 shadow-xl">
-                    <h4 class="font-bold text-white text-sm border-b border-slate-800 pb-3">Log Aktivitas Server</h4>
-                    <div id="githubLogContainer" class="p-4 bg-slate-900/90 border border-slate-800 rounded-2xl text-xs font-mono text-emerald-400 h-48 overflow-y-auto space-y-1 shadow-inner">
-                        <div>[System v2.0] Menunggu koneksi server GitHub...</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </template>
-
-    <!-- 10. GEMINI AI VIEW (AUTO-CONFIGURED) -->
-    <template id="templateGeminiView">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl admin-only-box">
-                <h3 class="font-bold text-white text-sm border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-brain text-purple-400"></i> Pengaturan API Key Gemini (Admin)</h3>
-                <div class="space-y-4 text-xs">
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Gemini API Key</label><div class="flex gap-2"><input type="password" id="geminiApiKey" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner" placeholder="AIzaSy..."><button type="button" onclick="saveAdminGeminiKey()" class="px-4 py-3 bg-purple-600 text-white font-semibold rounded-xl">Simpan</button></div></div>
-                    <div><label class="block text-slate-300 mb-1.5 font-medium">Model AI</label><select id="geminiModel" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-3 text-white shadow-inner"><option value="gemini-2.5-flash">Gemini 2.5 Flash</option><option value="gemini-2.5-pro">Gemini 2.5 Pro</option></select></div>
-                </div>
-            </div>
-            <div class="lg:col-span-3 glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 flex flex-col h-[600px] shadow-xl" id="geminiChatWrapperBox">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
-                    <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-comments text-purple-400"></i> Gemini AI Workspace (Auto-Ready)</h3>
-                    <button type="button" onclick="clearGeminiChat()" class="text-xs text-slate-400 hover:text-rose-400 flex items-center gap-1.5"><i class="fa-solid fa-trash-can"></i> Bersihkan</button>
-                </div>
-                <div id="geminiChatMessages" class="flex-1 overflow-y-auto space-y-4 pr-2 mb-4 text-xs"></div>
-                <form onsubmit="sendGeminiPrompt(event)" class="flex gap-2.5 pt-3 border-t border-slate-800">
-                    <input type="text" id="geminiPromptInput" required class="flex-1 bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3 text-xs text-white shadow-inner" placeholder="Ketik perintah untuk Gemini AI...">
-                    <button type="submit" class="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold rounded-xl shadow">Kirim</button>
-                </form>
-            </div>
-        </div>
-    </template>
-
-    <!-- 11. ADMIN & PROMPT AUDIT LOG VIEW -->
-    <template id="templateAdminView">
-        <div class="space-y-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-brand-600/20 text-brand-400 flex items-center justify-center text-xl border border-brand-500/30"><i class="fa-solid fa-users"></i></div><div><p class="text-xs text-slate-400 font-medium">Total Pengguna</p><h4 id="statTotalUsers" class="text-xl font-bold text-white mt-0.5">0</h4></div></div>
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-xl border border-indigo-500/30"><i class="fa-solid fa-newspaper"></i></div><div><p class="text-xs text-slate-400 font-medium">Total Postingan</p><h4 id="statTotalPosts" class="text-xl font-bold text-white mt-0.5">0</h4></div></div>
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl border border-emerald-500/30"><i class="fa-solid fa-database"></i></div><div><p class="text-xs text-slate-400 font-medium">Penyimpanan</p><h4 id="statStorageSize" class="text-xl font-bold text-white mt-0.5">0 KB</h4></div></div>
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 flex items-center gap-4 shadow-xl"><div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-xl border border-rose-500/30"><i class="fa-solid fa-shield-halved"></i></div><div><p class="text-xs text-slate-400 font-medium">Status Sistem</p><h4 class="text-xl font-bold text-emerald-400 mt-0.5">Optimal v2.0</h4></div></div>
-            </div>
-            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-5 shadow-xl">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-                    <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-terminal text-blue-400"></i> Audit Rangkuman Prompt (Dari Awal v1.0 hingga v2.0)</h3>
-                    <button type="button" onclick="resetSystemData()" class="px-4 py-2 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 text-xs font-semibold rounded-xl border border-rose-500/30">Reset Sistem</button>
-                </div>
-                <div class="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 text-xs font-mono text-slate-300 max-h-60 overflow-y-auto space-y-2">
-                    <p class="text-emerald-400 font-bold">[Audit Log v1.0 - v2.0 Terpusat]</p>
-                    <p>• v1.0: Clean slate & initial protocol setup (Inisialisasi dasar).</p>
-                    <p>• v1.6 - v1.7: Pembuatan All-in-One Super Index.html dengan chunking 3 tahap, integrasi GitHub API & Gemini AI chat.</p>
-                    <p>• v1.8 - v1.9: Ekspansi modul keuangan, waktu, berita, keamanan sandi, serta perombakan tata letak UI/UX secara total.</p>
-                    <p>• v2.0: Penambahan Auto-Sync GitHub, Auto-Credentials AI, Edit CRUD penuh, Alarm, Berita Bergambar, Mini-game Hiburan, Riwayat Pembaruan, Izin Perangkat, dan Audit Prompt Admin.</p>
-                </div>
-            </div>
-            <div class="glass-panel p-6 lg:p-8 rounded-3xl border border-slate-800/80 space-y-5 shadow-xl">
-                <h3 class="font-bold text-white text-base flex items-center gap-2"><i class="fa-solid fa-user-gear text-rose-400"></i> Manajemen Pengguna Sistem</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs text-slate-300">
-                        <thead class="bg-slate-900/90 uppercase text-slate-400 font-semibold border-b border-slate-800">
-                            <tr><th class="p-3.5">Nama</th><th class="p-3.5">Email</th><th class="p-3.5">Peran</th><th class="p-3.5">Bergabung</th><th class="p-3.5 text-right">Aksi</th></tr>
-                        </thead>
-                        <tbody id="adminUsersTableBody" class="divide-y divide-slate-800/60"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </template>
-
-        <!-- JAVASCRIPT STATE ENGINE & CORE LOGIC -->
-    <script>
-        const STORAGE_KEY = 'SMARTCORE_STATE_V20';
-        const BACKUP_KEY = 'SMARTCORE_FORM_BACKUP_V20';
-
-        let appState = {
-            currentUser: null,
-            currentTab: 'social',
-            currentToolSub: 'json',
-            authMode: 'login',
-            users: [
-                { name: 'System Admin', email: 'admin@smartcore.io', password: 'admin', role: 'admin', joinedAt: '2026-01-01' },
-                { name: 'Demo User', email: 'user@smartcore.io', password: 'user', role: 'user', joinedAt: '2026-06-01' }
-            ],
-            posts: [
-                { id: 1, author: 'System Admin', content: 'Selamat datang di SmartCore Ultimate v2.0! Dilengkapi auto-sync GitHub, auto-credentials Gemini AI, fitur edit lengkap, alarm, hiburan, dan izin perangkat.', image: null, likes: 30, comments: [], createdAt: '15:00' }
-            ],
-            financeTransactions: [
-                { id: 1, date: '2026-06-01', desc: 'Gaji Proyek', amount: 10000000, type: 'income' },
-                { id: 2, date: '2026-06-04', desc: 'Server Hosting', amount: 500000, type: 'expense' }
-            ],
-            tasks: [
-                { id: 1, text: 'Deploy update v2.0 ke server produksi', completed: false }
-            ],
-            alarms: [
-                { id: 1, time: '08:00', label: 'Rapat Pagi Tim', active: true }
-            ],
-            githubConfig: { token: 'preset_default_token', owner: 'vanandi', repo: 'smartcore-v2', connected: true },
-            geminiConfig: { apiKey: 'AIzaSyPreconfiguredDefaultKeyForUsers', model: 'gemini-2.5-flash' },
-            geminiChat: [
-                { role: 'model', text: 'Halo! Saya asisten Gemini AI Anda. Anda dapat langsung menggunakan saya tanpa konfigurasi manual!' }
-            ]
-        };
-
-        function saveStateToStorage() {
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-            } catch (e) {
-                console.error('Storage error:', e);
-            }
-        }
-
-        function loadStateFromStorage() {
-            try {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                if (saved) {
-                    const parsed = JSON.parse(saved);
-                    appState = { ...appState, ...parsed };
-                }
-            } catch (e) {
-                console.error('Gagal memuat state:', e);
-            }
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            loadStateFromStorage();
-            checkAuthStatus();
-            setInterval(checkAlarms, 10000);
-        });
-
-        function checkAuthStatus() {
-            const authModal = document.getElementById('authModal');
-            const appWrapper = document.getElementById('appWrapper');
-            const currentUsernameDisplay = document.getElementById('currentUsernameDisplay');
             
-            const adminElements = document.querySelectorAll('.admin-only');
-            const adminBoxes = document.querySelectorAll('.admin-only-box');
+            <!-- Tema -->
+            <div class="space-y-2">
+                <h4 class="text-xs font-bold text-neutral-400 uppercase tracking-wider">Tema Tampilan</h4>
+                <div class="grid grid-cols-3 gap-2">
+                    <button class="theme-btn py-1.5 px-2 rounded-xl border text-[11px] font-semibold transition bg-white text-slate-900 border-slate-300 shadow-xs cursor-pointer" data-theme="theme-clean">Clean</button>
+                    <button class="theme-btn py-1.5 px-2 rounded-xl border text-[11px] font-semibold transition bg-gray-900 text-gray-200 border-gray-700 shadow-xs cursor-pointer" data-theme="theme-midnight">Midnight</button>
+                    <button class="theme-btn py-1.5 px-2 rounded-xl border text-[11px] font-semibold transition bg-black text-white border-neutral-800 shadow-xs cursor-pointer" data-theme="theme-oled">OLED</button>
+                </div>
+            </div>
 
-            if (!appState.currentUser) {
-                authModal.classList.remove('hidden');
-                appWrapper.classList.add('blur-sm', 'pointer-events-none');
-            } else {
-                authModal.classList.add('hidden');
-                appWrapper.classList.remove('blur-sm', 'pointer-events-none');
-                currentUsernameDisplay.textContent = appState.currentUser.name;
+            <!-- Musik & Audio -->
+            <div class="space-y-2">
+                <h4 class="text-xs font-bold text-neutral-400 uppercase tracking-wider">Musik Latar Belakang</h4>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs">Audio Lofi</span>
+                    <button id="sidebar-music-toggle" class="px-3 py-1 rounded-lg text-xs font-bold bg-sky-500 text-white transition cursor-pointer">Aktif/Mati</button>
+                </div>
+                <div class="flex items-center gap-3 pt-1">
+                    <span class="text-[10px] text-neutral-400">Vol</span>
+                    <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.4" class="w-full accent-sky-500 cursor-pointer">
+                </div>
+            </div>
 
-                const isAdmin = appState.currentUser.role === 'admin';
-                adminElements.forEach(el => {
-                    if(isAdmin) el.classList.remove('hidden');
-                    else el.classList.add('hidden');
-                });
-                adminBoxes.forEach(el => {
-                    if(isAdmin) el.classList.remove('hidden');
-                    else el.classList.add('hidden');
-                });
+            <!-- Quick Info & Tools -->
+            <div class="space-y-2">
+                <h4 class="text-xs font-bold text-neutral-400 uppercase tracking-wider">Tautan Cepat</h4>
+                <div class="space-y-1.5">
+                    <a href="mailto:vanandi@proton.me" class="block p-2 rounded-xl theme-card border text-xs hover:bg-sky-500 hover:text-white transition"><i class="fa-solid fa-envelope mr-2"></i> vanandi@proton.me</a>
+                    <a href="https://wa.me/628985160888" target="_blank" class="block p-2 rounded-xl theme-card border text-xs hover:bg-emerald-500 hover:text-white transition"><i class="fa-solid fa-phone mr-2"></i> +62 898 5160 888</a>
+                </div>
+            </div>
+        </div>
 
-                const initialEl = document.getElementById('postAuthorInitial');
-                if (initialEl) initialEl.textContent = appState.currentUser.name.charAt(0).toUpperCase();
-                
-                switchTab(appState.currentTab, false);
-            }
-        }
+        <div class="pt-4 border-t border-neutral-200 dark:border-neutral-800 text-center text-[10px] text-neutral-400">
+            Executive Suite v3.9 • Mohammad Danis Muria Vanandi
+        </div>
+    </aside>
 
-        function switchAuthTab(mode) {
-            appState.authMode = mode;
-            const title = document.getElementById('authTitle');
-            const subtitle = document.getElementById('authSubtitle');
-            const nameGroup = document.getElementById('nameFieldGroup');
-            const submitBtn = document.getElementById('authSubmitBtn');
-            const btnLogin = document.getElementById('tabLoginBtn');
-            const btnRegister = document.getElementById('tabRegisterBtn');
-            const btnAdmin = document.getElementById('tabAdminBtn');
+    <!-- Main Scrollable Content Container -->
+    <main class="flex-1 max-w-md w-full mx-auto px-3 py-4 mb-20">
+        
+        <!-- SECTION 1: Profile & Feed Grid -->
+        <div id="view-profile" class="space-y-4 animate-smooth block">
+            <div class="px-1">
+                <div class="flex items-center justify-between">
+                    <div class="p-[3px] ig-gradient rounded-full flex-shrink-0">
+                        <div class="w-20 h-20 rounded-full bg-neutral-200 overflow-hidden border-2 border-white flex items-center justify-center">
+                            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis Vanandi" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="flex-1 flex justify-around text-center ml-3">
+                        <div>
+                            <span class="font-bold text-sm block">4</span>
+                            <span class="text-[10px] text-neutral-400">Proyek</span>
+                        </div>
+                        <div>
+                            <span class="font-bold text-sm block">4+ Thn</span>
+                            <span class="text-[10px] text-neutral-400">Pengalaman</span>
+                        </div>
+                        <div>
+                            <span class="font-bold text-sm block">AI/NLP</span>
+                            <span class="text-[10px] text-neutral-400">Fokus</span>
+                        </div>
+                    </div>
+                </div>
 
-            [btnLogin, btnRegister, btnAdmin].forEach(b => {
-                if(b) b.className = "flex-1 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition-all";
-            });
+                <!-- Bio Rapih Sesuai CV -->
+                <div class="mt-3 space-y-1">
+                    <h2 class="font-bold text-xs">Mohammad Danis Muria Vanandi</h2>
+                    <p class="text-[11px] text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                        Civil Engineer (Politeknik Negeri Malang '21) 🏗️<br>
+                        AI & NLP Researcher | Supervisor & Project Manager 🤖<br>
+                        📍 Malang / Lumajang, Jawa Timur
+                    </p>
+                </div>
 
-            if (mode === 'login') {
-                if(btnLogin) btnLogin.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white transition-all shadow-md";
-                if(title) title.textContent = "SmartCore Masuk";
-                if(subtitle) subtitle.textContent = "Masuk menggunakan akun pengguna Anda";
-                if(nameGroup) nameGroup.classList.add('hidden');
-                document.getElementById('regName').required = false;
-                submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Masuk Sekarang';
-            } else if (mode === 'register') {
-                if(btnRegister) btnRegister.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-brand-600 text-white transition-all shadow-md";
-                if(title) title.textContent = "Registrasi Akun";
-                if(subtitle) subtitle.textContent = "Daftar akun baru untuk akses lengkap";
-                if(nameGroup) nameGroup.classList.remove('hidden');
-                document.getElementById('regName').required = true;
-                submitBtn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Daftar Akun';
-            } else if (mode === 'admin') {
-                if(btnAdmin) btnAdmin.className = "flex-1 py-2 text-sm font-semibold rounded-lg bg-rose-600 text-white transition-all shadow-md";
-                if(title) title.textContent = "Panel Akses Admin";
-                if(subtitle) subtitle.textContent = "Masuk dengan kredensial Administrator";
-                if(nameGroup) nameGroup.classList.add('hidden');
-                document.getElementById('regName').required = false;
-                submitBtn.innerHTML = '<i class="fa-solid fa-shield-halved"></i> Masuk Admin';
-            }
-        }
+                <!-- Tombol Kontak & CV Sesuai Data -->
+                <div class="flex gap-2 mt-3.5">
+                    <a href="mailto:vanandi@proton.me" class="flex-1 bg-sky-500 hover:bg-sky-600 text-white py-2 rounded-xl text-xs font-semibold transition text-center shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+                        <i class="fa-solid fa-envelope"></i> Email
+                    </a>
+                    <a href="https://wa.me/628985160888" target="_blank" class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-xl text-xs font-semibold transition text-center shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <button id="open-cv-modal" class="flex-1 theme-card border hover:opacity-80 py-2 rounded-xl text-xs font-semibold transition text-center shadow-xs cursor-pointer">
+                        Lihat CV
+                    </button>
+                </div>
+            </div>
 
-        function handleAuthSubmit(e) {
-            e.preventDefault();
-            const email = document.getElementById('authEmail').value.trim();
-            const password = document.getElementById('authPassword').value.trim();
-            const nameEl = document.getElementById('regName');
-            const name = nameEl ? nameEl.value.trim() : '';
+            <!-- Highlights -->
+            <div class="flex gap-3 overflow-x-auto px-1 pb-1 scrollbar-none">
+                <div class="flex flex-col items-center space-y-1 flex-shrink-0 cursor-pointer highlight-item" data-topic="pengalaman">
+                    <div class="w-14 h-14 rounded-full p-[2px] border border-neutral-300 flex items-center justify-center theme-card"><i class="fa-solid fa-briefcase text-sky-500 text-sm"></i></div>
+                    <span class="text-[9px] text-neutral-400 font-medium">Karir</span>
+                </div>
+                <div class="flex flex-col items-center space-y-1 flex-shrink-0 cursor-pointer highlight-item" data-topic="keahlian">
+                    <div class="w-14 h-14 rounded-full p-[2px] border border-neutral-300 flex items-center justify-center theme-card"><i class="fa-solid fa-brain text-purple-500 text-sm"></i></div>
+                    <span class="text-[9px] text-neutral-400 font-medium">Keahlian</span>
+                </div>
+                <div class="flex flex-col items-center space-y-1 flex-shrink-0 cursor-pointer highlight-item" data-topic="pendidikan">
+                    <div class="w-14 h-14 rounded-full p-[2px] border border-neutral-300 flex items-center justify-center theme-card"><i class="fa-solid fa-graduation-cap text-amber-500 text-sm"></i></div>
+                    <span class="text-[9px] text-neutral-400 font-medium">Studi</span>
+                </div>
+                <div class="flex flex-col items-center space-y-1 flex-shrink-0 cursor-pointer highlight-item" data-topic="kontak">
+                    <div class="w-14 h-14 rounded-full p-[2px] border border-neutral-300 flex items-center justify-center theme-card"><i class="fa-solid fa-address-book text-emerald-500 text-sm"></i></div>
+                    <span class="text-[9px] text-neutral-400 font-medium">Kontak</span>
+                </div>
+            </div>
 
-            if (appState.authMode === 'register') {
-                const existing = appState.users.find(u => u.email === email);
-                if (existing) { alert('Email sudah terdaftar!'); return; }
-                const newUser = { name: name || 'Pengguna Baru', email, password, role: 'user', joinedAt: new Date().toISOString().split('T')[0] };
-                appState.users.push(newUser);
-                appState.currentUser = newUser;
-                alert('Registrasi berhasil!');
-            } else if (appState.authMode === 'login') {
-                const user = appState.users.find(u => u.email === email && u.password === password);
-                if (!user) { alert('Email atau kata sandi salah!'); return; }
-                appState.currentUser = user;
-            } else if (appState.authMode === 'admin') {
-                const adminUser = appState.users.find(u => u.role === 'admin' && (u.email === email || u.password === password));
-                if (!adminUser && password !== 'admin') { alert('Kredensial Admin tidak valid!'); return; }
-                appState.currentUser = adminUser || { name: 'System Admin', email, role: 'admin', joinedAt: '2026-01-01' };
-            }
+            <!-- Feed Grid Estetik & Profesional -->
+            <div class="border-t border-neutral-200 dark:border-neutral-800 pt-3">
+                <div class="grid grid-cols-2 gap-2.5">
+                    <div class="theme-card border p-4 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-sky-500 transition space-y-2" data-caption="PTSL Juridical Aspect di National Land Agency / BPN (2021-2022). Menangani aspek yuridis pensertifikatan tanah dengan predikat penilaian kerja 'Good'.">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500 text-lg">
+                            <i class="fa-solid fa-landmark"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xs">BPN / Pertanahan</h4>
+                            <p class="text-[10px] text-neutral-400 mt-0.5">PTSL Juridical Aspect (2021-2022)</p>
+                        </div>
+                    </div>
+                    <div class="theme-card border p-4 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-sky-500 transition space-y-2" data-caption="Finance & Logistics di Kantor Kecamatan (2023-2024). Mengelola administrasi keuangan operasional dan logistik instansi pemerintahan.">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 text-lg">
+                            <i class="fa-solid fa-coins"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xs">Finance & Logistics</h4>
+                            <p class="text-[10px] text-neutral-400 mt-0.5">Kantor Kecamatan (2023-2024)</p>
+                        </div>
+                    </div>
+                    <div class="theme-card border p-4 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-sky-500 transition space-y-2" data-caption="Building Designer & Project Contractor (2024-2025). Merancang desain bangunan 2D & 3D serta pengawasan proyek konstruksi.">
+                        <div class="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-500 text-lg">
+                            <i class="fa-solid fa-building"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xs">Building Designer</h4>
+                            <p class="text-[10px] text-neutral-400 mt-0.5">Contractor & 2D/3D (2024-2025)</p>
+                        </div>
+                    </div>
+                    <div class="theme-card border p-4 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-sky-500 transition space-y-2" data-caption="Independent AI & NLP Researcher (2023 - Present). Riset mandiri mendalami Large Language Models (LLM), evaluasi konten, dan anotasi data.">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-500 text-lg">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xs">AI & NLP Research</h4>
+                            <p class="text-[10px] text-neutral-400 mt-0.5">Independent (2023 - Sekarang)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            saveStateToStorage();
-            checkAuthStatus();
-            document.getElementById('authForm').reset();
-        }
+        <!-- SECTION 2: AI Chat Assistant (DM) -->
+        <div id="view-chat" class="hidden space-y-3 animate-smooth">
+            <div class="flex items-center justify-between pb-2.5 border-b border-neutral-200 dark:border-neutral-800">
+                <div class="flex items-center space-x-2">
+                    <div class="w-7 h-7 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center">
+                        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xs">vanandi</h3>
+                        <p class="text-[9px] text-neutral-400">Online • AI Assistant</p>
+                    </div>
+                </div>
+            </div>
 
-        function logoutUser() {
-            if (confirm('Keluar dari sesi saat ini?')) {
-                appState.currentUser = null;
-                saveStateToStorage();
-                checkAuthStatus();
-            }
-        }
+            <div id="chat-container" class="space-y-3 min-h-[50vh] max-h-[60vh] overflow-y-auto pr-1">
+                <div class="flex items-start space-x-2 animate-smooth">
+                    <div class="w-6 h-6 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center flex-shrink-0">
+                        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis" class="w-full h-full object-cover">
+                    </div>
+                    <div class="theme-card border p-2.5 rounded-2xl rounded-tl-none max-w-[80%] text-xs leading-relaxed shadow-xs">
+                        Halo! Selamat datang di DM asisten virtual saya. Ada yang bisa saya bantu terkait latar belakang teknik sipil atau proyek riset AI saya?
+                    </div>
+                </div>
+            </div>
 
-        function switchTab(tabName, save = true) {
-            appState.currentTab = tabName;
-            if (save) saveStateToStorage();
+            <div class="pt-2">
+                <form id="chat-form" class="theme-card border rounded-full px-3.5 py-2 flex items-center gap-2 shadow-xs">
+                    <input type="text" id="user-input" placeholder="Kirim pesan..." class="w-full bg-transparent text-xs placeholder-neutral-400 focus:outline-none">
+                    <button type="submit" id="send-btn" class="text-sky-500 font-bold text-xs disabled:opacity-40 transition cursor-pointer">Kirim</button>
+                </form>
+            </div>
+        </div>
 
-            ['Social', 'Tools', 'Finance', 'Time', 'Feeds', 'Fun', 'History', 'Profile', 'Github', 'Gemini', 'Admin'].forEach(t => {
-                const btn = document.getElementById('nav' + t);
-                const btnMob = document.getElementById('nav' + t + 'Mob');
-                const activeClasses = "px-3.5 py-2 text-xs font-semibold rounded-xl bg-brand-600 text-white transition-all flex items-center gap-1.5 shadow-md";
-                const inactiveClasses = "px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-1.5";
-                
-                const activeMobClasses = "px-3 py-1.5 text-xs font-semibold rounded-lg bg-brand-600 text-white flex-shrink-0";
-                const inactiveMobClasses = "px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-300 flex-shrink-0";
+        <!-- SECTION 3: Productivity Notes / Scratchpad -->
+        <div id="view-notes" class="hidden space-y-3 animate-smooth">
+            <div class="flex items-center justify-between pb-2 border-b border-neutral-200 dark:border-neutral-800">
+                <h3 class="font-bold text-xs uppercase tracking-wider text-amber-500"><i class="fa-solid fa-note-sticky mr-1"></i> Catatan Cepat</h3>
+                <button id="clear-notes" class="text-[10px] text-neutral-400 hover:text-rose-500 transition cursor-pointer">Hapus Catatan</button>
+            </div>
+            <textarea id="scratchpad" placeholder="Tulis ide, catatan meeting, atau draft pekerjaan di sini..." class="w-full h-[60vh] theme-card border rounded-2xl p-3 text-xs placeholder-neutral-400 focus:outline-none focus:border-sky-500 resize-none leading-relaxed shadow-xs"></textarea>
+            <div class="text-[9px] text-neutral-400 text-center font-mono">Tersimpan otomatis secara lokal di perangkat Anda</div>
+        </div>
 
-                if (btn) btn.className = (t.toLowerCase() === tabName) ? activeClasses : inactiveClasses;
-                if (btnMob) btnMob.className = (t.toLowerCase() === tabName) ? activeMobClasses : inactiveMobClasses;
-            });
-            renderAll();
-        }
+        <!-- SECTION 4: Task Manager / Checklist -->
+        <div id="view-tasks" class="hidden space-y-3 animate-smooth">
+            <div class="flex items-center justify-between pb-2 border-b border-neutral-200 dark:border-neutral-800">
+                <h3 class="font-bold text-xs uppercase tracking-wider text-emerald-500"><i class="fa-solid fa-list-check mr-1"></i> Task Manager</h3>
+                <span id="task-counter" class="text-[10px] text-neutral-400 font-mono">0 Selesai</span>
+            </div>
+            <div class="flex gap-2">
+                <input type="text" id="task-input" placeholder="Tambah tugas baru..." class="flex-1 theme-card border rounded-xl px-3 py-2 text-xs placeholder-neutral-400 focus:outline-none focus:border-sky-500">
+                <button id="add-task-btn" class="bg-sky-500 hover:bg-sky-600 text-white px-3 py-2 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer">Tambah</button>
+            </div>
+            <div id="task-list" class="space-y-2 max-h-[55vh] overflow-y-auto pr-1"></div>
+        </div>
+    </main>
 
-        function renderAll() {
-            const workspace = document.getElementById('workspaceContent');
-            const templateId = 'template' + appState.currentTab.charAt(0).toUpperCase() + appState.currentTab.slice(1) + 'View';
-            const template = document.getElementById(templateId);
+    <!-- FIXED BOTTOM INSTAGRAM NAVIGATION BAR -->
+    <nav class="h-14 border-t backdrop-blur-md flex items-center justify-around px-2 z-30 fixed bottom-0 inset-x-0 transition-colors" id="bottom-nav">
+        <button id="tab-profile" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 text-sky-500 transition cursor-pointer">
+            <i class="fa-solid fa-table-cells text-base"></i>
+            <span class="text-[9px] mt-0.5 font-medium">Profil</span>
+        </button>
+        <button id="tab-chat" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 text-neutral-400 hover:text-sky-500 transition relative cursor-pointer">
+            <i class="fa-regular fa-paper-plane text-base"></i>
+            <span class="text-[9px] mt-0.5 font-medium">DM AI</span>
+        </button>
+        <button id="tab-notes" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 text-neutral-400 hover:text-sky-500 transition cursor-pointer">
+            <i class="fa-solid fa-note-sticky text-base"></i>
+            <span class="text-[9px] mt-0.5 font-medium">Catatan</span>
+        </button>
+        <button id="tab-tasks" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 text-neutral-400 hover:text-sky-500 transition cursor-pointer">
+            <i class="fa-solid fa-list-check text-base"></i>
+            <span class="text-[9px] mt-0.5 font-medium">Tugas</span>
+        </button>
+    </nav>
 
-            if (template && workspace) {
-                workspace.innerHTML = '';
-                workspace.appendChild(template.content.cloneNode(true));
-            }
+    <!-- Modal CV & Detail -->
+    <div id="modal-container" class="fixed inset-0 bg-black/60 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
+        <div class="theme-card border rounded-3xl max-w-md w-full p-5 shadow-2xl space-y-3 max-h-[85vh] overflow-y-auto animate-smooth">
+            <div class="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800 pb-2.5">
+                <h3 id="modal-title" class="font-bold text-xs">Detail Informasi</h3>
+                <button id="close-modal" class="text-neutral-400 hover:text-neutral-700 dark:hover:text-white p-1 cursor-pointer"><i class="fa-solid fa-xmark text-sm"></i></button>
+            </div>
+            <div id="modal-content" class="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed space-y-2"></div>
+            <button id="close-modal-btn" class="w-full bg-sky-500 hover:bg-sky-600 text-white py-2 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer">Tutup</button>
+        </div>
+    </div>
 
-            if (appState.currentTab === 'social') {
-                renderPostsFeed();
-                renderActiveUsers();
-            } else if (appState.currentTab === 'tools') {
-                switchToolSub(appState.currentToolSub);
-            } else if (appState.currentTab === 'finance') {
-                renderFinanceView();
-            } else if (appState.currentTab === 'time') {
-                renderTasks();
-                renderAlarms();
-            } else if (appState.currentTab === 'profile') {
-                if(appState.currentUser) {
-                    document.getElementById('profileNameInput').value = appState.currentUser.name;
-                    document.getElementById('profileEmailInput').value = appState.currentUser.email;
+    <!-- JavaScript Logika & Fitur Lengkap -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Audio Background Auto-play handling with robust interaction loop
+            const audio = document.getElementById('bg-audio');
+            audio.volume = 0.4;
+            let musicPlaying = false;
+
+            const toggleMusic = () => {
+                if (musicPlaying) {
+                    audio.pause();
+                    musicPlaying = false;
+                    document.getElementById('music-status').textContent = 'Lofi Off';
+                    document.getElementById('music-icon').classList.remove('animate-pulse');
+                } else {
+                    audio.play().then(() => {
+                        musicPlaying = true;
+                        document.getElementById('music-status').textContent = 'Lofi Aktif';
+                        document.getElementById('music-icon').classList.add('animate-pulse');
+                    }).catch(e => console.log("Autoplay waiting interaction"));
                 }
-            } else if (appState.currentTab === 'github') {
-                if(appState.githubConfig) {
-                    document.getElementById('ghToken').value = appState.githubConfig.token || '';
-                    document.getElementById('ghOwner').value = appState.githubConfig.owner || '';
-                    document.getElementById('ghRepo').value = appState.githubConfig.repo || '';
-                    if(appState.githubConfig.connected) {
-                        const badge = document.getElementById('githubStatusBadge');
-                        if(badge) {
-                            badge.className = "px-3 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full text-xs font-semibold";
-                            badge.textContent = "Terhubung Otomatis";
+            };
+
+            document.getElementById('music-toggle-btn').addEventListener('click', toggleMusic);
+            document.getElementById('sidebar-music-toggle').addEventListener('click', toggleMusic);
+
+            const startAudioOnce = () => {
+                if (!musicPlaying) {
+                    audio.play().then(() => {
+                        musicPlaying = true;
+                        document.getElementById('music-status').textContent = 'Lofi Aktif';
+                        document.getElementById('music-icon').classList.add('animate-pulse');
+                    }).catch(e => {});
+                }
+                window.removeEventListener('click', startAudioOnce);
+                window.removeEventListener('touchstart', startAudioOnce);
+            };
+            window.addEventListener('click', startAudioOnce);
+            window.addEventListener('touchstart', startAudioOnce);
+
+            document.getElementById('volume-slider').addEventListener('input', (e) => {
+                audio.volume = e.target.value;
+            });
+
+            // Sidebar Settings Controls
+            const sidebar = document.getElementById('settings-sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const openSidebar = document.getElementById('open-sidebar-btn');
+            const closeSidebar = document.getElementById('close-sidebar-btn');
+
+            const toggleSidebar = (show) => {
+                if (show) {
+                    overlay.classList.remove('hidden');
+                    sidebar.classList.remove('translate-x-full');
+                } else {
+                    sidebar.classList.add('translate-x-full');
+                    setTimeout(() => overlay.classList.add('hidden'), 300);
+                }
+            };
+
+            openSidebar.addEventListener('click', (e) => { e.stopPropagation(); toggleSidebar(true); });
+            closeSidebar.addEventListener('click', () => toggleSidebar(false));
+            overlay.addEventListener('click', () => toggleSidebar(false));
+
+            // Theme Customization
+            const savedTheme = localStorage.getItem('executive_theme') || 'theme-clean';
+            document.body.className = `${savedTheme} font-['Plus_Jakarta_Sans',sans-serif] min-h-screen flex flex-col selection:bg-pink-500 selection:text-white transition-colors duration-300`;
+
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const theme = btn.getAttribute('data-theme');
+                    document.body.className = `${theme} font-['Plus_Jakarta_Sans',sans-serif] min-h-screen flex flex-col selection:bg-pink-500 selection:text-white transition-colors duration-300`;
+                    localStorage.setItem('executive_theme', theme);
+                    toggleSidebar(false);
+                });
+            });
+
+            // Tabs Management
+            const views = {
+                profile: document.getElementById('view-profile'),
+                chat: document.getElementById('view-chat'),
+                notes: document.getElementById('view-notes'),
+                tasks: document.getElementById('view-tasks')
+            };
+            const navButtons = {
+                profile: document.getElementById('tab-profile'),
+                chat: document.getElementById('tab-chat'),
+                notes: document.getElementById('tab-notes'),
+                tasks: document.getElementById('tab-tasks')
+            };
+
+            function switchTab(activeKey) {
+                Object.keys(views).forEach(key => {
+                    if (key === activeKey) {
+                        views[key].classList.remove('hidden');
+                        views[key].classList.add('block');
+                        if(navButtons[key]) {
+                            navButtons[key].classList.remove('text-neutral-400');
+                            navButtons[key].classList.add('text-sky-500');
+                        }
+                    } else {
+                        views[key].classList.remove('block');
+                        views[key].classList.add('hidden');
+                        if(navButtons[key]) {
+                            navButtons[key].classList.add('text-neutral-400');
+                            navButtons[key].classList.remove('text-sky-500');
                         }
                     }
-                }
-            } else if (appState.currentTab === 'gemini') {
-                if(appState.geminiConfig) {
-                    document.getElementById('geminiApiKey').value = appState.geminiConfig.apiKey || '';
-                    document.getElementById('geminiModel').value = appState.geminiConfig.model || 'gemini-2.5-flash';
-                }
-                renderGeminiChat();
-            } else if (appState.currentTab === 'admin') {
-                renderAdminDashboard();
-            }
-        }
-
-        // --- SOCIAL ---
-        let tempPostImage = null;
-        function previewPostImage(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    tempPostImage = e.target.result;
-                    document.getElementById('postImagePreview').src = tempPostImage;
-                    document.getElementById('imagePreviewContainer').classList.remove('hidden');
-                    document.getElementById('imageFileName').textContent = file.name;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-        function removePostImage() {
-            tempPostImage = null;
-            document.getElementById('postImageInput').value = '';
-            document.getElementById('imagePreviewContainer').classList.add('hidden');
-            document.getElementById('imageFileName').textContent = '';
-        }
-        function handleCreatePost(e) {
-            e.preventDefault();
-            const content = document.getElementById('postContentInput').value.trim();
-            if(!content) return;
-            const newPost = {
-                id: Date.now(),
-                author: appState.currentUser ? appState.currentUser.name : 'Guest',
-                content,
-                image: tempPostImage,
-                likes: 0,
-                comments: [],
-                createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-            };
-            appState.posts.unshift(newPost);
-            saveStateToStorage();
-            removePostImage();
-            document.getElementById('postContentInput').value = '';
-            renderPostsFeed();
-        }
-        function renderPostsFeed() {
-            const container = document.getElementById('postsFeedContainer');
-            if(!container) return;
-            if(appState.posts.length === 0) {
-                container.innerHTML = `<div class="glass-panel p-6 rounded-3xl text-center text-slate-400 text-sm shadow-xl">Belum ada postingan.</div>`;
-                return;
-            }
-            container.innerHTML = appState.posts.map(p => `
-                <div class="glass-panel p-6 rounded-3xl border border-slate-800/80 space-y-4 shadow-xl">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3.5">
-                            <div class="w-10 h-10 rounded-2xl bg-brand-600/30 text-brand-400 flex items-center justify-center font-bold text-sm border border-brand-500/30 shadow-inner">${p.author.charAt(0).toUpperCase()}</div>
-                            <div>
-                                <h4 class="font-bold text-white text-sm">${p.author}</h4>
-                                <span class="text-xs text-slate-500">${p.createdAt}</span>
-                            </div>
-                        </div>
-                        ${appState.currentUser && (appState.currentUser.role === 'admin' || appState.currentUser.name === p.author) ? `
-                            <div class="flex items-center gap-2">
-                                <button type="button" onclick="editPost(${p.id})" class="text-slate-500 hover:text-brand-400 text-xs transition-colors"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button type="button" onclick="deletePost(${p.id})" class="text-slate-500 hover:text-rose-400 text-xs transition-colors"><i class="fa-solid fa-trash-can"></i></button>
-                            </div>
-                        ` : ''}
-                    </div>
-                    <p class="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap">${p.content}</p>
-                    ${p.image ? `<div class="rounded-2xl overflow-hidden border border-slate-800 max-h-72 shadow-md"><img src="${p.image}" class="w-full object-cover"></div>` : ''}
-                    <div class="flex items-center gap-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400">
-                        <button type="button" onclick="likePost(${p.id})" class="flex items-center gap-1.5 hover:text-brand-400 transition-colors"><i class="fa-solid fa-heart text-rose-500"></i> ${p.likes} Suka</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-        function likePost(id) {
-            const p = appState.posts.find(x => x.id === id);
-            if(p) { p.likes++; saveStateToStorage(); renderPostsFeed(); }
-        }
-        function deletePost(id) {
-            if(confirm('Hapus postingan?')) {
-                appState.posts = appState.posts.filter(x => x.id !== id);
-                saveStateToStorage();
-                renderPostsFeed();
-            }
-        }
-        function editPost(id) {
-            const p = appState.posts.find(x => x.id === id);
-            if(!p) return;
-            const newContent = prompt('Edit isi postingan:', p.content);
-            if(newContent !== null) {
-                p.content = newContent.trim();
-                saveStateToStorage();
-                renderPostsFeed();
-            }
-        }
-        function renderActiveUsers() {
-            const list = document.getElementById('activeUsersList');
-            if(!list) return;
-            list.innerHTML = appState.users.map(u => `
-                <div class="flex items-center justify-between p-3 bg-slate-900/90 rounded-2xl border border-slate-800/80 shadow-sm">
-                    <div class="flex items-center gap-2.5">
-                        <div class="w-8 h-8 rounded-xl bg-indigo-600/30 text-indigo-400 flex items-center justify-center font-bold text-xs shadow-inner">${u.name.charAt(0).toUpperCase()}</div>
-                        <div><span class="font-medium text-slate-200 text-xs">${u.name}</span><span class="block text-[10px] text-slate-500">${u.role.toUpperCase()}</span></div>
-                    </div>
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                </div>
-            `).join('');
-        }
-
-        // --- TOOLS ---
-        function switchToolSub(sub) {
-            appState.currentToolSub = sub;
-            ['Json', 'Base64', 'Hash', 'Password', 'Markdown'].forEach(s => {
-                const btn = document.getElementById('toolSub' + s);
-                const panel = document.getElementById('toolPanel' + s);
-                if(btn && panel) {
-                    if(s.toLowerCase() === sub) {
-                        btn.className = "w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold bg-brand-600 text-white flex items-center gap-2.5 transition-all shadow-md";
-                        panel.classList.remove('hidden');
-                    } else {
-                        btn.className = "w-full text-left px-3.5 py-3 rounded-2xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-900/90 flex items-center gap-2.5 transition-all";
-                        panel.classList.add('hidden');
-                    }
-                }
-            });
-        }
-        function formatJSON() {
-            try {
-                const parsed = JSON.parse(document.getElementById('jsonInput').value);
-                document.getElementById('jsonOutput').textContent = JSON.stringify(parsed, null, 2);
-                document.getElementById('jsonOutputContainer').classList.remove('hidden');
-            } catch(e) { alert('JSON Invalid: ' + e.message); }
-        }
-        function minifyJSON() {
-            try {
-                const parsed = JSON.parse(document.getElementById('jsonInput').value);
-                document.getElementById('jsonOutput').textContent = JSON.stringify(parsed);
-                document.getElementById('jsonOutputContainer').classList.remove('hidden');
-            } catch(e) { alert('JSON Invalid: ' + e.message); }
-        }
-        function clearJSON() {
-            document.getElementById('jsonInput').value = '';
-            document.getElementById('jsonOutputContainer').classList.add('hidden');
-        }
-        function encodeBase64() {
-            try {
-                document.getElementById('base64Output').value = btoa(unescape(encodeURIComponent(document.getElementById('base64Input').value)));
-            } catch(e) { alert('Error: ' + e.message); }
-        }
-        function decodeBase64() {
-            try {
-                document.getElementById('base64Output').value = decodeURIComponent(escape(atob(document.getElementById('base64Input').value)));
-            } catch(e) { alert('Base64 invalid'); }
-        }
-        function generateHashes() {
-            const val = document.getElementById('hashInput').value;
-            document.getElementById('hashLengthOutput').textContent = val.length + ' Karakter';
-            if(!val) { document.getElementById('sha256Output').textContent = '-'; return; }
-            crypto.subtle.digest('SHA-256', new TextEncoder().encode(val)).then(buf => {
-                const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
-                document.getElementById('sha256Output').textContent = hex;
-            });
-        }
-        function generateSecurePassword() {
-            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*!";
-            let pass = "";
-            for (let i = 0; i < 16; i++) {
-                pass += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            document.getElementById('generatedPasswordOutput').value = pass;
-        }
-        function renderMarkdownPreview() {
-            const val = document.getElementById('markdownInput').value;
-            let html = val.replace(/^# (.*$)/gim, '<h1 class="text-base font-bold text-white mb-2">$1</h1>').replace(/\n/g, '<br>');
-            document.getElementById('markdownPreview').innerHTML = html || 'Pratinjau...';
-        }
-
-        // --- FINANCE & CRUD EDIT ---
-        function handleFinanceSubmit(e) {
-            e.preventDefault();
-            const editId = document.getElementById('editFinanceId').value;
-            const desc = document.getElementById('finDesc').value.trim();
-            const amount = parseFloat(document.getElementById('finAmount').value);
-            const type = document.getElementById('finType').value;
-            if(!desc || isNaN(amount)) return;
-
-            if (editId) {
-                const item = appState.financeTransactions.find(x => x.id == editId);
-                if(item) {
-                    item.desc = desc;
-                    item.amount = amount;
-                    item.type = type;
-                }
-            } else {
-                appState.financeTransactions.unshift({
-                    id: Date.now(),
-                    date: new Date().toISOString().split('T')[0],
-                    desc, amount, type
                 });
+                window.scrollTo(0, 0);
             }
-            saveStateToStorage();
-            resetFinanceForm();
-            renderFinanceView();
-        }
-        function editTransaction(id) {
-            const t = appState.financeTransactions.find(x => x.id === id);
-            if(!t) return;
-            document.getElementById('editFinanceId').value = t.id;
-            document.getElementById('finDesc').value = t.desc;
-            document.getElementById('finAmount').value = t.amount;
-            document.getElementById('finType').value = t.type;
-            document.getElementById('financeFormTitle').innerHTML = '<i class="fa-solid fa-pen-to-square text-brand-400"></i> Edit Transaksi';
-            document.getElementById('financeSubmitBtn').textContent = 'Perbarui';
-            document.getElementById('financeCancelBtn').classList.remove('hidden');
-        }
-        function resetFinanceForm() {
-            document.getElementById('editFinanceId').value = '';
-            document.getElementById('finDesc').value = '';
-            document.getElementById('finAmount').value = '';
-            document.getElementById('financeFormTitle').innerHTML = '<i class="fa-solid fa-plus-circle text-brand-400"></i> Tambah Transaksi';
-            document.getElementById('financeSubmitBtn').textContent = 'Simpan';
-            document.getElementById('financeCancelBtn').classList.add('hidden');
-        }
-        function deleteTransaction(id) {
-            appState.financeTransactions = appState.financeTransactions.filter(x => x.id !== id);
-            saveStateToStorage();
-            renderFinanceView();
-        }
-        function renderFinanceView() {
-            const tbody = document.getElementById('financeTableBody');
-            if(!tbody) return;
-            let totalInc = 0, totalExp = 0;
-            tbody.innerHTML = appState.financeTransactions.map(t => {
-                if(t.type === 'income') totalInc += t.amount;
-                else totalExp += t.amount;
-                return `
-                    <tr class="hover:bg-slate-900/50 transition-colors">
-                        <td class="p-3.5 text-slate-400">${t.date}</td>
-                        <td class="p-3.5 font-medium text-white">${t.desc}</td>
-                        <td class="p-3.5"><span class="px-2.5 py-1 rounded-lg text-[10px] font-semibold ${t.type === 'income' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-rose-500/20 text-rose-400 border border-rose-500/30'}">${t.type.toUpperCase()}</span></td>
-                        <td class="p-3.5 text-right font-mono font-semibold ${t.type === 'income' ? 'text-emerald-400' : 'text-rose-400'}">${t.type === 'income' ? '+' : '-'}Rp ${t.amount.toLocaleString()}</td>
-                        <td class="p-3.5 text-center flex items-center justify-center gap-2">
-                            <button type="button" onclick="editTransaction(${t.id})" class="text-slate-500 hover:text-brand-400 transition-colors"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button type="button" onclick="deleteTransaction(${t.id})" class="text-slate-500 hover:text-rose-400 transition-colors"><i class="fa-solid fa-trash-can"></i></button>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
-            document.getElementById('finTotalIncome').textContent = 'Rp ' + totalInc.toLocaleString();
-            document.getElementById('finTotalExpense').textContent = 'Rp ' + totalExp.toLocaleString();
-            document.getElementById('finTotalBalance').textContent = 'Rp ' + (totalInc - totalExp).toLocaleString();
-        }
 
-        // --- TIME, POMODORO & ALARMS ---
-        let pomodoroTimer = null;
-        let pomodoroSeconds = 25 * 60;
-        let isPomodoroRunning = false;
-        function updatePomodoroDisplay() {
-            const m = Math.floor(pomodoroSeconds / 60).toString().padStart(2, '0');
-            const s = (pomodoroSeconds % 60).toString().padStart(2, '0');
-            const el = document.getElementById('pomodoroDisplay');
-            if(el) el.textContent = `${m}:${s}`;
-        }
-        function startPomodoro() {
-            if(isPomodoroRunning) return;
-            isPomodoroRunning = true;
-            pomodoroTimer = setInterval(() => {
-                if(pomodoroSeconds > 0) {
-                    pomodoroSeconds--;
-                    updatePomodoroDisplay();
-                } else {
-                    clearInterval(pomodoroTimer);
-                    isPomodoroRunning = false;
-                    alert('Waktu Pomodoro selesai!');
-                }
-            }, 1000);
-        }
-        function pausePomodoro() {
-            clearInterval(pomodoroTimer);
-            isPomodoroRunning = false;
-        }
-        function resetPomodoro() {
-            clearInterval(pomodoroTimer);
-            isPomodoroRunning = false;
-            pomodoroSeconds = 25 * 60;
-            updatePomodoroDisplay();
-        }
+            navButtons.profile.addEventListener('click', () => switchTab('profile'));
+            navButtons.chat.addEventListener('click', () => switchTab('chat'));
+            navButtons.notes.addEventListener('click', () => switchTab('notes'));
+            navButtons.tasks.addEventListener('click', () => switchTab('tasks'));
 
-        function handleAddAlarm(e) {
-            e.preventDefault();
-            const time = document.getElementById('alarmTimeInput').value;
-            const label = document.getElementById('alarmLabelInput').value.trim();
-            if(!time || !label) return;
-            appState.alarms.push({ id: Date.now(), time, label, active: true });
-            saveStateToStorage();
-            renderAlarms();
-            e.target.reset();
-            alert('Alarm berhasil disetel!');
-        }
-        function deleteAlarm(id) {
-            appState.alarms = appState.alarms.filter(x => x.id !== id);
-            saveStateToStorage();
-            renderAlarms();
-        }
-        function renderAlarms() {
-            const container = document.getElementById('alarmListContainer');
-            if(!container) return;
-            if(appState.alarms.length === 0) {
-                container.innerHTML = '<p class="text-[11px] text-slate-500 italic">Belum ada alarm.</p>';
-                return;
+            // Chat Assistant Logic with Gemini API Runtime
+            const chatContainer = document.getElementById('chat-container');
+            const chatForm = document.getElementById('chat-form');
+            const userInput = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+
+            const apiKey = "";
+            const modelName = "gemini-2.5-flash-preview-09-2025";
+
+            let chatHistory = JSON.parse(localStorage.getItem('exec_suite_chat_danis')) || [];
+            if (chatHistory.length > 0) {
+                chatHistory.forEach(msg => appendMessage(msg.role, msg.text, false));
             }
-            container.innerHTML = appState.alarms.map(a => `
-                <div class="flex items-center justify-between p-2.5 bg-slate-900/90 rounded-xl border border-slate-800 text-xs">
-                    <div><span class="font-mono font-bold text-amber-400">${a.time}</span> - <span class="text-slate-200">${a.label}</span></div>
-                    <button type="button" onclick="deleteAlarm(${a.id})" class="text-slate-500 hover:text-rose-400"><i class="fa-solid fa-trash-can"></i></button>
-                </div>
-            `).join('');
-        }
-        function checkAlarms() {
-            const now = new Date();
-            const currentTime = now.toTimeString().substring(0, 5);
-            appState.alarms.forEach(a => {
-                if(a.active && a.time === currentTime) {
-                    a.active = false;
-                    if(Notification.permission === 'granted') {
-                        new Notification('Alarm Pengingat SmartCore', { body: a.label });
-                    } else {
-                        alert(`⏰ ALARM BERBUNYI: ${a.label} (${a.time})`);
-                    }
+
+            userInput.addEventListener('input', () => {
+                sendBtn.disabled = userInput.value.trim().length === 0;
+            });
+
+            chatForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const text = userInput.value.trim();
+                if (!text) return;
+
+                userInput.value = '';
+                sendBtn.disabled = true;
+
+                appendMessage('user', text);
+                saveToHistory('user', text);
+
+                const typingId = showTypingIndicator();
+
+                try {
+                    const botResponse = await callGeminiAPI(text);
+                    removeTypingIndicator(typingId);
+                    appendMessage('model', botResponse);
+                    saveToHistory('model', botResponse);
+                } catch (err) {
+                    removeTypingIndicator(typingId);
+                    appendMessage('model', `⚠️ Maaf, mohon coba beberapa saat lagi.`);
                 }
             });
-        }
 
-        function handleTaskSubmit(e) {
-            e.preventDefault();
-            const editId = document.getElementById('editTaskId').value;
-            const text = document.getElementById('taskInput').value.trim();
-            if(!text) return;
+            async function callGeminiAPI(promptText) {
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+                const systemPrompt = `Anda adalah asisten virtual profesional untuk profil Instagram Mohammad Danis Muria Vanandi (vanandi). Berbicaralah selayaknya asisten pribadi Danis yang ramah, sopan, dan profesional di DM. Jangan sebutkan detail teknis sistem atau Google.
+CV Ringkas Danis:
+- Civil Engineer Politeknik Negeri Malang (2021)
+- Pengalaman: PTSL BPN (2021-2022), Finance & Logistics Kantor Kecamatan (2023-2024), Building Designer & Contractor (2024-2025), Independent AI & NLP Researcher (2023-Present).
+- Kontak: vanandi@proton.me | WhatsApp +62 898 5160 888.`;
 
-            if (editId) {
-                const task = appState.tasks.find(x => x.id == editId);
-                if(task) task.text = text;
-            } else {
-                appState.tasks.push({ id: Date.now(), text, completed: false });
-            }
-            saveStateToStorage();
-            document.getElementById('editTaskId').value = '';
-            e.target.reset();
-            renderTasks();
-        }
-        function editTask(id) {
-            const t = appState.tasks.find(x => x.id === id);
-            if(!t) return;
-            document.getElementById('editTaskId').value = t.id;
-            document.getElementById('taskInput').value = t.text;
-        }
-        function toggleTask(id) {
-            const task = appState.tasks.find(x => x.id === id);
-            if(task) { task.completed = !task.completed; saveStateToStorage(); renderTasks(); }
-        }
-        function deleteTask(id) {
-            appState.tasks = appState.tasks.filter(x => x.id !== id);
-            saveStateToStorage();
-            renderTasks();
-        }
-        function renderTasks() {
-            const container = document.getElementById('taskListContainer');
-            if(!container) return;
-            container.innerHTML = appState.tasks.map(t => `
-                <div class="flex items-center justify-between p-3 bg-slate-900/90 rounded-2xl border border-slate-800/80 text-xs shadow-sm">
-                    <div class="flex items-center gap-3">
-                        <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="toggleTask(${t.id})" class="rounded-lg bg-slate-800 border-slate-700 text-brand-600 focus:ring-0 w-4 h-4 cursor-pointer">
-                        <span class="${t.completed ? 'line-through text-slate-500' : 'text-slate-200'} font-medium">${t.text}</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <button type="button" onclick="editTask(${t.id})" class="text-slate-500 hover:text-brand-400"><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button type="button" onclick="deleteTask(${t.id})" class="text-slate-500 hover:text-rose-400"><i class="fa-solid fa-trash-can"></i></button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // --- DEVICE PERMISSIONS ---
-        function requestDevicePermissions() {
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        document.getElementById('locationStatusText').textContent = `Aktif (${position.coords.latitude.toFixed(2)}, ${position.coords.longitude.toFixed(2)})`;
-                        document.getElementById('locationStatusText').className = "text-emerald-400 font-semibold";
-                    },
-                    (error) => {
-                        alert('Izin lokasi ditolak atau tidak tersedia.');
+                let data = null;
+                for (let attempt = 0; attempt < 5; attempt++) {
+                    try {
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                contents: [{ parts: [{ text: promptText }] }],
+                                systemInstruction: { parts: [{ text: systemPrompt }] }
+                            })
+                        });
+                        if (!response.ok) throw new Error('API Error');
+                        data = await response.json();
+                        break;
+                    } catch (err) {
+                        if (attempt === 4) throw err;
+                        await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 1000));
                     }
-                );
-            }
-            if ("Notification" in window) {
-                Notification.requestPermission().then(permission => {
-                    if (permission === "granted") {
-                        alert('Izin notifikasi perangkat berhasil diberikan!');
-                    }
-                });
-            }
-        }
+                }
 
-        // --- ENTERTAINMENT ---
-        const quotesList = [
-            "“Kesuksesan bukanlah kunci kebahagiaan. Kebahagiaan adalah kunci kesuksesan.”",
-            "“Jangan menunggu kesempatan, ciptakanlah kesempatan itu.”",
-            "“Masa depan adalah milik mereka yang menyiapkan hari ini.”",
-            "“Lakukan yang terbaik dalam setiap kesempatan yang ada.”"
-        ];
-        function generateNewQuote() {
-            const rand = quotesList[Math.floor(Math.random() * quotesList.length)];
-            document.getElementById('quoteDisplay').textContent = rand;
-        }
-        let secretNumber = Math.floor(Math.random() * 10) + 1;
-        function checkGuessNumber() {
-            const val = parseInt(document.getElementById('guessInput').value);
-            const resEl = document.getElementById('guessResultText');
-            if(isNaN(val)) return;
-            if(val === secretNumber) {
-                resEl.textContent = "🎉 Luar biasa! Tebakan Anda benar!";
-                secretNumber = Math.floor(Math.random() * 10) + 1;
-            } else if(val < secretNumber) {
-                resEl.textContent = "Terlalu kecil! Coba angka lebih besar.";
-            } else {
-                resEl.textContent = "Terlalu besar! Coba angka lebih kecil.";
+                const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (!text) throw new Error('Respons kosong.');
+                return text;
             }
-        }
 
-        // --- PROFILE & SECURITY ---
-        function handleUpdateProfile(e) {
-            e.preventDefault();
-            const name = document.getElementById('profileNameInput').value.trim();
-            const email = document.getElementById('profileEmailInput').value.trim();
-            if(!name || !email) return;
-            appState.currentUser.name = name;
-            appState.currentUser.email = email;
-            const idx = appState.users.findIndex(u => u.email === email || u.name === appState.currentUser.name);
-            if(idx !== -1) { appState.users[idx].name = name; appState.users[idx].email = email; }
-            saveStateToStorage();
-            checkAuthStatus();
-            alert('Profil berhasil diperbarui!');
-        }
-        function handleUpdatePassword(e) {
-            e.preventDefault();
-            const oldPass = document.getElementById('oldPasswordInput').value.trim();
-            const newPass = document.getElementById('newPasswordInput').value.trim();
-            if(appState.currentUser.password && appState.currentUser.password !== oldPass) {
-                alert('Kata sandi lama salah!');
-                return;
-            }
-            appState.currentUser.password = newPass;
-            const idx = appState.users.findIndex(u => u.email === appState.currentUser.email);
-            if(idx !== -1) appState.users[idx].password = newPass;
-            saveStateToStorage();
-            alert('Kata sandi berhasil diperbarui!');
-            e.target.reset();
-        }
-
-        // --- GITHUB INTEGRATION (ADMIN CONTROLLED & AUTO-READY) ---
-        function appendGithubLog(msg) {
-            const container = document.getElementById('githubLogContainer');
-            if(container) {
+            function appendMessage(role, text, scroll = true) {
+                const isUser = role === 'user';
                 const div = document.createElement('div');
-                div.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
-                container.appendChild(div);
-                container.scrollTop = container.scrollHeight;
+                div.className = `flex items-start space-x-2 animate-smooth ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`;
+
+                div.innerHTML = `
+                    ${!isUser ? '<div class="w-6 h-6 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center flex-shrink-0"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis" class="w-full h-full object-cover"></div>' : ''}
+                    <div class="${isUser ? 'bg-sky-500 text-white rounded-tr-none' : 'theme-card border rounded-tl-none'} p-2.5 rounded-2xl max-w-[80%] text-xs leading-relaxed shadow-xs">
+                        ${text.replace(/\n/g, '<br>')}
+                    </div>
+                `;
+
+                chatContainer.appendChild(div);
+                if (scroll) chatContainer.scrollTop = chatContainer.scrollHeight;
             }
-        }
-        function saveAdminGithubConfig() {
-            const token = document.getElementById('ghToken').value.trim();
-            const owner = document.getElementById('ghOwner').value.trim();
-            const repo = document.getElementById('ghRepo').value.trim();
-            if(!token || !owner || !repo) { alert('Isi lengkap data GitHub!'); return; }
-            appState.githubConfig = { token, owner, repo, connected: true };
-            saveStateToStorage();
-            document.getElementById('githubStatusBadge').className = "px-3 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full text-xs font-semibold";
-            document.getElementById('githubStatusBadge').textContent = "Terhubung Otomatis";
-            appendGithubLog(`Konfigurasi server GitHub disimpan oleh Admin.`);
-            alert('Konfigurasi GitHub tersimpan! Pengguna kini terhubung otomatis.');
-        }
-        async function syncToGitHub() {
-            appendGithubLog('Melakukan push real-time state ke server GitHub secara otomatis...');
-            setTimeout(() => {
-                appendGithubLog('Berhasil sinkronisasi file index.html & state ke GitHub repository!');
-                alert('Sinkronisasi real-time ke server GitHub Berhasil!');
-            }, 800);
-        }
 
-        // --- GEMINI AI (AUTO-CONFIGURED) ---
-        function saveAdminGeminiKey() {
-            const apiKey = document.getElementById('geminiApiKey').value.trim();
-            const model = document.getElementById('geminiModel').value;
-            if(!apiKey) { alert('Masukkan API Key!'); return; }
-            appState.geminiConfig = { apiKey, model };
-            saveStateToStorage();
-            alert('API Key Gemini berhasil disimpan untuk semua pengguna!');
-        }
-        function clearGeminiChat() {
-            appState.geminiChat = [{ role: 'model', text: 'Halo! Ada yang bisa saya bantu analisis hari ini?' }];
-            saveStateToStorage();
-            renderGeminiChat();
-        }
-        function renderGeminiChat() {
-            const container = document.getElementById('geminiChatMessages');
-            if(!container) return;
-            container.innerHTML = appState.geminiChat.map(c => `
-                <div class="flex items-start ${c.role === 'user' ? 'justify-end' : ''} gap-3">
-                    ${c.role !== 'user' ? '<div class="w-8 h-8 rounded-2xl bg-purple-600/30 text-purple-400 flex items-center justify-center font-bold text-xs border border-purple-500/30 shadow-inner flex-shrink-0"><i class="fa-solid fa-brain"></i></div>' : ''}
-                    <div class="p-4 ${c.role === 'user' ? 'bg-brand-600/30 text-slate-100 border-brand-500/30' : 'bg-slate-900/90 text-slate-200 border-slate-800'} border rounded-2xl max-w-[85%] whitespace-pre-wrap shadow-sm">${c.text}</div>
-                    ${c.role === 'user' ? '<div class="w-8 h-8 rounded-2xl bg-brand-600 text-white flex items-center justify-center font-bold text-xs shadow-inner flex-shrink-0"><i class="fa-solid fa-user"></i></div>' : ''}
-                </div>
-            `).join('');
-            container.scrollTop = container.scrollHeight;
-        }
-        async function sendGeminiPrompt(e) {
-            e.preventDefault();
-            const input = document.getElementById('geminiPromptInput');
-            const promptText = input.value.trim();
-            if(!promptText) return;
+            function showTypingIndicator() {
+                const id = 'typing-' + Date.now();
+                const div = document.createElement('div');
+                div.id = id;
+                div.className = 'flex items-start space-x-2 animate-smooth';
+                div.innerHTML = `
+                    <div class="w-6 h-6 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center flex-shrink-0">
+                        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis" class="w-full h-full object-cover">
+                    </div>
+                    <div class="theme-card border p-2.5 rounded-2xl rounded-tl-none flex items-center space-x-1 h-7 shadow-xs">
+                        <div class="w-1.5 h-1.5 rounded-full bg-neutral-400 animate-pulse"></div>
+                        <div class="w-1.5 h-1.5 rounded-full bg-neutral-400 animate-pulse" style="animation-delay: 0.2s"></div>
+                        <div class="w-1.5 h-1.5 rounded-full bg-neutral-400 animate-pulse" style="animation-delay: 0.4s"></div>
+                    </div>
+                `;
+                chatContainer.appendChild(div);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+                return id;
+            }
 
-            appState.geminiChat.push({ role: 'user', text: promptText });
-            input.value = '';
-            renderGeminiChat();
+            function removeTypingIndicator(id) {
+                const el = document.getElementById(id);
+                if (el) el.remove();
+            }
 
-            appState.geminiChat.push({ role: 'model', text: 'Menganalisis...' });
-            renderGeminiChat();
+            function saveToHistory(role, text) {
+                chatHistory.push({ role, text });
+                if (chatHistory.length > 30) chatHistory.shift();
+                localStorage.setItem('exec_suite_chat_danis', JSON.stringify(chatHistory));
+            }
 
-            const { apiKey, model } = appState.geminiConfig;
-            try {
-                if (apiKey.startsWith('AIzaSyPreconfiguredDefaultKey')) {
-                    setTimeout(() => {
-                        appState.geminiChat.pop();
-                        appState.geminiChat.push({ role: 'model', text: `Respons AI otomatis untuk: "${promptText}". Sistem SmartCore v2.0 berjalan optimal dengan asisten terpusat!` });
-                        saveStateToStorage();
-                        renderGeminiChat();
-                    }, 600);
-                    return;
+            // Notes / Scratchpad Logic
+            const scratchpad = document.getElementById('scratchpad');
+            const clearNotes = document.getElementById('clear-notes');
+            scratchpad.value = localStorage.getItem('exec_suite_notes') || '';
+            scratchpad.addEventListener('input', () => {
+                localStorage.setItem('exec_suite_notes', scratchpad.value);
+            });
+            clearNotes.addEventListener('click', () => {
+                if (confirm('Hapus seluruh catatan?')) {
+                    scratchpad.value = '';
+                    localStorage.removeItem('exec_suite_notes');
                 }
+            });
 
-                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
+            // Task Manager Logic
+            const taskInput = document.getElementById('task-input');
+            const addTaskBtn = document.getElementById('add-task-btn');
+            const taskList = document.getElementById('task-list');
+            const taskCounter = document.getElementById('task-counter');
+
+            let tasks = JSON.parse(localStorage.getItem('exec_suite_tasks')) || [];
+            renderTasks();
+
+            addTaskBtn.addEventListener('click', () => {
+                const val = taskInput.value.trim();
+                if (!val) return;
+                tasks.push({ text: val, completed: false });
+                taskInput.value = '';
+                saveAndRenderTasks();
+            });
+
+            function saveAndRenderTasks() {
+                localStorage.setItem('exec_suite_tasks', JSON.stringify(tasks));
+                renderTasks();
+            }
+
+            function renderTasks() {
+                taskList.innerHTML = '';
+                let completedCount = 0;
+                tasks.forEach((t, idx) => {
+                    if (t.completed) completedCount++;
+                    const div = document.createElement('div');
+                    div.className = "theme-card border rounded-xl p-2.5 flex items-center justify-between text-xs shadow-xs";
+                    div.innerHTML = `
+                        <div class="flex items-center space-x-2.5">
+                            <input type="checkbox" ${t.completed ? 'checked' : ''} data-index="${idx}" class="task-checkbox accent-sky-500 w-4 h-4 rounded cursor-pointer">
+                            <span class="${t.completed ? 'line-through text-neutral-400' : ''}">${t.text}</span>
+                        </div>
+                        <button data-index="${idx}" class="delete-task text-neutral-400 hover:text-rose-500 transition cursor-pointer"><i class="fa-solid fa-trash-can"></i></button>
+                    `;
+                    taskList.appendChild(div);
                 });
-                const data = await res.json();
-                appState.geminiChat.pop();
-                if(data.candidates && data.candidates[0].content.parts[0].text) {
-                    appState.geminiChat.push({ role: 'model', text: data.candidates[0].content.parts[0].text });
-                } else {
-                    appState.geminiChat.push({ role: 'model', text: 'Respons diterima dari Gemini API.' });
-                }
-            } catch(err) {
-                appState.geminiChat.pop();
-                appState.geminiChat.push({ role: 'model', text: 'Respons otomatis SmartCore AI: Permintaan Anda diproses dengan sukses.' });
-            }
-            saveStateToStorage();
-            renderGeminiChat();
-        }
+                taskCounter.textContent = `${completedCount} dari ${tasks.length} Selesai`;
 
-        // --- ADMIN ---
-        function renderAdminDashboard() {
-            document.getElementById('statTotalUsers').textContent = appState.users.length;
-            document.getElementById('statTotalPosts').textContent = appState.posts.length;
-            let bytes = 0;
-            for(let k in localStorage) { if(localStorage.hasOwnProperty(k)) bytes += localStorage[k].length * 2; }
-            document.getElementById('statStorageSize').textContent = (bytes/1024).toFixed(1) + ' KB';
+                document.querySelectorAll('.task-checkbox').forEach(box => {
+                    box.addEventListener('change', (e) => {
+                        const idx = e.target.getAttribute('data-index');
+                        tasks[idx].completed = e.target.checked;
+                        saveAndRenderTasks();
+                    });
+                });
 
-            const tbody = document.getElementById('adminUsersTableBody');
-            if(tbody) {
-                tbody.innerHTML = appState.users.map((u, idx) => `
-                    <tr class="hover:bg-slate-900/50 transition-colors">
-                        <td class="p-3.5 font-medium text-white">${u.name}</td>
-                        <td class="p-3.5 text-slate-400">${u.email}</td>
-                        <td class="p-3.5"><span class="px-2.5 py-1 rounded-lg text-[10px] font-semibold ${u.role === 'admin' ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30' : 'bg-brand-500/20 text-brand-400 border border-brand-500/30'}">${u.role.toUpperCase()}</span></td>
-                        <td class="p-3.5 text-slate-400">${u.joinedAt || '2026-01-01'}</td>
-                        <td class="p-3.5 text-right">${u.role !== 'admin' ? `<button type="button" onclick="deleteUser(${idx})" class="text-slate-500 hover:text-rose-400 transition-colors"><i class="fa-solid fa-trash-can"></i></button>` : '-'}</td>
-                    </tr>
-                `).join('');
+                document.querySelectorAll('.delete-task').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const idx = e.currentTarget.getAttribute('data-index');
+                        tasks.splice(idx, 1);
+                        saveAndRenderTasks();
+                    });
+                });
             }
-        }
-        function deleteUser(idx) {
-            if(confirm('Hapus pengguna?')) {
-                appState.users.splice(idx, 1);
-                saveStateToStorage();
-                renderAdminDashboard();
-            }
-        }
-        function resetSystemData() {
-            if(confirm('Reset seluruh sistem ke awal?')) {
-                localStorage.removeItem(STORAGE_KEY);
-                location.reload();
-            }
-        }
+
+            // Modal Handlers
+            const modalContainer = document.getElementById('modal-container');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            const closeModal = document.getElementById('close-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+
+            document.querySelectorAll('.highlight-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const topic = item.getAttribute('data-topic');
+                    modalTitle.textContent = `Sorotan: ${topic.toUpperCase()}`;
+                    if (topic === 'pengalaman') {
+                        modalContent.innerHTML = `<p>1. PTSL Juridical Aspect BPN (2021-2022)<br>2. Finance & Logistics Kantor Kecamatan (2023-2024)<br>3. Building Designer & Project Contractor (2024-2025)</p>`;
+                    } else if (topic === 'keahlian') {
+                        modalContent.innerHTML = `<p><strong>Hard Skills:</strong> 3D & 2D Designer, Supervisor, Project Manager, AI & NLP Researcher.<br><strong>Soft Skills:</strong> Hardworking, Discipline, Responsible.</p>`;
+                    } else if (topic === 'pendidikan') {
+                        modalContent.innerHTML = `<p>Politeknik Negeri Malang (2021 | Civil Engineer)<br>SMA Negeri Senduro (2019 | Sains)</p>`;
+                    } else {
+                        modalContent.innerHTML = `<p>Email: vanandi@proton.me<br>WhatsApp: +62 898 5160 888</p>`;
+                    }
+                    modalContainer.classList.remove('hidden');
+                    modalContainer.classList.add('flex');
+                });
+            });
+
+            document.querySelectorAll('.feed-post').forEach(post => {
+                post.addEventListener('click', () => {
+                    modalTitle.textContent = "Detail Pengalaman / Proyek";
+                    modalContent.innerHTML = `<p>${post.getAttribute('data-caption')}</p>`;
+                    modalContainer.classList.remove('hidden');
+                    modalContainer.classList.add('flex');
+                });
+            });
+
+            document.getElementById('open-cv-modal').addEventListener('click', () => {
+                modalTitle.textContent = "Curriculum Vitae - Mohammad Danis Muria Vanandi";
+                modalContent.innerHTML = `
+                    <p><strong>Profil:</strong> Results-oriented professional with a Civil Engineering foundation and 4+ years of experience across land administration, finance logistics, and building design projects.</p>
+                    <p><strong>Pendidikan:</strong> Politeknik Negeri Malang (2021 | Civil Engineer)</p>
+                    <p><strong>Kontak:</strong> vanandi@proton.me | +62 898 5160 888</p>
+                `;
+                modalContainer.classList.remove('hidden');
+                modalContainer.classList.add('flex');
+            });
+
+            closeModal.addEventListener('click', () => { modalContainer.classList.add('hidden'); modalContainer.classList.remove('flex'); });
+            closeModalBtn.addEventListener('click', () => { modalContainer.classList.add('hidden'); modalContainer.classList.remove('flex'); });
+        });
     </script>
 </body>
-    </html>
+</html>

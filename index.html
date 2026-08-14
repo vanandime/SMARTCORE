@@ -612,7 +612,7 @@
             const initialTab = localStorage.getItem('exec_active_tab') || 'profile';
             switchTab(initialTab, false);
 
-            // AI Chat Assistant Engine
+            // AI Chat Assistant Engine (Auto-detect user language & concise output)
             const chatContainer = document.getElementById('chat-container');
             const chatForm = document.getElementById('chat-form');
             const userInput = document.getElementById('user-input');
@@ -624,7 +624,7 @@
             if (chatHistory.length > 0) {
                 chatHistory.forEach(msg => appendMessage(msg.role, msg.text, false));
             } else {
-                appendMessage('model', "Hello! Welcome to my virtual assistant direct message. Feel free to ask anything about my civil engineering background, project management, or AI research!", false);
+                appendMessage('model', "Halo! Selamat datang di DM asisten virtual saya. Silakan tanyakan apa saja mengenai latar belakang teknik sipil, manajemen proyek, atau riset AI saya!", false);
             }
 
             userInput.addEventListener('input', () => {
@@ -658,7 +658,7 @@
 
             async function callOpenRouterAPI(promptText, key) {
                 const url = "https://openrouter.ai/api/v1/chat/completions";
-                const systemPrompt = `You are the professional virtual assistant for Mohammad Danis Muria Vanandi (vanandii). Answer questions about his civil engineering career, project management, and AI research politely and accurately in English.`;
+                const systemPrompt = `You are the professional virtual assistant for Mohammad Danis Muria Vanandi (vanandii). Detect the language of the user's message and reply in that EXACT same language (e.g., if user writes in Indonesian, reply in Indonesian; if in English, reply in English). Keep responses concise, efficient, highly professional, and straight to the point. CV Data: Civil Engineer Politeknik Negeri Malang (2021), BPN Land Agency (2021-2022), Sub-District Finance & Logistics (2023-2024), Building Designer & Contractor (2024-2025), AI & NLP Researcher (2023-Present). Contact: vanandi@proton.me | +62 898 5160 888.`;
 
                 const response = await fetch(url, {
                     method: 'POST',
@@ -684,16 +684,26 @@
 
             function getSmartFallbackResponse(query) {
                 const q = query.toLowerCase();
-                if (q.includes('who') || q.includes('name') || q.includes('profile')) {
-                    return "Mohammad Danis Muria Vanandi is a Civil Engineer graduated from State Polytechnic of Malang (2021) and an independent AI & NLP Researcher / Project Manager.";
-                } else if (q.includes('project') || q.includes('experience') || q.includes('work')) {
-                    return "His career includes BPN Land Agency (2021-2022), Sub-District Finance & Logistics (2023-2024), Building Designer & Contractor (2024-2025), and AI/NLP Research (2023-Present).";
-                } else if (q.includes('skill')) {
-                    return "Hard Skills: 3D/2D Building Design, Supervisor, Project Management, AI/NLP (LLM). Soft Skills: Hardworking, disciplined, and responsible.";
-                } else if (q.includes('contact') || q.includes('email') || q.includes('whatsapp')) {
-                    return "You can reach Danis via Email at vanandi@proton.me or WhatsApp at +62 898 5160 888.";
+                const isIndonesian = q.includes('apa') || q.includes('siapa') || q.includes('profil') || q.includes('pengalaman') || q.includes('proyek') || q.includes('kontak') || q.includes('halo') || q.includes('pendidikan');
+                
+                if (isIndonesian) {
+                    if (q.includes('siapa') || q.includes('profil')) {
+                        return "Mohammad Danis Muria Vanandi adalah seorang Civil Engineer lulusan Politeknik Negeri Malang (2021) serta Independent AI & NLP Researcher dan Project Manager.";
+                    } else if (q.includes('proyek') || q.includes('pengalaman') || q.includes('kerja')) {
+                        return "Pengalaman beliau meliputi BPN (2021-2022), Keuangan & Logistik Kecamatan (2023-2024), Building Designer & Kontraktor (2024-2025), dan Riset AI/NLP (2023-Sekarang).";
+                    } else if (q.includes('kontak')) {
+                        return "Hubungi Danis via Email di vanandi@proton.me atau WhatsApp +62 898 5160 888.";
+                    } else {
+                        return "Mohammad Danis Muria Vanandi adalah profesional berpengalaman di bidang Teknik Sipil dan Riset AI/NLP. Silakan hubungi vanandi@proton.me untuk kolaborasi.";
+                    }
                 } else {
-                    return "Thank you for your inquiry! Mohammad Danis Muria Vanandi specializes in civil engineering and AI research. For direct inquiries, please contact vanandi@proton.me or WhatsApp +62 898 5160 888.";
+                    if (q.includes('who') || q.includes('profile')) {
+                        return "Mohammad Danis Muria Vanandi is a Civil Engineer (Politeknik Negeri Malang '21) and AI/NLP Researcher / Project Manager.";
+                    } else if (q.includes('project') || q.includes('experience')) {
+                        return "Experience includes BPN Land Agency, Sub-District Finance, Building Designer & Contractor, and AI/NLP Research.";
+                    } else {
+                        return "Mohammad Danis Muria Vanandi specializes in civil engineering and AI research. Contact via vanandi@proton.me or WhatsApp +62 898 5160 888.";
+                    }
                 }
             }
 

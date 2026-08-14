@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Danis Vanandi (@vanandi) • Executive Suite</title>
+    <!-- Favicon & PWA Icons -->
+    <link rel="icon" type="image/jpeg" href="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601">
+    <link rel="apple-touch-icon" href="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Plus Jakarta Sans) -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        ::-webkit-scrollbar { width: 3px; height: 3px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(150,150,150,0.3); border-radius: 9999px; }
+        
+        @keyframes smoothFade {
+            from { opacity: 0; transform: scale(0.98) translateY(6px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .animate-smooth { animation: smoothFade 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .ig-gradient { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        
+        /* Tema Terang Estetik Instagram (Kontras Tinggi & Jelas) */
+        body.theme-clean { background-color: #fafafa; color: #0f172a; }
+        body.theme-clean .theme-card { background-color: #ffffff; border-color: #cbd5e1; color: #0f172a; }
+        body.theme-clean header, body.theme-clean nav { background-color: rgba(255, 255, 255, 0.98) !important; border-color: #cbd5e1 !important; color: #0f172a !important; }
+        body.theme-clean input, body.theme-clean textarea { background-color: #f1f5f9 !important; color: #0f172a !important; border-color: #cbd5e1 !important; }
+        body.theme-clean .bio-text { color: #334155 !important; }
+
+        /* Tema Midnight */
+        body.theme-midnight { background-color: #0b0f19; color: #f3f4f6; }
+        body.theme-midnight .theme-card { background-color: #111827; border-color: #1f2937; color: #f3f4f6; }
+        body.theme-midnight header, body.theme-midnight nav { background-color: rgba(11, 15, 25, 0.98) !important; border-color: #1f2937 !important; color: #f3f4f6 !important; }
+        body.theme-midnight .bio-text { color: #d1d5db !important; }
+
+        /* Tema OLED Black */
+        body.theme-oled { background-color: #000000; color: #ffffff; }
+        body.theme-oled .theme-card { background-color: #121212; border-color: #262626; color: #ffffff; }
+        body.theme-oled header, body.theme-oled nav { background-color: rgba(0, 0, 0, 0.98) !important; border-color: #262626 !important; color: #ffffff !important; }
+        body.theme-oled .bio-text { color: #e5e7eb !important; }
+
+        #settings-sidebar {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="theme-clean font-['Plus_Jakarta_Sans',sans-serif] min-h-screen flex flex-col selection:bg-pink-500 selection:text-white transition-colors duration-300">
+
+    <!-- Background Audio Ambient -->
+    <audio id="bg-audio" loop preload="auto">
+        <source src="https://actions.google.com/sounds/v1/ambiences/coffee_shop.ogg" type="audio/ogg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Top IG Executive Header -->
+    <header class="h-12 border-b backdrop-blur-md flex items-center justify-between px-4 sticky top-0 z-30 flex-shrink-0 transition-colors">
+        <div class="flex items-center space-x-2">
+            <span class="font-bold text-sm tracking-tight">vanandi</span>
+            <i class="fa-solid fa-circle-check text-sky-500 text-[10px]"></i>
+        </div>
+        <div class="flex items-center space-x-3">
+            <button id="open-sidebar-btn" class="text-base hover:text-sky-500 transition p-1.5 cursor-pointer rounded-full">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Sidebar Settings Panel -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-xs z-40 hidden transition-opacity"></div>
+    <aside id="settings-sidebar" class="fixed top-0 right-0 bottom-0 w-80 theme-card border-l z-50 transform translate-x-full p-5 flex flex-col justify-between shadow-2xl overflow-y-auto">
+        <div class="space-y-6">
+            <div class="flex items-center justify-between pb-3 border-b border-neutral-300 dark:border-neutral-800">
+                <h3 class="font-bold text-sm flex items-center gap-2"><i class="fa-solid fa-sliders text-sky-500"></i> Pengaturan Sistem</h3>
+                <button id="close-sidebar-btn" class="hover:text-sky-500 text-base p-1 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <!-- Tema -->
+            <div class="space-y-2">
+                <h4 class="text-xs font-bold uppercase tracking-wider opacity-70">Tema Tampilan</h4>
+                <div class="grid grid-cols-3 gap-2">
+                    <button class="theme-btn py-2 px-2 rounded-xl border text-[11px] font-semibold transition bg-white text-slate-900 border-slate-300 shadow-xs cursor-pointer" data-theme="theme-clean">Clean</button>
+                    <button class="theme-btn py-2 px-2 rounded-xl border text-[11px] font-semibold transition bg-gray-900 text-gray-200 border-gray-700 shadow-xs cursor-pointer" data-theme="theme-midnight">Midnight</button>
+                    <button class="theme-btn py-2 px-2 rounded-xl border text-[11px] font-semibold transition bg-black text-white border-neutral-800 shadow-xs cursor-pointer" data-theme="theme-oled">OLED</button>
+                </div>
+            </div>
+
+            <!-- Musik & Audio -->
+            <div class="space-y-2">
+                <h4 class="text-xs font-bold uppercase tracking-wider opacity-70">Musik Latar Belakang</h4>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-semibold" id="sidebar-music-label">Status: Matikan</span>
+                    <button id="sidebar-music-toggle" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500 hover:bg-sky-600 text-white transition cursor-pointer shadow-xs">Nyalakan Musik</button>
+                </div>
+                <div class="flex items-center gap-3 pt-1">
+                    <span class="text-[10px] opacity-70">Volume</span>
+                    <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.4" class="w-full accent-sky-500 cursor-pointer">
+                </div>
+            </div>
+
+            <!-- Quick Info & Tools -->
+            <div class="space-y-2">
+                <h4 class="text-xs font-bold uppercase tracking-wider opacity-70">Tautan Kontak</h4>
+                <div class="space-y-1.5">
+                    <a href="mailto:vanandi@proton.me" class="block p-2.5 rounded-xl theme-card border text-xs hover:bg-sky-500 hover:text-white transition font-medium"><i class="fa-solid fa-envelope mr-2"></i> vanandi@proton.me</a>
+                    <a href="https://wa.me/628985160888" target="_blank" class="block p-2.5 rounded-xl theme-card border text-xs hover:bg-emerald-500 hover:text-white transition font-medium"><i class="fa-solid fa-phone mr-2"></i> +62 898 5160 888</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-4 border-t border-neutral-300 dark:border-neutral-800 text-center text-[10px] opacity-70">
+            Executive Suite v4.2 • Mohammad Danis Muria Vanandi
+        </div>
+    </aside>
+
+    <!-- Main Scrollable Content Container -->
+    <main class="flex-1 max-w-md w-full mx-auto px-3 py-4 mb-20">
+        
+        <!-- SECTION 1: Profile & Feed Grid -->
+        <div id="view-profile" class="space-y-4 animate-smooth block">
+            <div class="px-1">
+                <div class="flex items-center justify-between">
+                    <div class="p-[3px] ig-gradient rounded-full flex-shrink-0">
+                        <div class="w-20 h-20 rounded-full bg-neutral-200 overflow-hidden border-2 border-white flex items-center justify-center">
+                            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis Vanandi" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="flex-1 flex justify-around text-center ml-3">
+                        <div>
+                            <span class="font-bold text-sm block">4</span>
+                            <span class="text-[10px] font-semibold opacity-70">Proyek</span>
+                        </div>
+                        <div>
+                            <span class="font-bold text-sm block">4+ Thn</span>
+                            <span class="text-[10px] font-semibold opacity-70">Pengalaman</span>
+                        </div>
+                        <div>
+                            <span class="font-bold text-sm block">AI/NLP</span>
+                            <span class="text-[10px] font-semibold opacity-70">Fokus</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bio Rapih Sesuai CV -->
+                <div class="mt-3 space-y-1">
+                    <h2 class="font-bold text-xs">Mohammad Danis Muria Vanandi</h2>
+                    <p class="text-[11px] bio-text leading-relaxed font-semibold">
+                        Civil Engineer (Politeknik Negeri Malang '21) 🏗️<br>
+                        AI & NLP Researcher | Supervisor & Project Manager 🤖<br>
+                        📍 Malang / Lumajang, Jawa Timur
+                    </p>
+                </div>
+
+                <!-- Tombol Kontak & CV Sesuai Data -->
+                <div class="flex gap-2 mt-3.5">
+                    <a href="mailto:vanandi@proton.me" class="flex-1 bg-sky-500 hover:bg-sky-600 text-white py-2 rounded-xl text-xs font-semibold transition text-center shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+                        <i class="fa-solid fa-envelope"></i> Email
+                    </a>
+                    <a href="https://wa.me/628985160888" target="_blank" class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-xl text-xs font-semibold transition text-center shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <button id="open-cv-modal" class="flex-1 theme-card border hover:opacity-80 py-2 rounded-xl text-xs font-bold transition text-center shadow-xs cursor-pointer">
+                        Lihat CV
+                    </button>
+                </div>
+            </div>
+
+            <!-- Highlights -->
+            <div class="flex gap-3 overflow-x-auto px-1 pb-1 scrollbar-none">
+                <div class="flex flex-col items-center space-y-1 flex-shrink-0 cursor-pointer highlight-item" data-topic="pengalaman">
+                    <div class="w-14 h-14 rounded-full p-[2px] border border-neutral-300 flex items-center justify-center theme-card"><i class="fa-solid fa-briefcase text-sky-500 text-sm"></i></div>
+                    <span class="text-[9px] font-bold opacity-80">Karir</span>
+                </div>
+                <div class="flex flex-col items-center space-y-1 flex-shrink-0 cursor-pointer highlight-item" data-topic="keahlian">
+                    <div class="w-14 h-14 rounded-full p-[2px] border border-neutral-300 flex items-center justify-center theme-card"><i class="fa-solid fa-brain text-purple-500 text-sm"></i></div>
+                    <span class="text-[9px] font-bold opacity-80">Keahlian</span>
+                </div>
+                <div class="flex flex-col items-center space-y-1 flex-shrink-0 cursor-pointer highlight-item" data-topic="pendidikan">
+                    <div class="w-14 h-14 rounded-full p-[2px] border border-neutral-300 flex items-center justify-center theme-card"><i class="fa-solid fa-graduation-cap text-amber-500 text-sm"></i></div>
+                    <span class="text-[9px] font-bold opacity-80">Studi</span>
+                </div>
+                <div class="flex flex-col items-center space-y-1 flex-shrink-0 cursor-pointer highlight-item" data-topic="kontak">
+                    <div class="w-14 h-14 rounded-full p-[2px] border border-neutral-300 flex items-center justify-center theme-card"><i class="fa-solid fa-address-book text-emerald-500 text-sm"></i></div>
+                    <span class="text-[9px] font-bold opacity-80">Kontak</span>
+                </div>
+            </div>
+
+            <!-- Feed Grid Estetik & Profesional -->
+            <div class="border-t border-neutral-300 dark:border-neutral-800 pt-3">
+                <div class="grid grid-cols-2 gap-2.5">
+                    <div class="theme-card border p-4 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-sky-500 transition space-y-2" data-caption="PTSL Juridical Aspect di National Land Agency / BPN (2021-2022). Menangani aspek yuridis pensertifikatan tanah dengan predikat penilaian kerja 'Good'.">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500 text-lg">
+                            <i class="fa-solid fa-landmark"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xs">BPN / Pertanahan</h4>
+                            <p class="text-[10px] opacity-70 mt-0.5 font-semibold">PTSL Juridical Aspect (2021-2022)</p>
+                        </div>
+                    </div>
+                    <div class="theme-card border p-4 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-sky-500 transition space-y-2" data-caption="Finance & Logistics di Kantor Kecamatan (2023-2024). Mengelola administrasi keuangan operasional dan logistik instansi pemerintahan.">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 text-lg">
+                            <i class="fa-solid fa-coins"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xs">Finance & Logistics</h4>
+                            <p class="text-[10px] opacity-70 mt-0.5 font-semibold">Kantor Kecamatan (2023-2024)</p>
+                        </div>
+                    </div>
+                    <div class="theme-card border p-4 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-sky-500 transition space-y-2" data-caption="Building Designer & Project Contractor (2024-2025). Merancang desain bangunan 2D & 3D serta pengawasan proyek konstruksi.">
+                        <div class="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-500 text-lg">
+                            <i class="fa-solid fa-building"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xs">Building Designer</h4>
+                            <p class="text-[10px] opacity-70 mt-0.5 font-semibold">Contractor & 2D/3D (2024-2025)</p>
+                        </div>
+                    </div>
+                    <div class="theme-card border p-4 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-sky-500 transition space-y-2" data-caption="Independent AI & NLP Researcher (2023 - Present). Riset mandiri mendalami Large Language Models (LLM), evaluasi konten, dan anotasi data.">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-500 text-lg">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xs">AI & NLP Research</h4>
+                            <p class="text-[10px] opacity-70 mt-0.5 font-semibold">Independent (2023 - Sekarang)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: AI Chat Assistant (DM) Ala Instagram -->
+        <div id="view-chat" class="hidden space-y-3 animate-smooth">
+            <div class="flex items-center justify-between pb-2.5 border-b border-neutral-300 dark:border-neutral-800">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center">
+                        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xs">vanandi</h3>
+                        <p class="text-[9px] opacity-70 font-semibold">Active • AI Executive Assistant</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="chat-container" class="space-y-3 min-h-[50vh] max-h-[60vh] overflow-y-auto pr-1">
+                <div class="flex items-start space-x-2 animate-smooth">
+                    <div class="w-6 h-6 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis" class="w-full h-full object-cover">
+                    </div>
+                    <div class="theme-card border p-3 rounded-2xl rounded-tl-none max-w-[85%] text-xs leading-relaxed shadow-xs font-semibold">
+                        Halo! Selamat datang di DM asisten virtual saya. Ada yang bisa saya bantu terkait latar belakang teknik sipil atau proyek riset AI saya?
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <form id="chat-form" class="theme-card border rounded-full px-4 py-2.5 flex items-center gap-2 shadow-xs">
+                    <input type="text" id="user-input" placeholder="Kirim pesan..." class="w-full bg-transparent text-xs placeholder-neutral-400 focus:outline-none font-medium">
+                    <button type="submit" id="send-btn" class="text-sky-500 font-bold text-xs disabled:opacity-40 transition cursor-pointer px-2">Kirim</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- SECTION 3: Productivity Notes / Scratchpad -->
+        <div id="view-notes" class="hidden space-y-3 animate-smooth">
+            <div class="flex items-center justify-between pb-2 border-b border-neutral-300 dark:border-neutral-800">
+                <h3 class="font-bold text-xs uppercase tracking-wider text-amber-500"><i class="fa-solid fa-note-sticky mr-1"></i> Catatan Cepat</h3>
+                <button id="clear-notes" class="text-[10px] opacity-70 hover:text-rose-500 transition cursor-pointer font-bold">Hapus Catatan</button>
+            </div>
+            <textarea id="scratchpad" placeholder="Tulis ide, catatan meeting, atau draft pekerjaan di sini..." class="w-full h-[60vh] theme-card border rounded-2xl p-3.5 text-xs placeholder-neutral-400 focus:outline-none focus:border-sky-500 resize-none leading-relaxed shadow-xs font-medium"></textarea>
+            <div class="text-[9px] opacity-60 text-center font-mono">Tersimpan otomatis secara lokal di perangkat Anda</div>
+        </div>
+
+        <!-- SECTION 4: Task Manager / Checklist -->
+        <div id="view-tasks" class="hidden space-y-3 animate-smooth">
+            <div class="flex items-center justify-between pb-2 border-b border-neutral-300 dark:border-neutral-800">
+                <h3 class="font-bold text-xs uppercase tracking-wider text-emerald-500"><i class="fa-solid fa-list-check mr-1"></i> Task Manager</h3>
+                <span id="task-counter" class="text-[10px] opacity-70 font-mono font-bold">0 Selesai</span>
+            </div>
+            <div class="flex gap-2">
+                <input type="text" id="task-input" placeholder="Tambah tugas baru..." class="flex-1 theme-card border rounded-xl px-3 py-2 text-xs placeholder-neutral-400 focus:outline-none focus:border-sky-500 font-medium">
+                <button id="add-task-btn" class="bg-sky-500 hover:bg-sky-600 text-white px-3 py-2 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer">Tambah</button>
+            </div>
+            <div id="task-list" class="space-y-2 max-h-[55vh] overflow-y-auto pr-1"></div>
+        </div>
+    </main>
+
+    <!-- FIXED BOTTOM INSTAGRAM NAVIGATION BAR -->
+    <nav class="h-14 border-t backdrop-blur-md flex items-center justify-around px-2 z-30 fixed bottom-0 inset-x-0 transition-colors" id="bottom-nav">
+        <button id="tab-profile" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 text-sky-500 transition cursor-pointer">
+            <i class="fa-solid fa-table-cells text-base"></i>
+            <span class="text-[9px] mt-0.5 font-bold">Profil</span>
+        </button>
+        <button id="tab-chat" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 opacity-60 hover:text-sky-500 transition relative cursor-pointer">
+            <i class="fa-regular fa-paper-plane text-base"></i>
+            <span class="text-[9px] mt-0.5 font-bold">DM AI</span>
+        </button>
+        <button id="tab-notes" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 opacity-60 hover:text-sky-500 transition cursor-pointer">
+            <i class="fa-solid fa-note-sticky text-base"></i>
+            <span class="text-[9px] mt-0.5 font-bold">Catatan</span>
+        </button>
+        <button id="tab-tasks" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 opacity-60 hover:text-sky-500 transition cursor-pointer">
+            <i class="fa-solid fa-list-check text-base"></i>
+            <span class="text-[9px] mt-0.5 font-bold">Tugas</span>
+        </button>
+    </nav>
+
+    <!-- Modal CV & Detail -->
+    <div id="modal-container" class="fixed inset-0 bg-black/60 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
+        <div class="theme-card border rounded-3xl max-w-md w-full p-5 shadow-2xl space-y-3 max-h-[85vh] overflow-y-auto animate-smooth">
+            <div class="flex items-center justify-between border-b border-neutral-300 dark:border-neutral-800 pb-2.5">
+                <h3 id="modal-title" class="font-bold text-xs">Detail Informasi</h3>
+                <button id="close-modal" class="opacity-70 hover:opacity-100 p-1 cursor-pointer"><i class="fa-solid fa-xmark text-sm"></i></button>
+            </div>
+            <div id="modal-content" class="text-xs leading-relaxed space-y-2 font-semibold opacity-90"></div>
+            <button id="close-modal-btn" class="w-full bg-sky-500 hover:bg-sky-600 text-white py-2 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer">Tutup</button>
+        </div>
+    </div>
+
+    <!-- JavaScript Logika & Fitur Lengkap -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Audio Background Handling
+            const audio = document.getElementById('bg-audio');
+            audio.volume = 0.4;
+            let musicPlaying = false;
+
+            const toggleMusic = () => {
+                if (musicPlaying) {
+                    audio.pause();
+                    musicPlaying = false;
+                    document.getElementById('sidebar-music-label').textContent = 'Status: Matikan';
+                    document.getElementById('sidebar-music-toggle').textContent = 'Nyalakan Musik';
+                    document.getElementById('sidebar-music-toggle').className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500 hover:bg-sky-600 text-white transition cursor-pointer shadow-xs';
+                } else {
+                    audio.play().then(() => {
+                        musicPlaying = true;
+                        document.getElementById('sidebar-music-label').textContent = 'Status: Aktif';
+                        document.getElementById('sidebar-music-toggle').textContent = 'Matikan Musik';
+                        document.getElementById('sidebar-music-toggle').className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-500 hover:bg-rose-600 text-white transition cursor-pointer shadow-xs';
+                    }).catch(e => console.log("Autoplay waiting interaction"));
+                }
+            };
+
+            document.getElementById('sidebar-music-toggle').addEventListener('click', toggleMusic);
+
+            const startAudioOnce = () => {
+                if (!musicPlaying) {
+                    audio.play().then(() => {
+                        musicPlaying = true;
+                        document.getElementById('sidebar-music-label').textContent = 'Status: Aktif';
+                        document.getElementById('sidebar-music-toggle').textContent = 'Matikan Musik';
+                        document.getElementById('sidebar-music-toggle').className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-500 hover:bg-rose-600 text-white transition cursor-pointer shadow-xs';
+                    }).catch(e => {});
+                }
+                window.removeEventListener('click', startAudioOnce);
+                window.removeEventListener('touchstart', startAudioOnce);
+            };
+            window.addEventListener('click', startAudioOnce);
+            window.addEventListener('touchstart', startAudioOnce);
+
+            document.getElementById('volume-slider').addEventListener('input', (e) => {
+                audio.volume = e.target.value;
+            });
+
+            // Sidebar Settings Controls
+            const sidebar = document.getElementById('settings-sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            const openSidebar = document.getElementById('open-sidebar-btn');
+            const closeSidebar = document.getElementById('close-sidebar-btn');
+
+            const toggleSidebar = (show) => {
+                if (show) {
+                    overlay.classList.remove('hidden');
+                    sidebar.classList.remove('translate-x-full');
+                } else {
+                    sidebar.classList.add('translate-x-full');
+                    setTimeout(() => overlay.classList.add('hidden'), 300);
+                }
+            };
+
+            openSidebar.addEventListener('click', (e) => { e.stopPropagation(); toggleSidebar(true); });
+            closeSidebar.addEventListener('click', () => toggleSidebar(false));
+            overlay.addEventListener('click', () => toggleSidebar(false));
+
+            // Theme Customization
+            const savedTheme = localStorage.getItem('executive_theme') || 'theme-clean';
+            document.body.className = `${savedTheme} font-['Plus_Jakarta_Sans',sans-serif] min-h-screen flex flex-col selection:bg-pink-500 selection:text-white transition-colors duration-300`;
+
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const theme = btn.getAttribute('data-theme');
+                    document.body.className = `${theme} font-['Plus_Jakarta_Sans',sans-serif] min-h-screen flex flex-col selection:bg-pink-500 selection:text-white transition-colors duration-300`;
+                    localStorage.setItem('executive_theme', theme);
+                    toggleSidebar(false);
+                });
+            });
+
+            // Tabs Management
+            const views = {
+                profile: document.getElementById('view-profile'),
+                chat: document.getElementById('view-chat'),
+                notes: document.getElementById('view-notes'),
+                tasks: document.getElementById('view-tasks')
+            };
+            const navButtons = {
+                profile: document.getElementById('tab-profile'),
+                chat: document.getElementById('tab-chat'),
+                notes: document.getElementById('tab-notes'),
+                tasks: document.getElementById('tab-tasks')
+            };
+
+            function switchTab(activeKey) {
+                Object.keys(views).forEach(key => {
+                    if (key === activeKey) {
+                        views[key].classList.remove('hidden');
+                        views[key].classList.add('block');
+                        if(navButtons[key]) {
+                            navButtons[key].classList.remove('opacity-60');
+                            navButtons[key].classList.add('text-sky-500');
+                        }
+                    } else {
+                        views[key].classList.remove('block');
+                        views[key].classList.add('hidden');
+                        if(navButtons[key]) {
+                            navButtons[key].classList.add('opacity-60');
+                            navButtons[key].classList.remove('text-sky-500');
+                        }
+                    }
+                });
+                window.scrollTo(0, 0);
+            }
+
+            navButtons.profile.addEventListener('click', () => switchTab('profile'));
+            navButtons.chat.addEventListener('click', () => switchTab('chat'));
+            navButtons.notes.addEventListener('click', () => switchTab('notes'));
+            navButtons.tasks.addEventListener('click', () => switchTab('tasks'));
+
+            document.getElementById('open-chat-from-bio')?.addEventListener('click', () => switchTab('chat'));
+
+            // Chat Assistant Logic with Gemini API Runtime & GitHub Setup Support
+            const chatContainer = document.getElementById('chat-container');
+            const chatForm = document.getElementById('chat-form');
+            const userInput = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+
+            // PERHATIAN: Masukkan Google Gemini API Key Anda di dalam string berikut jika di-upload ke GitHub Pages
+            const apiKey = ""; 
+            const modelName = "gemini-2.5-flash-preview-09-2025";
+
+            let chatHistory = JSON.parse(localStorage.getItem('exec_suite_chat_danis')) || [];
+            if (chatHistory.length > 0) {
+                chatHistory.forEach(msg => appendMessage(msg.role, msg.text, false));
+            }
+
+            userInput.addEventListener('input', () => {
+                sendBtn.disabled = userInput.value.trim().length === 0;
+            });
+
+            chatForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const text = userInput.value.trim();
+                if (!text) return;
+
+                userInput.value = '';
+                sendBtn.disabled = true;
+
+                appendMessage('user', text);
+                saveToHistory('user', text);
+
+                const typingId = showTypingIndicator();
+
+                try {
+                    const botResponse = await callGeminiAPI(text);
+                    removeTypingIndicator(typingId);
+                    appendMessage('model', botResponse);
+                    saveToHistory('model', botResponse);
+                } catch (err) {
+                    removeTypingIndicator(typingId);
+                    const errorMsg = !apiKey ? 
+                        "⚠️ Masukkan Google Gemini API Key Anda pada variabel `apiKey` di dalam kode JavaScript file HTML ini agar AI dapat aktif saat di-upload ke GitHub Pages." : 
+                        "⚠️ Maaf, mohon periksa koneksi internet Anda atau coba beberapa saat lagi.";
+                    appendMessage('model', errorMsg);
+                }
+            });
+
+            async function callGeminiAPI(promptText) {
+                if (!apiKey) {
+                    throw new Error("API Key belum diisi.");
+                }
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+                const systemPrompt = `Anda adalah asisten virtual profesional untuk profil Instagram Mohammad Danis Muria Vanandi (vanandi). Berbicaralah selayaknya asisten pribadi Danis yang ramah, sopan, dan profesional di DM Instagram. Jangan sebutkan detail teknis sistem atau Google.
+CV Ringkas Danis:
+- Civil Engineer Politeknik Negeri Malang (2021)
+- Pengalaman: PTSL BPN (2021-2022), Finance & Logistics Kantor Kecamatan (2023-2024), Building Designer & Contractor (2024-2025), Independent AI & NLP Researcher (2023-Present).
+- Kontak: vanandi@proton.me | WhatsApp +62 898 5160 888.`;
+
+                let data = null;
+                for (let attempt = 0; attempt < 5; attempt++) {
+                    try {
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                contents: [{ parts: [{ text: promptText }] }],
+                                systemInstruction: { parts: [{ text: systemPrompt }] }
+                            })
+                        });
+                        if (!response.ok) throw new Error('API Error');
+                        data = await response.json();
+                        break;
+                    } catch (err) {
+                        if (attempt === 4) throw err;
+                        await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 1000));
+                    }
+                }
+
+                const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (!text) throw new Error('Respons kosong.');
+                return text;
+            }
+
+            function appendMessage(role, text, scroll = true) {
+                const isUser = role === 'user';
+                const div = document.createElement('div');
+                div.className = `flex items-start space-x-2 animate-smooth ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`;
+
+                div.innerHTML = `
+                    ${!isUser ? '<div class="w-6 h-6 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center flex-shrink-0 mt-0.5"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis" class="w-full h-full object-cover"></div>' : ''}
+                    <div class="${isUser ? 'bg-sky-500 text-white rounded-tr-none' : 'theme-card border rounded-tl-none'} p-3 rounded-2xl max-w-[80%] text-xs leading-relaxed shadow-xs font-semibold">
+                        ${text.replace(/\n/g, '<br>')}
+                    </div>
+                `;
+
+                chatContainer.appendChild(div);
+                if (scroll) chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+
+            function showTypingIndicator() {
+                const id = 'typing-' + Date.now();
+                const div = document.createElement('div');
+                div.id = id;
+                div.className = 'flex items-start space-x-2 animate-smooth';
+                div.innerHTML = `
+                    <div class="w-6 h-6 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis" class="w-full h-full object-cover">
+                    </div>
+                    <div class="theme-card border p-3 rounded-2xl rounded-tl-none flex items-center space-x-1 h-7 shadow-xs">
+                        <div class="w-1.5 h-1.5 rounded-full bg-neutral-400 animate-pulse"></div>
+                        <div class="w-1.5 h-1.5 rounded-full bg-neutral-400 animate-pulse" style="animation-delay: 0.2s"></div>
+                        <div class="w-1.5 h-1.5 rounded-full bg-neutral-400 animate-pulse" style="animation-delay: 0.4s"></div>
+                    </div>
+                `;
+                chatContainer.appendChild(div);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+                return id;
+            }
+
+            function removeTypingIndicator(id) {
+                const el = document.getElementById(id);
+                if (el) el.remove();
+            }
+
+            function saveToHistory(role, text) {
+                chatHistory.push({ role, text });
+                if (chatHistory.length > 30) chatHistory.shift();
+                localStorage.setItem('exec_suite_chat_danis', JSON.stringify(chatHistory));
+            }
+
+            // Notes / Scratchpad Logic
+            const scratchpad = document.getElementById('scratchpad');
+            const clearNotes = document.getElementById('clear-notes');
+            scratchpad.value = localStorage.getItem('exec_suite_notes') || '';
+            scratchpad.scratchpad?.addEventListener('input', () => {
+                localStorage.setItem('exec_suite_notes', scratchpad.value);
+            });
+            clearNotes.addEventListener('click', () => {
+                if (confirm('Hapus seluruh catatan?')) {
+                    scratchpad.value = '';
+                    localStorage.removeItem('exec_suite_notes');
+                }
+            });
+
+            // Task Manager Logic
+            const taskInput = document.getElementById('task-input');
+            const addTaskBtn = document.getElementById('add-task-btn');
+            const taskList = document.getElementById('task-list');
+            const taskCounter = document.getElementById('task-counter');
+
+            let tasks = JSON.parse(localStorage.getItem('exec_suite_tasks')) || [];
+            renderTasks();
+
+            addTaskBtn.addEventListener('click', () => {
+                const val = taskInput.value.trim();
+                if (!val) return;
+                tasks.push({ text: val, completed: false });
+                taskInput.value = '';
+                saveAndRenderTasks();
+            });
+
+            function saveAndRenderTasks() {
+                localStorage.setItem('exec_suite_tasks', JSON.stringify(tasks));
+                renderTasks();
+            }
+
+            function renderTasks() {
+                taskList.innerHTML = '';
+                let completedCount = 0;
+                tasks.forEach((t, idx) => {
+                    if (t.completed) completedCount++;
+                    const div = document.createElement('div');
+                    div.className = "theme-card border rounded-xl p-2.5 flex items-center justify-between text-xs shadow-xs";
+                    div.innerHTML = `
+                        <div class="flex items-center space-x-2.5">
+                            <input type="checkbox" ${t.completed ? 'checked' : ''} data-index="${idx}" class="task-checkbox accent-sky-500 w-4 h-4 rounded cursor-pointer">
+                            <span class="${t.completed ? 'line-through opacity-50' : 'font-semibold'}">${t.text}</span>
+                        </div>
+                        <button data-index="${idx}" class="delete-task opacity-60 hover:text-rose-500 transition cursor-pointer p-1"><i class="fa-solid fa-trash-can"></i></button>
+                    `;
+                    taskList.appendChild(div);
+                });
+                taskCounter.textContent = `${completedCount} dari ${tasks.length} Selesai`;
+
+                document.querySelectorAll('.task-checkbox').forEach(box => {
+                    box.addEventListener('change', (e) => {
+                        const idx = e.target.getAttribute('data-index');
+                        tasks[idx].completed = e.target.checked;
+                        saveAndRenderTasks();
+                    });
+                });
+
+                document.querySelectorAll('.delete-task').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const idx = e.currentTarget.getAttribute('data-index');
+                        tasks.splice(idx, 1);
+                        saveAndRenderTasks();
+                    });
+                });
+            }
+
+            // Modal Handlers
+            const modalContainer = document.getElementById('modal-container');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            const closeModal = document.getElementById('close-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+
+            document.querySelectorAll('.highlight-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const topic = item.getAttribute('data-topic');
+                    modalTitle.textContent = `Sorotan: ${topic.toUpperCase()}`;
+                    if (topic === 'pengalaman') {
+                        modalContent.innerHTML = `<p>1. PTSL Juridical Aspect BPN (2021-2022)<br>2. Finance & Logistics Kantor Kecamatan (2023-2024)<br>3. Building Designer & Project Contractor (2024-2025)</p>`;
+                    } else if (topic === 'keahlian') {
+                        modalContent.innerHTML = `<p><strong>Hard Skills:</strong> 3D & 2D Designer, Supervisor, Project Manager, AI & NLP Researcher.<br><strong>Soft Skills:</strong> Hardworking, Discipline, Responsible.</p>`;
+                    } else if (topic === 'pendidikan') {
+                        modalContent.innerHTML = `<p>Politeknik Negeri Malang (2021 | Civil Engineer)<br>SMA Negeri Senduro (2019 | Sains)</p>`;
+                    } else {
+                        modalContent.innerHTML = `<p>Email: vanandi@proton.me<br>WhatsApp: +62 898 5160 888</p>`;
+                    }
+                    modalContainer.classList.remove('hidden');
+                    modalContainer.classList.add('flex');
+                });
+            });
+
+            document.querySelectorAll('.feed-post').forEach(post => {
+                post.addEventListener('click', () => {
+                    modalTitle.textContent = "Detail Pengalaman / Proyek";
+                    modalContent.innerHTML = `<p>${post.getAttribute('data-caption')}</p>`;
+                    modalContainer.classList.remove('hidden');
+                    modalContainer.classList.add('flex');
+                });
+            });
+
+            document.getElementById('open-cv-modal').addEventListener('click', () => {
+                modalTitle.textContent = "Curriculum Vitae - Mohammad Danis Muria Vanandi";
+                modalContent.innerHTML = `
+                    <p><strong>Profil:</strong> Results-oriented professional with a Civil Engineering foundation and 4+ years of experience across land administration, finance logistics, and building design projects.</p>
+                    <p><strong>Pendidikan:</strong> Politeknik Negeri Malang (2021 | Civil Engineer)</p>
+                    <p><strong>Kontak:</strong> vanandi@proton.me | +62 898 5160 888</p>
+                `;
+                modalContainer.classList.remove('hidden');
+                modalContainer.classList.add('flex');
+            });
+
+            closeModal.addEventListener('click', () => { modalContainer.classList.add('hidden'); modalContainer.classList.remove('flex'); });
+            closeModalBtn.addEventListener('click', () => { modalContainer.classList.add('hidden'); modalContainer.classList.remove('flex'); });
+        });
+    </script>
+</body>
+</html>

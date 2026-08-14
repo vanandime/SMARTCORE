@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Danis Vanandi (@vanandi) • Executive Suite</title>
-    <!-- Favicon -->
+    <!-- Favicon & PWA Icons -->
     <link rel="icon" type="image/jpeg" href="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601">
+    <link rel="apple-touch-icon" href="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601">
+    <meta name="theme-color" content="#ffffff">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -24,17 +26,18 @@
         .animate-smooth { animation: smoothFade 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .ig-gradient { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
         
-        /* Tema Terang Estetik Instagram */
-        body.theme-clean { background-color: #fafafa; color: #262626; }
-        body.theme-clean .theme-card { background-color: #ffffff; border-color: #dbdbdb; color: #262626; }
-        body.theme-clean header, body.theme-clean nav { background-color: rgba(255, 255, 255, 0.98) !important; border-color: #dbdbdb !important; color: #262626 !important; }
-        body.theme-clean input, body.theme-clean textarea { background-color: #efefef !important; color: #262626 !important; border-color: #dbdbdb !important; }
+        /* Tema Terang Estetik Instagram (Default) */
+        body.theme-clean { background-color: #fafafa; color: #111827; }
+        body.theme-clean .theme-card { background-color: #ffffff; border-color: #e5e7eb; color: #111827; }
+        body.theme-clean header, body.theme-clean nav { background-color: rgba(255, 255, 255, 0.98) !important; border-color: #e5e7eb !important; color: #111827 !important; }
+        body.theme-clean input, body.theme-clean textarea { background-color: #f3f4f6 !important; color: #111827 !important; border-color: #e5e7eb !important; }
 
-        /* Tema Alternatif */
+        /* Tema Midnight */
         body.theme-midnight { background-color: #0b0f19; color: #f3f4f6; }
         body.theme-midnight .theme-card { background-color: #111827; border-color: #1f2937; color: #f3f4f6; }
         body.theme-midnight header, body.theme-midnight nav { background-color: rgba(11, 15, 25, 0.98) !important; border-color: #1f2937 !important; color: #f3f4f6 !important; }
 
+        /* Tema OLED Black */
         body.theme-oled { background-color: #000000; color: #ffffff; }
         body.theme-oled .theme-card { background-color: #121212; border-color: #262626; color: #ffffff; }
         body.theme-oled header, body.theme-oled nav { background-color: rgba(0, 0, 0, 0.98) !important; border-color: #262626 !important; color: #ffffff !important; }
@@ -47,8 +50,9 @@
 </head>
 <body class="theme-clean font-['Plus_Jakarta_Sans',sans-serif] min-h-screen flex flex-col selection:bg-pink-500 selection:text-white transition-colors duration-300">
 
-    <!-- Background Audio Ambient -->
+    <!-- Background Audio Ambient (Stabil & Auto-play) -->
     <audio id="bg-audio" loop preload="auto">
+        <source src="https://actions.google.com/sounds/v1/ambiences/coffee_shop.ogg" type="audio/ogg">
         <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
     </audio>
 
@@ -59,22 +63,18 @@
             <i class="fa-solid fa-circle-check text-sky-500 text-[10px]"></i>
         </div>
         <div class="flex items-center space-x-3">
-            <button id="music-toggle-btn" class="cursor-pointer text-[11px] font-medium transition flex items-center gap-1.5 px-2.5 py-1 rounded-full border shadow-xs">
-                <i class="fa-solid fa-music text-pink-500 animate-pulse" id="music-icon"></i>
-                <span id="music-status">Lofi On</span>
-            </button>
-            <button id="open-sidebar-btn" class="text-base text-neutral-600 dark:text-neutral-300 hover:text-sky-500 transition p-1 cursor-pointer">
+            <button id="open-sidebar-btn" class="text-base text-neutral-600 dark:text-neutral-300 hover:text-sky-500 transition p-1.5 cursor-pointer rounded-full">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
     </header>
 
-    <!-- Sidebar Settings Panel -->
+    <!-- Sidebar Settings Panel (Slide-over dengan Kontrol Musik & Tema) -->
     <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-xs z-40 hidden transition-opacity"></div>
     <aside id="settings-sidebar" class="fixed top-0 right-0 bottom-0 w-80 theme-card border-l z-50 transform translate-x-full p-5 flex flex-col justify-between shadow-2xl overflow-y-auto">
         <div class="space-y-6">
             <div class="flex items-center justify-between pb-3 border-b border-neutral-200 dark:border-neutral-800">
-                <h3 class="font-bold text-sm flex items-center gap-2"><i class="fa-solid fa-sliders text-sky-500"></i> Pengaturan & Fitur</h3>
+                <h3 class="font-bold text-sm flex items-center gap-2"><i class="fa-solid fa-sliders text-sky-500"></i> Pengaturan Sistem</h3>
                 <button id="close-sidebar-btn" class="text-neutral-400 hover:text-neutral-700 dark:hover:text-white text-base p-1 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
@@ -82,37 +82,37 @@
             <div class="space-y-2">
                 <h4 class="text-xs font-bold text-neutral-400 uppercase tracking-wider">Tema Tampilan</h4>
                 <div class="grid grid-cols-3 gap-2">
-                    <button class="theme-btn py-1.5 px-2 rounded-xl border text-[11px] font-semibold transition bg-white text-slate-900 border-slate-300 shadow-xs cursor-pointer" data-theme="theme-clean">Clean</button>
-                    <button class="theme-btn py-1.5 px-2 rounded-xl border text-[11px] font-semibold transition bg-gray-900 text-gray-200 border-gray-700 shadow-xs cursor-pointer" data-theme="theme-midnight">Midnight</button>
-                    <button class="theme-btn py-1.5 px-2 rounded-xl border text-[11px] font-semibold transition bg-black text-white border-neutral-800 shadow-xs cursor-pointer" data-theme="theme-oled">OLED</button>
+                    <button class="theme-btn py-2 px-2 rounded-xl border text-[11px] font-semibold transition bg-white text-slate-900 border-slate-300 shadow-xs cursor-pointer" data-theme="theme-clean">Clean</button>
+                    <button class="theme-btn py-2 px-2 rounded-xl border text-[11px] font-semibold transition bg-gray-900 text-gray-200 border-gray-700 shadow-xs cursor-pointer" data-theme="theme-midnight">Midnight</button>
+                    <button class="theme-btn py-2 px-2 rounded-xl border text-[11px] font-semibold transition bg-black text-white border-neutral-800 shadow-xs cursor-pointer" data-theme="theme-oled">OLED</button>
                 </div>
             </div>
 
-            <!-- Musik & Audio -->
+            <!-- Musik & Audio (Hanya di Pengaturan) -->
             <div class="space-y-2">
                 <h4 class="text-xs font-bold text-neutral-400 uppercase tracking-wider">Musik Latar Belakang</h4>
                 <div class="flex items-center justify-between">
-                    <span class="text-xs">Audio Lofi</span>
-                    <button id="sidebar-music-toggle" class="px-3 py-1 rounded-lg text-xs font-bold bg-sky-500 text-white transition cursor-pointer">Aktif/Mati</button>
+                    <span class="text-xs font-medium" id="sidebar-music-label">Status: Matikan</span>
+                    <button id="sidebar-music-toggle" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500 hover:bg-sky-600 text-white transition cursor-pointer shadow-xs">Nyalakan Musik</button>
                 </div>
                 <div class="flex items-center gap-3 pt-1">
-                    <span class="text-[10px] text-neutral-400">Vol</span>
+                    <span class="text-[10px] text-neutral-400">Volume</span>
                     <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.4" class="w-full accent-sky-500 cursor-pointer">
                 </div>
             </div>
 
             <!-- Quick Info & Tools -->
             <div class="space-y-2">
-                <h4 class="text-xs font-bold text-neutral-400 uppercase tracking-wider">Tautan Cepat</h4>
+                <h4 class="text-xs font-bold text-neutral-400 uppercase tracking-wider">Tautan Kontak</h4>
                 <div class="space-y-1.5">
-                    <a href="mailto:vanandi@proton.me" class="block p-2 rounded-xl theme-card border text-xs hover:bg-sky-500 hover:text-white transition"><i class="fa-solid fa-envelope mr-2"></i> vanandi@proton.me</a>
-                    <a href="https://wa.me/628985160888" target="_blank" class="block p-2 rounded-xl theme-card border text-xs hover:bg-emerald-500 hover:text-white transition"><i class="fa-solid fa-phone mr-2"></i> +62 898 5160 888</a>
+                    <a href="mailto:vanandi@proton.me" class="block p-2.5 rounded-xl theme-card border text-xs hover:bg-sky-500 hover:text-white transition"><i class="fa-solid fa-envelope mr-2"></i> vanandi@proton.me</a>
+                    <a href="https://wa.me/628985160888" target="_blank" class="block p-2.5 rounded-xl theme-card border text-xs hover:bg-emerald-500 hover:text-white transition"><i class="fa-solid fa-phone mr-2"></i> +62 898 5160 888</a>
                 </div>
             </div>
         </div>
 
         <div class="pt-4 border-t border-neutral-200 dark:border-neutral-800 text-center text-[10px] text-neutral-400">
-            Executive Suite v3.9 • Mohammad Danis Muria Vanandi
+            Executive Suite v4.0 • Mohammad Danis Muria Vanandi
         </div>
     </aside>
 
@@ -131,15 +131,15 @@
                     <div class="flex-1 flex justify-around text-center ml-3">
                         <div>
                             <span class="font-bold text-sm block">4</span>
-                            <span class="text-[10px] text-neutral-400">Proyek</span>
+                            <span class="text-[10px] text-neutral-500 dark:text-neutral-400">Proyek</span>
                         </div>
                         <div>
                             <span class="font-bold text-sm block">4+ Thn</span>
-                            <span class="text-[10px] text-neutral-400">Pengalaman</span>
+                            <span class="text-[10px] text-neutral-500 dark:text-neutral-400">Pengalaman</span>
                         </div>
                         <div>
                             <span class="font-bold text-sm block">AI/NLP</span>
-                            <span class="text-[10px] text-neutral-400">Fokus</span>
+                            <span class="text-[10px] text-neutral-500 dark:text-neutral-400">Fokus</span>
                         </div>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                 <!-- Bio Rapih Sesuai CV -->
                 <div class="mt-3 space-y-1">
                     <h2 class="font-bold text-xs">Mohammad Danis Muria Vanandi</h2>
-                    <p class="text-[11px] text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                    <p class="text-[11px] text-neutral-700 dark:text-neutral-300 leading-relaxed font-medium">
                         Civil Engineer (Politeknik Negeri Malang '21) 🏗️<br>
                         AI & NLP Researcher | Supervisor & Project Manager 🤖<br>
                         📍 Malang / Lumajang, Jawa Timur
@@ -162,7 +162,7 @@
                     <a href="https://wa.me/628985160888" target="_blank" class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-xl text-xs font-semibold transition text-center shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
                         <i class="fa-brands fa-whatsapp"></i> WhatsApp
                     </a>
-                    <button id="open-cv-modal" class="flex-1 theme-card border hover:opacity-80 py-2 rounded-xl text-xs font-semibold transition text-center shadow-xs cursor-pointer">
+                    <button id="open-cv-modal" class="flex-1 theme-card border hover:opacity-80 py-2 rounded-xl text-xs font-semibold transition text-center shadow-xs cursor-pointer font-medium">
                         Lihat CV
                     </button>
                 </div>
@@ -172,19 +172,19 @@
             <div class="flex gap-3 overflow-x-auto px-1 pb-1 scrollbar-none">
                 <div class="flex flex-col items-center space-y-1 flex-shrink-0 cursor-pointer highlight-item" data-topic="pengalaman">
                     <div class="w-14 h-14 rounded-full p-[2px] border border-neutral-300 flex items-center justify-center theme-card"><i class="fa-solid fa-briefcase text-sky-500 text-sm"></i></div>
-                    <span class="text-[9px] text-neutral-400 font-medium">Karir</span>
+                    <span class="text-[9px] text-neutral-600 dark:text-neutral-300 font-semibold">Karir</span>
                 </div>
                 <div class="flex flex-col items-center space-y-1 flex-shrink-0 cursor-pointer highlight-item" data-topic="keahlian">
                     <div class="w-14 h-14 rounded-full p-[2px] border border-neutral-300 flex items-center justify-center theme-card"><i class="fa-solid fa-brain text-purple-500 text-sm"></i></div>
-                    <span class="text-[9px] text-neutral-400 font-medium">Keahlian</span>
+                    <span class="text-[9px] text-neutral-600 dark:text-neutral-300 font-semibold">Keahlian</span>
                 </div>
                 <div class="flex flex-col items-center space-y-1 flex-shrink-0 cursor-pointer highlight-item" data-topic="pendidikan">
                     <div class="w-14 h-14 rounded-full p-[2px] border border-neutral-300 flex items-center justify-center theme-card"><i class="fa-solid fa-graduation-cap text-amber-500 text-sm"></i></div>
-                    <span class="text-[9px] text-neutral-400 font-medium">Studi</span>
+                    <span class="text-[9px] text-neutral-600 dark:text-neutral-300 font-semibold">Studi</span>
                 </div>
                 <div class="flex flex-col items-center space-y-1 flex-shrink-0 cursor-pointer highlight-item" data-topic="kontak">
                     <div class="w-14 h-14 rounded-full p-[2px] border border-neutral-300 flex items-center justify-center theme-card"><i class="fa-solid fa-address-book text-emerald-500 text-sm"></i></div>
-                    <span class="text-[9px] text-neutral-400 font-medium">Kontak</span>
+                    <span class="text-[9px] text-neutral-600 dark:text-neutral-300 font-semibold">Kontak</span>
                 </div>
             </div>
 
@@ -197,7 +197,7 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-xs">BPN / Pertanahan</h4>
-                            <p class="text-[10px] text-neutral-400 mt-0.5">PTSL Juridical Aspect (2021-2022)</p>
+                            <p class="text-[10px] text-neutral-500 dark:text-neutral-400 mt-0.5 font-medium">PTSL Juridical Aspect (2021-2022)</p>
                         </div>
                     </div>
                     <div class="theme-card border p-4 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-sky-500 transition space-y-2" data-caption="Finance & Logistics di Kantor Kecamatan (2023-2024). Mengelola administrasi keuangan operasional dan logistik instansi pemerintahan.">
@@ -206,7 +206,7 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-xs">Finance & Logistics</h4>
-                            <p class="text-[10px] text-neutral-400 mt-0.5">Kantor Kecamatan (2023-2024)</p>
+                            <p class="text-[10px] text-neutral-500 dark:text-neutral-400 mt-0.5 font-medium">Kantor Kecamatan (2023-2024)</p>
                         </div>
                     </div>
                     <div class="theme-card border p-4 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-sky-500 transition space-y-2" data-caption="Building Designer & Project Contractor (2024-2025). Merancang desain bangunan 2D & 3D serta pengawasan proyek konstruksi.">
@@ -215,7 +215,7 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-xs">Building Designer</h4>
-                            <p class="text-[10px] text-neutral-400 mt-0.5">Contractor & 2D/3D (2024-2025)</p>
+                            <p class="text-[10px] text-neutral-500 dark:text-neutral-400 mt-0.5 font-medium">Contractor & 2D/3D (2024-2025)</p>
                         </div>
                     </div>
                     <div class="theme-card border p-4 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-sky-500 transition space-y-2" data-caption="Independent AI & NLP Researcher (2023 - Present). Riset mandiri mendalami Large Language Models (LLM), evaluasi konten, dan anotasi data.">
@@ -224,42 +224,42 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-xs">AI & NLP Research</h4>
-                            <p class="text-[10px] text-neutral-400 mt-0.5">Independent (2023 - Sekarang)</p>
+                            <p class="text-[10px] text-neutral-500 dark:text-neutral-400 mt-0.5 font-medium">Independent (2023 - Sekarang)</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SECTION 2: AI Chat Assistant (DM) -->
+        <!-- SECTION 2: AI Chat Assistant (DM) Ala Instagram -->
         <div id="view-chat" class="hidden space-y-3 animate-smooth">
             <div class="flex items-center justify-between pb-2.5 border-b border-neutral-200 dark:border-neutral-800">
                 <div class="flex items-center space-x-2">
-                    <div class="w-7 h-7 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center">
+                    <div class="w-8 h-8 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center">
                         <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis" class="w-full h-full object-cover">
                     </div>
                     <div>
                         <h3 class="font-bold text-xs">vanandi</h3>
-                        <p class="text-[9px] text-neutral-400">Online • AI Assistant</p>
+                        <p class="text-[9px] text-neutral-500 dark:text-neutral-400 font-medium">Active • AI Executive Assistant</p>
                     </div>
                 </div>
             </div>
 
             <div id="chat-container" class="space-y-3 min-h-[50vh] max-h-[60vh] overflow-y-auto pr-1">
                 <div class="flex items-start space-x-2 animate-smooth">
-                    <div class="w-6 h-6 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center flex-shrink-0">
+                    <div class="w-6 h-6 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center flex-shrink-0 mt-0.5">
                         <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis" class="w-full h-full object-cover">
                     </div>
-                    <div class="theme-card border p-2.5 rounded-2xl rounded-tl-none max-w-[80%] text-xs leading-relaxed shadow-xs">
+                    <div class="theme-card border p-3 rounded-2xl rounded-tl-none max-w-[85%] text-xs leading-relaxed shadow-xs font-medium">
                         Halo! Selamat datang di DM asisten virtual saya. Ada yang bisa saya bantu terkait latar belakang teknik sipil atau proyek riset AI saya?
                     </div>
                 </div>
             </div>
 
             <div class="pt-2">
-                <form id="chat-form" class="theme-card border rounded-full px-3.5 py-2 flex items-center gap-2 shadow-xs">
+                <form id="chat-form" class="theme-card border rounded-full px-4 py-2.5 flex items-center gap-2 shadow-xs">
                     <input type="text" id="user-input" placeholder="Kirim pesan..." class="w-full bg-transparent text-xs placeholder-neutral-400 focus:outline-none">
-                    <button type="submit" id="send-btn" class="text-sky-500 font-bold text-xs disabled:opacity-40 transition cursor-pointer">Kirim</button>
+                    <button type="submit" id="send-btn" class="text-sky-500 font-bold text-xs disabled:opacity-40 transition cursor-pointer px-2">Kirim</button>
                 </form>
             </div>
         </div>
@@ -268,9 +268,9 @@
         <div id="view-notes" class="hidden space-y-3 animate-smooth">
             <div class="flex items-center justify-between pb-2 border-b border-neutral-200 dark:border-neutral-800">
                 <h3 class="font-bold text-xs uppercase tracking-wider text-amber-500"><i class="fa-solid fa-note-sticky mr-1"></i> Catatan Cepat</h3>
-                <button id="clear-notes" class="text-[10px] text-neutral-400 hover:text-rose-500 transition cursor-pointer">Hapus Catatan</button>
+                <button id="clear-notes" class="text-[10px] text-neutral-400 hover:text-rose-500 transition cursor-pointer font-medium">Hapus Catatan</button>
             </div>
-            <textarea id="scratchpad" placeholder="Tulis ide, catatan meeting, atau draft pekerjaan di sini..." class="w-full h-[60vh] theme-card border rounded-2xl p-3 text-xs placeholder-neutral-400 focus:outline-none focus:border-sky-500 resize-none leading-relaxed shadow-xs"></textarea>
+            <textarea id="scratchpad" placeholder="Tulis ide, catatan meeting, atau draft pekerjaan di sini..." class="w-full h-[60vh] theme-card border rounded-2xl p-3.5 text-xs placeholder-neutral-400 focus:outline-none focus:border-sky-500 resize-none leading-relaxed shadow-xs"></textarea>
             <div class="text-[9px] text-neutral-400 text-center font-mono">Tersimpan otomatis secara lokal di perangkat Anda</div>
         </div>
 
@@ -315,7 +315,7 @@
                 <h3 id="modal-title" class="font-bold text-xs">Detail Informasi</h3>
                 <button id="close-modal" class="text-neutral-400 hover:text-neutral-700 dark:hover:text-white p-1 cursor-pointer"><i class="fa-solid fa-xmark text-sm"></i></button>
             </div>
-            <div id="modal-content" class="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed space-y-2"></div>
+            <div id="modal-content" class="text-xs text-neutral-700 dark:text-neutral-300 leading-relaxed space-y-2 font-medium"></div>
             <button id="close-modal-btn" class="w-full bg-sky-500 hover:bg-sky-600 text-white py-2 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer">Tutup</button>
         </div>
     </div>
@@ -323,7 +323,7 @@
     <!-- JavaScript Logika & Fitur Lengkap -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Audio Background Auto-play handling with robust interaction loop
+            // Audio Background Handling
             const audio = document.getElementById('bg-audio');
             audio.volume = 0.4;
             let musicPlaying = false;
@@ -332,26 +332,28 @@
                 if (musicPlaying) {
                     audio.pause();
                     musicPlaying = false;
-                    document.getElementById('music-status').textContent = 'Lofi Off';
-                    document.getElementById('music-icon').classList.remove('animate-pulse');
+                    document.getElementById('sidebar-music-label').textContent = 'Status: Matikan';
+                    document.getElementById('sidebar-music-toggle').textContent = 'Nyalakan Musik';
+                    document.getElementById('sidebar-music-toggle').className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500 hover:bg-sky-600 text-white transition cursor-pointer shadow-xs';
                 } else {
                     audio.play().then(() => {
                         musicPlaying = true;
-                        document.getElementById('music-status').textContent = 'Lofi Aktif';
-                        document.getElementById('music-icon').classList.add('animate-pulse');
+                        document.getElementById('sidebar-music-label').textContent = 'Status: Aktif';
+                        document.getElementById('sidebar-music-toggle').textContent = 'Matikan Musik';
+                        document.getElementById('sidebar-music-toggle').className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-500 hover:bg-rose-600 text-white transition cursor-pointer shadow-xs';
                     }).catch(e => console.log("Autoplay waiting interaction"));
                 }
             };
 
-            document.getElementById('music-toggle-btn').addEventListener('click', toggleMusic);
             document.getElementById('sidebar-music-toggle').addEventListener('click', toggleMusic);
 
             const startAudioOnce = () => {
                 if (!musicPlaying) {
                     audio.play().then(() => {
                         musicPlaying = true;
-                        document.getElementById('music-status').textContent = 'Lofi Aktif';
-                        document.getElementById('music-icon').classList.add('animate-pulse');
+                        document.getElementById('sidebar-music-label').textContent = 'Status: Aktif';
+                        document.getElementById('sidebar-music-toggle').textContent = 'Matikan Musik';
+                        document.getElementById('sidebar-music-toggle').className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-500 hover:bg-rose-600 text-white transition cursor-pointer shadow-xs';
                     }).catch(e => {});
                 }
                 window.removeEventListener('click', startAudioOnce);
@@ -437,6 +439,8 @@
             navButtons.notes.addEventListener('click', () => switchTab('notes'));
             navButtons.tasks.addEventListener('click', () => switchTab('tasks'));
 
+            document.getElementById('open-chat-from-bio')?.addEventListener('click', () => switchTab('chat'));
+
             // Chat Assistant Logic with Gemini API Runtime
             const chatContainer = document.getElementById('chat-container');
             const chatForm = document.getElementById('chat-form');
@@ -481,7 +485,7 @@
 
             async function callGeminiAPI(promptText) {
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
-                const systemPrompt = `Anda adalah asisten virtual profesional untuk profil Instagram Mohammad Danis Muria Vanandi (vanandi). Berbicaralah selayaknya asisten pribadi Danis yang ramah, sopan, dan profesional di DM. Jangan sebutkan detail teknis sistem atau Google.
+                const systemPrompt = `Anda adalah asisten virtual profesional untuk profil Instagram Mohammad Danis Muria Vanandi (vanandi). Berbicaralah selayaknya asisten pribadi Danis yang ramah, sopan, dan profesional di DM Instagram. Jangan sebutkan detail teknis sistem atau Google.
 CV Ringkas Danis:
 - Civil Engineer Politeknik Negeri Malang (2021)
 - Pengalaman: PTSL BPN (2021-2022), Finance & Logistics Kantor Kecamatan (2023-2024), Building Designer & Contractor (2024-2025), Independent AI & NLP Researcher (2023-Present).
@@ -518,8 +522,8 @@ CV Ringkas Danis:
                 div.className = `flex items-start space-x-2 animate-smooth ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`;
 
                 div.innerHTML = `
-                    ${!isUser ? '<div class="w-6 h-6 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center flex-shrink-0"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis" class="w-full h-full object-cover"></div>' : ''}
-                    <div class="${isUser ? 'bg-sky-500 text-white rounded-tr-none' : 'theme-card border rounded-tl-none'} p-2.5 rounded-2xl max-w-[80%] text-xs leading-relaxed shadow-xs">
+                    ${!isUser ? '<div class="w-6 h-6 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center flex-shrink-0 mt-0.5"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis" class="w-full h-full object-cover"></div>' : ''}
+                    <div class="${isUser ? 'bg-sky-500 text-white rounded-tr-none' : 'theme-card border rounded-tl-none'} p-3 rounded-2xl max-w-[80%] text-xs leading-relaxed shadow-xs font-medium">
                         ${text.replace(/\n/g, '<br>')}
                     </div>
                 `;
@@ -534,10 +538,10 @@ CV Ringkas Danis:
                 div.id = id;
                 div.className = 'flex items-start space-x-2 animate-smooth';
                 div.innerHTML = `
-                    <div class="w-6 h-6 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center flex-shrink-0">
+                    <div class="w-6 h-6 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center flex-shrink-0 mt-0.5">
                         <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis" class="w-full h-full object-cover">
                     </div>
-                    <div class="theme-card border p-2.5 rounded-2xl rounded-tl-none flex items-center space-x-1 h-7 shadow-xs">
+                    <div class="theme-card border p-3 rounded-2xl rounded-tl-none flex items-center space-x-1 h-7 shadow-xs">
                         <div class="w-1.5 h-1.5 rounded-full bg-neutral-400 animate-pulse"></div>
                         <div class="w-1.5 h-1.5 rounded-full bg-neutral-400 animate-pulse" style="animation-delay: 0.2s"></div>
                         <div class="w-1.5 h-1.5 rounded-full bg-neutral-400 animate-pulse" style="animation-delay: 0.4s"></div>
@@ -605,9 +609,9 @@ CV Ringkas Danis:
                     div.innerHTML = `
                         <div class="flex items-center space-x-2.5">
                             <input type="checkbox" ${t.completed ? 'checked' : ''} data-index="${idx}" class="task-checkbox accent-sky-500 w-4 h-4 rounded cursor-pointer">
-                            <span class="${t.completed ? 'line-through text-neutral-400' : ''}">${t.text}</span>
+                            <span class="${t.completed ? 'line-through text-neutral-400' : 'font-medium'}">${t.text}</span>
                         </div>
-                        <button data-index="${idx}" class="delete-task text-neutral-400 hover:text-rose-500 transition cursor-pointer"><i class="fa-solid fa-trash-can"></i></button>
+                        <button data-index="${idx}" class="delete-task text-neutral-400 hover:text-rose-500 transition cursor-pointer p-1"><i class="fa-solid fa-trash-can"></i></button>
                     `;
                     taskList.appendChild(div);
                 });

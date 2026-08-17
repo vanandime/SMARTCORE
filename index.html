@@ -1,984 +1,444 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="id">
+<head>grhrh
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mohammad Danis Muria Vanandi • Executive Suite Pro</title>
-    <!-- Favicon & PWA Icons matching profile -->
-    <link rel="icon" type="image/jpeg" href="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601">
-    <link rel="apple-touch-icon" href="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601">
-    <meta name="theme-color" content="#ffffff">
-    <!-- Tailwind CSS CDN -->
+    <title>Hybrid AI Super App</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts (Plus Jakarta Sans) -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Custom CSS -->
     <style>
-        ::-webkit-scrollbar { width: 3px; height: 3px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #000000; color: #ffffff; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(150,150,150,0.3); border-radius: 9999px; }
-        
-        @keyframes smoothFade {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-smooth { animation: smoothFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .ig-gradient { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-        
-        /* Clean Theme */
-        body.theme-clean { background-color: #fafafa; color: #0f172a; }
-        body.theme-clean .theme-card { background-color: #ffffff; border-color: #dbdbdb; color: #262626; }
-        body.theme-clean header, body.theme-clean nav { background-color: rgba(255, 255, 255, 0.95) !important; border-color: #dbdbdb !important; color: #262626 !important; }
-        body.theme-clean input, body.theme-clean textarea, body.theme-clean select { background-color: #efefef !important; color: #262626 !important; border-color: #dbdbdb !important; }
-        body.theme-clean .bio-text { color: #262626 !important; }
-
-        /* Midnight Theme */
-        body.theme-midnight { background-color: #0b0f19; color: #f3f4f6; }
-        body.theme-midnight .theme-card { background-color: #121622; border-color: #1f2937; color: #f3f4f6; }
-        body.theme-midnight header, body.theme-midnight nav { background-color: rgba(11, 15, 25, 0.95) !important; border-color: #1f2937 !important; color: #f3f4f6 !important; }
-        body.theme-midnight input, body.theme-midnight textarea, body.theme-midnight select { background-color: #1a2234 !important; color: #f3f4f6 !important; border-color: #2d3748 !important; }
-        body.theme-midnight .bio-text { color: #d1d5db !important; }
-
-        /* OLED Black Theme */
-        body.theme-oled { background-color: #000000; color: #ffffff; }
-        body.theme-oled .theme-card { background-color: #0a0a0a; border-color: #262626; color: #ffffff; }
-        body.theme-oled header, body.theme-oled nav { background-color: rgba(0, 0, 0, 0.95) !important; border-color: #262626 !important; color: #ffffff !important; }
-        body.theme-oled input, body.theme-oled textarea, body.theme-oled select { background-color: #141414 !important; color: #ffffff !important; border-color: #262626 !important; }
-        body.theme-oled .bio-text { color: #e5e7eb !important; }
-
-        #settings-sidebar {
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            pointer-events: auto;
-        }
+        ::-webkit-scrollbar-thumb { background: #333333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555555; }
+        .glass-effect { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); }
+        .typing-indicator span { animation: blink 1.4s infinite both; height: 6px; width: 6px; background: #a1a1aa; border-radius: 50%; display: inline-block; margin: 0 1px; }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes blink { 0% { opacity: .2; } 20% { opacity: 1; } 100% { opacity: .2; } }
+        .view-section { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
+
+    <!-- Firebase SDK -->
+    <script type="importmap">
+      {
+        "imports": {
+          "firebase/app": "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js",
+          "firebase/auth": "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"
+        }
+      }
+    </script>
 </head>
-<body class="theme-clean font-['Plus_Jakarta_Sans',sans-serif] min-h-screen flex flex-col selection:bg-pink-500 selection:text-white transition-colors duration-300">
+<body class="h-screen w-screen overflow-hidden flex flex-col relative bg-black text-white">
 
-    <!-- Background Audio Ambient Stable Stream -->
-    <audio id="bg-audio" loop preload="auto">
-        <source src="https://stream.zeno.fm/f3wvbbqmdg8uv" type="audio/mp3">
-    </audio>
-
-    <!-- Top Instagram Header -->
-    <header class="h-12 border-b backdrop-blur-md flex items-center justify-between px-4 sticky top-0 z-30 flex-shrink-0">
-        <div class="flex items-center space-x-1.5 cursor-pointer">
-            <span class="font-bold text-sm tracking-tight">vanandii</span>
-            <i class="fa-solid fa-circle-check text-sky-500 text-[11px]"></i>
+    <!-- Header -->
+    <header class="h-16 flex items-center justify-between px-4 glass-effect z-20 border-b border-gray-800">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-black">
+                <i class="ph ph-sparkle text-lg"></i>
+            </div>
+            <h1 class="font-semibold text-lg tracking-tight text-white">AI Assistant</h1>
         </div>
-        <div class="flex items-center space-x-3.5">
-            <button id="open-stats-btn" class="text-base hover:text-sky-500 transition cursor-pointer" title="Quick Analytics">
-                <i class="fa-solid fa-chart-line"></i>
-            </button>
-            <button id="open-sidebar-btn" class="text-base hover:text-sky-500 transition cursor-pointer" aria-label="Settings">
-                <i class="fa-solid fa-bars"></i>
+        <div class="flex items-center gap-2">
+            <button id="btn-about" class="text-sm font-medium text-gray-300 hover:text-white transition px-3 py-1.5 rounded-full hover:bg-gray-800"><i class="ph ph-info text-xl"></i></button>
+            <button id="btn-login" class="flex items-center gap-2 bg-white text-black px-4 py-1.5 rounded-full text-sm font-medium hover:bg-gray-200 transition shadow-sm">
+                <i class="ph ph-google-logo"></i> <span id="login-text">Login</span>
             </button>
         </div>
     </header>
 
-    <!-- Sidebar Settings Panel -->
-    <div id="sidebar-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-xs z-40 hidden transition-opacity"></div>
-    <aside id="settings-sidebar" class="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] theme-card border-l z-50 transform translate-x-full p-4 flex flex-col justify-between shadow-2xl overflow-y-auto">
-        <div class="space-y-4">
-            <div class="flex items-center justify-between pb-3 border-b border-neutral-300 dark:border-neutral-800">
-                <h3 class="font-bold text-xs flex items-center gap-2"><i class="fa-solid fa-sliders text-sky-500"></i> System Settings</h3>
-                <button id="close-sidebar-btn" class="hover:text-sky-500 text-sm p-1 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            
-            <!-- Security & Status -->
-            <div class="theme-card border p-3 rounded-xl space-y-1 shadow-xs">
-                <h4 class="text-[11px] font-bold uppercase tracking-wider text-emerald-500 flex items-center gap-1.5"><i class="fa-solid fa-shield-halved"></i> Max Security Encrypted</h4>
-                <p class="text-[10px] opacity-80">Local storage obfuscated & anti-tamper secured.</p>
-            </div>
-
-            <!-- Appearance Theme -->
-            <div class="space-y-1.5">
-                <h4 class="text-[11px] font-bold uppercase tracking-wider opacity-70">Theme Mode</h4>
-                <div class="grid grid-cols-3 gap-1.5">
-                    <button class="theme-btn py-1.5 px-2 rounded-lg border text-[11px] font-semibold transition bg-white text-slate-900 border-slate-300 cursor-pointer" data-theme="theme-clean">Clean</button>
-                    <button class="theme-btn py-1.5 px-2 rounded-lg border text-[11px] font-semibold transition bg-gray-900 text-gray-200 border-gray-700 cursor-pointer" data-theme="theme-midnight">Midnight</button>
-                    <button class="theme-btn py-1.5 px-2 rounded-lg border text-[11px] font-semibold transition bg-black text-white border-neutral-800 cursor-pointer" data-theme="theme-oled">OLED</button>
-                </div>
-            </div>
-
-            <!-- Background Music Controls -->
-            <div class="space-y-1.5">
-                <h4 class="text-[11px] font-bold uppercase tracking-wider opacity-70">Background Atmosphere</h4>
-                <div class="flex items-center justify-between bg-neutral-100 dark:bg-neutral-900 p-2 rounded-xl border">
-                    <span class="text-[11px] font-semibold" id="sidebar-music-label">Status: Muted</span>
-                    <button id="sidebar-music-toggle" class="px-3 py-1 rounded-lg text-xs font-bold bg-sky-500 hover:bg-sky-600 text-white transition cursor-pointer">Play</button>
-                </div>
-                <div class="flex items-center gap-2 pt-0.5">
-                    <span class="text-[10px] opacity-70">Vol</span>
-                    <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.3" class="w-full accent-sky-500 cursor-pointer">
-                </div>
-            </div>
-
-            <!-- Data Recovery & Backup -->
-            <div class="space-y-1.5">
-                <h4 class="text-[11px] font-bold uppercase tracking-wider opacity-70">Backup & Restore</h4>
-                <div class="grid grid-cols-2 gap-2">
-                    <button id="export-data-btn" class="theme-card border py-2 px-2 rounded-xl text-[11px] font-bold hover:bg-sky-500 hover:text-white transition cursor-pointer flex items-center justify-center gap-1"><i class="fa-solid fa-download"></i> Export</button>
-                    <label class="theme-card border py-2 px-2 rounded-xl text-[11px] font-bold hover:bg-emerald-500 hover:text-white transition cursor-pointer text-center flex items-center justify-center gap-1">
-                        <i class="fa-solid fa-upload"></i> Import
-                        <input type="file" id="import-file-input" accept=".json" class="hidden">
-                    </label>
-                </div>
-            </div>
-
-            <!-- Direct Contacts -->
-            <div class="space-y-1.5">
-                <h4 class="text-[11px] font-bold uppercase tracking-wider opacity-70">Contacts</h4>
-                <div class="space-y-1">
-                    <a href="mailto:vanandi@proton.me" class="block p-2 rounded-xl theme-card border text-[11px] hover:bg-sky-500 hover:text-white transition font-medium"><i class="fa-solid fa-envelope mr-1.5"></i> vanandi@proton.me</a>
-                    <a href="https://wa.me/628985160888" target="_blank" class="block p-2 rounded-xl theme-card border text-[11px] hover:bg-emerald-500 hover:text-white transition font-medium"><i class="fa-solid fa-phone mr-1.5"></i> +62 898 5160 888</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="pt-3 border-t border-neutral-300 dark:border-neutral-800 text-center text-[10px] opacity-70">
-            Executive Suite Pro • vanandii
-        </div>
-    </aside>
-
-    <!-- Main Content Container -->
-    <main class="flex-1 max-w-md w-full mx-auto px-3 py-3 mb-20">
-        
-        <!-- SECTION 1: Profile & Professional Feed -->
-        <div id="view-profile" class="space-y-3 animate-smooth">
-            <div class="px-1">
-                <div class="flex items-center justify-between">
-                    <div class="p-[3px] ig-gradient rounded-full flex-shrink-0">
-                        <div class="w-20 h-20 rounded-full bg-neutral-200 overflow-hidden border-2 border-white flex items-center justify-center">
-                            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Mohammad Danis Muria Vanandi" class="w-full h-full object-cover">
-                        </div>
-                    </div>
-                    <!-- Professional Info Stats instead of followers -->
-                    <div class="flex-1 flex justify-around text-center ml-2">
-                        <div class="theme-card border px-2 py-1.5 rounded-xl shadow-xs flex-1 mx-1">
-                            <span class="font-bold text-xs block text-sky-500">4</span>
-                            <span class="text-[9px] font-semibold opacity-70">Projects</span>
-                        </div>
-                        <div class="theme-card border px-2 py-1.5 rounded-xl shadow-xs flex-1 mx-1">
-                            <span class="font-bold text-xs block text-emerald-500">4+ Yrs</span>
-                            <span class="text-[9px] font-semibold opacity-70">Experience</span>
-                        </div>
-                        <div class="theme-card border px-2 py-1.5 rounded-xl shadow-xs flex-1 mx-1">
-                            <span class="font-bold text-xs block text-purple-500">AI/NLP</span>
-                            <span class="text-[9px] font-semibold opacity-70">Focus</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CV Profile Bio -->
-                <div class="mt-2.5 space-y-0.5">
-                    <h2 class="font-bold text-xs flex items-center gap-1">Mohammad Danis Muria Vanandi <i class="fa-solid fa-circle-check text-sky-500 text-[10px]"></i></h2>
-                    <p class="text-[11px] bio-text leading-relaxed font-medium">
-                        Civil Engineer (Politeknik Negeri Malang '21) 🏗️<br>
-                        AI & NLP Researcher | Supervisor & Project Manager 🤖<br>
-                        📍 Malang / Lumajang, East Java
-                    </p>
-                    <a href="https://vanandi.me" target="_blank" class="text-[11px] text-sky-600 dark:text-sky-400 font-semibold inline-block"><i class="fa-solid fa-link mr-1"></i>vanandi.me</a>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="flex gap-1.5 mt-3">
-                    <a href="mailto:vanandi@proton.me" class="flex-1 bg-sky-500 hover:bg-sky-600 text-white py-1.5 rounded-xl text-xs font-semibold transition text-center shadow-xs flex items-center justify-center gap-1 cursor-pointer">
-                        <i class="fa-solid fa-envelope"></i> Email
-                    </a>
-                    <a href="https://wa.me/628985160888" target="_blank" class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-1.5 rounded-xl text-xs font-semibold transition text-center shadow-xs flex items-center justify-center gap-1 cursor-pointer">
-                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
-                    </a>
-                    <button id="open-cv-modal" class="flex-1 theme-card border hover:opacity-80 py-1.5 rounded-xl text-xs font-bold transition text-center shadow-xs cursor-pointer">
-                        View CV
-                    </button>
-                </div>
-            </div>
-
-            <!-- Stories / Highlights -->
-            <div class="flex gap-3 overflow-x-auto px-1 pb-1 scrollbar-none">
-                <div class="flex flex-col items-center space-y-1 flex-shrink-0 cursor-pointer highlight-item" data-topic="experience">
-                    <div class="w-14 h-14 rounded-full p-[2px] border border-neutral-300 flex items-center justify-center theme-card"><i class="fa-solid fa-briefcase text-sky-500 text-sm"></i></div>
-                    <span class="text-[9px] font-bold opacity-85">Career</span>
-                </div>
-                <div class="flex flex-col items-center space-y-1 flex-shrink-0 cursor-pointer highlight-item" data-topic="skills">
-                    <div class="w-14 h-14 rounded-full p-[2px] border border-neutral-300 flex items-center justify-center theme-card"><i class="fa-solid fa-brain text-purple-500 text-sm"></i></div>
-                    <span class="text-[9px] font-bold opacity-85">Skills</span>
-                </div>
-                <div class="flex flex-col items-center space-y-1 flex-shrink-0 cursor-pointer highlight-item" data-topic="education">
-                    <div class="w-14 h-14 rounded-full p-[2px] border border-neutral-300 flex items-center justify-center theme-card"><i class="fa-solid fa-graduation-cap text-amber-500 text-sm"></i></div>
-                    <span class="text-[9px] font-bold opacity-85">Study</span>
-                </div>
-                <div class="flex flex-col items-center space-y-1 flex-shrink-0 cursor-pointer highlight-item" data-topic="contact">
-                    <div class="w-14 h-14 rounded-full p-[2px] border border-neutral-300 flex items-center justify-center theme-card"><i class="fa-solid fa-address-book text-emerald-500 text-sm"></i></div>
-                    <span class="text-[9px] font-bold opacity-85">Contact</span>
-                </div>
-            </div>
-
-            <!-- Profile Interactive Sub-Panels (Posts vs Tagged) -->
-            <div class="border-t border-neutral-300 dark:border-neutral-800 flex justify-around text-center pt-2">
-                <button id="subtab-posts" class="flex-1 pb-2 border-b-2 border-sky-500 font-bold text-xs transition cursor-pointer"><i class="fa-solid fa-table-cells mr-1"></i> Posts</button>
-                <button id="subtab-tagged" class="flex-1 pb-2 opacity-60 hover:opacity-100 font-semibold text-xs transition cursor-pointer"><i class="fa-solid fa-user-tag mr-1"></i> Tagged</button>
-            </div>
-
-            <!-- Sub-Panel 1: Posts (Portfolio / Career Projects) -->
-            <div id="subview-posts" class="grid grid-cols-2 gap-2.5 animate-smooth">
-                <div class="theme-card border p-3.5 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-sky-500 transition space-y-1.5" data-caption="PTSL Juridical Aspect at National Land Agency / BPN (2021-2022). Handled legal land certification administration with 'Good' performance rating.">
-                    <div class="w-9 h-9 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500 text-base">
-                        <i class="fa-solid fa-landmark"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-xs">Land Agency (BPN)</h4>
-                        <p class="text-[10px] opacity-70 font-semibold">PTSL Juridical (2021-2022)</p>
-                    </div>
-                </div>
-                <div class="theme-card border p-3.5 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-sky-500 transition space-y-1.5" data-caption="Finance & Logistics at Sub-District Office (2023-2024). Managed operational financial administration and institutional logistics.">
-                    <div class="w-9 h-9 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 text-base">
-                        <i class="fa-solid fa-coins"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-xs">Finance & Logistics</h4>
-                        <p class="text-[10px] opacity-70 font-semibold">Sub-District Office (2023-2024)</p>
-                    </div>
-                </div>
-                <div class="theme-card border p-3.5 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-sky-500 transition space-y-1.5" data-caption="Building Designer & Project Contractor (2024-2025). Designed 2D & 3D architectural structures and supervised civil construction projects.">
-                    <div class="w-9 h-9 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-500 text-base">
-                        <i class="fa-solid fa-building"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-xs">Building Designer</h4>
-                        <p class="text-[10px] opacity-70 font-semibold">Contractor & 2D/3D (2024-2025)</p>
-                    </div>
-                </div>
-                <div class="theme-card border p-3.5 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-sky-500 transition space-y-1.5" data-caption="Independent AI & NLP Researcher (2023 - Present). Conducting independent research on Large Language Models (LLM), content evaluation, and data annotation.">
-                    <div class="w-9 h-9 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-500 text-base">
-                        <i class="fa-solid fa-brain"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-xs">AI & NLP Research</h4>
-                        <p class="text-[10px] opacity-70 font-semibold">Independent (2023 - Present)</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sub-Panel 2: Tagged (Certifications & Institutional Collaborations) -->
-            <div id="subview-tagged" class="grid grid-cols-2 gap-2.5 hidden animate-smooth">
-                <div class="theme-card border p-3.5 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-purple-500 transition space-y-1.5" data-caption="Certified Civil Engineering Professional Accreditation - State Polytechnic of Malang (2021).">
-                    <div class="w-9 h-9 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-500 text-base">
-                        <i class="fa-solid fa-certificate"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-xs">Civil Engineering Degree</h4>
-                        <p class="text-[10px] opacity-70 font-semibold">Politeknik Negeri Malang</p>
-                    </div>
-                </div>
-                <div class="theme-card border p-3.5 rounded-2xl relative group cursor-pointer feed-post shadow-xs hover:border-purple-500 transition space-y-1.5" data-caption="Advanced LLM Annotation & NLP Evaluation Certification (2023).">
-                    <div class="w-9 h-9 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-500 text-base">
-                        <i class="fa-solid fa-robot"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-xs">AI & NLP Evaluation</h4>
-                        <p class="text-[10px] opacity-70 font-semibold">Independent Research</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECTION 2: AI Chat Assistant (DM) -->
-        <div id="view-chat" class="hidden space-y-3 animate-smooth">
-            <div class="flex items-center justify-between pb-2.5 border-b border-neutral-300 dark:border-neutral-800">
-                <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center">
-                        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis" class="w-full h-full object-cover">
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-xs flex items-center gap-1">vanandii <i class="fa-solid fa-circle-check text-sky-500 text-[9px]"></i></h3>
-                        <p class="text-[9px] opacity-70 font-semibold">Active • Executive Assistant</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="chat-container" class="space-y-3 min-h-[50vh] max-h-[58vh] overflow-y-auto pr-1 flex flex-col-reverse"></div>
-
-            <div class="pt-2">
-                <form id="chat-form" class="theme-card border rounded-full px-4 py-2 flex items-center gap-2 shadow-xs">
-                    <input type="text" id="user-input" placeholder="Message..." class="w-full bg-transparent text-xs placeholder-neutral-400 focus:outline-none font-medium">
-                    <button type="submit" id="send-btn" class="text-sky-500 font-bold text-xs disabled:opacity-40 transition cursor-pointer px-2">Send</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- SECTION 3: Productivity Notes / Scratchpad -->
-        <div id="view-notes" class="hidden space-y-3 animate-smooth">
-            <div class="flex items-center justify-between pb-2 border-b border-neutral-300 dark:border-neutral-800">
-                <h3 class="font-bold text-xs uppercase tracking-wider text-amber-500"><i class="fa-solid fa-note-sticky mr-1"></i> Quick Notes</h3>
-                <button id="clear-notes" class="text-[10px] opacity-70 hover:text-rose-500 transition cursor-pointer font-bold">Clear Notes</button>
-            </div>
-            <textarea id="scratchpad" placeholder="Write ideas, meeting notes, or job drafts here..." class="w-full h-[60vh] theme-card border rounded-2xl p-3.5 text-xs placeholder-neutral-400 focus:outline-none focus:border-sky-500 resize-none leading-relaxed shadow-xs font-medium"></textarea>
-            <div class="text-[9px] opacity-60 text-center font-mono">Auto-saved securely on your device</div>
-        </div>
-
-        <!-- SECTION 4: Task Manager -->
-        <div id="view-tasks" class="hidden space-y-3 animate-smooth">
-            <div class="flex items-center justify-between pb-2 border-b border-neutral-300 dark:border-neutral-800">
-                <h3 class="font-bold text-xs uppercase tracking-wider text-emerald-500"><i class="fa-solid fa-list-check mr-1"></i> Task Manager</h3>
-                <span id="task-counter" class="text-[10px] opacity-70 font-mono font-bold">0 Completed</span>
-            </div>
-            <div class="flex gap-2">
-                <input type="text" id="task-input" placeholder="Add new task..." class="flex-1 theme-card border rounded-xl px-3 py-2 text-xs placeholder-neutral-400 focus:outline-none focus:border-sky-500 font-medium">
-                <button id="add-task-btn" class="bg-sky-500 hover:bg-sky-600 text-white px-3 py-2 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer">Add</button>
-            </div>
-            <div id="task-list" class="space-y-2 max-h-[55vh] overflow-y-auto pr-1"></div>
-        </div>
-
-        <!-- SECTION 5: Financial Manager (With Payment Method Support) -->
-        <div id="view-finance" class="hidden space-y-3 animate-smooth">
-            <div class="flex items-center justify-between pb-2 border-b border-neutral-300 dark:border-neutral-800">
-                <h3 class="font-bold text-xs uppercase tracking-wider text-purple-500"><i class="fa-solid fa-wallet mr-1"></i> Financial Manager</h3>
-                <span id="finance-total" class="text-xs font-mono font-bold">Balance: $0</span>
-            </div>
-
-            <div class="grid grid-cols-2 gap-2">
-                <div class="theme-card border p-3 rounded-2xl shadow-xs">
-                    <span class="text-[10px] opacity-70 block font-bold uppercase">Total Income</span>
-                    <span id="income-total" class="text-xs font-bold text-emerald-500">$0</span>
-                </div>
-                <div class="theme-card border p-3 rounded-2xl shadow-xs">
-                    <span class="text-[10px] opacity-70 block font-bold uppercase">Total Expense</span>
-                    <span id="expense-total" class="text-xs font-bold text-rose-500">$0</span>
-                </div>
-            </div>
-
-            <form id="finance-form" class="theme-card border p-3 rounded-2xl space-y-2 shadow-xs">
-                <div class="grid grid-cols-2 gap-2">
-                    <input type="text" id="fin-desc" placeholder="Title..." required class="border rounded-xl px-2.5 py-1.5 text-xs focus:outline-none font-medium">
-                    <input type="number" id="fin-amount" placeholder="Amount..." required class="border rounded-xl px-2.5 py-1.5 text-xs focus:outline-none font-medium">
-                </div>
-                <div class="grid grid-cols-2 gap-2">
-                    <select id="fin-type" class="border rounded-xl px-2.5 py-1.5 text-xs focus:outline-none font-medium cursor-pointer">
-                        <option value="income">Income (+)</option>
-                        <option value="expense">Expense (-)</option>
-                    </select>
-                    <select id="fin-method" class="border rounded-xl px-2.5 py-1.5 text-xs focus:outline-none font-medium cursor-pointer">
-                        <option value="Cash / Tunai">Cash / Tunai</option>
-                        <option value="Bank Transfer">Bank Transfer</option>
-                        <option value="E-Wallet">E-Wallet</option>
-                        <option value="QRIS">QRIS</option>
-                        <option value="Credit Card">Credit Card</option>
-                    </select>
-                </div>
-                <button type="submit" class="w-full bg-sky-500 hover:bg-sky-600 text-white py-2 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer">Add Transaction</button>
-            </form>
-
-            <div id="finance-list" class="space-y-2 max-h-[35vh] overflow-y-auto pr-1"></div>
-        </div>
-    </main>
-
-    <!-- FIXED BOTTOM INSTAGRAM NAVIGATION BAR -->
-    <nav class="h-14 border-t backdrop-blur-md flex items-center justify-around px-1 z-30 fixed bottom-0 inset-x-0" id="bottom-nav">
-        <button id="tab-profile" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 text-sky-500 transition cursor-pointer" data-tab="profile">
-            <i class="fa-solid fa-table-cells text-base"></i>
-            <span class="text-[8px] mt-0.5 font-bold">Profile</span>
+    <!-- Tab Switcher -->
+    <div class="flex border-b border-gray-800 glass-effect z-20">
+        <button class="tab-btn flex-1 py-3 text-sm font-medium text-white border-b-2 border-white transition flex justify-center items-center gap-2" data-target="chat">
+            <i class="ph ph-chat-teardrop"></i> Chat
         </button>
-        <button id="tab-chat" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 opacity-60 hover:text-sky-500 transition relative cursor-pointer" data-tab="chat">
-            <i class="fa-regular fa-paper-plane text-base"></i>
-            <span class="text-[8px] mt-0.5 font-bold">DM AI</span>
+        <button class="tab-btn flex-1 py-3 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition flex justify-center items-center gap-2" data-target="tasks">
+            <i class="ph ph-check-square"></i> Tasks
         </button>
-        <button id="tab-notes" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 opacity-60 hover:text-sky-500 transition cursor-pointer" data-tab="notes">
-            <i class="fa-solid fa-note-sticky text-base"></i>
-            <span class="text-[8px] mt-0.5 font-bold">Notes</span>
+        <button class="tab-btn flex-1 py-3 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:text-gray-300 transition flex justify-center items-center gap-2" data-target="history">
+            <i class="ph ph-clock-counter-clockwise"></i> History
         </button>
-        <button id="tab-tasks" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 opacity-60 hover:text-sky-500 transition cursor-pointer" data-tab="tasks">
-            <i class="fa-solid fa-list-check text-base"></i>
-            <span class="text-[8px] mt-0.5 font-bold">Tasks</span>
-        </button>
-        <button id="tab-finance" class="nav-btn flex flex-col items-center justify-center flex-1 py-1 opacity-60 hover:text-sky-500 transition cursor-pointer" data-tab="finance">
-            <i class="fa-solid fa-wallet text-base"></i>
-            <span class="text-[8px] mt-0.5 font-bold">Finance</span>
-        </button>
-    </nav>
+    </div>
 
-    <!-- Modal CV & Detail / Quick Stats -->
-    <div id="modal-container" class="fixed inset-0 bg-black/60 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
-        <div class="theme-card border rounded-3xl max-w-md w-full p-5 shadow-2xl space-y-3 max-h-[85vh] overflow-y-auto animate-smooth">
-            <div class="flex items-center justify-between border-b border-neutral-300 dark:border-neutral-800 pb-2.5">
-                <h3 id="modal-title" class="font-bold text-xs">Information Details</h3>
-                <button id="close-modal" class="opacity-70 hover:opacity-100 p-1 cursor-pointer"><i class="fa-solid fa-xmark text-sm"></i></button>
+    <!-- Main Views -->
+    <div class="flex-1 overflow-hidden relative">
+        <!-- 1. Chat Window -->
+        <main id="view-chat" class="view-section h-full overflow-y-auto p-4 md:p-8 flex flex-col gap-6 pb-40">
+            <div id="empty-state" class="m-auto flex flex-col items-center justify-center opacity-70">
+                <div class="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center mb-4 shadow-inner border border-gray-800">
+                    <i class="ph ph-magic-wand text-3xl text-gray-400"></i>
+                </div>
+                <h2 class="text-xl font-medium text-gray-200">Siap membantu Anda</h2>
+                <p class="text-sm text-gray-500 mt-2 text-center max-w-xs">Ketik pesan atau biarkan AI mengekstrak tugas secara otomatis.</p>
             </div>
-            <div id="modal-content" class="text-xs leading-relaxed space-y-2 font-semibold opacity-90"></div>
-            <button id="close-modal-btn" class="w-full bg-sky-500 hover:bg-sky-600 text-white py-2 rounded-xl text-xs font-bold transition shadow-xs cursor-pointer">Close</button>
+        </main>
+
+        <!-- 2. Tasks Window -->
+        <main id="view-tasks" class="view-section h-full overflow-y-auto p-4 md:p-8 hidden bg-[#0a0a0a]">
+            <div class="max-w-3xl mx-auto w-full">
+                <div class="flex justify-between items-end mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white">Smart Task</h2>
+                        <p class="text-sm text-gray-500">Tugas otomatis dari AI & input manual.</p>
+                    </div>
+                    <span class="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded">Auto-sync</span>
+                </div>
+                <ul id="todo-list" class="space-y-3">
+                    <li class="text-gray-500 text-center py-10 text-sm border border-dashed border-gray-800 rounded-xl">Belum ada tugas.</li>
+                </ul>
+            </div>
+        </main>
+
+        <!-- 3. History Window -->
+        <main id="view-history" class="view-section h-full overflow-y-auto p-4 md:p-8 hidden bg-[#0a0a0a]">
+            <div class="max-w-3xl mx-auto w-full">
+                <h2 class="text-2xl font-bold text-white mb-2">Riwayat Obrolan</h2>
+                <p class="text-sm text-gray-500 mb-6">Percakapan Anda sebelumnya.</p>
+                <ul id="chat-history" class="space-y-2">
+                    <li class="text-gray-500 text-center py-10 text-sm border border-dashed border-gray-800 rounded-xl">Belum ada riwayat.</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <!-- Bottom Input Dock -->
+    <div id="input-dock" class="fixed bottom-0 w-full bg-gradient-to-t from-black via-black to-transparent pt-6 pb-4 px-4 sm:px-8 z-10 transition-transform duration-300">
+        <div class="max-w-3xl mx-auto flex flex-col gap-2">
+            <div class="flex gap-2 overflow-x-auto pb-1 hide-scrollbar" id="model-selectors">
+                <button data-model="fast" class="model-btn active px-4 py-1.5 rounded-full border border-gray-700 text-xs font-medium bg-white text-black whitespace-nowrap transition">⚡ Cloudflare Workers AI</button>
+            </div>
+            <div class="flex items-end gap-2 bg-[#262626] rounded-3xl p-2 border border-gray-700 shadow-sm focus-within:border-gray-500 focus-within:bg-[#363636] transition-all">
+                <button class="p-2.5 text-gray-400 hover:text-white rounded-full hover:bg-gray-700 transition"><i class="ph ph-paperclip text-xl"></i></button>
+                <textarea id="chat-input" rows="1" class="w-full bg-transparent text-white border-none outline-none resize-none py-3 px-2 max-h-32 text-sm" placeholder="Tanyakan atau tugaskan sesuatu..."></textarea>
+                <button id="btn-mic" class="p-2.5 text-gray-400 hover:text-white rounded-full hover:bg-gray-700 transition"><i class="ph ph-microphone text-xl"></i></button>
+                <button id="btn-send" class="p-2.5 bg-white text-black rounded-full hover:bg-gray-200 transition disabled:opacity-50 disabled:cursor-not-allowed"><i class="ph ph-arrow-up text-xl"></i></button>
+            </div>
         </div>
     </div>
 
-    <!-- JavaScript Application Logic -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Audio Background Handling with Stable Stream
-            const audio = document.getElementById('bg-audio');
-            audio.volume = 0.3;
-            let musicPlaying = false;
+    <!-- About Developer Modal -->
+    <div id="modal-about" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center backdrop-blur-md opacity-0 transition-opacity">
+        <div class="bg-[#121212] rounded-3xl p-6 md:p-8 max-w-md w-full mx-4 shadow-2xl transform scale-95 transition-transform border border-gray-800">
+            <div class="flex justify-between items-start mb-6">
+                <div class="flex gap-4 items-center">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-black font-bold text-2xl shadow-lg">
+                        DV
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-white">Danis Vanandi</h2>
+                        <p class="text-sm text-gray-400">Civil Engineer & AI Developer</p>
+                    </div>
+                </div>
+                <button id="btn-close-modal" class="p-1 hover:bg-gray-800 text-gray-400 hover:text-white rounded-full transition"><i class="ph ph-x text-xl"></i></button>
+            </div>
+            <div class="space-y-4 text-sm text-gray-300">
+                <p><strong>Profil:</strong> Profesional berorientasi hasil dengan fondasi Teknik Sipil dan pengalaman 4+ tahun dalam administrasi pertanahan, logistik keuangan, serta proyek desain bangunan. Saat ini bertransisi ke ranah AI dan NLP.</p>
+                <div class="pt-4 border-t border-gray-800">
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center"><i class="ph ph-envelope-simple mr-2 text-white"></i> vanandi@proton.me</li>
+                        <li class="flex items-center"><i class="ph ph-phone mr-2 text-white"></i> +62 898 5160 888</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            const toggleMusic = () => {
-                if (musicPlaying) {
-                    audio.pause();
-                    musicPlaying = false;
-                    document.getElementById('sidebar-music-label').textContent = 'Status: Muted';
-                    document.getElementById('sidebar-music-toggle').textContent = 'Play';
-                    document.getElementById('sidebar-music-toggle').className = 'px-3 py-1 rounded-lg text-xs font-bold bg-sky-500 hover:bg-sky-600 text-white transition cursor-pointer';
-                } else {
-                    audio.play().then(() => {
-                        musicPlaying = true;
-                        document.getElementById('sidebar-music-label').textContent = 'Status: Playing';
-                        document.getElementById('sidebar-music-toggle').textContent = 'Stop';
-                        document.getElementById('sidebar-music-toggle').className = 'px-3 py-1 rounded-lg text-xs font-bold bg-rose-500 hover:bg-rose-600 text-white transition cursor-pointer';
-                    }).catch(e => console.log("Autoplay blocked"));
-                }
-            };
+    <!-- Application Script -->
+    <script type="module">
+        import { initializeApp } from "firebase/app";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "firebase/auth";
 
-            document.getElementById('sidebar-music-toggle').addEventListener('click', toggleMusic);
+        const CONFIG = {
+            firebase: { apiKey: "API_KEY", authDomain: "app.firebaseapp.com", projectId: "app" },
+            githubToken: "PAT_GITHUB_ANDA", 
+            gistId: "ID_GIST_ANDA",
+            workerUrl: "https://ai-backend.bankorut.workers.dev"
+        };
 
-            const startAudioOnce = () => {
-                if (!musicPlaying) {
-                    audio.play().then(() => {
-                        musicPlaying = true;
-                        document.getElementById('sidebar-music-label').textContent = 'Status: Playing';
-                        document.getElementById('sidebar-music-toggle').textContent = 'Stop';
-                        document.getElementById('sidebar-music-toggle').className = 'px-3 py-1 rounded-lg text-xs font-bold bg-rose-500 hover:bg-rose-600 text-white transition cursor-pointer';
-                    }).catch(e => {});
-                }
-                window.removeEventListener('click', startAudioOnce);
-                window.removeEventListener('touchstart', startAudioOnce);
-            };
-            window.addEventListener('click', startAudioOnce);
-            window.addEventListener('touchstart', startAudioOnce);
+        const State = { user: null, uid: null, currentModel: 'fast', chatHistory: [], todos: [], isGenerating: false };
 
-            document.getElementById('volume-slider').addEventListener('input', (e) => {
-                audio.volume = e.target.value;
-            });
-
-            // Sidebar Settings Controls
-            const sidebar = document.getElementById('settings-sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            const openSidebar = document.getElementById('open-sidebar-btn');
-            const closeSidebar = document.getElementById('close-sidebar-btn');
-
-            const toggleSidebar = (show) => {
-                if (show) {
-                    overlay.classList.remove('hidden');
-                    sidebar.classList.remove('translate-x-full');
-                } else {
-                    sidebar.classList.add('translate-x-full');
-                    setTimeout(() => overlay.classList.add('hidden'), 300);
-                }
-            };
-
-            openSidebar.addEventListener('click', (e) => { e.stopPropagation(); toggleSidebar(true); });
-            closeSidebar.addEventListener('click', () => toggleSidebar(false));
-            overlay.addEventListener('click', () => toggleSidebar(false));
-
-            // Quick Stats & Analytics Modal Button (Next to Hamburger)
-            const modalContainer = document.getElementById('modal-container');
-            const modalTitle = document.getElementById('modal-title');
-            const modalContent = document.getElementById('modal-content');
-            const closeModal = document.getElementById('close-modal');
-            const closeModalBtn = document.getElementById('close-modal-btn');
-
-            document.getElementById('open-stats-btn').addEventListener('click', () => {
-                modalTitle.textContent = "Executive Quick Analytics & Stats";
-                const totalTasks = JSON.parse(localStorage.getItem('exec_suite_tasks') || '[]').length;
-                const totalFin = JSON.parse(localStorage.getItem('exec_suite_finance') || '[]').length;
-                modalContent.innerHTML = `
-                    <p><strong>System Status:</strong> Fully Operational (Max Encrypted)</p>
-                    <p><strong>Active Profile:</strong> Mohammad Danis Muria Vanandi (@vanandii)</p>
-                    <p><strong>Saved Tasks:</strong> ${totalTasks} items managed.</p>
-                    <p><strong>Financial Transactions:</strong> ${totalFin} records logged.</p>
-                    <p><strong>Storage Status:</strong> Secure local browser session active.</p>
-                `;
-                modalContainer.classList.remove('hidden');
-                modalContainer.classList.add('flex');
-            });
-
-            // Theme Customization
-            const savedTheme = localStorage.getItem('executive_theme') || 'theme-clean';
-            document.body.className = `${savedTheme} font-['Plus_Jakarta_Sans',sans-serif] min-h-screen flex flex-col selection:bg-pink-500 selection:text-white transition-colors duration-300`;
-
-            document.querySelectorAll('.theme-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const theme = btn.getAttribute('data-theme');
-                    document.body.className = `${theme} font-['Plus_Jakarta_Sans',sans-serif] min-h-screen flex flex-col selection:bg-pink-500 selection:text-white transition-colors duration-300`;
-                    localStorage.setItem('executive_theme', theme);
-                    toggleSidebar(false);
-                });
-            });
-
-            // Profile Sub-tabs Switcher (Posts vs Tagged)
-            const subtabPosts = document.getElementById('subtab-posts');
-            const subtabTagged = document.getElementById('subtab-tagged');
-            const subviewPosts = document.getElementById('subview-posts');
-            const subviewTagged = document.getElementById('subview-tagged');
-
-            subtabPosts.addEventListener('click', () => {
-                subviewPosts.classList.remove('hidden');
-                subviewTagged.classList.add('hidden');
-                subtabPosts.className = "flex-1 pb-2 border-b-2 border-sky-500 font-bold text-xs transition cursor-pointer";
-                subtabTagged.className = "flex-1 pb-2 opacity-60 hover:opacity-100 font-semibold text-xs transition cursor-pointer";
-            });
-
-            subtabTagged.addEventListener('click', () => {
-                subviewTagged.classList.remove('hidden');
-                subviewPosts.classList.add('hidden');
-                subtabTagged.className = "flex-1 pb-2 border-b-2 border-purple-500 font-bold text-xs transition cursor-pointer";
-                subtabPosts.className = "flex-1 pb-2 opacity-60 hover:opacity-100 font-semibold text-xs transition cursor-pointer";
-            });
-
-            // Data Backup & Recovery
-            document.getElementById('export-data-btn').addEventListener('click', () => {
-                const backupData = {
-                    notes: localStorage.getItem('exec_suite_notes') || '',
-                    tasks: JSON.parse(localStorage.getItem('exec_suite_tasks') || '[]'),
-                    finance: JSON.parse(localStorage.getItem('exec_suite_finance') || '[]'),
-                    chat: JSON.parse(localStorage.getItem('exec_suite_chat_vanandii') || '[]')
-                };
-                const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'json' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `Vanandi_Backup_${new Date().toISOString().slice(0,10)}.json`;
-                a.click();
-            });
-
-            document.getElementById('import-file-input').addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    try {
-                        const data = JSON.parse(event.target.result);
-                        if (data.notes !== undefined) localStorage.setItem('exec_suite_notes', data.notes);
-                        if (data.tasks) localStorage.setItem('exec_suite_tasks', JSON.stringify(data.tasks));
-                        if (data.finance) localStorage.setItem('exec_suite_finance', JSON.stringify(data.finance));
-                        if (data.chat) localStorage.setItem('exec_suite_chat_vanandii', JSON.stringify(data.chat));
-                        alert('Data successfully restored! Reloading...');
-                        location.reload();
-                    } catch (err) {
-                        alert('Invalid backup file format.');
-                    }
-                };
-                reader.readAsText(file);
-            });
-
-            // Persistent Tabs Management
-            const views = {
-                profile: document.getElementById('view-profile'),
-                chat: document.getElementById('view-chat'),
-                notes: document.getElementById('view-notes'),
-                tasks: document.getElementById('view-tasks'),
-                finance: document.getElementById('view-finance')
-            };
-            const navButtons = {
-                profile: document.getElementById('tab-profile'),
-                chat: document.getElementById('tab-chat'),
-                notes: document.getElementById('tab-notes'),
-                tasks: document.getElementById('tab-tasks'),
-                finance: document.getElementById('tab-finance')
-            };
-
-            function switchTab(activeKey, save = true) {
-                Object.keys(views).forEach(key => {
-                    if (key === activeKey) {
-                        views[key].classList.remove('hidden');
-                        views[key].classList.add('block');
-                        if(navButtons[key]) {
-                            navButtons[key].classList.remove('opacity-60');
-                            navButtons[key].classList.add('text-sky-500');
-                        }
-                    } else {
-                        views[key].classList.remove('block');
-                        views[key].classList.add('hidden');
-                        if(navButtons[key]) {
-                            navButtons[key].classList.add('opacity-60');
-                            navButtons[key].classList.remove('text-sky-500');
-                        }
-                    }
-                });
-                if (save) localStorage.setItem('exec_active_tab', activeKey);
-                window.scrollTo(0, 0);
-            }
-
-            Object.keys(navButtons).forEach(key => {
-                navButtons[key].addEventListener('click', () => switchTab(key));
-            });
-
-            const initialTab = localStorage.getItem('exec_active_tab') || 'profile';
-            switchTab(initialTab, false);
-
-            // AI Chat Assistant Engine (Auto-detect user language & concise output)
-            const chatContainer = document.getElementById('chat-container');
-            const chatForm = document.getElementById('chat-form');
-            const userInput = document.getElementById('user-input');
-            const sendBtn = document.getElementById('send-btn');
-            
-            const OPENROUTER_API_KEY = "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";
-
-            let chatHistory = JSON.parse(localStorage.getItem('exec_suite_chat_vanandii')) || [];
-            if (chatHistory.length > 0) {
-                chatHistory.forEach(msg => appendMessage(msg.role, msg.text, false));
-            } else {
-                appendMessage('model', "Halo! Selamat datang di DM asisten virtual saya. Silakan tanyakan apa saja mengenai latar belakang teknik sipil, manajemen proyek, atau riset AI saya!", false);
-            }
-
-            userInput.addEventListener('input', () => {
-                sendBtn.disabled = userInput.value.trim().length === 0;
-            });
-
-            chatForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const text = userInput.value.trim();
-                if (!text) return;
-
-                userInput.value = '';
-                sendBtn.disabled = true;
-
-                appendMessage('user', text);
-                saveToHistory('user', text);
-
-                const typingId = showTypingIndicator();
-
-                let botResponse = "";
+        class AuthService {
+            constructor() {
                 try {
-                    botResponse = await callOpenRouterAPI(text, OPENROUTER_API_KEY);
-                } catch (err) {
-                    botResponse = getSmartFallbackResponse(text);
-                }
-
-                removeTypingIndicator(typingId);
-                appendMessage('model', botResponse);
-                saveToHistory('model', botResponse);
-            });
-
-            async function callOpenRouterAPI(promptText, key) {
-                const url = "https://openrouter.ai/api/v1/chat/completions";
-                const systemPrompt = `You are the professional virtual assistant for Mohammad Danis Muria Vanandi (vanandii). Detect the language of the user's message and reply in that EXACT same language (e.g., if user writes in Indonesian, reply in Indonesian; if in English, reply in English). Keep responses concise, efficient, highly professional, and straight to the point. CV Data: Civil Engineer Politeknik Negeri Malang (2021), BPN Land Agency (2021-2022), Sub-District Finance & Logistics (2023-2024), Building Designer & Contractor (2024-2025), AI & NLP Researcher (2023-Present). Contact: vanandi@proton.me | +62 898 5160 888.`;
-
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${key}`,
-                        "HTTP-Referer": window.location.origin,
-                        "X-Title": "Executive Suite Pro"
-                    },
-                    body: JSON.stringify({
-                        model: "deepseek/deepseek-chat",
-                        messages: [
-                            { role: "system", content: systemPrompt },
-                            { role: "user", content: promptText }
-                        ]
-                    })
-                });
-
-                if (!response.ok) throw new Error('API Error');
-                const data = await response.json();
-                return data.choices[0].message.content;
+                    this.app = initializeApp(CONFIG.firebase);
+                    this.auth = getAuth(this.app);
+                    this.provider = new GoogleAuthProvider();
+                    this.initListeners();
+                } catch(e) { console.warn("Firebase config missing. Guest Mode."); }
             }
+            initListeners() {
+                if(!this.auth) return;
+                onAuthStateChanged(this.auth, (user) => {
+                    if (user) {
+                        State.user = user; State.uid = user.uid;
+                        UIService.updateAuthUI(user); DatabaseService.fetchUserData();
+                    } else {
+                        State.user = null; State.uid = null;
+                        UIService.updateAuthUI(null);
+                    }
+                });
+            }
+            async login() { if(this.auth) await signInWithPopup(this.auth, this.provider); }
+            async logout() { if(this.auth) { await signOut(this.auth); State.chatHistory=[]; State.todos=[]; UIService.clearChat(); } }
+        }
 
-            function getSmartFallbackResponse(query) {
-                const q = query.toLowerCase();
-                const isIndonesian = q.includes('apa') || q.includes('siapa') || q.includes('profil') || q.includes('pengalaman') || q.includes('proyek') || q.includes('kontak') || q.includes('halo') || q.includes('pendidikan');
+        class DatabaseService {
+            static get headers() { return { "Accept": "application/vnd.github.v3+json", "Authorization": `token ${CONFIG.githubToken}` }; }
+            static async fetchUserData() {
+                if(!State.uid || !CONFIG.githubToken.startsWith('ghp_')) return;
+                try {
+                    const res = await fetch(`https://api.github.com/gists/${CONFIG.gistId}`, { headers: this.headers });
+                    const gist = await res.json();
+                    const db = JSON.parse(gist.files["database.json"].content || "{}");
+                    if (db[State.uid]) {
+                        State.chatHistory = db[State.uid].chats || []; State.todos = db[State.uid].todos || [];
+                        UIService.renderHistoryList(); UIService.renderTodos();
+                    }
+                } catch (e) { console.error("Gist Fetch Error:", e); }
+            }
+            static async saveUserData() {
+                if(!State.uid || !CONFIG.githubToken.startsWith('ghp_')) return;
+                try {
+                    const res = await fetch(`https://api.github.com/gists/${CONFIG.gistId}`, { headers: this.headers });
+                    const gist = await res.json();
+                    const db = JSON.parse(gist.files["database.json"].content || "{}");
+                    db[State.uid] = { chats: State.chatHistory, todos: State.todos };
+                    await fetch(`https://api.github.com/gists/${CONFIG.gistId}`, {
+                        method: "PATCH", headers: this.headers,
+                        body: JSON.stringify({ files: { "database.json": { content: JSON.stringify(db, null, 2) } } })
+                    });
+                } catch (e) { console.error("Gist Save Error:", e); }
+            }
+        }
+
+        class AIService {
+            static async processPrompt(prompt) {
+                let responseText = "";
+                try {
+                    const res = await fetch(CONFIG.workerUrl, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ prompt: prompt })
+                    });
+                    
+                    const rawText = await res.text();
+                    
+                    // Deteksi jika worker mengembalikan HTML (Error 404 / 500)
+                    if (rawText.trim().startsWith('<')) {
+                        throw new Error("Worker mengembalikan HTML. Pastikan skrip worker sudah di-deploy dan AI Binding 'AI' sudah aktif.");
+                    }
+
+                    const data = JSON.parse(rawText);
+                    if (data.error) throw new Error(data.error);
+                    responseText = data.result;
+                } catch (error) {
+                    console.error("AI Error:", error);
+                    responseText = `⚠️ Gagal terhubung ke Cloudflare Worker: ${error.message}`;
+                }
                 
-                if (isIndonesian) {
-                    if (q.includes('siapa') || q.includes('profil')) {
-                        return "Mohammad Danis Muria Vanandi adalah seorang Civil Engineer lulusan Politeknik Negeri Malang (2021) serta Independent AI & NLP Researcher dan Project Manager.";
-                    } else if (q.includes('proyek') || q.includes('pengalaman') || q.includes('kerja')) {
-                        return "Pengalaman beliau meliputi BPN (2021-2022), Keuangan & Logistik Kecamatan (2023-2024), Building Designer & Kontraktor (2024-2025), dan Riset AI/NLP (2023-Sekarang).";
-                    } else if (q.includes('kontak')) {
-                        return "Hubungi Danis via Email di vanandi@proton.me atau WhatsApp +62 898 5160 888.";
-                    } else {
-                        return "Mohammad Danis Muria Vanandi adalah profesional berpengalaman di bidang Teknik Sipil dan Riset AI/NLP. Silakan hubungi vanandi@proton.me untuk kolaborasi.";
+                this.extractTodos(responseText);
+                return responseText;
+            }
+
+            static extractTodos(text) {
+                const todoRegex = /(?:-|\*|todo:|tugas:)\s?\[?\s?\]?\s?(.+)/gi;
+                let match, found = false;
+                while ((match = todoRegex.exec(text)) !== null) {
+                    if(match[1].length > 4 && !match[1].includes('?')) {
+                        State.todos.push({ id: Date.now()+Math.random(), text: match[1].trim(), done: false });
+                        found = true;
                     }
+                }
+                if(found) { UIService.renderTodos(); DatabaseService.saveUserData(); }
+            }
+        }
+
+        class UIService {
+            static elements = {
+                chatContainer: document.getElementById('view-chat'),
+                emptyState: document.getElementById('empty-state'),
+                input: document.getElementById('chat-input'),
+                btnSend: document.getElementById('btn-send'),
+                loginBtn: document.getElementById('login-text').parentElement,
+                modalAbout: document.getElementById('modal-about'),
+                inputDock: document.getElementById('input-dock')
+            };
+
+            static updateAuthUI(user) {
+                if (user) {
+                    this.elements.loginBtn.innerHTML = `<img src="${user.photoURL}" class="w-5 h-5 rounded-full"> <span class="text-xs">Logout</span>`;
+                    this.elements.loginBtn.onclick = () => window.app.authService.logout();
                 } else {
-                    if (q.includes('who') || q.includes('profile')) {
-                        return "Mohammad Danis Muria Vanandi is a Civil Engineer (Politeknik Negeri Malang '21) and AI/NLP Researcher / Project Manager.";
-                    } else if (q.includes('project') || q.includes('experience')) {
-                        return "Experience includes BPN Land Agency, Sub-District Finance, Building Designer & Contractor, and AI/NLP Research.";
-                    } else {
-                        return "Mohammad Danis Muria Vanandi specializes in civil engineering and AI research. Contact via vanandi@proton.me or WhatsApp +62 898 5160 888.";
-                    }
+                    this.elements.loginBtn.innerHTML = `<i class="ph ph-google-logo"></i> <span>Login</span>`;
+                    this.elements.loginBtn.onclick = () => window.app.authService.login();
                 }
             }
 
-            function appendMessage(role, text) {
-                const isUser = role === 'user';
-                const div = document.createElement('div');
-                div.className = `flex items-start space-x-2 animate-smooth ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`;
+            static switchTab(target) {
+                document.querySelectorAll('.view-section').forEach(v => {
+                    v.classList.add('hidden');
+                    v.classList.remove('flex');
+                });
+                const view = document.getElementById(`view-${target}`);
+                view.classList.remove('hidden');
+                if(target === 'chat') view.classList.add('flex');
 
-                div.innerHTML = `
-                    ${!isUser ? '<div class="w-6 h-6 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center flex-shrink-0 mt-0.5"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis" class="w-full h-full object-cover"></div>' : ''}
-                    <div class="${isUser ? 'bg-sky-500 text-white rounded-tr-none' : 'theme-card border rounded-tl-none'} p-3 rounded-2xl max-w-[80%] text-xs leading-relaxed shadow-xs font-semibold whitespace-pre-line">
-                        ${text}
-                    </div>
-                `;
-
-                chatContainer.prepend(div);
-                chatContainer.scrollTop = 0;
-            }
-
-            function showTypingIndicator() {
-                const id = 'typing-' + Date.now();
-                const div = document.createElement('div');
-                div.id = id;
-                div.className = 'flex items-start space-x-2 animate-smooth';
-                div.innerHTML = `
-                    <div class="w-6 h-6 rounded-full overflow-hidden bg-neutral-200 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEj3ae4pK3Fkc8MvlhZleBdDcEs9xNiERVEr80vr_yggRuvHvASGknP5Ff-A9e39OcFkDDpwgBKoWiFBukba80LV3AL7X0UxIbSaAk1tdGUSM1D_7uveXovth8y1x9L8godEPCbFnDUUlFtx3UITwrguA-8DKwGwfViqrXKC_xnlNCaNGbBCL8LvObtpuAg=s1601" alt="Danis" class="w-full h-full object-cover">
-                    </div>
-                    <div class="theme-card border p-3 rounded-2xl rounded-tl-none flex items-center space-x-1 h-7 shadow-xs">
-                        <div class="w-1.5 h-1.5 rounded-full bg-neutral-400 animate-pulse"></div>
-                        <div class="w-1.5 h-1.5 rounded-full bg-neutral-400 animate-pulse" style="animation-delay: 0.2s"></div>
-                        <div class="w-1.5 h-1.5 rounded-full bg-neutral-400 animate-pulse" style="animation-delay: 0.4s"></div>
-                    </div>
-                `;
-                chatContainer.prepend(div);
-                chatContainer.scrollTop = 0;
-                return id;
-            }
-
-            function removeTypingIndicator(id) {
-                const el = document.getElementById(id);
-                if (el) el.remove();
-            }
-
-            function saveToHistory(role, text) {
-                chatHistory.push({ role, text });
-                if (chatHistory.length > 30) chatHistory.shift();
-                localStorage.setItem('exec_suite_chat_vanandii', JSON.stringify(chatHistory));
-            }
-
-            // Notes / Scratchpad Logic
-            const scratchpad = document.getElementById('scratchpad');
-            const clearNotes = document.getElementById('clear-notes');
-            scratchpad.value = localStorage.getItem('exec_suite_notes') || '';
-            scratchpad.addEventListener('input', () => {
-                localStorage.setItem('exec_suite_notes', scratchpad.value);
-            });
-            clearNotes.addEventListener('click', () => {
-                if (confirm('Clear all notes?')) {
-                    scratchpad.value = '';
-                    localStorage.removeItem('exec_suite_notes');
+                if(target === 'chat') {
+                    this.elements.inputDock.style.transform = 'translateY(0)';
+                } else {
+                    this.elements.inputDock.style.transform = 'translateY(150%)'; 
                 }
-            });
-
-            // Task Manager with Editing & Reordering Support
-            const taskInput = document.getElementById('task-input');
-            const addTaskBtn = document.getElementById('add-task-btn');
-            const taskList = document.getElementById('task-list');
-            const taskCounter = document.getElementById('task-counter');
-
-            let tasks = JSON.parse(localStorage.getItem('exec_suite_tasks')) || [];
-            renderTasks();
-
-            addTaskBtn.addEventListener('click', () => {
-                const val = taskInput.value.trim();
-                if (!val) return;
-                tasks.push({ text: val, completed: false });
-                taskInput.value = '';
-                saveAndRenderTasks();
-            });
-
-            function saveAndRenderTasks() {
-                localStorage.setItem('exec_suite_tasks', JSON.stringify(tasks));
-                renderTasks();
             }
 
-            function renderTasks() {
-                taskList.innerHTML = '';
-                let completedCount = 0;
-                tasks.forEach((t, idx) => {
-                    if (t.completed) completedCount++;
-                    const div = document.createElement('div');
-                    div.className = "theme-card border rounded-xl p-2.5 flex items-center justify-between text-xs shadow-xs gap-2";
-                    div.innerHTML = `
-                        <div class="flex items-center space-x-2.5 flex-1 min-w-0">
-                            <input type="checkbox" ${t.completed ? 'checked' : ''} data-index="${idx}" class="task-checkbox accent-sky-500 w-4 h-4 rounded cursor-pointer flex-shrink-0">
-                            <span class="${t.completed ? 'line-through opacity-50' : 'font-semibold'} truncate flex-1" data-index="${idx}">${t.text}</span>
-                        </div>
-                        <div class="flex items-center gap-1 flex-shrink-0">
-                            <button data-index="${idx}" class="move-up opacity-70 hover:text-sky-500 p-1 cursor-pointer" title="Move Up"><i class="fa-solid fa-arrow-up"></i></button>
-                            <button data-index="${idx}" class="move-down opacity-70 hover:text-sky-500 p-1 cursor-pointer" title="Move Down"><i class="fa-solid fa-arrow-down"></i></button>
-                            <button data-index="${idx}" class="edit-task opacity-70 hover:text-amber-500 p-1 cursor-pointer" title="Edit"><i class="fa-solid fa-pen"></i></button>
-                            <button data-index="${idx}" class="delete-task opacity-70 hover:text-rose-500 p-1 cursor-pointer" title="Delete"><i class="fa-solid fa-trash-can"></i></button>
-                        </div>
-                    `;
-                    taskList.appendChild(div);
-                });
-                taskCounter.textContent = `${completedCount} of ${tasks.length} Completed`;
-
-                document.querySelectorAll('.task-checkbox').forEach(box => {
-                    box.addEventListener('change', (e) => {
-                        const idx = e.target.getAttribute('data-index');
-                        tasks[idx].completed = e.target.checked;
-                        saveAndRenderTasks();
-                    });
-                });
-
-                document.querySelectorAll('.edit-task').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const idx = e.currentTarget.getAttribute('data-index');
-                        const newText = prompt('Edit task:', tasks[idx].text);
-                        if (newText !== null && newText.trim() !== '') {
-                            tasks[idx].text = newText.trim();
-                            saveAndRenderTasks();
-                        }
-                    });
-                });
-
-                document.querySelectorAll('.delete-task').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const idx = e.currentTarget.getAttribute('data-index');
-                        tasks.splice(idx, 1);
-                        saveAndRenderTasks();
-                    });
-                });
-
-                document.querySelectorAll('.move-up').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const idx = parseInt(e.currentTarget.getAttribute('data-index'));
-                        if (idx > 0) {
-                            const temp = tasks[idx];
-                            tasks[idx] = tasks[idx - 1];
-                            tasks[idx - 1] = temp;
-                            saveAndRenderTasks();
-                        }
-                    });
-                });
-
-                document.querySelectorAll('.move-down').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const idx = parseInt(e.currentTarget.getAttribute('data-index'));
-                        if (idx < tasks.length - 1) {
-                            const temp = tasks[idx];
-                            tasks[idx] = tasks[idx + 1];
-                            tasks[idx + 1] = temp;
-                            saveAndRenderTasks();
-                        }
-                    });
-                });
-            }
-
-            // Financial Manager Logic with Payment Method Support
-            const financeForm = document.getElementById('finance-form');
-            const finDesc = document.getElementById('fin-desc');
-            const finAmount = document.getElementById('fin-amount');
-            const finType = document.getElementById('fin-type');
-            const finMethod = document.getElementById('fin-method');
-            const financeList = document.getElementById('finance-list');
-            const incomeTotal = document.getElementById('income-total');
-            const expenseTotal = document.getElementById('expense-total');
-            const financeTotal = document.getElementById('finance-total');
-
-            let finances = JSON.parse(localStorage.getItem('exec_suite_finance')) || [];
-            renderFinance();
-
-            financeForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const desc = finDesc.value.trim();
-                const amount = parseFloat(finAmount.value);
-                const type = finType.value;
-                const method = finMethod.value;
-                if (!desc || isNaN(amount)) return;
-
-                finances.push({ id: Date.now(), desc, amount, type, method });
-                finDesc.value = '';
-                finAmount.value = '';
-                saveAndRenderFinance();
-            });
-
-            function saveAndRenderFinance() {
-                localStorage.setItem('exec_suite_finance', JSON.stringify(finances));
-                renderFinance();
-            }
-
-            function renderFinance() {
-                financeList.innerHTML = '';
-                let income = 0;
-                let expense = 0;
-
-                finances.forEach((item, idx) => {
-                    if (item.type === 'income') income += item.amount;
-                    else expense += item.amount;
-
-                    const div = document.createElement('div');
-                    div.className = "theme-card border rounded-xl p-2.5 flex items-center justify-between text-xs shadow-xs";
-                    div.innerHTML = `
-                        <div class="flex items-center space-x-2">
-                            <span class="${item.type === 'income' ? 'text-emerald-500 font-bold' : 'text-rose-500 font-bold'}">${item.type === 'income' ? '+' : '-'}$${item.amount.toLocaleString()}</span>
-                            <div>
-                                <span class="font-semibold block">${item.desc}</span>
-                                <span class="text-[9px] opacity-70 font-mono">${item.method || 'Cash / Tunai'}</span>
-                            </div>
-                        </div>
-                        <button data-index="${idx}" class="delete-fin opacity-60 hover:text-rose-500 transition cursor-pointer p-1"><i class="fa-solid fa-trash-can"></i></button>
-                    `;
-                    financeList.appendChild(div);
-                });
-
-                const balance = income - expense;
-                incomeTotal.textContent = `$${income.toLocaleString()}`;
-                expenseTotal.textContent = `$${expense.toLocaleString()}`;
-                financeTotal.textContent = `Balance: $${balance.toLocaleString()}`;
-
-                document.querySelectorAll('.delete-fin').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const idx = e.currentTarget.getAttribute('data-index');
-                        finances.splice(idx, 1);
-                        saveAndRenderFinance();
-                    });
-                });
-            }
-
-            // Modal Handlers & CV Content
-            document.querySelectorAll('.highlight-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const topic = item.getAttribute('data-topic');
-                    modalTitle.textContent = `Highlight: ${topic.toUpperCase()}`;
-                    if (topic === 'experience') {
-                        modalContent.innerHTML = `<p>1. PTSL Land Agency / BPN (2021-2022)<br>2. Finance & Logistics Sub-District Office (2023-2024)<br>3. Building Designer & Project Contractor (2024-2025)</p>`;
-                    } else if (topic === 'skills') {
-                        modalContent.innerHTML = `<p><strong>Hard Skills:</strong> 3D & 2D Architecture Design, Supervisor, Project Management, AI & NLP Research.<br><strong>Soft Skills:</strong> Hardworking, Discipline, High Responsibility.</p>`;
-                    } else if (topic === 'education') {
-                        modalContent.innerHTML = `<p>State Polytechnic of Malang (2021 | Civil Engineer)<br>SMA Negeri Senduro (2019 | Science)</p>`;
-                    } else {
-                        modalContent.innerHTML = `<p>Email: vanandi@proton.me<br>WhatsApp: +62 898 5160 888</p>`;
-                    }
-                    modalContainer.classList.remove('hidden');
-                    modalContainer.classList.add('flex');
-                });
-            });
-
-            document.querySelectorAll('.feed-post').forEach(post => {
-                post.addEventListener('click', () => {
-                    modalTitle.textContent = "Project & Experience Details";
-                    modalContent.innerHTML = `<p>${post.getAttribute('data-caption')}</p>`;
-                    modalContainer.classList.remove('hidden');
-                    modalContainer.classList.add('flex');
-                });
-            });
-
-            document.getElementById('open-cv-modal').addEventListener('click', () => {
-                modalTitle.textContent = "Curriculum Vitae - Mohammad Danis Muria Vanandi";
-                modalContent.innerHTML = `
-                    <p><strong>Professional Profile:</strong> Results-oriented professional with a Civil Engineering foundation and 4+ years of experience across land administration, finance logistics, and building design projects.</p>
-                    <p><strong>Education:</strong> State Polytechnic of Malang (2021 | Civil Engineer)</p>
-                    <p><strong>Contacts:</strong> vanandi@proton.me | +62 898 5160 888</p>
-                    <p><strong>Core Competencies:</strong> Project Supervision, Architectural Design, AI/NLP Data Annotation & Research.</p>
+            static addMessage(text, isUser = false) {
+                if (this.elements.emptyState) this.elements.emptyState.style.display = 'none';
+                const bubble = document.createElement('div');
+                bubble.className = `max-w-[85%] md:max-w-2xl flex flex-col ${isUser ? 'self-end items-end' : 'self-start items-start'} mb-4`;
+                let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+                
+                bubble.innerHTML = `
+                    <div class="${isUser ? 'bg-white text-black rounded-2xl rounded-tr-sm' : 'bg-[#262626] text-white rounded-2xl rounded-tl-sm'} p-3.5 sm:p-4 text-sm sm:text-base leading-relaxed shadow-sm border ${isUser ? 'border-white' : 'border-gray-700'}">
+                        ${formattedText}
+                    </div>
                 `;
-                modalContainer.classList.remove('hidden');
-                modalContainer.classList.add('flex');
-            });
+                this.elements.chatContainer.appendChild(bubble);
+                this.scrollToBottom();
+            }
 
-            closeModal.addEventListener('click', () => { modalContainer.classList.add('hidden'); modalContainer.classList.remove('flex'); });
-            closeModalBtn.addEventListener('click', () => { modalContainer.classList.add('hidden'); modalContainer.classList.remove('flex'); });
-        });
+            static showTyping() {
+                if (this.elements.emptyState) this.elements.emptyState.style.display = 'none';
+                const indicator = document.createElement('div');
+                indicator.id = 'typing-indicator';
+                indicator.className = 'self-start bg-[#262626] border border-gray-700 rounded-2xl rounded-tl-sm p-4 w-fit mb-4 flex items-center typing-indicator shadow-sm';
+                indicator.innerHTML = '<span></span><span></span><span></span>';
+                this.elements.chatContainer.appendChild(indicator);
+                this.scrollToBottom();
+            }
+
+            static removeTyping() {
+                const ind = document.getElementById('typing-indicator');
+                if (ind) ind.remove();
+            }
+
+            static scrollToBottom() {
+                setTimeout(() => { this.elements.chatContainer.scrollTo({ top: this.elements.chatContainer.scrollHeight, behavior: 'smooth' }); }, 100);
+            }
+
+            static renderTodos() {
+                const list = document.getElementById('todo-list');
+                list.innerHTML = State.todos.map(todo => `
+                    <li class="flex items-center justify-between gap-3 p-4 bg-[#1a1a1a] border border-gray-800 rounded-xl group transition">
+                        <div class="flex items-start gap-3">
+                            <input type="checkbox" ${todo.done ? 'checked' : ''} onchange="window.app.toggleTodo('${todo.id}')" class="mt-1 w-4 h-4 accent-white cursor-pointer">
+                            <span class="${todo.done ? 'line-through text-gray-600' : 'text-gray-200'} text-sm">${todo.text}</span>
+                        </div>
+                        <button onclick="window.app.deleteTodo('${todo.id}')" class="text-gray-600 hover:text-red-500 transition"><i class="ph ph-trash text-lg"></i></button>
+                    </li>
+                `).join('') || '<li class="text-gray-500 text-center py-10 text-sm border border-dashed border-gray-800 rounded-xl">Belum ada tugas.</li>';
+            }
+
+            static renderHistoryList() {
+                const list = document.getElementById('chat-history');
+                list.innerHTML = State.chatHistory.map(chat => `
+                    <li class="flex items-center gap-3 p-4 bg-[#1a1a1a] border border-gray-800 rounded-xl cursor-pointer hover:bg-gray-800 transition">
+                        <i class="ph ph-chat-circle text-gray-500 text-xl"></i>
+                        <span class="text-gray-300 text-sm truncate w-full">${chat.title}</span>
+                    </li>
+                `).join('') || '<li class="text-gray-500 text-center py-10 text-sm border border-dashed border-gray-800 rounded-xl">Belum ada riwayat obrolan.</li>';
+            }
+
+            static clearChat() { this.elements.chatContainer.innerHTML = ''; this.elements.chatContainer.appendChild(this.elements.emptyState); this.elements.emptyState.style.display = 'flex'; }
+        }
+
+        class App {
+            constructor() {
+                this.authService = new AuthService();
+                this.bindEvents();
+                window.app = this;
+            }
+
+            bindEvents() {
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        document.querySelectorAll('.tab-btn').forEach(b => {
+                            b.classList.remove('text-white', 'border-white');
+                            b.classList.add('text-gray-500', 'border-transparent');
+                        });
+                        e.currentTarget.classList.add('text-white', 'border-white');
+                        e.currentTarget.classList.remove('text-gray-500', 'border-transparent');
+                        UIService.switchTab(e.currentTarget.dataset.target);
+                    });
+                });
+
+                UIService.elements.input.addEventListener('input', function() {
+                    this.style.height = 'auto'; this.style.height = (this.scrollHeight) + 'px';
+                    UIService.elements.btnSend.disabled = this.value.trim() === '';
+                });
+
+                UIService.elements.input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.handleSend(); }
+                });
+
+                UIService.elements.btnSend.addEventListener('click', () => this.handleSend());
+
+                document.getElementById('btn-about').addEventListener('click', () => {
+                    UIService.elements.modalAbout.classList.remove('hidden');
+                    setTimeout(() => UIService.elements.modalAbout.classList.remove('opacity-0'), 10);
+                });
+                
+                document.getElementById('btn-close-modal').addEventListener('click', () => {
+                    UIService.elements.modalAbout.classList.add('opacity-0');
+                    setTimeout(() => UIService.elements.modalAbout.classList.add('hidden'), 300);
+                });
+            }
+
+            async handleSend() {
+                if (State.isGenerating) return;
+                const prompt = UIService.elements.input.value.trim();
+                if (!prompt) return;
+
+                UIService.elements.input.value = ''; UIService.elements.input.style.height = 'auto';
+                UIService.elements.btnSend.disabled = true; State.isGenerating = true;
+
+                UIService.addMessage(prompt, true);
+                UIService.showTyping();
+
+                const aiResponse = await AIService.processPrompt(prompt);
+
+                UIService.removeTyping();
+                UIService.addMessage(aiResponse, false);
+
+                if (State.user) {
+                    if (State.chatHistory.length === 0 || State.chatHistory.length > 0) {
+                        State.chatHistory.push({ title: prompt.substring(0, 30) + "..." });
+                        UIService.renderHistoryList();
+                    }
+                    DatabaseService.saveUserData();
+                }
+                State.isGenerating = false;
+            }
+
+            toggleTodo(id) {
+                const t = State.todos.find(t => t.id == id);
+                if (t) { t.done = !t.done; UIService.renderTodos(); if(State.user) DatabaseService.saveUserData(); }
+            }
+            
+            deleteTodo(id) {
+                State.todos = State.todos.filter(t => t.id != id);
+                UIService.renderTodos();
+                if(State.user) DatabaseService.saveUserData();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => new App());
     </script>
 </body>
 </html>
